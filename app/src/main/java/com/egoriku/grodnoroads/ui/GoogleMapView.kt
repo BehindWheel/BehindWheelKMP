@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.Camera
+import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.generateHomeMarker
@@ -33,7 +33,7 @@ private val defaultCameraPosition = CameraPosition.fromLatLngZoom(grodnoPosition
 @Composable
 fun GoogleMapView(
     modifier: Modifier,
-    markers: List<Camera>
+    stationary: List<Camera>
 ) {
     val context = LocalContext.current
 
@@ -72,7 +72,7 @@ fun GoogleMapView(
             false
         }
 
-        markers.forEach { camera ->
+        stationary.forEach { camera ->
             MarkerInfoWindow(
                 state = rememberMarkerState(position = camera.position),
                 icon = generateHomeMarker(context),

@@ -8,29 +8,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.egoriku.grodnoroads.CameraType.Stationary
+import com.egoriku.grodnoroads.domain.model.Camera
+import com.egoriku.grodnoroads.domain.model.CameraType.Stationary
 import com.egoriku.grodnoroads.ui.GoogleMapView
 import com.egoriku.grodnoroads.ui.StartDriveModButton
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-
-private const val TAG = "MapSampleActivity"
-
-enum class CameraType {
-    Stationary,
-    Temporary
-}
-
-data class Camera(
-    val type: CameraType,
-    val message: String,
-    val speed: Int,
-    val position: LatLng
-)
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private val stationaryCameras = listOf(
     Camera(
@@ -43,15 +33,19 @@ private val stationaryCameras = listOf(
 
 class MainActivity : ComponentActivity() {
 
+    private val cameraViewModel: CameraViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             GrodnoRoadsTheme {
                 Box(modifier = Modifier.fillMaxSize()) {
+                    val stationary by cameraViewModel.stationary.collectAsState()
+
                     GoogleMapView(
                         modifier = Modifier.matchParentSize(),
-                        markers = stationaryCameras
+                        stationary = stationary
                     )
                     StartDriveModButton(
                         modifier = Modifier
