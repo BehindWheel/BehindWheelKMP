@@ -10,7 +10,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -21,13 +20,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.CameraType.Stationary
+import com.egoriku.grodnoroads.ui.SpeedLimitSign
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.compose.*
@@ -149,47 +147,13 @@ fun GoogleMapView(
                 ) {
                     Text(text = camera.message, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Circle(text = camera.speed.toString())
+                    SpeedLimitSign(limit = camera.speed)
                 }
             }
         }
     }
 
     DebugView(cameraPositionState)
-}
-
-@Composable
-fun Circle(text: String) {
-    Box(contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .background(Color.Red, shape = CircleShape)
-            .layout { measurable, constraints ->
-                // Measure the composable
-                val placeable = measurable.measure(constraints)
-
-                //get the current max dimension to assign width=height
-                val currentHeight = placeable.height
-                var heightCircle = currentHeight
-                if (placeable.width > heightCircle)
-                    heightCircle = placeable.width
-
-                //assign the dimension and the center position
-                layout(heightCircle, heightCircle) {
-                    // Where the composable gets placed
-                    placeable.placeRelative(0, (heightCircle - currentHeight) / 2)
-                }
-            }) {
-
-        Text(
-            text = text,
-            textAlign = TextAlign.Center,
-            color = Color.White,
-            modifier = Modifier
-                .padding(4.dp)
-                .defaultMinSize(24.dp) //Use a min size for short text.
-        )
-    }
-
 }
 
 fun smallIcon(context: Context): Bitmap {
