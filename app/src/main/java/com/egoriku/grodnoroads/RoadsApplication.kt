@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.egoriku.grodnoroads
 
 import android.app.Application

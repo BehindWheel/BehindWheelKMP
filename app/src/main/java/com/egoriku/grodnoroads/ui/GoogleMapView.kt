@@ -17,15 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.domain.model.Camera
+import com.egoriku.grodnoroads.MarkerCache
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.extension.logD
-import com.egoriku.grodnoroads.generateHomeMarker
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
+import org.koin.androidx.compose.get
 
 private val grodnoPosition = LatLng(53.6687765, 23.8212226)
 private val defaultCameraPosition = CameraPosition.fromLatLngZoom(grodnoPosition, 13f)
@@ -36,6 +36,7 @@ fun GoogleMapView(
     stationary: List<Camera>
 ) {
     val context = LocalContext.current
+    val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState {
         position = defaultCameraPosition
@@ -43,7 +44,7 @@ fun GoogleMapView(
 
     val uiSettings by remember {
         mutableStateOf(
-            MapUiSettings(compassEnabled = true)
+            MapUiSettings(mapToolbarEnabled = false)
         )
     }
     val mapProperties by remember {
@@ -64,19 +65,10 @@ fun GoogleMapView(
             logD("POI clicked: ${it.name}")
         }
     ) {
-        val markerClick: (Marker) -> Boolean = {
-            logD("${it.title} was clicked")
-            cameraPositionState.projection?.let { projection ->
-                logD("The current projection is: $projection")
-            }
-            false
-        }
-
         stationary.forEach { camera ->
             MarkerInfoWindow(
                 state = rememberMarkerState(position = camera.position),
-                icon = generateHomeMarker(context),
-                onClick = markerClick
+                icon = markerCache.getOrPut(R.drawable.ic_speed_camera),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

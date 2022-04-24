@@ -58,14 +58,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-fun smallIcon(context: Context): Bitmap {
-    val height = 80
-    val width = 80
-    val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.ic_speed_camera)
-    return Bitmap.createScaledBitmap(bitmap, width, height, false)
-}
-
-fun generateHomeMarker(context: Context): BitmapDescriptor {
-    return BitmapDescriptorFactory.fromBitmap(smallIcon(context))
-}
