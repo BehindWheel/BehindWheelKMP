@@ -68,7 +68,7 @@ fun GoogleMapView(
         stationary.forEach { camera ->
             MarkerInfoWindow(
                 state = rememberMarkerState(position = camera.position),
-                icon = markerCache.getOrPut(R.drawable.ic_speed_camera),
+                icon = markerCache.getOrPut(id = R.drawable.ic_speed_camera, size = 80),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

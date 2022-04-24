@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.LruCache
 import androidx.annotation.DrawableRes
+import androidx.core.graphics.scale
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -16,9 +17,7 @@ class MarkerCache(private val context: Context) {
     fun getOrPut(@DrawableRes id: Int): BitmapDescriptor {
         return when (val cachedBitmap = lruCache.get(id)) {
             null -> {
-                BitmapDescriptorFactory.fromBitmap(
-                    smallIcon(id)
-                ).also { bitmapDescriptor ->
+                BitmapDescriptorFactory.fromResource(id).also { bitmapDescriptor ->
                     lruCache.put(id, bitmapDescriptor)
                 }
             }
@@ -26,10 +25,25 @@ class MarkerCache(private val context: Context) {
         }
     }
 
-    private fun smallIcon(id: Int): Bitmap {
-        val height = 80
-        val width = 80
-        val bitmap = BitmapFactory.decodeResource(context.resources, id)
-        return Bitmap.createScaledBitmap(bitmap, width, height, false)
+    fun getOrPut(@DrawableRes id: Int, size: Int): BitmapDescriptor {
+        return when (val cachedBitmap = lruCache.get(id)) {
+            null -> {
+                val resizedIcon = resize(id = id, size = size)
+
+                BitmapDescriptorFactory.fromBitmap(resizedIcon).also { bitmapDescriptor ->
+                    lruCache.put(id, bitmapDescriptor)
+                }
+            }
+            else -> cachedBitmap
+        }
+    }
+
+    private fun resize(@DrawableRes id: Int, size: Int): Bitmap {
+        return BitmapFactory.decodeResource(context.resources, id)
+            .scale(
+                width = size,
+                height = size,
+                filter = false
+            )
     }
 }
