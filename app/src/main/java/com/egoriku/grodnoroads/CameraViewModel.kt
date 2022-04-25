@@ -18,17 +18,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+private val defaultPosition = UserPosition(
+    location = LatLng(0.0, 0.0),
+    bearing = 0f
+)
+
 class CameraViewModel(
     application: Application,
     private val useCase: CameraUseCase
 ) : AndroidViewModel(application) {
 
-    private val _location = MutableStateFlow(
-        UserPosition(
-            location = LatLng(0.0, 0.0),
-            bearing = 0f
-        )
-    )
+    private val _mode = MutableStateFlow(AppMode.Map)
+    val mode = _mode.asStateFlow()
+
+    private val _location = MutableStateFlow(defaultPosition)
     val location = _location.asStateFlow()
 
     private val _stationary = MutableStateFlow<List<Camera>>(emptyList())
@@ -61,8 +64,8 @@ class CameraViewModel(
     @SuppressLint("MissingPermission")
     fun startLocationUpdates() {
         val locationRequest = LocationRequest.create().apply {
-            interval = 5000
-            fastestInterval = 5000
+            interval = 1000
+            fastestInterval = 1000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
@@ -72,6 +75,15 @@ class CameraViewModel(
             locationCallback,
             Looper.getMainLooper()
         )
+
+        _mode.tryEmit(AppMode.Drive)
+    }
+
+    fun stopLocationUpdates() {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        _location.tryEmit(defaultPosition)
+
+        _mode.tryEmit(AppMode.Map)
     }
 
     override fun onCleared() {

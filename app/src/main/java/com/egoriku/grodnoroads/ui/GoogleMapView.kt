@@ -18,7 +18,6 @@ import com.egoriku.grodnoroads.MarkerCache
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.ui.debug.DebugView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -38,7 +37,7 @@ fun GoogleMapView(
     val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(grodnoPosition, 13f)
+        position = CameraPosition.fromLatLngZoom(grodnoPosition, 14f)
     }
 
     LaunchedEffect(key1 = userPosition) {
@@ -46,7 +45,7 @@ fun GoogleMapView(
             val cameraPosition = CameraPosition.Builder(cameraPositionState.position)
                 .bearing(userPosition.bearing)
                 .target(userPosition.location)
-                .zoom(17f)
+                .zoom(14f)
                 .build()
 
             cameraPositionState.animate(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -55,7 +54,7 @@ fun GoogleMapView(
 
     val uiSettings by remember {
         mutableStateOf(
-            MapUiSettings(mapToolbarEnabled = false, compassEnabled = true)
+            MapUiSettings(mapToolbarEnabled = false, compassEnabled = false)
         )
     }
     val mapProperties by remember {
@@ -94,7 +93,7 @@ fun GoogleMapView(
                         .background(color = Color.White, shape = RoundedCornerShape(10.dp))
                         .padding(8.dp)
                 ) {
-                    Text(text = camera.message, fontWeight = FontWeight.Bold)
+                    Text(text = camera.message, fontWeight = FontWeight.Bold, color = Color.Black)
                     Spacer(modifier = Modifier.width(8.dp))
                     SpeedLimitSign(limit = camera.speed)
                 }
