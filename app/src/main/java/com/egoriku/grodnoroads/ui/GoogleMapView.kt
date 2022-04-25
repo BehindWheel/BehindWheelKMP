@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,32 +16,46 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.MarkerCache
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.ui.debug.DebugView
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import org.koin.androidx.compose.get
 
-private val grodnoPosition = LatLng(53.6687765, 23.8212226)
-private val defaultCameraPosition = CameraPosition.fromLatLngZoom(grodnoPosition, 13f)
+val grodnoPosition = LatLng(53.6687765, 23.8212226)
 
 @Composable
 fun GoogleMapView(
     modifier: Modifier,
-    stationary: List<Camera>
+    stationary: List<Camera>,
+    userPosition: UserPosition
 ) {
     val context = LocalContext.current
     val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState {
-        position = defaultCameraPosition
+        position = CameraPosition.fromLatLngZoom(grodnoPosition, 13f)
+    }
+
+    LaunchedEffect(key1 = userPosition) {
+        if (userPosition.location.latitude != 0.0 && userPosition.location.longitude != 0.0) {
+            val cameraPosition = CameraPosition.Builder(cameraPositionState.position)
+                .bearing(userPosition.bearing)
+                .target(userPosition.location)
+                .zoom(17f)
+                .build()
+
+            cameraPositionState.animate(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        }
     }
 
     val uiSettings by remember {
         mutableStateOf(
-            MapUiSettings(mapToolbarEnabled = false)
+            MapUiSettings(mapToolbarEnabled = false, compassEnabled = true)
         )
     }
     val mapProperties by remember {
@@ -60,11 +71,18 @@ fun GoogleMapView(
         modifier = modifier,
         cameraPositionState = cameraPositionState,
         properties = mapProperties,
-        uiSettings = uiSettings,
-        onPOIClick = {
-            logD("POI clicked: ${it.name}")
-        }
+        uiSettings = uiSettings
     ) {
+        if (userPosition.location.latitude != 0.0 && userPosition.location.longitude != 0.0) {
+            Marker(
+                state = MarkerState(position = userPosition.location),
+                icon = markerCache.getOrPut(
+                    id = R.drawable.ic_arrow,
+                    size = 80
+                )
+            )
+        }
+
         stationary.forEach { camera ->
             MarkerInfoWindow(
                 state = rememberMarkerState(position = camera.position),

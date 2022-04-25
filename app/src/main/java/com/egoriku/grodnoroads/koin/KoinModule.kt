@@ -22,6 +22,6 @@ val koinModule = module {
     factory<CameraUseCase> { CameraUseCaseImpl(stationaryCameraRepository = get()) }
 
     viewModel {
-        CameraViewModel(useCase = get())
+        CameraViewModel(application = get(), useCase = get())
     }
 }

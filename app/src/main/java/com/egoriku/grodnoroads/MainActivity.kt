@@ -14,23 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.domain.model.CameraType.Stationary
+import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.ui.GoogleMapView
 import com.egoriku.grodnoroads.ui.StartDriveModButton
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.android.gms.maps.model.LatLng
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-private val stationaryCameras = listOf(
-    Camera(
-        type = Stationary,
-        message = "Стационарная камера",
-        speed = 70,
-        position = LatLng(53.647136, 23.811177)
-    )
-)
 
 class MainActivity : ComponentActivity() {
 
@@ -55,16 +44,19 @@ class MainActivity : ComponentActivity() {
                         .navigationBarsPadding()
                 ) {
                     val stationary by cameraViewModel.stationary.collectAsState()
+                    val location by cameraViewModel.location.collectAsState()
 
                     GoogleMapView(
                         modifier = Modifier.matchParentSize(),
-                        stationary = stationary
+                        stationary = stationary,
+                        userPosition = location
                     )
                     StartDriveModButton(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                     ) {
-                        //todo Start Navigation
+                        logD("Start Navigation")
+                        cameraViewModel.startLocationUpdates()
                     }
                 }
             }

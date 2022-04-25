@@ -47,7 +47,11 @@ dependencies {
     implementation 'com.google.maps.android:maps-compose:2.1.0'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
+    implementation("com.google.android.gms:play-services-location:19.0.1")
+
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.7-alpha"
+    implementation "com.google.accompanist:accompanist-permissions:0.24.7-alpha"
+
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.runtime:runtime:$compose_version"

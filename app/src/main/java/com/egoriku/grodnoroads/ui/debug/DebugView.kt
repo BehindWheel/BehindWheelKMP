@@ -11,7 +11,8 @@ import com.google.maps.android.compose.CameraPositionState
 fun DebugView(cameraPositionState: CameraPositionState) {
     Column(
         Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .statusBarsPadding(),
         verticalArrangement = Arrangement.Center
     ) {
         val moving =
