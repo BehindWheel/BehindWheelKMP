@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.egoriku.grodnoroads.ui.GoogleMapView
-import com.egoriku.grodnoroads.ui.mode.drive.action.DriveMode
+import com.egoriku.grodnoroads.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.ui.mode.map.MapMode
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

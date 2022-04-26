@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.ui.mode.drive.action
+package com.egoriku.grodnoroads.ui.mode.drive
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -8,7 +8,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.ui.mode.drive.ReportAction
+import com.egoriku.grodnoroads.ui.mode.drive.action.ReportAction
+import com.egoriku.grodnoroads.ui.mode.drive.action.CloseAction
 
 @Composable
 fun DriveMode(
