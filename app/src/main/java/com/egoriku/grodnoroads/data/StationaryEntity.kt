@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.data
 
-import com.google.firebase.firestore.GeoPoint
-import com.google.firebase.firestore.PropertyName
+import com.google.firebase.database.PropertyName
 
 class StationaryEntity(
     @PropertyName("message")
@@ -14,5 +13,15 @@ class StationaryEntity(
 
     @PropertyName("position")
     @JvmField
-    val position: GeoPoint = GeoPoint(0.0, 0.0)
+    val position: LatLng = LatLng()
+)
+
+class LatLng(
+    @PropertyName("lat")
+    @JvmField
+    val latitude: Double = 0.0,
+
+    @PropertyName("lng")
+    @JvmField
+    val longitude: Double = 0.0
 )

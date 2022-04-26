@@ -1,19 +1,27 @@
 package com.egoriku.grodnoroads.data
 
 import com.egoriku.grodnoroads.domain.repository.StationaryCameraRepository
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObjects
+import com.egoriku.grodnoroads.extension.DataResponse
+import com.egoriku.grodnoroads.extension.singleValueEvent
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 internal class StationaryCameraRepositoryImpl(
-    private val db: FirebaseFirestore
+    private val db: FirebaseDatabase
 ) : StationaryCameraRepository {
 
     override suspend fun load() = withContext(Dispatchers.IO) {
         runCatching {
-            db.collection("stationary_camera").get().await().toObjects<StationaryEntity>()
-        }.getOrDefault(emptyList())
+            val dataResponse = db.reference
+                .child("stationary_camera")
+                .singleValueEvent()
+
+            when (dataResponse) {
+                is DataResponse.Complete -> dataResponse.data.children.mapNotNull { it.getValue<StationaryEntity>() }
+                is DataResponse.Error -> emptyList()
+            }
+        }.getOrThrow()
     }
 }
