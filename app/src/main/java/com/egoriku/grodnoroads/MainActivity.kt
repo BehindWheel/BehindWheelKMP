@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import com.egoriku.grodnoroads.domain.model.UserAction
 import com.egoriku.grodnoroads.ui.GoogleMapView
 import com.egoriku.grodnoroads.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.ui.mode.map.MapMode
@@ -62,8 +63,18 @@ class MainActivity : ComponentActivity() {
                             stopDrive = {
                                 cameraViewModel.stopLocationUpdates()
                             },
-                            reportPolice = {},
-                            reportAccident = {}
+                            reportPolice = {
+                                cameraViewModel.reportAction(
+                                    latLng = location.latLng,
+                                    type = UserAction.Police
+                                )
+                            },
+                            reportAccident = {
+                                cameraViewModel.reportAction(
+                                    latLng = location.latLng,
+                                    type = UserAction.Accident
+                                )
+                            }
                         )
                     }
                 }

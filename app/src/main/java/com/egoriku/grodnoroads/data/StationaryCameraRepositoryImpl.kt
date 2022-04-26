@@ -2,10 +2,10 @@ package com.egoriku.grodnoroads.data
 
 import com.egoriku.grodnoroads.data.response.StationaryCameraResponse
 import com.egoriku.grodnoroads.domain.repository.StationaryCameraRepository
-import com.egoriku.grodnoroads.extension.DataResponse
-import com.egoriku.grodnoroads.extension.singleValueEvent
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
+import com.kpstv.firebase.DataResponse
+import com.kpstv.firebase.extensions.singleValueEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,7 +16,7 @@ internal class StationaryCameraRepositoryImpl(
     override suspend fun load() = withContext(Dispatchers.IO) {
         runCatching {
             val dataResponse = db.reference
-                .child("stationary_camera")
+                .child(STATIONARY_CAMERA)
                 .singleValueEvent()
 
             when (dataResponse) {

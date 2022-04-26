@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.egoriku.grodnoroads.domain.model.Camera
+import com.egoriku.grodnoroads.domain.model.UserAction
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.extension.logD
 import com.google.android.gms.location.LocationCallback
@@ -89,5 +90,11 @@ class CameraViewModel(
     override fun onCleared() {
         super.onCleared()
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    fun reportAction(latLng: LatLng, type: UserAction) {
+        viewModelScope.launch {
+            useCase.reportAction(type = type, latLng = latLng)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.ui
+package com.egoriku.grodnoroads.ui.mode.map
 
 import android.app.Activity
 import android.content.Context

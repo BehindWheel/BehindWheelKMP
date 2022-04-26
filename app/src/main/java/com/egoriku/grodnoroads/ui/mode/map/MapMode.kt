@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.egoriku.grodnoroads.extension.logD
-import com.egoriku.grodnoroads.ui.StartDriveModButton
 
 @Composable
 fun MapMode(startNavigation: () -> Unit) {
