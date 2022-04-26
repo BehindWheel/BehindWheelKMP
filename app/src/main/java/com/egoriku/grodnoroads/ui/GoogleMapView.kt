@@ -21,12 +21,15 @@ import com.egoriku.grodnoroads.MarkerCache
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
+import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.util.SphericalUtil
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
+import com.google.maps.android.ui.IconGenerator
 import org.koin.androidx.compose.get
 
 val grodnoPosition = LatLng(53.6687765, 23.8212226)
@@ -35,11 +38,14 @@ val grodnoPosition = LatLng(53.6687765, 23.8212226)
 fun GoogleMapView(
     modifier: Modifier,
     stationary: List<Camera>,
-    userPosition: UserPosition
+    userPosition: UserPosition,
+    userActions: List<MapEvent>
 ) {
     val context = LocalContext.current
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val markerCache = get<MarkerCache>()
+
+    val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
 
     var lastBearing by remember { mutableStateOf(0.0f) }
     var directionBearing by remember { mutableStateOf(0.0f) }
@@ -126,6 +132,15 @@ fun GoogleMapView(
                     SpeedLimitSign(limit = camera.speed)
                 }
             }
+        }
+
+        userActions.forEach {
+            MarkerInfoWindow(
+                state = rememberMarkerState(position = it.position),
+                icon = BitmapDescriptorFactory.fromBitmap(
+                    iconGenerator.makeIcon("${it.time} ${it.message}")
+                )
+            )
         }
     }
 

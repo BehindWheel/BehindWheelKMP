@@ -7,7 +7,7 @@ import android.os.Looper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.domain.model.UserAction
+import com.egoriku.grodnoroads.domain.model.UserActionType
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.extension.logD
 import com.google.android.gms.location.LocationCallback
@@ -29,6 +29,8 @@ class CameraViewModel(
     private val useCase: CameraUseCase
 ) : AndroidViewModel(application) {
 
+    val userActions = useCase.usersActions()
+
     private val _mode = MutableStateFlow(AppMode.Map)
     val mode = _mode.asStateFlow()
 
@@ -41,6 +43,10 @@ class CameraViewModel(
     init {
         viewModelScope.launch {
             _stationary.emit(useCase.loadStationary())
+        }
+
+        viewModelScope.launch {
+            useCase.usersActions()
         }
     }
 
@@ -92,7 +98,7 @@ class CameraViewModel(
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
-    fun reportAction(latLng: LatLng, type: UserAction) {
+    fun reportAction(latLng: LatLng, type: UserActionType) {
         viewModelScope.launch {
             useCase.reportAction(type = type, latLng = latLng)
         }

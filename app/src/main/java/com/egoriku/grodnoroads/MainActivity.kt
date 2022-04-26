@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import com.egoriku.grodnoroads.domain.model.UserAction
+import com.egoriku.grodnoroads.domain.model.UserActionType
 import com.egoriku.grodnoroads.ui.GoogleMapView
 import com.egoriku.grodnoroads.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.ui.mode.map.MapMode
@@ -46,11 +46,13 @@ class MainActivity : ComponentActivity() {
                     val stationary by cameraViewModel.stationary.collectAsState()
                     val location by cameraViewModel.location.collectAsState()
                     val mode by cameraViewModel.mode.collectAsState()
+                    val userActions by cameraViewModel.userActions.collectAsState(initial = emptyList())
 
                     GoogleMapView(
                         modifier = Modifier.fillMaxSize(),
                         stationary = stationary,
-                        userPosition = location
+                        userPosition = location,
+                        userActions = userActions
                     )
 
                     when (mode) {
@@ -66,13 +68,13 @@ class MainActivity : ComponentActivity() {
                             reportPolice = {
                                 cameraViewModel.reportAction(
                                     latLng = location.latLng,
-                                    type = UserAction.Police
+                                    type = UserActionType.Police
                                 )
                             },
                             reportAccident = {
                                 cameraViewModel.reportAction(
                                     latLng = location.latLng,
-                                    type = UserAction.Accident
+                                    type = UserActionType.Accident
                                 )
                             }
                         )
