@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 private val defaultPosition = UserPosition(
-    location = LatLng(0.0, 0.0),
+    latLng = LatLng(0.0, 0.0),
     bearing = 0f
 )
 
@@ -50,7 +50,7 @@ class CameraViewModel(
                 logD("locationCallback: ${location.latitude}, ${location.longitude}, ${location.bearing}")
                 _location.tryEmit(
                     UserPosition(
-                        location = LatLng(location.latitude, location.longitude),
+                        latLng = LatLng(location.latitude, location.longitude),
                         bearing = location.bearing
                     )
                 )

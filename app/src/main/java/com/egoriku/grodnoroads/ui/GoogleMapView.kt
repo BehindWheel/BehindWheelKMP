@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.ui
 
+import android.graphics.Point
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -18,6 +21,7 @@ import com.egoriku.grodnoroads.MarkerCache
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
+import com.egoriku.grodnoroads.util.SphericalUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -34,18 +38,40 @@ fun GoogleMapView(
     userPosition: UserPosition
 ) {
     val context = LocalContext.current
+    val screenHeight = LocalConfiguration.current.screenHeightDp
     val markerCache = get<MarkerCache>()
+
+    var lastBearing by remember { mutableStateOf(0.0f) }
+    var directionBearing by remember { mutableStateOf(0.0f) }
 
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(grodnoPosition, 14f)
     }
 
+    val screenLocation =
+        cameraPositionState.projection?.toScreenLocation(userPosition.latLng)?.apply {
+            set(x, y - screenHeight / 3)
+        } ?: Point()
+
+    val fromScreenLocation = cameraPositionState.projection?.fromScreenLocation(screenLocation)
+        ?: userPosition.latLng
+
+    lastBearing = directionBearing
+    directionBearing = userPosition.bearing
+
+    if (directionBearing == 0.0f) {
+        directionBearing = lastBearing
+    }
+
+    val computeHeading = SphericalUtil.computeHeading(userPosition.latLng, fromScreenLocation)
+
     LaunchedEffect(key1 = userPosition) {
-        if (userPosition.location.latitude != 0.0 && userPosition.location.longitude != 0.0) {
-            val cameraPosition = CameraPosition.Builder(cameraPositionState.position)
-                .bearing(userPosition.bearing)
-                .target(userPosition.location)
+        if (userPosition.latLng.latitude != 0.0 && userPosition.latLng.longitude != 0.0) {
+            val cameraPosition = CameraPosition.Builder()
+                .target(fromScreenLocation)
                 .zoom(14f)
+                .bearing(directionBearing)
+                .tilt(25.0f)
                 .build()
 
             cameraPositionState.animate(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -72,13 +98,15 @@ fun GoogleMapView(
         properties = mapProperties,
         uiSettings = uiSettings
     ) {
-        if (userPosition.location.latitude != 0.0 && userPosition.location.longitude != 0.0) {
+        if (userPosition.latLng.latitude != 0.0 && userPosition.latLng.longitude != 0.0) {
             Marker(
-                state = MarkerState(position = userPosition.location),
+                state = MarkerState(position = userPosition.latLng),
                 icon = markerCache.getOrPut(
                     id = R.drawable.ic_arrow,
                     size = 80
-                )
+                ),
+                rotation = (directionBearing - computeHeading).toFloat(),
+                anchor = Offset(0.5f, 0.0f)
             )
         }
 
