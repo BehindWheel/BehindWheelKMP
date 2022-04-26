@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.data
 
+import com.egoriku.grodnoroads.data.response.StationaryCameraResponse
 import com.egoriku.grodnoroads.domain.repository.StationaryCameraRepository
 import com.egoriku.grodnoroads.extension.DataResponse
 import com.egoriku.grodnoroads.extension.singleValueEvent
@@ -19,7 +20,7 @@ internal class StationaryCameraRepositoryImpl(
                 .singleValueEvent()
 
             when (dataResponse) {
-                is DataResponse.Complete -> dataResponse.data.children.mapNotNull { it.getValue<StationaryEntity>() }
+                is DataResponse.Complete -> dataResponse.data.children.mapNotNull { it.getValue<StationaryCameraResponse>() }
                 is DataResponse.Error -> emptyList()
             }
         }.getOrThrow()
