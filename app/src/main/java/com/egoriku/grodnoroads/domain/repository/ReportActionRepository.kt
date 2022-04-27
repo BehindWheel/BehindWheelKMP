@@ -1,11 +1,11 @@
 package com.egoriku.grodnoroads.domain.repository
 
-import com.egoriku.grodnoroads.data.response.ReportActionResponse
+import com.egoriku.grodnoroads.data.model.ActionResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ReportActionRepository {
 
-    suspend fun report(reportActionResponse: ReportActionResponse)
+    suspend fun report(actionResponse: ActionResponse)
 
-    fun usersActions(): Flow<List<ReportActionResponse>>
+    fun usersActions(): Flow<List<ActionResponse>>
 }
