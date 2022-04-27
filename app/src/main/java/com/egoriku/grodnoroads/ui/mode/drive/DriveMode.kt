@@ -8,8 +8,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.ui.mode.drive.action.ReportAction
 import com.egoriku.grodnoroads.ui.mode.drive.action.CloseAction
+import com.egoriku.grodnoroads.ui.mode.drive.action.ReportAction
 
 @Composable
 fun DriveMode(
@@ -18,15 +18,6 @@ fun DriveMode(
     reportAccident: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        CloseAction(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .statusBarsPadding()
-                .padding(top = 16.dp, start = 16.dp),
-            painter = painterResource(id = R.drawable.ic_close),
-            onClick = stopDrive
-        )
-
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -43,6 +34,14 @@ fun DriveMode(
                 onClick = reportAccident
             )
         }
+        CloseAction(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .navigationBarsPadding()
+                .padding(bottom = 16.dp),
+            painter = painterResource(id = R.drawable.ic_close),
+            onClick = stopDrive
+        )
     }
 }
 
