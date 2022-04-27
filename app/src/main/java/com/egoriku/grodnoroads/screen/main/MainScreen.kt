@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
@@ -49,6 +46,9 @@ object MainScreen : Screen {
             onClick = { tabNavigator.current = tab },
             icon = {
                 Icon(painter = tab.options.icon!!, contentDescription = tab.options.title)
+            },
+            label = {
+                Text(text = tab.options.title)
             }
         )
     }
