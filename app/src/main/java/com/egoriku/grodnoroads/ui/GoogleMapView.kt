@@ -51,7 +51,7 @@ fun GoogleMapView(
     var directionBearing by remember { mutableStateOf(0.0f) }
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(grodnoPosition, 14f)
+        position = CameraPosition.fromLatLngZoom(grodnoPosition, 12.5f)
     }
 
     val screenLocation =
