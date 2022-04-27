@@ -4,5 +4,6 @@ import com.google.android.gms.maps.model.LatLng
 
 data class UserPosition(
     val latLng: LatLng,
-    val bearing: Float
+    val bearing: Float,
+    val speed: Double
 )

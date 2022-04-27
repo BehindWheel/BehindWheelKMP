@@ -21,7 +21,8 @@ import kotlinx.coroutines.launch
 
 private val defaultPosition = UserPosition(
     latLng = LatLng(0.0, 0.0),
-    bearing = 0f
+    bearing = 0f,
+    speed = 0.0
 )
 
 class CameraViewModel(
@@ -58,7 +59,8 @@ class CameraViewModel(
                 _location.tryEmit(
                     UserPosition(
                         latLng = LatLng(location.latitude, location.longitude),
-                        bearing = location.bearing
+                        bearing = location.bearing,
+                        speed = if (location.hasSpeed()) location.speed * 18.0 / 5.0 else 0.0
                     )
                 )
             }
