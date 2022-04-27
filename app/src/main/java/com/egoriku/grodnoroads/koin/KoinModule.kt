@@ -18,7 +18,7 @@ val koinModule = module {
         StationaryCameraRepositoryImpl(api = get())
     }
     factory<ReportActionRepository> {
-        ReportActionRepositoryImpl(api = get())
+        ReportActionRepositoryImpl(context = get(), api = get())
     }
 
     factory<CameraUseCase> {
