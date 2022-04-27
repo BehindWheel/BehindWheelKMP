@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.koin
 
 import com.egoriku.grodnoroads.CameraViewModel
-import com.egoriku.grodnoroads.MarkerCache
+import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.data.repository.ReportActionRepositoryImpl
 import com.egoriku.grodnoroads.data.repository.StationaryCameraRepositoryImpl
 import com.egoriku.grodnoroads.domain.repository.ReportActionRepository

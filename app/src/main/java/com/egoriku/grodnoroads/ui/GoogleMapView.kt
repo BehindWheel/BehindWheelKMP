@@ -17,9 +17,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.MarkerCache
+import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.UserPosition
+import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.util.SphericalUtil

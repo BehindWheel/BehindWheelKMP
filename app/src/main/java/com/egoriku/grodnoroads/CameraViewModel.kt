@@ -6,8 +6,10 @@ import android.location.Location
 import android.os.Looper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.UserActionType
+import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.extension.logD
 import com.google.android.gms.location.LocationCallback

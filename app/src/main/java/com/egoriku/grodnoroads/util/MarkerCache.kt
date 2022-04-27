@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads
+package com.egoriku.grodnoroads.util
 
 import android.content.Context
 import android.graphics.Bitmap

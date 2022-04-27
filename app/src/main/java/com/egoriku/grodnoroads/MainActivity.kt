@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.UserActionType
 import com.egoriku.grodnoroads.ui.GoogleMapView
 import com.egoriku.grodnoroads.ui.mode.drive.DriveMode
