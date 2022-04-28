@@ -6,6 +6,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Forum
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,7 +23,7 @@ object ChatScreenTab : Tab {
         @Composable
         get() {
             val title = stringResource(R.string.tab_chat)
-            val icon = rememberVectorPainter(Icons.Filled.Email)
+            val icon = rememberVectorPainter(Icons.Default.Forum)
 
             return remember {
                 TabOptions(

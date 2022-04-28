@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Explore
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,7 +29,7 @@ object MapScreenTab : Tab {
         @Composable
         get() {
             val title = stringResource(R.string.tab_map)
-            val icon = rememberVectorPainter(Icons.Filled.LocationOn)
+            val icon = rememberVectorPainter(Icons.Default.Explore)
 
             return remember {
                 TabOptions(

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Дороги Гродно</string>
+    <string name="tab_map">Карта</string>
+    <string name="tab_chat">Чат</string>
+</resources>
