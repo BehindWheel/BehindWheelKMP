@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.ui
+package com.egoriku.grodnoroads.screen.map.ui
 
 import android.graphics.Point
 import androidx.compose.foundation.background
@@ -17,11 +17,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.MapEvent
+import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.SphericalUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory

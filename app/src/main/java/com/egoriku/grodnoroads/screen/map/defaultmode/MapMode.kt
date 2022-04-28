@@ -1,11 +1,11 @@
-package com.egoriku.grodnoroads.ui.mode.map
+package com.egoriku.grodnoroads.screen.map.defaultmode
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.screen.map.defaultmode.ui.StartDriveModButton
 
 @Composable
 fun MapMode(startNavigation: () -> Unit) {
@@ -13,7 +13,6 @@ fun MapMode(startNavigation: () -> Unit) {
         StartDriveModButton(
             modifier = Modifier.align(Alignment.BottomCenter),
             onStartNavigation = {
-                logD("Start Navigation")
                 startNavigation()
             }
         )

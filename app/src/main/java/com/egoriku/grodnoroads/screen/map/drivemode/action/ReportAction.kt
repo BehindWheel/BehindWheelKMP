@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.ui.mode.drive.action
+package com.egoriku.grodnoroads.screen.map.drivemode.action
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

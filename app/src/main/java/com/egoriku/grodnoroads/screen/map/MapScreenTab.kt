@@ -18,9 +18,9 @@ import com.egoriku.grodnoroads.CameraViewModel
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.UserActionType
-import com.egoriku.grodnoroads.ui.GoogleMapView
-import com.egoriku.grodnoroads.ui.mode.drive.DriveMode
-import com.egoriku.grodnoroads.ui.mode.map.MapMode
+import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
+import com.egoriku.grodnoroads.screen.map.drivemode.DriveMode
+import com.egoriku.grodnoroads.screen.map.defaultmode.MapMode
 import org.koin.androidx.compose.viewModel
 
 object MapScreenTab : Tab {

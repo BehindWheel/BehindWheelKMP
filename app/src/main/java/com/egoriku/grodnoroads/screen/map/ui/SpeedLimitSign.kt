@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.ui
+package com.egoriku.grodnoroads.screen.map.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

@@ -44,7 +44,6 @@ class CameraViewModel(
     val stationary = _stationary.asStateFlow()
 
     init {
-        logD("created")
         viewModelScope.launch {
             _stationary.emit(useCase.loadStationary())
         }
