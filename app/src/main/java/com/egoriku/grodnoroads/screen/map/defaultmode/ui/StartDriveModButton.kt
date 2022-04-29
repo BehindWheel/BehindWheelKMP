@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -70,7 +71,7 @@ fun StartDriveModButton(
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_car),
-            contentDescription = "Start Navigation"
+            contentDescription = null
         )
     }
 }

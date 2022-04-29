@@ -2,10 +2,7 @@ package com.egoriku.grodnoroads.screen.map.ui
 
 import android.graphics.Point
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -92,6 +89,7 @@ fun GoogleMapView(
     val mapProperties by remember {
         mutableStateOf(
             MapProperties(
+                isMyLocationEnabled = true,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
             )
@@ -102,7 +100,8 @@ fun GoogleMapView(
         modifier = modifier,
         cameraPositionState = cameraPositionState,
         properties = mapProperties,
-        uiSettings = uiSettings
+        uiSettings = uiSettings,
+        contentPadding = WindowInsets.statusBars.asPaddingValues()
     ) {
         if (userPosition.latLng.latitude != 0.0 && userPosition.latLng.longitude != 0.0) {
             Marker(

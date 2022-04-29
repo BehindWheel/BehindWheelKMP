@@ -3,4 +3,5 @@
     <string name="app_name">Дороги Гродно</string>
     <string name="tab_map">Карта</string>
     <string name="tab_chat">Чат</string>
+    <string name="settings">Настройки</string>
 </resources>
