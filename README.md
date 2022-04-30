@@ -1,4 +1,4 @@
-# GrodnoRoads
+# EN
 Application to show on the map different events in real-time.
 
 Currently under development and first build will be available soon.
