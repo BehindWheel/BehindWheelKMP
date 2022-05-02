@@ -13,7 +13,7 @@ interface GrodnoRoadsApi {
     @GET(SHEET_ROAD_EVENTS)
     suspend fun getRoadEvents(): List<ActionResponse>
 
-    @Read("SELECT *")
+    @Read
     @GET(SHEET_STATIONARY_CAMERA)
     suspend fun getStationaryCameras(): List<StationaryResponse>
 

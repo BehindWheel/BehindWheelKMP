@@ -4,6 +4,7 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.gms.google-services'
     id("com.google.devtools.ksp").version("1.6.20-1.0.5")
+    id("kotlin-parcelize")
 }
 
 apply plugin: 'com.google.firebase.crashlytics'
@@ -88,7 +89,11 @@ dependencies {
 
     implementation "io.insert-koin:koin-android:3.2.0-beta-1"
     implementation 'io.insert-koin:koin-androidx-compose:3.2.0-beta-1'
+    
+    implementation 'com.arkivanov.decompose:decompose:0.6.0'
+    implementation 'com.arkivanov.decompose:extensions-compose-jetpack:0.6.0'
 
-    implementation "cafe.adriel.voyager:voyager-navigator:1.0.0-rc01"
-    implementation "cafe.adriel.voyager:voyager-tab-navigator:1.0.0-rc01"
+    implementation 'com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02'
+    implementation 'com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02'
+    implementation 'com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02'
 }

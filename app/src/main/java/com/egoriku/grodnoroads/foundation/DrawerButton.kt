@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.defaultmode.ui
+package com.egoriku.grodnoroads.foundation
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.FloatingActionButton

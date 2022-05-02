@@ -7,8 +7,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import cafe.adriel.voyager.navigator.Navigator
-import com.egoriku.grodnoroads.screen.main.MainScreen
+import com.arkivanov.decompose.defaultComponentContext
+import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
+import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -27,8 +28,10 @@ class MainActivity : ComponentActivity() {
                 systemUiController.setStatusBarColor(Color.Transparent, darkIcons = useDarkIcons)
             }
 
+            val root = RoadsRootComponentImpl(defaultComponentContext())
+
             GrodnoRoadsTheme {
-                Navigator(MainScreen)
+                RootContent(roadsRootComponent = root)
             }
         }
     }

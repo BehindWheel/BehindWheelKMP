@@ -6,6 +6,10 @@ import android.app.Application
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.koin.koinModule
 import com.egoriku.grodnoroads.koin.networkModule
+import com.egoriku.grodnoroads.screen.chat.chatModule
+import com.egoriku.grodnoroads.screen.main.koin.mainModule
+import com.egoriku.grodnoroads.screen.map.koin.mapModule
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import org.koin.android.ext.koin.androidContext
@@ -16,11 +20,19 @@ class RoadsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+
         subscribeToTopic()
 
         startKoin {
             androidContext(this@RoadsApplication)
-            modules(koinModule, networkModule)
+            modules(
+                chatModule,
+                koinModule,
+                mainModule,
+                mapModule,
+                networkModule
+            )
         }
     }
 
