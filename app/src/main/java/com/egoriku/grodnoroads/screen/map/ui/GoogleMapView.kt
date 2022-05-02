@@ -1,5 +1,7 @@
 package com.egoriku.grodnoroads.screen.map.ui
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.graphics.Point
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,6 +22,8 @@ import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.SphericalUtil
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -31,6 +35,7 @@ import org.koin.androidx.compose.get
 
 val grodnoPosition = LatLng(53.6687765, 23.8212226)
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun GoogleMapView(
     modifier: Modifier,
@@ -83,13 +88,22 @@ fun GoogleMapView(
 
     val uiSettings by remember {
         mutableStateOf(
-            MapUiSettings(mapToolbarEnabled = false, compassEnabled = false)
+            MapUiSettings(
+                mapToolbarEnabled = false,
+                compassEnabled = false,
+                myLocationButtonEnabled = false
+            )
         )
     }
+
+    val locationPermissionsState = rememberMultiplePermissionsState(
+        listOf(ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION)
+    )
+
     val mapProperties by remember {
         mutableStateOf(
             MapProperties(
-                isMyLocationEnabled = true,
+                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
             )
