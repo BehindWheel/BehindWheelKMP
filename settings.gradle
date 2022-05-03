@@ -13,5 +13,8 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
+
+enableFeaturePreview("VERSION_CATALOGS")
+
 rootProject.name = "Grodno Roads"
 include ':app'
