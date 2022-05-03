@@ -64,7 +64,6 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
             interval = 1000
             fastestInterval = 1000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            smallestDisplacement = 1.0f
         }
     }
 }

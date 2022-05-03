@@ -30,8 +30,6 @@ fun rememberMapProperties(userPosition: UserPosition): MapProperties {
         else -> R.raw.map_light_style
     }
 
-    logD(isSystemInDarkTheme().toString())
-
     val mapProperties by remember(userPosition) {
         mutableStateOf(
             MapProperties(
