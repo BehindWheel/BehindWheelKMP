@@ -1,5 +1,8 @@
 package com.egoriku.grodnoroads.screen.map
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -43,12 +46,29 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                 userActions = userActions
             )
 
-            when (mode) {
-                AppMode.Map -> MapMode(
+            AnimatedVisibility(
+                visible = mode == AppMode.Map,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                MapMode(
                     onLocationEnabled = component::startLocationUpdates,
                     onLocationDisabled = component::onLocationDisabled
                 )
-                AppMode.Drive -> DriveMode(
+                DrawerButton(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.TopStart)
+                        .statusBarsPadding(),
+                    onClick = openDrawer
+                )
+            }
+            AnimatedVisibility(
+                visible = mode == AppMode.Drive,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                DriveMode(
                     location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {
@@ -63,16 +83,6 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                             type = UserActionType.Accident
                         )
                     }
-                )
-            }
-
-            if (mode == AppMode.Map) {
-                DrawerButton(
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.TopStart)
-                        .statusBarsPadding(),
-                    onClick = openDrawer
                 )
             }
         }
