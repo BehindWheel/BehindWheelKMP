@@ -20,7 +20,11 @@ val mapModule = module {
     }
 
     factory {
-        LocationStoreFactory(storeFactory = get(), locationHelper = get()).create()
+        LocationStoreFactory(
+            storeFactory = get(),
+            locationHelper = get(),
+            resourceProvider = get()
+        ).create()
     }
 }
 

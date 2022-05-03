@@ -2,13 +2,14 @@ package com.egoriku.grodnoroads.screen.map
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
+import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.domain.model.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStore
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.store.LocationStore
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.StartLocationUpdates
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.StopLocationUpdates
+import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
+import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -40,7 +41,11 @@ class MapComponentImpl(
         )
     }
 
+    override val labels: Flow<Label> = locationStore.labels
+
     override fun startLocationUpdates() = locationStore.accept(StartLocationUpdates)
 
     override fun stopLocationUpdates() = locationStore.accept(StopLocationUpdates)
+
+    override fun onLocationDisabled() = locationStore.accept(DisabledLocation)
 }

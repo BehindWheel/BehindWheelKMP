@@ -3,18 +3,23 @@ package com.egoriku.grodnoroads.screen.map
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.UserActionType
 import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.foundation.DrawerButton
+import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
+import com.egoriku.grodnoroads.util.toast
 
 @Composable
 fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
@@ -28,6 +33,8 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
         val mode by component.appMode.collectAsState(AppMode.Map)
         val userActions by component.usersActions.collectAsState(initial = emptyList())
 
+        LabelsSubscription(component)
+
         Box(modifier = Modifier.fillMaxSize()) {
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
@@ -38,7 +45,8 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
 
             when (mode) {
                 AppMode.Map -> MapMode(
-                    startNavigation = component::startLocationUpdates
+                    onLocationEnabled = component::startLocationUpdates,
+                    onLocationDisabled = component::onLocationDisabled
                 )
                 AppMode.Drive -> DriveMode(
                     stopDrive = component::stopLocationUpdates,
@@ -64,6 +72,19 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                     .statusBarsPadding(),
                 onClick = openDrawer
             )
+        }
+    }
+}
+
+@Composable
+private fun LabelsSubscription(component: MapComponent) {
+    val context = LocalContext.current
+    val labels by component.labels.collectAsState(initial = Label.None)
+
+    LaunchedEffect(labels) {
+        when (val label = labels) {
+            is ShowToast -> context.toast(label.message)
+            is Label.None -> {}
         }
     }
 }

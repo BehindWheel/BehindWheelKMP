@@ -8,16 +8,12 @@ import androidx.compose.ui.Modifier
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.ui.StartDriveModButton
 
 @Composable
-fun MapMode(startNavigation: () -> Unit) {
+fun MapMode(onLocationEnabled: () -> Unit, onLocationDisabled: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         StartDriveModButton(
             modifier = Modifier.align(Alignment.BottomCenter),
-            onLocationEnabled = {
-                startNavigation()
-            },
-            onLocationDisabled = {
-
-            }
+            onLocationEnabled = onLocationEnabled,
+            onLocationDisabled = onLocationDisabled
         )
     }
 }
