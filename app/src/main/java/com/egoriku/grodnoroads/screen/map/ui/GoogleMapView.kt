@@ -1,7 +1,5 @@
 package com.egoriku.grodnoroads.screen.map.ui
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.graphics.Point
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,22 +18,19 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.SphericalUtil
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import com.google.maps.android.ui.IconGenerator
 import org.koin.androidx.compose.get
 
 val grodnoPosition = LatLng(53.6687765, 23.8212226)
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun GoogleMapView(
     modifier: Modifier,
@@ -96,19 +91,7 @@ fun GoogleMapView(
         )
     }
 
-    val locationPermissionsState = rememberMultiplePermissionsState(
-        listOf(ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION)
-    )
-
-    val mapProperties by remember(userPosition) {
-        mutableStateOf(
-            MapProperties(
-                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && userPosition == UserPosition.None,
-                mapType = MapType.NORMAL,
-                mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
-            )
-        )
-    }
+    val mapProperties = rememberMapProperties(userPosition)
 
     GoogleMap(
         modifier = modifier,
