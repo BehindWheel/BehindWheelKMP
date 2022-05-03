@@ -24,16 +24,16 @@ class CamerasStoreFactory(
     private val cameraUseCase: CameraUseCase
 ) {
 
-    sealed class Intent {
+    sealed interface Intent {
         data class ReportAction(
             val latLng: LatLng,
             val type: UserActionType
-        ) : Intent()
+        ) : Intent
     }
 
-    private sealed class Message {
-        data class StationaryLoaded(val data: List<Camera>) : Message()
-        data class UserActionsLoaded(val data: List<MapEvent>) : Message()
+    private sealed interface Message {
+        data class StationaryLoaded(val data: List<Camera>) : Message
+        data class UserActionsLoaded(val data: List<MapEvent>) : Message
     }
 
     data class State(
