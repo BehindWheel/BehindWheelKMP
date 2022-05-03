@@ -77,7 +77,8 @@ fun GoogleMapView(
                     size = 80
                 ),
                 rotation = cameraPositionValues.markerRotation,
-                anchor = Offset(0.5f, 0.5f)
+                anchor = Offset(0.5f, 0.5f),
+                zIndex = 1f
             )
         }
     }
