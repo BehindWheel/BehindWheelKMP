@@ -4,7 +4,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("com.google.devtools.ksp") version "1.6.20-1.0.5"
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
 
@@ -76,7 +76,7 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx")
 
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
-    implementation("com.google.maps.android:maps-ktx:3.3.0")
+    implementation("com.google.maps.android:maps-ktx:3.4.0")
     implementation("com.google.maps.android:maps-compose:2.1.0")
 
     implementation("com.google.android.gms:play-services-maps:18.0.2")
