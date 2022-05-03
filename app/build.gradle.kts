@@ -124,6 +124,10 @@ dependencies {
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
 }
 
+secrets {
+    propertiesFileName = "secrets.properties"
+}
+
 fun keyStoreFile(vararg fileNames: String): File? {
     for (path in fileNames) {
         val file = project.file(path)

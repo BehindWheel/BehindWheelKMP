@@ -36,6 +36,9 @@ jobs:
       - name: Console
         run: echo ${{ github.workspace }}/app/keystore.jks
 
+      - name: Make secrets.properties
+        run: echo ${{ secrets.SECRETS_PROPERTIES }} | base64 --decode > app/google-services.json
+
       - name: "Check keystore existence"
         uses: andstor/file-existence-action@v1
         with:
