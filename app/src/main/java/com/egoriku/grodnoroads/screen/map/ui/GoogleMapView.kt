@@ -18,6 +18,7 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.SphericalUtil

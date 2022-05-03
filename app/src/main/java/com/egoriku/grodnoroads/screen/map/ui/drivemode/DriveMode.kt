@@ -8,16 +8,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.foundation.CurrentSpeed
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
 
 @Composable
 fun DriveMode(
+    location: UserPosition,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
     reportAccident: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
+        CurrentSpeed(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 8.dp, end = 16.dp)
+                .statusBarsPadding(),
+            speed = location.speed.toString()
+        )
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -49,6 +59,7 @@ fun DriveMode(
 @Composable
 private fun DriveModePReview() {
     DriveMode(
+        location = UserPosition.None,
         stopDrive = {},
         reportPolice = {},
         reportAccident = {}

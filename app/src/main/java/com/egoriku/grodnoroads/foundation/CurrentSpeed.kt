@@ -1,7 +1,6 @@
-package com.egoriku.grodnoroads.screen.map.ui
+package com.egoriku.grodnoroads.foundation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
@@ -18,12 +17,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SpeedLimitSign(limit: Int) {
+fun CurrentSpeed(
+    modifier: Modifier = Modifier,
+    speed: String
+) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
+        modifier = modifier
             .background(Color.White, shape = CircleShape)
-            .border(3.dp, Color.Red, CircleShape)
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
 
@@ -38,19 +39,19 @@ fun SpeedLimitSign(limit: Int) {
             }
     ) {
         Text(
-            text = limit.toString(),
+            text = speed,
             textAlign = TextAlign.Center,
             color = Color.Black,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .padding(4.dp)
-                .defaultMinSize(24.dp)
+                .defaultMinSize(48.dp)
         )
     }
 }
 
 @Preview
 @Composable
-fun SpeedLimitSignPreview() {
-    SpeedLimitSign(limit = 70)
+fun CurrentSpeedPreview() {
+    CurrentSpeed(speed = 70.toString())
 }

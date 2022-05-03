@@ -35,7 +35,7 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
                 UserPosition(
                     latLng = LatLng(location.latitude, location.longitude),
                     bearing = location.bearing,
-                    speed = if (location.hasSpeed()) location.speed * 18.0 / 5.0 else 0.0
+                    speed = if (location.hasSpeed()) location.speed.toInt() else 0
                 )
             )
         }

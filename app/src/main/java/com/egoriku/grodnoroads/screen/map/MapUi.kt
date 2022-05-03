@@ -49,6 +49,7 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                     onLocationDisabled = component::onLocationDisabled
                 )
                 AppMode.Drive -> DriveMode(
+                    location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {
                         component.reportAction(
@@ -65,13 +66,15 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                 )
             }
 
-            DrawerButton(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .align(Alignment.TopStart)
-                    .statusBarsPadding(),
-                onClick = openDrawer
-            )
+            if (mode == AppMode.Map) {
+                DrawerButton(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.TopStart)
+                        .statusBarsPadding(),
+                    onClick = openDrawer
+                )
+            }
         }
     }
 }
