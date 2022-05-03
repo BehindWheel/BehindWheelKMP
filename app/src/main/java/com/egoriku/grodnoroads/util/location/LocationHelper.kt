@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Looper
 import com.egoriku.grodnoroads.domain.model.UserPosition
 import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.util.MetricUtils.speedToKilometerPerHour
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -35,7 +36,10 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
                 UserPosition(
                     latLng = LatLng(location.latitude, location.longitude),
                     bearing = location.bearing,
-                    speed = if (location.hasSpeed()) location.speed.toInt() else 0
+                    speed = when {
+                        location.hasSpeed() -> speedToKilometerPerHour(location.speed)
+                        else -> 0
+                    }
                 )
             )
         }
