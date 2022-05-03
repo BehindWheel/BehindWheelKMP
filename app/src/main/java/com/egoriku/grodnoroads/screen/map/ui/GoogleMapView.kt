@@ -109,7 +109,7 @@ fun GoogleMapView(
                     size = 80
                 ),
                 rotation = (directionBearing - computeHeading).toFloat(),
-                anchor = Offset(0.5f, 0.0f)
+                anchor = Offset(0.5f, 0.5f)
             )
         }
 
