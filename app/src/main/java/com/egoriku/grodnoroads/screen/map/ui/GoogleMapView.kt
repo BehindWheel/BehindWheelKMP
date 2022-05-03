@@ -74,7 +74,7 @@ fun GoogleMapView(
     val computeHeading = SphericalUtil.computeHeading(userPosition.latLng, fromScreenLocation)
 
     LaunchedEffect(key1 = userPosition) {
-        if (userPosition.latLng.latitude != 0.0 && userPosition.latLng.longitude != 0.0 && userPosition.speed > 1.0) {
+        if (userPosition != UserPosition.None) {
             val cameraPosition = CameraPosition.Builder()
                 .target(fromScreenLocation)
                 .zoom(14f)
@@ -100,10 +100,10 @@ fun GoogleMapView(
         listOf(ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION)
     )
 
-    val mapProperties by remember {
+    val mapProperties by remember(userPosition) {
         mutableStateOf(
             MapProperties(
-                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted,
+                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && userPosition == UserPosition.None,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
             )
@@ -117,7 +117,7 @@ fun GoogleMapView(
         uiSettings = uiSettings,
         contentPadding = WindowInsets.statusBars.asPaddingValues()
     ) {
-        if (userPosition.latLng.latitude != 0.0 && userPosition.latLng.longitude != 0.0) {
+        if (userPosition != UserPosition.None) {
             Marker(
                 state = MarkerState(position = userPosition.latLng),
                 icon = markerCache.getOrPut(
