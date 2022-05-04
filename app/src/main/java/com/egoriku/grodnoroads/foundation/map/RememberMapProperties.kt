@@ -8,8 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.UserPosition
-import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.domain.model.LocationState
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -18,7 +17,7 @@ import com.google.maps.android.compose.MapType
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun rememberMapProperties(userPosition: UserPosition): MapProperties {
+fun rememberMapProperties(locationState: LocationState): MapProperties {
     val context = LocalContext.current
 
     val locationPermissionsState = rememberMultiplePermissionsState(
@@ -30,10 +29,10 @@ fun rememberMapProperties(userPosition: UserPosition): MapProperties {
         else -> R.raw.map_light_style
     }
 
-    val mapProperties by remember(userPosition) {
+    val mapProperties by remember(locationState) {
         mutableStateOf(
             MapProperties(
-                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && userPosition == UserPosition.None,
+                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle)
             )

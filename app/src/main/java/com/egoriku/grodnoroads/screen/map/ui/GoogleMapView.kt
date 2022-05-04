@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.Camera
 import com.egoriku.grodnoroads.domain.model.MapEvent
-import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
@@ -35,7 +35,7 @@ val grodnoPosition = LatLng(53.6687765, 23.8212226)
 fun GoogleMapView(
     modifier: Modifier,
     stationary: List<Camera>,
-    userPosition: UserPosition,
+    locationState: LocationState,
     userActions: List<MapEvent>
 ) {
     val markerCache = get<MarkerCache>()
@@ -44,10 +44,10 @@ fun GoogleMapView(
         position = CameraPosition.fromLatLngZoom(grodnoPosition, 12.5f)
     }
 
-    val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, userPosition)
+    val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, locationState)
 
-    LaunchedEffect(key1 = userPosition) {
-        if (userPosition != UserPosition.None) {
+    LaunchedEffect(key1 = locationState) {
+        if (locationState != LocationState.None) {
             val cameraPosition = CameraPosition.Builder()
                 .target(cameraPositionValues.targetLatLng)
                 .zoom(14f)
@@ -62,16 +62,16 @@ fun GoogleMapView(
     GoogleMap(
         modifier = modifier,
         cameraPositionState = cameraPositionState,
-        properties = rememberMapProperties(userPosition),
+        properties = rememberMapProperties(locationState),
         uiSettings = rememberUiSettings(),
         contentPadding = WindowInsets.statusBars.asPaddingValues()
     ) {
         StationaryCameras(stationary, markerCache)
         PlaceUserActions(userActions)
 
-        if (userPosition != UserPosition.None) {
+        if (locationState != LocationState.None) {
             Marker(
-                state = MarkerState(position = userPosition.latLng),
+                state = MarkerState(position = locationState.latLng),
                 icon = markerCache.getOrPut(
                     id = R.drawable.ic_arrow,
                     size = 80

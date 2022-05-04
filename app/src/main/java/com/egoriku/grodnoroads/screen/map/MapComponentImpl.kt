@@ -29,8 +29,8 @@ class MapComponentImpl(
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
 
-    override val location: Flow<UserPosition>
-        get() = locationStore.states.map { it.userPosition }
+    override val location: Flow<LocationState>
+        get() = locationStore.states.map { it.locationState }
 
     override val stationary: Flow<List<Camera>>
         get() = stationaryStore.states.map { it.stationaryCameras }

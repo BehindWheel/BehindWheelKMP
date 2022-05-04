@@ -9,7 +9,7 @@ interface MapComponent {
 
     val appMode: Flow<AppMode>
 
-    val location: Flow<UserPosition>
+    val location: Flow<LocationState>
 
     val stationary: Flow<List<Camera>>
     val usersActions: Flow<List<MapEvent>>

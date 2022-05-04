@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
-import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.domain.model.LocationState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import com.google.maps.android.compose.CameraPositionState
@@ -14,7 +14,7 @@ import com.google.maps.android.compose.CameraPositionState
 @Composable
 fun rememberCameraPositionValues(
     cameraPositionState: CameraPositionState,
-    userPosition: UserPosition
+    locationState: LocationState
 ): CameraPositionValues {
     val screenHeight = LocalConfiguration.current.screenHeightDp
 
@@ -22,25 +22,25 @@ fun rememberCameraPositionValues(
 
     val screenLocation by remember(projection) {
         mutableStateOf(
-            projection?.toScreenLocation(userPosition.latLng)?.apply {
+            projection?.toScreenLocation(locationState.latLng)?.apply {
                 set(x, y - screenHeight / 3)
             } ?: Point()
         )
     }
     val fromScreenLocation by remember(projection) {
-        mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: userPosition.latLng)
+        mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: locationState.latLng)
     }
 
-    val directionBearing by remember(userPosition) {
+    val directionBearing by remember(locationState) {
         mutableStateOf(
             when {
-                userPosition.speed > 10 -> userPosition.bearing
+                locationState.speed > 10 -> locationState.bearing
                 else -> 0.0f
             }
         )
     }
 
-    val computeHeading = SphericalUtil.computeHeading(userPosition.latLng, fromScreenLocation)
+    val computeHeading = SphericalUtil.computeHeading(locationState.latLng, fromScreenLocation)
 
     return CameraPositionValues(
         targetLatLng = fromScreenLocation,
