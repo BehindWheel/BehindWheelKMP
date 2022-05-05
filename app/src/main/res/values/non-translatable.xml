@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bullet_separator" translatable="false">•</string>
+    <string name="terms_of_service_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/TermsConditions.md</string>
+    <string name="privacy_policy_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/PrivacyPolicy.md</string>
+</resources>

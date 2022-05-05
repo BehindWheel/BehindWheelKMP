@@ -87,6 +87,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.7-alpha")
     implementation("com.google.accompanist:accompanist-permissions:0.24.7-alpha")
 
+    implementation(libs.androidx.browser)
+
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.material.icons)

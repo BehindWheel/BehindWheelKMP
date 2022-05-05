@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.screen.main
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -20,7 +21,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.chat.ChatUi
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
+import com.egoriku.grodnoroads.screen.main.ui.drawer.DrawerContent
 import com.egoriku.grodnoroads.screen.map.MapUi
 import kotlinx.coroutines.launch
 
@@ -41,13 +42,12 @@ fun MainUi(component: MainComponent) {
         drawerState = drawerState,
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
-            Surface(modifier = Modifier.statusBarsPadding()) {
-                DrawerContent(
-                    navigate = {
-                        // TODO: Navigate to Settings screen
-                    }
-                )
-            }
+            DrawerContent(
+                modifier = Modifier.systemBarsPadding(),
+                navigate = {
+                    // TODO: Navigate to Settings screen
+                }
+            )
         }
     ) {
         Scaffold(

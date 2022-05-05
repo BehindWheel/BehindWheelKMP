@@ -18,4 +18,7 @@
     <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Временная камера</string>
     <string name="camera_alerts_accident">\uD83D\uDCA5 Авария</string>
     <string name="camera_alerts_police">\uD83D\uDC6E Экипаж ГАИ</string>
+
+    <string name="terms_of_service">Условия использования</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
 </resources>
