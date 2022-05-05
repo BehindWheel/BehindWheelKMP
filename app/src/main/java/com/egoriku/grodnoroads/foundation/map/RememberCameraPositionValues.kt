@@ -1,10 +1,7 @@
 package com.egoriku.grodnoroads.foundation.map
 
 import android.graphics.Point
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.google.android.gms.maps.model.LatLng
@@ -18,7 +15,7 @@ fun rememberCameraPositionValues(
 ): CameraPositionValues {
     val screenHeight = LocalConfiguration.current.screenHeightDp
 
-    val projection= cameraPositionState.projection
+    val projection = cameraPositionState.projection
 
     val screenLocation by remember(projection) {
         mutableStateOf(
@@ -31,11 +28,15 @@ fun rememberCameraPositionValues(
         mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: locationState.latLng)
     }
 
+    var lastBearing by remember { mutableStateOf(0.0f) }
     val directionBearing by remember(locationState) {
         mutableStateOf(
             when {
-                locationState.speed > 10 -> locationState.bearing
-                else -> 0.0f
+                locationState.speed > 10 -> {
+                    lastBearing = locationState.bearing
+                    locationState.bearing
+                }
+                else -> lastBearing
             }
         )
     }
