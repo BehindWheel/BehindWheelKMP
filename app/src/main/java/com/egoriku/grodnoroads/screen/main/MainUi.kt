@@ -38,7 +38,6 @@ fun MainUi(component: MainComponent) {
     }
 
     ModalDrawer(
-        gesturesEnabled = drawerState.isOpen,
         drawerState = drawerState,
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
