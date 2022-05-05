@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.main.ui.drawer
+package com.egoriku.grodnoroads.screen.main.ui
 
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.clickable
@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.egoriku.grodnoroads.foundation.WSpacer
+import com.egoriku.grodnoroads.screen.main.ui.drawer.DrawerNavigationScreen
+import com.egoriku.grodnoroads.screen.main.ui.drawer.PrivacyPolicySection
 
 @Composable
 fun DrawerContent(
@@ -49,7 +51,7 @@ fun DrawerContent(
                     )
                 }
             }
-            PrivacyPolicy { url ->
+            PrivacyPolicySection { url ->
                 CustomTabsIntent.Builder()
                     .setShareState(CustomTabsIntent.SHARE_STATE_OFF)
                     .build()

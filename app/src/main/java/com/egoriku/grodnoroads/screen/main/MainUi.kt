@@ -21,7 +21,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.chat.ChatUi
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.screen.main.ui.drawer.DrawerContent
+import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
 import com.egoriku.grodnoroads.screen.map.MapUi
 import kotlinx.coroutines.launch
 

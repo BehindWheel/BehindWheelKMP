@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.R
 
 @Composable
-fun PrivacyPolicy(openUrl: (String) -> Unit) {
+fun PrivacyPolicySection(openUrl: (String) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -61,8 +61,8 @@ private fun LinkButton(
 @Preview(locale = "en")
 @Preview(locale = "ru")
 @Composable
-fun PrivacyPolicyPreview() {
+fun PrivacyPolicySectionPreview() {
     Surface {
-        PrivacyPolicy {}
+        PrivacyPolicySection {}
     }
 }
