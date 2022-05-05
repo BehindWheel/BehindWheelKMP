@@ -5,10 +5,10 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.domain.model.MapEvent
-import com.egoriku.grodnoroads.domain.model.UserActionType
+import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.StationaryLoaded
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.UserActionsLoaded
@@ -27,18 +27,18 @@ class CamerasStoreFactory(
     sealed interface Intent {
         data class ReportAction(
             val latLng: LatLng,
-            val type: UserActionType
+            val eventType: EventType
         ) : Intent
     }
 
     private sealed interface Message {
-        data class StationaryLoaded(val data: List<Camera>) : Message
-        data class UserActionsLoaded(val data: List<MapEvent>) : Message
+        data class StationaryLoaded(val data: List<StationaryCamera>) : Message
+        data class UserActionsLoaded(val data: List<UserActions>) : Message
     }
 
     data class State(
-        val stationaryCameras: List<Camera> = emptyList(),
-        val userActions: List<MapEvent> = emptyList()
+        val stationaryCameras: List<StationaryCamera> = emptyList(),
+        val userActions: List<UserActions> = emptyList()
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -57,7 +57,7 @@ class CamerasStoreFactory(
                 }
                 onIntent<Intent.ReportAction> {
                     launch {
-                        cameraUseCase.reportAction(type = it.type, latLng = it.latLng)
+                        cameraUseCase.reportAction(type = it.eventType, latLng = it.latLng)
                     }
                 }
             },

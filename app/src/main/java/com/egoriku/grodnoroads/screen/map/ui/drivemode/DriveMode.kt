@@ -8,14 +8,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.foundation.CameraAlerts
 import com.egoriku.grodnoroads.foundation.CurrentSpeed
+import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
 
 @Composable
 fun DriveMode(
-    location: UserPosition,
+    alertMessages: List<AlertMessage>,
+    location: LocationState,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
     reportAccident: () -> Unit
@@ -52,6 +55,13 @@ fun DriveMode(
             painter = painterResource(id = R.drawable.ic_close),
             onClick = stopDrive
         )
+
+        CameraAlerts(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .statusBarsPadding(),
+            alertMessages = alertMessages
+        )
     }
 }
 
@@ -59,7 +69,8 @@ fun DriveMode(
 @Composable
 private fun DriveModePReview() {
     DriveMode(
-        location = UserPosition.None,
+        alertMessages = emptyList(),
+        location = LocationState.None,
         stopDrive = {},
         reportPolice = {},
         reportAccident = {}

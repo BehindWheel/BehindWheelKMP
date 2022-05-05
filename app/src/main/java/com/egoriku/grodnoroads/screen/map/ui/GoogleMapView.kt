@@ -13,13 +13,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.Camera
-import com.egoriku.grodnoroads.domain.model.MapEvent
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -34,9 +35,8 @@ val grodnoPosition = LatLng(53.6687765, 23.8212226)
 @Composable
 fun GoogleMapView(
     modifier: Modifier,
-    stationary: List<Camera>,
+    mapEvents: List<MapEvent>,
     locationState: LocationState,
-    userActions: List<MapEvent>
 ) {
     val markerCache = get<MarkerCache>()
 
@@ -66,8 +66,12 @@ fun GoogleMapView(
         uiSettings = rememberUiSettings(),
         contentPadding = WindowInsets.statusBars.asPaddingValues()
     ) {
-        StationaryCameras(stationary, markerCache)
-        PlaceUserActions(userActions)
+        mapEvents.forEach { mapEvent ->
+            when (mapEvent) {
+                is StationaryCamera -> PlaceStationaryCamera(mapEvent, markerCache)
+                is UserActions -> PlaceUserActions(mapEvent)
+            }
+        }
 
         if (locationState != LocationState.None) {
             Marker(
@@ -82,46 +86,40 @@ fun GoogleMapView(
             )
         }
     }
-
-    // DebugView(cameraPositionState)
 }
 
 @Composable
-fun PlaceUserActions(userActions: List<MapEvent>) {
+fun PlaceUserActions(userActions: UserActions) {
     val context = LocalContext.current
 
     val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
 
-    userActions.forEach {
-        MarkerInfoWindow(
-            state = rememberMarkerState(position = it.position),
-            icon = BitmapDescriptorFactory.fromBitmap(
-                iconGenerator.makeIcon("${it.time} ${it.message}")
-            )
+    MarkerInfoWindow(
+        state = rememberMarkerState(position = userActions.position),
+        icon = BitmapDescriptorFactory.fromBitmap(
+            iconGenerator.makeIcon("${userActions.time} ${userActions.message}")
         )
-    }
+    )
 }
 
 @Composable
-fun StationaryCameras(
-    stationary: List<Camera>,
+fun PlaceStationaryCamera(
+    stationaryCamera: StationaryCamera,
     markerCache: MarkerCache
 ) {
-    stationary.forEach { camera ->
-        MarkerInfoWindow(
-            state = rememberMarkerState(position = camera.position),
-            icon = markerCache.getOrPut(id = R.drawable.ic_speed_camera, size = 80),
+    MarkerInfoWindow(
+        state = rememberMarkerState(position = stationaryCamera.position),
+        icon = markerCache.getOrPut(id = R.drawable.ic_speed_camera, size = 80),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .background(color = Color.White, shape = RoundedCornerShape(10.dp))
+                .padding(8.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .background(color = Color.White, shape = RoundedCornerShape(10.dp))
-                    .padding(8.dp)
-            ) {
-                Text(text = camera.message, fontWeight = FontWeight.Bold, color = Color.Black)
-                Spacer(modifier = Modifier.width(8.dp))
-                SpeedLimitSign(limit = camera.speed)
-            }
+            Text(text = stationaryCamera.message, fontWeight = FontWeight.Bold, color = Color.Black)
+            Spacer(modifier = Modifier.width(8.dp))
+            SpeedLimitSign(limit = stationaryCamera.speed)
         }
     }
 }

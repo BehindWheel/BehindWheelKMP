@@ -1,11 +1,13 @@
 package com.egoriku.grodnoroads.domain.model
 
-enum class UserActionType(val type: String) {
+enum class EventType(val type: String) {
+    StationaryCamera(type = "stationary"),
+    MobileCamera(type = "mobile"),
     Police(type = "police"),
     Accident(type = "accident");
 
     companion object {
-        fun valueOf(value: String): UserActionType {
+        fun valueOf(value: String): EventType {
             return requireNotNull(values().find { it.type == value })
         }
     }

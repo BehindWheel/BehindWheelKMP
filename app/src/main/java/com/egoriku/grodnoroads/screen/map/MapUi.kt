@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.UserActionType
+import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.DrawerButton
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
@@ -31,19 +31,18 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
-        val stationary by component.stationary.collectAsState(emptyList())
-        val location by component.location.collectAsState(UserPosition.None)
+        val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
-        val userActions by component.usersActions.collectAsState(initial = emptyList())
+        val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
+        val alertMessages by component.alertMessages.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
 
         Box(modifier = Modifier.fillMaxSize()) {
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
-                stationary = stationary,
-                locationState = location,
-                userActions = userActions
+                mapEvents = mapEvents,
+                locationState = location
             )
 
             AnimatedVisibility(
@@ -69,18 +68,19 @@ fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
                 exit = fadeOut()
             ) {
                 DriveMode(
+                    alertMessages = alertMessages,
                     location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = UserActionType.Police
+                            type = EventType.Police
                         )
                     },
                     reportAccident = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = UserActionType.Accident
+                            type = EventType.Accident
                         )
                     }
                 )

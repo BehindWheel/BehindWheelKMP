@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Grodno Roads</string>
 
@@ -5,4 +6,18 @@
     <string name="tab_chat">Chat</string>
     <string name="settings">Settings</string>
     <string name="toast_location_disabled">Location required for Drive mode</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="zero">0 meters</item>
+        <item quantity="one">%1$d meter</item>
+        <item quantity="two">%1$d meters</item>
+        <item quantity="few">%1$d meters</item>
+        <item quantity="many">%1$d meters</item>
+        <item quantity="other">%1$d meters</item>
+    </plurals>
+
+    <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Stationary camera</string>
+    <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Mobile camera</string>
+    <string name="camera_alerts_accident">\uD83D\uDCA5 Accident</string>
+    <string name="camera_alerts_police">\uD83D\uDC6E Police</string>
 </resources>
