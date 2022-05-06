@@ -22,7 +22,7 @@ jobs:
           java-version: 11
 
       - name: Grant rights
-        run: chmod +x build.gradle
+        run: chmod +x build.gradle.kts
 
       - name: Copy google-services.json
         run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/google-services.json
