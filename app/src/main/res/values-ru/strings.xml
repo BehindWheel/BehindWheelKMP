@@ -21,4 +21,6 @@
 
     <string name="terms_of_service">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
+
+    <string name="drawer_telegram_section">Обсуждение приложения</string>
 </resources>
