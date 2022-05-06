@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.StationaryLoaded
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.UserActionsLoaded
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
+import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,9 +56,15 @@ class CamerasStoreFactory(
                         }
                     }
                 }
-                onIntent<Intent.ReportAction> {
+                onIntent<Intent.ReportAction> { action ->
                     launch {
-                        cameraUseCase.reportAction(type = it.eventType, latLng = it.latLng)
+                        dispatch(
+                            UserActionsLoaded(
+                                data = state.userActions + buildInstantAction(action)
+                            )
+                        )
+
+                        cameraUseCase.reportAction(type = action.eventType, latLng = action.latLng)
                     }
                 }
             },
@@ -69,4 +76,16 @@ class CamerasStoreFactory(
                 }
             }
         ) {}
+
+    private fun buildInstantAction(action: Intent.ReportAction) =
+        UserActions(
+            time = DateUtil.formatToTime(date = System.currentTimeMillis()),
+            message = when (action.eventType) {
+                EventType.Police -> "\uD83D\uDC6E"
+                EventType.Accident -> "\uD83D\uDCA5"
+                else -> throw IllegalArgumentException("reporting ${action.eventType} is not supporting")
+            },
+            position = action.latLng,
+            eventType = action.eventType
+        )
 }
