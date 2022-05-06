@@ -9,6 +9,7 @@ import com.egoriku.grodnoroads.koin.networkModule
 import com.egoriku.grodnoroads.screen.chat.chatModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.map.koin.mapModule
+import com.egoriku.grodnoroads.screen.settings.koin.settingsModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
@@ -31,7 +32,8 @@ class RoadsApplication : Application() {
                 koinModule,
                 mainModule,
                 mapModule,
-                networkModule
+                networkModule,
+                settingsModule
             )
         }
     }

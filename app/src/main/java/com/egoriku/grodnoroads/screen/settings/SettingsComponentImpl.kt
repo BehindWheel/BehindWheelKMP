@@ -1,5 +1,7 @@
 package com.egoriku.grodnoroads.screen.settings
 
-class SettingsComponentImpl : SettingsComponent {
+import com.arkivanov.decompose.ComponentContext
+
+class SettingsComponentImpl(componentContext: ComponentContext) : SettingsComponent {
 
 }
