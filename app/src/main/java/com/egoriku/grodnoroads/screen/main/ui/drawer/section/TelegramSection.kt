@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.main.ui.drawer
+package com.egoriku.grodnoroads.screen.main.ui.drawer.section
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image

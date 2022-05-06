@@ -1,12 +1,10 @@
 package com.egoriku.grodnoroads.screen.main.ui
 
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,8 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.egoriku.grodnoroads.foundation.drawer.DrawerNavigationItem
 import com.egoriku.grodnoroads.screen.main.ui.drawer.DrawerNavigationScreen
-import com.egoriku.grodnoroads.screen.main.ui.drawer.PrivacyPolicySection
-import com.egoriku.grodnoroads.screen.main.ui.drawer.TelegramSection
+import com.egoriku.grodnoroads.screen.main.ui.drawer.section.PrivacyPolicySection
+import com.egoriku.grodnoroads.screen.main.ui.drawer.section.TelegramSection
+import com.egoriku.grodnoroads.screen.main.ui.drawer.section.VersionSection
 
 @Composable
 fun DrawerContent(
@@ -56,6 +55,8 @@ fun DrawerContent(
                 }
             }
             TelegramSection(onClick = openUrl)
+            VersionSection()
+            Divider(modifier = Modifier.fillMaxWidth())
             PrivacyPolicySection(openUrl = openUrl)
         }
     }

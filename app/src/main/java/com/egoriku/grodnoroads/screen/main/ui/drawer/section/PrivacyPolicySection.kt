@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.main.ui.drawer
+package com.egoriku.grodnoroads.screen.main.ui.drawer.section
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

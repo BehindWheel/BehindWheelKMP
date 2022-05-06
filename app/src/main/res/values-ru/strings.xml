@@ -23,4 +23,5 @@
     <string name="privacy_policy">Политика конфиденциальности</string>
 
     <string name="drawer_telegram_section">Обсуждение приложения</string>
+    <string name="drawer_app_version">Версия: %1$s"</string>
 </resources>
