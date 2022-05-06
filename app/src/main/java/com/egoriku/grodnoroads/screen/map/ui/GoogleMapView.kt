@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
+import com.egoriku.grodnoroads.ui.debug.DebugView
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -86,6 +87,8 @@ fun GoogleMapView(
             )
         }
     }
+    
+    DebugView(cameraPositionState = cameraPositionState)
 }
 
 @Composable

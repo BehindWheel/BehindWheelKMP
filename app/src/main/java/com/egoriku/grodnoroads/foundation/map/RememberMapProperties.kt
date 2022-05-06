@@ -34,7 +34,9 @@ fun rememberMapProperties(locationState: LocationState): MapProperties {
             MapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
                 mapType = MapType.NORMAL,
-                mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle)
+                mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
+                minZoomPreference = 9.0f,
+                maxZoomPreference = 17.5f
             )
         )
     }
