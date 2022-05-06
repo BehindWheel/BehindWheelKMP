@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.screen.main
 
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -38,6 +37,7 @@ fun MainUi(component: MainComponent) {
     }
 
     ModalDrawer(
+        gesturesEnabled = drawerState.isOpen,
         drawerState = drawerState,
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
@@ -58,7 +58,10 @@ fun MainUi(component: MainComponent) {
                     animation = childAnimation(scale() + fade())
                 ) { created ->
                     when (val child = created.instance) {
-                        is Child.Map -> MapUi(openDrawer = openDrawer, component = child.component)
+                        is Child.Map -> MapUi(
+                            component = child.component,
+                            openDrawer = openDrawer
+                        )
                         is Child.Chat -> ChatUi()
                     }
                 }

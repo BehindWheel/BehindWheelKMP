@@ -25,7 +25,10 @@ import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 import com.egoriku.grodnoroads.util.toast
 
 @Composable
-fun MapUi(openDrawer: () -> Unit, component: MapComponent) {
+fun MapUi(
+    component: MapComponent,
+    openDrawer: () -> Unit
+) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
