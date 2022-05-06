@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 
 private const val DISTANCE_RADIUS = 600
+private const val MIN_DISTANCE = 20
 
 fun alertMessagesTransformation(): suspend (List<MapEvent>, LocationState) -> List<AlertMessage> =
     { mapEvents: List<MapEvent>, locationState: LocationState ->
@@ -52,10 +53,8 @@ private fun computeDistance(
 
     return when {
         distanceBetweenOffsetAndEvent < DISTANCE_RADIUS -> {
-            val distanceToEvent = currentLatLnt distanceTo eventLatLng
-
-            when {
-                distanceToEvent < DISTANCE_RADIUS -> distanceToEvent
+            when (val distanceToEvent = currentLatLnt distanceTo eventLatLng) {
+                in MIN_DISTANCE until DISTANCE_RADIUS -> distanceToEvent
                 else -> null
             }
         }
