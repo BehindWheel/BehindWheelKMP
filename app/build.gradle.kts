@@ -4,7 +4,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("com.google.devtools.ksp") version "1.6.20-1.0.5"
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
 
@@ -15,8 +15,8 @@ android {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
         targetSdk = 32
-        versionCode = 101
-        versionName = "1.0.1"
+        versionCode = 102
+        versionName = "1.0.2"
         resourceConfigurations + listOf("en", "ru")
     }
 
@@ -76,7 +76,7 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx")
 
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
-    implementation("com.google.maps.android:maps-ktx:3.3.0")
+    implementation("com.google.maps.android:maps-ktx:3.4.0")
     implementation("com.google.maps.android:maps-compose:2.1.0")
 
     implementation("com.google.android.gms:play-services-maps:18.0.2")
@@ -86,6 +86,8 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.7-alpha")
     implementation("com.google.accompanist:accompanist-permissions:0.24.7-alpha")
+
+    implementation(libs.androidx.browser)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)

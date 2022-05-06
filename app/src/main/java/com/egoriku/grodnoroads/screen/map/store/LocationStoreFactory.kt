@@ -5,7 +5,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.util.ResourceProvider
@@ -29,7 +29,7 @@ class LocationStoreFactory(
 
     private sealed interface Message {
         data class ChangeAppMode(val appMode: AppMode) : Message
-        data class OnNewLocation(val userPosition: UserPosition) : Message
+        data class OnNewLocation(val locationState: LocationState) : Message
     }
 
     sealed interface Label {
@@ -38,7 +38,7 @@ class LocationStoreFactory(
     }
 
     data class State(
-        val userPosition: UserPosition = UserPosition.None,
+        val locationState: LocationState = LocationState.None,
         val appMode: AppMode = AppMode.Map
     )
 
@@ -53,16 +53,15 @@ class LocationStoreFactory(
 
                     launch {
                         locationHelper.lastLocation.collect {
-                            dispatch(Message.OnNewLocation(userPosition = it))
+                            dispatch(Message.OnNewLocation(locationState = it))
                         }
                     }
-
                 }
                 onIntent<StopLocationUpdates> {
                     locationHelper.stopLocationUpdates()
 
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Map))
-                    dispatch(Message.OnNewLocation(userPosition = UserPosition.None))
+                    dispatch(Message.OnNewLocation(locationState = LocationState.None))
                 }
                 onIntent<DisabledLocation> {
                     publish(Label.ShowToast(message = resourceProvider.locationDisabled))
@@ -70,7 +69,7 @@ class LocationStoreFactory(
             },
             reducer = { message: Message ->
                 when (message) {
-                    is Message.OnNewLocation -> copy(userPosition = message.userPosition)
+                    is Message.OnNewLocation -> copy(locationState = message.locationState)
                     is Message.ChangeAppMode -> copy(appMode = message.appMode)
                 }
             }

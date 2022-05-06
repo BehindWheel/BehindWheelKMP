@@ -1,12 +1,23 @@
 [versions]
 gradleBuildTools = "7.1.3"
+gradleCrashlytics = "2.8.1"
+gradleGoogleServices = "4.3.10"
+gradleKsp = "1.6.20-1.0.5"
+gradleSecrets = "2.0.1"
+gradleVersionCheck = "0.42.0"
 
+browser = "1.4.0"
 compose = "1.2.0-alpha08"
 kotlin = "1.6.20"
 
 [libraries]
 gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }
+gradle-plugin-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "gradleCrashlytics" }
+gradle-plugin-googleservices = { module = "com.google.gms:google-services", version.ref = "gradleGoogleServices" }
 gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-plugin-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "gradleKsp" }
+gradle-plugin-versioncheck = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersionCheck" }
+gradle-plugin-secrets = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "gradleSecrets" }
 
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
@@ -15,3 +26,5 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", versio
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+
+androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }

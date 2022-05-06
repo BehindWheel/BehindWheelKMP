@@ -2,16 +2,16 @@ package com.egoriku.grodnoroads.domain.model
 
 import com.google.android.gms.maps.model.LatLng
 
-data class UserPosition(
+data class LocationState(
     val latLng: LatLng,
     val bearing: Float,
-    val speed: Double
+    val speed: Int
 ) {
     companion object {
-        val None = UserPosition(
+        val None = LocationState(
             latLng = LatLng(0.0, 0.0),
             bearing = 0f,
-            speed = 0.0
+            speed = 0
         )
     }
 }

@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">За рулем</string>
+
     <string name="tab_map">Карта</string>
     <string name="tab_chat">Чат</string>
     <string name="settings">Настройки</string>
     <string name="toast_location_disabled">Для навигации нужен доступ к геолокации</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метра</item>
+        <item quantity="many">%1$d метров</item>
+        <item quantity="other">%1$d метра</item>
+    </plurals>
+
+    <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Стационарная камера</string>
+    <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Временная камера</string>
+    <string name="camera_alerts_accident">\uD83D\uDCA5 Авария</string>
+    <string name="camera_alerts_police">\uD83D\uDC6E Экипаж ГАИ</string>
+
+    <string name="terms_of_service">Условия использования</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+
+    <string name="drawer_telegram_section">Обсуждение приложения</string>
+    <string name="drawer_app_version">Версия: %1$s"</string>
 </resources>

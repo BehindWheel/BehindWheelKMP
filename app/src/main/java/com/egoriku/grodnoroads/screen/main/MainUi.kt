@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.screen.main
 
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -41,13 +41,12 @@ fun MainUi(component: MainComponent) {
         drawerState = drawerState,
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
-            Surface(modifier = Modifier.statusBarsPadding()) {
-                DrawerContent(
-                    navigate = {
-                        // TODO: Navigate to Settings screen
-                    }
-                )
-            }
+            DrawerContent(
+                modifier = Modifier.systemBarsPadding(),
+                navigate = {
+                    // TODO: Navigate to Settings screen
+                }
+            )
         }
     ) {
         Scaffold(
@@ -59,7 +58,10 @@ fun MainUi(component: MainComponent) {
                     animation = childAnimation(scale() + fade())
                 ) { created ->
                     when (val child = created.instance) {
-                        is Child.Map -> MapUi(openDrawer = openDrawer, component = child.component)
+                        is Child.Map -> MapUi(
+                            component = child.component,
+                            openDrawer = openDrawer
+                        )
                         is Child.Chat -> ChatUi()
                     }
                 }

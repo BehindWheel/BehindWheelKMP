@@ -3,8 +3,9 @@ package com.egoriku.grodnoroads.util.location
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
-import com.egoriku.grodnoroads.domain.model.UserPosition
+import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.util.MetricUtils.speedToKilometerPerHour
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 interface LocationHelper {
-    val lastLocation: StateFlow<UserPosition>
+    val lastLocation: StateFlow<LocationState>
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
@@ -24,7 +25,7 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
 
     private val fusedLocationProvider = LocationServices.getFusedLocationProviderClient(context)
 
-    override val lastLocation: MutableStateFlow<UserPosition> = MutableStateFlow(UserPosition.None)
+    override val lastLocation: MutableStateFlow<LocationState> = MutableStateFlow(LocationState.None)
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
@@ -32,10 +33,13 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
             logD("locationCallback: ${location.latitude}, ${location.longitude}, ${location.bearing}")
 
             lastLocation.tryEmit(
-                UserPosition(
+                LocationState(
                     latLng = LatLng(location.latitude, location.longitude),
                     bearing = location.bearing,
-                    speed = if (location.hasSpeed()) location.speed * 18.0 / 5.0 else 0.0
+                    speed = when {
+                        location.hasSpeed() -> speedToKilometerPerHour(location.speed)
+                        else -> 0
+                    }
                 )
             )
         }
@@ -60,7 +64,6 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
             interval = 1000
             fastestInterval = 1000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            smallestDisplacement = 1.0f
         }
     }
 }
