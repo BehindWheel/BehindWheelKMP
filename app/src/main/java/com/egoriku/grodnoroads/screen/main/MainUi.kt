@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
-fun MainUi(component: MainComponent) {
+fun MainUi(component: MainComponent, openSettings: () -> Unit) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -44,7 +44,7 @@ fun MainUi(component: MainComponent) {
             DrawerContent(
                 modifier = Modifier.systemBarsPadding(),
                 navigate = {
-                    // TODO: Navigate to Settings screen
+                    openSettings()
                 }
             )
         }

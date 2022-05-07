@@ -9,6 +9,8 @@ interface RoadsRootComponent {
 
     val routerState: Value<RouterState<*, Child>>
 
+    fun openSettings()
+
     sealed class Child {
         data class Main(val component: MainComponent) : Child()
         data class Settings(val component: SettingsComponent) : Child()

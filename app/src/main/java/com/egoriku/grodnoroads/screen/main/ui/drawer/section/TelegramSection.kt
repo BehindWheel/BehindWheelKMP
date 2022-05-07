@@ -39,7 +39,7 @@ fun TelegramSection(onClick: (String) -> Unit) {
             imageVector = RoadIcons.IcTelegram,
             contentDescription = null
         )
-        WSpacer(24.dp)
+        WSpacer(8.dp)
         Text(
             text = stringResource(R.string.drawer_telegram_section),
             fontSize = 16.sp,
