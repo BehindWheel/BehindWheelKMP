@@ -8,7 +8,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
-import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
@@ -22,8 +21,6 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            KeepScreenOn()
-
             val root = RoadsRootComponentImpl(defaultComponentContext())
 
             GrodnoRoadsTheme {

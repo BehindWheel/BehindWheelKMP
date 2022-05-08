@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.CameraAlerts
 import com.egoriku.grodnoroads.foundation.CurrentSpeed
+import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
@@ -23,6 +24,7 @@ fun DriveMode(
     reportPolice: () -> Unit,
     reportAccident: () -> Unit
 ) {
+    KeepScreenOn()
     Box(modifier = Modifier.fillMaxSize()) {
         CurrentSpeed(
             modifier = Modifier
