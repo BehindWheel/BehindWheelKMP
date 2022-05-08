@@ -23,10 +23,10 @@ val koinModule = module {
     single { MarkerCache(context = get()) }
 
     factory<StationaryCameraRepository> {
-        StationaryCameraRepositoryImpl(api = get())
+        StationaryCameraRepositoryImpl(httpClient = get())
     }
     factory<ReportActionRepository> {
-        ReportActionRepositoryImpl(context = get(), api = get())
+        ReportActionRepositoryImpl(context = get(), api = get(), httpClient = get())
     }
 
     factory<CameraUseCase> {
