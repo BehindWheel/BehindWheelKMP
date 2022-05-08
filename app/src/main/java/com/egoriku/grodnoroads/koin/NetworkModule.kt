@@ -1,9 +1,8 @@
 package com.egoriku.grodnoroads.koin
 
+import com.egoriku.grodnoroads.BuildConfig
 import com.egoriku.grodnoroads.data.api.FORM_REPORT_ACTION
 import com.egoriku.grodnoroads.data.api.GrodnoRoadsApi
-import com.egoriku.grodnoroads.data.api.SHEET_ROAD_EVENTS
-import com.egoriku.grodnoroads.data.api.SHEET_STATIONARY_CAMERA
 import com.github.theapache64.retrosheet.RetrosheetInterceptor
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -15,15 +14,7 @@ import retrofit2.create
 val networkModule = module {
     single {
         val retrosheetInterceptor = RetrosheetInterceptor.Builder()
-            .setLogging(true)
-            .addSheet(
-                SHEET_ROAD_EVENTS,
-                "type", "message", "latitude", "longitude", "added_time"
-            )
-            .addSheet(
-                SHEET_STATIONARY_CAMERA,
-                "message", "latitude", "longitude", "speed", "last_update_time"
-            )
+            .setLogging(BuildConfig.DEBUG)
             .addForm(
                 FORM_REPORT_ACTION,
                 "https://docs.google.com/forms/d/e/1FAIpQLScvuOIcHuVCdR5fZNbwLPFslheGX6olZkr8dpo1gcYmakkIlQ/viewform?usp=sf_link"

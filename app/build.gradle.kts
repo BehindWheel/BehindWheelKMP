@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    kotlin("android")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -69,10 +70,12 @@ android {
 }
 
 dependencies {
+    implementation(projects.library.retrosheetKmm)
+
     implementation(platform("com.google.firebase:firebase-bom:29.3.1"))
 
-    implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
 
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
@@ -124,6 +127,11 @@ dependencies {
     implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
+
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.contentnegotiation)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.serialization.json)
 }
 
 secrets {
