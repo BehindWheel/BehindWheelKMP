@@ -1,5 +1,5 @@
 [versions]
-gradleBuildTools = "7.1.3"
+gradleBuildTools = "7.2.0"
 gradleCrashlytics = "2.8.1"
 gradleGoogleServices = "4.3.10"
 gradleKsp = "1.6.20-1.0.5"
