@@ -36,8 +36,8 @@ class CamerasStoreFactory(
     }
 
     private sealed interface Message {
-        data class StationaryLoaded(val data: List<StationaryCamera>) : Message
-        data class UserActionsLoaded(val data: List<UserActions>) : Message
+        data class OnStationary(val data: List<StationaryCamera>) : Message
+        data class OnUserActions(val data: List<UserActions>) : Message
         data class OnMobileCamera(val data: List<MobileCamera>) : Message
     }
 
@@ -55,12 +55,12 @@ class CamerasStoreFactory(
                 onAction<Unit> {
                     launch {
                         dispatch(
-                            StationaryLoaded(data = cameraUseCase.loadStationary())
+                            OnStationary(data = cameraUseCase.loadStationary())
                         )
                     }
                     launch {
                         cameraUseCase.usersActions().collect {
-                            dispatch(UserActionsLoaded(data = it))
+                            dispatch(OnUserActions(data = it))
                         }
                     }
                     launch {
@@ -72,7 +72,7 @@ class CamerasStoreFactory(
                 onIntent<Intent.ReportAction> { action ->
                     launch {
                         dispatch(
-                            UserActionsLoaded(
+                            OnUserActions(
                                 data = state.userActions + buildInstantAction(action)
                             )
                         )
@@ -84,8 +84,8 @@ class CamerasStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is StationaryLoaded -> copy(stationaryCameras = message.data)
-                    is UserActionsLoaded -> copy(userActions = message.data)
+                    is OnStationary -> copy(stationaryCameras = message.data)
+                    is OnUserActions -> copy(userActions = message.data)
                     is OnMobileCamera -> copy(mobileCamera = message.data)
                 }
             }
