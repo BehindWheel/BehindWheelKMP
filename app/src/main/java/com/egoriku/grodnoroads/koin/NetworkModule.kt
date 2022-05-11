@@ -4,6 +4,8 @@ import com.egoriku.grodnoroads.BuildConfig
 import com.egoriku.grodnoroads.data.api.FORM_REPORT_ACTION
 import com.egoriku.grodnoroads.data.api.GrodnoRoadsApi
 import com.github.theapache64.retrosheet.RetrosheetInterceptor
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -12,6 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
 val networkModule = module {
+    single { Firebase.database.reference }
     single {
         val retrosheetInterceptor = RetrosheetInterceptor.Builder()
             .setLogging(BuildConfig.DEBUG)

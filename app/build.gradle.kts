@@ -77,6 +77,7 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
 
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
     implementation("com.google.maps.android:maps-ktx:3.4.0")

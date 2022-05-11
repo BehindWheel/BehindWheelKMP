@@ -30,12 +30,13 @@ class MapComponentImpl(
 
     private val usersActions = stationaryStore.states.map { it.userActions }
     private val stationary = stationaryStore.states.map { it.stationaryCameras }
+    private val mobile = stationaryStore.states.map { it.mobileCamera }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
 
     override val mapEvents: Flow<List<MapEvent>>
-        get() = combine(usersActions, stationary) { a, b -> a + b }
+        get() = combine(usersActions, stationary, mobile) { a, b, c -> a + b + c }
 
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }

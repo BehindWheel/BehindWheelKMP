@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.screen.map
 
 import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.EventType
+import com.egoriku.grodnoroads.domain.model.EventType.MobileCamera
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
@@ -48,6 +49,12 @@ interface MapComponent {
             val message: String,
             override val position: LatLng,
             override val eventType: EventType
+        ) : MapEvent
+
+        data class MobileCamera(
+            val message: String,
+            override val position: LatLng,
+            override val eventType: EventType = MobileCamera
         ) : MapEvent
     }
 }
