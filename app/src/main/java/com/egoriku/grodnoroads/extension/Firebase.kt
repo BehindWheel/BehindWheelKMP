@@ -35,7 +35,7 @@ inline fun <reified T> DatabaseReference.awaitValueEventListener(): Flow<ResultO
         }
     }
 
-private fun getErrorMessage(errorCode: Int): String {
+fun getErrorMessage(errorCode: Int): String {
     return when (errorCode) {
         DatabaseError.DISCONNECTED -> "disconnected"
         DatabaseError.EXPIRED_TOKEN -> "expired.token"
