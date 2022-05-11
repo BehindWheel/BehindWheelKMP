@@ -22,8 +22,7 @@ internal class CameraUseCaseImpl(
         StationaryCamera(
             message = it.message,
             speed = it.speed,
-            position = LatLng(it.latitude, it.longitude),
-            eventType = EventType.StationaryCamera
+            position = LatLng(it.latitude, it.longitude)
         )
     }
 
