@@ -3,11 +3,11 @@ package com.egoriku.grodnoroads.koin
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.egoriku.grodnoroads.data.repository.ReportActionRepositoryImpl
-import com.egoriku.grodnoroads.data.repository.StationaryCameraRepositoryImpl
 import com.egoriku.grodnoroads.domain.repository.ReportActionRepository
-import com.egoriku.grodnoroads.domain.repository.StationaryCameraRepository
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCaseImpl
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepositoryImpl
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.ResourceProviderImpl
@@ -23,16 +23,13 @@ val koinModule = module {
     single { MarkerCache(context = get()) }
 
     factory<StationaryCameraRepository> {
-        StationaryCameraRepositoryImpl(httpClient = get())
+        StationaryCameraRepositoryImpl(databaseReference = get())
     }
     factory<ReportActionRepository> {
         ReportActionRepositoryImpl(context = get(), api = get(), httpClient = get())
     }
 
     factory<CameraUseCase> {
-        CameraUseCaseImpl(
-            stationaryCameraRepository = get(),
-            reportActionRepository = get()
-        )
+        CameraUseCaseImpl(reportActionRepository = get())
     }
 }

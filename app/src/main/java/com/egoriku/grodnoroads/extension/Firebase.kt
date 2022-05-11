@@ -35,6 +35,35 @@ inline fun <reified T> DatabaseReference.awaitValueEventListener(): Flow<ResultO
         }
     }
 
+inline fun <reified T> DatabaseReference.awaitSingleValueEventListener(): Flow<ResultOf<List<T>>> =
+    callbackFlow {
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                try {
+                    val entityList = mutableListOf<T>()
+                    snapshot.children.forEach { dataSnapshot ->
+                        dataSnapshot.getValue<T>()?.let {
+                            entityList.add(it)
+                        }
+                    }
+                    trySend(ResultOf.Success(entityList))
+                } catch (e: DatabaseException) {
+                    trySend(ResultOf.Failure(e))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                val exception = FirebaseException(getErrorMessage(error.code))
+                trySend(ResultOf.Failure(exception))
+            }
+        }
+
+        addListenerForSingleValueEvent(valueEventListener)
+        awaitClose {
+            removeEventListener(valueEventListener)
+        }
+    }
+
 fun getErrorMessage(errorCode: Int): String {
     return when (errorCode) {
         DatabaseError.DISCONNECTED -> "disconnected"

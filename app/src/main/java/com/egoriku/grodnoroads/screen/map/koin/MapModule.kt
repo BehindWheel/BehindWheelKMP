@@ -22,7 +22,8 @@ val mapModule = module {
         CamerasStoreFactory(
             storeFactory = get(),
             cameraUseCase = get(),
-            mobileCameraRepository = get()
+            mobileCameraRepository = get(),
+            stationaryCameraRepository = get()
         ).create()
     }
 

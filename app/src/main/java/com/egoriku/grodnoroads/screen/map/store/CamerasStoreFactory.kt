@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
@@ -25,7 +26,8 @@ interface CamerasStore : Store<Intent, State, Nothing>
 class CamerasStoreFactory(
     private val storeFactory: StoreFactory,
     private val cameraUseCase: CameraUseCase,
-    private val mobileCameraRepository: MobileCameraRepository
+    private val mobileCameraRepository: MobileCameraRepository,
+    private val stationaryCameraRepository: StationaryCameraRepository
 ) {
 
     sealed interface Intent {
@@ -54,9 +56,11 @@ class CamerasStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        dispatch(
-                            OnStationary(data = cameraUseCase.loadStationary())
-                        )
+                        subscribeForStationaryCameras { stationaryCamera ->
+                            dispatch(
+                                OnStationary(data = stationaryCamera)
+                            )
+                        }
                     }
                     launch {
                         cameraUseCase.usersActions().collect {
@@ -100,6 +104,26 @@ class CamerasStoreFactory(
                     val cameras = result.value.map { data ->
                         MobileCamera(
                             message = data.name,
+                            position = LatLng(data.latitude, data.longitude)
+                        )
+                    }
+                    onLoaded(cameras)
+                }
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+            }
+        }
+    }
+
+    private suspend fun subscribeForStationaryCameras(
+        onLoaded: (List<StationaryCamera>) -> Unit
+    ) {
+        stationaryCameraRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is ResultOf.Success -> {
+                    val cameras = result.value.map { data ->
+                        StationaryCamera(
+                            message = data.message,
+                            speed = data.speed,
                             position = LatLng(data.latitude, data.longitude)
                         )
                     }
