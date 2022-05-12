@@ -1,6 +1,8 @@
 package com.egoriku.grodnoroads.screen.map.ui.drivemode
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +56,7 @@ fun DriveMode(
                 .align(Alignment.BottomCenter)
                 .navigationBarsPadding()
                 .padding(bottom = 16.dp),
-            painter = painterResource(id = R.drawable.ic_close),
+            imageVector = Icons.Default.Close,
             onClick = stopDrive
         )
 
