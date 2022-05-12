@@ -88,8 +88,8 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.7-alpha")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.7-alpha")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-permissions:0.24.8-beta")
 
     implementation(libs.androidx.browser)
 
@@ -119,8 +119,8 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.13.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 
-    implementation("io.insert-koin:koin-android:3.2.0-beta-1")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0-beta-1")
+    implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 
     implementation("com.arkivanov.decompose:decompose:0.6.0")
     implementation("com.arkivanov.decompose:extensions-compose-jetpack:0.6.0")
