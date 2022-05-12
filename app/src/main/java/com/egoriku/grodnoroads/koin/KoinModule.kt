@@ -2,34 +2,19 @@ package com.egoriku.grodnoroads.koin
 
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.egoriku.grodnoroads.data.repository.ReportActionRepositoryImpl
-import com.egoriku.grodnoroads.domain.repository.ReportActionRepository
-import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
-import com.egoriku.grodnoroads.domain.usecase.CameraUseCaseImpl
-import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
-import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepositoryImpl
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.ResourceProviderImpl
 import com.egoriku.grodnoroads.util.location.LocationHelper
 import com.egoriku.grodnoroads.util.location.LocationHelperImpl
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val koinModule = module {
-    single<StoreFactory> { DefaultStoreFactory() }
-    single<LocationHelper> { LocationHelperImpl(context = get()) }
-    single<ResourceProvider> { ResourceProviderImpl(context = get()) }
+val appScopeModule = module {
+    singleOf(::DefaultStoreFactory) { bind<StoreFactory>()}
+    singleOf(::LocationHelperImpl) { bind<LocationHelper>()}
+    singleOf(::ResourceProviderImpl) { bind<ResourceProvider>()}
 
-    single { MarkerCache(context = get()) }
-
-    factory<StationaryCameraRepository> {
-        StationaryCameraRepositoryImpl(databaseReference = get())
-    }
-    factory<ReportActionRepository> {
-        ReportActionRepositoryImpl(context = get(), api = get(), httpClient = get())
-    }
-
-    factory<CameraUseCase> {
-        CameraUseCaseImpl(reportActionRepository = get())
-    }
+    singleOf(::MarkerCache)
 }
