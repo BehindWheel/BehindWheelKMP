@@ -11,7 +11,7 @@ internal class MobileCameraRepositoryImpl(
 ) : MobileCameraRepository {
 
     override suspend fun loadAsFlow() = databaseReference
-        .child("temporary_camera/camera")
+        .child("temporary_camera/cameras")
         .awaitValueEventListener<MobileCameraResponse>()
 }
 
