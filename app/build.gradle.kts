@@ -16,8 +16,8 @@ android {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
         targetSdk = 32
-        versionCode = 111
-        versionName = "1.0.11"
+        versionCode = 112
+        versionName = "1.0.12"
         resourceConfigurations + listOf("en", "ru")
     }
 
