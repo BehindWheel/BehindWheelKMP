@@ -1,8 +1,7 @@
 name: Deploy App CI
 
 on:
-  push:
-    branches: [ release ]
+  workflow_dispatch:
 
 jobs:
   build_apk:
