@@ -90,9 +90,6 @@ jobs:
         id: buildRelease
         run: ./gradlew clean bundleRelease
 
-      - name: Build Release APK
-        run: ./gradlew clean assembleRelease
-
       - name: Upload AAB
         id: uploadArtifact
         uses: actions/upload-artifact@v1
