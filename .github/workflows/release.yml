@@ -5,7 +5,49 @@ on:
     branches: [ release ]
 
 jobs:
-  build:
+  build_apk:
+    runs-on: ubuntu-latest
+    env:
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Grant rights
+        run: chmod +x build.gradle.kts
+
+      - name: Copy google-services.json
+        run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/google-services.json
+
+      - name: Copy key
+        uses: RollyPeres/base64-to-path@v1
+        with:
+          filePath: ${{ github.workspace }}/app/keystore.jks
+          encodedString: ${{ secrets.KEY_STORE }}
+
+      - name: Console
+        run: echo ${{ github.workspace }}/app/keystore.jks
+
+      - name: Make secrets.properties
+        run: echo ${{ secrets.SECRETS_PROPERTIES }} | base64 --decode > secrets.properties
+
+      - name: "Check keystore existence"
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "app/keystore.jks"
+
+      - name: Build Release APK
+        run: ./gradlew clean assembleRelease
+
+  build_aab:
     runs-on: ubuntu-latest
     env:
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
