@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: app/build/outputs/apk/app/release/apk-release.apk
+          path: app/build/outputs/apk/release/apk-release.apk
