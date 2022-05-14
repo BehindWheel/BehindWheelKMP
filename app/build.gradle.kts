@@ -16,8 +16,8 @@ android {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
         targetSdk = 32
-        versionCode = 109
-        versionName = "1.0.9"
+        versionCode = 110
+        versionName = "1.0.10"
         resourceConfigurations + listOf("en", "ru")
     }
 
@@ -47,6 +47,7 @@ android {
         release {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
+            isDebuggable = true
             proguardFiles(
                 "proguard-rules.pro",
                 getDefaultProguardFile("proguard-android-optimize.txt")
