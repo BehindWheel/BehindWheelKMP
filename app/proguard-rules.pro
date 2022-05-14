@@ -37,3 +37,6 @@
 #-keepnames class <1>$$serializer { # -keepnames suffices; class is kept when serializer() is kept.
 #    static <1>$$serializer INSTANCE;
 #}
+
+#https://stackoverflow.com/questions/38472268/not-a-direct-subclass-of-generictypeindicator-class-com-google-firebase-databas
+-keepclassmembers class com.google.firebase.database.GenericTypeIndicator { *; }
