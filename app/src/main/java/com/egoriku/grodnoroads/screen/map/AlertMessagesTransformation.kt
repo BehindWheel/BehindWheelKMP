@@ -10,39 +10,56 @@ import com.google.maps.android.SphericalUtil
 
 private const val DISTANCE_RADIUS = 600
 private const val MIN_DISTANCE = 20
+private const val MIN_SPEED = 10
 
 fun alertMessagesTransformation(): suspend (List<MapEvent>, LocationState) -> List<AlertMessage> =
     { mapEvents: List<MapEvent>, locationState: LocationState ->
-        mapEvents.mapNotNull { mapEvent ->
-            val distance = computeDistance(
-                eventLatLng = mapEvent.position,
-                offsetLatLng = computeOffset(locationState),
-                currentLatLnt = locationState.latLng
-            )
+        when {
+            locationState.speed > MIN_SPEED -> makeAlertMessage(mapEvents, locationState)
+            else -> emptyList()
+        }
+    }
 
-            when (distance) {
-                null -> null
-                else -> when (mapEvent) {
-                    is StationaryCamera -> {
-                        AlertMessage(
-                            distance = distance,
-                            message = "",
-                            speedLimit = mapEvent.speed,
-                            eventType = mapEvent.eventType
-                        )
-                    }
-                    is MapEvent.UserActions -> {
-                        AlertMessage(
-                            distance = distance,
-                            message = mapEvent.message,
-                            speedLimit = -1,
-                            eventType = mapEvent.eventType
-                        )
-                    }
-                }
+private fun makeAlertMessage(
+    mapEvents: List<MapEvent>,
+    locationState: LocationState
+) = mapEvents.mapNotNull { event ->
+    val distance = computeDistance(
+        eventLatLng = event.position,
+        offsetLatLng = computeOffset(locationState),
+        currentLatLnt = locationState.latLng
+    )
+
+    when (distance) {
+        null -> null
+        else -> when (event) {
+            is StationaryCamera -> {
+                AlertMessage(
+                    distance = distance,
+                    message = "",
+                    speedLimit = event.speed,
+                    eventType = event.eventType
+                )
+            }
+            is MapEvent.UserActions -> {
+                AlertMessage(
+                    distance = distance,
+                    message = event.message,
+                    speedLimit = -1,
+                    eventType = event.eventType
+                )
+            }
+            is MapEvent.MobileCamera -> {
+                AlertMessage(
+                    distance = distance,
+                    message = event.message,
+                    speedLimit = -1,
+                    eventType = event.eventType
+                )
             }
         }
     }
+}
 
 private fun computeDistance(
     eventLatLng: LatLng,

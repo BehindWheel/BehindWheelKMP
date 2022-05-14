@@ -15,8 +15,10 @@ import com.egoriku.grodnoroads.screen.map.store.LocationStore
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -30,12 +32,13 @@ class MapComponentImpl(
 
     private val usersActions = stationaryStore.states.map { it.userActions }
     private val stationary = stationaryStore.states.map { it.stationaryCameras }
+    private val mobile = stationaryStore.states.map { it.mobileCamera }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
 
     override val mapEvents: Flow<List<MapEvent>>
-        get() = combine(usersActions, stationary) { a, b -> a + b }
+        get() = combine(usersActions, stationary, mobile) { a, b, c -> a + b + c }
 
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
@@ -45,7 +48,9 @@ class MapComponentImpl(
     }
 
     override val alertMessages: Flow<List<AlertMessage>>
-        get() = mapEvents.combine(flow = location, transform = alertMessagesTransformation())
+        get() = mapEvents
+            .combine(flow = location, transform = alertMessagesTransformation())
+            .flowOn(Dispatchers.Default)
 
     override val labels: Flow<Label> = locationStore.labels
 

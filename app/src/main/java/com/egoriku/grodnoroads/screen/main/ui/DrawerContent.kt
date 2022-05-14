@@ -43,7 +43,7 @@ fun DrawerContent(
             verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
             LazyColumn(modifier = Modifier.weight(1f)) {
-                items(navigationItems) { item ->
+                /*items(navigationItems) { item ->
                     DrawerNavigationItem(
                         contentPadding = PaddingValues(start = 16.dp),
                         text = stringResource(item.resourceId),
@@ -52,7 +52,7 @@ fun DrawerContent(
                             navigate(item)
                         }
                     )
-                }
+                }*/
             }
             TelegramSection(onClick = openUrl)
             VersionSection()

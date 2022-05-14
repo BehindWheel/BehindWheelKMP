@@ -72,7 +72,7 @@ fun MainUi(component: MainComponent, openSettings: () -> Unit) {
                 BottomNavigation {
                     listOf(
                         Screen.Map(),
-                        Screen.Chat()
+                        // FsScreen.Chat()
                     ).forEach { screen ->
                         BottomNavigationItem(
                             selected = screen.index == activeIndex,

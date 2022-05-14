@@ -19,8 +19,7 @@ import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -70,6 +69,7 @@ fun GoogleMapView(
             when (mapEvent) {
                 is StationaryCamera -> PlaceStationaryCamera(mapEvent, markerCache)
                 is UserActions -> PlaceUserActions(mapEvent)
+                is MobileCamera -> PlaceMobileCameras(mapEvent, markerCache)
             }
         }
 
@@ -111,7 +111,7 @@ fun PlaceStationaryCamera(
 ) {
     MarkerInfoWindow(
         state = rememberMarkerState(position = stationaryCamera.position),
-        icon = markerCache.getOrPut(id = R.drawable.ic_speed_camera, size = 80),
+        icon = markerCache.getVector(id = R.drawable.ic_stationary_camera),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -124,4 +124,12 @@ fun PlaceStationaryCamera(
             SpeedLimitSign(limit = stationaryCamera.speed)
         }
     }
+}
+
+@Composable
+fun PlaceMobileCameras(mobileCamera: MobileCamera, markerCache: MarkerCache) {
+    MarkerInfoWindow(
+        state = rememberMarkerState(position = mobileCamera.position),
+        icon = markerCache.getVector(id = R.drawable.ic_mobile_camera)
+    )
 }

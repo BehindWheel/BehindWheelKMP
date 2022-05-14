@@ -1,14 +1,14 @@
 [versions]
-gradleBuildTools = "7.1.3"
+gradleBuildTools = "7.2.0"
 gradleCrashlytics = "2.8.1"
 gradleGoogleServices = "4.3.10"
-gradleKsp = "1.6.20-1.0.5"
+gradleKsp = "1.6.21-1.0.5"
 gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
 
 browser = "1.4.0"
-compose = "1.2.0-alpha08"
-kotlin = "1.6.20"
+compose = "1.2.0-beta01"
+kotlin = "1.6.21"
 ktor = "2.0.1"
 
 [libraries]

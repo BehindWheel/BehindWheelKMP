@@ -140,10 +140,28 @@
   },
   {
     "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
     "elementType": "labels.icon",
     "stylers": [
       {
         "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
       }
     ]
   },
@@ -189,15 +207,6 @@
     "stylers": [
       {
         "color": "#db8555"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
       }
     ]
   },

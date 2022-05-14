@@ -7,14 +7,17 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
+import com.egoriku.grodnoroads.extension.common.ResultOf
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.StationaryLoaded
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.UserActionsLoaded
+import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -22,7 +25,9 @@ interface CamerasStore : Store<Intent, State, Nothing>
 
 class CamerasStoreFactory(
     private val storeFactory: StoreFactory,
-    private val cameraUseCase: CameraUseCase
+    private val cameraUseCase: CameraUseCase,
+    private val mobileCameraRepository: MobileCameraRepository,
+    private val stationaryCameraRepository: StationaryCameraRepository
 ) {
 
     sealed interface Intent {
@@ -33,13 +38,15 @@ class CamerasStoreFactory(
     }
 
     private sealed interface Message {
-        data class StationaryLoaded(val data: List<StationaryCamera>) : Message
-        data class UserActionsLoaded(val data: List<UserActions>) : Message
+        data class OnStationary(val data: List<StationaryCamera>) : Message
+        data class OnUserActions(val data: List<UserActions>) : Message
+        data class OnMobileCamera(val data: List<MobileCamera>) : Message
     }
 
     data class State(
         val stationaryCameras: List<StationaryCamera> = emptyList(),
-        val userActions: List<UserActions> = emptyList()
+        val userActions: List<UserActions> = emptyList(),
+        val mobileCamera: List<MobileCamera> = emptyList(),
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -49,17 +56,27 @@ class CamerasStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        dispatch(StationaryLoaded(data = cameraUseCase.loadStationary()))
-
+                        subscribeForStationaryCameras { stationaryCamera ->
+                            dispatch(
+                                OnStationary(data = stationaryCamera)
+                            )
+                        }
+                    }
+                    launch {
                         cameraUseCase.usersActions().collect {
-                            dispatch(UserActionsLoaded(data = it))
+                            dispatch(OnUserActions(data = it))
+                        }
+                    }
+                    launch {
+                        subscribeForMobileCameras { mobileCamera ->
+                            dispatch(OnMobileCamera(data = mobileCamera))
                         }
                     }
                 }
                 onIntent<Intent.ReportAction> { action ->
                     launch {
                         dispatch(
-                            UserActionsLoaded(
+                            OnUserActions(
                                 data = state.userActions + buildInstantAction(action)
                             )
                         )
@@ -71,11 +88,51 @@ class CamerasStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is StationaryLoaded -> copy(stationaryCameras = message.data)
-                    is UserActionsLoaded -> copy(userActions = message.data)
+                    is OnStationary -> copy(stationaryCameras = message.data)
+                    is OnUserActions -> copy(userActions = message.data)
+                    is OnMobileCamera -> copy(mobileCamera = message.data)
                 }
             }
         ) {}
+
+    private suspend fun subscribeForMobileCameras(
+        onLoaded: (List<MobileCamera>) -> Unit
+    ) {
+        mobileCameraRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is ResultOf.Success -> {
+                    val cameras = result.value.map { data ->
+                        MobileCamera(
+                            message = data.name,
+                            position = LatLng(data.latitude, data.longitude)
+                        )
+                    }
+                    onLoaded(cameras)
+                }
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+            }
+        }
+    }
+
+    private suspend fun subscribeForStationaryCameras(
+        onLoaded: (List<StationaryCamera>) -> Unit
+    ) {
+        stationaryCameraRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is ResultOf.Success -> {
+                    val cameras = result.value.map { data ->
+                        StationaryCamera(
+                            message = data.message,
+                            speed = data.speed,
+                            position = LatLng(data.latitude, data.longitude)
+                        )
+                    }
+                    onLoaded(cameras)
+                }
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+            }
+        }
+    }
 
     private fun buildInstantAction(action: Intent.ReportAction) =
         UserActions(
