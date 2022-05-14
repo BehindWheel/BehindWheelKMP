@@ -49,7 +49,7 @@ jobs:
         run: ./gradlew clean bundleRelease
 
       - name: Build Release APK
-        run: ./gradlew clean appRelease
+        run: ./gradlew clean assembleRelease
 
       - name: Upload AAB
         id: uploadArtifact
