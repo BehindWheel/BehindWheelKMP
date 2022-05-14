@@ -46,3 +46,10 @@ jobs:
 
       - name: Build Release APK
         run: ./gradlew clean assembleRelease
+
+      - name: Upload APK
+        id: uploadArtifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/app/release/apk-release.apk
