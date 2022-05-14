@@ -8,6 +8,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.extension.common.ResultOf
+import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
@@ -109,7 +110,9 @@ class CamerasStoreFactory(
                     }
                     onLoaded(cameras)
                 }
-                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
+                    logD(result.exception.message.toString())
+                }
             }
         }
     }
@@ -129,7 +132,9 @@ class CamerasStoreFactory(
                     }
                     onLoaded(cameras)
                 }
-                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
+                    logD(result.exception.message.toString())
+                }
             }
         }
     }
