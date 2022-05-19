@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.CameraAlerts
-import com.egoriku.grodnoroads.foundation.CurrentSpeed
+import com.egoriku.grodnoroads.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
@@ -28,13 +28,17 @@ fun DriveMode(
 ) {
     KeepScreenOn()
     Box(modifier = Modifier.fillMaxSize()) {
-        CurrentSpeed(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 8.dp, end = 16.dp)
-                .statusBarsPadding(),
-            speed = location.speed.toString()
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CurrentSpeedRect(
+                modifier = Modifier.statusBarsPadding(),
+                speed = location.speed.toString()
+            )
+            CameraAlerts(alertMessages = alertMessages)
+        }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -58,13 +62,6 @@ fun DriveMode(
                 .padding(bottom = 16.dp),
             imageVector = Icons.Default.Close,
             onClick = stopDrive
-        )
-
-        CameraAlerts(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .statusBarsPadding(),
-            alertMessages = alertMessages
         )
     }
 }

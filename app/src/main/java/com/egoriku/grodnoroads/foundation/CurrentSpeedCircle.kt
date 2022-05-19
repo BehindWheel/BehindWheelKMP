@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CurrentSpeed(
+fun CurrentSpeedCircle(
     modifier: Modifier = Modifier,
     speed: String
 ) {
@@ -52,6 +52,6 @@ fun CurrentSpeed(
 
 @Preview
 @Composable
-fun CurrentSpeedPreview() {
-    CurrentSpeed(speed = 70.toString())
+private fun CurrentSpeedCirclePreview() {
+    CurrentSpeedCircle(speed = 70.toString())
 }
