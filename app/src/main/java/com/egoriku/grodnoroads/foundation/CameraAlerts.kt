@@ -24,7 +24,10 @@ fun CameraAlerts(
     modifier: Modifier = Modifier,
     alertMessages: List<AlertMessage>
 ) {
-    LazyColumn(modifier = modifier.fillMaxWidth()) {
+    LazyColumn(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         items(alertMessages) { message ->
             Card(
                 modifier = Modifier
