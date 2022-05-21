@@ -1,18 +1,16 @@
 package com.egoriku.grodnoroads.foundation
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,20 +24,21 @@ fun CurrentSpeedRect(
     modifier: Modifier = Modifier,
     speed: String
 ) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .clip(shape = RoundedCornerShape(8.dp))
-            .background(color = MaterialTheme.colors.surface)
+    Card(
+        modifier = modifier,
+        elevation = 5.dp,
+        shape = RoundedCornerShape(8.dp)
     ) {
-        Text(
-            text = stringResource(id = R.string.current_speed_template, speed),
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(all = 8.dp)
-                .defaultMinSize(minWidth = 70.dp)
-        )
+        Box(contentAlignment = Alignment.Center) {
+            Text(
+                text = stringResource(id = R.string.current_speed_template, speed),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .defaultMinSize(minWidth = 80.dp)
+            )
+        }
     }
 }
 
