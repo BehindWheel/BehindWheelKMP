@@ -36,7 +36,7 @@ fun DriveMode(
                 modifier = Modifier.statusBarsPadding(),
                 speed = location.speed.toString()
             )
-            CameraAlerts(alertMessages = alertMessages)
+            Alerts(alertMessages = alertMessages)
         }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,

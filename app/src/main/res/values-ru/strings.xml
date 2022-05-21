@@ -18,11 +18,8 @@
 
     <string name="alerts_stationary_camera">Стационарная камера</string>
     <string name="alerts_mobile_camera">Временная камера</string>
-
-    <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Стационарная камера</string>
-    <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Временная камера</string>
-    <string name="camera_alerts_accident">\uD83D\uDCA5 Авария</string>
-    <string name="camera_alerts_police">\uD83D\uDC6E Экипаж ГАИ</string>
+    <string name="alerts_accident">\uD83D\uDCA5 Дорожное происшествие</string>
+    <string name="alerts_police">\uD83D\uDC6E Экипаж ГАИ</string>
 
     <string name="terms_of_service">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
