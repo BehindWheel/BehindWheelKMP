@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.LocationState
-import com.egoriku.grodnoroads.foundation.CameraAlerts
 import com.egoriku.grodnoroads.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage

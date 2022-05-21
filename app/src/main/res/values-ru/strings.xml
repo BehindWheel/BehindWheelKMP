@@ -16,6 +16,9 @@
 
     <string name="current_speed_template">%1$s км/ч</string>
 
+    <string name="alerts_stationary_camera">Стационарная камера</string>
+    <string name="alerts_mobile_camera">Временная камера</string>
+
     <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Стационарная камера</string>
     <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Временная камера</string>
     <string name="camera_alerts_accident">\uD83D\uDCA5 Авария</string>

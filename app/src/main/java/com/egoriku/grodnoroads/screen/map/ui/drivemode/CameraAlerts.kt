@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.screen.map.ui.drivemode
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,13 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.EventType.*
+import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.SpeedLimitSign
+import com.egoriku.grodnoroads.foundation.alerts.CameraAlert
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
 
 @Composable
@@ -25,38 +30,57 @@ fun CameraAlerts(
     alertMessages: List<AlertMessage>
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(alertMessages) { message ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                elevation = 5.dp
-            ) {
-                Column(modifier = Modifier.padding(8.dp)) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            MessageHeader(
-                                eventType = message.eventType,
-                                distance = message.distance
-                            )
-                        }
+            when (message.eventType) {
+                StationaryCamera -> CameraAlert(
+                    distance = message.distance,
+                    speedLimit = message.speedLimit,
+                    painter = painterResource(id = R.drawable.ic_stationary_camera),
+                    title = stringResource(R.string.alerts_stationary_camera)
+                )
+                MobileCamera -> CameraAlert(
+                    distance = message.distance,
+                    speedLimit = message.speedLimit,
+                    painter = painterResource(id = R.drawable.ic_mobile_camera),
+                    title = stringResource(R.string.alerts_mobile_camera)
+                )
+                else -> Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    elevation = 5.dp
+                ) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                MessageHeader(
+                                    eventType = message.eventType,
+                                    distance = message.distance
+                                )
+                            }
 
-                        if (message.speedLimit > 0) {
-                            SpeedLimitSign(limit = message.speedLimit)
+                            if (message.speedLimit > 0) {
+                                SpeedLimitSign(limit = message.speedLimit, fontSize = 30.sp)
+                            }
                         }
+                        Messages(message)
                     }
-                    Messages(message)
                 }
             }
         }
     }
 }
+
+//· (15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр
+//· (15:45) Новый мост в левой полосе по направлению
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -128,7 +152,17 @@ fun CameraAlertsPreview() {
             alertMessages = listOf(
                 AlertMessage(
                     distance = 220,
-                    message = "",
+                    message = "ул. Поповича",
+                    speedLimit = -1,
+                    eventType = MobileCamera
+                )
+            )
+        )
+        CameraAlerts(
+            alertMessages = listOf(
+                AlertMessage(
+                    distance = 220,
+                    message = "ул. Поповича",
                     speedLimit = 60,
                     eventType = MobileCamera
                 )

@@ -18,6 +18,9 @@
 
     <string name="current_speed_template">%1$s km/h</string>
 
+    <string name="alerts_stationary_camera">Stationary camera</string>
+    <string name="alerts_mobile_camera">Mobile camera</string>
+
     <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Stationary camera</string>
     <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Mobile camera</string>
     <string name="camera_alerts_accident">\uD83D\uDCA5 Accident</string>
