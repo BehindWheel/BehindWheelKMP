@@ -73,7 +73,7 @@ android {
 dependencies {
     implementation(projects.library.retrosheetKmm)
 
-    implementation(platform("com.google.firebase:firebase-bom:30.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.0.2"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -89,8 +89,8 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta")
+    implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
 
     implementation(libs.androidx.browser)
 
