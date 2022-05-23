@@ -5,7 +5,6 @@ package com.egoriku.grodnoroads
 import android.app.Application
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.koin.appScopeModule
-import com.egoriku.grodnoroads.koin.networkModule
 import com.egoriku.grodnoroads.koin.retrosheetModule
 import com.egoriku.grodnoroads.screen.chat.chatModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
@@ -33,7 +32,6 @@ class RoadsApplication : Application() {
                 appScopeModule,
                 mainModule,
                 mapModule,
-                networkModule,
                 retrosheetModule,
                 settingsModule
             )

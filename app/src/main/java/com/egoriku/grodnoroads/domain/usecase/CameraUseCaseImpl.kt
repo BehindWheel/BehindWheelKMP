@@ -3,20 +3,19 @@ package com.egoriku.grodnoroads.domain.usecase
 import com.egoriku.grodnoroads.data.model.ActionResponse
 import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.EventType.Companion.valueOf
-import com.egoriku.grodnoroads.domain.repository.ReportActionRepository
+import com.egoriku.grodnoroads.domain.repository.ActionRepository
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
 import com.egoriku.grodnoroads.util.DateUtil
-import com.egoriku.grodnoroads.util.encodeMessage
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 internal class CameraUseCaseImpl(
-    private val reportActionRepository: ReportActionRepository
+    private val actionRepository: ActionRepository
 ) : CameraUseCase {
 
     override suspend fun reportAction(type: EventType, latLng: LatLng) {
-        reportActionRepository.report(
+        actionRepository.report(
             actionResponse = ActionResponse(
                 addedTime = System.currentTimeMillis(),
                 type = type.type,
@@ -24,7 +23,7 @@ internal class CameraUseCaseImpl(
                     EventType.Police -> "\uD83D\uDC6E"
                     EventType.Accident -> "\uD83D\uDCA5"
                     else -> throw IllegalArgumentException("reporting $type is not supporting")
-                }.encodeMessage(),
+                },
                 latitude = latLng.latitude,
                 longitude = latLng.longitude
             )
@@ -32,7 +31,7 @@ internal class CameraUseCaseImpl(
     }
 
     override fun usersActions(): Flow<List<UserActions>> {
-        return reportActionRepository.usersActions().map {
+        return actionRepository.usersActions().map {
             it.map { response ->
                 UserActions(
                     eventType = valueOf(response.type),

@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.screen.map.koin
 
-import com.egoriku.grodnoroads.data.repository.ReportActionRepositoryImpl
-import com.egoriku.grodnoroads.domain.repository.ReportActionRepository
+import com.egoriku.grodnoroads.data.repository.ActionRepositoryImpl
+import com.egoriku.grodnoroads.domain.repository.ActionRepository
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
 import com.egoriku.grodnoroads.domain.usecase.CameraUseCaseImpl
 import com.egoriku.grodnoroads.screen.map.MapComponent
@@ -19,7 +19,7 @@ import org.koin.dsl.module
 val mapModule = module {
     factoryOf(::MobileCameraRepositoryImpl) { bind<MobileCameraRepository>() }
     factoryOf(::StationaryCameraRepositoryImpl) { bind<StationaryCameraRepository>() }
-    factoryOf(::ReportActionRepositoryImpl) { bind<ReportActionRepository>() }
+    factoryOf(::ActionRepositoryImpl) { bind<ActionRepository>() }
 
     factoryOf(::CameraUseCaseImpl) { bind<CameraUseCase>() }
 

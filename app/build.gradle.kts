@@ -113,13 +113,6 @@ dependencies {
 
     implementation("com.google.android.material:material:1.6.0")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation("com.squareup.moshi:moshi:1.13.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
-
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 

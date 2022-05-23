@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.domain.repository
 import com.egoriku.grodnoroads.data.model.ActionResponse
 import kotlinx.coroutines.flow.Flow
 
-interface ReportActionRepository {
+interface ActionRepository {
 
     suspend fun report(actionResponse: ActionResponse)
 
