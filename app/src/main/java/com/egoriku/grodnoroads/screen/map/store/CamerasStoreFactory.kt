@@ -9,6 +9,7 @@ import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.EventType.Companion.eventFromString
 import com.egoriku.grodnoroads.domain.model.Source.App
 import com.egoriku.grodnoroads.domain.model.Source.Companion.sourceFromString
+import com.egoriku.grodnoroads.extension.appendIfNotEmpty
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
@@ -32,13 +33,13 @@ class CamerasStoreFactory(
     private val storeFactory: StoreFactory,
     private val mobileCameraRepository: MobileCameraRepository,
     private val stationaryCameraRepository: StationaryCameraRepository,
-    private val reportsRepository: ReportsRepository
+    private val reportsRepository: ReportsRepository,
 ) {
 
     sealed interface Intent {
         data class ReportAction(
             val latLng: LatLng,
-            val eventType: EventType
+            val eventType: EventType,
         ) : Intent
     }
 
@@ -88,7 +89,7 @@ class CamerasStoreFactory(
                                 timestamp = System.currentTimeMillis(),
                                 type = action.eventType.type,
                                 message = message,
-                                shortMessage = message,
+                                shortMessage = "",
                                 latitude = action.latLng.latitude,
                                 longitude = action.latLng.longitude,
                                 source = App.source
@@ -133,8 +134,14 @@ class CamerasStoreFactory(
                     val cameras = result.value.map { data ->
                         val eventType = eventFromString(data.type)
                         val shortMessage = when (eventType) {
-                            EventType.Police -> "👮 (${data.shortMessage})"
-                            EventType.Accident -> "💥 (${data.shortMessage})"
+                            EventType.Police -> buildString {
+                                append("\uD83D\uDC6E")
+                                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                            }
+                            EventType.Accident -> buildString {
+                                append("\uD83D\uDCA5")
+                                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                            }
                             else -> data.shortMessage
                         }
 
