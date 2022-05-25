@@ -7,7 +7,7 @@ enum class EventType(val type: String) {
     Accident(type = "accident");
 
     companion object {
-        fun valueOf(value: String): EventType {
+        fun eventFromString(value: String): EventType {
             return requireNotNull(values().find { it.type == value })
         }
     }

@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.EventType.MobileCamera
 import com.egoriku.grodnoroads.domain.model.EventType.StationaryCamera
 import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
@@ -48,6 +49,8 @@ interface MapComponent {
         data class UserActions(
             val time: String,
             val message: String,
+            val shortMessage: String,
+            val source: Source,
             override val position: LatLng,
             override val eventType: EventType
         ) : MapEvent

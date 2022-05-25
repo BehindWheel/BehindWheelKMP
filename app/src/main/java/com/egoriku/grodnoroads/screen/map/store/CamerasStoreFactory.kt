@@ -6,12 +6,16 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.domain.model.EventType
-import com.egoriku.grodnoroads.domain.usecase.CameraUseCase
+import com.egoriku.grodnoroads.domain.model.EventType.Companion.eventFromString
+import com.egoriku.grodnoroads.domain.model.Source.App
+import com.egoriku.grodnoroads.domain.model.Source.Companion.sourceFromString
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
@@ -26,9 +30,9 @@ interface CamerasStore : Store<Intent, State, Nothing>
 
 class CamerasStoreFactory(
     private val storeFactory: StoreFactory,
-    private val cameraUseCase: CameraUseCase,
     private val mobileCameraRepository: MobileCameraRepository,
-    private val stationaryCameraRepository: StationaryCameraRepository
+    private val stationaryCameraRepository: StationaryCameraRepository,
+    private val reportsRepository: ReportsRepository
 ) {
 
     sealed interface Intent {
@@ -57,32 +61,39 @@ class CamerasStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        subscribeForStationaryCameras { stationaryCamera ->
-                            dispatch(
-                                OnStationary(data = stationaryCamera)
-                            )
+                        subscribeForStationaryCameras {
+                            dispatch(OnStationary(data = it))
                         }
                     }
                     launch {
-                        cameraUseCase.usersActions().collect {
+                        subscribeForMobileCameras {
+                            dispatch(OnMobileCamera(data = it))
+                        }
+                    }
+                    launch {
+                        subscribeForReports {
                             dispatch(OnUserActions(data = it))
-                        }
-                    }
-                    launch {
-                        subscribeForMobileCameras { mobileCamera ->
-                            dispatch(OnMobileCamera(data = mobileCamera))
                         }
                     }
                 }
                 onIntent<Intent.ReportAction> { action ->
                     launch {
-                        dispatch(
-                            OnUserActions(
-                                data = state.userActions + buildInstantAction(action)
+                        val message = when (action.eventType) {
+                            EventType.Police -> "\uD83D\uDC6E"
+                            EventType.Accident -> "\uD83D\uDCA5"
+                            else -> throw IllegalArgumentException()
+                        }
+                        reportsRepository.report(
+                            ReportsResponse(
+                                timestamp = System.currentTimeMillis(),
+                                type = action.eventType.type,
+                                message = message,
+                                shortMessage = message,
+                                latitude = action.latLng.latitude,
+                                longitude = action.latLng.longitude,
+                                source = App.source
                             )
                         )
-
-                        cameraUseCase.reportAction(type = action.eventType, latLng = action.latLng)
                     }
                 }
             },
@@ -96,9 +107,7 @@ class CamerasStoreFactory(
             }
         ) {}
 
-    private suspend fun subscribeForMobileCameras(
-        onLoaded: (List<MobileCamera>) -> Unit
-    ) {
+    private suspend fun subscribeForMobileCameras(onLoaded: (List<MobileCamera>) -> Unit) {
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is ResultOf.Success -> {
@@ -117,9 +126,37 @@ class CamerasStoreFactory(
         }
     }
 
-    private suspend fun subscribeForStationaryCameras(
-        onLoaded: (List<StationaryCamera>) -> Unit
-    ) {
+    private suspend fun subscribeForReports(onLoaded: (List<UserActions>) -> Unit) {
+        reportsRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is ResultOf.Success -> {
+                    val cameras = result.value.map { data ->
+                        val eventType = eventFromString(data.type)
+                        val shortMessage = when (eventType) {
+                            EventType.Police -> "👮 (${data.shortMessage})"
+                            EventType.Accident -> "💥 (${data.shortMessage})"
+                            else -> data.shortMessage
+                        }
+
+                        UserActions(
+                            message = data.message,
+                            shortMessage = shortMessage,
+                            source = sourceFromString(data.source),
+                            position = LatLng(data.latitude, data.longitude),
+                            time = DateUtil.formatToTime(data.timestamp),
+                            eventType = eventType
+                        )
+                    }
+                    onLoaded(cameras)
+                }
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
+                    logD(result.exception.message.toString())
+                }
+            }
+        }
+    }
+
+    private suspend fun subscribeForStationaryCameras(onLoaded: (List<StationaryCamera>) -> Unit) {
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is ResultOf.Success -> {
@@ -132,22 +169,9 @@ class CamerasStoreFactory(
                     }
                     onLoaded(cameras)
                 }
-                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
-                    logD(result.exception.message.toString())
-                }
+                is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
+                    .also { logD(result.exception.message.toString()) }
             }
         }
     }
-
-    private fun buildInstantAction(action: Intent.ReportAction) =
-        UserActions(
-            time = DateUtil.formatToTime(date = System.currentTimeMillis()),
-            message = when (action.eventType) {
-                EventType.Police -> "\uD83D\uDC6E"
-                EventType.Accident -> "\uD83D\uDCA5"
-                else -> throw IllegalArgumentException("reporting ${action.eventType} is not supporting")
-            },
-            position = action.latLng,
-            eventType = action.eventType
-        )
 }

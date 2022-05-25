@@ -10,12 +10,12 @@ internal class MobileCameraRepositoryImpl(
     private val databaseReference: DatabaseReference
 ) : MobileCameraRepository {
 
-    override suspend fun loadAsFlow() = databaseReference
+    override fun loadAsFlow() = databaseReference
         .child("temporary_camera/cameras")
         .awaitValueEventListener<MobileCameraResponse>()
 }
 
 interface MobileCameraRepository {
 
-    suspend fun loadAsFlow(): Flow<ResultOf<List<MobileCameraResponse>>>
+    fun loadAsFlow(): Flow<ResultOf<List<MobileCameraResponse>>>
 }

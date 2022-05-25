@@ -113,6 +113,8 @@ dependencies {
 
     implementation("com.google.android.material:material:1.6.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
+
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 

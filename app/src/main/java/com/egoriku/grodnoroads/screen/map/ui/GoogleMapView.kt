@@ -99,7 +99,7 @@ fun PlaceUserActions(userActions: UserActions) {
     MarkerInfoWindow(
         state = rememberMarkerState(position = userActions.position),
         icon = BitmapDescriptorFactory.fromBitmap(
-            iconGenerator.makeIcon("${userActions.time} ${userActions.message}")
+            iconGenerator.makeIcon("${userActions.time} ${userActions.shortMessage}")
         )
     )
 }
