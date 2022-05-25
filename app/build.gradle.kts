@@ -71,8 +71,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.library.retrosheetKmm)
-
     implementation(platform("com.google.firebase:firebase-bom:30.0.2"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
