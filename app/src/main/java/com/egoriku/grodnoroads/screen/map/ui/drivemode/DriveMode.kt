@@ -46,11 +46,11 @@ fun DriveMode(
                 .padding(bottom = 48.dp)
         ) {
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_police_car),
+                painter = painterResource(id = R.drawable.ic_traffic_police),
                 onClick = reportPolice
             )
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_accident),
+                painter = painterResource(id = R.drawable.ic_warning),
                 onClick = reportAccident
             )
         }
@@ -65,7 +65,7 @@ fun DriveMode(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DriveModePReview() {
     DriveMode(
