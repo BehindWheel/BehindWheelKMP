@@ -76,10 +76,7 @@ fun GoogleMapView(
         if (locationState != LocationState.None) {
             Marker(
                 state = MarkerState(position = locationState.latLng),
-                icon = markerCache.getOrPut(
-                    id = R.drawable.ic_arrow,
-                    size = 80
-                ),
+                icon = markerCache.getVector(id = R.drawable.ic_arrow),
                 rotation = cameraPositionValues.markerRotation,
                 anchor = Offset(0.5f, 0.5f),
                 zIndex = 1f
