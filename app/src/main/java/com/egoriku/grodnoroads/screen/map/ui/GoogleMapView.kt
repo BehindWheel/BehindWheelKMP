@@ -86,22 +86,29 @@ fun GoogleMapView(
             )
         }
     }
-
-    // DebugView(cameraPositionState = cameraPositionState)
 }
 
 @Composable
 fun PlaceUserActions(userActions: UserActions) {
     val context = LocalContext.current
-
     val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
 
-    MarkerInfoWindow(
-        state = rememberMarkerState(position = userActions.position),
-        icon = BitmapDescriptorFactory.fromBitmap(
-            iconGenerator.makeIcon("${userActions.time} ${userActions.shortMessage}")
+    // https://github.com/googlemaps/android-maps-compose/issues/46
+    val marketState = rememberMarkerState(position = userActions.position)
+
+    val icon by remember(userActions) {
+        mutableStateOf(
+            BitmapDescriptorFactory.fromBitmap(
+                iconGenerator.makeIcon("${userActions.time} ${userActions.shortMessage}")
+            )
         )
-    )
+    }
+
+    LaunchedEffect(key1 = userActions.position) {
+        marketState.position = userActions.position
+    }
+
+    Marker(state = marketState, icon = icon)
 }
 
 @Composable
