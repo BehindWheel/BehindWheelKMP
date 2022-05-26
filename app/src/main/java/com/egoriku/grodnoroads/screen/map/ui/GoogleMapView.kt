@@ -108,7 +108,7 @@ fun PlaceUserActions(userActions: UserActions) {
         marketState.position = userActions.position
     }
 
-    Marker(state = marketState, icon = icon)
+    Marker(state = marketState, icon = icon, zIndex = 2f)
 }
 
 @Composable
