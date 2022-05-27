@@ -8,6 +8,34 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
+inline fun <reified T> Query.awaitValueEventListener(): Flow<ResultOf<List<T>>> =
+    callbackFlow {
+        val valueEventListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                try {
+                    val entityList = snapshot.children.mapNotNull { dataSnapshot ->
+                        dataSnapshot.getValue<T>()
+                    }
+
+                    trySend(ResultOf.Success(entityList))
+                } catch (e: DatabaseException) {
+                    trySend(ResultOf.Failure(e))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                val exception = FirebaseException(getErrorMessage(error.code))
+                trySend(ResultOf.Failure(exception))
+            }
+        }
+
+        addValueEventListener(valueEventListener)
+        awaitClose {
+            removeEventListener(valueEventListener)
+        }
+    }
+
+
 inline fun <reified T> DatabaseReference.awaitValueEventListener(): Flow<ResultOf<List<T>>> =
     callbackFlow {
         val valueEventListener = object : ValueEventListener {

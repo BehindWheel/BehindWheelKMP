@@ -12,6 +12,7 @@ class ReportsRepositoryImpl(databaseReference: DatabaseReference) : ReportsRepos
     private val reportsReference = databaseReference.child("reports")
 
     override fun loadAsFlow() = reportsReference
+        .orderByChild("timestamp")
         .awaitValueEventListener<ReportsResponse>()
 
     override suspend fun report(response: ReportsResponse) {

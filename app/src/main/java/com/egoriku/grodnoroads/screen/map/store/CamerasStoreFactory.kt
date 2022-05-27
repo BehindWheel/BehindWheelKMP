@@ -20,6 +20,7 @@ import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
+import com.egoriku.grodnoroads.screen.map.store.util.mergeActions
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.crashlytics.ktx.crashlytics
@@ -131,29 +132,32 @@ class CamerasStoreFactory(
         reportsRepository.loadAsFlow().collect { result ->
             when (result) {
                 is ResultOf.Success -> {
-                    val cameras = result.value.map { data ->
-                        val eventType = eventFromString(data.type)
-                        val shortMessage = when (eventType) {
-                            EventType.Police -> buildString {
-                                append("\uD83D\uDC6E")
-                                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                    val cameras = result.value
+                        .map { data ->
+                            val eventType = eventFromString(data.type)
+                            val shortMessage = when (eventType) {
+                                EventType.Police -> buildString {
+                                    append("\uD83D\uDC6E")
+                                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                                }
+                                EventType.Accident -> buildString {
+                                    append("\uD83D\uDCA5")
+                                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                                }
+                                else -> data.shortMessage
                             }
-                            EventType.Accident -> buildString {
-                                append("\uD83D\uDCA5")
-                                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
-                            }
-                            else -> data.shortMessage
-                        }
 
-                        UserActions(
-                            message = data.message,
-                            shortMessage = shortMessage,
-                            source = sourceFromString(data.source),
-                            position = LatLng(data.latitude, data.longitude),
-                            time = DateUtil.formatToTime(data.timestamp),
-                            eventType = eventType
-                        )
-                    }
+                            UserActions(
+                                message = data.message,
+                                shortMessage = shortMessage,
+                                source = sourceFromString(data.source),
+                                position = LatLng(data.latitude, data.longitude),
+                                time = DateUtil.formatToTime(data.timestamp),
+                                eventType = eventType
+                            )
+                        }
+                        .mergeActions()
+
                     onLoaded(cameras)
                 }
                 is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {

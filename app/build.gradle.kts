@@ -127,6 +127,8 @@ dependencies {
     implementation(libs.ktor.client.contentnegotiation)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.serialization.json)
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.6.21")
 }
 
 secrets {
