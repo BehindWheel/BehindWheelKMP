@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.screen.map.store.util
 
-import com.egoriku.grodnoroads.domain.model.EventType.Accident
-import com.egoriku.grodnoroads.domain.model.EventType.Police
+import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.extension.second
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
@@ -20,7 +20,7 @@ class MergeActionsTest {
                 shortMessage = "Short message",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             )
         ).mergeActions()
 
@@ -37,7 +37,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -45,14 +45,14 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.672628, 23.875794),
-                eventType = Accident
+                mapEventType = RoadAccident
             ),
         ).mergeActions()
 
         assertEquals(2, mergedActions.size)
 
         with(mergedActions.first()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:30) Long message 1", message)
             assertEquals("12:30", time)
             assertEquals("Short message 1", shortMessage)
@@ -60,7 +60,7 @@ class MergeActionsTest {
         }
 
         with(mergedActions.second()) {
-            assertEquals(Accident, eventType)
+            assertEquals(RoadAccident, mapEventType)
             assertEquals("· (12:51) Long message 2", message)
             assertEquals("12:51", time)
             assertEquals("Short message 2", shortMessage)
@@ -77,7 +77,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -85,14 +85,14 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.666216, 23.785078),
-                eventType = Accident
+                mapEventType = RoadAccident
             ),
         ).mergeActions()
 
         assertEquals(2, mergedActions.size)
 
         with(mergedActions.first()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:30) Long message 1", message)
             assertEquals("12:30", time)
             assertEquals("Short message 1", shortMessage)
@@ -100,7 +100,7 @@ class MergeActionsTest {
         }
 
         with(mergedActions.second()) {
-            assertEquals(Accident, eventType)
+            assertEquals(RoadAccident, mapEventType)
             assertEquals("· (12:51) Long message 2", message)
             assertEquals("12:51", time)
             assertEquals("Short message 2", shortMessage)
@@ -117,7 +117,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -125,14 +125,14 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.672628, 23.875794),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
         ).mergeActions()
 
         assertEquals(2, mergedActions.size)
 
         with(mergedActions.first()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:30) Long message 1", message)
             assertEquals("12:30", time)
             assertEquals("Short message 1", shortMessage)
@@ -140,7 +140,7 @@ class MergeActionsTest {
         }
 
         with(mergedActions.second()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:51) Long message 2", message)
             assertEquals("12:51", time)
             assertEquals("Short message 2", shortMessage)
@@ -157,7 +157,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Accident
+                mapEventType = RoadAccident
             ),
             UserActions(
                 time = "12:51",
@@ -165,14 +165,14 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.666216, 23.785078),
-                eventType = Accident
+                mapEventType = RoadAccident
             ),
         ).mergeActions()
 
         assertEquals(1, mergedActions.size)
 
         with(mergedActions.first()) {
-            assertEquals(Accident, eventType)
+            assertEquals(RoadAccident, mapEventType)
             assertEquals("· (12:30) Long message 1\n· (12:51) Long message 2", message)
             assertEquals("12:30", time)
             assertEquals("Short message 1", shortMessage)
@@ -189,7 +189,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:40",
@@ -197,7 +197,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.666216, 23.785078),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -205,14 +205,14 @@ class MergeActionsTest {
                 shortMessage = "Short message 3",
                 source = Source.App,
                 position = LatLng(53.672628, 23.875794),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
         ).mergeActions()
 
         assertEquals(2, mergedActions.size)
 
         with(mergedActions.first()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:30) Long message 1\n· (12:40) Long message 2", message)
             assertEquals("12:30", time)
             assertEquals("Short message 1", shortMessage)
@@ -220,7 +220,7 @@ class MergeActionsTest {
         }
 
         with(mergedActions.second()) {
-            assertEquals(Police, eventType)
+            assertEquals(TrafficPolice, mapEventType)
             assertEquals("· (12:51) Long message 3", message)
             assertEquals("12:51", time)
             assertEquals("Short message 3", shortMessage)
@@ -237,7 +237,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.666199, 23.784990),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:40",
@@ -245,7 +245,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.673657, 23.869954),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -253,7 +253,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 3",
                 source = Source.App,
                 position = LatLng(53.719067, 23.850779),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
         ).mergeActions()
 
@@ -269,7 +269,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 1",
                 source = Source.App,
                 position = LatLng(53.673217, 23.871806),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:40",
@@ -277,7 +277,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 2",
                 source = Source.App,
                 position = LatLng(53.673187, 23.871366),
-                eventType = Police
+                mapEventType = TrafficPolice
             ),
             UserActions(
                 time = "12:51",
@@ -285,7 +285,7 @@ class MergeActionsTest {
                 shortMessage = "Short message 3",
                 source = Source.App,
                 position = LatLng(53.673274, 23.870778),
-                eventType = Police
+                mapEventType = TrafficPolice
             )
         ).mergeActions()
 

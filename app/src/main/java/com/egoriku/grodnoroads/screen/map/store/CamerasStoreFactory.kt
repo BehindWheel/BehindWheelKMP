@@ -5,8 +5,10 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.domain.model.EventType
-import com.egoriku.grodnoroads.domain.model.EventType.Companion.eventFromString
+import com.egoriku.grodnoroads.domain.model.MapEventType
+import com.egoriku.grodnoroads.domain.model.MapEventType.Companion.eventFromString
+import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.domain.model.Source.App
 import com.egoriku.grodnoroads.domain.model.Source.Companion.sourceFromString
 import com.egoriku.grodnoroads.extension.appendIfNotEmpty
@@ -40,7 +42,7 @@ class CamerasStoreFactory(
     sealed interface Intent {
         data class ReportAction(
             val latLng: LatLng,
-            val eventType: EventType,
+            val mapEventType: MapEventType,
         ) : Intent
     }
 
@@ -80,15 +82,15 @@ class CamerasStoreFactory(
                 }
                 onIntent<Intent.ReportAction> { action ->
                     launch {
-                        val message = when (action.eventType) {
-                            EventType.Police -> "\uD83D\uDC6E"
-                            EventType.Accident -> "\uD83D\uDCA5"
+                        val message = when (action.mapEventType) {
+                            TrafficPolice -> "\uD83D\uDC6E"
+                            RoadAccident -> "\uD83D\uDCA5"
                             else -> throw IllegalArgumentException()
                         }
                         reportsRepository.report(
                             ReportsResponse(
                                 timestamp = System.currentTimeMillis(),
-                                type = action.eventType.type,
+                                type = action.mapEventType.type,
                                 message = message,
                                 shortMessage = "",
                                 latitude = action.latLng.latitude,
@@ -136,11 +138,11 @@ class CamerasStoreFactory(
                         .map { data ->
                             val eventType = eventFromString(data.type)
                             val shortMessage = when (eventType) {
-                                EventType.Police -> buildString {
+                                TrafficPolice -> buildString {
                                     append("\uD83D\uDC6E")
                                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                                 }
-                                EventType.Accident -> buildString {
+                                RoadAccident -> buildString {
                                     append("\uD83D\uDCA5")
                                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                                 }
@@ -153,7 +155,7 @@ class CamerasStoreFactory(
                                 source = sourceFromString(data.source),
                                 position = LatLng(data.latitude, data.longitude),
                                 time = DateUtil.formatToTime(data.timestamp),
-                                eventType = eventType
+                                mapEventType = eventType
                             )
                         }
                         .mergeActions()

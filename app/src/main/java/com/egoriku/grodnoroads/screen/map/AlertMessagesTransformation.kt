@@ -38,7 +38,7 @@ private fun makeAlertMessage(
                     distance = distance,
                     message = "",
                     speedLimit = event.speed,
-                    eventType = event.eventType
+                    mapEventType = event.mapEventType
                 )
             }
             is MapEvent.UserActions -> {
@@ -46,7 +46,7 @@ private fun makeAlertMessage(
                     distance = distance,
                     message = event.message,
                     speedLimit = -1,
-                    eventType = event.eventType
+                    mapEventType = event.mapEventType
                 )
             }
             is MapEvent.MobileCamera -> {
@@ -54,7 +54,7 @@ private fun makeAlertMessage(
                     distance = distance,
                     message = event.message,
                     speedLimit = -1,
-                    eventType = event.eventType
+                    mapEventType = event.mapEventType
                 )
             }
         }

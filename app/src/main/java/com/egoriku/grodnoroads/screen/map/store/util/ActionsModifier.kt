@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.extension.distanceTo
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
 
 fun List<UserActions>.mergeActions(): List<UserActions> {
-    return groupBy { it.eventType }
+    return groupBy { it.mapEventType }
         .mapValues { it.value.merge() }
         .values
         .flatten()

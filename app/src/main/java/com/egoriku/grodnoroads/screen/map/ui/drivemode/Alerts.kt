@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.EventType.*
+import com.egoriku.grodnoroads.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.foundation.alerts.CameraAlert
 import com.egoriku.grodnoroads.foundation.alerts.IncidentAlert
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
@@ -30,7 +30,7 @@ fun Alerts(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(alertMessages) { alert ->
-            when (alert.eventType) {
+            when (alert.mapEventType) {
                 StationaryCamera -> CameraAlert(
                     distance = alert.distance,
                     speedLimit = alert.speedLimit,
@@ -43,12 +43,12 @@ fun Alerts(
                     painter = painterResource(id = R.drawable.ic_mobile_camera),
                     title = stringResource(R.string.alerts_mobile_camera)
                 )
-                Police -> IncidentAlert(
+                TrafficPolice -> IncidentAlert(
                     title = stringResource(R.string.alerts_police),
                     distance = alert.distance,
                     message = alert.message
                 )
-                Accident -> IncidentAlert(
+                RoadAccident -> IncidentAlert(
                     title = stringResource(R.string.alerts_accident),
                     distance = alert.distance,
                     message = alert.message
@@ -69,7 +69,7 @@ private fun AlertsPreview() {
                     distance = 1,
                     message = "· Славинского беларуснефть на скорость",
                     speedLimit = -1,
-                    eventType = Police
+                    mapEventType = TrafficPolice
                 )
             )
         )
@@ -79,7 +79,7 @@ private fun AlertsPreview() {
                     distance = 2,
                     message = "",
                     speedLimit = 60,
-                    eventType = StationaryCamera
+                    mapEventType = StationaryCamera
                 )
             )
         )
@@ -89,7 +89,7 @@ private fun AlertsPreview() {
                     distance = 5,
                     message = "· (15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр\n· (15:45) Новый мост в левой полосе по направлению",
                     speedLimit = -1,
-                    eventType = Accident
+                    mapEventType = RoadAccident
                 )
             )
         )
@@ -99,7 +99,7 @@ private fun AlertsPreview() {
                     distance = 220,
                     message = "ул. Поповича",
                     speedLimit = -1,
-                    eventType = MobileCamera
+                    mapEventType = MobileCamera
                 )
             )
         )
@@ -109,7 +109,7 @@ private fun AlertsPreview() {
                     distance = 220,
                     message = "ул. Поповича",
                     speedLimit = 60,
-                    eventType = MobileCamera
+                    mapEventType = MobileCamera
                 )
             )
         )

@@ -5,8 +5,8 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.domain.model.MapEventType
 import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStore
@@ -43,8 +43,8 @@ class MapComponentImpl(
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
 
-    override fun reportAction(latLng: LatLng, type: EventType) {
-        stationaryStore.accept(ReportAction(latLng = latLng, eventType = type))
+    override fun reportAction(latLng: LatLng, type: MapEventType) {
+        stationaryStore.accept(ReportAction(latLng = latLng, mapEventType = type))
     }
 
     override val alertMessages: Flow<List<AlertMessage>>

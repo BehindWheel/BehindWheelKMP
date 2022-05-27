@@ -14,8 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.EventType
 import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.foundation.DrawerButton
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
@@ -77,13 +78,13 @@ fun MapUi(
                     reportPolice = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = EventType.Police
+                            type = TrafficPolice
                         )
                     },
                     reportAccident = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = EventType.Accident
+                            type = RoadAccident
                         )
                     }
                 )

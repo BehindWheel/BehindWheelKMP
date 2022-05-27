@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.screen.map
 
 import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.EventType
-import com.egoriku.grodnoroads.domain.model.EventType.MobileCamera
-import com.egoriku.grodnoroads.domain.model.EventType.StationaryCamera
 import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.domain.model.MapEventType
+import com.egoriku.grodnoroads.domain.model.MapEventType.MobileCamera
+import com.egoriku.grodnoroads.domain.model.MapEventType.StationaryCamera
 import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
@@ -20,7 +20,7 @@ interface MapComponent {
 
     val alertMessages: Flow<List<AlertMessage>>
 
-    fun reportAction(latLng: LatLng, type: EventType)
+    fun reportAction(latLng: LatLng, type: MapEventType)
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
@@ -31,19 +31,19 @@ interface MapComponent {
         val distance: Int,
         val message: String,
         val speedLimit: Int,
-        val eventType: EventType
+        val mapEventType: MapEventType
     )
 
     sealed interface MapEvent {
 
         val position: LatLng
-        val eventType: EventType
+        val mapEventType: MapEventType
 
         data class StationaryCamera(
             val message: String,
             val speed: Int,
             override val position: LatLng,
-            override val eventType: EventType = StationaryCamera
+            override val mapEventType: MapEventType = StationaryCamera
         ) : MapEvent
 
         data class UserActions(
@@ -52,13 +52,13 @@ interface MapComponent {
             val shortMessage: String,
             val source: Source,
             override val position: LatLng,
-            override val eventType: EventType
+            override val mapEventType: MapEventType
         ) : MapEvent
 
         data class MobileCamera(
             val message: String,
             override val position: LatLng,
-            override val eventType: EventType = MobileCamera
+            override val mapEventType: MapEventType = MobileCamera
         ) : MapEvent
     }
 }
