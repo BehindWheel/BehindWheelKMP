@@ -5,15 +5,18 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.DrawerButton
+import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
@@ -29,15 +32,7 @@ fun MapUi(
     component: MapComponent,
     openDrawer: () -> Unit
 ) {
-    // TODO: Open with MVI flow
-    var markerState: Reports? by remember { mutableStateOf(null) }
-
-    MarkerAlertDialog(
-        reports = markerState,
-        onClose = {
-            markerState = null
-        }
-    )
+    MarkerAlertDialogComponent(component)
 
     Surface(
         modifier = Modifier
@@ -57,7 +52,7 @@ fun MapUi(
                 mapEvents = mapEvents,
                 locationState = location,
                 onMarkerClick = {
-                    markerState = it
+                    component.showMarkerInfoDialog(reports = it)
                 }
             )
 
@@ -102,6 +97,23 @@ fun MapUi(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun MarkerAlertDialogComponent(component: MapComponent) {
+    val alertDialogState by component.alertDialogState.collectAsState(initial = AlertDialogState.Closed)
+
+    when (val state = alertDialogState) {
+        is AlertDialogState.Show -> {
+            MarkerAlertDialog(
+                reports = state.reports,
+                onClose = {
+                    component.closeDialog()
+                }
+            )
+        }
+        is AlertDialogState.Closed -> Unit
     }
 }
 

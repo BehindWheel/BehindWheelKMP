@@ -4,12 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.screen.map.domain.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.Alert
+import com.egoriku.grodnoroads.screen.map.domain.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStore
+import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.store.LocationStore
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
@@ -27,12 +24,16 @@ class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
 
+    // TODO: Rename
     private val stationaryStore = instanceKeeper.getStore { get<CamerasStore>() }
     private val locationStore = instanceKeeper.getStore { get<LocationStore>() }
 
     private val mobile = stationaryStore.states.map { it.mobileCamera }
     private val stationary = stationaryStore.states.map { it.stationaryCameras }
     private val reports = stationaryStore.states.map { it.reports }
+
+    override val alertDialogState: Flow<AlertDialogState>
+        get() = stationaryStore.states.map { it.alertDialogState }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
@@ -59,4 +60,10 @@ class MapComponentImpl(
     override fun stopLocationUpdates() = locationStore.accept(StopLocationUpdates)
 
     override fun onLocationDisabled() = locationStore.accept(DisabledLocation)
+
+    override fun showMarkerInfoDialog(reports: MapEvent.Reports) = stationaryStore.accept(
+        Intent.OpenMarkerInfoDialog(reports = reports)
+    )
+
+    override fun closeDialog() = stationaryStore.accept(Intent.CloseDialog)
 }

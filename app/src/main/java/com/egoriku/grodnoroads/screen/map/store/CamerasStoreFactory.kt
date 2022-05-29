@@ -5,19 +5,20 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.screen.map.domain.Source.App
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
+import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.Source.App
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
+import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
 import com.egoriku.grodnoroads.screen.map.store.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
@@ -40,18 +41,25 @@ class CamerasStoreFactory(
             val latLng: LatLng,
             val mapEventType: MapEventType,
         ) : Intent
+
+        data class OpenMarkerInfoDialog(val reports: Reports) : Intent
+        object CloseDialog : Intent
     }
 
     private sealed interface Message {
         data class OnStationary(val data: List<StationaryCamera>) : Message
         data class OnNewReports(val data: List<Reports>) : Message
         data class OnMobileCamera(val data: List<MobileCamera>) : Message
+
+        data class OpenDialog(val dialog: AlertDialogState.Show) : Message
+        data class CloseDialog(val dialog: AlertDialogState.Closed) : Message
     }
 
     data class State(
         val stationaryCameras: List<StationaryCamera> = emptyList(),
         val reports: List<Reports> = emptyList(),
         val mobileCamera: List<MobileCamera> = emptyList(),
+        val alertDialogState: AlertDialogState = AlertDialogState.Closed
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -62,21 +70,21 @@ class CamerasStoreFactory(
                 onAction<Unit> {
                     launch {
                         subscribeForStationaryCameras {
-                            dispatch(OnStationary(data = it))
+                            dispatch(Message.OnStationary(data = it))
                         }
                     }
                     launch {
                         subscribeForMobileCameras {
-                            dispatch(OnMobileCamera(data = it))
+                            dispatch(Message.OnMobileCamera(data = it))
                         }
                     }
                     launch {
                         subscribeForReports {
-                            dispatch(OnNewReports(data = it))
+                            dispatch(Message.OnNewReports(data = it))
                         }
                     }
                 }
-                onIntent<Intent.ReportAction> { action ->
+                onIntent<ReportAction> { action ->
                     launch {
                         val message = when (action.mapEventType) {
                             TrafficPolice -> "\uD83D\uDC6E"
@@ -96,13 +104,25 @@ class CamerasStoreFactory(
                         )
                     }
                 }
+                onIntent<Intent.OpenMarkerInfoDialog> { dialog ->
+                    dispatch(
+                        Message.OpenDialog(dialog = AlertDialogState.Show(dialog.reports))
+                    )
+                }
+                onIntent<Intent.CloseDialog> {
+                    dispatch(
+                        Message.CloseDialog(dialog = AlertDialogState.Closed)
+                    )
+                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is OnStationary -> copy(stationaryCameras = message.data)
-                    is OnNewReports -> copy(reports = message.data)
-                    is OnMobileCamera -> copy(mobileCamera = message.data)
+                    is Message.OnStationary -> copy(stationaryCameras = message.data)
+                    is Message.OnNewReports -> copy(reports = message.data)
+                    is Message.OnMobileCamera -> copy(mobileCamera = message.data)
+                    is Message.OpenDialog -> copy(alertDialogState = message.dialog)
+                    is Message.CloseDialog -> copy(alertDialogState = message.dialog)
                 }
             }
         ) {}
