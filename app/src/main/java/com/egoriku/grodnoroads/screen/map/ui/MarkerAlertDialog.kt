@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.screen.map.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -33,7 +34,7 @@ fun MarkerAlertDialog(
         ),
         onDismissRequest = onClose,
         title = {
-            Text(text = userActions.shortMessage)
+            Text(text = userActions.shortMessage, style = MaterialTheme.typography.h6)
         },
         text = {
             Column(
@@ -44,7 +45,7 @@ fun MarkerAlertDialog(
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Image(
                             modifier = Modifier
-                                .size(16.dp)
+                                .size(24.dp)
                                 .padding(end = 4.dp),
                             painter = when (it.source) {
                                 Source.Viber -> painterResource(R.drawable.ic_viber)
@@ -55,7 +56,7 @@ fun MarkerAlertDialog(
                         )
                         Text(
                             text = it.message,
-                            style = MaterialTheme.typography.caption
+                            style = MaterialTheme.typography.body1
                         )
                     }
                 }
@@ -70,11 +71,13 @@ fun MarkerAlertDialog(
                     LocalMinimumTouchTargetEnforcement provides false,
                 ) {
                     TextButton(
+                        shape = RoundedCornerShape(0.dp),
                         contentPadding = PaddingValues(vertical = 8.dp),
                         modifier = Modifier.fillMaxWidth(),
                         onClick = onClose
                     ) {
                         Text(
+                            modifier = Modifier.padding(vertical = 8.dp),
                             text = stringResource(id = android.R.string.ok),
                             color = MaterialTheme.colors.onSurface
                         )
