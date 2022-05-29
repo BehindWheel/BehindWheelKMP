@@ -48,10 +48,7 @@ jobs:
         id: buildRelease
         run: ./gradlew clean bundleRelease
 
-      - name: Build Release APK
-        run: ./gradlew clean appRelease
-
-      - name: Upload AAB
+      - name: Upload *.aab artifact
         id: uploadArtifact
         uses: actions/upload-artifact@v1
         with:
