@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.screen.map.domain
 
-import com.egoriku.grodnoroads.domain.model.MapEventType
 import com.google.android.gms.maps.model.LatLng
 
 sealed interface MapEvent {

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.domain.model
+package com.egoriku.grodnoroads.screen.map.domain
 
 import com.google.android.gms.maps.model.LatLng
 

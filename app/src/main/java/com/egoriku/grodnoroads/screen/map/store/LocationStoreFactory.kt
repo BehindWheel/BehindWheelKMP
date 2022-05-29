@@ -4,8 +4,8 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.util.ResourceProvider

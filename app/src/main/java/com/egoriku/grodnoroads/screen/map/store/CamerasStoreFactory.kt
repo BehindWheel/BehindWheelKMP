@@ -5,10 +5,10 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.domain.model.MapEventType
-import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
-import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.domain.model.Source.App
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.Source.App
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*

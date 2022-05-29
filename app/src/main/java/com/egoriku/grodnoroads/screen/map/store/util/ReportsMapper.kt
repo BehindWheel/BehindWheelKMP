@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.screen.map.store.util
 
-import com.egoriku.grodnoroads.domain.model.MapEventType
-import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.extension.appendIfNotEmpty
 import com.egoriku.grodnoroads.extension.distanceTo
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
+import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 

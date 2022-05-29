@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties

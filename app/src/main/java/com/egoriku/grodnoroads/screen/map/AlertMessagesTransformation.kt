@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.screen.map
 
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.extension.distanceTo
 import com.egoriku.grodnoroads.screen.map.domain.Alert.CameraAlert
 import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert

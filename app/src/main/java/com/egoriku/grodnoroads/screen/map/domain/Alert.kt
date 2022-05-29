@@ -1,8 +1,5 @@
 package com.egoriku.grodnoroads.screen.map.domain
 
-import com.egoriku.grodnoroads.domain.model.MapEventType
-import com.egoriku.grodnoroads.domain.model.Source
-
 sealed interface Alert {
 
     data class IncidentAlert(

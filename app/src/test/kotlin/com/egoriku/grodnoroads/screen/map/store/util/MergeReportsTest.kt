@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.screen.map.store.util
 
-import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
-import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.domain.model.Source.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.Source.*
 import com.egoriku.grodnoroads.extension.second
 import com.egoriku.grodnoroads.extension.third
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
