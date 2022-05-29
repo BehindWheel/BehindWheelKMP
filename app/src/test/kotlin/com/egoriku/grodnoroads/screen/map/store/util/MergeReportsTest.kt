@@ -6,13 +6,21 @@ import com.egoriku.grodnoroads.domain.model.Source.*
 import com.egoriku.grodnoroads.extension.second
 import com.egoriku.grodnoroads.extension.third
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
+import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
+import org.junit.Before
 import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
 class MergeReportsTest {
+
+    @Before
+    fun init() {
+        DateUtil.defaultTimeZone = TimeZone.getTimeZone("GTM")
+    }
 
     @Test
     fun `empty reports`() {
