@@ -5,12 +5,12 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.map.domain.*
-import com.egoriku.grodnoroads.screen.map.store.CamerasStore
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.store.LocationStore
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStore
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,16 +24,15 @@ class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
 
-    // TODO: Rename
-    private val stationaryStore = instanceKeeper.getStore { get<CamerasStore>() }
+    private val mapEventsStore = instanceKeeper.getStore { get<MapEventsStore>() }
     private val locationStore = instanceKeeper.getStore { get<LocationStore>() }
 
-    private val mobile = stationaryStore.states.map { it.mobileCamera }
-    private val stationary = stationaryStore.states.map { it.stationaryCameras }
-    private val reports = stationaryStore.states.map { it.reports }
+    private val mobile = mapEventsStore.states.map { it.mobileCamera }
+    private val stationary = mapEventsStore.states.map { it.stationaryCameras }
+    private val reports = mapEventsStore.states.map { it.reports }
 
     override val alertDialogState: Flow<AlertDialogState>
-        get() = stationaryStore.states.map { it.alertDialogState }
+        get() = mapEventsStore.states.map { it.alertDialogState }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
@@ -45,7 +44,7 @@ class MapComponentImpl(
         get() = locationStore.states.map { it.locationState }
 
     override fun reportAction(latLng: LatLng, type: MapEventType) {
-        stationaryStore.accept(ReportAction(latLng = latLng, mapEventType = type))
+        mapEventsStore.accept(ReportAction(latLng = latLng, mapEventType = type))
     }
 
     override val alerts: Flow<List<Alert>>
@@ -61,9 +60,10 @@ class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(DisabledLocation)
 
-    override fun showMarkerInfoDialog(reports: MapEvent.Reports) = stationaryStore.accept(
-        Intent.OpenMarkerInfoDialog(reports = reports)
-    )
+    override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
+        mapEventsStore.accept(
+            Intent.OpenMarkerInfoDialog(reports = reports)
+        )
 
-    override fun closeDialog() = stationaryStore.accept(Intent.CloseDialog)
+    override fun closeDialog() = mapEventsStore.accept(Intent.CloseDialog)
 }

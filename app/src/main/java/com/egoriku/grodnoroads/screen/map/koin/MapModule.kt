@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.screen.map.koin
 import com.egoriku.grodnoroads.screen.map.MapComponent
 import com.egoriku.grodnoroads.screen.map.MapComponentImpl
 import com.egoriku.grodnoroads.screen.map.data.*
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -17,7 +17,7 @@ val mapModule = module {
     factoryOf(::MapComponentImpl) { bind<MapComponent>() }
 
     factory {
-        CamerasStoreFactory(
+        MapEventsStoreFactory(
             storeFactory = get(),
             mobileCameraRepository = get(),
             stationaryCameraRepository = get(),

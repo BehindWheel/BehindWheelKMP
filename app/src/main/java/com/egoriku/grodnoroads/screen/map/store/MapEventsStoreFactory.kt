@@ -17,9 +17,9 @@ import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.domain.Source.App
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
-import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.State
 import com.egoriku.grodnoroads.screen.map.store.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.crashlytics.ktx.crashlytics
@@ -27,9 +27,9 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-interface CamerasStore : Store<Intent, State, Nothing>
+interface MapEventsStore : Store<Intent, State, Nothing>
 
-class CamerasStoreFactory(
+class MapEventsStoreFactory(
     private val storeFactory: StoreFactory,
     private val mobileCameraRepository: MobileCameraRepository,
     private val stationaryCameraRepository: StationaryCameraRepository,
@@ -63,8 +63,8 @@ class CamerasStoreFactory(
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
-    fun create(): CamerasStore =
-        object : CamerasStore, Store<Intent, State, Nothing> by storeFactory.create(
+    fun create(): MapEventsStore =
+        object : MapEventsStore, Store<Intent, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
