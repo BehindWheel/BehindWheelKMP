@@ -5,7 +5,7 @@ on:
     branches: [ release ]
 
 jobs:
-  build_apk:
+  build_aab:
     runs-on: ubuntu-latest
     env:
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -44,7 +44,7 @@ jobs:
         with:
           files: "app/keystore.jks"
 
-      - name: Build Release *.aab
+      - name: Build Release AAB
         id: buildRelease
         run: ./gradlew clean bundleRelease
 
