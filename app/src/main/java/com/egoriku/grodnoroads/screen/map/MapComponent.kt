@@ -47,10 +47,8 @@ interface MapComponent {
         ) : MapEvent
 
         data class UserActions(
-            val time: String,
-            val message: String,
             val shortMessage: String,
-            val source: Source,
+            val messages: List<MessageItem>,
             override val position: LatLng,
             override val mapEventType: MapEventType
         ) : MapEvent
@@ -61,4 +59,9 @@ interface MapComponent {
             override val mapEventType: MapEventType = MobileCamera
         ) : MapEvent
     }
+
+    data class MessageItem(
+        val message: String,
+        val source: Source
+    )
 }

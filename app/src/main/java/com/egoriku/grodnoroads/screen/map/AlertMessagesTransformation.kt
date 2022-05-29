@@ -44,7 +44,8 @@ private fun makeAlertMessage(
             is MapEvent.UserActions -> {
                 AlertMessage(
                     distance = distance,
-                    message = event.message,
+                    // TODO: show source
+                    message = event.messages.joinToString(separator = "\n") { it.message },
                     speedLimit = -1,
                     mapEventType = event.mapEventType
                 )

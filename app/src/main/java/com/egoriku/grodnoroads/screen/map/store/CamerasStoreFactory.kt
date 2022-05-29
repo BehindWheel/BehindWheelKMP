@@ -6,12 +6,9 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.domain.model.MapEventType
-import com.egoriku.grodnoroads.domain.model.MapEventType.Companion.eventFromString
 import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
 import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.domain.model.Source.App
-import com.egoriku.grodnoroads.domain.model.Source.Companion.sourceFromString
-import com.egoriku.grodnoroads.extension.appendIfNotEmpty
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
@@ -22,8 +19,7 @@ import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Message.*
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.State
-import com.egoriku.grodnoroads.screen.map.store.util.mergeActions
-import com.egoriku.grodnoroads.util.DateUtil
+import com.egoriku.grodnoroads.screen.map.store.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
@@ -134,33 +130,7 @@ class CamerasStoreFactory(
         reportsRepository.loadAsFlow().collect { result ->
             when (result) {
                 is ResultOf.Success -> {
-                    val cameras = result.value
-                        .map { data ->
-                            val eventType = eventFromString(data.type)
-                            val shortMessage = when (eventType) {
-                                TrafficPolice -> buildString {
-                                    append("\uD83D\uDC6E")
-                                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
-                                }
-                                RoadAccident -> buildString {
-                                    append("\uD83D\uDCA5")
-                                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
-                                }
-                                else -> data.shortMessage
-                            }
-
-                            UserActions(
-                                message = data.message,
-                                shortMessage = shortMessage,
-                                source = sourceFromString(data.source),
-                                position = LatLng(data.latitude, data.longitude),
-                                time = DateUtil.formatToTime(data.timestamp),
-                                mapEventType = eventType
-                            )
-                        }
-                        .mergeActions()
-
-                    onLoaded(cameras)
+                    onLoaded(result.value.mapAndMerge())
                 }
                 is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
                     logD(result.exception.message.toString())

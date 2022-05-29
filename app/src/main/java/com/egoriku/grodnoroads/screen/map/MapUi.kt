@@ -5,10 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,9 +15,11 @@ import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
 import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.foundation.DrawerButton
+import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
+import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 import com.egoriku.grodnoroads.util.toast
@@ -30,6 +29,16 @@ fun MapUi(
     component: MapComponent,
     openDrawer: () -> Unit
 ) {
+    // TODO: Open with MVI flow
+    var markerState: UserActions? by remember { mutableStateOf(null) }
+
+    MarkerAlertDialog(
+        userActions = markerState,
+        onClose = {
+            markerState = null
+        }
+    )
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -46,7 +55,10 @@ fun MapUi(
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
-                locationState = location
+                locationState = location,
+                onMarkerClick = {
+                    markerState = it
+                }
             )
 
             AnimatedVisibility(
