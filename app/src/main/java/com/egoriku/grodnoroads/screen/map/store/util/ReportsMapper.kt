@@ -4,21 +4,21 @@ import com.egoriku.grodnoroads.domain.model.MapEventType
 import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.extension.appendIfNotEmpty
 import com.egoriku.grodnoroads.extension.distanceTo
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
-import com.egoriku.grodnoroads.screen.map.MapComponent.MessageItem
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 
-fun List<ReportsResponse>.mapAndMerge(): List<UserActions> {
+fun List<ReportsResponse>.mapAndMerge(): List<Reports> {
     return groupBy { it.type }
         .mapValues { it.value.mergeReports() }
         .values
         .flatten()
 }
 
-private fun List<ReportsResponse>.mergeReports(): List<UserActions> {
-    val mergedReports = mutableListOf<UserActions>()
+private fun List<ReportsResponse>.mergeReports(): List<Reports> {
+    val mergedReports = mutableListOf<Reports>()
 
     forEach { data ->
         val index = mergedReports.indexOfFirst { calcAction ->
@@ -28,7 +28,7 @@ private fun List<ReportsResponse>.mergeReports(): List<UserActions> {
         }
 
         if (index != -1) {
-            val item: UserActions = mergedReports[index]
+            val item: Reports = mergedReports[index]
 
             mergedReports[index] = item.copy(
                 messages = item.messages.toMutableList().apply {
@@ -57,7 +57,7 @@ private fun List<ReportsResponse>.mergeReports(): List<UserActions> {
                 else -> data.shortMessage
             }
 
-            val action = UserActions(
+            val action = Reports(
                 messages = listOf(
                     MessageItem(
                         message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message}",

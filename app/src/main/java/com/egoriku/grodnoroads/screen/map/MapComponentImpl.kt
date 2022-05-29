@@ -7,8 +7,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.domain.model.AppMode
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.domain.model.MapEventType
-import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.Alert
 import com.egoriku.grodnoroads.screen.map.store.CamerasStore
 import com.egoriku.grodnoroads.screen.map.store.CamerasStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.store.LocationStore
@@ -30,15 +30,15 @@ class MapComponentImpl(
     private val stationaryStore = instanceKeeper.getStore { get<CamerasStore>() }
     private val locationStore = instanceKeeper.getStore { get<LocationStore>() }
 
-    private val usersActions = stationaryStore.states.map { it.userActions }
-    private val stationary = stationaryStore.states.map { it.stationaryCameras }
     private val mobile = stationaryStore.states.map { it.mobileCamera }
+    private val stationary = stationaryStore.states.map { it.stationaryCameras }
+    private val reports = stationaryStore.states.map { it.reports }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
 
     override val mapEvents: Flow<List<MapEvent>>
-        get() = combine(usersActions, stationary, mobile) { a, b, c -> a + b + c }
+        get() = combine(reports, stationary, mobile) { a, b, c -> a + b + c }
 
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
@@ -47,7 +47,7 @@ class MapComponentImpl(
         stationaryStore.accept(ReportAction(latLng = latLng, mapEventType = type))
     }
 
-    override val alertMessages: Flow<List<AlertMessage>>
+    override val alerts: Flow<List<Alert>>
         get() = mapEvents
             .combine(flow = location, transform = alertMessagesTransformation())
             .flowOn(Dispatchers.Default)

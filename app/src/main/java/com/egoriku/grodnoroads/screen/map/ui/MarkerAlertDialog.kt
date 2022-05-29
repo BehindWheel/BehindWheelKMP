@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.screen.map.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -8,25 +7,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.domain.model.MapEventType
 import com.egoriku.grodnoroads.domain.model.Source
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
-import com.egoriku.grodnoroads.screen.map.MapComponent.MessageItem
+import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.google.android.gms.maps.model.LatLng
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun MarkerAlertDialog(
-    userActions: UserActions?,
+    reports: Reports?,
     onClose: () -> Unit
 ) {
-    if (userActions == null) return
+    if (reports == null) return
 
     AlertDialog(
         properties = DialogProperties(
@@ -34,33 +32,10 @@ fun MarkerAlertDialog(
         ),
         onDismissRequest = onClose,
         title = {
-            Text(text = userActions.shortMessage, style = MaterialTheme.typography.h6)
+            Text(text = reports.shortMessage, style = MaterialTheme.typography.h6)
         },
         text = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                userActions.messages.forEach {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Image(
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(end = 4.dp),
-                            painter = when (it.source) {
-                                Source.Viber -> painterResource(R.drawable.ic_viber)
-                                Source.Telegram -> painterResource(R.drawable.ic_telegram)
-                                Source.App -> painterResource(R.drawable.ic_app_logo)
-                            },
-                            contentDescription = "Source App"
-                        )
-                        Text(
-                            text = it.message,
-                            style = MaterialTheme.typography.body1
-                        )
-                    }
-                }
-            }
+            MessageComponent(messages = reports.messages)
         },
         buttons = {
             Column(
@@ -92,7 +67,7 @@ fun MarkerAlertDialog(
 @Composable
 fun PreviewMarkerAlertDialog() {
     MarkerAlertDialog(
-        userActions = UserActions(
+        reports = Reports(
             messages = listOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",

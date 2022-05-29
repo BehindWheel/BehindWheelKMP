@@ -18,8 +18,8 @@ import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -36,7 +36,7 @@ fun GoogleMapView(
     modifier: Modifier,
     mapEvents: List<MapEvent>,
     locationState: LocationState,
-    onMarkerClick: (UserActions) -> Unit
+    onMarkerClick: (Reports) -> Unit
 ) {
     val markerCache = get<MarkerCache>()
 
@@ -69,7 +69,7 @@ fun GoogleMapView(
         mapEvents.forEach { mapEvent ->
             when (mapEvent) {
                 is StationaryCamera -> PlaceStationaryCamera(mapEvent, markerCache)
-                is UserActions -> PlaceUserActions(mapEvent, onMarkerClick)
+                is Reports -> PlaceReports(mapEvent, onMarkerClick)
                 is MobileCamera -> PlaceMobileCameras(mapEvent, markerCache)
             }
         }
@@ -87,23 +87,23 @@ fun GoogleMapView(
 }
 
 @Composable
-fun PlaceUserActions(userActions: UserActions, onMarkerClick: (UserActions) -> Unit) {
+fun PlaceReports(reports: Reports, onMarkerClick: (Reports) -> Unit) {
     val context = LocalContext.current
     val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
 
     // https://github.com/googlemaps/android-maps-compose/issues/46
-    val marketState = rememberMarkerState(position = userActions.position)
+    val marketState = rememberMarkerState(position = reports.position)
 
-    val icon by remember(userActions) {
+    val icon by remember(reports) {
         mutableStateOf(
             BitmapDescriptorFactory.fromBitmap(
-                iconGenerator.makeIcon(userActions.shortMessage)
+                iconGenerator.makeIcon(reports.shortMessage)
             )
         )
     }
 
-    LaunchedEffect(key1 = userActions.position) {
-        marketState.position = userActions.position
+    LaunchedEffect(key1 = reports.position) {
+        marketState.position = reports.position
     }
 
     Marker(
@@ -111,7 +111,7 @@ fun PlaceUserActions(userActions: UserActions, onMarkerClick: (UserActions) -> U
         icon = icon,
         zIndex = 2f,
         onClick = {
-            onMarkerClick(userActions)
+            onMarkerClick(reports)
             true
         }
     )

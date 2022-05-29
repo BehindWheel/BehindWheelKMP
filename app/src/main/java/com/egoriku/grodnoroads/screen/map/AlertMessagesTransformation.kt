@@ -2,9 +2,11 @@ package com.egoriku.grodnoroads.screen.map
 
 import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.extension.distanceTo
-import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.domain.Alert.CameraAlert
+import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.Alert
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 
@@ -12,7 +14,7 @@ private const val DISTANCE_RADIUS = 600
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
-fun alertMessagesTransformation(): suspend (List<MapEvent>, LocationState) -> List<AlertMessage> =
+fun alertMessagesTransformation(): suspend (List<MapEvent>, LocationState) -> List<Alert> =
     { mapEvents: List<MapEvent>, locationState: LocationState ->
         when {
             locationState.speed > MIN_SPEED -> makeAlertMessage(mapEvents, locationState)
@@ -34,26 +36,22 @@ private fun makeAlertMessage(
         null -> null
         else -> when (event) {
             is StationaryCamera -> {
-                AlertMessage(
+                CameraAlert(
                     distance = distance,
-                    message = "",
                     speedLimit = event.speed,
                     mapEventType = event.mapEventType
                 )
             }
-            is MapEvent.UserActions -> {
-                AlertMessage(
+            is Reports -> {
+                IncidentAlert(
                     distance = distance,
-                    // TODO: show source
-                    message = event.messages.joinToString(separator = "\n") { it.message },
-                    speedLimit = -1,
+                    messages = event.messages,
                     mapEventType = event.mapEventType
                 )
             }
-            is MapEvent.MobileCamera -> {
-                AlertMessage(
+            is MobileCamera -> {
+                CameraAlert(
                     distance = distance,
-                    message = event.message,
                     speedLimit = -1,
                     mapEventType = event.mapEventType
                 )

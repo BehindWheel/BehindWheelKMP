@@ -15,7 +15,7 @@ import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.domain.model.MapEventType.RoadAccident
 import com.egoriku.grodnoroads.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.foundation.DrawerButton
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.UserActions
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
@@ -30,10 +30,10 @@ fun MapUi(
     openDrawer: () -> Unit
 ) {
     // TODO: Open with MVI flow
-    var markerState: UserActions? by remember { mutableStateOf(null) }
+    var markerState: Reports? by remember { mutableStateOf(null) }
 
     MarkerAlertDialog(
-        userActions = markerState,
+        reports = markerState,
         onClose = {
             markerState = null
         }
@@ -47,7 +47,7 @@ fun MapUi(
         val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
         val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
-        val alertMessages by component.alertMessages.collectAsState(initial = emptyList())
+        val alerts by component.alerts.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
 
@@ -84,7 +84,7 @@ fun MapUi(
                 exit = fadeOut()
             ) {
                 DriveMode(
-                    alertMessages = alertMessages,
+                    alerts = alerts,
                     location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {

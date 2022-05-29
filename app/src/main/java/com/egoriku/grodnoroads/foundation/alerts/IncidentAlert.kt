@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,14 +18,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.domain.model.Source
 import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
+import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun IncidentAlert(
     title: String,
     distance: Int,
-    message: String
+    messages: List<MessageItem>
 ) {
     Card(modifier = Modifier.fillMaxWidth(), elevation = 5.dp) {
         Column(modifier = Modifier.padding(8.dp)) {
@@ -47,13 +51,8 @@ fun IncidentAlert(
                     style = MaterialTheme.typography.body2
                 )
             }
-
-            HSpacer(dp = 8.dp)
-
-            Text(
-                text = message,
-                style = MaterialTheme.typography.caption
-            )
+            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            MessageComponent(messages = messages)
         }
     }
 }
@@ -66,12 +65,27 @@ fun PreviewIncidentAlert() {
         IncidentAlert(
             title = stringResource(R.string.alerts_accident),
             distance = 200,
-            message = "· (15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр\n· (15:45) Новый мост в левой полосе по направлению"
+            messages = listOf(
+                MessageItem(
+                    message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
+                    source = Source.App
+                ),
+                MessageItem(
+                    message = "(15:45) Новый мост в левой полосе по направлению",
+                    source = Source.Viber
+                ),
+                MessageItem(message = "(15:50) Новый мост", source = Source.Telegram)
+            )
         )
         IncidentAlert(
             title = stringResource(R.string.alerts_police),
             distance = 350,
-            message = "· Славинского беларуснефть на скорость"
+            messages = listOf(
+                MessageItem(
+                    message = "(15:30) Славинского беларуснефть на скорость",
+                    source = Source.App
+                )
+            )
         )
     }
 }
