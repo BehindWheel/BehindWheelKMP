@@ -16,14 +16,16 @@
         <item quantity="other">%1$d meters</item>
     </plurals>
 
-    <string name="camera_alerts_stationary_camera">\uD83D\uDCF7 Stationary camera</string>
-    <string name="camera_alerts_mobile_camera">\uD83D\uDCF8 Mobile camera</string>
-    <string name="camera_alerts_accident">\uD83D\uDCA5 Accident</string>
-    <string name="camera_alerts_police">\uD83D\uDC6E Police</string>
+    <string name="current_speed_template">%1$s km/h</string>
+
+    <string name="alerts_stationary_camera">Stationary camera</string>
+    <string name="alerts_mobile_camera">Mobile camera</string>
+    <string name="alerts_accident">\uD83D\uDCA5 Road accident</string>
+    <string name="alerts_police">\uD83D\uDC6E Police</string>
 
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
 
     <string name="drawer_telegram_section">App Discussion</string>
-    <string name="drawer_app_version">Version: %1$s"</string>
+    <string name="drawer_app_version">Version: %1$s</string>
 </resources>

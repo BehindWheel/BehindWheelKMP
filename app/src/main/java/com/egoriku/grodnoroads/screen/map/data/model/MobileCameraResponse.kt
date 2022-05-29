@@ -1,9 +1,7 @@
 package com.egoriku.grodnoroads.screen.map.data.model
 
-import androidx.annotation.Keep
 import com.google.firebase.database.PropertyName
 
-@Keep
 class MobileCameraResponse(
     @PropertyName("name")
     @JvmField

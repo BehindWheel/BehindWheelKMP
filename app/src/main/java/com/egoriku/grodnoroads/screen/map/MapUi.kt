@@ -13,13 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.EventType
-import com.egoriku.grodnoroads.domain.model.LocationState
 import com.egoriku.grodnoroads.foundation.DrawerButton
+import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
+import com.egoriku.grodnoroads.screen.map.domain.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
+import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 import com.egoriku.grodnoroads.util.toast
@@ -29,6 +32,8 @@ fun MapUi(
     component: MapComponent,
     openDrawer: () -> Unit
 ) {
+    MarkerAlertDialogComponent(component)
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -37,7 +42,7 @@ fun MapUi(
         val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
         val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
-        val alertMessages by component.alertMessages.collectAsState(initial = emptyList())
+        val alerts by component.alerts.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
 
@@ -45,7 +50,10 @@ fun MapUi(
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
-                locationState = location
+                locationState = location,
+                onMarkerClick = {
+                    component.showMarkerInfoDialog(reports = it)
+                }
             )
 
             AnimatedVisibility(
@@ -71,24 +79,41 @@ fun MapUi(
                 exit = fadeOut()
             ) {
                 DriveMode(
-                    alertMessages = alertMessages,
+                    alerts = alerts,
                     location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = EventType.Police
+                            type = TrafficPolice
                         )
                     },
                     reportAccident = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = EventType.Accident
+                            type = RoadAccident
                         )
                     }
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun MarkerAlertDialogComponent(component: MapComponent) {
+    val alertDialogState by component.alertDialogState.collectAsState(initial = AlertDialogState.Closed)
+
+    when (val state = alertDialogState) {
+        is AlertDialogState.Show -> {
+            MarkerAlertDialog(
+                reports = state.reports,
+                onClose = {
+                    component.closeDialog()
+                }
+            )
+        }
+        is AlertDialogState.Closed -> Unit
     }
 }
 

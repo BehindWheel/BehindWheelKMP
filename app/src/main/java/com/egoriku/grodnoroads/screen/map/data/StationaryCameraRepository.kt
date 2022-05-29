@@ -10,12 +10,12 @@ internal class StationaryCameraRepositoryImpl(
     private val databaseReference: DatabaseReference
 ) : StationaryCameraRepository {
 
-    override suspend fun loadAsFlow() = databaseReference
+    override fun loadAsFlow() = databaseReference
         .child("stationary_camera")
         .awaitSingleValueEventListener<StationaryResponse>()
 }
 
 interface StationaryCameraRepository {
 
-    suspend fun loadAsFlow(): Flow<ResultOf<List<StationaryResponse>>>
+    fun loadAsFlow(): Flow<ResultOf<List<StationaryResponse>>>
 }

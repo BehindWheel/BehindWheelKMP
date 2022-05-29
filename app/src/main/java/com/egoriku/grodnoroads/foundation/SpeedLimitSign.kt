@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.foundation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -15,15 +16,25 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun SpeedLimitSign(limit: Int) {
+fun SpeedLimitSign(
+    limit: Int,
+    fontSize: TextUnit = TextUnit.Unspecified
+) {
+    val borderSize = when (fontSize) {
+        TextUnit.Unspecified -> 3.dp
+        else -> 5.dp
+    }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .background(Color.White, shape = CircleShape)
-            .border(3.dp, Color.Red, CircleShape)
+            .border(borderSize, Color.Red, CircleShape)
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
 
@@ -41,10 +52,21 @@ fun SpeedLimitSign(limit: Int) {
             text = limit.toString(),
             textAlign = TextAlign.Center,
             color = Color.Black,
+            fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(4.dp)
-                .defaultMinSize(24.dp)
+                .padding(
+                    when (fontSize) {
+                        TextUnit.Unspecified -> 4.dp
+                        else -> fontSize.value.dp / 2f
+                    }
+                )
+                .defaultMinSize(
+                    when (fontSize) {
+                        TextUnit.Unspecified -> 24.dp
+                        else -> fontSize.value.dp * 1.5f
+                    }
+                )
         )
     }
 }
@@ -52,5 +74,9 @@ fun SpeedLimitSign(limit: Int) {
 @Preview
 @Composable
 fun SpeedLimitSignPreview() {
-    SpeedLimitSign(limit = 70)
+    Column {
+        SpeedLimitSign(limit = 70)
+        SpeedLimitSign(fontSize = 30.sp, limit = 70)
+        SpeedLimitSign(fontSize = 30.sp, limit = 100)
+    }
 }

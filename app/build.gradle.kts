@@ -70,9 +70,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.library.retrosheetKmm)
-
-    implementation(platform("com.google.firebase:firebase-bom:30.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.0.2"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -88,8 +86,8 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta")
+    implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
 
     implementation(libs.androidx.browser)
 
@@ -112,12 +110,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.6.0")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation("com.squareup.moshi:moshi:1.13.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
 
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
@@ -133,6 +126,8 @@ dependencies {
     implementation(libs.ktor.client.contentnegotiation)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.serialization.json)
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.6.21")
 }
 
 secrets {

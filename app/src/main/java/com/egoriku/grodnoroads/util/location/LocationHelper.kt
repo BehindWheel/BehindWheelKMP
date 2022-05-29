@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.util.location
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.util.MetricUtils.speedToKilometerPerHour
 import com.google.android.gms.location.LocationCallback

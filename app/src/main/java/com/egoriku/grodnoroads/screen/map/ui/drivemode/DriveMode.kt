@@ -10,17 +10,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.LocationState
-import com.egoriku.grodnoroads.foundation.CameraAlerts
-import com.egoriku.grodnoroads.foundation.CurrentSpeed
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
-import com.egoriku.grodnoroads.screen.map.MapComponent.AlertMessage
+import com.egoriku.grodnoroads.screen.map.domain.Alert
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
 
 @Composable
 fun DriveMode(
-    alertMessages: List<AlertMessage>,
+    alerts: List<Alert>,
     location: LocationState,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
@@ -28,13 +27,17 @@ fun DriveMode(
 ) {
     KeepScreenOn()
     Box(modifier = Modifier.fillMaxSize()) {
-        CurrentSpeed(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 8.dp, end = 16.dp)
-                .statusBarsPadding(),
-            speed = location.speed.toString()
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CurrentSpeedRect(
+                modifier = Modifier.statusBarsPadding(),
+                speed = location.speed.toString()
+            )
+            Alerts(alerts = alerts)
+        }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -43,11 +46,11 @@ fun DriveMode(
                 .padding(bottom = 48.dp)
         ) {
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_police_car),
+                painter = painterResource(id = R.drawable.ic_traffic_police),
                 onClick = reportPolice
             )
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_accident),
+                painter = painterResource(id = R.drawable.ic_warning),
                 onClick = reportAccident
             )
         }
@@ -59,21 +62,14 @@ fun DriveMode(
             imageVector = Icons.Default.Close,
             onClick = stopDrive
         )
-
-        CameraAlerts(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .statusBarsPadding(),
-            alertMessages = alertMessages
-        )
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DriveModePReview() {
     DriveMode(
-        alertMessages = emptyList(),
+        alerts = emptyList(),
         location = LocationState.None,
         stopDrive = {},
         reportPolice = {},

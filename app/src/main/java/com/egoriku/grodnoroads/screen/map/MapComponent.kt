@@ -1,61 +1,29 @@
 package com.egoriku.grodnoroads.screen.map
 
-import com.egoriku.grodnoroads.domain.model.AppMode
-import com.egoriku.grodnoroads.domain.model.EventType
-import com.egoriku.grodnoroads.domain.model.EventType.MobileCamera
-import com.egoriku.grodnoroads.domain.model.EventType.StationaryCamera
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 interface MapComponent {
 
+    val alertDialogState: Flow<AlertDialogState>
     val appMode: Flow<AppMode>
     val location: Flow<LocationState>
     val mapEvents: Flow<List<MapEvent>>
 
     val labels: Flow<Label>
 
-    val alertMessages: Flow<List<AlertMessage>>
+    val alerts: Flow<List<Alert>>
 
-    fun reportAction(latLng: LatLng, type: EventType)
+    fun reportAction(latLng: LatLng, type: MapEventType)
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
 
     fun onLocationDisabled()
 
-    data class AlertMessage(
-        val distance: Int,
-        val message: String,
-        val speedLimit: Int,
-        val eventType: EventType
-    )
-
-    sealed interface MapEvent {
-
-        val position: LatLng
-        val eventType: EventType
-
-        data class StationaryCamera(
-            val message: String,
-            val speed: Int,
-            override val position: LatLng,
-            override val eventType: EventType = StationaryCamera
-        ) : MapEvent
-
-        data class UserActions(
-            val time: String,
-            val message: String,
-            override val position: LatLng,
-            override val eventType: EventType
-        ) : MapEvent
-
-        data class MobileCamera(
-            val message: String,
-            override val position: LatLng,
-            override val eventType: EventType = MobileCamera
-        ) : MapEvent
-    }
+    fun showMarkerInfoDialog(reports: Reports)
+    fun closeDialog()
 }

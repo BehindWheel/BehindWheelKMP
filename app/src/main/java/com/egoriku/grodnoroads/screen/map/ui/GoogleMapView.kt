@@ -13,13 +13,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent
-import com.egoriku.grodnoroads.screen.map.MapComponent.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -36,6 +36,7 @@ fun GoogleMapView(
     modifier: Modifier,
     mapEvents: List<MapEvent>,
     locationState: LocationState,
+    onMarkerClick: (Reports) -> Unit
 ) {
     val markerCache = get<MarkerCache>()
 
@@ -68,7 +69,7 @@ fun GoogleMapView(
         mapEvents.forEach { mapEvent ->
             when (mapEvent) {
                 is StationaryCamera -> PlaceStationaryCamera(mapEvent, markerCache)
-                is UserActions -> PlaceUserActions(mapEvent)
+                is Reports -> PlaceReports(mapEvent, onMarkerClick)
                 is MobileCamera -> PlaceMobileCameras(mapEvent, markerCache)
             }
         }
@@ -76,31 +77,43 @@ fun GoogleMapView(
         if (locationState != LocationState.None) {
             Marker(
                 state = MarkerState(position = locationState.latLng),
-                icon = markerCache.getOrPut(
-                    id = R.drawable.ic_arrow,
-                    size = 80
-                ),
+                icon = markerCache.getVector(id = R.drawable.ic_arrow),
                 rotation = cameraPositionValues.markerRotation,
                 anchor = Offset(0.5f, 0.5f),
                 zIndex = 1f
             )
         }
     }
-
-    // DebugView(cameraPositionState = cameraPositionState)
 }
 
 @Composable
-fun PlaceUserActions(userActions: UserActions) {
+fun PlaceReports(reports: Reports, onMarkerClick: (Reports) -> Unit) {
     val context = LocalContext.current
-
     val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
 
-    MarkerInfoWindow(
-        state = rememberMarkerState(position = userActions.position),
-        icon = BitmapDescriptorFactory.fromBitmap(
-            iconGenerator.makeIcon("${userActions.time} ${userActions.message}")
+    // https://github.com/googlemaps/android-maps-compose/issues/46
+    val marketState = rememberMarkerState(position = reports.position)
+
+    val icon by remember(reports) {
+        mutableStateOf(
+            BitmapDescriptorFactory.fromBitmap(
+                iconGenerator.makeIcon(reports.shortMessage)
+            )
         )
+    }
+
+    LaunchedEffect(key1 = reports.position) {
+        marketState.position = reports.position
+    }
+
+    Marker(
+        state = marketState,
+        icon = icon,
+        zIndex = 2f,
+        onClick = {
+            onMarkerClick(reports)
+            true
+        }
     )
 }
 
@@ -119,7 +132,11 @@ fun PlaceStationaryCamera(
                 .background(color = Color.White, shape = RoundedCornerShape(10.dp))
                 .padding(8.dp)
         ) {
-            Text(text = stationaryCamera.message, fontWeight = FontWeight.Bold, color = Color.Black)
+            Text(
+                text = stationaryCamera.message,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
             Spacer(modifier = Modifier.width(8.dp))
             SpeedLimitSign(limit = stationaryCamera.speed)
         }
