@@ -50,6 +50,7 @@ fun TelegramSection(onClick: (String) -> Unit) {
 
 @Preview(showBackground = true)
 @Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true, locale = "ru")
 @Composable
 private fun TelegramSectionPreview() {
     GrodnoRoadsTheme {
