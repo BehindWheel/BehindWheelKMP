@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.foundation.button
 
-import android.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AlertTextButton(
+    modifier: Modifier = Modifier,
     textResId: Int,
     onClick: () -> Unit
 ) {
@@ -24,7 +24,7 @@ fun AlertTextButton(
         TextButton(
             shape = RoundedCornerShape(0.dp),
             contentPadding = PaddingValues(vertical = 8.dp),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier,
             onClick = onClick
         ) {
             Text(
@@ -41,7 +41,13 @@ fun AlertTextButton(
 @Composable
 fun PreviewAlertTextButton() {
     Column {
-        AlertTextButton(textResId = R.string.ok) {}
-        AlertTextButton(textResId = R.string.cancel) {}
+        AlertTextButton(
+            modifier = Modifier.fillMaxWidth(),
+            textResId = android.R.string.ok
+        ) {}
+        AlertTextButton(
+            modifier = Modifier.fillMaxWidth(),
+            textResId = android.R.string.cancel
+        ) {}
     }
 }

@@ -11,7 +11,7 @@ sealed class DrawerNavigationScreen(
     val imageVector: ImageVector
 ) {
     object Settings : DrawerNavigationScreen(
-        resourceId = R.string.settings,
+        resourceId = R.string.tab_settings,
         imageVector = Icons.Filled.Settings
     )
 }

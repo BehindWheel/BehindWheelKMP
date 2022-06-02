@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.foundation.map
 
 import android.Manifest
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,11 +25,11 @@ fun rememberMapProperties(locationState: LocationState): MapProperties {
     )
 
     val mapStyle = when {
-        isSystemInDarkTheme() -> R.raw.map_dark_style
-        else -> R.raw.map_light_style
+        MaterialTheme.colors.isLight -> R.raw.map_light_style
+        else -> R.raw.map_dark_style
     }
 
-    val mapProperties by remember(locationState) {
+    val mapProperties by remember(locationState, mapStyle) {
         mutableStateOf(
             MapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
