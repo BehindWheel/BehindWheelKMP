@@ -9,11 +9,10 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
-import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.ThemeState
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl.Configuration.Main
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
+import com.egoriku.grodnoroads.screen.root.store.RootStore
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -23,8 +22,7 @@ class RoadsRootComponentImpl(
     componentContext: ComponentContext
 ) : RoadsRootComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val settingsStore = instanceKeeper.getStore { get<SettingsStore>() }
-    private val settings = settingsStore.states.map { it.settingsState }
+    private val rootStore = instanceKeeper.getStore { get<RootStore>() }
 
     private val main: (ComponentContext) -> MainComponent = {
         get { parametersOf(componentContext) }
@@ -43,9 +41,7 @@ class RoadsRootComponentImpl(
 
     override val routerState: Value<RouterState<*, Child>> = router.state
 
-    override val themeState: Flow<ThemeState> = settings.map {
-        ThemeState(theme = it.appTheme.current)
-    }
+    override val themeState: Flow<State> = rootStore.states
 
     private sealed class Configuration : Parcelable {
         @Parcelize

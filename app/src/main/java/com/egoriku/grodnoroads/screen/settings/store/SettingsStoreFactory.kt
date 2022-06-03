@@ -15,7 +15,6 @@ import com.egoriku.grodnoroads.screen.settings.domain.Theme.Companion.fromOrdina
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
 import com.egoriku.grodnoroads.screen.settings.store.preferences.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -93,7 +92,7 @@ class SettingsStoreFactory(
                                     alertDistanceRadius = preferences[ALERT_DISTANCE]
                                         ?: DEFAULT_ALERT_DISTANCE_RADIUS
                                 )
-                            }.collectLatest {
+                            }.collect {
                                 dispatch(Message.NewSettings(it))
                             }
                     }
