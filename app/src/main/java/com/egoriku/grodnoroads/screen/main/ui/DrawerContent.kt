@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.screen.main.ui
 
+import android.content.Intent
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -11,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.egoriku.grodnoroads.screen.main.ui.drawer.section.PrivacyPolicySection
+import com.egoriku.grodnoroads.screen.main.ui.drawer.section.ShareAppSection
 import com.egoriku.grodnoroads.screen.main.ui.drawer.section.TelegramSection
 import com.egoriku.grodnoroads.screen.main.ui.drawer.section.VersionSection
 
@@ -25,14 +27,24 @@ fun DrawerContent(modifier: Modifier = Modifier) {
             .launchUrl(context, it.toUri())
     }
 
+    val share: (String) -> Unit = { url ->
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url)
+            type = "text/plain"
+        }
+        context.startActivity(Intent.createChooser(sendIntent, null))
+    }
+
     Surface(modifier = modifier) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
-            Spacer(modifier = Modifier.weight(1f))
-
             TelegramSection(onClick = openUrl)
+            ShareAppSection(onClick = share)
+
+            Spacer(modifier = Modifier.weight(1f))
             VersionSection()
             Divider(modifier = Modifier.fillMaxWidth())
             PrivacyPolicySection(openUrl = openUrl)

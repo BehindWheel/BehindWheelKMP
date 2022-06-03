@@ -26,6 +26,7 @@
     <string name="privacy_policy">Политика конфиденциальности</string>
 
     <string name="drawer_telegram_section">Обсуждение</string>
+    <string name="drawer_share_app_section">Поделиться приложением</string>
     <string name="drawer_app_version">Версия: %1$s</string>
 
     <!-- Settings -->
