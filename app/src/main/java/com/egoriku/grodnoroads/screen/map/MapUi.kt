@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
-import com.egoriku.grodnoroads.util.toast
+import com.egoriku.grodnoroads.extension.toast
 
 @Composable
 fun MapUi(

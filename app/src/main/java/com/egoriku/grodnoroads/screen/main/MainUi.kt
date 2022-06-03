@@ -15,18 +15,16 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.childAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.fade
-import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.plus
-import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import com.egoriku.grodnoroads.screen.chat.ChatUi
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
 import com.egoriku.grodnoroads.screen.map.MapUi
+import com.egoriku.grodnoroads.screen.settings.SettingsUi
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
-fun MainUi(component: MainComponent, openSettings: () -> Unit) {
+fun MainUi(component: MainComponent) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -41,12 +39,7 @@ fun MainUi(component: MainComponent, openSettings: () -> Unit) {
         drawerState = drawerState,
         drawerShape = RoundedCornerShape(0),
         drawerContent = {
-            DrawerContent(
-                modifier = Modifier.systemBarsPadding(),
-                navigate = {
-                    openSettings()
-                }
-            )
+            DrawerContent(modifier = Modifier.systemBarsPadding())
         }
     ) {
         Scaffold(
@@ -55,14 +48,14 @@ fun MainUi(component: MainComponent, openSettings: () -> Unit) {
                 Children(
                     modifier = Modifier.padding(it),
                     routerState = component.routerState,
-                    animation = childAnimation(scale() + fade())
+                    animation = childAnimation(fade())
                 ) { created ->
                     when (val child = created.instance) {
                         is Child.Map -> MapUi(
                             component = child.component,
                             openDrawer = openDrawer
                         )
-                        is Child.Chat -> ChatUi()
+                        is Child.Settings -> SettingsUi(settingsComponent = child.component)
                     }
                 }
             },
@@ -70,10 +63,7 @@ fun MainUi(component: MainComponent, openSettings: () -> Unit) {
                 val activeIndex by component.activeChildIndex.subscribeAsState()
 
                 BottomNavigation {
-                    listOf(
-                        Screen.Map(),
-                        // FsScreen.Chat()
-                    ).forEach { screen ->
+                    listOf(Screen.Map(), Screen.Settings()).forEach { screen ->
                         BottomNavigationItem(
                             selected = screen.index == activeIndex,
                             onClick = { component.onSelectTab(index = screen.index) },

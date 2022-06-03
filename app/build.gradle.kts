@@ -6,7 +6,6 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     kotlin("android")
-    kotlin("plugin.serialization")
 }
 
 android {
@@ -16,8 +15,8 @@ android {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
         targetSdk = 32
-        versionCode = 114
-        versionName = "1.0.14"
+        versionCode = 115
+        versionName = "1.0.15"
         resourceConfigurations + listOf("en", "ru")
     }
 
@@ -70,26 +69,22 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.0.2"))
+    implementation(platform("com.google.firebase:firebase-bom:30.1.0"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
 
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
     implementation("com.google.maps.android:maps-ktx:3.4.0")
-    implementation("com.google.maps.android:maps-compose:2.1.1")
+    implementation(libs.maps.compose)
 
     implementation("com.google.android.gms:play-services-maps:18.0.2")
     implementation("com.google.android.gms:play-services-location:19.0.1")
-
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("com.google.android.material:material:1.6.1")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta")
     implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
-
-    implementation(libs.androidx.browser)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
@@ -99,18 +94,12 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation(libs.androidx.browser)
+    implementation(libs.activity.compose)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.datastore)
 
-    implementation("com.github.theapache64:retrosheet:2.0.0-beta03")
-
-    implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-
-    implementation("com.google.android.material:material:1.6.0")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
+    implementation(libs.coroutines.play.services)
 
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
@@ -121,11 +110,6 @@ dependencies {
     implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
-
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.contentnegotiation)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.serialization.json)
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.6.21")
 }

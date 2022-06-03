@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.screen.main
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Forum
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.egoriku.grodnoroads.R
 
@@ -17,9 +17,9 @@ sealed class Screen {
         override val labelId: Int = R.string.tab_map
     ) : Screen()
 
-    data class Chat(
+    data class Settings(
         override val index: Int = 1,
-        override val icon: ImageVector = Icons.Default.Forum,
-        override val labelId: Int = R.string.tab_chat
+        override val icon: ImageVector = Icons.Default.Settings,
+        override val labelId: Int = R.string.tab_settings
     ) : Screen()
 }

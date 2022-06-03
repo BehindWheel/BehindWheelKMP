@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.screen.main.ui.drawer.section
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,7 +21,8 @@ fun VersionSection() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(all = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         Text(
             text = stringResource(R.string.drawer_app_version, BuildConfig.VERSION_NAME),

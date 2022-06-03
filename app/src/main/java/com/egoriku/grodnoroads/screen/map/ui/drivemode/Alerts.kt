@@ -13,14 +13,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
-import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.egoriku.grodnoroads.foundation.alerts.CameraAlert
 import com.egoriku.grodnoroads.foundation.alerts.IncidentAlert
 import com.egoriku.grodnoroads.screen.map.domain.Alert
 import com.egoriku.grodnoroads.screen.map.domain.Alert.CameraAlert
 import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
+import com.egoriku.grodnoroads.screen.map.domain.Source
 
 @Composable
 fun Alerts(

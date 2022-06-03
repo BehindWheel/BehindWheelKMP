@@ -10,8 +10,6 @@ import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.childA
 import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.fade
 import com.egoriku.grodnoroads.screen.main.MainUi
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child.Main
-import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child.Settings
-import com.egoriku.grodnoroads.screen.settings.SettingsUi
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
@@ -22,11 +20,7 @@ fun RootContent(roadsRootComponent: RoadsRootComponent) {
             animation = childAnimation(fade())
         ) {
             when (val child = it.instance) {
-                is Main -> MainUi(
-                    component = child.component,
-                    openSettings = roadsRootComponent::openSettings
-                )
-                is Settings -> SettingsUi()
+                is Main -> MainUi(component = child.component)
             }
         }
     }
