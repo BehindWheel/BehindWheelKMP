@@ -6,7 +6,6 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     kotlin("android")
-    kotlin("plugin.serialization")
 }
 
 android {
@@ -120,11 +119,6 @@ dependencies {
     implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
-
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.contentnegotiation)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.serialization.json)
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.6.21")
 }

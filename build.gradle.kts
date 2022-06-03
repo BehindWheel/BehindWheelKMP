@@ -15,7 +15,6 @@ buildscript {
         classpath(libs.gradle.plugin.ksp)
         classpath(libs.gradle.plugin.versioncheck)
         classpath(libs.gradle.plugin.secrets)
-        classpath(libs.gradle.plugin.serialization)
     }
 }
 
