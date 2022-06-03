@@ -1,35 +1,50 @@
 package com.egoriku.grodnoroads.screen.map
 
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.extension.distanceTo
+import com.egoriku.grodnoroads.screen.map.domain.Alert
 import com.egoriku.grodnoroads.screen.map.domain.Alert.CameraAlert
 import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
-import com.egoriku.grodnoroads.screen.map.domain.Alert
+import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 
-private const val DISTANCE_RADIUS = 600
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
-fun alertMessagesTransformation(): suspend (List<MapEvent>, LocationState) -> List<Alert> =
-    { mapEvents: List<MapEvent>, locationState: LocationState ->
+fun alertMessagesTransformation(): suspend (
+    List<MapEvent>,
+    LocationState,
+    SettingsState
+) -> List<Alert> =
+    { mapEvents: List<MapEvent>,
+      locationState: LocationState,
+      settingsState: SettingsState ->
         when {
-            locationState.speed > MIN_SPEED -> makeAlertMessage(mapEvents, locationState)
+            locationState.speed > MIN_SPEED -> makeAlertMessage(
+                mapEvents = mapEvents,
+                locationState = locationState,
+                distanceRadius = settingsState.alertDistanceRadius
+            )
             else -> emptyList()
         }
     }
 
 private fun makeAlertMessage(
     mapEvents: List<MapEvent>,
-    locationState: LocationState
+    locationState: LocationState,
+    distanceRadius: Int
 ) = mapEvents.mapNotNull { event ->
     val distance = computeDistance(
         eventLatLng = event.position,
-        offsetLatLng = computeOffset(locationState),
-        currentLatLnt = locationState.latLng
+        offsetLatLng = computeOffset(
+            locationState = locationState,
+            distanceRadius = distanceRadius
+        ),
+        currentLatLnt = locationState.latLng,
+        distanceRadius = distanceRadius
     )
 
     when (distance) {
@@ -63,14 +78,15 @@ private fun makeAlertMessage(
 private fun computeDistance(
     eventLatLng: LatLng,
     offsetLatLng: LatLng,
-    currentLatLnt: LatLng
+    currentLatLnt: LatLng,
+    distanceRadius: Int
 ): Int? {
     val distanceBetweenOffsetAndEvent = eventLatLng distanceTo offsetLatLng
 
     return when {
-        distanceBetweenOffsetAndEvent < DISTANCE_RADIUS -> {
+        distanceBetweenOffsetAndEvent < distanceRadius -> {
             when (val distanceToEvent = currentLatLnt distanceTo eventLatLng) {
-                in MIN_DISTANCE until DISTANCE_RADIUS -> distanceToEvent
+                in MIN_DISTANCE until distanceRadius -> distanceToEvent
                 else -> null
             }
         }
@@ -78,8 +94,9 @@ private fun computeDistance(
     }
 }
 
-private fun computeOffset(locationState: LocationState) = SphericalUtil.computeOffset(
-    locationState.latLng,
-    DISTANCE_RADIUS.toDouble(),
-    locationState.bearing.toDouble()
-)
+private fun computeOffset(locationState: LocationState, distanceRadius: Int) =
+    SphericalUtil.computeOffset(
+        locationState.latLng,
+        distanceRadius.toDouble(),
+        locationState.bearing.toDouble()
+    )

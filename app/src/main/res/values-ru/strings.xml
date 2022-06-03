@@ -4,7 +4,8 @@
 
     <string name="tab_map">Карта</string>
     <string name="tab_chat">Чат</string>
-    <string name="settings">Настройки</string>
+    <string name="tab_settings">Настройки</string>
+
     <string name="toast_location_disabled">Для навигации нужен доступ к геолокации</string>
 
     <plurals name="camera_alerts_plurals_distance">
@@ -24,6 +25,22 @@
     <string name="terms_of_service">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
 
-    <string name="drawer_telegram_section">Обсуждение приложения</string>
+    <string name="drawer_telegram_section">Обсуждение</string>
+    <string name="drawer_share_app_section">Поделиться приложением</string>
     <string name="drawer_app_version">Версия: %1$s</string>
+
+    <!-- Settings -->
+    <string name="settings_section_appearance">Внешний вид</string>
+
+    <string name="settings_app_theme">Тема</string>
+    <string name="settings_app_theme_system">Системная</string>
+    <string name="settings_app_theme_dark">Темная</string>
+    <string name="settings_app_theme_light">Светлая</string>
+
+    <string name="settings_section_map_information">Информация на карте</string>
+
+    <string name="settings_stationary_cameras">Стационарные камеры</string>
+    <string name="settings_mobile_cameras">Мобильные камеры</string>
+    <string name="settings_traffic_police">ГАИ</string>
+    <string name="settings_incidents">Аварии</string>
 </resources>

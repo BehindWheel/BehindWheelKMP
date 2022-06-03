@@ -2,15 +2,14 @@ package com.egoriku.grodnoroads.screen.main
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.RouterState
-import com.arkivanov.decompose.router.push
 import com.arkivanov.decompose.router.replaceCurrent
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
 import com.arkivanov.essenty.parcelable.Parcelable
-import com.egoriku.grodnoroads.screen.chat.ChatComponent
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.map.MapComponent
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -24,8 +23,8 @@ class MainComponentImpl(
         get { parametersOf(componentContext) }
     }
 
-    private val chat: (ComponentContext) -> ChatComponent = {
-        get { parametersOf(componentContext) }
+    private val settings: (ComponentContext) -> SettingsComponent = {
+        get { parametersOf(it) }
     }
 
     private val router = router<Config, Child>(
@@ -34,7 +33,7 @@ class MainComponentImpl(
     ) { configuration, componentContext ->
         when (configuration) {
             is Config.Map -> Child.Map(map(componentContext))
-            is Config.Chat -> Child.Chat(chat(componentContext))
+            is Config.Settings -> Child.Settings(settings(componentContext))
         }
     }
 
@@ -48,7 +47,7 @@ class MainComponentImpl(
         router.replaceCurrent(
             when (index) {
                 0 -> Config.Map
-                1 -> Config.Chat
+                1 -> Config.Settings
                 else -> throw IllegalArgumentException("index $index is not defined in app")
             }
         )
@@ -59,6 +58,6 @@ class MainComponentImpl(
         object Map : Config()
 
         @Parcelize
-        object Chat : Config()
+        object Settings : Config()
     }
 }

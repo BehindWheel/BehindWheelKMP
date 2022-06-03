@@ -1,7 +1,9 @@
 package com.egoriku.grodnoroads.koin
 
+import android.content.Context
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
+import com.egoriku.grodnoroads.screen.settings.store.preferences.dataStore
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.ResourceProviderImpl
@@ -15,10 +17,11 @@ import org.koin.dsl.module
 
 val appScopeModule = module {
     single { Firebase.database.reference }
+    single { get<Context>().dataStore }
 
-    singleOf(::DefaultStoreFactory) { bind<StoreFactory>()}
-    singleOf(::LocationHelperImpl) { bind<LocationHelper>()}
-    singleOf(::ResourceProviderImpl) { bind<ResourceProvider>()}
+    singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }
+    singleOf(::LocationHelperImpl) { bind<LocationHelper>() }
+    singleOf(::ResourceProviderImpl) { bind<ResourceProvider>() }
 
     singleOf(::MarkerCache)
 }

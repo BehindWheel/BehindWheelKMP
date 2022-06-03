@@ -1,24 +1,26 @@
 package com.egoriku.grodnoroads.screen.map.ui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
+import com.egoriku.grodnoroads.foundation.button.AlertTextButton
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.google.android.gms.maps.model.LatLng
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MarkerAlertDialog(
     reports: Reports?,
@@ -38,26 +40,13 @@ fun MarkerAlertDialog(
             MessageComponent(messages = reports.messages)
         },
         buttons = {
-            Column(
-                verticalArrangement = Arrangement.Center
-            ) {
+            Column(verticalArrangement = Arrangement.Center) {
                 Divider()
-                CompositionLocalProvider(
-                    LocalMinimumTouchTargetEnforcement provides false,
-                ) {
-                    TextButton(
-                        shape = RoundedCornerShape(0.dp),
-                        contentPadding = PaddingValues(vertical = 8.dp),
-                        modifier = Modifier.fillMaxWidth(),
-                        onClick = onClose
-                    ) {
-                        Text(
-                            modifier = Modifier.padding(vertical = 8.dp),
-                            text = stringResource(id = android.R.string.ok),
-                            color = MaterialTheme.colors.onSurface
-                        )
-                    }
-                }
+                AlertTextButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    textResId = android.R.string.ok,
+                    onClick = onClose
+                )
             }
         }
     )
