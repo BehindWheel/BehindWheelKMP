@@ -12,7 +12,7 @@ interface MapComponent {
     val appMode: Flow<AppMode>
     val location: Flow<LocationState>
     val mapEvents: Flow<List<MapEvent>>
-    val mapSettings: Flow<MapSettings>
+    val mapPreferences: Flow<GrodnoRoadsMapPreferences>
 
     val labels: Flow<Label>
 

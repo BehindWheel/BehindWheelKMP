@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.screen.map.domain
 
-data class MapSettings(
+data class GrodnoRoadsMapPreferences(
     val isTrafficEnabled: Boolean
 ) {
     companion object {
-        val Default = MapSettings(
+        val Default = GrodnoRoadsMapPreferences(
             isTrafficEnabled = false,
         )
     }

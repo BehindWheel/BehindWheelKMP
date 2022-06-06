@@ -18,7 +18,7 @@ import com.egoriku.grodnoroads.screen.settings.ui.common.BasicSettingsSection
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
-fun MapSettings(
+fun MapEventsSettings(
     settingsState: SettingsState,
     onCheckedChange: (Pref) -> Unit
 ) {
@@ -27,7 +27,6 @@ fun MapSettings(
             StationaryCameras(settingsState, onCheckedChange)
             MobileCameras(settingsState, onCheckedChange)
             TrafficPolice(settingsState, onCheckedChange)
-            TrafficJam(settingsState, onCheckedChange)
             Incidents(settingsState, onCheckedChange)
         }
     }
@@ -109,31 +108,6 @@ fun TrafficPolice(
 }
 
 @Composable
-fun TrafficJam(
-    settingsState: SettingsState,
-    onCheckedChange: (Pref) -> Unit
-) {
-    val trafficJam = settingsState.trafficJam
-
-    SettingsCheckbox(
-        title = {
-            Text(text = stringResource(R.string.settings_traffic_jam))
-        },
-        icon = {
-            Image(
-                modifier = Modifier.size(36.dp),
-                painter = painterResource(id = R.drawable.ic_traffic_light),
-                contentDescription = null
-            )
-        },
-        isChecked = trafficJam.isShow,
-        onCheckedChange = {
-            onCheckedChange(trafficJam.copy(isShow = it))
-        }
-    )
-}
-
-@Composable
 fun Incidents(
     settingsState: SettingsState,
     onCheckedChange: (Pref) -> Unit
@@ -161,8 +135,8 @@ fun Incidents(
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
 @Composable
-fun PreviewMapSettings() {
+fun PreviewMapEventsSettings() {
     GrodnoRoadsTheme {
-        MapSettings(settingsState = SettingsState()) { }
+        MapEventsSettings(settingsState = SettingsState()) { }
     }
 }

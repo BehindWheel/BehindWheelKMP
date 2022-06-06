@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapSettings
+import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -20,7 +20,7 @@ import com.google.maps.android.compose.MapType
 @Composable
 fun rememberMapProperties(
     locationState: LocationState,
-    mapSettings: MapSettings,
+    mapPreferences: GrodnoRoadsMapPreferences,
 ): MapProperties {
     val context = LocalContext.current
 
@@ -36,7 +36,7 @@ fun rememberMapProperties(
     val mapProperties by remember(
         locationState,
         mapStyle,
-        mapSettings
+        mapPreferences
     ) {
         mutableStateOf(
             MapProperties(
@@ -45,7 +45,7 @@ fun rememberMapProperties(
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
                 minZoomPreference = 9.0f,
                 maxZoomPreference = 17.5f,
-                isTrafficEnabled = mapSettings.isTrafficEnabled,
+                isTrafficEnabled = mapPreferences.isTrafficEnabled,
             )
         )
     }

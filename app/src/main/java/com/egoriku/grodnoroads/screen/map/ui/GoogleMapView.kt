@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
-import com.egoriku.grodnoroads.screen.map.domain.MapSettings
+import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -36,7 +36,7 @@ val grodnoPosition = LatLng(53.6687765, 23.8212226)
 fun GoogleMapView(
     modifier: Modifier,
     mapEvents: List<MapEvent>,
-    mapSettings: MapSettings,
+    mapPreferences: GrodnoRoadsMapPreferences,
     locationState: LocationState,
     onMarkerClick: (Reports) -> Unit
 ) {
@@ -66,7 +66,7 @@ fun GoogleMapView(
         cameraPositionState = cameraPositionState,
         properties = rememberMapProperties(
             locationState = locationState,
-            mapSettings = mapSettings
+            mapPreferences = mapPreferences
         ),
         uiSettings = rememberUiSettings(),
         contentPadding = WindowInsets.statusBars.asPaddingValues()

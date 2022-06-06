@@ -38,6 +38,7 @@
     <string name="settings_app_theme_light">Светлая</string>
 
     <string name="settings_section_map_information">Информация на карте</string>
+    <string name="settings_section_map_preferences">Настройки карты</string>
 
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>
