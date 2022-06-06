@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.MapSettings
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -17,7 +18,10 @@ import com.google.maps.android.compose.MapType
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun rememberMapProperties(locationState: LocationState): MapProperties {
+fun rememberMapProperties(
+    locationState: LocationState,
+    mapSettings: MapSettings,
+): MapProperties {
     val context = LocalContext.current
 
     val locationPermissionsState = rememberMultiplePermissionsState(
@@ -29,14 +33,19 @@ fun rememberMapProperties(locationState: LocationState): MapProperties {
         else -> R.raw.map_dark_style
     }
 
-    val mapProperties by remember(locationState, mapStyle) {
+    val mapProperties by remember(
+        locationState,
+        mapStyle,
+        mapSettings
+    ) {
         mutableStateOf(
             MapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
                 minZoomPreference = 9.0f,
-                maxZoomPreference = 17.5f
+                maxZoomPreference = 17.5f,
+                isTrafficEnabled = mapSettings.isTrafficEnabled,
             )
         )
     }

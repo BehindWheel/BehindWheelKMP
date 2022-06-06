@@ -27,6 +27,7 @@ fun MapSettings(
             StationaryCameras(settingsState, onCheckedChange)
             MobileCameras(settingsState, onCheckedChange)
             TrafficPolice(settingsState, onCheckedChange)
+            TrafficJam(settingsState, onCheckedChange)
             Incidents(settingsState, onCheckedChange)
         }
     }
@@ -103,6 +104,31 @@ fun TrafficPolice(
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
             onCheckedChange(trafficPolice.copy(isShow = it))
+        }
+    )
+}
+
+@Composable
+fun TrafficJam(
+    settingsState: SettingsState,
+    onCheckedChange: (Pref) -> Unit
+) {
+    val trafficJam = settingsState.trafficJam
+
+    SettingsCheckbox(
+        title = {
+            Text(text = stringResource(R.string.settings_traffic_jam))
+        },
+        icon = {
+            Image(
+                modifier = Modifier.size(36.dp),
+                painter = painterResource(id = R.drawable.ic_traffic_light),
+                contentDescription = null
+            )
+        },
+        isChecked = trafficJam.isShow,
+        onCheckedChange = {
+            onCheckedChange(trafficJam.copy(isShow = it))
         }
     )
 }

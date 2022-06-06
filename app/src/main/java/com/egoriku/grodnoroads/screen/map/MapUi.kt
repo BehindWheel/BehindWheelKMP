@@ -26,6 +26,7 @@ import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 import com.egoriku.grodnoroads.extension.toast
+import com.egoriku.grodnoroads.screen.map.domain.MapSettings
 
 @Composable
 fun MapUi(
@@ -42,6 +43,7 @@ fun MapUi(
         val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
         val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
+        val mapSettings by component.mapSettings.collectAsState(initial = MapSettings.Default)
         val alerts by component.alerts.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
@@ -50,6 +52,7 @@ fun MapUi(
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
+                mapSettings = mapSettings,
                 locationState = location,
                 onMarkerClick = {
                     component.showMarkerInfoDialog(reports = it)

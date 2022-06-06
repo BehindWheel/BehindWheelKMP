@@ -42,5 +42,6 @@
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>
     <string name="settings_traffic_police">ГАИ</string>
+    <string name="settings_traffic_jam">Пробки</string>
     <string name="settings_incidents">Аварии</string>
 </resources>

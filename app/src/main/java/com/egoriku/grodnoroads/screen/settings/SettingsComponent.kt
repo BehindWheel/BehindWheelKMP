@@ -27,6 +27,7 @@ interface SettingsComponent {
         data class StationaryCameras(val isShow: Boolean = true) : Pref
         data class MobileCameras(val isShow: Boolean = true) : Pref
         data class TrafficPolice(val isShow: Boolean = true) : Pref
+        data class TrafficJam(val isShow: Boolean = true) : Pref
         data class Incidents(val isShow: Boolean = true) : Pref
     }
 }

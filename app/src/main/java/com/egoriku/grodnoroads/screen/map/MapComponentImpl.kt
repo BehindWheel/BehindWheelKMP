@@ -49,6 +49,13 @@ class MapComponentImpl(
             transform = filterMapEvents()
         )
 
+    override val mapSettings: Flow<MapSettings>
+        get() = settingsStore.states.map {
+            MapSettings(
+                isTrafficEnabled = it.settingsState.trafficJam.isShow
+            )
+        }
+
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
 
