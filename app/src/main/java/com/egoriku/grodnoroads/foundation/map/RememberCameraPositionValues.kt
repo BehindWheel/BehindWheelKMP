@@ -24,7 +24,7 @@ fun rememberCameraPositionValues(
             } ?: Point()
         )
     }
-    val fromScreenLocation by remember(projection) {
+    val fromScreenLocation by remember(projection, locationState) {
         mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: locationState.latLng)
     }
 

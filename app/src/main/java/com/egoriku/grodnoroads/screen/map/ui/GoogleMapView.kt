@@ -13,11 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.util.MarkerCache
@@ -46,8 +46,8 @@ fun GoogleMapView(
 
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, locationState)
 
-    LaunchedEffect(key1 = locationState) {
-        if (locationState != LocationState.None) {
+    LaunchedEffect(locationState, cameraPositionValues) {
+        if (locationState != LocationState.None && cameraPositionValues.targetLatLng != LocationState.None.latLng) {
             val cameraPosition = CameraPosition.Builder()
                 .target(cameraPositionValues.targetLatLng)
                 .zoom(14f)
