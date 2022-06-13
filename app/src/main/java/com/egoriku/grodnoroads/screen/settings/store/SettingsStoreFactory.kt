@@ -83,7 +83,7 @@ class SettingsStoreFactory(
                                         isShow = preferences[IS_SHOW_TRAFFIC_POLICE_EVENTS] ?: true
                                     ),
                                     trafficJam = TrafficJam(
-                                        isShow = preferences[IS_SHOW_TRAFFIC_JAM] ?: true
+                                        isShow = preferences[IS_SHOW_TRAFFIC_JAM] ?: false
                                     ),
                                     incidents = Incidents(
                                         isShow = preferences[IS_SHOW_INCIDENT_EVENTS] ?: true
