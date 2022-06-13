@@ -59,6 +59,6 @@ private fun TrafficJam(
 @Composable
 fun PreviewMapPreferencesSettings() {
     GrodnoRoadsTheme {
-        MapEventsSettings(settingsState = SettingsStoreFactory.SettingsState()) { }
+        MapPreferencesSettings(settingsState = SettingsStoreFactory.SettingsState()) { }
     }
 }
