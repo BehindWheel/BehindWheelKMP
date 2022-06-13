@@ -14,6 +14,7 @@ val APP_THEME = intPreferencesKey("app_theme")
 val IS_SHOW_STATIONARY_CAMERAS = booleanPreferencesKey("is_show_stationary_cameras")
 val IS_SHOW_MOBILE_CAMERAS = booleanPreferencesKey("is_show_mobile_cameras")
 val IS_SHOW_TRAFFIC_POLICE_EVENTS = booleanPreferencesKey("is_show_traffic_police_events")
+val IS_SHOW_TRAFFIC_JAM = booleanPreferencesKey("is_show_traffic_jam")
 val IS_SHOW_INCIDENT_EVENTS = booleanPreferencesKey("is_show_incident_events")
 
 val ALERT_DISTANCE = intPreferencesKey("alert_distance")

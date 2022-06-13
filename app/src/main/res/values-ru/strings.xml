@@ -43,4 +43,7 @@
     <string name="settings_mobile_cameras">Мобильные камеры</string>
     <string name="settings_traffic_police">ГАИ</string>
     <string name="settings_incidents">Аварии</string>
+
+    <string name="settings_section_map_preferences">Настройки карты</string>
+    <string name="settings_traffic_jam">Пробки</string>
 </resources>

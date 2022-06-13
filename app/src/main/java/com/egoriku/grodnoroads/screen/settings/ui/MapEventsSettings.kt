@@ -1,15 +1,9 @@
 package com.egoriku.grodnoroads.screen.settings.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.settings.SettingsCheckbox
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
@@ -18,7 +12,7 @@ import com.egoriku.grodnoroads.screen.settings.ui.common.BasicSettingsSection
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
-fun MapSettings(
+fun MapEventsSettings(
     settingsState: SettingsState,
     onCheckedChange: (Pref) -> Unit
 ) {
@@ -40,16 +34,8 @@ private fun StationaryCameras(
     val stationaryCameras = settingsState.stationaryCameras
 
     SettingsCheckbox(
-        title = {
-            Text(text = stringResource(R.string.settings_stationary_cameras))
-        },
-        icon = {
-            Image(
-                modifier = Modifier.size(36.dp),
-                painter = painterResource(id = R.drawable.ic_stationary_camera),
-                contentDescription = null
-            )
-        },
+        titleId = R.string.settings_stationary_cameras,
+        iconId = R.drawable.ic_stationary_camera,
         isChecked = stationaryCameras.isShow,
         onCheckedChange = {
             onCheckedChange(stationaryCameras.copy(isShow = it))
@@ -65,16 +51,8 @@ private fun MobileCameras(
     val mobileCameras = settingsState.mobileCameras
 
     SettingsCheckbox(
-        title = {
-            Text(text = stringResource(R.string.settings_mobile_cameras))
-        },
-        icon = {
-            Image(
-                modifier = Modifier.size(36.dp),
-                painter = painterResource(id = R.drawable.ic_mobile_camera),
-                contentDescription = null
-            )
-        },
+        titleId = R.string.settings_mobile_cameras,
+        iconId = R.drawable.ic_mobile_camera,
         isChecked = mobileCameras.isShow,
         onCheckedChange = {
             onCheckedChange(mobileCameras.copy(isShow = it))
@@ -90,16 +68,8 @@ fun TrafficPolice(
     val trafficPolice = settingsState.trafficPolice
 
     SettingsCheckbox(
-        title = {
-            Text(text = stringResource(R.string.settings_traffic_police))
-        },
-        icon = {
-            Image(
-                modifier = Modifier.size(36.dp),
-                painter = painterResource(id = R.drawable.ic_traffic_police),
-                contentDescription = null
-            )
-        },
+        titleId = R.string.settings_traffic_police,
+        iconId = R.drawable.ic_traffic_police,
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
             onCheckedChange(trafficPolice.copy(isShow = it))
@@ -115,16 +85,8 @@ fun Incidents(
     val incidents = settingsState.incidents
 
     SettingsCheckbox(
-        title = {
-            Text(text = stringResource(R.string.settings_incidents))
-        },
-        icon = {
-            Image(
-                modifier = Modifier.size(36.dp),
-                painter = painterResource(id = R.drawable.ic_warning),
-                contentDescription = null
-            )
-        },
+        titleId = R.string.settings_incidents,
+        iconId = R.drawable.ic_warning,
         isChecked = incidents.isShow,
         onCheckedChange = {
             onCheckedChange(incidents.copy(isShow = it))
@@ -135,8 +97,8 @@ fun Incidents(
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
 @Composable
-fun PreviewMapSettings() {
+fun PreviewMapEventsSettings() {
     GrodnoRoadsTheme {
-        MapSettings(settingsState = SettingsState()) { }
+        MapEventsSettings(settingsState = SettingsState()) { }
     }
 }

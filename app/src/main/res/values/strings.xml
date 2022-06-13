@@ -45,4 +45,7 @@
     <string name="settings_mobile_cameras">Mobile cameras</string>
     <string name="settings_traffic_police">Traffic Police</string>
     <string name="settings_incidents">Incidents</string>
+
+    <string name="settings_section_map_preferences">Map preferences</string>
+    <string name="settings_traffic_jam">Traffic Jam</string>
 </resources>

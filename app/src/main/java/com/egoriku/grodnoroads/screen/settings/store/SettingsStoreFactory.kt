@@ -52,6 +52,7 @@ class SettingsStoreFactory(
         val stationaryCameras: StationaryCameras = StationaryCameras(),
         val mobileCameras: MobileCameras = MobileCameras(),
         val trafficPolice: TrafficPolice = TrafficPolice(),
+        val trafficJam: TrafficJam = TrafficJam(),
         val incidents: Incidents = Incidents(),
 
         val alertDistanceRadius: Int = DEFAULT_ALERT_DISTANCE_RADIUS
@@ -81,6 +82,9 @@ class SettingsStoreFactory(
                                     trafficPolice = TrafficPolice(
                                         isShow = preferences[IS_SHOW_TRAFFIC_POLICE_EVENTS] ?: true
                                     ),
+                                    trafficJam = TrafficJam(
+                                        isShow = preferences[IS_SHOW_TRAFFIC_JAM] ?: false
+                                    ),
                                     incidents = Incidents(
                                         isShow = preferences[IS_SHOW_INCIDENT_EVENTS] ?: true
                                     ),
@@ -105,6 +109,7 @@ class SettingsStoreFactory(
                             is StationaryCameras -> IS_SHOW_STATIONARY_CAMERAS
                             is MobileCameras -> IS_SHOW_MOBILE_CAMERAS
                             is TrafficPolice -> IS_SHOW_TRAFFIC_POLICE_EVENTS
+                            is TrafficJam -> IS_SHOW_TRAFFIC_JAM
                             is Incidents -> IS_SHOW_INCIDENT_EVENTS
                             else -> throw IllegalArgumentException(onCheckedChanged.toString())
                         }
@@ -112,6 +117,7 @@ class SettingsStoreFactory(
                             is StationaryCameras -> preference.isShow
                             is MobileCameras -> preference.isShow
                             is TrafficPolice -> preference.isShow
+                            is TrafficJam -> preference.isShow
                             is Incidents -> preference.isShow
                             else -> throw IllegalArgumentException(onCheckedChanged.toString())
                         }
