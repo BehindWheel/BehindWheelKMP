@@ -127,7 +127,8 @@ class MapEventsStoreFactory(
                     val cameras = result.value.map { data ->
                         MobileCamera(
                             message = data.name,
-                            position = LatLng(data.latitude, data.longitude)
+                            position = LatLng(data.latitude, data.longitude),
+                            speed = data.speed
                         )
                     }
                     onLoaded(cameras)

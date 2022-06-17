@@ -2,7 +2,9 @@ package com.egoriku.grodnoroads.screen.map.ui.markers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.MobileCamera
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.maps.android.compose.MarkerInfoWindow
@@ -30,7 +33,7 @@ fun MobileCameraMarker(mobileCamera: MobileCamera, markerCache: MarkerCache) {
     MarkerInfoWindow(
         state = markerState,
         icon = markerCache.getVector(id = R.drawable.ic_mobile_camera)
-    ){
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -42,6 +45,8 @@ fun MobileCameraMarker(mobileCamera: MobileCamera, markerCache: MarkerCache) {
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
             )
+            Spacer(modifier = Modifier.width(8.dp))
+            SpeedLimitSign(limit = mobileCamera.speed)
         }
     }
 }
