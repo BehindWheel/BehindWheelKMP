@@ -1,15 +1,15 @@
 [versions]
 gradleBuildTools = "7.2.1"
-gradleCrashlytics = "2.8.1"
+gradleCrashlytics = "2.9.0"
 gradleGoogleServices = "4.3.10"
 gradleKsp = "1.6.21-1.0.5"
 gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
 
 browser = "1.4.0"
-compose = "1.2.0-beta03"
+compose = "1.2.0-rc01"
 kotlin = "1.6.21"
-map-compose = "2.2.0"
+map-compose = "2.2.1"
 
 [libraries]
 gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }

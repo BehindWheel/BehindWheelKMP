@@ -80,11 +80,11 @@ dependencies {
     implementation(libs.maps.compose)
 
     implementation("com.google.android.gms:play-services-maps:18.0.2")
-    implementation("com.google.android.gms:play-services-location:19.0.1")
+    implementation("com.google.android.gms:play-services-location:20.0.0")
     implementation("com.google.android.material:material:1.6.1")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.11-rc")
+    implementation("com.google.accompanist:accompanist-permissions:0.24.11-rc")
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
