@@ -50,9 +50,9 @@ private fun List<ReportsResponse>.mergeReports(): List<Reports> {
                     append(TrafficPolice.emoji)
                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                 }
-                RoadAccident -> buildString {
+                RoadIncident -> buildString {
                     append("(${DateUtil.formatToTime(data.timestamp)}) ")
-                    append(RoadAccident.emoji)
+                    append(RoadIncident.emoji)
                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                 }
                 WildAnimals -> buildString {
@@ -68,11 +68,6 @@ private fun List<ReportsResponse>.mergeReports(): List<Reports> {
                 TrafficJam -> buildString {
                     append("(${DateUtil.formatToTime(data.timestamp)}) ")
                     append(TrafficJam.emoji)
-                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
-                }
-                RoadRepair -> buildString {
-                    append("(${DateUtil.formatToTime(data.timestamp)}) ")
-                    append(RoadRepair.emoji)
                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                 }
                 else -> data.shortMessage

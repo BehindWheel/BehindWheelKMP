@@ -18,14 +18,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.egoriku.grodnoroads.foundation.HSpacer
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
+import com.egoriku.grodnoroads.screen.map.domain.Source
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun IncidentAlert(
+    emoji: String,
     title: String,
     distance: Int,
     messages: List<MessageItem>
@@ -38,7 +41,11 @@ fun IncidentAlert(
             ) {
                 Text(
                     textAlign = TextAlign.Center,
-                    text = title,
+                    text = buildString {
+                        append(emoji)
+                        append(" ")
+                        append(title)
+                    },
                     style = MaterialTheme.typography.body1,
                 )
                 HSpacer(dp = 4.dp)
@@ -63,7 +70,8 @@ fun IncidentAlert(
 fun PreviewIncidentAlert() {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         IncidentAlert(
-            title = stringResource(R.string.alerts_accident),
+            emoji = MapEventType.RoadIncident.emoji,
+            title = stringResource(R.string.alerts_incident),
             distance = 200,
             messages = listOf(
                 MessageItem(
@@ -78,7 +86,8 @@ fun PreviewIncidentAlert() {
             )
         )
         IncidentAlert(
-            title = stringResource(R.string.alerts_police),
+            emoji = TrafficPolice.emoji,
+            title = stringResource(R.string.alerts_traffic_police),
             distance = 350,
             messages = listOf(
                 MessageItem(

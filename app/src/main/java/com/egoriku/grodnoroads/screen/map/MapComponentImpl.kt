@@ -52,7 +52,7 @@ class MapComponentImpl(
     override val mapPreferences: Flow<GrodnoRoadsMapPreferences>
         get() = settingsStore.states.map {
             GrodnoRoadsMapPreferences(
-                isTrafficEnabled = it.settingsState.trafficJam.isShow
+                isTrafficEnabled = it.settingsState.mapAppearance.trafficJam.isShow
             )
         }
 

@@ -7,31 +7,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.settings.SettingsCheckbox
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
+import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState.MapInfo
 import com.egoriku.grodnoroads.screen.settings.ui.common.BasicSettingsSection
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
 fun MapEventsSettings(
-    settingsState: SettingsState,
+    mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
     BasicSettingsSection(title = stringResource(R.string.settings_section_map_information)) {
         Column {
-            StationaryCameras(settingsState, onCheckedChange)
-            MobileCameras(settingsState, onCheckedChange)
-            TrafficPolice(settingsState, onCheckedChange)
-            Incidents(settingsState, onCheckedChange)
+            StationaryCameras(mapInfo, onCheckedChange)
+            MobileCameras(mapInfo, onCheckedChange)
+            TrafficPolice(mapInfo, onCheckedChange)
+            RoadIncidents(mapInfo, onCheckedChange)
+            CarCrash(mapInfo, onCheckedChange)
+            TrafficJam(mapInfo, onCheckedChange)
+            WildAnimals(mapInfo, onCheckedChange)
         }
     }
 }
 
 @Composable
 private fun StationaryCameras(
-    settingsState: SettingsState,
+    mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    val stationaryCameras = settingsState.stationaryCameras
+    val stationaryCameras = mapInfo.stationaryCameras
 
     SettingsCheckbox(
         titleId = R.string.settings_stationary_cameras,
@@ -45,10 +48,10 @@ private fun StationaryCameras(
 
 @Composable
 private fun MobileCameras(
-    settingsState: SettingsState,
+    mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    val mobileCameras = settingsState.mobileCameras
+    val mobileCameras = mapInfo.mobileCameras
 
     SettingsCheckbox(
         titleId = R.string.settings_mobile_cameras,
@@ -61,11 +64,11 @@ private fun MobileCameras(
 }
 
 @Composable
-fun TrafficPolice(
-    settingsState: SettingsState,
+private fun TrafficPolice(
+    mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    val trafficPolice = settingsState.trafficPolice
+    val trafficPolice = mapInfo.trafficPolice
 
     SettingsCheckbox(
         titleId = R.string.settings_traffic_police,
@@ -78,18 +81,69 @@ fun TrafficPolice(
 }
 
 @Composable
-fun Incidents(
-    settingsState: SettingsState,
+private fun RoadIncidents(
+    mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    val incidents = settingsState.incidents
+    val roadIncident = mapInfo.roadIncident
 
     SettingsCheckbox(
         titleId = R.string.settings_incidents,
         iconId = R.drawable.ic_warning,
-        isChecked = incidents.isShow,
+        isChecked = roadIncident.isShow,
         onCheckedChange = {
-            onCheckedChange(incidents.copy(isShow = it))
+            onCheckedChange(roadIncident.copy(isShow = it))
+        }
+    )
+}
+
+@Composable
+private fun CarCrash(
+    mapInfo: MapInfo,
+    onCheckedChange: (Pref) -> Unit
+) {
+    val carCrash = mapInfo.carCrash
+
+    SettingsCheckbox(
+        titleId = R.string.settings_car_crash,
+        iconId = R.drawable.ic_car_crash,
+        isChecked = carCrash.isShow,
+        onCheckedChange = {
+            onCheckedChange(carCrash.copy(isShow = it))
+        }
+    )
+}
+
+@Composable
+private fun TrafficJam(
+    mapInfo: MapInfo,
+    onCheckedChange: (Pref) -> Unit
+) {
+    val trafficJam = mapInfo.trafficJam
+
+    SettingsCheckbox(
+        titleId = R.string.settings_traffic_jam,
+        iconId = R.drawable.ic_traffic_jam,
+        isChecked = trafficJam.isShow,
+        onCheckedChange = {
+            onCheckedChange(trafficJam.copy(isShow = it))
+        }
+    )
+}
+
+@Composable
+private fun WildAnimals(
+    mapInfo: MapInfo,
+    onCheckedChange: (Pref) -> Unit
+) {
+    val wildAnimals = mapInfo.wildAnimals
+
+    SettingsCheckbox(
+        titleId = R.string.settings_wild_animals,
+        iconId = R.drawable.ic_wild_animals,
+        isChecked = wildAnimals.isShow,
+        onCheckedChange = {
+            onCheckedChange(wildAnimals.copy(isShow = it))
         }
     )
 }
@@ -99,6 +153,6 @@ fun Incidents(
 @Composable
 fun PreviewMapEventsSettings() {
     GrodnoRoadsTheme {
-        MapEventsSettings(settingsState = SettingsState()) { }
+        MapEventsSettings(mapInfo = MapInfo()) { }
     }
 }

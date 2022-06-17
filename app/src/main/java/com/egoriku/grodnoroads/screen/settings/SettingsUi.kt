@@ -44,8 +44,14 @@ fun SettingsUi(settingsComponent: SettingsComponent) {
                 )
         ) {
             AppSettings(settingsState, settingsComponent::process)
-            MapEventsSettings(settingsState, settingsComponent::onCheckedChanged)
-            MapPreferencesSettings(settingsState, settingsComponent::onCheckedChanged)
+            MapEventsSettings(
+                mapInfo = settingsState.mapInfo,
+                onCheckedChange = settingsComponent::onCheckedChanged
+            )
+            MapPreferencesSettings(
+                mapAppearance = settingsState.mapAppearance,
+                onCheckedChange = settingsComponent::onCheckedChanged
+            )
         }
     }
 }

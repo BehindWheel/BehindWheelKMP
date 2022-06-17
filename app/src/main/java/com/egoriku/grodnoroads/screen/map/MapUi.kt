@@ -13,11 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extension.toast
 import com.egoriku.grodnoroads.foundation.DrawerButton
 import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
@@ -25,8 +27,6 @@ import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
-import com.egoriku.grodnoroads.extension.toast
-import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 
 @Composable
 fun MapUi(
@@ -91,10 +91,10 @@ fun MapUi(
                             type = TrafficPolice
                         )
                     },
-                    reportAccident = {
+                    reportIncident = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = RoadAccident
+                            type = RoadIncident
                         )
                     }
                 )

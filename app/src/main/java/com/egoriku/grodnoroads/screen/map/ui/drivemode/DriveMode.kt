@@ -10,10 +10,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.screen.map.domain.Alert
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
 
@@ -23,7 +23,7 @@ fun DriveMode(
     location: LocationState,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
-    reportAccident: () -> Unit
+    reportIncident: () -> Unit
 ) {
     KeepScreenOn()
     Box(modifier = Modifier.fillMaxSize()) {
@@ -51,7 +51,7 @@ fun DriveMode(
             )
             ReportAction(
                 painter = painterResource(id = R.drawable.ic_warning),
-                onClick = reportAccident
+                onClick = reportIncident
             )
         }
         CloseAction(
@@ -73,6 +73,6 @@ private fun DriveModePReview() {
         location = LocationState.None,
         stopDrive = {},
         reportPolice = {},
-        reportAccident = {}
+        reportIncident = {}
     )
 }
