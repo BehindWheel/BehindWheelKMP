@@ -3,8 +3,7 @@ package com.egoriku.grodnoroads.screen.map.ui
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.R
@@ -45,17 +44,29 @@ fun GoogleMapView(
     }
 
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, locationState)
+    val zoomLevel by remember { mutableStateOf(14f) }
 
     LaunchedEffect(locationState, cameraPositionValues) {
-        if (locationState != LocationState.None && cameraPositionValues.targetLatLng != LocationState.None.latLng) {
-            val cameraPosition = CameraPosition.Builder()
-                .target(cameraPositionValues.targetLatLng)
-                .zoom(14f)
-                .bearing(cameraPositionValues.bearing)
-                .tilt(25.0f)
-                .build()
-
-            cameraPositionState.animate(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        if (locationState != LocationState.None && cameraPositionValues.targetLatLngWithOffset != LocationState.None.latLng) {
+            if (zoomLevel == cameraPositionState.position.zoom) {
+                cameraPositionState.animate(
+                    buildCameraPosition(
+                        target = cameraPositionValues.targetLatLngWithOffset,
+                        bearing = cameraPositionValues.bearing,
+                        zoomLevel = zoomLevel
+                    ),
+                    500
+                )
+            } else {
+                cameraPositionState.animate(
+                    buildCameraPosition(
+                        target = cameraPositionValues.initialLatLng,
+                        bearing = cameraPositionValues.bearing,
+                        zoomLevel = zoomLevel
+                    ),
+                    500
+                )
+            }
         }
     }
 
@@ -88,3 +99,16 @@ fun GoogleMapView(
         }
     }
 }
+
+private fun buildCameraPosition(
+    target: LatLng,
+    bearing: Float,
+    zoomLevel: Float
+) = CameraUpdateFactory.newCameraPosition(
+    CameraPosition.builder()
+        .target(target)
+        .bearing(bearing)
+        .zoom(zoomLevel)
+        .tilt(25.0f)
+        .build()
+)
