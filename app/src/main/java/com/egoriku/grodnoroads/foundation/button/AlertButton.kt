@@ -12,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AlertTextButton(
+fun AlertButton(
     modifier: Modifier = Modifier,
     textResId: Int,
     onClick: () -> Unit
@@ -39,15 +40,15 @@ fun AlertTextButton(
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
 @Composable
-fun PreviewAlertTextButton() {
+fun PreviewAlertButton() {
     Column {
-        AlertTextButton(
+        AlertButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = android.R.string.ok
+            textResId = R.string.ok
         ) {}
-        AlertTextButton(
+        AlertButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = android.R.string.cancel
+            textResId = R.string.cancel
         ) {}
     }
 }

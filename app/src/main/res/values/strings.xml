@@ -54,4 +54,11 @@
 
     <string name="settings_section_map_preferences">Map preferences</string>
     <string name="settings_traffic_jam_appearance">Traffic Jam</string>
+
+    <string name="dialog_report_police">Report Traffic Police</string>
+    <string name="dialog_incident">Report Road Incident</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="send">Send</string>
 </resources>

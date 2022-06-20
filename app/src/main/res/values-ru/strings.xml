@@ -52,4 +52,11 @@
 
     <string name="settings_section_map_preferences">Настройки карты</string>
     <string name="settings_traffic_jam_appearance">Пробки</string>
+
+    <string name="dialog_report_police">Сообщить о ГАИ</string>
+    <string name="dialog_incident">Сообщить о проблеме</string>
+
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="send">Отправить</string>
 </resources>
