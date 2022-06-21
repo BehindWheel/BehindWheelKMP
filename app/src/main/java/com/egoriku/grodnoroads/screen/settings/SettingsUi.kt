@@ -1,12 +1,11 @@
 package com.egoriku.grodnoroads.screen.settings
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -38,10 +37,7 @@ fun SettingsUi(settingsComponent: SettingsComponent) {
             modifier = Modifier
                 .statusBarsPadding()
                 .padding(horizontal = 16.dp)
-                .scrollable(
-                    state = rememberScrollState(),
-                    orientation = Orientation.Vertical
-                )
+                .verticalScroll(state = rememberScrollState())
         ) {
             AppSettings(settingsState, settingsComponent::process)
             MapEventsSettings(
