@@ -13,5 +13,9 @@ class MobileCameraResponse(
 
     @PropertyName("longitude")
     @JvmField
-    val longitude: Double = 0.0
+    val longitude: Double = 0.0,
+
+    @PropertyName("speed")
+    @JvmField
+    val speed: Int = 0
 )

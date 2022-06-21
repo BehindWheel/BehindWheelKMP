@@ -37,12 +37,17 @@ fun Alerts(
             when (alert) {
                 is IncidentAlert -> {
                     val title = when (alert.mapEventType) {
-                        RoadAccident -> stringResource(R.string.alerts_accident)
-                        TrafficPolice -> stringResource(R.string.alerts_police)
+                        RoadIncident -> stringResource(R.string.alerts_incident)
+                        RoadAccident -> stringResource(R.string.alerts_incident)
+                        TrafficPolice -> stringResource(R.string.alerts_traffic_police)
+                        CarCrash -> stringResource(R.string.alerts_car_crash)
+                        TrafficJam -> stringResource(R.string.alerts_traffic_jam)
+                        WildAnimals -> stringResource(R.string.alerts_wild_animals)
                         else -> throw IllegalArgumentException("title not applicable")
                     }
 
                     IncidentAlert(
+                        emoji = alert.mapEventType.emoji,
                         title = title,
                         distance = alert.distance,
                         messages = alert.messages
@@ -114,7 +119,7 @@ private fun AlertsPreview() {
                             source = Source.Viber
                         )
                     ),
-                    mapEventType = RoadAccident
+                    mapEventType = RoadIncident
                 )
             )
         )

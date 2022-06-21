@@ -6,13 +6,15 @@ enum class MapEventType(
 ) {
     StationaryCamera(type = "stationary", emoji = "📷"),
     MobileCamera(type = "mobile", emoji = "📸"),
-    TrafficPolice(type = "police", emoji = "👮"),
 
+    @Deprecated("should be removed in next release")
     RoadAccident(type = "accident", emoji = "❗"),
-    RoadRepair(type = "road_repair", emoji = "🚧"),
+
+    TrafficPolice(type = "police", emoji = "👮"),
+    RoadIncident(type = "road_incident", emoji = "❗"),
+    CarCrash(type = "car_crash", emoji = "💥🚗"),
     TrafficJam(type = "traffic_jam", emoji = "🚗🚕🚛"),
-    WildAnimals(type = "wild_animals", emoji = "🦌"),
-    CarCrash(type = "car_crash", emoji = "💥🚗");
+    WildAnimals(type = "wild_animals", emoji = "🦌");
 
     companion object {
         fun eventFromString(value: String): MapEventType {

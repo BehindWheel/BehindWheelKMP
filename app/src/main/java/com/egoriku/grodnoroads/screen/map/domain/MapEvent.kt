@@ -23,6 +23,7 @@ sealed interface MapEvent {
 
     data class MobileCamera(
         val message: String,
+        val speed: Int,
         override val position: LatLng,
         override val mapEventType: MapEventType = MapEventType.MobileCamera
     ) : MapEvent

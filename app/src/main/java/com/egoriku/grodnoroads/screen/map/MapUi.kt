@@ -13,11 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extension.toast
 import com.egoriku.grodnoroads.foundation.DrawerButton
 import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
@@ -25,7 +27,6 @@ import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
-import com.egoriku.grodnoroads.extension.toast
 
 @Composable
 fun MapUi(
@@ -42,6 +43,7 @@ fun MapUi(
         val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
         val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
+        val mapPreferences by component.mapPreferences.collectAsState(initial = GrodnoRoadsMapPreferences.Default)
         val alerts by component.alerts.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
@@ -50,6 +52,7 @@ fun MapUi(
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
+                mapPreferences = mapPreferences,
                 locationState = location,
                 onMarkerClick = {
                     component.showMarkerInfoDialog(reports = it)
@@ -88,10 +91,10 @@ fun MapUi(
                             type = TrafficPolice
                         )
                     },
-                    reportAccident = {
+                    reportIncident = {
                         component.reportAction(
                             latLng = location.latLng,
-                            type = RoadAccident
+                            type = RoadIncident
                         )
                     }
                 )

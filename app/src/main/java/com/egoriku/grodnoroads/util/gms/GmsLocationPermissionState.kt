@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
 
 @Composable
 fun rememberGmsLocationPermissionsState(
@@ -69,7 +70,7 @@ internal class MutableGmsLocationPermissionState(
     private val highPrecisionLowIntervalRequest = LocationRequest.create().apply {
         interval = 1000
         fastestInterval = 1000
-        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        priority = Priority.PRIORITY_HIGH_ACCURACY
         smallestDisplacement = 10f
     }
 

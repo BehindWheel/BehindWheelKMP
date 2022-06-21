@@ -12,30 +12,50 @@ fun filterMapEvents(): suspend (
     SettingsState
 ) -> List<MapEvent> = { reports, stationary, mobile, settings ->
     (reports + stationary + mobile).mapNotNull { mapEvent ->
+        val mapInfo = settings.mapInfo
+
         when (mapEvent) {
             is MobileCamera -> {
                 when {
-                    settings.mobileCameras.isShow -> mapEvent
+                    mapInfo.mobileCameras.isShow -> mapEvent
                     else -> null
                 }
             }
             is StationaryCamera -> {
                 when {
-                    settings.stationaryCameras.isShow -> mapEvent
+                    mapInfo.stationaryCameras.isShow -> mapEvent
                     else -> null
                 }
             }
             is Reports -> {
                 when (mapEvent.mapEventType) {
-                    MapEventType.RoadAccident -> {
+                    MapEventType.RoadIncident -> {
                         when {
-                            settings.incidents.isShow -> mapEvent
+                            mapInfo.roadIncident.isShow -> mapEvent
                             else -> null
                         }
                     }
                     MapEventType.TrafficPolice -> {
                         when {
-                            settings.trafficPolice.isShow -> mapEvent
+                            mapInfo.trafficPolice.isShow -> mapEvent
+                            else -> null
+                        }
+                    }
+                    MapEventType.CarCrash -> {
+                        when {
+                            mapInfo.carCrash.isShow -> mapEvent
+                            else -> null
+                        }
+                    }
+                    MapEventType.TrafficJam -> {
+                        when {
+                            mapInfo.trafficJam.isShow -> mapEvent
+                            else -> null
+                        }
+                    }
+                    MapEventType.WildAnimals -> {
+                        when {
+                            mapInfo.wildAnimals.isShow -> mapEvent
                             else -> null
                         }
                     }

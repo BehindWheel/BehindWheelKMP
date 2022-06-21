@@ -18,7 +18,8 @@ import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Dialog
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState.ThemeDialog
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
 import com.egoriku.grodnoroads.screen.settings.ui.AppSettings
-import com.egoriku.grodnoroads.screen.settings.ui.MapSettings
+import com.egoriku.grodnoroads.screen.settings.ui.MapEventsSettings
+import com.egoriku.grodnoroads.screen.settings.ui.MapPreferencesSettings
 import com.egoriku.grodnoroads.screen.settings.ui.dialog.AppThemeDialog
 
 @Composable
@@ -43,7 +44,14 @@ fun SettingsUi(settingsComponent: SettingsComponent) {
                 )
         ) {
             AppSettings(settingsState, settingsComponent::process)
-            MapSettings(settingsState, settingsComponent::onCheckedChanged)
+            MapEventsSettings(
+                mapInfo = settingsState.mapInfo,
+                onCheckedChange = settingsComponent::onCheckedChanged
+            )
+            MapPreferencesSettings(
+                mapAppearance = settingsState.mapAppearance,
+                onCheckedChange = settingsComponent::onCheckedChanged
+            )
         }
     }
 }

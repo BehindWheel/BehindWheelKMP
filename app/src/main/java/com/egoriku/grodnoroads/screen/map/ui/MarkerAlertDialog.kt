@@ -77,7 +77,7 @@ fun PreviewMarkerAlertDialog() {
             ),
             shortMessage = "\uD83D\uDEA7 (12:30) м6 выезд из города",
             position = LatLng(0.0, 0.0),
-            mapEventType = MapEventType.RoadAccident
+            mapEventType = MapEventType.RoadIncident
         )
     ) {
     }

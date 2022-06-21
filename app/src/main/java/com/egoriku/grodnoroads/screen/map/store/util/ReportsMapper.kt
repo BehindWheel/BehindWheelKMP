@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.extension.distanceTo
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.egoriku.grodnoroads.util.DateUtil
@@ -44,14 +45,29 @@ private fun List<ReportsResponse>.mergeReports(): List<Reports> {
         } else {
             val eventType = MapEventType.eventFromString(data.type)
             val shortMessage = when (eventType) {
-                MapEventType.TrafficPolice -> buildString {
+                TrafficPolice -> buildString {
                     append("(${DateUtil.formatToTime(data.timestamp)}) ")
-                    append("\uD83D\uDC6E")
+                    append(TrafficPolice.emoji)
                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                 }
-                MapEventType.RoadAccident -> buildString {
+                RoadIncident -> buildString {
                     append("(${DateUtil.formatToTime(data.timestamp)}) ")
-                    append("\uD83D\uDCA5")
+                    append(RoadIncident.emoji)
+                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                }
+                WildAnimals -> buildString {
+                    append("(${DateUtil.formatToTime(data.timestamp)}) ")
+                    append(WildAnimals.emoji)
+                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                }
+                CarCrash -> buildString {
+                    append("(${DateUtil.formatToTime(data.timestamp)}) ")
+                    append(CarCrash.emoji)
+                    appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                }
+                TrafficJam -> buildString {
+                    append("(${DateUtil.formatToTime(data.timestamp)}) ")
+                    append(TrafficJam.emoji)
                     appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
                 }
                 else -> data.shortMessage

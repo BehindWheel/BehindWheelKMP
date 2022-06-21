@@ -14,8 +14,6 @@ import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
 import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadAccident
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.screen.map.domain.Source.App
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
@@ -86,16 +84,11 @@ class MapEventsStoreFactory(
                 }
                 onIntent<ReportAction> { action ->
                     launch {
-                        val message = when (action.mapEventType) {
-                            TrafficPolice -> "\uD83D\uDC6E"
-                            RoadAccident -> "\uD83D\uDCA5"
-                            else -> throw IllegalArgumentException()
-                        }
                         reportsRepository.report(
                             ReportsResponse(
                                 timestamp = System.currentTimeMillis(),
                                 type = action.mapEventType.type,
-                                message = message,
+                                message = action.mapEventType.emoji,
                                 shortMessage = "",
                                 latitude = action.latLng.latitude,
                                 longitude = action.latLng.longitude,
@@ -134,7 +127,8 @@ class MapEventsStoreFactory(
                     val cameras = result.value.map { data ->
                         MobileCamera(
                             message = data.name,
-                            position = LatLng(data.latitude, data.longitude)
+                            position = LatLng(data.latitude, data.longitude),
+                            speed = data.speed
                         )
                     }
                     onLoaded(cameras)

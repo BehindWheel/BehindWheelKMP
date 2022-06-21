@@ -21,8 +21,11 @@
 
     <string name="alerts_stationary_camera">Stationary camera</string>
     <string name="alerts_mobile_camera">Mobile camera</string>
-    <string name="alerts_accident">\uD83D\uDCA5 Road accident</string>
-    <string name="alerts_police">\uD83D\uDC6E Police</string>
+    <string name="alerts_incident">Road incident</string>
+    <string name="alerts_traffic_police">Traffic police</string>
+    <string name="alerts_car_crash">Car crash</string>
+    <string name="alerts_traffic_jam">Traffic jam</string>
+    <string name="alerts_wild_animals">Wild animals</string>
 
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
@@ -39,10 +42,16 @@
     <string name="settings_app_theme_dark">Dark</string>
     <string name="settings_app_theme_light">Light</string>
 
-    <string name="settings_section_map_information">Information on map</string>
+    <string name="settings_section_map_information">Markers on map</string>
 
     <string name="settings_stationary_cameras">Stationary cameras</string>
     <string name="settings_mobile_cameras">Mobile cameras</string>
     <string name="settings_traffic_police">Traffic Police</string>
-    <string name="settings_incidents">Incidents</string>
+    <string name="settings_incidents">Incidents on road</string>
+    <string name="settings_car_crash">Car crash</string>
+    <string name="settings_traffic_jam">Traffic Jam</string>
+    <string name="settings_wild_animals">Wild animals</string>
+
+    <string name="settings_section_map_preferences">Map preferences</string>
+    <string name="settings_traffic_jam_appearance">Traffic Jam</string>
 </resources>
