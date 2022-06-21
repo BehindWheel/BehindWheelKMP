@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="GrodnoRoads" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">#FF4A6572</item>
     </style>
+
+    <style name="GrodnoRoadsTheme" parent="Base.AppTheme" />
 </resources>
