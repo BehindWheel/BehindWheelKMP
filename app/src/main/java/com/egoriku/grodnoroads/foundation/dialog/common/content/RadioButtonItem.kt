@@ -1,7 +1,10 @@
 package com.egoriku.grodnoroads.foundation.dialog.common.content
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
@@ -30,11 +33,6 @@ fun RadioButtonItem(
             onClick = {
                 onSelect(index)
             },
-        )
-        Spacer(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(32.dp)
         )
         Text(
             item,

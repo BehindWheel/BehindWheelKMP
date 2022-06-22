@@ -57,6 +57,7 @@
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>
+    <string name="dialog_input_hint">Optional message</string>
 
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>

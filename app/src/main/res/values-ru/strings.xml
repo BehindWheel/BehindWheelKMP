@@ -55,6 +55,7 @@
 
     <string name="dialog_report_police">Сообщить о ГАИ</string>
     <string name="dialog_incident">Сообщить о проблеме</string>
+    <string name="dialog_input_hint">Опциональное сообщение</string>
 
     <string name="cancel">Отмена</string>
     <string name="ok">ОК</string>

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MapComponent {
 
-    val alertDialogState: Flow<AlertDialogState>
+    val mapAlertDialog: Flow<MapAlertDialog>
     val appMode: Flow<AppMode>
     val location: Flow<LocationState>
     val mapEvents: Flow<List<MapEvent>>
@@ -18,7 +18,14 @@ interface MapComponent {
 
     val alerts: Flow<List<Alert>>
 
-    fun reportAction(latLng: LatLng, type: MapEventType)
+    fun openReportFlow(reportDialogFlow: ReportDialogFlow)
+
+    fun reportAction(
+        latLng: LatLng,
+        type: MapEventType,
+        shortMessage: String,
+        message: String
+    )
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
@@ -27,4 +34,9 @@ interface MapComponent {
 
     fun showMarkerInfoDialog(reports: Reports)
     fun closeDialog()
+
+    sealed interface ReportDialogFlow {
+        data class TrafficPolice(val latLng: LatLng) : ReportDialogFlow
+        data class RoadIncident(val latLng: LatLng) : ReportDialogFlow
+    }
 }

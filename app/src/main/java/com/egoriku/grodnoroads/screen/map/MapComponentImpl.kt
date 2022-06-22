@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.screen.map.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.screen.map.domain.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStore
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
@@ -34,8 +35,8 @@ class MapComponentImpl(
     private val reports = mapEventsStore.states.map { it.reports }
     private val settings = settingsStore.states.map { it.settingsState }
 
-    override val alertDialogState: Flow<AlertDialogState>
-        get() = mapEventsStore.states.map { it.alertDialogState }
+    override val mapAlertDialog: Flow<MapAlertDialog>
+        get() = mapEventsStore.states.map { it.mapAlertDialog }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
@@ -59,10 +60,6 @@ class MapComponentImpl(
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
 
-    override fun reportAction(latLng: LatLng, type: MapEventType) {
-        mapEventsStore.accept(ReportAction(latLng = latLng, mapEventType = type))
-    }
-
     override val alerts: Flow<List<Alert>>
         get() = combine(
             flow = mapEvents,
@@ -79,10 +76,39 @@ class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(DisabledLocation)
 
+    override fun reportAction(
+        latLng: LatLng,
+        type: MapEventType,
+        shortMessage: String,
+        message: String
+    ) {
+        mapEventsStore.accept(
+            ReportAction(
+                latLng = latLng,
+                mapEventType = type,
+                shortMessage = shortMessage,
+                message = message
+            )
+        )
+    }
+
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
         mapEventsStore.accept(
             Intent.OpenMarkerInfoDialog(reports = reports)
         )
+
+    override fun openReportFlow(reportDialogFlow: ReportDialogFlow) {
+        when (reportDialogFlow) {
+            is ReportDialogFlow.TrafficPolice -> mapEventsStore.accept(
+                intent = Intent.OpenReportTrafficPoliceDialog(reportDialogFlow.latLng)
+            )
+            is ReportDialogFlow.RoadIncident -> mapEventsStore.accept(
+                intent = Intent.OpenRoadIncidentDialog(
+                    reportDialogFlow.latLng
+                )
+            )
+        }
+    }
 
     override fun closeDialog() = mapEventsStore.accept(Intent.CloseDialog)
 }

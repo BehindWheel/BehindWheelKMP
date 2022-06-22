@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
+import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.Source.App
@@ -38,9 +38,13 @@ class MapEventsStoreFactory(
         data class ReportAction(
             val latLng: LatLng,
             val mapEventType: MapEventType,
+            val shortMessage: String,
+            val message: String
         ) : Intent
 
         data class OpenMarkerInfoDialog(val reports: Reports) : Intent
+        data class OpenReportTrafficPoliceDialog(val latLng: LatLng) : Intent
+        data class OpenRoadIncidentDialog(val latLng: LatLng) : Intent
         object CloseDialog : Intent
     }
 
@@ -49,15 +53,16 @@ class MapEventsStoreFactory(
         data class OnNewReports(val data: List<Reports>) : Message
         data class OnMobileCamera(val data: List<MobileCamera>) : Message
 
-        data class OpenDialog(val dialog: AlertDialogState.Show) : Message
-        data class CloseDialog(val dialog: AlertDialogState.Closed) : Message
+        //todo consider to extract into separate store with dialog
+        data class OpenDialog(val dialog: MapAlertDialog) : Message
+        data class CloseDialog(val dialog: MapAlertDialog.None) : Message
     }
 
     data class State(
         val stationaryCameras: List<StationaryCamera> = emptyList(),
         val reports: List<Reports> = emptyList(),
         val mobileCamera: List<MobileCamera> = emptyList(),
-        val alertDialogState: AlertDialogState = AlertDialogState.Closed
+        val mapAlertDialog: MapAlertDialog = MapAlertDialog.None
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -88,8 +93,8 @@ class MapEventsStoreFactory(
                             ReportsResponse(
                                 timestamp = System.currentTimeMillis(),
                                 type = action.mapEventType.type,
-                                message = action.mapEventType.emoji,
-                                shortMessage = "",
+                                message = action.message,
+                                shortMessage = action.shortMessage,
                                 latitude = action.latLng.latitude,
                                 longitude = action.latLng.longitude,
                                 source = App.source
@@ -99,12 +104,30 @@ class MapEventsStoreFactory(
                 }
                 onIntent<Intent.OpenMarkerInfoDialog> { dialog ->
                     dispatch(
-                        Message.OpenDialog(dialog = AlertDialogState.Show(dialog.reports))
+                        Message.OpenDialog(dialog = MapAlertDialog.MarkerInfoDialog(dialog.reports))
+                    )
+                }
+                onIntent<Intent.OpenReportTrafficPoliceDialog> { data ->
+                    dispatch(
+                        Message.OpenDialog(
+                            dialog = MapAlertDialog.PoliceDialog(
+                                currentLatLng = data.latLng
+                            )
+                        )
+                    )
+                }
+                onIntent<Intent.OpenRoadIncidentDialog> { data ->
+                    dispatch(
+                        Message.OpenDialog(
+                            dialog = MapAlertDialog.RoadIncidentDialog(
+                                currentLatLng = data.latLng
+                            )
+                        )
                     )
                 }
                 onIntent<Intent.CloseDialog> {
                     dispatch(
-                        Message.CloseDialog(dialog = AlertDialogState.Closed)
+                        Message.CloseDialog(dialog = MapAlertDialog.None)
                     )
                 }
             },
@@ -114,8 +137,8 @@ class MapEventsStoreFactory(
                     is Message.OnStationary -> copy(stationaryCameras = message.data)
                     is Message.OnNewReports -> copy(reports = message.data)
                     is Message.OnMobileCamera -> copy(mobileCamera = message.data)
-                    is Message.OpenDialog -> copy(alertDialogState = message.dialog)
-                    is Message.CloseDialog -> copy(alertDialogState = message.dialog)
+                    is Message.OpenDialog -> copy(mapAlertDialog = message.dialog)
+                    is Message.CloseDialog -> copy(mapAlertDialog = message.dialog)
                 }
             }
         ) {}

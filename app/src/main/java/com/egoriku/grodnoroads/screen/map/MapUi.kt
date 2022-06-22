@@ -15,12 +15,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extension.toast
 import com.egoriku.grodnoroads.foundation.DrawerButton
-import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
+import com.egoriku.grodnoroads.screen.map.ui.dialog.IncidentDialog
+import com.egoriku.grodnoroads.screen.map.ui.dialog.ReportDialog
+import com.egoriku.grodnoroads.screen.map.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
@@ -86,16 +87,18 @@ fun MapUi(
                     location = location,
                     stopDrive = component::stopLocationUpdates,
                     reportPolice = {
-                        component.reportAction(
-                            latLng = location.latLng,
-                            type = TrafficPolice
-                        )
+                        if (location != LocationState.None) {
+                            component.openReportFlow(
+                                reportDialogFlow = ReportDialogFlow.TrafficPolice(location.latLng)
+                            )
+                        }
                     },
                     reportIncident = {
-                        component.reportAction(
-                            latLng = location.latLng,
-                            type = RoadIncident
-                        )
+                        if (location != LocationState.None) {
+                            component.openReportFlow(
+                                reportDialogFlow = ReportDialogFlow.RoadIncident(location.latLng)
+                            )
+                        }
                     }
                 )
             }
@@ -105,10 +108,10 @@ fun MapUi(
 
 @Composable
 private fun MarkerAlertDialogComponent(component: MapComponent) {
-    val alertDialogState by component.alertDialogState.collectAsState(initial = AlertDialogState.Closed)
+    val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
 
-    when (val state = alertDialogState) {
-        is AlertDialogState.Show -> {
+    when (val state = mapAlertDialog) {
+        is MarkerInfoDialog -> {
             MarkerAlertDialog(
                 reports = state.reports,
                 onClose = {
@@ -116,7 +119,35 @@ private fun MarkerAlertDialogComponent(component: MapComponent) {
                 }
             )
         }
-        is AlertDialogState.Closed -> Unit
+        is PoliceDialog -> {
+            ReportDialog(
+                onClose = { component.closeDialog() },
+                onSend = { mapEvent, shortMessage, message ->
+                    component.reportAction(
+                        latLng = state.currentLatLng,
+                        type = mapEvent,
+                        shortMessage = shortMessage,
+                        message = message
+                    )
+                    component.closeDialog()
+                }
+            )
+        }
+        is RoadIncidentDialog -> {
+            IncidentDialog(
+                onClose = { component.closeDialog() },
+                onSend = { mapEvent, shortMessage, message ->
+                    component.reportAction(
+                        latLng = state.currentLatLng,
+                        type = mapEvent,
+                        shortMessage = shortMessage,
+                        message = message
+                    )
+                    component.closeDialog()
+                }
+            )
+        }
+        is None -> Unit
     }
 }
 

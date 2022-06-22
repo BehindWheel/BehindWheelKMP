@@ -18,11 +18,13 @@ import com.egoriku.grodnoroads.R
 @Composable
 fun AlertButton(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     textResId: Int,
     onClick: () -> Unit
 ) {
     CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
         TextButton(
+            enabled = enabled,
             shape = RoundedCornerShape(0.dp),
             contentPadding = PaddingValues(vertical = 8.dp),
             modifier = modifier,
@@ -31,7 +33,10 @@ fun AlertButton(
             Text(
                 modifier = Modifier.padding(vertical = 8.dp),
                 text = stringResource(id = textResId),
-                color = MaterialTheme.colors.onSurface
+                color = when {
+                    enabled -> MaterialTheme.colors.onSurface
+                    else -> MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+                }
             )
         }
     }
@@ -49,6 +54,11 @@ fun PreviewAlertButton() {
         AlertButton(
             modifier = Modifier.fillMaxWidth(),
             textResId = R.string.cancel
+        ) {}
+        AlertButton(
+            modifier = Modifier.fillMaxWidth(),
+            textResId = R.string.cancel,
+            enabled = false
         ) {}
     }
 }
