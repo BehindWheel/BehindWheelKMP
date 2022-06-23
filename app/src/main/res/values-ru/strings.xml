@@ -40,7 +40,7 @@
     <string name="settings_app_theme_dark">Темная</string>
     <string name="settings_app_theme_light">Светлая</string>
 
-    <string name="settings_section_map_information">Маркеры на карте</string>
+    <string name="settings_section_map_information">Сообщения на карте</string>
 
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>

@@ -42,7 +42,7 @@
     <string name="settings_app_theme_dark">Dark</string>
     <string name="settings_app_theme_light">Light</string>
 
-    <string name="settings_section_map_information">Markers on map</string>
+    <string name="settings_section_map_information">Messages on map</string>
 
     <string name="settings_stationary_cameras">Stationary cameras</string>
     <string name="settings_mobile_cameras">Mobile cameras</string>
