@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
-import com.egoriku.grodnoroads.foundation.button.AlertButton
+import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
@@ -43,7 +43,7 @@ fun MarkerAlertDialog(
         buttons = {
             Column(verticalArrangement = Arrangement.Center) {
                 Divider()
-                AlertButton(
+                DialogButton(
                     modifier = Modifier.fillMaxWidth(),
                     textResId = R.string.ok,
                     onClick = onClose

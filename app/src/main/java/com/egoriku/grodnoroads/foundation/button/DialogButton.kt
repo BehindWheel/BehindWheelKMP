@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AlertButton(
+fun DialogButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     textResId: Int,
@@ -45,17 +45,17 @@ fun AlertButton(
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
 @Composable
-fun PreviewAlertButton() {
+fun PreviewDialogButton() {
     Column {
-        AlertButton(
+        DialogButton(
             modifier = Modifier.fillMaxWidth(),
             textResId = R.string.ok
         ) {}
-        AlertButton(
+        DialogButton(
             modifier = Modifier.fillMaxWidth(),
             textResId = R.string.cancel
         ) {}
-        AlertButton(
+        DialogButton(
             modifier = Modifier.fillMaxWidth(),
             textResId = R.string.cancel,
             enabled = false

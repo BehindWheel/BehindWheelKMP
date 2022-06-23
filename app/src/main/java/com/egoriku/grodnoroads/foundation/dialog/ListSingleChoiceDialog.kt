@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.foundation.button.AlertButton
+import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.common.ListItems
 import com.egoriku.grodnoroads.foundation.dialog.common.content.RadioButtonItem
@@ -43,12 +43,12 @@ fun ListSingleChoiceDialog(
             }
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                AlertButton(
+                DialogButton(
                     modifier = Modifier.weight(1f),
                     textResId = R.string.cancel,
                     onClick = onClose
                 )
-                AlertButton(
+                DialogButton(
                     modifier = Modifier.weight(1f),
                     textResId = R.string.ok,
                     onClick = {
