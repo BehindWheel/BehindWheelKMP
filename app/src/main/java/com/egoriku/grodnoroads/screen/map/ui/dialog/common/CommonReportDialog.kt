@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.common.ListItems
-import com.egoriku.grodnoroads.foundation.dialog.common.Title
+import com.egoriku.grodnoroads.foundation.dialog.common.DialogTitle
 import com.egoriku.grodnoroads.foundation.dialog.common.content.RadioButtonItem
 
 @Composable
@@ -33,7 +33,7 @@ fun CommonReportDialog(
 
     Dialog(onDismissRequest = onClose) {
         DialogContent {
-            Title(titleRes = titleRes, center = true)
+            DialogTitle(titleRes = titleRes, center = true)
 
             ListItems(
                 modifier = Modifier.weight(weight = 1f, fill = false),

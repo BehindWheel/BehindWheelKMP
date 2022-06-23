@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 
 @Composable
-fun Title(
+fun DialogTitle(
     @StringRes titleRes: Int,
     center: Boolean = false
 ) {
@@ -46,10 +46,10 @@ fun Title(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewTitle() {
+fun PreviewDialogTitle() {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Title(titleRes = R.string.app_name)
+        DialogTitle(titleRes = R.string.app_name)
         Divider()
-        Title(titleRes = R.string.app_name, center = true)
+        DialogTitle(titleRes = R.string.app_name, center = true)
     }
 }
