@@ -11,7 +11,6 @@ import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.AlertDialogState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.Source.App
@@ -35,29 +34,26 @@ class MapEventsStoreFactory(
 ) {
 
     sealed interface Intent {
-        data class ReportAction(
-            val latLng: LatLng,
-            val mapEventType: MapEventType,
-        ) : Intent
-
-        data class OpenMarkerInfoDialog(val reports: Reports) : Intent
-        object CloseDialog : Intent
+        data class ReportAction(val params: Params) : Intent {
+            data class Params(
+                val latLng: LatLng,
+                val mapEventType: MapEventType,
+                val shortMessage: String,
+                val message: String
+            )
+        }
     }
 
     private sealed interface Message {
         data class OnStationary(val data: List<StationaryCamera>) : Message
         data class OnNewReports(val data: List<Reports>) : Message
         data class OnMobileCamera(val data: List<MobileCamera>) : Message
-
-        data class OpenDialog(val dialog: AlertDialogState.Show) : Message
-        data class CloseDialog(val dialog: AlertDialogState.Closed) : Message
     }
 
     data class State(
         val stationaryCameras: List<StationaryCamera> = emptyList(),
         val reports: List<Reports> = emptyList(),
-        val mobileCamera: List<MobileCamera> = emptyList(),
-        val alertDialogState: AlertDialogState = AlertDialogState.Closed
+        val mobileCamera: List<MobileCamera> = emptyList()
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -82,30 +78,22 @@ class MapEventsStoreFactory(
                         }
                     }
                 }
-                onIntent<ReportAction> { action ->
+                onIntent<ReportAction> { data ->
                     launch {
+                        val params = data.params
+
                         reportsRepository.report(
                             ReportsResponse(
                                 timestamp = System.currentTimeMillis(),
-                                type = action.mapEventType.type,
-                                message = action.mapEventType.emoji,
-                                shortMessage = "",
-                                latitude = action.latLng.latitude,
-                                longitude = action.latLng.longitude,
+                                type = params.mapEventType.type,
+                                message = params.message,
+                                shortMessage = params.shortMessage,
+                                latitude = params.latLng.latitude,
+                                longitude = params.latLng.longitude,
                                 source = App.source
                             )
                         )
                     }
-                }
-                onIntent<Intent.OpenMarkerInfoDialog> { dialog ->
-                    dispatch(
-                        Message.OpenDialog(dialog = AlertDialogState.Show(dialog.reports))
-                    )
-                }
-                onIntent<Intent.CloseDialog> {
-                    dispatch(
-                        Message.CloseDialog(dialog = AlertDialogState.Closed)
-                    )
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
@@ -114,8 +102,6 @@ class MapEventsStoreFactory(
                     is Message.OnStationary -> copy(stationaryCameras = message.data)
                     is Message.OnNewReports -> copy(reports = message.data)
                     is Message.OnMobileCamera -> copy(mobileCamera = message.data)
-                    is Message.OpenDialog -> copy(alertDialogState = message.dialog)
-                    is Message.CloseDialog -> copy(alertDialogState = message.dialog)
                 }
             }
         ) {}

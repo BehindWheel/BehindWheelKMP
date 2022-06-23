@@ -7,9 +7,9 @@ gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
 
 browser = "1.4.0"
-compose = "1.2.0-rc01"
+compose = "1.2.0-rc02"
 kotlin = "1.6.21"
-map-compose = "2.2.1"
+map-compose = "2.3.0"
 
 [libraries]
 gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }

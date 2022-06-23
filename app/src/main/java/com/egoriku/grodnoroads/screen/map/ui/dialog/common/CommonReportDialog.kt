@@ -1,34 +1,55 @@
-package com.egoriku.grodnoroads.foundation.dialog
+package com.egoriku.grodnoroads.screen.map.ui.dialog.common
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.common.ListItems
+import com.egoriku.grodnoroads.foundation.dialog.common.DialogTitle
 import com.egoriku.grodnoroads.foundation.dialog.common.content.RadioButtonItem
 
 @Composable
-fun ListSingleChoiceDialog(
-    list: List<String>,
-    initialSelection: Int,
+fun CommonReportDialog(
+    titleRes: Int,
+    actions: List<String>,
     onClose: () -> Unit,
-    onSelected: (selected: Int) -> Unit
+    onSelected: (selected: Int, inputText: String) -> Unit
 ) {
-    var selectedItem by remember { mutableStateOf(initialSelection) }
+    var selectedItem by remember { mutableStateOf(-1) }
+    var inputText by remember { mutableStateOf("") }
+
+    val sendButtonEnable by remember(selectedItem) {
+        mutableStateOf(selectedItem != -1)
+    }
 
     Dialog(onDismissRequest = onClose) {
         DialogContent {
+            DialogTitle(titleRes = titleRes, center = true)
+
             ListItems(
-                modifier = Modifier.padding(vertical = 16.dp),
-                list = list,
+                modifier = Modifier.weight(weight = 1f, fill = false),
+                list = actions,
                 onClick = { index, _ -> selectedItem = index },
+                footer = {
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(all = 16.dp),
+                        value = inputText,
+                        singleLine = false,
+                        onValueChange = { inputText = it },
+                        label = { Text(stringResource(R.string.dialog_input_hint)) }
+                    )
+                }
             ) { index, item ->
                 val selected = remember(selectedItem) { index == selectedItem }
 
@@ -49,24 +70,14 @@ fun ListSingleChoiceDialog(
                     onClick = onClose
                 )
                 DialogButton(
+                    enabled = sendButtonEnable,
                     modifier = Modifier.weight(1f),
-                    textResId = R.string.ok,
+                    textResId = R.string.send,
                     onClick = {
-                        onSelected(selectedItem)
+                        onSelected(selectedItem, inputText)
                     }
                 )
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewListSingleChoiceDialog() {
-    ListSingleChoiceDialog(
-        list = listOf("System", "Dark", "Light"),
-        initialSelection = 0,
-        onClose = {},
-        onSelected = {}
-    )
 }

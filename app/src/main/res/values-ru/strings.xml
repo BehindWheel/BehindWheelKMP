@@ -40,7 +40,7 @@
     <string name="settings_app_theme_dark">Темная</string>
     <string name="settings_app_theme_light">Светлая</string>
 
-    <string name="settings_section_map_information">Маркеры на карте</string>
+    <string name="settings_section_map_information">Сообщения на карте</string>
 
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>
@@ -52,4 +52,12 @@
 
     <string name="settings_section_map_preferences">Настройки карты</string>
     <string name="settings_traffic_jam_appearance">Пробки</string>
+
+    <string name="dialog_report_police">Сообщить о ГАИ</string>
+    <string name="dialog_incident">Сообщить о проблеме</string>
+    <string name="dialog_input_hint">Опциональное сообщение</string>
+
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="send">Отправить</string>
 </resources>

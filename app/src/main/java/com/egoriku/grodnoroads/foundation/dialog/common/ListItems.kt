@@ -13,6 +13,7 @@ fun <T> ListItems(
     modifier: Modifier = Modifier,
     list: List<T>,
     onClick: (index: Int, item: T) -> Unit = { _, _ -> },
+    footer: @Composable () -> Unit = {},
     item: @Composable (index: Int, T) -> Unit = { _, _ -> },
 ) {
     LazyColumn(
@@ -30,6 +31,9 @@ fun <T> ListItems(
             ) {
                 item(index, it)
             }
+        }
+        item {
+            footer()
         }
     }
 }

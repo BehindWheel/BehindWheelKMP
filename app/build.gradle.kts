@@ -15,8 +15,8 @@ android {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
         targetSdk = 32
-        versionCode = 118
-        versionName = "1.0.18"
+        versionCode = 119
+        versionName = "1.0.19"
         resourceConfigurations + listOf("en", "ru")
     }
 
@@ -83,8 +83,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:20.0.0")
     implementation("com.google.android.material:material:1.6.1")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.11-rc")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.11-rc")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.12-rc")
+    implementation("com.google.accompanist:accompanist-permissions:0.24.12-rc")
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
