@@ -3,12 +3,13 @@ package com.egoriku.grodnoroads.screen.map
 import com.egoriku.grodnoroads.screen.map.domain.*
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 interface MapComponent {
 
-    val alertDialogState: Flow<AlertDialogState>
+    val mapAlertDialog: Flow<MapAlertDialog>
     val appMode: Flow<AppMode>
     val location: Flow<LocationState>
     val mapEvents: Flow<List<MapEvent>>
@@ -18,7 +19,8 @@ interface MapComponent {
 
     val alerts: Flow<List<Alert>>
 
-    fun reportAction(latLng: LatLng, type: MapEventType)
+    fun openReportFlow(reportDialogFlow: ReportDialogFlow)
+    fun reportAction(params: ReportAction.Params)
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
@@ -27,4 +29,9 @@ interface MapComponent {
 
     fun showMarkerInfoDialog(reports: Reports)
     fun closeDialog()
+
+    sealed interface ReportDialogFlow {
+        data class TrafficPolice(val latLng: LatLng) : ReportDialogFlow
+        data class RoadIncident(val latLng: LatLng) : ReportDialogFlow
+    }
 }

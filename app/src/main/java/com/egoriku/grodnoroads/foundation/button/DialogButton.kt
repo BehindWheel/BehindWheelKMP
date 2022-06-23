@@ -12,16 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AlertTextButton(
+fun DialogButton(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     textResId: Int,
     onClick: () -> Unit
 ) {
     CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
         TextButton(
+            enabled = enabled,
             shape = RoundedCornerShape(0.dp),
             contentPadding = PaddingValues(vertical = 8.dp),
             modifier = modifier,
@@ -30,7 +33,10 @@ fun AlertTextButton(
             Text(
                 modifier = Modifier.padding(vertical = 8.dp),
                 text = stringResource(id = textResId),
-                color = MaterialTheme.colors.onSurface
+                color = when {
+                    enabled -> MaterialTheme.colors.onSurface
+                    else -> MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+                }
             )
         }
     }
@@ -39,15 +45,20 @@ fun AlertTextButton(
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
 @Composable
-fun PreviewAlertTextButton() {
+fun PreviewDialogButton() {
     Column {
-        AlertTextButton(
+        DialogButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = android.R.string.ok
+            textResId = R.string.ok
         ) {}
-        AlertTextButton(
+        DialogButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = android.R.string.cancel
+            textResId = R.string.cancel
+        ) {}
+        DialogButton(
+            modifier = Modifier.fillMaxWidth(),
+            textResId = R.string.cancel,
+            enabled = false
         ) {}
     }
 }
