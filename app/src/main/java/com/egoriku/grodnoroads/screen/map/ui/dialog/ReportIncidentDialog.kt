@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
 import com.egoriku.grodnoroads.screen.map.ui.dialog.common.CommonReportDialog
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
@@ -22,12 +23,12 @@ fun IncidentDialog(
     val actions by remember {
         mutableStateOf(
             mapOf(
-                "ДТП" to MapEventType.CarCrash,
-                "Пробка" to MapEventType.TrafficJam,
-                "Сломалась машина" to MapEventType.RoadIncident,
-                "Ремонт дороги" to MapEventType.RoadIncident,
-                "Не работают светофоры" to MapEventType.RoadIncident,
-                "Дикие животные" to MapEventType.WildAnimals
+                "ДТП" to CarCrash,
+                "Пробка" to TrafficJam,
+                "Сломалась машина" to RoadIncident,
+                "Ремонт дороги" to RoadIncident,
+                "Не работают светофоры" to RoadIncident,
+                "Дикие животные" to WildAnimals
             )
         )
     }
