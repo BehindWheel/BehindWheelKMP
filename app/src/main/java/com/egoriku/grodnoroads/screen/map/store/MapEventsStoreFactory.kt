@@ -34,12 +34,14 @@ class MapEventsStoreFactory(
 ) {
 
     sealed interface Intent {
-        data class ReportAction(
-            val latLng: LatLng,
-            val mapEventType: MapEventType,
-            val shortMessage: String,
-            val message: String
-        ) : Intent
+        data class ReportAction(val params: Params) : Intent {
+            data class Params(
+                val latLng: LatLng,
+                val mapEventType: MapEventType,
+                val shortMessage: String,
+                val message: String
+            )
+        }
     }
 
     private sealed interface Message {
@@ -76,16 +78,18 @@ class MapEventsStoreFactory(
                         }
                     }
                 }
-                onIntent<ReportAction> { action ->
+                onIntent<ReportAction> { data ->
                     launch {
+                        val params = data.params
+
                         reportsRepository.report(
                             ReportsResponse(
                                 timestamp = System.currentTimeMillis(),
-                                type = action.mapEventType.type,
-                                message = action.message,
-                                shortMessage = action.shortMessage,
-                                latitude = action.latLng.latitude,
-                                longitude = action.latLng.longitude,
+                                type = params.mapEventType.type,
+                                message = params.message,
+                                shortMessage = params.shortMessage,
+                                latitude = params.latLng.latitude,
+                                longitude = params.latLng.longitude,
                                 source = App.source
                             )
                         )

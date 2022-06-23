@@ -22,6 +22,7 @@ import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
+import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
@@ -124,10 +125,12 @@ private fun MarkerAlertDialogComponent(component: MapComponent) {
                 onClose = { component.closeDialog() },
                 onSend = { mapEvent, shortMessage, message ->
                     component.reportAction(
-                        latLng = state.currentLatLng,
-                        type = mapEvent,
-                        shortMessage = shortMessage,
-                        message = message
+                        ReportAction.Params(
+                            latLng = state.currentLatLng,
+                            mapEventType = mapEvent,
+                            shortMessage = shortMessage,
+                            message = message
+                        )
                     )
                 }
             )
@@ -137,10 +140,12 @@ private fun MarkerAlertDialogComponent(component: MapComponent) {
                 onClose = { component.closeDialog() },
                 onSend = { mapEvent, shortMessage, message ->
                     component.reportAction(
-                        latLng = state.currentLatLng,
-                        type = mapEvent,
-                        shortMessage = shortMessage,
-                        message = message
+                        ReportAction.Params(
+                            latLng = state.currentLatLng,
+                            mapEventType = mapEvent,
+                            shortMessage = shortMessage,
+                            message = message
+                        )
                     )
                 }
             )

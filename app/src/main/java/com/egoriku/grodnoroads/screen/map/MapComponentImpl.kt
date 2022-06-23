@@ -14,7 +14,6 @@ import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStore
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -78,20 +77,8 @@ class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(DisabledLocation)
 
-    override fun reportAction(
-        latLng: LatLng,
-        type: MapEventType,
-        shortMessage: String,
-        message: String
-    ) {
-        mapEventsStore.accept(
-            ReportAction(
-                latLng = latLng,
-                mapEventType = type,
-                shortMessage = shortMessage,
-                message = message
-            )
-        )
+    override fun reportAction(params: ReportAction.Params) {
+        mapEventsStore.accept(ReportAction(params = params))
         dialogStore.accept(CloseDialog)
     }
 
