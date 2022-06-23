@@ -15,8 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extension.toast
 import com.egoriku.grodnoroads.foundation.DrawerButton
-import com.egoriku.grodnoroads.screen.map.ui.dialog.IncidentDialog
-import com.egoriku.grodnoroads.screen.map.ui.dialog.ReportDialog
 import com.egoriku.grodnoroads.screen.map.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
@@ -27,6 +25,8 @@ import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowT
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
+import com.egoriku.grodnoroads.screen.map.ui.dialog.IncidentDialog
+import com.egoriku.grodnoroads.screen.map.ui.dialog.ReportDialog
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 
 @Composable
@@ -129,7 +129,6 @@ private fun MarkerAlertDialogComponent(component: MapComponent) {
                         shortMessage = shortMessage,
                         message = message
                     )
-                    component.closeDialog()
                 }
             )
         }
@@ -143,7 +142,6 @@ private fun MarkerAlertDialogComponent(component: MapComponent) {
                         shortMessage = shortMessage,
                         message = message
                     )
-                    component.closeDialog()
                 }
             )
         }

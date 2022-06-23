@@ -27,8 +27,8 @@ fun ReportDialog(
                 "Проверка документов" to TrafficPolice,
                 "Остановили на ходу" to TrafficPolice,
                 "Сидят в машине" to TrafficPolice,
-                "Фильтр" to TrafficPolice,
                 "Транспортная инспекция" to TrafficPolice,
+                "Фильтр" to TrafficPolice,
                 "Регулировщик" to TrafficPolice
             )
         )
@@ -50,7 +50,7 @@ fun ReportDialog(
 }
 
 @Preview
-@Preview(locale = "ru", heightDp = 200)
+@Preview(locale = "ru")
 @Composable
 fun PreviewReportDialog() {
     GrodnoRoadsTheme {

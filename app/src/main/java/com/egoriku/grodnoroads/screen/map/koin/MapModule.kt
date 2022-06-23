@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.screen.map.koin
 import com.egoriku.grodnoroads.screen.map.MapComponent
 import com.egoriku.grodnoroads.screen.map.MapComponentImpl
 import com.egoriku.grodnoroads.screen.map.data.*
+import com.egoriku.grodnoroads.screen.map.store.DialogStoreFactory
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory
@@ -39,6 +40,10 @@ val mapModule = module {
             storeFactory = get(),
             dataStore = get()
         ).create()
+    }
+
+    factory {
+        DialogStoreFactory(storeFactory = get()).create()
     }
 }
 
