@@ -20,7 +20,7 @@ fun rememberCameraPositionValues(
     val screenLocation by remember(projection) {
         mutableStateOf(
             projection?.toScreenLocation(locationState.latLng)?.apply {
-                set(x, y - screenHeight / 2)
+                set(x, y - screenHeight / 3)
             } ?: Point()
         )
     }
