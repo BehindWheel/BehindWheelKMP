@@ -1,7 +1,7 @@
 [versions]
 gradleBuildTools = "7.2.1"
-gradleCrashlytics = "2.9.0"
-gradleGoogleServices = "4.3.10"
+gradleCrashlytics = "2.9.1"
+gradleGoogleServices = "4.3.12"
 gradleKsp = "1.6.21-1.0.5"
 gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
@@ -9,7 +9,7 @@ gradleVersionCheck = "0.42.0"
 browser = "1.4.0"
 compose = "1.2.0-rc02"
 kotlin = "1.6.21"
-map-compose = "2.3.0"
+map-compose = "2.4.0"
 
 [libraries]
 gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }
@@ -33,6 +33,6 @@ androidx-core = "androidx.core:core-ktx:1.8.0"
 activity-compose = "androidx.activity:activity-compose:1.4.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
-coroutines-play-services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.2"
+coroutines-play-services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.3"
 
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "map-compose" }
