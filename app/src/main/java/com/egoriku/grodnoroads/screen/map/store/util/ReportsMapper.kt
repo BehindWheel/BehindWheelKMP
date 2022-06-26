@@ -11,6 +11,8 @@ import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 
+private const val MERGE_ALERT_DISTANCE = 200
+
 fun List<ReportsResponse>.mapAndMerge(): List<Reports> {
     return groupBy { it.type }
         .mapValues { it.value.mergeReports() }
@@ -25,7 +27,7 @@ private fun List<ReportsResponse>.mergeReports(): List<Reports> {
         val index = mergedReports.indexOfFirst { calcAction ->
             val distance = calcAction.position distanceTo LatLng(data.latitude, data.longitude)
 
-            distance < 100
+            distance < MERGE_ALERT_DISTANCE
         }
 
         if (index != -1) {
