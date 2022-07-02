@@ -42,10 +42,14 @@ fun IncidentDialog(
         onClose = onClose,
         onSelected = { index, inputText ->
             val pair = actions.toList()[index]
+
+            val eventType = pair.second
+            val shortMessage = pair.first
+
             onSend(
-                pair.second,
-                pair.first,
-                inputText
+                eventType,
+                shortMessage,
+                inputText.ifEmpty { shortMessage }
             )
         }
     )
