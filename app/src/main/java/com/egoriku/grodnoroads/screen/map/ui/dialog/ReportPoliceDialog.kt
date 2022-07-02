@@ -27,6 +27,7 @@ fun ReportDialog(
                 "Проверка документов" to TrafficPolice,
                 "Остановили на ходу" to TrafficPolice,
                 "Сидят в машине" to TrafficPolice,
+                "Работают на ходу" to TrafficPolice,
                 "Транспортная инспекция" to TrafficPolice,
                 "Фильтр" to TrafficPolice,
                 "Регулировщик" to TrafficPolice
