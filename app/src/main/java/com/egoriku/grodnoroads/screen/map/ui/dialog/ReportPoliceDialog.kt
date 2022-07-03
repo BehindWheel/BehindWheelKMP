@@ -23,6 +23,7 @@ fun ReportDialog(
     val actions by remember {
         mutableStateOf(
             mapOf(
+                "ГАИ" to TrafficPolice,
                 "Работают с радаром" to TrafficPolice,
                 "Проверка документов" to TrafficPolice,
                 "Остановили на ходу" to TrafficPolice,
