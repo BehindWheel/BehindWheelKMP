@@ -17,7 +17,7 @@ android {
         targetSdk = 32
         versionCode = 119
         versionName = "1.0.19"
-        resourceConfigurations + listOf("en", "ru")
+        resourceConfigurations += listOf("en", "ru")
     }
 
     signingConfigs {
@@ -40,7 +40,7 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            isMinifyEnabled = false
+            isMinifyEnabled = true
         }
 
         release {
@@ -50,6 +50,7 @@ android {
                 "proguard-rules.pro",
                 getDefaultProguardFile("proguard-android-optimize.txt")
             )
+            isShrinkResources = true
         }
     }
 
