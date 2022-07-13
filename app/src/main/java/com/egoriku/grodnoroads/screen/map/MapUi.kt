@@ -1,21 +1,18 @@
 package com.egoriku.grodnoroads.screen.map
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extension.toast
-import com.egoriku.grodnoroads.foundation.DrawerButton
-import com.egoriku.grodnoroads.screen.map.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
@@ -30,6 +27,7 @@ import com.egoriku.grodnoroads.screen.map.ui.dialog.IncidentDialog
 import com.egoriku.grodnoroads.screen.map.ui.dialog.ReportDialog
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MapUi(
     component: MapComponent,
@@ -62,47 +60,41 @@ fun MapUi(
                 }
             )
 
-            AnimatedVisibility(
-                visible = mode == AppMode.Map,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                MapMode(
-                    onLocationEnabled = component::startLocationUpdates,
-                    onLocationDisabled = component::onLocationDisabled
-                )
-                DrawerButton(
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.TopStart)
-                        .statusBarsPadding(),
-                    onClick = openDrawer
-                )
-            }
-            AnimatedVisibility(
-                visible = mode == AppMode.Drive,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                DriveMode(
-                    alerts = alerts,
-                    location = location,
-                    stopDrive = component::stopLocationUpdates,
-                    reportPolice = {
-                        if (location != LocationState.None) {
-                            component.openReportFlow(
-                                reportDialogFlow = ReportDialogFlow.TrafficPolice(location.latLng)
-                            )
-                        }
-                    },
-                    reportIncident = {
-                        if (location != LocationState.None) {
-                            component.openReportFlow(
-                                reportDialogFlow = ReportDialogFlow.RoadIncident(location.latLng)
-                            )
-                        }
+            AnimatedContent(targetState = mode) { state ->
+                when (state) {
+                    AppMode.Map -> {
+                        MapMode(
+                            onLocationEnabled = component::startLocationUpdates,
+                            onLocationDisabled = component::onLocationDisabled,
+                            openDrawer = openDrawer
+                        )
                     }
-                )
+                    AppMode.Drive -> {
+                        DriveMode(
+                            alerts = alerts,
+                            location = location,
+                            stopDrive = component::stopLocationUpdates,
+                            reportPolice = {
+                                if (location != LocationState.None) {
+                                    component.openReportFlow(
+                                        reportDialogFlow = MapComponent.ReportDialogFlow.TrafficPolice(
+                                            location.latLng
+                                        )
+                                    )
+                                }
+                            },
+                            reportIncident = {
+                                if (location != LocationState.None) {
+                                    component.openReportFlow(
+                                        reportDialogFlow = MapComponent.ReportDialogFlow.RoadIncident(
+                                            location.latLng
+                                        )
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
             }
         }
     }

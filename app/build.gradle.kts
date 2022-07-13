@@ -58,7 +58,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packagingOptions {
@@ -83,8 +83,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:20.0.0")
     implementation("com.google.android.material:material:1.6.1")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.12-rc")
-    implementation("com.google.accompanist:accompanist-permissions:0.24.12-rc")
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
@@ -94,8 +94,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
-    implementation(libs.activity.compose)
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)
 
@@ -104,14 +104,14 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 
-    implementation("com.arkivanov.decompose:decompose:0.6.0")
-    implementation("com.arkivanov.decompose:extensions-compose-jetpack:0.6.0")
+    implementation(libs.decompose)
+    implementation(libs.decompose.compose.jetpack)
 
     implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02")
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.6.21")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.10")
 }
 
 secrets {
