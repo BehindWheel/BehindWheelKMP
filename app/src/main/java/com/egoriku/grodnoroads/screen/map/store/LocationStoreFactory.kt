@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.screen.map.store
 
+import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
@@ -47,12 +48,23 @@ class LocationStoreFactory(
         object : LocationStore, Store<Intent, State, Label> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                onAction<Unit> {
+                    launch {
+                        val lastKnownLocation = locationHelper.getLastKnownLocation()
+
+                        if (lastKnownLocation != null) {
+                            dispatch(
+                                Message.OnNewLocation(locationState = lastKnownLocation)
+                            )
+                        }
+                    }
+                }
                 onIntent<StartLocationUpdates> {
                     locationHelper.startLocationUpdates()
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Drive))
 
                     launch {
-                        locationHelper.lastLocation.collect {
+                        locationHelper.lastLocationFlow.collect {
                             dispatch(Message.OnNewLocation(locationState = it))
                         }
                     }
@@ -61,12 +73,12 @@ class LocationStoreFactory(
                     locationHelper.stopLocationUpdates()
 
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Map))
-                    dispatch(Message.OnNewLocation(locationState = LocationState.None))
                 }
                 onIntent<DisabledLocation> {
                     publish(Label.ShowToast(message = resourceProvider.locationDisabled))
                 }
             },
+            bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
                     is Message.OnNewLocation -> copy(locationState = message.locationState)

@@ -54,6 +54,7 @@ fun MapUi(
             GoogleMapView(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
+                mode = mode,
                 mapPreferences = mapPreferences,
                 locationState = location,
                 onMarkerClick = {

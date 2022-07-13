@@ -9,10 +9,10 @@ data class LocationState(
 ) {
 
     companion object {
-        val EmptyLatLng = LatLng(0.0, 0.0)
+        val GrodnoLatLng = LatLng(53.6687765, 23.8212226)
 
         val None = LocationState(
-            latLng = EmptyLatLng,
+            latLng = GrodnoLatLng,
             bearing = 0f,
             speed = 0
         )
