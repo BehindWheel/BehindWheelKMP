@@ -23,10 +23,12 @@ fun ReportDialog(
     val actions by remember {
         mutableStateOf(
             mapOf(
+                "ГАИ" to TrafficPolice,
                 "Работают с радаром" to TrafficPolice,
                 "Проверка документов" to TrafficPolice,
                 "Остановили на ходу" to TrafficPolice,
                 "Сидят в машине" to TrafficPolice,
+                "Работают на ходу" to TrafficPolice,
                 "Транспортная инспекция" to TrafficPolice,
                 "Фильтр" to TrafficPolice,
                 "Регулировщик" to TrafficPolice
@@ -40,10 +42,14 @@ fun ReportDialog(
         onClose = onClose,
         onSelected = { index, inputText ->
             val pair = actions.toList()[index]
+
+            val eventType = pair.second
+            val shortMessage = pair.first
+
             onSend(
-                pair.second,
-                pair.first,
-                inputText
+                eventType,
+                shortMessage,
+                inputText.ifEmpty { shortMessage }
             )
         }
     )

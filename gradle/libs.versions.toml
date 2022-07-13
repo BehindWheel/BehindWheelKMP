@@ -1,15 +1,18 @@
 [versions]
 gradleBuildTools = "7.2.1"
-gradleCrashlytics = "2.9.0"
-gradleGoogleServices = "4.3.10"
-gradleKsp = "1.6.21-1.0.5"
+gradleCrashlytics = "2.9.1"
+gradleGoogleServices = "4.3.13"
+gradleKsp = "1.7.0-1.0.6"
 gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
 
+accompanist = "0.24.13-rc"
 browser = "1.4.0"
-compose = "1.2.0-rc02"
-kotlin = "1.6.21"
-map-compose = "2.3.0"
+compose = "1.2.0-rc03"
+composeCompiler = "1.2.0"
+decompose = "0.7.0"
+kotlin = "1.7.0"
+maps-compose = "2.5.2"
 
 [libraries]
 gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }
@@ -28,11 +31,17 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compos
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+
+androidx-activity-compose = "androidx.activity:activity-compose:1.4.0"
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core = "androidx.core:core-ktx:1.8.0"
-activity-compose = "androidx.activity:activity-compose:1.4.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
-coroutines-play-services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.2"
+coroutines-play-services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
 
-maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "map-compose" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }

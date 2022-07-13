@@ -7,7 +7,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.CarCrash
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficJam
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.WildAnimals
 import com.egoriku.grodnoroads.screen.map.ui.dialog.common.CommonReportDialog
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
@@ -28,7 +31,8 @@ fun IncidentDialog(
                 "Сломалась машина" to RoadIncident,
                 "Ремонт дороги" to RoadIncident,
                 "Не работают светофоры" to RoadIncident,
-                "Дикие животные" to WildAnimals
+                "Дикие животные" to WildAnimals,
+                "Другое" to RoadIncident
             )
         )
     }
@@ -38,10 +42,14 @@ fun IncidentDialog(
         onClose = onClose,
         onSelected = { index, inputText ->
             val pair = actions.toList()[index]
+
+            val eventType = pair.second
+            val shortMessage = pair.first
+
             onSend(
-                pair.second,
-                pair.first,
-                inputText
+                eventType,
+                shortMessage,
+                inputText.ifEmpty { shortMessage }
             )
         }
     )

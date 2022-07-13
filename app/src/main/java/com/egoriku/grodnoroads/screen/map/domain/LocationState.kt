@@ -7,9 +7,12 @@ data class LocationState(
     val bearing: Float,
     val speed: Int
 ) {
+
     companion object {
+        val GrodnoLatLng = LatLng(53.6687765, 23.8212226)
+
         val None = LocationState(
-            latLng = LatLng(0.0, 0.0),
+            latLng = GrodnoLatLng,
             bearing = 0f,
             speed = 0
         )

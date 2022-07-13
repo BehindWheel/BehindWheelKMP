@@ -8,8 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
+import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -43,7 +43,7 @@ fun rememberMapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
-                minZoomPreference = 9.0f,
+                minZoomPreference = 7.0f,
                 maxZoomPreference = 17.5f,
                 isTrafficEnabled = mapPreferences.isTrafficEnabled,
             )
