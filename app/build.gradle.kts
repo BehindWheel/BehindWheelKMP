@@ -69,7 +69,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.3.0"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -79,7 +79,6 @@ dependencies {
     implementation("com.google.maps.android:maps-ktx:3.4.0")
     implementation(libs.maps.compose)
 
-    implementation("com.google.android.gms:play-services-maps:18.0.2")
     implementation("com.google.android.gms:play-services-location:20.0.0")
     implementation("com.google.android.material:material:1.6.1")
 
@@ -107,9 +106,9 @@ dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
 
-    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.0-beta02")
-    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.0-beta02")
-    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.0-beta02")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.1")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.1")
+    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.10")
 }

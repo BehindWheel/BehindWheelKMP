@@ -10,7 +10,7 @@ accompanist = "0.24.13-rc"
 browser = "1.4.0"
 compose = "1.2.0-rc03"
 composeCompiler = "1.2.0"
-decompose = "0.7.0"
+decompose = "0.8.0"
 kotlin = "1.7.0"
 maps-compose = "2.5.2"
 

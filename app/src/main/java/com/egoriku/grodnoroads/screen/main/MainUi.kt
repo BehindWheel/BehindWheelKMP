@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.extensions.compose.jetpack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.childAnimation
-import com.arkivanov.decompose.extensions.compose.jetpack.animation.child.fade
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
@@ -42,13 +42,15 @@ fun MainUi(component: MainComponent) {
             DrawerContent(modifier = Modifier.systemBarsPadding())
         }
     ) {
+        val childStack by component.childStack.subscribeAsState()
+
         Scaffold(
             modifier = Modifier.navigationBarsPadding(),
             content = {
                 Children(
                     modifier = Modifier.padding(it),
-                    routerState = component.routerState,
-                    animation = childAnimation(fade())
+                    stack = childStack,
+                    animation = stackAnimation(fade())
                 ) { created ->
                     when (val child = created.instance) {
                         is Child.Map -> MapUi(
@@ -60,12 +62,10 @@ fun MainUi(component: MainComponent) {
                 }
             },
             bottomBar = {
-                val activeIndex by component.activeChildIndex.subscribeAsState()
-
                 BottomNavigation {
                     listOf(Screen.Map(), Screen.Settings()).forEach { screen ->
                         BottomNavigationItem(
-                            selected = screen.index == activeIndex,
+                            selected = screen.index == childStack.active.instance.index,
                             onClick = { component.onSelectTab(index = screen.index) },
                             icon = {
                                 Icon(

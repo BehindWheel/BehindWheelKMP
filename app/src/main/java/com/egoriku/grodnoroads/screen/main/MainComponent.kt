@@ -1,15 +1,13 @@
 package com.egoriku.grodnoroads.screen.main
 
-import com.arkivanov.decompose.router.RouterState
+import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.screen.map.MapComponent
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent
 
 interface MainComponent {
 
-    val activeChildIndex: Value<Int>
-
-    val routerState: Value<RouterState<*, Child>>
+    val childStack: Value<ChildStack<*, Child>>
 
     sealed class Child(val index: Int) {
         data class Map(val component: MapComponent) : Child(index = 0)
