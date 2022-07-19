@@ -1,18 +1,26 @@
 package com.egoriku.grodnoroads.screen.map.store
 
+import androidx.core.os.bundleOf
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_MARKER_INFO_DIALOG
+import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_ROAD_INCIDENT_DIALOG
+import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_TRAFFIC_POLICE_DIALOG
 import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.store.DialogStoreFactory.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.Dispatchers
 
 interface DialogStore : Store<Intent, State, Message>
 
-class DialogStoreFactory(private val storeFactory: StoreFactory) {
+class DialogStoreFactory(
+    private val storeFactory: StoreFactory,
+    private val firebaseAnalytics: FirebaseAnalytics,
+) {
 
     sealed interface Intent {
         data class OpenMarkerInfoDialog(val reports: MapEvent.Reports) : Intent
@@ -39,6 +47,7 @@ class DialogStoreFactory(private val storeFactory: StoreFactory) {
                     dispatch(
                         Message.OpenDialog(dialog = MapAlertDialog.MarkerInfoDialog(dialog.reports))
                     )
+                    firebaseAnalytics.logEvent(EVENT_OPEN_MARKER_INFO_DIALOG, bundleOf())
                 }
                 onIntent<Intent.OpenReportTrafficPoliceDialog> { data ->
                     dispatch(
@@ -48,6 +57,7 @@ class DialogStoreFactory(private val storeFactory: StoreFactory) {
                             )
                         )
                     )
+                    firebaseAnalytics.logEvent(EVENT_OPEN_TRAFFIC_POLICE_DIALOG, bundleOf())
                 }
                 onIntent<Intent.OpenRoadIncidentDialog> { data ->
                     dispatch(
@@ -57,6 +67,7 @@ class DialogStoreFactory(private val storeFactory: StoreFactory) {
                             )
                         )
                     )
+                    firebaseAnalytics.logEvent(EVENT_OPEN_ROAD_INCIDENT_DIALOG, bundleOf())
                 }
                 onIntent<Intent.CloseDialog> {
                     dispatch(

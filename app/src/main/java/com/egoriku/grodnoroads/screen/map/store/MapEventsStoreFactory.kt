@@ -5,6 +5,9 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_REPORT_ACTION
+import com.egoriku.grodnoroads.common.AnalyticsEvent.PARAM_EVENT_TYPE
+import com.egoriku.grodnoroads.common.AnalyticsEvent.PARAM_SHORT_MESSAGE
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
@@ -19,6 +22,8 @@ import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.Rep
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.State
 import com.egoriku.grodnoroads.screen.map.store.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +36,7 @@ class MapEventsStoreFactory(
     private val mobileCameraRepository: MobileCameraRepository,
     private val stationaryCameraRepository: StationaryCameraRepository,
     private val reportsRepository: ReportsRepository,
+    private val firebaseAnalytics: FirebaseAnalytics,
 ) {
 
     sealed interface Intent {
@@ -93,6 +99,10 @@ class MapEventsStoreFactory(
                                 source = App.source
                             )
                         )
+                        firebaseAnalytics.logEvent(EVENT_REPORT_ACTION) {
+                            param(PARAM_EVENT_TYPE, params.mapEventType.type)
+                            param(PARAM_SHORT_MESSAGE, params.shortMessage)
+                        }
                     }
                 }
             },
