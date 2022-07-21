@@ -81,7 +81,7 @@ class SettingsComponentImpl(
         configuration: Config,
         componentContext: ComponentContext,
     ) = when (configuration) {
-        is Config.Settings -> Child.Settings(componentContext)
+        is Config.Settings -> Child.Settings
         is Config.WhatsNew -> Child.WhatsNew(
             whatsNewComponent = WhatsNewComponentImpl(
                 componentContext = componentContext

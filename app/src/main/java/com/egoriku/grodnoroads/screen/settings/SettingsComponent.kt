@@ -15,7 +15,8 @@ interface SettingsComponent {
     val childStack: Value<ChildStack<*, Child>>
 
     sealed class Child {
-        data class Settings(val componentContext: ComponentContext) : Child()
+        object Settings : Child()
+
         data class Appearance(val componentContext: ComponentContext) : Child()
         data class Markers(val componentContext: ComponentContext) : Child()
         data class Map(val componentContext: ComponentContext) : Child()
