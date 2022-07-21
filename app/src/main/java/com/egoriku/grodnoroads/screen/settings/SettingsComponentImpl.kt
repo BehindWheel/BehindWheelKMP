@@ -7,11 +7,12 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
+import com.egoriku.grodnoroads.screen.settings.faq.component.FaqComponentImpl
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.OnCheckedChanged
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.ProcessPreferenceClick
-import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewComponentImpl
+import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
@@ -62,7 +63,7 @@ class SettingsComponentImpl(
 
     override fun open(page: SettingsComponent.Page) {
         when (page) {
-            SettingsComponent.Page.About -> navigation.push(Config.About)
+            SettingsComponent.Page.FAQ -> navigation.push(Config.FAQ)
             SettingsComponent.Page.Appearance -> TODO()
             SettingsComponent.Page.Markers -> TODO()
             SettingsComponent.Page.Map -> TODO()
@@ -86,7 +87,11 @@ class SettingsComponentImpl(
                 componentContext = componentContext
             )
         )
-        is Config.About -> Child.About(componentContext)
+        is Config.FAQ -> Child.FAQ(
+            faqComponent = FaqComponentImpl(
+                componentContext = componentContext
+            )
+        )
     }
 
     private sealed class Config : Parcelable {
@@ -97,6 +102,6 @@ class SettingsComponentImpl(
         object WhatsNew : Config()
 
         @Parcelize
-        object About : Config()
+        object FAQ : Config()
     }
 }

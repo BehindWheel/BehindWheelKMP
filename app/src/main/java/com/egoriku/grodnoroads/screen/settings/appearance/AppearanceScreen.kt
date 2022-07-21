@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings
+package com.egoriku.grodnoroads.screen.settings.appearance
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +18,7 @@ fun AppearanceScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_about),
+                title = stringResource(id = R.string.settings_section_appearance),
                 onBack = onBack
             )
         }

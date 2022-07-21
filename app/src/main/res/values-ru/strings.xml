@@ -39,7 +39,7 @@
     <string name="settings_section_alerts">Уведомления</string>
     <string name="settings_section_whats_new">Что нового</string>
     <string name="settings_section_beta_features">Beta функции</string>
-    <string name="settings_section_about">О приложении</string>
+    <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
     <string name="settings_app_theme">Тема</string>
     <string name="settings_app_theme_system">Системная</string>

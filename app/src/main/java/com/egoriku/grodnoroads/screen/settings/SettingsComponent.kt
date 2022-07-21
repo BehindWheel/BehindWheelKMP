@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.screen.settings.domain.Theme
+import com.egoriku.grodnoroads.screen.settings.faq.FaqComponent
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewComponent
@@ -21,7 +22,7 @@ interface SettingsComponent {
         data class Alerts(val componentContext: ComponentContext) : Child()
         data class WhatsNew(val whatsNewComponent: WhatsNewComponent) : Child()
         data class BetaFeatures(val componentContext: ComponentContext) : Child()
-        data class About(val componentContext: ComponentContext) : Child()
+        data class FAQ(val faqComponent: FaqComponent) : Child()
     }
 
     enum class Page {
@@ -31,7 +32,7 @@ interface SettingsComponent {
         Alerts,
         WhatsNew,
         BetaFeatures,
-        About
+        FAQ
     }
 
     val settingsState: Flow<SettingsState>

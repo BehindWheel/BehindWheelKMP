@@ -20,7 +20,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
-import com.egoriku.grodnoroads.screen.settings.about.AboutScreen
+import com.egoriku.grodnoroads.screen.settings.faq.FaqScreen
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState.ThemeDialog
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
@@ -58,7 +58,10 @@ fun SettingsUi(settingsComponent: SettingsComponent) {
             ) { created ->
                 when (val child = created.instance) {
                     is SettingsComponent.Child.Settings -> d(settingsComponent)
-                    is SettingsComponent.Child.About -> AboutScreen(onBack = settingsComponent::onBack)
+                    is SettingsComponent.Child.FAQ -> FaqScreen(
+                        faqComponent = child.faqComponent,
+                        onBack = settingsComponent::onBack
+                    )
                     is SettingsComponent.Child.Alerts -> TODO()
                     is SettingsComponent.Child.Appearance -> TODO()
                     is SettingsComponent.Child.BetaFeatures -> TODO()
@@ -135,9 +138,9 @@ fun d(settingsComponent: SettingsComponent) {
         )
         SettingsItem(
             icon = Icons.Filled.Help,
-            text = stringResource(R.string.settings_section_about),
+            text = stringResource(R.string.settings_section_faq),
             onClick = {
-                settingsComponent.open(page = Page.About)
+                settingsComponent.open(page = Page.FAQ)
             }
         )
     }

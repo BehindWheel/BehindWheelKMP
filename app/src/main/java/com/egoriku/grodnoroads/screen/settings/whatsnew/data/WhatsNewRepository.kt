@@ -14,7 +14,7 @@ internal class WhatsNewRepositoryImpl(
     override suspend fun load() = withContext(Dispatchers.IO) {
         firestore
             .collection("whats_new")
-            .orderBy("code", Query.Direction.DESCENDING)
+            .orderBy("id", Query.Direction.DESCENDING)
             .await<WhatsNewResponse>()
     }
 }
