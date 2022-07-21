@@ -19,7 +19,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
 import com.egoriku.grodnoroads.screen.map.MapUi
-import com.egoriku.grodnoroads.screen.settings.SettingsUi
+import com.egoriku.grodnoroads.screen.settings.SettingsScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalDecomposeApi::class)
@@ -57,7 +57,7 @@ fun MainUi(component: MainComponent) {
                             component = child.component,
                             openDrawer = openDrawer
                         )
-                        is Child.Settings -> SettingsUi(settingsComponent = child.component)
+                        is Child.Settings -> SettingsScreen(settingsComponent = child.component)
                     }
                 }
             },

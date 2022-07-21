@@ -7,6 +7,7 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 import com.egoriku.grodnoroads.screen.settings.faq.component.FaqComponentImpl
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
@@ -61,21 +62,20 @@ class SettingsComponentImpl(
         settingsStore.accept(Intent.CloseDialog)
     }
 
-    override fun open(page: SettingsComponent.Page) {
+    override fun open(page: Page) {
         when (page) {
-            SettingsComponent.Page.FAQ -> navigation.push(Config.FAQ)
-            SettingsComponent.Page.Appearance -> TODO()
-            SettingsComponent.Page.Markers -> TODO()
-            SettingsComponent.Page.Map -> TODO()
-            SettingsComponent.Page.Alerts -> TODO()
-            SettingsComponent.Page.WhatsNew -> navigation.push(Config.WhatsNew)
-            SettingsComponent.Page.BetaFeatures -> TODO()
+            Page.Appearance -> navigation.push(Config.Appearance)
+            Page.Markers -> navigation.push(Config.Markers)
+            Page.Map -> navigation.push(Config.Map)
+            Page.Alerts -> navigation.push(Config.Alerts)
+            Page.WhatsNew -> navigation.push(Config.WhatsNew)
+            Page.NextFeatures -> navigation.push(Config.NextFeatures)
+            Page.BetaFeatures -> navigation.push(Config.BetaFeatures)
+            Page.FAQ -> navigation.push(Config.FAQ)
         }
     }
 
-    override fun onBack() {
-        navigation.pop()
-    }
+    override fun onBack() = navigation.pop()
 
     private fun child(
         configuration: Config,
@@ -92,6 +92,12 @@ class SettingsComponentImpl(
                 componentContext = componentContext
             )
         )
+        Config.Alerts -> TODO()
+        Config.Appearance -> TODO()
+        Config.BetaFeatures -> TODO()
+        Config.Map -> TODO()
+        Config.Markers -> TODO()
+        Config.NextFeatures -> TODO()
     }
 
     private sealed class Config : Parcelable {
@@ -99,7 +105,25 @@ class SettingsComponentImpl(
         object Settings : Config()
 
         @Parcelize
+        object Appearance : Config()
+
+        @Parcelize
+        object Markers : Config()
+
+        @Parcelize
+        object Map : Config()
+
+        @Parcelize
+        object Alerts : Config()
+
+        @Parcelize
         object WhatsNew : Config()
+
+        @Parcelize
+        object NextFeatures : Config()
+
+        @Parcelize
+        object BetaFeatures : Config()
 
         @Parcelize
         object FAQ : Config()

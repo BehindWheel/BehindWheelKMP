@@ -38,6 +38,7 @@
     <string name="settings_section_map">Карта</string>
     <string name="settings_section_alerts">Уведомления</string>
     <string name="settings_section_whats_new">Что нового</string>
+    <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_beta_features">Beta функции</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
