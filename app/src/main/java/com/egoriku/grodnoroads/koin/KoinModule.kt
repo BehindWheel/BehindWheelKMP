@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.util.location.LocationHelper
 import com.egoriku.grodnoroads.util.location.LocationHelperImpl
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -19,6 +20,7 @@ import org.koin.dsl.module
 val appScopeModule = module {
     single { Firebase.analytics }
     single { Firebase.database.reference }
+    single { Firebase.firestore }
     single { get<Context>().dataStore }
 
     singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }

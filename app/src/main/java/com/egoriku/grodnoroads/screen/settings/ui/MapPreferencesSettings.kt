@@ -16,7 +16,7 @@ fun MapPreferencesSettings(
     mapAppearance: MapAppearance,
     onCheckedChange: (SettingsComponent.Pref) -> Unit
 ) {
-    BasicSettingsSection(title = stringResource(R.string.settings_section_map_preferences)) {
+    BasicSettingsSection(title = stringResource(R.string.settings_section_map)) {
         Column {
             TrafficJam(mapAppearance, onCheckedChange)
         }

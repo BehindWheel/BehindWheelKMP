@@ -20,6 +20,7 @@ val LightColors = lightColors(
     secondary = Orange700,
     secondaryVariant = Orange500,
     onSecondary = Color.Black,
+    background = Color.White
 )
 
 val DarkColors = darkColors(
@@ -28,4 +29,5 @@ val DarkColors = darkColors(
     onPrimary = Color.Black,
     secondary = Orange500,
     onSecondary = Color.Black,
+    background = Slate900
 )

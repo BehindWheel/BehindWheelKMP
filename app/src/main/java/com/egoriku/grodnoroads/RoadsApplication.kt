@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.map.koin.mapModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.screen.settings.koin.settingsModule
+import com.egoriku.grodnoroads.screen.settings.whatsnew.di.whatsNewModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -26,7 +27,8 @@ class RoadsApplication : Application() {
                 mainModule,
                 mapModule,
                 rootModule,
-                settingsModule
+                settingsModule,
+                whatsNewModule
             )
         }
     }

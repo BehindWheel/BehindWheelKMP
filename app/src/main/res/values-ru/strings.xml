@@ -34,13 +34,17 @@
 
     <!-- Settings -->
     <string name="settings_section_appearance">Внешний вид</string>
+    <string name="settings_section_markers">Маркеры</string>
+    <string name="settings_section_map">Карта</string>
+    <string name="settings_section_alerts">Уведомления</string>
+    <string name="settings_section_whats_new">Что нового</string>
+    <string name="settings_section_beta_features">Beta функции</string>
+    <string name="settings_section_about">О приложении</string>
 
     <string name="settings_app_theme">Тема</string>
     <string name="settings_app_theme_system">Системная</string>
     <string name="settings_app_theme_dark">Темная</string>
     <string name="settings_app_theme_light">Светлая</string>
-
-    <string name="settings_section_map_information">Сообщения на карте</string>
 
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>
@@ -50,7 +54,6 @@
     <string name="settings_traffic_jam">Пробки</string>
     <string name="settings_wild_animals">Дикие животные</string>
 
-    <string name="settings_section_map_preferences">Настройки карты</string>
     <string name="settings_traffic_jam_appearance">Пробки</string>
 
     <string name="dialog_report_police">Сообщить о ГАИ</string>

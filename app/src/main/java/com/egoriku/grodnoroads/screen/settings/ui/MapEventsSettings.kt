@@ -16,7 +16,7 @@ fun MapEventsSettings(
     mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    BasicSettingsSection(title = stringResource(R.string.settings_section_map_information)) {
+    BasicSettingsSection(title = stringResource(R.string.settings_section_markers)) {
         Column {
             StationaryCameras(mapInfo, onCheckedChange)
             MobileCameras(mapInfo, onCheckedChange)

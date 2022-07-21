@@ -1,14 +1,42 @@
 package com.egoriku.grodnoroads.screen.settings
 
+import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.screen.settings.domain.Theme
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
+import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewComponent
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsComponent {
 
+    val childStack: Value<ChildStack<*, Child>>
+
+    sealed class Child {
+        data class Settings(val componentContext: ComponentContext) : Child()
+        data class Appearance(val componentContext: ComponentContext) : Child()
+        data class Markers(val componentContext: ComponentContext) : Child()
+        data class Map(val componentContext: ComponentContext) : Child()
+        data class Alerts(val componentContext: ComponentContext) : Child()
+        data class WhatsNew(val whatsNewComponent: WhatsNewComponent) : Child()
+        data class BetaFeatures(val componentContext: ComponentContext) : Child()
+        data class About(val componentContext: ComponentContext) : Child()
+    }
+
+    enum class Page {
+        Appearance,
+        Markers,
+        Map,
+        Alerts,
+        WhatsNew,
+        BetaFeatures,
+        About
+    }
+
     val settingsState: Flow<SettingsState>
     val dialogState: Flow<DialogState>
+
 
     fun onCheckedChanged(preference: Pref)
 
@@ -17,6 +45,9 @@ interface SettingsComponent {
     fun processResult(preference: Pref)
 
     fun closeDialog()
+
+    fun open(page: Page)
+    fun onBack()
 
     sealed interface Pref {
         data class AppTheme(
