@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.screen.settings.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.settings.SettingsCheckbox
@@ -16,7 +15,7 @@ fun MapEventsSettings(
     mapInfo: MapInfo,
     onCheckedChange: (Pref) -> Unit
 ) {
-    BasicSettingsSection(title = stringResource(R.string.settings_section_markers)) {
+    BasicSettingsSection(title = "") {
         Column {
             StationaryCameras(mapInfo, onCheckedChange)
             MobileCameras(mapInfo, onCheckedChange)

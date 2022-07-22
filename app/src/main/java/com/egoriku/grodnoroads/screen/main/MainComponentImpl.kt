@@ -31,7 +31,7 @@ class MainComponentImpl(
 
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
-        initialConfiguration = Config.Map,
+        initialConfiguration = Config.Settings,
         handleBackButton = true,
         key = "Main",
         childFactory = ::child

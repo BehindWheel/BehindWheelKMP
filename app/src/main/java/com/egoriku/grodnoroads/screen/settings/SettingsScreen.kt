@@ -47,7 +47,6 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
                         appearanceComponent = child.appearanceComponent,
                         onBack = settingsComponent::onBack
                     )
-                    is SettingsComponent.Child.Markers -> TODO()
                     is SettingsComponent.Child.Map -> TODO()
                     is SettingsComponent.Child.Alerts -> TODO()
                     is SettingsComponent.Child.WhatsNew -> WhatsNewScreen(

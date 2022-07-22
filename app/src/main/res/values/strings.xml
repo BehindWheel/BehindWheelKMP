@@ -36,7 +36,6 @@
 
     <!-- Settings Header -->
     <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_markers">Markers</string>
     <string name="settings_section_map">Map</string>
     <string name="settings_section_alerts">Alerts</string>
     <string name="settings_section_whats_new">What\'s new</string>
@@ -54,6 +53,9 @@
     <string name="appearance_app_language_ru">Russian</string>
     <string name="appearance_app_language_en">English</string>
     <string name="appearance_app_language_by">Belarusian</string>
+
+    <!-- Map -->
+    <string name="map_header_markers">Markers</string>
 
 
     <string name="settings_stationary_cameras">Stationary cameras</string>

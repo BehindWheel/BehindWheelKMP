@@ -65,7 +65,6 @@ class SettingsComponentImpl(
     override fun open(page: Page) {
         when (page) {
             Page.Appearance -> navigation.push(Config.Appearance)
-            Page.Markers -> navigation.push(Config.Markers)
             Page.Map -> navigation.push(Config.Map)
             Page.Alerts -> navigation.push(Config.Alerts)
             Page.WhatsNew -> navigation.push(Config.WhatsNew)
@@ -91,7 +90,6 @@ class SettingsComponentImpl(
         is Config.Alerts -> TODO()
         is Config.BetaFeatures -> TODO()
         is Config.Map -> TODO()
-        is Config.Markers -> TODO()
         is Config.NextFeatures -> TODO()
         is Config.WhatsNew -> WhatsNew(
             whatsNewComponent = WhatsNewComponentImpl(
@@ -111,9 +109,6 @@ class SettingsComponentImpl(
 
         @Parcelize
         object Appearance : Config()
-
-        @Parcelize
-        object Markers : Config()
 
         @Parcelize
         object Map : Config()

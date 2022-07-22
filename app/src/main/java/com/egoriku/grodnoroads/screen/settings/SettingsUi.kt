@@ -21,13 +21,6 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
             }
         )
         SettingsItem(
-            icon = Icons.Filled.Info,
-            text = stringResource(R.string.settings_section_markers),
-            onClick = {
-                onSettingClick(Page.Markers)
-            }
-        )
-        SettingsItem(
             icon = Icons.Filled.Map,
             text = stringResource(R.string.settings_section_map),
             onClick = {

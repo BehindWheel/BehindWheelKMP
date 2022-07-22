@@ -17,7 +17,6 @@ interface SettingsComponent {
         object Settings : Child()
 
         data class Appearance(val appearanceComponent: AppearanceComponent) : Child()
-        data class Markers(val componentContext: ComponentContext) : Child()
         data class Map(val componentContext: ComponentContext) : Child()
         data class Alerts(val componentContext: ComponentContext) : Child()
         data class WhatsNew(val whatsNewComponent: WhatsNewComponent) : Child()
@@ -28,7 +27,6 @@ interface SettingsComponent {
 
     enum class Page {
         Appearance,
-        Markers,
         Map,
         Alerts,
         WhatsNew,
