@@ -7,12 +7,16 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Settings
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.WhatsNew
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponentImpl
 import com.egoriku.grodnoroads.screen.settings.faq.component.FaqComponentImpl
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
+import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.OnCheckedChanged
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.ProcessPreferenceClick
+import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
 import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -40,10 +44,6 @@ class SettingsComponentImpl(
 
     override val settingsState: Flow<SettingsState> = settingsStore.states.map {
         it.settingsState
-    }
-
-    override val dialogState: Flow<DialogState> = settingsStore.states.map {
-        it.dialogState
     }
 
     override fun onCheckedChanged(preference: SettingsComponent.Pref) {
@@ -81,8 +81,19 @@ class SettingsComponentImpl(
         configuration: Config,
         componentContext: ComponentContext,
     ) = when (configuration) {
-        is Config.Settings -> Child.Settings
-        is Config.WhatsNew -> Child.WhatsNew(
+        is Config.Settings -> Settings
+
+        is Config.Appearance -> Child.Appearance(
+            appearanceComponent = AppearanceComponentImpl(
+                componentContext = componentContext
+            )
+        )
+        is Config.Alerts -> TODO()
+        is Config.BetaFeatures -> TODO()
+        is Config.Map -> TODO()
+        is Config.Markers -> TODO()
+        is Config.NextFeatures -> TODO()
+        is Config.WhatsNew -> WhatsNew(
             whatsNewComponent = WhatsNewComponentImpl(
                 componentContext = componentContext
             )
@@ -92,12 +103,6 @@ class SettingsComponentImpl(
                 componentContext = componentContext
             )
         )
-        Config.Alerts -> TODO()
-        Config.Appearance -> TODO()
-        Config.BetaFeatures -> TODO()
-        Config.Map -> TODO()
-        Config.Markers -> TODO()
-        Config.NextFeatures -> TODO()
     }
 
     private sealed class Config : Parcelable {

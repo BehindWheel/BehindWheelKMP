@@ -8,7 +8,9 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
-import com.egoriku.grodnoroads.screen.settings.domain.Theme
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
+import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_LANGUAGE
 import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_THEME
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -22,10 +24,13 @@ class RootStoreFactory(
 ) {
 
     sealed interface Message {
-        data class NewTheme(val theme: Theme) : Message
+        data class NewState(val state: State) : Message
     }
 
-    data class State(val theme: Theme = Theme.System)
+    data class State(
+        val theme: Theme = Theme.System,
+        val language: Language = Language.Russian
+    )
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): RootStore =
@@ -36,10 +41,16 @@ class RootStoreFactory(
                     launch {
                         dataStore.data
                             .map { preferences ->
-                                Theme.fromOrdinal(preferences[APP_THEME] ?: Theme.System.theme)
+                                val value = preferences[APP_LANGUAGE] ?: Language.Russian.lang
+                                State(
+                                    theme = Theme.fromOrdinal(
+                                        preferences[APP_THEME] ?: Theme.System.theme
+                                    ),
+                                    language = Language.localeToLanguage(value)
+                                )
                             }
                             .collect {
-                                dispatch(Message.NewTheme(theme = it))
+                                dispatch(Message.NewState(state = it))
                             }
                     }
                 }
@@ -47,7 +58,10 @@ class RootStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.NewTheme -> copy(theme = message.theme)
+                    is Message.NewState -> copy(
+                        theme = message.state.theme,
+                        language = message.state.language,
+                    )
                 }
             }
         ) {}

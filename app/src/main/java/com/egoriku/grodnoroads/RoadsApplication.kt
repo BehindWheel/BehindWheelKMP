@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.map.koin.mapModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
+import com.egoriku.grodnoroads.screen.settings.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.screen.settings.faq.di.faqModule
 import com.egoriku.grodnoroads.screen.settings.koin.settingsModule
 import com.egoriku.grodnoroads.screen.settings.whatsnew.di.whatsNewModule
@@ -21,6 +22,10 @@ class RoadsApplication : Application() {
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
 
+        initKoin()
+    }
+
+    private fun initKoin() {
         startKoin {
             androidContext(this@RoadsApplication)
             modules(
@@ -30,6 +35,7 @@ class RoadsApplication : Application() {
                 rootModule,
                 settingsModule,
 
+                appearanceModule,
                 faqModule,
                 whatsNewModule
             )

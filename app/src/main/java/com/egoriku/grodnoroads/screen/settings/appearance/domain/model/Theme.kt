@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.domain
+package com.egoriku.grodnoroads.screen.settings.appearance.domain.model
 
 import com.egoriku.grodnoroads.R
 
@@ -11,9 +11,9 @@ enum class Theme(val theme: Int) {
         fun fromOrdinal(ordinal: Int) = values()[ordinal]
 
         fun Theme.toStringResource() = when (this) {
-            System -> R.string.settings_app_theme_system
-            Dark -> R.string.settings_app_theme_dark
-            Light -> R.string.settings_app_theme_light
+            System -> R.string.appearance_app_theme_system
+            Dark -> R.string.appearance_app_theme_dark
+            Light -> R.string.appearance_app_theme_light
         }
     }
 }

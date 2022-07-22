@@ -10,7 +10,7 @@ interface RoadsRootComponent {
 
     val childStack: Value<ChildStack<*, Child>>
 
-    val themeState: Flow<RootStoreFactory.State>
+    val state: Flow<RootStoreFactory.State>
 
     sealed class Child {
         data class Main(val component: MainComponent) : Child()

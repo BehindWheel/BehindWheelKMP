@@ -32,7 +32,7 @@
     <string name="drawer_share_app_section">Поделиться приложением</string>
     <string name="drawer_app_version">Версия: %1$s</string>
 
-    <!-- Settings -->
+    <!-- Settings Header -->
     <string name="settings_section_appearance">Внешний вид</string>
     <string name="settings_section_markers">Маркеры</string>
     <string name="settings_section_map">Карта</string>
@@ -42,10 +42,16 @@
     <string name="settings_section_beta_features">Beta функции</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
-    <string name="settings_app_theme">Тема</string>
-    <string name="settings_app_theme_system">Системная</string>
-    <string name="settings_app_theme_dark">Темная</string>
-    <string name="settings_app_theme_light">Светлая</string>
+    <!-- Appearance -->
+    <string name="appearance_app_theme">Тема</string>
+    <string name="appearance_app_theme_system">Системная</string>
+    <string name="appearance_app_theme_dark">Темная</string>
+    <string name="appearance_app_theme_light">Светлая</string>
+
+    <string name="appearance_app_language">Язык</string>
+    <string name="appearance_app_language_ru">Русский</string>
+    <string name="appearance_app_language_en">Английский</string>
+    <string name="appearance_app_language_by">Белорусский</string>
 
     <string name="settings_stationary_cameras">Стационарные камеры</string>
     <string name="settings_mobile_cameras">Мобильные камеры</string>

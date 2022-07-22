@@ -14,28 +14,17 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
+import com.egoriku.grodnoroads.screen.settings.appearance.ui.AppearanceScreen
 import com.egoriku.grodnoroads.screen.settings.faq.FaqScreen
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState.ThemeDialog
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
-import com.egoriku.grodnoroads.screen.settings.ui.AppSettings
 import com.egoriku.grodnoroads.screen.settings.ui.MapEventsSettings
 import com.egoriku.grodnoroads.screen.settings.ui.MapPreferencesSettings
-import com.egoriku.grodnoroads.screen.settings.ui.dialog.AppThemeDialog
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewScreen
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
 fun SettingsScreen(settingsComponent: SettingsComponent) {
     val settingsState by settingsComponent.settingsState.collectAsState(initial = SettingsState())
-    val dialogState by settingsComponent.dialogState.collectAsState(initial = DialogState.None)
-
-    DialogHandler(
-        dialogState = dialogState,
-        closeDialog = settingsComponent::closeDialog,
-        processResult = settingsComponent::processResult
-    )
 
     Surface(
         modifier = Modifier
@@ -54,18 +43,22 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
                     is SettingsComponent.Child.Settings -> SettingsUi { page ->
                         settingsComponent.open(page)
                     }
-                    is SettingsComponent.Child.FAQ -> FaqScreen(
-                        faqComponent = child.faqComponent,
+                    is SettingsComponent.Child.Appearance -> AppearanceScreen(
+                        appearanceComponent = child.appearanceComponent,
                         onBack = settingsComponent::onBack
                     )
-                    is SettingsComponent.Child.Alerts -> TODO()
-                    is SettingsComponent.Child.Appearance -> TODO()
-                    is SettingsComponent.Child.BetaFeatures -> TODO()
-                    is SettingsComponent.Child.Map -> TODO()
                     is SettingsComponent.Child.Markers -> TODO()
+                    is SettingsComponent.Child.Map -> TODO()
+                    is SettingsComponent.Child.Alerts -> TODO()
                     is SettingsComponent.Child.WhatsNew -> WhatsNewScreen(
                         whatsNewComponent = child.whatsNewComponent,
                         onBack = settingsComponent::onBack,
+                    )
+                    is SettingsComponent.Child.NextFeatures -> TODO()
+                    is SettingsComponent.Child.BetaFeatures -> TODO()
+                    is SettingsComponent.Child.FAQ -> FaqScreen(
+                        faqComponent = child.faqComponent,
+                        onBack = settingsComponent::onBack
                     )
                 }
             }
@@ -83,7 +76,6 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(state = rememberScrollState())
             ) {
-                AppSettings(settingsState, settingsComponent::process)
                 MapEventsSettings(
                     mapInfo = settingsState.mapInfo,
                     onCheckedChange = settingsComponent::onCheckedChanged
@@ -94,23 +86,5 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun DialogHandler(
-    dialogState: DialogState,
-    closeDialog: () -> Unit,
-    processResult: (Pref) -> Unit
-) {
-    when (dialogState) {
-        is ThemeDialog -> {
-            AppThemeDialog(
-                dialogState = dialogState,
-                closeDialog = closeDialog,
-                processResult = processResult
-            )
-        }
-        else -> {}
     }
 }

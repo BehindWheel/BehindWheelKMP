@@ -41,7 +41,7 @@ class RoadsRootComponentImpl(
 
     override val childStack: Value<ChildStack<*, Child>> = stack
 
-    override val themeState: Flow<State> = rootStore.states
+    override val state: Flow<State> = rootStore.states
 
     private fun child(
         configuration: Configuration,

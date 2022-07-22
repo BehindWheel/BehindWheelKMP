@@ -10,8 +10,6 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref.*
-import com.egoriku.grodnoroads.screen.settings.domain.Theme
-import com.egoriku.grodnoroads.screen.settings.domain.Theme.Companion.fromOrdinal
 import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
 import com.egoriku.grodnoroads.screen.settings.store.preferences.*
 import kotlinx.coroutines.Dispatchers
@@ -36,20 +34,12 @@ class SettingsStoreFactory(
 
     private sealed interface Message {
         data class NewSettings(val settingsState: SettingsState) : Message
-        data class Dialog(val dialogState: DialogState) : Message
     }
 
     sealed interface Label
 
-    sealed interface DialogState {
-        data class ThemeDialog(val preference: AppTheme) : DialogState
-        object None : DialogState
-    }
 
     data class SettingsState(
-        val dialogState: DialogState = DialogState.None,
-
-        val appTheme: AppTheme = AppTheme(),
         val mapInfo: MapInfo = MapInfo(),
         val mapAppearance: MapAppearance = MapAppearance(),
 
@@ -71,10 +61,7 @@ class SettingsStoreFactory(
         )
     }
 
-    data class State(
-        val settingsState: SettingsState = SettingsState(),
-        val dialogState: DialogState = DialogState.None
-    )
+    data class State(val settingsState: SettingsState = SettingsState())
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): SettingsStore =
@@ -117,11 +104,6 @@ class SettingsStoreFactory(
                                                 ?: false
                                         )
                                     ),
-                                    appTheme = AppTheme(
-                                        current = fromOrdinal(
-                                            preferences[APP_THEME] ?: Theme.System.theme
-                                        )
-                                    ),
                                     alertDistanceRadius = preferences[ALERT_DISTANCE]
                                         ?: DEFAULT_ALERT_DISTANCE_RADIUS
                                 )
@@ -161,36 +143,11 @@ class SettingsStoreFactory(
                         dataStore.edit { it[key] = value }
                     }
                 }
-                onIntent<Intent.ProcessPreferenceClick> {
-                    when (it.preference) {
-                        is AppTheme -> {
-                            dispatch(Message.Dialog(dialogState = DialogState.ThemeDialog(it.preference)))
-                        }
-                        else -> throw IllegalArgumentException(it.preference.toString())
-                    }
-                }
-                onIntent<Intent.ProcessDialogResult> { dialogResult ->
-                    dispatch(Message.Dialog(dialogState = DialogState.None))
-                    when (dialogResult.preference) {
-                        is AppTheme -> {
-                            launch {
-                                dataStore.edit {
-                                    it[APP_THEME] = dialogResult.preference.current.theme
-                                }
-                            }
-                        }
-                        else -> throw IllegalArgumentException(dialogResult.preference.toString())
-                    }
-                }
-                onIntent<Intent.CloseDialog> {
-                    dispatch(Message.Dialog(dialogState = DialogState.None))
-                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
                     is Message.NewSettings -> copy(settingsState = message.settingsState)
-                    is Message.Dialog -> copy(dialogState = message.dialogState)
                 }
             }
         ) {}
