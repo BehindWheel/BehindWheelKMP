@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.common.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.Preferences
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_THEME
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_CAR_CRASH_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_INCIDENT_EVENTS
@@ -11,16 +12,32 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_JAM_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle.Style
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 object DataFlow {
+    val Context.appTheme: Flow<Theme>
+        get() = dataStore.data.map { it.appTheme }
+
+    val Context.appLanguage: Flow<Language>
+        get() = dataStore.data.map { it.language }
+
     val Context.googleMapStyle: Flow<Style>
         get() = dataStore.data.map { it.googleMapStyle }
 
     val Context.trafficJamOnMap: Flow<Boolean>
         get() = dataStore.data.map { it.trafficJamOnMap }
+
+    val Preferences.appTheme: Theme
+        get() = Theme.fromOrdinal(this[APP_THEME] ?: Theme.System.theme)
+
+    val Preferences.language: Language
+        get() = Language.localeToLanguage(
+            this[PreferenceKeys.APP_LANGUAGE] ?: Language.Russian.lang
+        )
 
     val Preferences.trafficJamOnMap: Boolean
         get() = this[IS_SHOW_TRAFFIC_JAM_APPEARANCE] ?: false

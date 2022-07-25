@@ -8,14 +8,14 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.datastore.DataFlow.appTheme
+import com.egoriku.grodnoroads.common.datastore.DataFlow.language
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_LANGUAGE
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_THEME
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.*
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.Modify
@@ -38,16 +38,8 @@ class AppearanceStoreFactory(
                         dataStore.data
                             .map { preferences ->
                                 AppearanceState(
-                                    appTheme = AppTheme(
-                                        current = Theme.fromOrdinal(
-                                            preferences[APP_THEME] ?: Theme.System.theme
-                                        )
-                                    ),
-                                    appLanguage = AppLanguage(
-                                        current = Language.localeToLanguage(
-                                            preferences[APP_LANGUAGE] ?: Language.Russian.lang
-                                        )
-                                    )
+                                    appTheme = AppTheme(current = preferences.appTheme),
+                                    appLanguage = AppLanguage(current = preferences.language)
                                 )
                             }.collect {
                                 dispatch(Message.NewSettings(it))
