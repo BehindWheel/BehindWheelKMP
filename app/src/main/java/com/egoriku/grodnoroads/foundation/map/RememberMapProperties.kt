@@ -27,7 +27,7 @@ fun rememberMapProperties(locationState: LocationState): MapProperties {
         listOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
     )
 
-    val prefs = runBlocking { context.dataStore.data.first() }
+    val prefs by remember { mutableStateOf(runBlocking { context.dataStore.data.first() }) }
 
     val googleMapStyle by context.googleMapStyle.collectAsState(initial = prefs.googleMapStyle)
     val isTrafficEnabled by context.trafficJamOnMap.collectAsState(initial = prefs.trafficJamOnMap)

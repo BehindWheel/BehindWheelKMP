@@ -3,7 +3,6 @@
 package com.egoriku.grodnoroads
 
 import android.app.Application
-import com.egoriku.grodnoroads.common.datastore.dataStore
 import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.map.koin.mapModule
@@ -15,8 +14,6 @@ import com.egoriku.grodnoroads.screen.settings.koin.settingsModule
 import com.egoriku.grodnoroads.screen.settings.map.di.mapSettingsModule
 import com.egoriku.grodnoroads.screen.settings.whatsnew.di.whatsNewModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -28,8 +25,6 @@ class RoadsApplication : Application() {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
 
         initKoin()
-
-        runBlocking { dataStore.data.first() }
     }
 
     private fun initKoin() {
