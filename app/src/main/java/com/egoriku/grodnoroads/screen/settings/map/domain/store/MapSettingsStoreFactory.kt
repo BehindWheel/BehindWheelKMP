@@ -7,6 +7,15 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.datastore.DataFlow.googleMapStyle
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowCarCrash
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowMobileCameras
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowRoadIncidents
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowStationaryCameras
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficJam
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficPolice
+import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowWildAnimals
+import com.egoriku.grodnoroads.common.datastore.DataFlow.trafficJamOnMap
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_CAR_CRASH_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_INCIDENT_EVENTS
@@ -39,46 +48,21 @@ class MapSettingsStoreFactory(
                 onAction<Unit> {
                     launch {
                         dataStore.data
-                            .map { preferences ->
+                            .map { pref ->
                                 MapSettingsState(
                                     mapInfo = MapInfo(
-                                        stationaryCameras = StationaryCameras(
-                                            isShow = preferences[IS_SHOW_STATIONARY_CAMERAS] ?: true
-                                        ),
-                                        mobileCameras = MobileCameras(
-                                            isShow = preferences[IS_SHOW_MOBILE_CAMERAS] ?: true
-                                        ),
-                                        trafficPolice = TrafficPolice(
-                                            isShow = preferences[IS_SHOW_TRAFFIC_POLICE_EVENTS]
-                                                ?: true
-                                        ),
-                                        roadIncident = RoadIncident(
-                                            isShow = preferences[IS_SHOW_INCIDENT_EVENTS] ?: true
-                                        ),
-                                        carCrash = CarCrash(
-                                            isShow = preferences[IS_SHOW_CAR_CRASH_EVENTS] ?: true
-                                        ),
-                                        trafficJam = TrafficJam(
-                                            isShow = preferences[IS_SHOW_TRAFFIC_JAM_EVENTS] ?: true
-                                        ),
-                                        wildAnimals = WildAnimals(
-                                            isShow = preferences[IS_SHOW_WILD_ANIMALS_EVENTS]
-                                                ?: true
-                                        ),
+                                        stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
+                                        mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
+                                        trafficPolice = TrafficPolice(isShow = pref.isShowTrafficPolice),
+                                        roadIncident = RoadIncident(isShow = pref.isShowRoadIncidents),
+                                        carCrash = CarCrash(isShow = pref.isShowCarCrash),
+                                        trafficJam = TrafficJam(isShow = pref.isShowTrafficJam),
+                                        wildAnimals = WildAnimals(isShow = pref.isShowWildAnimals),
                                     ),
                                     mapStyle = MapStyle(
-                                        trafficJam = TrafficJamOnMap(
-                                            isShow = preferences[IS_SHOW_TRAFFIC_JAM_APPEARANCE]
-                                                ?: false
-                                        ),
-                                        googleMapStyle = GoogleMapStyle(
-                                            style = GoogleMapStyle.Style.valueOf(
-                                                preferences[GOOGLE_MAP_STYLE]
-                                                    ?: GoogleMapStyle.Style.Minimal.name
-                                            )
-                                        )
+                                        trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
+                                        googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
                                     )
-
                                 )
                             }.collect {
                                 dispatch(Message.NewSettings(it))
@@ -112,7 +96,7 @@ class MapSettingsStoreFactory(
                                 is WildAnimals -> preference.isShow
 
                                 is TrafficJamOnMap -> preference.isShow
-                                is GoogleMapStyle -> preference.style.name
+                                is GoogleMapStyle -> preference.style.type
                             }
                         )
                     }

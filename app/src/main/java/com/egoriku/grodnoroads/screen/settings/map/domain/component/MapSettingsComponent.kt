@@ -21,9 +21,9 @@ interface MapSettingsComponent {
 
         data class TrafficJamOnMap(val isShow: Boolean = false) : MapPref
         data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref {
-            enum class Style {
-                Minimal,
-                Detailed
+            enum class Style(val type: String) {
+                Minimal(type = "minimalistic"),
+                Detailed(type = "detailed")
             }
         }
     }
@@ -43,7 +43,7 @@ interface MapSettingsComponent {
         )
 
         data class MapStyle(
-            val trafficJam: TrafficJamOnMap = TrafficJamOnMap(),
+            val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),
             val googleMapStyle: GoogleMapStyle = GoogleMapStyle(),
         )
     }

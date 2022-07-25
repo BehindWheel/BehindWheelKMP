@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.extension.toast
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
@@ -43,7 +42,6 @@ fun MapUi(
         val location by component.location.collectAsState(LocationState.None)
         val mode by component.appMode.collectAsState(AppMode.Map)
         val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
-        val mapPreferences by component.mapPreferences.collectAsState(initial = GrodnoRoadsMapPreferences.Default)
         val alerts by component.alerts.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
@@ -53,12 +51,10 @@ fun MapUi(
                 modifier = Modifier.fillMaxSize(),
                 mapEvents = mapEvents,
                 mode = mode,
-                mapPreferences = mapPreferences,
-                locationState = location,
-                onMarkerClick = {
-                    component.showMarkerInfoDialog(reports = it)
-                }
-            )
+                locationState = location
+            ) {
+                component.showMarkerInfoDialog(reports = it)
+            }
 
             AnimatedContent(targetState = mode) { state ->
                 when (state) {

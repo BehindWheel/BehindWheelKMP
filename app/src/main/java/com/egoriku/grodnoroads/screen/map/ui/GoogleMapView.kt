@@ -14,7 +14,6 @@ import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.GrodnoRoadsMapPreferences
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
@@ -40,7 +39,6 @@ fun GoogleMapView(
     modifier: Modifier,
     mapEvents: List<MapEvent>,
     mode: AppMode,
-    mapPreferences: GrodnoRoadsMapPreferences,
     locationState: LocationState,
     onMarkerClick: (Reports) -> Unit
 ) {
@@ -119,10 +117,7 @@ fun GoogleMapView(
                 }
             },
         cameraPositionState = cameraPositionState,
-        properties = rememberMapProperties(
-            locationState = locationState,
-            mapPreferences = mapPreferences
-        ),
+        properties = rememberMapProperties(locationState = locationState),
         uiSettings = rememberUiSettings(),
         contentPadding = WindowInsets.statusBars.asPaddingValues()
     ) {

@@ -56,13 +56,6 @@ class MapComponentImpl(
             transform = filterMapEvents()
         )
 
-    override val mapPreferences: Flow<GrodnoRoadsMapPreferences>
-        get() = mapSettingsStore.states.map {
-            GrodnoRoadsMapPreferences(
-                isTrafficEnabled = it.mapSettingsState.mapStyle.trafficJam.isShow
-            )
-        }
-
     override val location: Flow<LocationState>
         get() = locationStore.states.map { it.locationState }
 

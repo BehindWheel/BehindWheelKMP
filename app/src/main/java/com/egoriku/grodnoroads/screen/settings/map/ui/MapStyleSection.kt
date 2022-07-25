@@ -66,14 +66,14 @@ private fun TrafficJam(
     mapStyle: MapStyle,
     onCheckedChange: (MapPref) -> Unit
 ) {
-    val trafficJam = mapStyle.trafficJam
+    val trafficJamOnMap = mapStyle.trafficJamOnMap
 
     CheckboxSettings(
         iconRes = R.drawable.ic_traffic_light,
         textRes = R.string.map_traffic_jam_appearance,
-        isChecked = trafficJam.isShow,
+        isChecked = trafficJamOnMap.isShow,
         onCheckedChange = {
-            onCheckedChange(trafficJam.copy(isShow = it))
+            onCheckedChange(trafficJamOnMap.copy(isShow = it))
         }
     )
 }
