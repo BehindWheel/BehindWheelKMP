@@ -114,6 +114,15 @@
   },
   {
     "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
     "elementType": "labels.text",
     "stylers": [
       {
