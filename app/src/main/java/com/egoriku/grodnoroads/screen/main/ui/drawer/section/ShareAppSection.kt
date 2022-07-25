@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.screen.main.ui.drawer.section
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
@@ -38,8 +37,6 @@ fun ShareAppSection(onClick: (String) -> Unit) {
 @Composable
 private fun ShareAppSectionPreview() {
     GrodnoRoadsTheme {
-        Surface {
-            ShareAppSection(onClick = {})
-        }
+        ShareAppSection(onClick = {})
     }
 }

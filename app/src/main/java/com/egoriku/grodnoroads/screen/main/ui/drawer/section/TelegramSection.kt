@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.screen.main.ui.drawer.section
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -39,8 +38,6 @@ fun TelegramSection(onClick: (String) -> Unit) {
 @Composable
 private fun TelegramSectionPreview() {
     GrodnoRoadsTheme {
-        Surface {
-            TelegramSection(onClick = {})
-        }
+        TelegramSection(onClick = {})
     }
 }

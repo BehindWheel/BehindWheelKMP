@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,8 +46,6 @@ fun CurrentSpeedRect(
 @Composable
 private fun CurrentSpeedRectPreview() {
     GrodnoRoadsTheme {
-        Surface {
-            CurrentSpeedRect(speed = 70.toString())
-        }
+        CurrentSpeedRect(speed = 70.toString())
     }
 }
