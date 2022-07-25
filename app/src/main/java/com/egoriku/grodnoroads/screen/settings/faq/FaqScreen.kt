@@ -15,7 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore
+import com.egoriku.grodnoroads.screen.settings.faq.domain.component.FaqComponent
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

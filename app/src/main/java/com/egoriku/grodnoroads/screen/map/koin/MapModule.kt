@@ -6,7 +6,6 @@ import com.egoriku.grodnoroads.screen.map.data.*
 import com.egoriku.grodnoroads.screen.map.store.DialogStoreFactory
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -33,13 +32,6 @@ val mapModule = module {
             storeFactory = get(),
             locationHelper = get(),
             resourceProvider = get()
-        ).create()
-    }
-
-    factory {
-        SettingsStoreFactory(
-            storeFactory = get(),
-            dataStore = get()
         ).create()
     }
 

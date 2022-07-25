@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.foundation.list.SettingsItem
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
-import com.egoriku.grodnoroads.screen.settings.ui.common.SettingsItem
 
 @Composable
 fun SettingsUi(onSettingClick: (Page) -> Unit) {
@@ -65,7 +65,7 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun SettingUiPreview() {
     SettingsUi(onSettingClick = {})

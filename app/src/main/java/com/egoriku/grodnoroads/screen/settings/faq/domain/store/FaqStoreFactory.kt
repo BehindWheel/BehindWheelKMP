@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.faq.store
+package com.egoriku.grodnoroads.screen.settings.faq.domain.store
 
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
@@ -8,9 +8,9 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.extension.common.ResultOf
 import com.egoriku.grodnoroads.extension.logD
 import com.egoriku.grodnoroads.screen.settings.faq.data.FaqRepository
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore.Message
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore.State
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore.State.FAQ
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.Message
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State.FAQ
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers

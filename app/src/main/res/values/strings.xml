@@ -55,18 +55,20 @@
     <string name="appearance_app_language_by">Belarusian</string>
 
     <!-- Map -->
+    <string name="map_header_appearance">Appearance</string>
+    <string name="map_traffic_jam_appearance">Traffic jam on map</string>
+    <string name="map_google_map_style_minimal">Minimal</string>
+    <string name="map_google_map_style_detailed">Detailed</string>
+
     <string name="map_header_markers">Markers</string>
+    <string name="map_markers_stationary_cameras">Stationary cameras</string>
+    <string name="map_markers_mobile_cameras">Mobile cameras</string>
+    <string name="map_markers_traffic_police">Traffic Police</string>
+    <string name="map_markers_incidents">Incidents on road</string>
+    <string name="map_markers_car_crash">Car crash</string>
+    <string name="map_markers_traffic_jam">Traffic jam</string>
+    <string name="map_markers_wild_animals">Wild animals</string>
 
-
-    <string name="settings_stationary_cameras">Stationary cameras</string>
-    <string name="settings_mobile_cameras">Mobile cameras</string>
-    <string name="settings_traffic_police">Traffic Police</string>
-    <string name="settings_incidents">Incidents on road</string>
-    <string name="settings_car_crash">Car crash</string>
-    <string name="settings_traffic_jam">Traffic Jam</string>
-    <string name="settings_wild_animals">Wild animals</string>
-
-    <string name="settings_traffic_jam_appearance">Traffic Jam</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>

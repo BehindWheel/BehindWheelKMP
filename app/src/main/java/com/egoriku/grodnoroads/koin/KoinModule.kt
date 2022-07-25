@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.koin
 import android.content.Context
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.egoriku.grodnoroads.screen.settings.store.preferences.dataStore
+import com.egoriku.grodnoroads.common.datastore.dataStore
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.ResourceProviderImpl

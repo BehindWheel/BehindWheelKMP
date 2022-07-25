@@ -13,7 +13,8 @@ import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStore
 import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -29,12 +30,16 @@ class MapComponentImpl(
     private val dialogStore = instanceKeeper.getStore { get<DialogStore>() }
     private val locationStore = instanceKeeper.getStore { get<LocationStore>() }
     private val mapEventsStore = instanceKeeper.getStore { get<MapEventsStore>() }
-    private val settingsStore = instanceKeeper.getStore { get<SettingsStore>() }
+
+    private val alertsStore = instanceKeeper.getStore { get<AlertsStore>() }
+    private val mapSettingsStore = instanceKeeper.getStore { get<MapSettingsStore>() }
 
     private val mobile = mapEventsStore.states.map { it.mobileCamera }
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
     private val reports = mapEventsStore.states.map { it.reports }
-    private val settings = settingsStore.states.map { it.settingsState }
+
+    private val alertDistance = alertsStore.states.map { it.alertDistance }
+    private val mapSettings = mapSettingsStore.states.map { it.mapSettingsState }
 
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }
@@ -47,14 +52,14 @@ class MapComponentImpl(
             flow = reports,
             flow2 = stationary,
             flow3 = mobile,
-            flow4 = settings,
+            flow4 = mapSettings,
             transform = filterMapEvents()
         )
 
     override val mapPreferences: Flow<GrodnoRoadsMapPreferences>
-        get() = settingsStore.states.map {
+        get() = mapSettingsStore.states.map {
             GrodnoRoadsMapPreferences(
-                isTrafficEnabled = it.settingsState.mapAppearance.trafficJam.isShow
+                isTrafficEnabled = it.mapSettingsState.mapStyle.trafficJam.isShow
             )
         }
 
@@ -65,7 +70,7 @@ class MapComponentImpl(
         get() = combine(
             flow = mapEvents,
             flow2 = location,
-            flow3 = settings,
+            flow3 = alertDistance,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 

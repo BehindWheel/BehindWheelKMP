@@ -29,8 +29,8 @@ fun rememberMapProperties(
     )
 
     val mapStyle = when {
-        MaterialTheme.colors.isLight -> R.raw.map_light_style
-        else -> R.raw.map_dark_style
+        MaterialTheme.colors.isLight -> R.raw.map_style_light_minimal
+        else -> R.raw.map_style_dark_minimal
     }
 
     val mapProperties by remember(

@@ -4,31 +4,21 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.mvikotlin.core.instancekeeper.getStore
-import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Settings
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.WhatsNew
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponentImpl
-import com.egoriku.grodnoroads.screen.settings.faq.component.FaqComponentImpl
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.OnCheckedChanged
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.ProcessPreferenceClick
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
+import com.egoriku.grodnoroads.screen.settings.faq.domain.component.FaqComponentImpl
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 
 class SettingsComponentImpl(
     componentContext: ComponentContext
 ) : SettingsComponent, KoinComponent, ComponentContext by componentContext {
-
-    private val settingsStore = instanceKeeper.getStore { get<SettingsStore>() }
 
     private val navigation = StackNavigation<Config>()
 
@@ -41,26 +31,6 @@ class SettingsComponentImpl(
     )
 
     override val childStack: Value<ChildStack<*, Child>> = stack
-
-    override val settingsState: Flow<SettingsState> = settingsStore.states.map {
-        it.settingsState
-    }
-
-    override fun onCheckedChanged(preference: SettingsComponent.Pref) {
-        settingsStore.accept(OnCheckedChanged(preference))
-    }
-
-    override fun process(preference: SettingsComponent.Pref) {
-        settingsStore.accept(ProcessPreferenceClick(preference = preference))
-    }
-
-    override fun processResult(preference: SettingsComponent.Pref) {
-        settingsStore.accept(Intent.ProcessDialogResult(preference = preference))
-    }
-
-    override fun closeDialog() {
-        settingsStore.accept(Intent.CloseDialog)
-    }
 
     override fun open(page: Page) {
         when (page) {
@@ -82,24 +52,22 @@ class SettingsComponentImpl(
     ) = when (configuration) {
         is Config.Settings -> Settings
 
-        is Config.Appearance -> Child.Appearance(
-            appearanceComponent = AppearanceComponentImpl(
-                componentContext = componentContext
-            )
+        is Config.Appearance -> Appearance(
+            appearanceComponent = AppearanceComponentImpl(componentContext)
         )
-        is Config.Alerts -> TODO()
+        is Config.Alerts -> Alerts(
+            alertsComponent = AlertsComponentImpl(componentContext)
+        )
         is Config.BetaFeatures -> TODO()
-        is Config.Map -> TODO()
+        is Config.Map -> Map(
+            mapSettingsComponent = MapSettingsComponentImpl(componentContext)
+        )
         is Config.NextFeatures -> TODO()
         is Config.WhatsNew -> WhatsNew(
-            whatsNewComponent = WhatsNewComponentImpl(
-                componentContext = componentContext
-            )
+            whatsNewComponent = WhatsNewComponentImpl(componentContext)
         )
-        is Config.FAQ -> Child.FAQ(
-            faqComponent = FaqComponentImpl(
-                componentContext = componentContext
-            )
+        is Config.FAQ -> FAQ(
+            faqComponent = FaqComponentImpl(componentContext)
         )
     }
 

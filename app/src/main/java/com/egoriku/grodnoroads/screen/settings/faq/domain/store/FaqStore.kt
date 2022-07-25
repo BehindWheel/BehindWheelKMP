@@ -1,8 +1,8 @@
-package com.egoriku.grodnoroads.screen.settings.faq.store
+package com.egoriku.grodnoroads.screen.settings.faq.domain.store
 
 import com.arkivanov.mvikotlin.core.store.Store
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore.State
-import com.egoriku.grodnoroads.screen.settings.faq.store.FaqStore.State.FAQ
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State
+import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State.FAQ
 
 interface FaqStore : Store<Nothing, State, Nothing> {
 

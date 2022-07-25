@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.store.preferences
+package com.egoriku.grodnoroads.common.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -22,5 +22,6 @@ val IS_SHOW_TRAFFIC_JAM_EVENTS = booleanPreferencesKey("is_show_traffic_jam_even
 val IS_SHOW_WILD_ANIMALS_EVENTS = booleanPreferencesKey("is_show_wild_animals_events")
 
 val IS_SHOW_TRAFFIC_JAM_APPEARANCE = booleanPreferencesKey("is_show_traffic_jam_appearance")
+val GOOGLE_MAP_STYLE = stringPreferencesKey("google_map_style")
 
 val ALERT_DISTANCE = intPreferencesKey("alert_distance")

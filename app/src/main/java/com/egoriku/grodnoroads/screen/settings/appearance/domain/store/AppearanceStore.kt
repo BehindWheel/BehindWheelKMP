@@ -2,7 +2,9 @@ package com.egoriku.grodnoroads.screen.settings.appearance.domain.store
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.*
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.None
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.State
 
 interface AppearanceStore : Store<Intent, State, Nothing> {
 
@@ -11,6 +13,11 @@ interface AppearanceStore : Store<Intent, State, Nothing> {
         data class Update(val preference: AppearancePref) : Intent
         object CloseDialog : Intent
     }
+
+    data class State(
+        val dialogState: AppearanceDialogState = None,
+        val appearanceState: AppearanceState = AppearanceState()
+    )
 
     sealed interface Message {
         data class NewSettings(val appearanceState: AppearanceState) : Message

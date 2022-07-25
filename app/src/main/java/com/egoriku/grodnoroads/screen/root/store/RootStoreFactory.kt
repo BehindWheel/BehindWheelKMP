@@ -10,8 +10,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
-import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_LANGUAGE
-import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_THEME
+import com.egoriku.grodnoroads.common.datastore.APP_LANGUAGE
+import com.egoriku.grodnoroads.common.datastore.APP_THEME
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

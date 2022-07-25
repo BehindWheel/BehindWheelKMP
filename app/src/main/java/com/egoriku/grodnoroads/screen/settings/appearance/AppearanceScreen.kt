@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.appearance.ui
+package com.egoriku.grodnoroads.screen.settings.appearance
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,16 +14,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.*
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language.Companion.toStringResource
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme.Companion.toStringResource
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppLanguageDialog
 import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppThemeDialog
-import com.egoriku.grodnoroads.screen.settings.ui.common.SettingsItem
 
 @Composable
 fun AppearanceScreen(
@@ -63,7 +65,7 @@ private fun Language(
 ) {
     val language = state.appearanceState.appLanguage
 
-    SettingsItem(
+    MoreActionSettings(
         icon = Icons.Default.Language,
         text = stringResource(R.string.appearance_app_language),
         value = stringResource(id = language.current.toStringResource()),
@@ -79,7 +81,7 @@ private fun AppTheme(
 ) {
     val appTheme = state.appearanceState.appTheme
 
-    SettingsItem(
+    MoreActionSettings(
         icon = Icons.Default.DarkMode,
         text = stringResource(R.string.appearance_app_theme),
         value = stringResource(id = appTheme.current.toStringResource()),

@@ -1,26 +1,21 @@
 package com.egoriku.grodnoroads.screen.settings.appearance.domain.component
 
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.None
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language.*
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme.*
+import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore
 import kotlinx.coroutines.flow.Flow
 
 interface AppearanceComponent {
 
-    val state: Flow<State>
+    val state: Flow<AppearanceStore.State>
 
     fun modify(preference: AppearancePref)
     fun update(preference: AppearancePref)
     fun closeDialog()
-
-    data class State(
-        val dialogState: AppearanceDialogState = None,
-        val appearanceState: AppearanceState = AppearanceState()
-    )
 
     data class AppearanceState(
         val appTheme: AppTheme = AppTheme(),
