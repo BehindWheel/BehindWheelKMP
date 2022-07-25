@@ -7,7 +7,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.common.datastore.ALERT_DISTANCE
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.ALERT_DISTANCE
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.Message
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.State
