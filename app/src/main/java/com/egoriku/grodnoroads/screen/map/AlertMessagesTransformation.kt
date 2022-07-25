@@ -7,7 +7,7 @@ import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 
@@ -17,16 +17,16 @@ private const val MIN_SPEED = 10
 fun alertMessagesTransformation(): suspend (
     List<MapEvent>,
     LocationState,
-    SettingsState
+    AlertSettingsState
 ) -> List<Alert> =
     { mapEvents: List<MapEvent>,
       locationState: LocationState,
-      settingsState: SettingsState ->
+      settingsState: AlertSettingsState ->
         when {
             locationState.speed > MIN_SPEED -> makeAlertMessage(
                 mapEvents = mapEvents,
                 locationState = locationState,
-                distanceRadius = settingsState.alertDistanceRadius
+                distanceRadius = settingsState.alertDistance.distance
             )
             else -> emptyList()
         }
