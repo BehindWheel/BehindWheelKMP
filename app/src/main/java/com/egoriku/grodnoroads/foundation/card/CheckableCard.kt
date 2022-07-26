@@ -35,7 +35,7 @@ fun CheckableCard(
             onClick = onClick,
             shape = RoundedCornerShape(20.dp),
             border = when {
-                selected -> BorderStroke(width = 1.5.dp, color = MaterialTheme.colors.secondary)
+                selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colors.secondary)
                 else -> null
             }
         ) {
