@@ -80,6 +80,7 @@ private fun TrafficJam(
 
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
+@Preview(showBackground = true, locale = "be")
 @Composable
 fun PreviewMapStyleSection() {
     GrodnoRoadsTheme {

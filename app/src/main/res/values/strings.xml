@@ -52,7 +52,7 @@
     <string name="appearance_app_language">Language</string>
     <string name="appearance_app_language_ru">Russian</string>
     <string name="appearance_app_language_en">English</string>
-    <string name="appearance_app_language_by">Belarusian</string>
+    <string name="appearance_app_language_be">Belarusian</string>
 
     <!-- Map -->
     <string name="map_header_appearance">Appearance</string>

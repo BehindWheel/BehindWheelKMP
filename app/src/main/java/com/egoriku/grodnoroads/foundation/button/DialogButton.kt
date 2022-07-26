@@ -44,6 +44,7 @@ fun DialogButton(
 
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
+@Preview(showBackground = true, locale = "be")
 @Composable
 fun PreviewDialogButton() {
     Column {

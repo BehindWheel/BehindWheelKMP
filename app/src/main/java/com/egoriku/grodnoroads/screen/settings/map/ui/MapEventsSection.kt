@@ -152,6 +152,7 @@ private fun WildAnimals(
 
 @Preview(showBackground = true)
 @Preview(showBackground = true, locale = "ru")
+@Preview(showBackground = true, locale = "be")
 @Composable
 private fun PreviewMapEventsSection() {
     GrodnoRoadsTheme {

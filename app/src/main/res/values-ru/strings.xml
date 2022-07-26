@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">За рулем</string>
+    <string name="app_name">За рулем (Гродно)</string>
 
     <string name="tab_map">Карта</string>
     <string name="tab_chat">Чат</string>
@@ -50,7 +50,7 @@
     <string name="appearance_app_language">Язык</string>
     <string name="appearance_app_language_ru">Русский</string>
     <string name="appearance_app_language_en">Английский</string>
-    <string name="appearance_app_language_by">Белорусский</string>
+    <string name="appearance_app_language_be">Белорусский</string>
 
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>

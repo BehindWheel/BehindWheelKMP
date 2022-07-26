@@ -39,7 +39,7 @@ fun ReportAction(
     }
 }
 
-@Preview(showBackground = true, locale = "ru")
+@Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun ReportActionPreview() {

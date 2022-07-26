@@ -64,6 +64,7 @@ fun CheckableCard(
 }
 
 @Preview(showBackground = true, locale = "ru")
+@Preview(showBackground = true, locale = "be")
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun CheckableCardPreview() {

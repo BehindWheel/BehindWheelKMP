@@ -53,7 +53,7 @@ fun AppearanceScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             AppTheme(state = state, appearanceComponent = appearanceComponent)
-            //Language(state = state, appearanceComponent = appearanceComponent)
+            Language(state = state, appearanceComponent = appearanceComponent)
         }
     }
 }

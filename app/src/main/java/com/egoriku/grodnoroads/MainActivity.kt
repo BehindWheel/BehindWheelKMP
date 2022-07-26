@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -10,7 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
+import com.egoriku.grodnoroads.common.datastore.DataFlow.appLanguage
 import com.egoriku.grodnoroads.common.datastore.DataFlow.appTheme
+import com.egoriku.grodnoroads.common.datastore.DataFlow.language
 import com.egoriku.grodnoroads.common.datastore.dataStore
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
@@ -20,7 +21,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class MainActivity : ComponentActivity() {
+class MainActivity : LocalizedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
             }
 
             val theme by context.appTheme.collectAsState(initial = preferences.appTheme)
+            val language by context.appLanguage.collectAsState(initial = preferences.language)
 
             val darkTheme = when (theme) {
                 Theme.System -> isSystemInDarkTheme()
@@ -43,7 +45,7 @@ class MainActivity : ComponentActivity() {
                 Theme.Light -> false
             }
 
-            GrodnoRoadsTheme(darkTheme = darkTheme) {
+            GrodnoRoadsTheme(darkTheme = darkTheme, language = language) {
                 val systemUiController = rememberSystemUiController()
                 val useDarkIcons = MaterialTheme.colors.isLight
 
