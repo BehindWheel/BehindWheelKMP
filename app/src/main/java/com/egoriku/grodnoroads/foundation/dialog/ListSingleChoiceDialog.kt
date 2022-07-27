@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.common.ListItems
 import com.egoriku.grodnoroads.foundation.dialog.common.content.RadioButtonItem
+import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
 fun ListSingleChoiceDialog(
@@ -63,10 +64,12 @@ fun ListSingleChoiceDialog(
 @Preview(showBackground = true)
 @Composable
 fun PreviewListSingleChoiceDialog() {
-    ListSingleChoiceDialog(
-        list = listOf("System", "Dark", "Light"),
-        initialSelection = 0,
-        onClose = {},
-        onSelected = {}
-    )
+    GrodnoRoadsTheme {
+        ListSingleChoiceDialog(
+            list = listOf("System", "Dark", "Light"),
+            initialSelection = 0,
+            onClose = {},
+            onSelected = {}
+        )
+    }
 }

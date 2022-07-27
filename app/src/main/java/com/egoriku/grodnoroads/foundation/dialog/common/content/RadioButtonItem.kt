@@ -1,18 +1,15 @@
 package com.egoriku.grodnoroads.foundation.dialog.common.content
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RadioButtonItem(
     item: String,
@@ -20,25 +17,36 @@ fun RadioButtonItem(
     selected: Boolean,
     onSelect: (index: Int) -> Unit
 ) {
-    Row(
-        Modifier
-            .fillMaxWidth()
+    ListItem(
+        modifier = Modifier
             .height(48.dp)
-            .clickable { onSelect(index) }
-            .padding(start = 12.dp, end = 24.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = {
-                onSelect(index)
-            },
-        )
-        Text(
-            item,
-            modifier = Modifier,
-            color = MaterialTheme.colors.onSurface,
-            style = MaterialTheme.typography.body1
+            .clickable { onSelect(index) },
+        icon = {
+            RadioButton(
+                selected = selected,
+                onClick = {
+                    onSelect(index)
+                },
+            )
+        },
+        text = {
+            Text(
+                item,
+                color = MaterialTheme.colors.onSurface,
+            )
+        }
+    )
+}
+
+@Preview
+@Composable
+private fun PreviewRadioButtonItem() {
+    GrodnoRoadsTheme {
+        RadioButtonItem(
+            item = "test",
+            index = 0,
+            selected = true,
+            onSelect = {}
         )
     }
 }
