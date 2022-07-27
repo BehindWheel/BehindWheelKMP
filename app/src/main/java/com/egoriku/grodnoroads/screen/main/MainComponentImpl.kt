@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.screen.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
@@ -40,7 +40,7 @@ class MainComponentImpl(
     override val childStack: Value<ChildStack<*, Child>> = stack
 
     override fun onSelectTab(index: Int) {
-        navigation.replaceCurrent(
+        navigation.bringToFront(
             when (index) {
                 0 -> Config.Map
                 1 -> Config.Settings
