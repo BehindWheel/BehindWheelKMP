@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.Appea
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme.Companion.toStringResource
+import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
 fun AppThemeDialog(
@@ -31,11 +32,14 @@ fun AppThemeDialog(
 
 @Preview
 @Preview(locale = "ru")
+@Preview(locale = "be")
 @Composable
 fun PreviewAppThemeDialog() {
-    AppThemeDialog(
-        themeDialogState = ThemeDialogState(themes = AppTheme()),
-        onClose = {},
-        onResult = {}
-    )
+    GrodnoRoadsTheme {
+        AppThemeDialog(
+            themeDialogState = ThemeDialogState(themes = AppTheme()),
+            onClose = {},
+            onResult = {}
+        )
+    }
 }

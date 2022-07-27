@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.Appea
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language.Companion.toStringResource
+import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
 fun AppLanguageDialog(
@@ -31,11 +32,14 @@ fun AppLanguageDialog(
 
 @Preview
 @Preview(locale = "ru")
+@Preview(locale = "be")
 @Composable
 private fun PreviewLanguageDialog() {
-    AppLanguageDialog(
-        languageDialogState = LanguageDialogState(languages = AppLanguage()),
-        onClose = {},
-        onResult = {}
-    )
+    GrodnoRoadsTheme {
+        AppLanguageDialog(
+            languageDialogState = LanguageDialogState(languages = AppLanguage()),
+            onClose = {},
+            onResult = {}
+        )
+    }
 }
