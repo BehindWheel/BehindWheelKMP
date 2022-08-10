@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.datastore.DataFlow.defaultCity
 import com.egoriku.grodnoroads.common.datastore.DataFlow.googleMapStyle
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowCarCrash
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowMobileCameras
@@ -16,6 +17,7 @@ import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficJam
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficPolice
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowWildAnimals
 import com.egoriku.grodnoroads.common.datastore.DataFlow.trafficJamOnMap
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.DEFAULT_CITY
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_CAR_CRASH_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_INCIDENT_EVENTS
@@ -26,6 +28,8 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
 import com.egoriku.grodnoroads.extension.put
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState.MapInfo
@@ -62,14 +66,15 @@ class MapSettingsStoreFactory(
                                     mapStyle = MapStyle(
                                         trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
                                         googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
-                                    )
+                                    ),
+                                    defaultCity = DefaultCity(current = pref.defaultCity)
                                 )
                             }.collect {
                                 dispatch(Message.NewSettings(it))
                             }
                     }
                 }
-                onIntent<Intent.OnCheckedChanged> { onCheckedChanged ->
+                onIntent<Intent.Modify> { onCheckedChanged ->
                     val preference = onCheckedChanged.preference
 
                     launch {
@@ -85,6 +90,7 @@ class MapSettingsStoreFactory(
 
                                 is TrafficJamOnMap -> IS_SHOW_TRAFFIC_JAM_APPEARANCE
                                 is GoogleMapStyle -> GOOGLE_MAP_STYLE
+                                is DefaultCity -> DEFAULT_CITY
                             }.name,
                             value = when (preference) {
                                 is StationaryCameras -> preference.isShow
@@ -97,15 +103,30 @@ class MapSettingsStoreFactory(
 
                                 is TrafficJamOnMap -> preference.isShow
                                 is GoogleMapStyle -> preference.style.type
+                                is DefaultCity -> preference.current.cityName
                             }
                         )
                     }
+                }
+                onIntent<Intent.OpenDialog> {
+                    when (it.preference) {
+                        is DefaultCity -> dispatch(
+                            Message.NewDialogState(
+                                mapDialogState = DefaultLocationDialogState(defaultCity = it.preference)
+                            )
+                        )
+                        else -> throw UnsupportedOperationException("${it.preference} not supported")
+                    }
+                }
+                onIntent<Intent.CloseDialog> {
+                    dispatch(message = Message.NewDialogState(mapDialogState = None))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
                     is Message.NewSettings -> copy(mapSettingsState = message.mapSettingsState)
+                    is Message.NewDialogState -> copy(mapDialogState = message.mapDialogState)
                 }
             }
         ) {}

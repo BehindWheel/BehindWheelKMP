@@ -1,10 +1,13 @@
 package com.egoriku.grodnoroads.screen.map.store
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.common.datastore.DataFlow.defaultCity
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.*
@@ -19,7 +22,8 @@ interface LocationStore : Store<Intent, State, Label>
 class LocationStoreFactory(
     private val storeFactory: StoreFactory,
     private val locationHelper: LocationHelper,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
+    private val datastore: DataStore<Preferences>
 ) {
 
     sealed interface Intent {
@@ -56,6 +60,18 @@ class LocationStoreFactory(
                             dispatch(
                                 Message.OnNewLocation(locationState = lastKnownLocation)
                             )
+                        } else {
+                            datastore.data.collect {
+                                dispatch(
+                                    Message.OnNewLocation(
+                                        locationState = LocationState(
+                                            latLng = it.defaultCity.latLng,
+                                            bearing = 0.0f,
+                                            speed = 0
+                                        )
+                                    )
+                                )
+                            }
                         }
                     }
                 }

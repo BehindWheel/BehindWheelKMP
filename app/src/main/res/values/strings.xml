@@ -55,6 +55,14 @@
     <string name="appearance_app_language_be">Belarusian</string>
 
     <!-- Map -->
+    <string name="map_header_default_location">Default location</string>
+    <string name="map_default_location">My City</string>
+    <string name="map_default_location_grodno">Grodno</string>
+    <string name="map_default_location_skidel">Skidel</string>
+    <string name="map_default_location_volkovysk">Volkovysk</string>
+    <string name="map_default_location_ozery">Ozery</string>
+    <string name="map_default_location_porechye">Porechye</string>
+
     <string name="map_header_appearance">Appearance</string>
     <string name="map_traffic_jam_appearance">Traffic jam on map</string>
     <string name="map_google_map_style_minimal">Minimal</string>

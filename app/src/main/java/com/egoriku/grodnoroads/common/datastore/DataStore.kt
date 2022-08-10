@@ -24,6 +24,7 @@ object PreferenceKeys {
 
     val IS_SHOW_TRAFFIC_JAM_APPEARANCE = booleanPreferencesKey("is_show_traffic_jam_appearance")
     val GOOGLE_MAP_STYLE = stringPreferencesKey("google_map_style")
+    val DEFAULT_CITY = stringPreferencesKey("default_city")
 
     val ALERT_DISTANCE = intPreferencesKey("alert_distance")
 }

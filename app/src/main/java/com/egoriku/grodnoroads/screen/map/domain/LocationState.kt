@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.screen.map.domain
 
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Grodno
 import com.google.android.gms.maps.model.LatLng
 
 data class LocationState(
@@ -9,10 +10,8 @@ data class LocationState(
 ) {
 
     companion object {
-        val GrodnoLatLng = LatLng(53.6687765, 23.8212226)
-
         val None = LocationState(
-            latLng = GrodnoLatLng,
+            latLng = LatLng(Grodno.latLng.latitude, Grodno.latLng.longitude),
             bearing = 0f,
             speed = 0
         )

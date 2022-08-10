@@ -1,14 +1,25 @@
 package com.egoriku.grodnoroads.screen.settings.map.domain.component
 
+import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.State
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 interface MapSettingsComponent {
 
     val state: Flow<State>
 
-    fun onCheckedChanged(preference: MapPref)
+    fun modify(preference: MapPref)
+    fun openDialog(preference: MapPref)
+    fun closeDialog()
+
+    sealed interface MapDialogState {
+        data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
+
+        object None : MapDialogState
+    }
 
     sealed interface MapPref {
         data class StationaryCameras(val isShow: Boolean = true) : MapPref
@@ -26,11 +37,38 @@ interface MapSettingsComponent {
                 Detailed(type = "detailed")
             }
         }
+
+        data class DefaultCity(
+            val current: City = Grodno,
+            val values: List<City> = listOf(Grodno, Skidel, Volkovysk, Ozery, Porechye)
+        ) : MapPref {
+            enum class City(val cityName: String, val latLng: LatLng) {
+                Grodno(cityName = "grodno", latLng = LatLng(53.6687765, 23.8212226)),
+                Skidel(cityName = "skidel", latLng = LatLng(53.579644, 24.237978)),
+                Volkovysk(cityName = "volkovysk", latLng = LatLng(53.152847, 24.444242)),
+                Ozery(cityName = "ozery", latLng = LatLng(53.722526, 24.178165)),
+                Porechye(cityName = "porechye", latLng = LatLng(53.885623, 24.137678));
+
+                companion object {
+                    fun toCity(value: String) =
+                        checkNotNull(values().find { it.cityName == value })
+
+                    fun City.toResource(): Int = when (this) {
+                        Grodno -> R.string.map_default_location_grodno
+                        Skidel -> R.string.map_default_location_skidel
+                        Volkovysk -> R.string.map_default_location_volkovysk
+                        Ozery -> R.string.map_default_location_ozery
+                        Porechye -> R.string.map_default_location_porechye
+                    }
+                }
+            }
+        }
     }
 
     data class MapSettingsState(
         val mapInfo: MapInfo = MapInfo(),
         val mapStyle: MapStyle = MapStyle(),
+        val defaultCity: DefaultCity = DefaultCity()
     ) {
         data class MapInfo(
             val stationaryCameras: StationaryCameras = StationaryCameras(),

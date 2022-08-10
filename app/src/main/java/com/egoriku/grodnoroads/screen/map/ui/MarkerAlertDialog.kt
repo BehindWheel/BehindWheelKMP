@@ -15,11 +15,11 @@ import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.foundation.button.DialogButton
-import com.egoriku.grodnoroads.screen.map.domain.LocationState.Companion.GrodnoLatLng
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.egoriku.grodnoroads.screen.map.domain.Source
+import com.google.android.gms.maps.model.LatLng
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -77,7 +77,7 @@ fun PreviewMarkerAlertDialog() {
                 ),
             ),
             shortMessage = "\uD83D\uDEA7 (12:30) м6 выезд из города",
-            position = GrodnoLatLng,
+            position = LatLng(0.0, 0.0),
             mapEventType = MapEventType.RoadIncident
         )
     ) {

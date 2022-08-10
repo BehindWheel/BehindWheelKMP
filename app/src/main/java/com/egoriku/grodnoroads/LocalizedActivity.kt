@@ -6,7 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import com.egoriku.grodnoroads.common.datastore.DataFlow.language
 import com.egoriku.grodnoroads.common.datastore.dataStore
 import com.egoriku.grodnoroads.util.LocalizationUtil
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
@@ -18,7 +17,7 @@ abstract class LocalizedActivity : AppCompatActivity() {
 
     init {
         lifecycleScope.launchWhenCreated {
-            this@LocalizedActivity.dataStore.data.collectLatest { preferences ->
+            this@LocalizedActivity.dataStore.data.collect { preferences ->
                 currentLocale = Locale(preferences.language.lang)
 
                 LocalizationUtil.applyLanguageContext(

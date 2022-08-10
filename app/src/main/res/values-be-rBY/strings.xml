@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">За рулём (Гродна)</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метры</item>
+        <item quantity="many">%1$d метраў</item>
+        <item quantity="other">%1$d метраў</item>
+    </plurals>
+
     <string name="tab_map">Мапа</string>
     <string name="tab_chat">Чат</string>
     <string name="tab_settings">Наладкі</string>
@@ -51,4 +59,11 @@
     <string name="cancel">Скасаваць</string>
     <string name="ok">ОК</string>
     <string name="send">Адправіць</string>
+    <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
+    <string name="map_default_location">Мой Горад</string>
+    <string name="map_default_location_grodno">Гродна</string>
+    <string name="map_default_location_skidel">Скідзель</string>
+    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_ozery">Азёры</string>>
+    <string name="map_default_location_porechye">Парэчча</string>>
 </resources>

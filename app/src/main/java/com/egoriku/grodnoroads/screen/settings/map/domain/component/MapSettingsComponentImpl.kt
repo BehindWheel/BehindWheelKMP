@@ -20,7 +20,15 @@ class MapSettingsComponentImpl(
     override val state: Flow<State>
         get() = mapSettingsStore.states
 
-    override fun onCheckedChanged(preference: MapPref) {
-        mapSettingsStore.accept(Intent.OnCheckedChanged(preference))
+    override fun modify(preference: MapPref) {
+        mapSettingsStore.accept(Intent.Modify(preference))
+    }
+
+    override fun openDialog(preference: MapPref) {
+        mapSettingsStore.accept(Intent.OpenDialog(preference))
+    }
+
+    override fun closeDialog() {
+        mapSettingsStore.accept(Intent.CloseDialog)
     }
 }

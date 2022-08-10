@@ -75,4 +75,11 @@
     <string name="cancel">Отмена</string>
     <string name="ok">ОК</string>
     <string name="send">Отправить</string>
+    <string name="map_header_default_location">Местоположение по умолчанию</string>
+    <string name="map_default_location">Мой Город</string>
+    <string name="map_default_location_grodno">Гродно</string>
+    <string name="map_default_location_skidel">Скидель</string>
+    <string name="map_default_location_volkovysk">Волковыск</string>
+    <string name="map_default_location_ozery">Озёры</string>
+    <string name="map_default_location_porechye">Поречье</string>
 </resources>

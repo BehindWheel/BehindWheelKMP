@@ -31,7 +31,8 @@ val mapModule = module {
         LocationStoreFactory(
             storeFactory = get(),
             locationHelper = get(),
-            resourceProvider = get()
+            resourceProvider = get(),
+            datastore = get()
         ).create()
     }
 
