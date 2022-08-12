@@ -87,7 +87,7 @@ private fun LoadedState(
             .verticalScroll(rememberScrollState())
     ) {
         DefaultLocationSection(
-            defaultCity = mapSettingState.mapSettings.defaultCity,
+            locationInfo = mapSettingState.mapSettings.locationInfo,
             onCheckedChange = mapSettingsComponent::openDialog
         )
         MapStyleSection(

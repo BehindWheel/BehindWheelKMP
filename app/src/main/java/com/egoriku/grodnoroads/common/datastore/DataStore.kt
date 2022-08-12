@@ -2,10 +2,7 @@ package com.egoriku.grodnoroads.common.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -24,7 +21,10 @@ object PreferenceKeys {
 
     val IS_SHOW_TRAFFIC_JAM_APPEARANCE = booleanPreferencesKey("is_show_traffic_jam_appearance")
     val GOOGLE_MAP_STYLE = stringPreferencesKey("google_map_style")
+
     val DEFAULT_CITY = stringPreferencesKey("default_city")
+    val MAP_ZOOM_IN_CITY = floatPreferencesKey("map_zoom_in_city")
+    val MAP_ZOOM_OUT_CITY = floatPreferencesKey("map_zoom_out_city")
 
     val ALERT_DISTANCE = intPreferencesKey("alert_distance")
 }

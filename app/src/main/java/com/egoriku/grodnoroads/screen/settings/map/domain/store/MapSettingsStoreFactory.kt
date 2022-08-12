@@ -16,6 +16,8 @@ import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowStationaryCameras
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficJam
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficPolice
 import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowWildAnimals
+import com.egoriku.grodnoroads.common.datastore.DataFlow.mapZoomInCity
+import com.egoriku.grodnoroads.common.datastore.DataFlow.mapZoomOutCity
 import com.egoriku.grodnoroads.common.datastore.DataFlow.trafficJamOnMap
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.DEFAULT_CITY
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
@@ -27,13 +29,14 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_JAM_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.extension.put
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -69,7 +72,11 @@ class MapSettingsStoreFactory(
                                         trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
                                         googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
                                     ),
-                                    defaultCity = DefaultCity(current = pref.defaultCity)
+                                    locationInfo = LocationInfo(
+                                        defaultCity = DefaultCity(current = pref.defaultCity),
+                                        mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
+                                        mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity)
+                                    )
                                 )
                             }
                             .collect {
@@ -94,6 +101,8 @@ class MapSettingsStoreFactory(
                                 is TrafficJamOnMap -> IS_SHOW_TRAFFIC_JAM_APPEARANCE
                                 is GoogleMapStyle -> GOOGLE_MAP_STYLE
                                 is DefaultCity -> DEFAULT_CITY
+                                is MapZoomInCity -> MAP_ZOOM_IN_CITY
+                                is MapZoomOutCity -> MAP_ZOOM_OUT_CITY
                             }.name,
                             value = when (preference) {
                                 is StationaryCameras -> preference.isShow
@@ -107,6 +116,8 @@ class MapSettingsStoreFactory(
                                 is TrafficJamOnMap -> preference.isShow
                                 is GoogleMapStyle -> preference.style.type
                                 is DefaultCity -> preference.current.cityName
+                                is MapZoomInCity -> preference.current
+                                is MapZoomOutCity -> preference.current
                             }
                         )
                     }

@@ -2,6 +2,8 @@ package com.egoriku.grodnoroads.screen.settings.map.domain.component
 
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.common.Condition
+import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.*
@@ -44,6 +46,9 @@ interface MapSettingsComponent {
             }
         }
 
+        data class MapZoomInCity(val current: Float = DEFAULT_MAP_ZOOM_IN_CITY) : MapPref
+        data class MapZoomOutCity(val current: Float = DEFAULT_MAP_ZOOM_OUT_CITY) : MapPref
+
         data class DefaultCity(
             val current: City = Grodno,
             val values: List<City> = listOf(Grodno, Skidel, Volkovysk, Ozery, Porechye)
@@ -74,8 +79,14 @@ interface MapSettingsComponent {
     data class MapSettings(
         val mapInfo: MapInfo = MapInfo(),
         val mapStyle: MapStyle = MapStyle(),
-        val defaultCity: DefaultCity = DefaultCity()
+        val locationInfo: LocationInfo = LocationInfo()
     ) {
+        data class LocationInfo(
+            val defaultCity: DefaultCity = DefaultCity(),
+            val mapZoomInCity: MapZoomInCity = MapZoomInCity(),
+            val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity(),
+        )
+
         data class MapInfo(
             val stationaryCameras: StationaryCameras = StationaryCameras(),
             val mobileCameras: MobileCameras = MobileCameras(),

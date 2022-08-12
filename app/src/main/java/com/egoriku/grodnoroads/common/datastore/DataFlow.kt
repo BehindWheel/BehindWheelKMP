@@ -2,6 +2,8 @@ package com.egoriku.grodnoroads.common.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.Preferences
+import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_THEME
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.DEFAULT_CITY
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
@@ -13,6 +15,8 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_JAM_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City
@@ -43,6 +47,12 @@ object DataFlow {
 
     val Preferences.defaultCity: City
         get() = City.toCity(this[DEFAULT_CITY] ?: City.Grodno.cityName)
+
+    val Preferences.mapZoomInCity: Float
+        get() = this[MAP_ZOOM_IN_CITY] ?: DEFAULT_MAP_ZOOM_IN_CITY
+
+    val Preferences.mapZoomOutCity: Float
+        get() = this[MAP_ZOOM_OUT_CITY] ?: DEFAULT_MAP_ZOOM_OUT_CITY
 
     val Preferences.trafficJamOnMap: Boolean
         get() = this[IS_SHOW_TRAFFIC_JAM_APPEARANCE] ?: false
