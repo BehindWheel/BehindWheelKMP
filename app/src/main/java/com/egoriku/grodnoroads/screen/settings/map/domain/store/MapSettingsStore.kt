@@ -4,23 +4,25 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Intent
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.State
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.StoreState
 
-interface MapSettingsStore : Store<Intent, State, Nothing> {
+interface MapSettingsStore : Store<Intent, StoreState, Nothing> {
 
     sealed interface Intent {
         data class Modify(val preference: MapPref) : Intent
-        data class OpenDialog(val preference: MapPref): Intent
-        object CloseDialog: Intent
+        data class OpenDialog(val preference: MapPref) : Intent
+        object CloseDialog : Intent
     }
 
-    data class State(
-        val mapSettingsState: MapSettingsState = MapSettingsState(),
+    data class StoreState(
+        val isLoading: Boolean = true,
+        val mapSettings: MapSettings = MapSettings(),
         val mapDialogState: MapDialogState = None
     )
 
     sealed interface Message {
-        data class NewSettings(val mapSettingsState: MapSettingsState) : Message
-        data class NewDialogState(val mapDialogState: MapDialogState): Message
+        object Loading : Message
+        data class NewSettings(val mapSettings: MapSettings) : Message
+        data class NewDialogState(val mapDialogState: MapDialogState) : Message
     }
 }

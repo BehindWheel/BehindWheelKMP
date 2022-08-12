@@ -12,7 +12,7 @@ import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle.Style.Detailed
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle.Style.Minimal
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState.MapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.screen.settings.ui.SettingsHeader
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 

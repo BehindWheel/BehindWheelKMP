@@ -9,6 +9,6 @@ class AlertsComponentImpl(
     componentContext: ComponentContext
 ) : AlertsComponent, ComponentContext by componentContext, KoinComponent {
 
-    override val state: Flow<MapSettingsStore.State>
+    override val state: Flow<MapSettingsStore.StoreState>
         get() = TODO("Not yet implemented")
 }

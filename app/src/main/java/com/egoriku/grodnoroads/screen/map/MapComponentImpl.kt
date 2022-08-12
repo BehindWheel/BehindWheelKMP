@@ -39,7 +39,7 @@ class MapComponentImpl(
     private val reports = mapEventsStore.states.map { it.reports }
 
     private val alertDistance = alertsStore.states.map { it.alertDistance }
-    private val mapSettings = mapSettingsStore.states.map { it.mapSettingsState }
+    private val mapSettings = mapSettingsStore.states.map { it.mapSettings }
 
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }

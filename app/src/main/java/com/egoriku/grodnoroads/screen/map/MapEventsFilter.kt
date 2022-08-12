@@ -3,13 +3,13 @@ package com.egoriku.grodnoroads.screen.map
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
 
 fun filterMapEvents(): suspend (
     List<Reports>,
     List<StationaryCamera>,
     List<MobileCamera>,
-    MapSettingsState
+    MapSettings
 ) -> List<MapEvent> = { reports, stationary, mobile, settings ->
     (reports + stationary + mobile).mapNotNull { mapEvent ->
         val mapInfo = settings.mapInfo

@@ -1,19 +1,25 @@
 package com.egoriku.grodnoroads.screen.settings.map.domain.component
 
 import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.common.Condition
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.State
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 interface MapSettingsComponent {
 
-    val state: Flow<State>
+    val mapSettingsState: Flow<Condition<MapSettingState>>
 
     fun modify(preference: MapPref)
     fun openDialog(preference: MapPref)
     fun closeDialog()
+
+    data class MapSettingState(
+        val mapSettings: MapSettings = MapSettings(),
+        val mapDialogState: MapDialogState = None
+    )
 
     sealed interface MapDialogState {
         data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
@@ -65,7 +71,7 @@ interface MapSettingsComponent {
         }
     }
 
-    data class MapSettingsState(
+    data class MapSettings(
         val mapInfo: MapInfo = MapInfo(),
         val mapStyle: MapStyle = MapStyle(),
         val defaultCity: DefaultCity = DefaultCity()

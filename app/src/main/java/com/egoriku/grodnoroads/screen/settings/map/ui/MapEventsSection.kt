@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState.MapInfo
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 import com.egoriku.grodnoroads.screen.settings.ui.SettingsHeader
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 

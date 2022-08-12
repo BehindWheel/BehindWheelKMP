@@ -31,9 +31,9 @@ import com.egoriku.grodnoroads.extension.put
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState.MapInfo
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingsState.MapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -46,14 +46,16 @@ class MapSettingsStoreFactory(
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapSettingsStore =
-        object : MapSettingsStore, Store<Intent, State, Nothing> by storeFactory.create(
-            initialState = State(),
+        object : MapSettingsStore, Store<Intent, StoreState, Nothing> by storeFactory.create(
+            initialState = StoreState(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
+                        dispatch(Message.Loading)
+
                         dataStore.data
                             .map { pref ->
-                                MapSettingsState(
+                                MapSettings(
                                     mapInfo = MapInfo(
                                         stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
                                         mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
@@ -69,7 +71,8 @@ class MapSettingsStoreFactory(
                                     ),
                                     defaultCity = DefaultCity(current = pref.defaultCity)
                                 )
-                            }.collect {
+                            }
+                            .collect {
                                 dispatch(Message.NewSettings(it))
                             }
                     }
@@ -125,7 +128,11 @@ class MapSettingsStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.NewSettings -> copy(mapSettingsState = message.mapSettingsState)
+                    is Message.Loading -> copy(isLoading = true)
+                    is Message.NewSettings -> copy(
+                        mapSettings = message.mapSettings,
+                        isLoading = false
+                    )
                     is Message.NewDialogState -> copy(mapDialogState = message.mapDialogState)
                 }
             }
