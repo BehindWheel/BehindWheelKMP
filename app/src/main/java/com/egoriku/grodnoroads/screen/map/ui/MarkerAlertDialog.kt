@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.screen.map.domain.MessageItem
 import com.egoriku.grodnoroads.screen.map.domain.Source
 import com.google.android.gms.maps.model.LatLng
@@ -24,18 +24,16 @@ import com.google.android.gms.maps.model.LatLng
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MarkerAlertDialog(
-    reports: Reports?,
+    reports: Reports,
     onClose: () -> Unit
 ) {
-    if (reports == null) return
-
     AlertDialog(
         properties = DialogProperties(
             usePlatformDefaultWidth = true
         ),
         onDismissRequest = onClose,
         title = {
-            Text(text = reports.shortMessage, style = MaterialTheme.typography.h6)
+            Text(text = reports.dialogTitle, style = MaterialTheme.typography.h6)
         },
         text = {
             MessageComponent(messages = reports.messages)
@@ -76,9 +74,10 @@ fun PreviewMarkerAlertDialog() {
                     source = Source.Viber
                 ),
             ),
-            shortMessage = "\uD83D\uDEA7 (12:30) м6 выезд из города",
+            dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
+            markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
             position = LatLng(0.0, 0.0),
-            mapEventType = MapEventType.RoadIncident
+            mapEventType = RoadIncident
         )
     ) {
     }

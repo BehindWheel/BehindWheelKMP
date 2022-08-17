@@ -10,7 +10,7 @@ object DateUtil {
     var defaultTimeZone: TimeZone = TimeZone.getTimeZone("Europe/Minsk")
 
     private val simpleDateFormat: SimpleDateFormat
-        get() = SimpleDateFormat("HH:mm", Locale.getDefault()).apply {
+        get() = SimpleDateFormat("H:mm", Locale.getDefault()).apply {
             timeZone = defaultTimeZone
         }
 
