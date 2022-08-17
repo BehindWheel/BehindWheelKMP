@@ -2,8 +2,9 @@ package com.egoriku.grodnoroads.screen.root
 
 import android.os.Parcelable
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.RouterState
-import com.arkivanov.decompose.router.router
+import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
@@ -28,20 +29,26 @@ class RoadsRootComponentImpl(
         get { parametersOf(componentContext) }
     }
 
-    private val router = router<Configuration, Child>(
+    private val navigation = StackNavigation<Configuration>()
+
+    private val stack: Value<ChildStack<Configuration, Child>> = childStack(
+        source = navigation,
         initialConfiguration = Main,
         handleBackButton = true,
         key = "Root",
-        childFactory = { configuration, componentContext ->
-            when (configuration) {
-                is Main -> Child.Main(main(componentContext))
-            }
-        }
+        childFactory = ::child
     )
 
-    override val routerState: Value<RouterState<*, Child>> = router.state
+    override val childStack: Value<ChildStack<*, Child>> = stack
 
     override val themeState: Flow<State> = rootStore.states
+
+    private fun child(
+        configuration: Configuration,
+        componentContext: ComponentContext,
+    ) = when (configuration) {
+        is Main -> Child.Main(main(componentContext))
+    }
 
     private sealed class Configuration : Parcelable {
         @Parcelize

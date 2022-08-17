@@ -23,7 +23,8 @@ val mapModule = module {
             storeFactory = get(),
             mobileCameraRepository = get(),
             stationaryCameraRepository = get(),
-            reportsRepository = get()
+            reportsRepository = get(),
+            firebaseAnalytics = get()
         ).create()
     }
 
@@ -43,7 +44,10 @@ val mapModule = module {
     }
 
     factory {
-        DialogStoreFactory(storeFactory = get()).create()
+        DialogStoreFactory(
+            storeFactory = get(),
+            firebaseAnalytics = get()
+        ).create()
     }
 }
 

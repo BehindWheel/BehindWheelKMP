@@ -33,7 +33,7 @@ class MergeReportsTest {
     fun `single report`() {
         val reports = listOf(
             ReportsResponse(
-                timestamp = (12.hours + 30.minutes).inWholeMilliseconds,
+                timestamp = (0.hours + 30.minutes).inWholeMilliseconds,
                 message = "Long message",
                 source = App.source,
                 shortMessage = "Short message",
@@ -46,12 +46,13 @@ class MergeReportsTest {
         assertEquals(1, reports.size)
 
         with(reports.first()) {
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message)", shortMessage)
+            assertEquals("(0:30) ${TrafficPolice.emoji} (Short message)", markerMessage)
             assertEquals(TrafficPolice, mapEventType)
+            assertEquals("${TrafficPolice.emoji} Short message", dialogTitle)
 
             with(messages) {
                 assertEquals(1, size)
-                assertEquals("(12:30) Long message", first().message)
+                assertEquals("(0:30) Long message", first().message)
                 assertEquals(App, first().source)
             }
         }
@@ -84,25 +85,27 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(TrafficPolice, mapEventType)
+            assertEquals("${TrafficPolice.emoji} Short message 1", dialogTitle)
 
             with(messages) {
                 assertEquals(1, size)
                 assertEquals("(12:30) Long message 1", first().message)
             }
 
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", markerMessage)
             assertEquals(LatLng(53.666199, 23.784990), position)
         }
 
         with(reports.second()) {
             assertEquals(RoadIncident, mapEventType)
+            assertEquals("${RoadIncident.emoji} Short message 2", dialogTitle)
 
             with(messages) {
                 assertEquals(1, size)
                 assertEquals("(12:51) Long message 2", first().message)
             }
 
-            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", shortMessage)
+            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", markerMessage)
             assertEquals(LatLng(53.672628, 23.875794), position)
         }
     }
@@ -134,7 +137,8 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 1", dialogTitle)
             assertEquals(LatLng(53.666199, 23.784990), position)
 
             assertEquals(1, messages.size)
@@ -146,7 +150,9 @@ class MergeReportsTest {
 
         with(reports.second()) {
             assertEquals(RoadIncident, mapEventType)
-            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", shortMessage)
+            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", markerMessage)
+            assertEquals("${RoadIncident.emoji} Short message 2", dialogTitle)
+
             assertEquals(LatLng(53.666216, 23.785078), position)
 
             assertEquals(1, messages.size)
@@ -184,7 +190,9 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 1", dialogTitle)
+
             assertEquals(LatLng(53.666199, 23.784990), position)
 
             assertEquals(1, messages.size)
@@ -196,7 +204,8 @@ class MergeReportsTest {
 
         with(reports.second()) {
             assertEquals(RoadIncident, mapEventType)
-            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", shortMessage)
+            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", markerMessage)
+            assertEquals("${RoadIncident.emoji} Short message 2", dialogTitle)
             assertEquals(LatLng(53.666216, 23.785078), position)
 
             assertEquals(1, messages.size)
@@ -234,7 +243,8 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(RoadIncident, mapEventType)
-            assertEquals("(12:30) ${RoadIncident.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", markerMessage)
+            assertEquals("${RoadIncident.emoji} Short message 2", dialogTitle)
             assertEquals(LatLng(53.666199, 23.784990), position)
 
             assertEquals(2, messages.size)
@@ -286,7 +296,8 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:51) ${TrafficPolice.emoji} (Short message 2)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 2", dialogTitle)
             assertEquals(LatLng(53.666199, 23.784990), position)
 
             assertEquals(2, messages.size)
@@ -303,7 +314,8 @@ class MergeReportsTest {
 
         with(reports.second()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:52) ${TrafficPolice.emoji} (Short message 3)", shortMessage)
+            assertEquals("(12:52) ${TrafficPolice.emoji} (Short message 3)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 3", dialogTitle)
             assertEquals(LatLng(53.672628, 23.875794), position)
 
             assertEquals(1, messages.size)
@@ -350,7 +362,8 @@ class MergeReportsTest {
 
         with(reports.first()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 1", dialogTitle)
             assertEquals(LatLng(53.666199, 23.784990), position)
 
             assertEquals(1, messages.size)
@@ -362,7 +375,8 @@ class MergeReportsTest {
 
         with(reports.second()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:40) ${TrafficPolice.emoji} (Short message 2)", shortMessage)
+            assertEquals("(12:40) ${TrafficPolice.emoji} (Short message 2)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 2", dialogTitle)
             assertEquals(LatLng(53.673657, 23.869954), position)
 
             assertEquals(1, messages.size)
@@ -374,7 +388,8 @@ class MergeReportsTest {
 
         with(reports.third()) {
             assertEquals(TrafficPolice, mapEventType)
-            assertEquals("(12:51) ${TrafficPolice.emoji} (Short message 3)", shortMessage)
+            assertEquals("(12:51) ${TrafficPolice.emoji} (Short message 3)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 3", dialogTitle)
             assertEquals(LatLng(53.719067, 23.850779), position)
 
             assertEquals(1, messages.size)
@@ -420,7 +435,8 @@ class MergeReportsTest {
         assertEquals(1, reports.size)
 
         with(reports.first()) {
-            assertEquals("(12:30) ${TrafficPolice.emoji} (Short message 1)", shortMessage)
+            assertEquals("(12:51) ${TrafficPolice.emoji} (Short message 3)", markerMessage)
+            assertEquals("${TrafficPolice.emoji} Short message 3", dialogTitle)
             assertEquals(TrafficPolice, mapEventType)
 
             assertEquals(3, messages.size)
