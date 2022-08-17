@@ -19,7 +19,7 @@ fun ReportsMarker(reports: MapEvent.Reports, onMarkerClick: (MapEvent.Reports) -
     val icon by remember(reports) {
         mutableStateOf(
             BitmapDescriptorFactory.fromBitmap(
-                iconGenerator.makeIcon(reports.shortMessage)
+                iconGenerator.makeIcon(reports.markerMessage)
             )
         )
     }

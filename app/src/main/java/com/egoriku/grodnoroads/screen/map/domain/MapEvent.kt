@@ -15,7 +15,8 @@ sealed interface MapEvent {
     ) : MapEvent
 
     data class Reports(
-        val shortMessage: String,
+        val markerMessage: String,
+        val dialogTitle: String,
         val messages: List<MessageItem>,
         override val position: LatLng,
         override val mapEventType: MapEventType
