@@ -7,29 +7,43 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent.CloseDialog
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.NewTheme
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.UpdateHeadLampDialog
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
+import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampDispatcher
+import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.settings.domain.Theme
 import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_THEME
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-interface RootStore : Store<Nothing, State, Nothing>
+interface RootStore : Store<Intent, State, Nothing>
 
 class RootStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {
 
-    sealed interface Message {
-        data class NewTheme(val theme: Theme) : Message
+    sealed interface Intent {
+        object CloseDialog : Intent
     }
 
-    data class State(val theme: Theme = Theme.System)
+    sealed interface Message {
+        data class NewTheme(val theme: Theme) : Message
+        data class UpdateHeadLampDialog(val headLampType: HeadLampType) : Message
+    }
+
+    data class State(
+        val theme: Theme = Theme.System,
+        val headLampType: HeadLampType = HeadLampType.None
+    )
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): RootStore =
-        object : RootStore, Store<Nothing, State, Nothing> by storeFactory.create(
+        object : RootStore, Store<Intent, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
@@ -39,15 +53,24 @@ class RootStoreFactory(
                                 Theme.fromOrdinal(preferences[APP_THEME] ?: Theme.System.theme)
                             }
                             .collect {
-                                dispatch(Message.NewTheme(theme = it))
+                                dispatch(NewTheme(theme = it))
                             }
+                    }
+                    launch {
+                        dispatch(UpdateHeadLampDialog(headLampType = HeadLampDispatcher.calculateType()))
+                    }
+                }
+                onIntent<CloseDialog> {
+                    launch {
+                        dispatch(UpdateHeadLampDialog(headLampType = HeadLampType.None))
                     }
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.NewTheme -> copy(theme = message.theme)
+                    is NewTheme -> copy(theme = message.theme)
+                    is UpdateHeadLampDialog -> copy(headLampType = message.headLampType)
                 }
             }
         ) {}
