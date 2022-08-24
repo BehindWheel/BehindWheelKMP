@@ -4,13 +4,15 @@ import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.*
 import java.util.*
 
 private const val MAY = 5
-private const val JUNE = 6
 private val MAY_RANGE = 25..31
+
+private const val JUNE = 6
 private val JUNE_RANGE = 1..5
 
 private const val AUGUST = 8
-private const val SEPTEMBER = 9
 private val AUGUST_RANGE = 25..31
+
+private const val SEPTEMBER = 9
 private val SEPTEMBER_RANGE = 1..5
 
 enum class HeadLampType {
