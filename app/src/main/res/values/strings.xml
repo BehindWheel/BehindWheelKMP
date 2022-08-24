@@ -8,6 +8,9 @@
 
     <string name="toast_location_disabled">Location required for Drive mode</string>
 
+    <string name="headlamp_body_spring">From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
+    <string name="headlamp_body_autumn">From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
+
     <plurals name="camera_alerts_plurals_distance">
         <item quantity="zero">0 meters</item>
         <item quantity="one">%1$d meter</item>

@@ -11,7 +11,6 @@ import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory
 import com.egoriku.grodnoroads.screen.settings.domain.Theme
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -28,9 +27,9 @@ class MainActivity : ComponentActivity() {
                 mutableStateOf(RoadsRootComponentImpl(defaultComponentContext()))
             }
 
-            val themeState by root.themeState.collectAsState(initial = RootStoreFactory.State())
+            val themeState by root.themeState.collectAsState(initial = Theme.System)
 
-            val darkTheme = when (themeState.theme) {
+            val darkTheme = when (themeState) {
                 Theme.System -> isSystemInDarkTheme()
                 Theme.Dark -> true
                 Theme.Light -> false
