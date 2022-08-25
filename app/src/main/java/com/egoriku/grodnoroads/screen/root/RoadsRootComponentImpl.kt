@@ -12,8 +12,11 @@ import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl.Configuration.Main
 import com.egoriku.grodnoroads.screen.root.store.RootStore
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
+import com.egoriku.grodnoroads.screen.settings.domain.Theme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -41,7 +44,13 @@ class RoadsRootComponentImpl(
 
     override val childStack: Value<ChildStack<*, Child>> = stack
 
-    override val state: Flow<State> = rootStore.states
+    override val state: Flow<Theme> = rootStore.states.map { it.theme }
+
+    override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
+
+    override fun closeHeadlampDialog() {
+        rootStore.accept(Intent.CloseDialog)
+    }
 
     private fun child(
         configuration: Configuration,
