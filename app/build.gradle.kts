@@ -107,9 +107,9 @@ dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
 
-    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.1")
-    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.1")
-    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.1")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.2")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.2")
+    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.10")
 }
