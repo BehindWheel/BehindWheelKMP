@@ -13,8 +13,6 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
@@ -52,7 +50,6 @@ fun MainUi(component: MainComponent) {
                 Children(
                     modifier = Modifier.padding(it),
                     stack = childStack,
-                    animation = stackAnimation(fade())
                 ) { created ->
                     when (val child = created.instance) {
                         is Child.Map -> MapUi(
