@@ -42,6 +42,8 @@ fun MainUi(component: MainComponent) {
             DrawerContent(modifier = Modifier.systemBarsPadding())
         }
     ) {
+        val bottomNavItems = listOf(Screen.Map, Screen.Settings)
+
         val childStack by component.childStack.subscribeAsState()
 
         Scaffold(
@@ -63,7 +65,7 @@ fun MainUi(component: MainComponent) {
             },
             bottomBar = {
                 BottomNavigation {
-                    listOf(Screen.Map(), Screen.Settings()).forEach { screen ->
+                    bottomNavItems.forEach { screen ->
                         BottomNavigationItem(
                             selected = screen.index == childStack.active.instance.index,
                             onClick = { component.onSelectTab(index = screen.index) },
