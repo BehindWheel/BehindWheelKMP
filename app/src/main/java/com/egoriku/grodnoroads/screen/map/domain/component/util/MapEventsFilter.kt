@@ -1,8 +1,10 @@
-package com.egoriku.grodnoroads.screen.map
+package com.egoriku.grodnoroads.screen.map.domain.component.util
 
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
 
 fun filterMapEvents(): suspend (

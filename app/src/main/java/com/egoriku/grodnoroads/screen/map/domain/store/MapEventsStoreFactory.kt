@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.store
+package com.egoriku.grodnoroads.screen.map.domain.store
 
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
@@ -14,13 +14,15 @@ import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
 import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.Source.App
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.State
-import com.egoriku.grodnoroads.screen.map.store.util.mapAndMerge
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.model.Source.App
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.State
+import com.egoriku.grodnoroads.screen.map.domain.model.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent

@@ -16,7 +16,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
-import com.egoriku.grodnoroads.screen.map.MapUi
+import com.egoriku.grodnoroads.screen.map.MapScreen
 import com.egoriku.grodnoroads.screen.settings.SettingsScreen
 import kotlinx.coroutines.launch
 
@@ -52,7 +52,7 @@ fun MainUi(component: MainComponent) {
                     stack = childStack,
                 ) { created ->
                     when (val child = created.instance) {
-                        is Child.Map -> MapUi(
+                        is Child.Map -> MapScreen(
                             component = child.component,
                             openDrawer = openDrawer
                         )

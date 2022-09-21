@@ -1,13 +1,17 @@
-package com.egoriku.grodnoroads.screen.map.store.util
+package com.egoriku.grodnoroads.screen.map.domain.model.util
 
 import com.egoriku.grodnoroads.extension.appendIfNotEmpty
 import com.egoriku.grodnoroads.extension.distanceTo
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.*
-import com.egoriku.grodnoroads.screen.map.domain.MessageItem
-import com.egoriku.grodnoroads.screen.map.domain.Source
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.CarCrash
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.TrafficJam
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.WildAnimals
+import com.egoriku.grodnoroads.screen.map.domain.model.MessageItem
+import com.egoriku.grodnoroads.screen.map.domain.model.Source
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 

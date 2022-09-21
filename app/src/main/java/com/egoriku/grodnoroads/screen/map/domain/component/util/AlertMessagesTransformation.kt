@@ -1,12 +1,14 @@
 package com.egoriku.grodnoroads.screen.map
 
 import com.egoriku.grodnoroads.extension.distanceTo
-import com.egoriku.grodnoroads.screen.map.domain.Alert
-import com.egoriku.grodnoroads.screen.map.domain.Alert.CameraAlert
-import com.egoriku.grodnoroads.screen.map.domain.Alert.IncidentAlert
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.model.Alert
+import com.egoriku.grodnoroads.screen.map.domain.model.Alert.CameraAlert
+import com.egoriku.grodnoroads.screen.map.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil

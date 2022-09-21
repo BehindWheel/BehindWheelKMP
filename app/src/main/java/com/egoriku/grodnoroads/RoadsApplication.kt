@@ -5,7 +5,7 @@ package com.egoriku.grodnoroads
 import android.app.Application
 import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
-import com.egoriku.grodnoroads.screen.map.koin.mapModule
+import com.egoriku.grodnoroads.screen.map.di.mapModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.screen.settings.alerts.di.alertsModule
 import com.egoriku.grodnoroads.screen.settings.appearance.di.appearanceModule

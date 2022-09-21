@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.domain
+package com.egoriku.grodnoroads.screen.map.domain.model
 
 enum class MapEventType(
     val type: String,

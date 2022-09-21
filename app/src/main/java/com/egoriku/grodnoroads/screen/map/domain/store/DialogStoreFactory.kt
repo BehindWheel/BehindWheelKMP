@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.store
+package com.egoriku.grodnoroads.screen.map.domain.store
 
 import androidx.core.os.bundleOf
 import com.arkivanov.mvikotlin.core.store.Store
@@ -8,9 +8,11 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_MARKER_INFO_DIALOG
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_ROAD_INCIDENT_DIALOG
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_TRAFFIC_POLICE_DIALOG
-import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent
-import com.egoriku.grodnoroads.screen.map.store.DialogStoreFactory.*
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Message
+import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.State
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.Dispatchers

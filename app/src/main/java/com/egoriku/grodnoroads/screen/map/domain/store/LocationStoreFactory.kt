@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.store
+package com.egoriku.grodnoroads.screen.map.domain.store
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,10 +8,14 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.common.datastore.DataFlow.defaultCity
-import com.egoriku.grodnoroads.screen.map.domain.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.*
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Intent.*
+import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.DisabledLocation
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StartLocationUpdates
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StopLocationUpdates
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.State
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.location.LocationHelper
 import kotlinx.coroutines.Dispatchers

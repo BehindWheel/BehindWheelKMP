@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.SpeedLimitSign
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberMarkerState

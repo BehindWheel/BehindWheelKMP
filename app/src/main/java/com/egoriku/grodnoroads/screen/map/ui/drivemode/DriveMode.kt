@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
-import com.egoriku.grodnoroads.screen.map.domain.Alert
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.Alert
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.CloseAction
 import com.egoriku.grodnoroads.screen.map.ui.drivemode.action.ReportAction
 

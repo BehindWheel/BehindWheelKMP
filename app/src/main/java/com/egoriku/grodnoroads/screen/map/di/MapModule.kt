@@ -1,11 +1,16 @@
-package com.egoriku.grodnoroads.screen.map.koin
+package com.egoriku.grodnoroads.screen.map.di
 
-import com.egoriku.grodnoroads.screen.map.MapComponent
-import com.egoriku.grodnoroads.screen.map.MapComponentImpl
-import com.egoriku.grodnoroads.screen.map.data.*
-import com.egoriku.grodnoroads.screen.map.store.DialogStoreFactory
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory
+import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent
+import com.egoriku.grodnoroads.screen.map.domain.component.MapComponentImpl
+import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepositoryImpl
+import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
+import com.egoriku.grodnoroads.screen.map.data.ReportsRepositoryImpl
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
+import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepositoryImpl
+import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module

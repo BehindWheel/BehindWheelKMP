@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.foundation.map
 import android.graphics.Point
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import com.google.maps.android.compose.CameraPositionState

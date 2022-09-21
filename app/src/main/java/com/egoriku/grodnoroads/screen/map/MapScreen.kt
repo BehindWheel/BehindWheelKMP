@@ -13,12 +13,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.extension.toast
-import com.egoriku.grodnoroads.screen.map.domain.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.MapAlertDialog.*
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label.ShowToast
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
+import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent
+import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.MarkerInfoDialog
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.None
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.PoliceDialog
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.RoadIncidentDialog
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label.ShowToast
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.ui.GoogleMapView
 import com.egoriku.grodnoroads.screen.map.ui.MarkerAlertDialog
 import com.egoriku.grodnoroads.screen.map.ui.defaultmode.MapMode
@@ -28,7 +32,7 @@ import com.egoriku.grodnoroads.screen.map.ui.drivemode.DriveMode
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MapUi(
+fun MapScreen(
     component: MapComponent,
     openDrawer: () -> Unit
 ) {

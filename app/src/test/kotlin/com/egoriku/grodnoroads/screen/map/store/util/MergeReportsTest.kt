@@ -3,9 +3,10 @@ package com.egoriku.grodnoroads.screen.map.store.util
 import com.egoriku.grodnoroads.extension.second
 import com.egoriku.grodnoroads.extension.third
 import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.screen.map.domain.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.screen.map.domain.Source.*
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.screen.map.domain.model.Source.*
+import com.egoriku.grodnoroads.screen.map.domain.model.util.mapAndMerge
 import com.egoriku.grodnoroads.util.DateUtil
 import com.google.android.gms.maps.model.LatLng
 import org.junit.Before

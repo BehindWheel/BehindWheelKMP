@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.domain
+package com.egoriku.grodnoroads.screen.map.domain.model
 
 enum class Source(val source: String) {
     App("app"),

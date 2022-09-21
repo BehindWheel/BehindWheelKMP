@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.screen.map.MapComponent
+import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent

@@ -5,7 +5,7 @@ import android.content.Context
 import android.location.LocationRequest.QUALITY_HIGH_ACCURACY
 import android.os.Looper
 import com.egoriku.grodnoroads.extension.logD
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
 import com.egoriku.grodnoroads.util.MetricUtils.speedToKilometerPerHour
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng

@@ -1,9 +1,13 @@
-package com.egoriku.grodnoroads.screen.map
+package com.egoriku.grodnoroads.screen.map.domain.component
 
-import com.egoriku.grodnoroads.screen.map.domain.*
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.store.LocationStoreFactory.Label
-import com.egoriku.grodnoroads.screen.map.store.MapEventsStoreFactory.Intent.ReportAction
+import com.egoriku.grodnoroads.screen.map.domain.model.Alert
+import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.map.domain
+package com.egoriku.grodnoroads.screen.map.domain.model
 
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Grodno
 import com.google.android.gms.maps.model.LatLng

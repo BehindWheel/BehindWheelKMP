@@ -8,7 +8,7 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.common.datastore.DataFlow.googleMapStyle
 import com.egoriku.grodnoroads.common.datastore.DataFlow.trafficJamOnMap
 import com.egoriku.grodnoroads.common.datastore.dataStore
-import com.egoriku.grodnoroads.screen.map.domain.LocationState
+import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle.Style
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
