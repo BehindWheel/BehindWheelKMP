@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_IN_CITY
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUTSIDE_CITY
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City
@@ -52,7 +52,7 @@ object DataFlow {
         get() = this[MAP_ZOOM_IN_CITY] ?: DEFAULT_MAP_ZOOM_IN_CITY
 
     val Preferences.mapZoomOutCity: Float
-        get() = this[MAP_ZOOM_OUT_CITY] ?: DEFAULT_MAP_ZOOM_OUT_CITY
+        get() = this[MAP_ZOOM_OUTSIDE_CITY] ?: DEFAULT_MAP_ZOOM_OUT_CITY
 
     val Preferences.trafficJamOnMap: Boolean
         get() = this[IS_SHOW_TRAFFIC_JAM_APPEARANCE] ?: false

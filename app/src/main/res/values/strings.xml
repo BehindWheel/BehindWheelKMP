@@ -66,6 +66,10 @@
     <string name="map_default_location_ozery">Ozery</string>
     <string name="map_default_location_porechye">Porechye</string>
 
+    <string name="map_header_drive_mode">Navigation mode</string>
+    <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
+
     <string name="map_header_appearance">Appearance</string>
     <string name="map_traffic_jam_appearance">Traffic jam on map</string>
     <string name="map_google_map_style_minimal">Minimal</string>

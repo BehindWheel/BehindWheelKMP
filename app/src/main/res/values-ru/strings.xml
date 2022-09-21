@@ -85,4 +85,8 @@
     <string name="map_default_location_volkovysk">Волковыск</string>
     <string name="map_default_location_ozery">Озёры</string>
     <string name="map_default_location_porechye">Поречье</string>
+
+    <string name="map_header_drive_mode">Режим навигации</string>
+    <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
 </resources>

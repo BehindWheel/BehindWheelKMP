@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.screen.settings.map
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +7,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,13 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.common.Condition.*
 import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.dialog.StepperDialog
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomInCityDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomOutCityDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingState
 import com.egoriku.grodnoroads.screen.settings.map.ui.DefaultLocationSection
+import com.egoriku.grodnoroads.screen.settings.map.ui.DrivingModeSection
 import com.egoriku.grodnoroads.screen.settings.map.ui.MapEventsSection
 import com.egoriku.grodnoroads.screen.settings.map.ui.MapStyleSection
 import com.egoriku.grodnoroads.screen.settings.map.ui.dialog.DefaultLocationDialog
@@ -33,7 +36,8 @@ fun MapSettingsScreen(
     mapSettingsComponent: MapSettingsComponent,
     onBack: () -> Unit
 ) {
-    val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = Loading)
+    val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = MapSettingState())
+    val isLoading by mapSettingsComponent.isLoading.collectAsState(initial = false)
 
     Scaffold(
         topBar = {
@@ -43,29 +47,18 @@ fun MapSettingsScreen(
             )
         }
     ) {
-        Crossfade(targetState = state) {
-            when (it) {
-                is Loading -> {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
-                }
-                is Loaded -> {
-                    LoadedState(
-                        mapSettingState = it.data,
-                        mapSettingsComponent = mapSettingsComponent
-                    )
-                }
-                is Error -> {
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Text(text = "Error loading screen")
-                    }
-                }
+        if (isLoading) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
+        } else {
+            LoadedState(
+                mapSettingState = state,
+                mapSettingsComponent = mapSettingsComponent
+            )
         }
     }
 }
-
 
 @Composable
 private fun LoadedState(
@@ -89,6 +82,10 @@ private fun LoadedState(
         DefaultLocationSection(
             locationInfo = mapSettingState.mapSettings.locationInfo,
             onCheckedChange = mapSettingsComponent::openDialog
+        )
+        DrivingModeSection(
+            driveModeZoom = mapSettingState.mapSettings.driveModeZoom,
+            onChange = mapSettingsComponent::openDialog
         )
         MapStyleSection(
             mapStyle = mapSettingState.mapSettings.mapStyle,
@@ -116,6 +113,37 @@ private fun DialogHandler(
                 onResult = onResult
             )
         }
+
+        is MapZoomInCityDialogState -> {
+            val mapZoomInCity = dialogState.mapZoomInCity
+
+            StepperDialog(
+                initial = mapZoomInCity.current,
+                onClose = onClose,
+                min = 5f,
+                max = 6f,
+                step = 0.5f,
+                onSelected = {
+                    onResult(mapZoomInCity.copy(current = it))
+                }
+            )
+        }
+
+        is MapZoomOutCityDialogState -> {
+            val mapZoomOutCity = dialogState.mapZoomOutCity
+
+            StepperDialog(
+                initial = mapZoomOutCity.current,
+                onClose = onClose,
+                min = 10f,
+                max = 13f,
+                step = 0.5f,
+                onSelected = {
+                    onResult(mapZoomOutCity.copy(current = it))
+                }
+            )
+        }
+
         else -> {}
     }
 }

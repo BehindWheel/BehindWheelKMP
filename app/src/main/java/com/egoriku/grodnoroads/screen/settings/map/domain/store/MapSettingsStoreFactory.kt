@@ -30,14 +30,32 @@ import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_J
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
 import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_IN_CITY
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUTSIDE_CITY
 import com.egoriku.grodnoroads.extension.put
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomInCityDialogState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomOutCityDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MobileCameras
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.RoadIncident
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.StationaryCameras
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJam
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJamOnMap
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficPolice
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.WildAnimals
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.LocationInfo
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Intent
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Message
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.StoreState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -54,7 +72,7 @@ class MapSettingsStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        dispatch(Message.Loading)
+                        dispatch(Message.Loading(true))
 
                         dataStore.data
                             .map { pref ->
@@ -74,6 +92,8 @@ class MapSettingsStoreFactory(
                                     ),
                                     locationInfo = LocationInfo(
                                         defaultCity = DefaultCity(current = pref.defaultCity),
+                                    ),
+                                    driveModeZoom = DriveModeZoom(
                                         mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
                                         mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity)
                                     )
@@ -81,6 +101,7 @@ class MapSettingsStoreFactory(
                             }
                             .collect {
                                 dispatch(Message.NewSettings(it))
+                                dispatch(Message.Loading(false))
                             }
                     }
                 }
@@ -102,7 +123,7 @@ class MapSettingsStoreFactory(
                                 is GoogleMapStyle -> GOOGLE_MAP_STYLE
                                 is DefaultCity -> DEFAULT_CITY
                                 is MapZoomInCity -> MAP_ZOOM_IN_CITY
-                                is MapZoomOutCity -> MAP_ZOOM_OUT_CITY
+                                is MapZoomOutCity -> MAP_ZOOM_OUTSIDE_CITY
                             }.name,
                             value = when (preference) {
                                 is StationaryCameras -> preference.isShow
@@ -129,6 +150,19 @@ class MapSettingsStoreFactory(
                                 mapDialogState = DefaultLocationDialogState(defaultCity = it.preference)
                             )
                         )
+
+                        is MapZoomInCity -> dispatch(
+                            Message.NewDialogState(
+                                mapDialogState = MapZoomInCityDialogState(mapZoomInCity = it.preference)
+                            )
+                        )
+
+                        is MapZoomOutCity -> dispatch(
+                            Message.NewDialogState(
+                                mapDialogState = MapZoomOutCityDialogState(mapZoomOutCity = it.preference)
+                            )
+                        )
+
                         else -> throw UnsupportedOperationException("${it.preference} not supported")
                     }
                 }
@@ -139,12 +173,9 @@ class MapSettingsStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.Loading -> copy(isLoading = true)
-                    is Message.NewSettings -> copy(
-                        mapSettings = message.mapSettings,
-                        isLoading = false
-                    )
+                    is Message.NewSettings -> copy(mapSettings = message.mapSettings)
                     is Message.NewDialogState -> copy(mapDialogState = message.mapDialogState)
+                    is Message.Loading -> copy(isLoading = message.isLoading)
                 }
             }
         ) {}

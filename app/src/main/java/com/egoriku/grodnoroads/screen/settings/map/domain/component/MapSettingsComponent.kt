@@ -1,18 +1,33 @@
 package com.egoriku.grodnoroads.screen.settings.map.domain.component
 
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.common.Condition
 import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Grodno
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Ozery
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Porechye
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Skidel
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Volkovysk
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MobileCameras
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.RoadIncident
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.StationaryCameras
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJam
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJamOnMap
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficPolice
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.WildAnimals
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 interface MapSettingsComponent {
 
-    val mapSettingsState: Flow<Condition<MapSettingState>>
+    val mapSettingsState: Flow<MapSettingState>
+    val isLoading: Flow<Boolean>
 
     fun modify(preference: MapPref)
     fun openDialog(preference: MapPref)
@@ -25,6 +40,8 @@ interface MapSettingsComponent {
 
     sealed interface MapDialogState {
         data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
+        data class MapZoomInCityDialogState(val mapZoomInCity: MapZoomInCity) : MapDialogState
+        data class MapZoomOutCityDialogState(val mapZoomOutCity: MapZoomOutCity) : MapDialogState
 
         object None : MapDialogState
     }
@@ -77,12 +94,16 @@ interface MapSettingsComponent {
     }
 
     data class MapSettings(
-        val mapInfo: MapInfo = MapInfo(),
+        val locationInfo: LocationInfo = LocationInfo(),
+        val driveModeZoom: DriveModeZoom = DriveModeZoom(),
         val mapStyle: MapStyle = MapStyle(),
-        val locationInfo: LocationInfo = LocationInfo()
+        val mapInfo: MapInfo = MapInfo(),
     ) {
         data class LocationInfo(
-            val defaultCity: DefaultCity = DefaultCity(),
+            val defaultCity: DefaultCity = DefaultCity()
+        )
+
+        data class DriveModeZoom(
             val mapZoomInCity: MapZoomInCity = MapZoomInCity(),
             val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity(),
         )

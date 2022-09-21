@@ -1,8 +1,10 @@
 package com.egoriku.grodnoroads.screen.settings.map.domain.store
 
 import com.arkivanov.mvikotlin.core.store.Store
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Intent
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.StoreState
 
@@ -15,14 +17,14 @@ interface MapSettingsStore : Store<Intent, StoreState, Nothing> {
     }
 
     data class StoreState(
-        val isLoading: Boolean = true,
+        val isLoading: Boolean = false,
         val mapSettings: MapSettings = MapSettings(),
         val mapDialogState: MapDialogState = None
     )
 
     sealed interface Message {
-        object Loading : Message
         data class NewSettings(val mapSettings: MapSettings) : Message
+        data class Loading(val isLoading: Boolean) : Message
         data class NewDialogState(val mapDialogState: MapDialogState) : Message
     }
 }

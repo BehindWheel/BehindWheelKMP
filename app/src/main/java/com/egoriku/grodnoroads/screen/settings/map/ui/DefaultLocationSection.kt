@@ -3,8 +3,6 @@ package com.egoriku.grodnoroads.screen.settings.map.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CenterFocusStrong
-import androidx.compose.material.icons.filled.CenterFocusWeak
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -38,45 +36,7 @@ fun DefaultLocationSection(
         ) {
             onCheckedChange(defaultCity)
         }
-
-        MapZoomInCity(locationInfo = locationInfo, onCheckedChange = onCheckedChange)
-        MapZoomOutCity(locationInfo = locationInfo, onCheckedChange = onCheckedChange)
     }
-}
-
-
-@Composable
-private fun MapZoomInCity(
-    locationInfo: LocationInfo,
-    onCheckedChange: (MapPref) -> Unit
-) {
-    val mapZoomInCity = locationInfo.mapZoomInCity
-
-    MoreActionSettings(
-        icon = Icons.Default.CenterFocusStrong,
-        text = "Map Zoom in city",
-        value = mapZoomInCity.current.toString(),
-        onClick = {
-            onCheckedChange(mapZoomInCity)
-        }
-    )
-}
-
-@Composable
-private fun MapZoomOutCity(
-    locationInfo: LocationInfo,
-    onCheckedChange: (MapPref) -> Unit
-) {
-    val mapZoomOutCity = locationInfo.mapZoomOutCity
-
-    MoreActionSettings(
-        icon = Icons.Default.CenterFocusWeak,
-        text = "Map Zoom out city",
-        value = mapZoomOutCity.current.toString(),
-        onClick = {
-            onCheckedChange(mapZoomOutCity)
-        }
-    )
 }
 
 @Preview(showBackground = true)

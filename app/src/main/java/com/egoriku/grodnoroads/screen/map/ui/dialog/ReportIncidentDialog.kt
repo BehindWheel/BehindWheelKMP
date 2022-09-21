@@ -29,7 +29,7 @@ fun IncidentDialog(
                 "ДТП" to CarCrash,
                 "Пробка" to TrafficJam,
                 "Сломалась машина" to RoadIncident,
-                "Ремонт дороги" to RoadIncident,
+                "Дорожные работы" to RoadIncident,
                 "Не работают светофоры" to RoadIncident,
                 "Дикие животные" to WildAnimals,
                 "Другое" to RoadIncident

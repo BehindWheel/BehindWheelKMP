@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 122
         versionName = "1.0.22"
         resourceConfigurations += listOf("en", "ru", "be-rBY")
@@ -70,7 +70,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
+    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
 
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -102,7 +102,7 @@ dependencies {
 
     implementation(libs.coroutines.play.services)
 
-    implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("io.insert-koin:koin-android:3.2.1")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 
     implementation(libs.decompose)

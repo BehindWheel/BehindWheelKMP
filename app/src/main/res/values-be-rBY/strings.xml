@@ -66,4 +66,8 @@
     <string name="map_default_location_volkovysk">Ваўкавыск</string>>
     <string name="map_default_location_ozery">Азёры</string>>
     <string name="map_default_location_porechye">Парэчча</string>>
+
+    <string name="map_header_drive_mode">Рэжым навігацыі</string>
+    <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
 </resources>
