@@ -5,7 +5,12 @@ import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
@@ -16,10 +21,13 @@ import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
 import com.egoriku.grodnoroads.screen.map.domain.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.LocationState
 import com.egoriku.grodnoroads.screen.map.domain.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.MapEvent.*
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.Reports
+import com.egoriku.grodnoroads.screen.map.domain.MapEvent.StationaryCamera
 import com.egoriku.grodnoroads.screen.map.ui.markers.MobileCameraMarker
 import com.egoriku.grodnoroads.screen.map.ui.markers.ReportsMarker
 import com.egoriku.grodnoroads.screen.map.ui.markers.StationaryCameraMarker
+import com.egoriku.grodnoroads.ui.debug.DebugView
 import com.egoriku.grodnoroads.util.MarkerCache
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -139,6 +147,8 @@ fun GoogleMapView(
             )
         }
     }
+
+    DebugView(cameraPositionState = cameraPositionState)
 }
 
 private fun buildCameraPosition(

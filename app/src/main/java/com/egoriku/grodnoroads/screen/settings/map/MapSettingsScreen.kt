@@ -119,10 +119,10 @@ private fun DialogHandler(
 
             StepperDialog(
                 initial = mapZoomInCity.current,
+                min = mapZoomInCity.min,
+                max = mapZoomInCity.max,
+                step = mapZoomInCity.stepSize,
                 onClose = onClose,
-                min = 5f,
-                max = 6f,
-                step = 0.5f,
                 onSelected = {
                     onResult(mapZoomInCity.copy(current = it))
                 }
@@ -134,10 +134,10 @@ private fun DialogHandler(
 
             StepperDialog(
                 initial = mapZoomOutCity.current,
+                min = mapZoomOutCity.min,
+                max = mapZoomOutCity.max,
+                step = mapZoomOutCity.stepSize,
                 onClose = onClose,
-                min = 10f,
-                max = 13f,
-                step = 0.5f,
                 onSelected = {
                     onResult(mapZoomOutCity.copy(current = it))
                 }

@@ -63,8 +63,18 @@ interface MapSettingsComponent {
             }
         }
 
-        data class MapZoomInCity(val current: Float = DEFAULT_MAP_ZOOM_IN_CITY) : MapPref
-        data class MapZoomOutCity(val current: Float = DEFAULT_MAP_ZOOM_OUT_CITY) : MapPref
+        data class MapZoomInCity(
+            val current: Float = DEFAULT_MAP_ZOOM_IN_CITY,
+            val min: Float = 13f,
+            val max: Float = 16.5f,
+            val stepSize: Float = 0.5f
+        ) : MapPref
+        data class MapZoomOutCity(
+            val current: Float = DEFAULT_MAP_ZOOM_OUT_CITY,
+            val min: Float = 12f,
+            val max: Float = 15.0f,
+            val stepSize: Float = 0.5f
+        ) : MapPref
 
         data class DefaultCity(
             val current: City = Grodno,
