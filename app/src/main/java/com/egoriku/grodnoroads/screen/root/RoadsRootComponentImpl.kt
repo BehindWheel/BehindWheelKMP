@@ -26,7 +26,7 @@ class RoadsRootComponentImpl(
     componentContext: ComponentContext
 ) : RoadsRootComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val rootStore = instanceKeeper.getStore { get<RootStore>() }
+    private val rootStore: RootStore = instanceKeeper.getStore(::get)
 
     private val main: (ComponentContext) -> MainComponent = {
         get { parametersOf(componentContext) }

@@ -16,7 +16,7 @@ class MapSettingsComponentImpl(
     componentContext: ComponentContext
 ) : MapSettingsComponent, ComponentContext by componentContext, KoinComponent {
 
-    private val mapSettingsStore = instanceKeeper.getStore { get<MapSettingsStore>() }
+    private val mapSettingsStore: MapSettingsStore = instanceKeeper.getStore(::get)
 
     override val mapSettingsState: Flow<MapSettingState>
         get() = mapSettingsStore.states.map { storeState ->

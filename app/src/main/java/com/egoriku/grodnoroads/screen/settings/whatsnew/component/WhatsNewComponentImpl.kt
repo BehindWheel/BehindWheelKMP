@@ -13,7 +13,7 @@ internal class WhatsNewComponentImpl(
     componentContext: ComponentContext
 ) : WhatsNewComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val whatsNewStore = instanceKeeper.getStore { get<WhatsNewStore>() }
+    private val whatsNewStore: WhatsNewStore = instanceKeeper.getStore(::get)
 
     override val state: Flow<WhatsNewStore.State>
         get() = whatsNewStore.states

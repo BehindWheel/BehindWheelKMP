@@ -16,7 +16,7 @@ internal class AppearanceComponentImpl(
     componentContext: ComponentContext
 ) : AppearanceComponent, ComponentContext by componentContext, KoinComponent {
 
-    private val appearanceStore = instanceKeeper.getStore { get<AppearanceStore>() }
+    private val appearanceStore: AppearanceStore = instanceKeeper.getStore(::get)
 
     override val state: Flow<State>
         get() = appearanceStore.states

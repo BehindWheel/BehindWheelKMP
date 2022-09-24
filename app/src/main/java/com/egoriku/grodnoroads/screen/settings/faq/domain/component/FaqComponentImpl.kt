@@ -12,7 +12,7 @@ class FaqComponentImpl(
     componentContext: ComponentContext
 ) : FaqComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val faqStore = instanceKeeper.getStore { get<FaqStore>() }
+    private val faqStore: FaqStore = instanceKeeper.getStore(::get)
 
     override val state: Flow<FaqStore.State>
         get() = faqStore.states
