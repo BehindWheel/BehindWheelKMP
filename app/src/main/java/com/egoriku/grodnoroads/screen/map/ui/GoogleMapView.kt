@@ -4,6 +4,7 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,12 +19,13 @@ import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.map.rememberCameraPositionValues
 import com.egoriku.grodnoroads.foundation.map.rememberMapProperties
 import com.egoriku.grodnoroads.foundation.map.rememberUiSettings
-import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.screen.map.domain.model.MapConfig
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.StationaryCamera
 import com.egoriku.grodnoroads.screen.map.ui.markers.MobileCameraMarker
 import com.egoriku.grodnoroads.screen.map.ui.markers.ReportsMarker
 import com.egoriku.grodnoroads.screen.map.ui.markers.StationaryCameraMarker
@@ -44,12 +46,15 @@ import org.koin.androidx.compose.get
 
 @Composable
 fun GoogleMapView(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
+    appMode: AppMode,
+    mapConfig: MapConfig,
     mapEvents: List<MapEvent>,
-    mode: AppMode,
     locationState: LocationState,
-    onMarkerClick: (Reports) -> Unit
+    onMarkerClick: (Reports) -> Unit,
 ) {
+    val zoomLevel = mapConfig.zoomLevel
+
     val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState {
@@ -59,12 +64,11 @@ fun GoogleMapView(
     var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
 
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, locationState)
-    val zoomLevel by remember { mutableStateOf(14f) }
 
     LaunchedEffect(locationState, cameraPositionValues) {
         if (!cameraPositionChangeEnabled) return@LaunchedEffect
 
-        if (mode == AppMode.Drive) {
+        if (appMode == AppMode.Drive) {
             if (locationState != LocationState.None && cameraPositionValues.targetLatLngWithOffset != LocationState.None.latLng) {
                 if (zoomLevel == cameraPositionState.position.zoom) {
                     cameraPositionState.animate(
@@ -101,6 +105,7 @@ fun GoogleMapView(
 
     GoogleMap(
         modifier = modifier
+            .fillMaxSize()
             .pointerInput(Unit) {
                 coroutineScope {
                     var cameraPositionJob: Job? = null
@@ -137,7 +142,7 @@ fun GoogleMapView(
             }
         }
 
-        if (locationState != LocationState.None && mode != AppMode.Map) {
+        if (locationState != LocationState.None && appMode != AppMode.Map) {
             Marker(
                 state = MarkerState(position = locationState.latLng),
                 icon = markerCache.getVector(id = R.drawable.ic_arrow),

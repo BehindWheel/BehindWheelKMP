@@ -1,17 +1,15 @@
-package com.egoriku.grodnoroads.screen.map
+package com.egoriku.grodnoroads.screen.map.domain.component.util
 
-import com.egoriku.grodnoroads.extension.distanceTo
+import com.egoriku.grodnoroads.extensions.util.computeOffset
+import com.egoriku.grodnoroads.extensions.util.distanceTo
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
 import com.egoriku.grodnoroads.screen.map.domain.model.Alert
 import com.egoriku.grodnoroads.screen.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.screen.map.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.SphericalUtil
 
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
@@ -42,8 +40,9 @@ private fun makeAlertMessage(
     val distance = computeDistance(
         eventLatLng = event.position,
         offsetLatLng = computeOffset(
-            locationState = locationState,
-            distanceRadius = distanceRadius
+            from = locationState.latLng,
+            distance = distanceRadius.toDouble(),
+            heading = locationState.bearing.toDouble()
         ),
         currentLatLnt = locationState.latLng,
         distanceRadius = distanceRadius
@@ -95,10 +94,3 @@ private fun computeDistance(
         else -> null
     }
 }
-
-private fun computeOffset(locationState: LocationState, distanceRadius: Int) =
-    SphericalUtil.computeOffset(
-        locationState.latLng,
-        distanceRadius.toDouble(),
-        locationState.bearing.toDouble()
-    )

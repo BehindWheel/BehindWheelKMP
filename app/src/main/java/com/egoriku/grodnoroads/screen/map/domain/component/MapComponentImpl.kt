@@ -1,29 +1,27 @@
 package com.egoriku.grodnoroads.screen.map.domain.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
+import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.screen.map.alertMessagesTransformation
-import com.egoriku.grodnoroads.screen.map.domain.model.Alert
-import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
-import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.screen.map.domain.component.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.screen.map.domain.component.util.filterMapEvents
+import com.egoriku.grodnoroads.screen.map.domain.model.*
 import com.egoriku.grodnoroads.screen.map.domain.store.DialogStore
-import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent.CloseDialog
-import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent.OpenMarkerInfoDialog
-import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent.OpenReportTrafficPoliceDialog
-import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent.OpenRoadIncidentDialog
+import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent.*
 import com.egoriku.grodnoroads.screen.map.domain.store.LocationStore
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.DisabledLocation
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StartLocationUpdates
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StopLocationUpdates
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
+import com.egoriku.grodnoroads.screen.map.domain.store.MapConfigStore
+import com.egoriku.grodnoroads.screen.map.domain.store.MapConfigStore.Intent
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStore
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
-import com.egoriku.grodnoroads.screen.map.domain.component.util.filterMapEvents
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore
 import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore
 import kotlinx.coroutines.Dispatchers
@@ -38,12 +36,12 @@ class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
 
-    private val dialogStore = instanceKeeper.getStore { get<DialogStore>() }
-    private val locationStore = instanceKeeper.getStore { get<LocationStore>() }
-    private val mapEventsStore = instanceKeeper.getStore { get<MapEventsStore>() }
-
-    private val alertsStore = instanceKeeper.getStore { get<AlertsStore>() }
-    private val mapSettingsStore = instanceKeeper.getStore { get<MapSettingsStore>() }
+    private val alertsStore: AlertsStore = instanceKeeper.getStore(::get)
+    private val dialogStore: DialogStore = instanceKeeper.getStore(::get)
+    private val locationStore: LocationStore = instanceKeeper.getStore(::get)
+    private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
+    private val mapEventsStore: MapEventsStore = instanceKeeper.getStore(::get)
+    private val mapSettingsStore: MapSettingsStore = instanceKeeper.getStore(::get)
 
     private val mobile = mapEventsStore.states.map { it.mobileCamera }
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
@@ -52,11 +50,20 @@ class MapComponentImpl(
     private val alertDistance = alertsStore.states.map { it.alertDistance }
     private val mapSettings = mapSettingsStore.states.map { it.mapSettings }
 
-    override val mapAlertDialog: Flow<MapAlertDialog>
-        get() = dialogStore.states.map { it.mapAlertDialog }
+    init {
+        bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
+            locationStore.labels bindTo ::bindLocationLabel
+        }
+    }
 
     override val appMode: Flow<AppMode>
         get() = locationStore.states.map { it.appMode }
+
+    override val mapAlertDialog: Flow<MapAlertDialog>
+        get() = dialogStore.states.map { it.mapAlertDialog }
+
+    override val mapConfig: Flow<MapConfig>
+        get() = mapConfigStore.states.map { it.mapConfig }
 
     override val mapEvents: Flow<List<MapEvent>>
         get() = combine(
@@ -106,4 +113,9 @@ class MapComponentImpl(
     }
 
     override fun closeDialog() = dialogStore.accept(CloseDialog)
+
+    private fun bindLocationLabel(label: Label) = when (label) {
+        is Label.NewLocation -> mapConfigStore.accept(Intent.CheckLocation(label.latLng))
+        else -> Unit
+    }
 }

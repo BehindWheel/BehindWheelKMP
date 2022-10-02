@@ -8,21 +8,18 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_REPORT_ACTION
 import com.egoriku.grodnoroads.common.AnalyticsEvent.PARAM_EVENT_TYPE
 import com.egoriku.grodnoroads.common.AnalyticsEvent.PARAM_SHORT_MESSAGE
-import com.egoriku.grodnoroads.extension.common.ResultOf
-import com.egoriku.grodnoroads.extension.logD
-import com.egoriku.grodnoroads.screen.map.data.MobileCameraRepository
-import com.egoriku.grodnoroads.screen.map.data.ReportsRepository
-import com.egoriku.grodnoroads.screen.map.data.StationaryCameraRepository
-import com.egoriku.grodnoroads.screen.map.data.model.ReportsResponse
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.MobileCamera
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.StationaryCamera
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.model.Source.App
+import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.logD
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
+import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.map.domain.model.Source.App
+import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
+import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
+import com.egoriku.grodnoroads.map.domain.repository.ReportsRepository
+import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.State
-import com.egoriku.grodnoroads.screen.map.domain.model.util.mapAndMerge
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -91,7 +88,7 @@ class MapEventsStoreFactory(
                         val params = data.params
 
                         reportsRepository.report(
-                            ReportsResponse(
+                            ReportActionModel(
                                 timestamp = System.currentTimeMillis(),
                                 type = params.mapEventType.type,
                                 message = params.message,
@@ -121,16 +118,7 @@ class MapEventsStoreFactory(
     private suspend fun subscribeForMobileCameras(onLoaded: (List<MobileCamera>) -> Unit) {
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
-                is ResultOf.Success -> {
-                    val cameras = result.value.map { data ->
-                        MobileCamera(
-                            message = data.name,
-                            position = LatLng(data.latitude, data.longitude),
-                            speed = data.speed
-                        )
-                    }
-                    onLoaded(cameras)
-                }
+                is ResultOf.Success -> onLoaded(result.value)
                 is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
                     logD(result.exception.message.toString())
                 }
@@ -141,9 +129,7 @@ class MapEventsStoreFactory(
     private suspend fun subscribeForReports(onLoaded: (List<Reports>) -> Unit) {
         reportsRepository.loadAsFlow().collect { result ->
             when (result) {
-                is ResultOf.Success -> {
-                    onLoaded(result.value.mapAndMerge())
-                }
+                is ResultOf.Success -> onLoaded(result.value)
                 is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception).also {
                     logD(result.exception.message.toString())
                 }
@@ -154,16 +140,7 @@ class MapEventsStoreFactory(
     private suspend fun subscribeForStationaryCameras(onLoaded: (List<StationaryCamera>) -> Unit) {
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
-                is ResultOf.Success -> {
-                    val cameras = result.value.map { data ->
-                        StationaryCamera(
-                            message = data.message,
-                            speed = data.speed,
-                            position = LatLng(data.latitude, data.longitude)
-                        )
-                    }
-                    onLoaded(cameras)
-                }
+                is ResultOf.Success -> onLoaded(result.value)
                 is ResultOf.Failure -> Firebase.crashlytics.recordException(result.exception)
                     .also { logD(result.exception.message.toString()) }
             }

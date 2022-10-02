@@ -70,18 +70,23 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
+    implementation(projects.libraries.extensions)
 
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-database-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation(projects.features.map.mapData)
+    implementation(projects.features.map.mapDomain)
+    implementation(projects.features.map.mapUi)
 
-    implementation("com.google.maps.android:android-maps-utils:2.4.0")
-    implementation("com.google.maps.android:maps-ktx:3.4.0")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+
+    implementation(libs.maps.utils)
+    implementation(libs.maps)
     implementation(libs.maps.compose)
 
-    implementation("com.google.android.gms:play-services-location:20.0.0")
+    implementation(libs.gms.location)
     implementation("com.google.android.material:material:1.6.1")
 
     implementation(libs.accompanist.systemuicontroller)
@@ -100,19 +105,17 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)
 
-    implementation(libs.coroutines.play.services)
+    implementation(libs.coroutines.playservices)
 
-    implementation("io.insert-koin:koin-android:3.2.1")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
 
-    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.2")
-    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.2")
-    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.10")
+    implementation(libs.mvikotlin.extensions)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin)
 }
 
 secrets {

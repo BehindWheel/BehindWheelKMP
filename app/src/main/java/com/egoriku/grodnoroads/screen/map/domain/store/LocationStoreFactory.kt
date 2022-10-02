@@ -8,16 +8,13 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.common.datastore.DataFlow.defaultCity
-import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.DisabledLocation
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StartLocationUpdates
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.StopLocationUpdates
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
-import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.State
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.*
+import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Intent.*
 import com.egoriku.grodnoroads.util.ResourceProvider
 import com.egoriku.grodnoroads.util.location.LocationHelper
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -43,6 +40,7 @@ class LocationStoreFactory(
 
     sealed interface Label {
         object None : Label
+        data class NewLocation(val latLng: LatLng) : Label
         data class ShowToast(val message: String) : Label
     }
 
@@ -86,6 +84,8 @@ class LocationStoreFactory(
                     launch {
                         locationHelper.lastLocationFlow.collect {
                             dispatch(Message.OnNewLocation(locationState = it))
+
+                            publish(Label.NewLocation(it.latLng))
                         }
                     }
                 }

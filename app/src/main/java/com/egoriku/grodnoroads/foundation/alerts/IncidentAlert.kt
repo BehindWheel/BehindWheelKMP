@@ -20,10 +20,10 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.HSpacer
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.screen.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.screen.map.domain.model.Source
+import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.map.domain.model.MessageItem
+import com.egoriku.grodnoroads.map.domain.model.Source
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

@@ -8,8 +8,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_MARKER_INFO_DIALOG
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_ROAD_INCIDENT_DIALOG
 import com.egoriku.grodnoroads.common.AnalyticsEvent.EVENT_OPEN_TRAFFIC_POLICE_DIALOG
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.Message
 import com.egoriku.grodnoroads.screen.map.domain.store.DialogStoreFactory.State

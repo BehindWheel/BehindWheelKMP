@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.model.Source
+import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
@@ -21,6 +21,8 @@ fun SourceImage(modifier: Modifier = Modifier, source: Source) {
             Source.Viber -> painterResource(R.drawable.ic_viber)
             Source.Telegram -> painterResource(R.drawable.ic_telegram)
             Source.App -> painterResource(R.drawable.ic_app_logo)
+            // TODO: Add Zello icon
+            Source.Zello -> painterResource(R.drawable.ic_app_logo)
         },
         contentDescription = "Source App"
     )

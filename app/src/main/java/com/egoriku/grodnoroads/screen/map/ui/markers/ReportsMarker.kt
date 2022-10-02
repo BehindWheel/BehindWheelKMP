@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.screen.map.ui.markers
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberMarkerState

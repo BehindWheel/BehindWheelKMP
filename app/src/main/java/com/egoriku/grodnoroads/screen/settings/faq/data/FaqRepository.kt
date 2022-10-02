@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.screen.settings.faq.data
 
-import com.egoriku.grodnoroads.extension.await
-import com.egoriku.grodnoroads.extension.common.ResultOf
+import com.egoriku.grodnoroads.extensions.await
+import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

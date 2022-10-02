@@ -5,8 +5,8 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.extension.common.ResultOf
-import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.screen.settings.whatsnew.data.WhatsNewRepository
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.Message
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.State

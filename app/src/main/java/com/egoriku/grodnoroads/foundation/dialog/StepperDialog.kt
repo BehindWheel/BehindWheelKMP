@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.extension.logD
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.foundation.button.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme

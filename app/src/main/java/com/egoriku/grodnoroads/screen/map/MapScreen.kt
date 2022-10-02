@@ -13,13 +13,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.extension.toast
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
 import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.screen.map.domain.model.AppMode
 import com.egoriku.grodnoroads.screen.map.domain.model.LocationState
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.MarkerInfoDialog
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.None
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.PoliceDialog
-import com.egoriku.grodnoroads.screen.map.domain.model.MapAlertDialog.RoadIncidentDialog
+import com.egoriku.grodnoroads.screen.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label
 import com.egoriku.grodnoroads.screen.map.domain.store.LocationStoreFactory.Label.ShowToast
 import com.egoriku.grodnoroads.screen.map.domain.store.MapEventsStoreFactory.Intent.ReportAction
@@ -36,31 +34,33 @@ fun MapScreen(
     component: MapComponent,
     openDrawer: () -> Unit
 ) {
-    MarkerAlertDialogComponent(component)
+    AlertDialogs(component)
 
     Surface(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
-        val location by component.location.collectAsState(LocationState.None)
-        val mode by component.appMode.collectAsState(AppMode.Map)
-        val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
         val alerts by component.alerts.collectAsState(initial = emptyList())
+        val appMode by component.appMode.collectAsState(AppMode.Map)
+        val location by component.location.collectAsState(LocationState.None)
+        val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
+        val mapEvents by component.mapEvents.collectAsState(initial = emptyList())
 
         LabelsSubscription(component)
 
         Box(modifier = Modifier.fillMaxSize()) {
-            GoogleMapView(
-                modifier = Modifier.fillMaxSize(),
-                mapEvents = mapEvents,
-                mode = mode,
-                locationState = location
-            ) {
-                component.showMarkerInfoDialog(reports = it)
+            if (mapConfig != MapConfig.EMPTY) {
+                GoogleMapView(
+                    mapEvents = mapEvents,
+                    appMode = appMode,
+                    mapConfig = mapConfig,
+                    locationState = location,
+                    onMarkerClick = component::showMarkerInfoDialog
+                )
             }
 
-            AnimatedContent(targetState = mode) { state ->
+            AnimatedContent(targetState = appMode) { state ->
                 when (state) {
                     AppMode.Map -> {
                         MapMode(
@@ -69,6 +69,7 @@ fun MapScreen(
                             openDrawer = openDrawer
                         )
                     }
+
                     AppMode.Drive -> {
                         DriveMode(
                             alerts = alerts,
@@ -101,7 +102,7 @@ fun MapScreen(
 }
 
 @Composable
-private fun MarkerAlertDialogComponent(component: MapComponent) {
+private fun AlertDialogs(component: MapComponent) {
     val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
 
     when (val state = mapAlertDialog) {
@@ -155,7 +156,7 @@ private fun LabelsSubscription(component: MapComponent) {
     LaunchedEffect(labels) {
         when (val label = labels) {
             is ShowToast -> context.toast(label.message)
-            is Label.None -> {}
+            else -> {}
         }
     }
 }

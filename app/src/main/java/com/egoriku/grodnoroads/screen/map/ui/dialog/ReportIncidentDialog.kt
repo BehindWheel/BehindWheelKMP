@@ -6,11 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.CarCrash
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.TrafficJam
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.WildAnimals
+import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.CarCrash
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficJam
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.WildAnimals
 import com.egoriku.grodnoroads.screen.map.ui.dialog.common.CommonReportDialog
 import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 

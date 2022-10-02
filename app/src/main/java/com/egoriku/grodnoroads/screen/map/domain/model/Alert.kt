@@ -1,5 +1,8 @@
 package com.egoriku.grodnoroads.screen.map.domain.model
 
+import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.map.domain.model.MessageItem
+
 sealed interface Alert {
 
     data class IncidentAlert(
@@ -14,8 +17,3 @@ sealed interface Alert {
         val speedLimit: Int
     ) : Alert
 }
-
-data class MessageItem(
-    val message: String,
-    val source: Source
-)

@@ -15,10 +15,10 @@ import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.foundation.button.DialogButton
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.screen.map.domain.model.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.screen.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.screen.map.domain.model.Source
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.map.domain.model.MessageItem
+import com.egoriku.grodnoroads.map.domain.model.Source
 import com.google.android.gms.maps.model.LatLng
 
 @OptIn(ExperimentalComposeUiApi::class)

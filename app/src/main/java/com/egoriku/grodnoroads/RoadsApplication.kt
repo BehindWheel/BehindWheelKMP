@@ -4,6 +4,7 @@ package com.egoriku.grodnoroads
 
 import android.app.Application
 import com.egoriku.grodnoroads.koin.appScopeModule
+import com.egoriku.grodnoroads.map.data.di.mapDataModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.map.di.mapModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
@@ -32,6 +33,9 @@ class RoadsApplication : Application() {
             androidContext(this@RoadsApplication)
             modules(
                 appScopeModule,
+
+                mapDataModule,
+
                 mainModule,
                 mapModule,
                 rootModule,
