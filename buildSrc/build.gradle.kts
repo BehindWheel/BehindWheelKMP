@@ -8,10 +8,9 @@ repositories {
 }
 
 dependencies {
-    implementation(gradleApi())
-    implementation(localGroovy())
+    compileOnly(gradleApi())
+    compileOnly(localGroovy())
 
-    implementation(libs.gradle.plugin.buildtools)
-    implementation(libs.gradle.plugin.kotlin)
-    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+    compileOnly(libs.gradle.plugin.buildtools)
+    compileOnly(libs.gradle.plugin.kotlin)
 }

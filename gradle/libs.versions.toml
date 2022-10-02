@@ -1,4 +1,8 @@
 [versions]
+compileSdk = "33"
+minSdk = "21"
+targetSdk = "33"
+
 gradleBuildTools = "7.3.0"
 gradleCrashlytics = "2.9.2"
 gradleGoogleServices = "4.3.14"
