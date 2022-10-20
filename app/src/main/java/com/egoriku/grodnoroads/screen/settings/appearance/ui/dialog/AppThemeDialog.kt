@@ -2,13 +2,13 @@ package com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme.Companion.toStringResource
-import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
 @Composable
 fun AppThemeDialog(
@@ -30,9 +30,7 @@ fun AppThemeDialog(
     )
 }
 
-@Preview
-@Preview(locale = "ru")
-@Preview(locale = "be")
+@GrodnoRoadsPreview
 @Composable
 fun PreviewAppThemeDialog() {
     GrodnoRoadsTheme {

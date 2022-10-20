@@ -39,6 +39,10 @@ class AndroidLibraryPlugin : Plugin<Project> {
                     isMinifyEnabled = false
                 }
             }
+
+            buildFeatures {
+                buildConfig = false
+            }
         }
     }
 }

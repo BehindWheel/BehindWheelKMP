@@ -8,14 +8,14 @@ import androidx.compose.material.icons.filled.CenterFocusWeak
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
 import com.egoriku.grodnoroads.screen.settings.ui.SettingsHeader
-import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @Composable
 fun DrivingModeSection(
@@ -67,9 +67,7 @@ private fun MapZoomOutCity(
     )
 }
 
-@Preview(showBackground = true)
-@Preview(showBackground = true, locale = "ru")
-@Preview(showBackground = true, locale = "be")
+@GrodnoRoadsPreview
 @Composable
 private fun PreviewDrivingModeSectionSection() {
     GrodnoRoadsTheme {

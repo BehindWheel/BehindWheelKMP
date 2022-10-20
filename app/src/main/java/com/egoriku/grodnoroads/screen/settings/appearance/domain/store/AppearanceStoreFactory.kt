@@ -8,10 +8,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.common.datastore.DataFlow.appTheme
-import com.egoriku.grodnoroads.common.datastore.DataFlow.language
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_LANGUAGE
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.APP_THEME
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
@@ -19,6 +15,10 @@ import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.Appea
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.*
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.Modify
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.language
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateLanguage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -78,14 +78,14 @@ class AppearanceStoreFactory(
                         is AppTheme -> {
                             launch {
                                 dataStore.edit {
-                                    it[APP_THEME] = dialogResult.preference.current.theme
+                                    it.updateAppTheme(dialogResult.preference.current.theme)
                                 }
                             }
                         }
                         is AppLanguage -> {
                             launch {
                                 dataStore.edit {
-                                    it[APP_LANGUAGE] = dialogResult.preference.current.lang
+                                    it.updateLanguage(dialogResult.preference.current.lang)
                                 }
                             }
                         }

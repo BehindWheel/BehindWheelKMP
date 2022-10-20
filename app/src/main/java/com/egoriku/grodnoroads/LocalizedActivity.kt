@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.egoriku.grodnoroads.common.datastore.DataFlow.language
-import com.egoriku.grodnoroads.common.datastore.dataStore
+import com.egoriku.grodnoroads.shared.appsettings.extension.dataStore
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.language
 import com.egoriku.grodnoroads.util.LocalizationUtil
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
@@ -17,9 +17,7 @@ abstract class LocalizedActivity : AppCompatActivity() {
 
     init {
         lifecycleScope.launchWhenCreated {
-            this@LocalizedActivity.dataStore.data.collect { preferences ->
-                currentLocale = Locale(preferences.language.lang)
-
+            dataStore.data.collect {
                 LocalizationUtil.applyLanguageContext(
                     context = this@LocalizedActivity,
                     locale = this@LocalizedActivity.getLocale()

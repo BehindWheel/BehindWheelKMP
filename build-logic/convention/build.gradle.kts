@@ -19,7 +19,7 @@ gradlePlugin {
         }
         register("grodnoroadsLibraryCompose") {
             id = "grodnoroads.library.compose"
-            implementationClass = "AndroidLibraryPlugin"
+            implementationClass = "AndroidLibraryComposePlugin"
         }
     }
 }

@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.screen.main
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import com.egoriku.grodnoroads.screen.map.domain.component.MapComponent
+import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent
 
 interface MainComponent {

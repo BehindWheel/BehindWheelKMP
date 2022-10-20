@@ -1,27 +1,12 @@
 package com.egoriku.grodnoroads.screen.settings.map.domain.component
 
-import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_IN_CITY
-import com.egoriku.grodnoroads.common.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Grodno
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Ozery
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Porechye
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Skidel
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Volkovysk
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MobileCameras
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.RoadIncident
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.StationaryCameras
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJam
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJamOnMap
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficPolice
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.WildAnimals
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 import kotlinx.coroutines.flow.Flow
 
 interface MapSettingsComponent {
@@ -56,12 +41,7 @@ interface MapSettingsComponent {
         data class CarCrash(val isShow: Boolean = true) : MapPref
 
         data class TrafficJamOnMap(val isShow: Boolean = false) : MapPref
-        data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref {
-            enum class Style(val type: String) {
-                Minimal(type = "minimalistic"),
-                Detailed(type = "detailed")
-            }
-        }
+        data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref
 
         data class MapZoomInCity(
             val current: Float = DEFAULT_MAP_ZOOM_IN_CITY,
@@ -69,6 +49,7 @@ interface MapSettingsComponent {
             val max: Float = 16.5f,
             val stepSize: Float = 0.5f
         ) : MapPref
+
         data class MapZoomOutCity(
             val current: Float = DEFAULT_MAP_ZOOM_OUT_CITY,
             val min: Float = 12f,
@@ -79,28 +60,7 @@ interface MapSettingsComponent {
         data class DefaultCity(
             val current: City = Grodno,
             val values: List<City> = listOf(Grodno, Skidel, Volkovysk, Ozery, Porechye)
-        ) : MapPref {
-            enum class City(val cityName: String, val latLng: LatLng) {
-                Grodno(cityName = "grodno", latLng = LatLng(53.6687765, 23.8212226)),
-                Skidel(cityName = "skidel", latLng = LatLng(53.579644, 24.237978)),
-                Volkovysk(cityName = "volkovysk", latLng = LatLng(53.152847, 24.444242)),
-                Ozery(cityName = "ozery", latLng = LatLng(53.722526, 24.178165)),
-                Porechye(cityName = "porechye", latLng = LatLng(53.885623, 24.137678));
-
-                companion object {
-                    fun toCity(value: String) =
-                        checkNotNull(values().find { it.cityName == value })
-
-                    fun City.toResource(): Int = when (this) {
-                        Grodno -> R.string.map_default_location_grodno
-                        Skidel -> R.string.map_default_location_skidel
-                        Volkovysk -> R.string.map_default_location_volkovysk
-                        Ozery -> R.string.map_default_location_ozery
-                        Porechye -> R.string.map_default_location_porechye
-                    }
-                }
-            }
-        }
+        ) : MapPref
     }
 
     data class MapSettings(

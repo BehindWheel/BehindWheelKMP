@@ -8,13 +8,25 @@ android {
 }
 
 dependencies {
+    implementation(projects.libraries.analytics)
+    implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
+    implementation(projects.libraries.location)
+    implementation(projects.libraries.resources)
+
+    implementation(projects.shared.appSettings)
+
+    implementation(libs.androidx.compose.runtime)
 
     implementation(libs.coroutines)
 
     implementation(libs.decompose)
 
-    implementation(libs.maps)
+    implementation(libs.gms.maps)
+
+    implementation(libs.maps.utils)
+
+    implementation(libs.koin.android)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

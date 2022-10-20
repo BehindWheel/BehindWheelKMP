@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore
 

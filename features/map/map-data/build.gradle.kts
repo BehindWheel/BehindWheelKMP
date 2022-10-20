@@ -18,7 +18,7 @@ dependencies {
 
     implementation(libs.koin.android)
 
-    implementation(libs.maps)
+    implementation(libs.gms.maps)
 
     testImplementation(libs.kotlin.tests)
 }

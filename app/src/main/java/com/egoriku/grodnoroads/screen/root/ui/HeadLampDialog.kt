@@ -5,20 +5,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Divider
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.DialogProperties
-import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.foundation.button.DialogButton
+import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Spring
-import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -52,22 +51,18 @@ fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
 }
 
 
-@Preview(locale = "ru")
+@GrodnoRoadsPreview
 @Composable
 private fun PreviewHeadLampDialogSpring() {
     GrodnoRoadsTheme {
-        Surface {
-            HeadLampDialog(headlampType = Spring) {}
-        }
+        HeadLampDialog(headlampType = Spring) {}
     }
 }
 
-@Preview(locale = "ru")
+@GrodnoRoadsPreview
 @Composable
 private fun PreviewHeadLampDialogAutumn() {
     GrodnoRoadsTheme {
-        Surface {
-            HeadLampDialog(headlampType = Autumn) {}
-        }
+        HeadLampDialog(headlampType = Autumn) {}
     }
 }

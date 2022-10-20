@@ -4,7 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.egoriku.grodnoroads.R
+import com.egoriku.grodnoroads.resources.R
 
 sealed class Screen(val index: Int, val icon: ImageVector, val labelId: Int) {
 

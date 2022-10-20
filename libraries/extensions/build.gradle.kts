@@ -7,12 +7,15 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.runtime)
     implementation(libs.coroutines)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
 
-    implementation(libs.maps)
+    implementation(libs.gms.maps)
+
     implementation(libs.maps.utils)
 }

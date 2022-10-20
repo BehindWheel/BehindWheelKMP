@@ -3,7 +3,7 @@ compileSdk = "33"
 minSdk = "21"
 targetSdk = "33"
 
-gradleBuildTools = "7.3.0"
+gradleBuildTools = "7.3.1"
 gradleCrashlytics = "2.9.2"
 gradleGoogleServices = "4.3.14"
 gradleKsp = "1.7.10-1.0.6"
@@ -11,6 +11,7 @@ gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.42.0"
 
 accompanist = "0.25.1"
+appcompat = "1.5.1"
 browser = "1.4.0"
 compose = "1.2.1"
 composeCompiler = "1.3.1"
@@ -42,6 +43,7 @@ accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
@@ -59,6 +61,7 @@ firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
 gms-location = "com.google.android.gms:play-services-location:20.0.0"
+gms-maps = "com.google.android.gms:play-services-maps:18.1.0"
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }

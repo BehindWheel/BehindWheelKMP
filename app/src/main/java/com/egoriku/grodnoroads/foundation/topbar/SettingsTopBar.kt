@@ -4,7 +4,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 
 @Composable
 fun SettingsTopBar(
@@ -27,9 +28,9 @@ fun SettingsTopBar(
     )
 }
 
-@Preview
+@GrodnoRoadsPreview
 @Composable
-private fun SettingsTopBarPreview() {
+private fun SettingsTopBarPreview() = GrodnoRoadsTheme {
     SettingsTopBar(title = "Test") {
 
     }

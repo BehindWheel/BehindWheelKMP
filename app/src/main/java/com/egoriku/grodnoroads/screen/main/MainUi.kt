@@ -15,8 +15,8 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.screen.main.ui.DrawerContent
-import com.egoriku.grodnoroads.screen.map.MapScreen
+import com.egoriku.grodnoroads.screen.main.ui.drawer.DrawerContent
+import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.settings.SettingsScreen
 import kotlinx.coroutines.launch
 

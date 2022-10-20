@@ -70,19 +70,23 @@ android {
 }
 
 dependencies {
+    implementation(projects.shared.appSettings)
+
+    implementation(projects.libraries.analytics)
+    implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
+    implementation(projects.libraries.foundation)
+    implementation(projects.libraries.location)
+    implementation(projects.libraries.resources)
 
     implementation(projects.features.map.mapData)
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
 
-    implementation(libs.maps.utils)
     implementation(libs.maps)
     implementation(libs.maps.compose)
 
@@ -90,7 +94,6 @@ dependencies {
     implementation("com.google.android.material:material:1.6.1")
 
     implementation(libs.accompanist.systemuicontroller)
-    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
@@ -103,9 +106,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core)
-    implementation(libs.androidx.datastore)
 
-    implementation(libs.coroutines.playservices)
+    implementation(libs.coroutines)
 
     implementation(libs.koin.android)
     implementation(libs.koin.compose)

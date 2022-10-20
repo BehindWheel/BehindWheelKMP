@@ -7,55 +7,23 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.common.datastore.DataFlow.defaultCity
-import com.egoriku.grodnoroads.common.datastore.DataFlow.googleMapStyle
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowCarCrash
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowMobileCameras
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowRoadIncidents
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowStationaryCameras
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficJam
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowTrafficPolice
-import com.egoriku.grodnoroads.common.datastore.DataFlow.isShowWildAnimals
-import com.egoriku.grodnoroads.common.datastore.DataFlow.mapZoomInCity
-import com.egoriku.grodnoroads.common.datastore.DataFlow.mapZoomOutCity
-import com.egoriku.grodnoroads.common.datastore.DataFlow.trafficJamOnMap
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.DEFAULT_CITY
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.GOOGLE_MAP_STYLE
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_CAR_CRASH_EVENTS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_INCIDENT_EVENTS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_MOBILE_CAMERAS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_STATIONARY_CAMERAS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_JAM_APPEARANCE
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_JAM_EVENTS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_TRAFFIC_POLICE_EVENTS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.IS_SHOW_WILD_ANIMALS_EVENTS
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_IN_CITY
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.MAP_ZOOM_OUTSIDE_CITY
-import com.egoriku.grodnoroads.extension.put
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomInCityDialogState
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.MapZoomOutCityDialogState
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.MobileCameras
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.RoadIncident
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.StationaryCameras
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJam
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficJamOnMap
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.TrafficPolice
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.WildAnimals
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.LocationInfo
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Intent
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Message
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.StoreState
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.*
+import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.*
+import com.egoriku.grodnoroads.shared.appsettings.extension.edit
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.updateMapZoomInCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.updateMapZoomOutsideCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.updateDefaultCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateGoogleMapStyle
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateTrafficJamAppearance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -109,38 +77,25 @@ class MapSettingsStoreFactory(
                     val preference = onCheckedChanged.preference
 
                     launch {
-                        dataStore.put(
-                            key = when (preference) {
-                                is StationaryCameras -> IS_SHOW_STATIONARY_CAMERAS
-                                is MobileCameras -> IS_SHOW_MOBILE_CAMERAS
-                                is TrafficPolice -> IS_SHOW_TRAFFIC_POLICE_EVENTS
-                                is RoadIncident -> IS_SHOW_INCIDENT_EVENTS
-                                is CarCrash -> IS_SHOW_CAR_CRASH_EVENTS
-                                is TrafficJam -> IS_SHOW_TRAFFIC_JAM_EVENTS
-                                is WildAnimals -> IS_SHOW_WILD_ANIMALS_EVENTS
+                        dataStore.edit {
+                            when (preference) {
+                                is StationaryCameras -> updateStationaryCameras(preference.isShow)
+                                is MobileCameras -> updateMobileCameras(preference.isShow)
+                                is TrafficPolice -> updateTrafficPolice(preference.isShow)
+                                is RoadIncident -> updateRoadIncidents(preference.isShow)
+                                is CarCrash -> updateCarCrash(preference.isShow)
+                                is TrafficJam -> updateTrafficJam(preference.isShow)
+                                is WildAnimals -> updateWildAnimals(preference.isShow)
 
-                                is TrafficJamOnMap -> IS_SHOW_TRAFFIC_JAM_APPEARANCE
-                                is GoogleMapStyle -> GOOGLE_MAP_STYLE
-                                is DefaultCity -> DEFAULT_CITY
-                                is MapZoomInCity -> MAP_ZOOM_IN_CITY
-                                is MapZoomOutCity -> MAP_ZOOM_OUTSIDE_CITY
-                            }.name,
-                            value = when (preference) {
-                                is StationaryCameras -> preference.isShow
-                                is MobileCameras -> preference.isShow
-                                is TrafficPolice -> preference.isShow
-                                is RoadIncident -> preference.isShow
-                                is CarCrash -> preference.isShow
-                                is TrafficJam -> preference.isShow
-                                is WildAnimals -> preference.isShow
+                                is TrafficJamOnMap -> updateTrafficJamAppearance(preference.isShow)
+                                is GoogleMapStyle -> updateGoogleMapStyle(preference.style.type)
 
-                                is TrafficJamOnMap -> preference.isShow
-                                is GoogleMapStyle -> preference.style.type
-                                is DefaultCity -> preference.current.cityName
-                                is MapZoomInCity -> preference.current
-                                is MapZoomOutCity -> preference.current
+                                is DefaultCity -> updateDefaultCity(preference.current.cityName)
+
+                                is MapZoomInCity -> updateMapZoomInCity(preference.current)
+                                is MapZoomOutCity -> updateMapZoomOutsideCity(preference.current)
                             }
-                        )
+                        }
                     }
                 }
                 onIntent<Intent.OpenDialog> {

@@ -10,6 +10,6 @@ interface AlertsComponent {
     data class AlertSettingsState(
         val alertDistance: AlertDistance = AlertDistance()
     ) {
-        data class AlertDistance(val distance: Int = 600)
+        data class AlertDistance(val distance: Int = -1)
     }
 }

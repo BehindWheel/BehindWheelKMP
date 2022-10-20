@@ -13,19 +13,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Language.Companion.toStringResource
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.model.Theme.Companion.toStringResource
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppLanguageDialog
 import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppThemeDialog
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.Companion.toStringResource
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
 @Composable
 fun AppearanceScreen(

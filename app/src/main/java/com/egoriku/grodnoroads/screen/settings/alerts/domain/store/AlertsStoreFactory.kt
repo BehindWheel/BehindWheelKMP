@@ -7,10 +7,11 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.common.datastore.PreferenceKeys.ALERT_DISTANCE
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState.AlertDistance
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.Message
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.State
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -29,9 +30,7 @@ class AlertsStoreFactory(
                         dataStore.data
                             .map { preferences ->
                                 AlertsComponent.AlertSettingsState(
-                                    alertDistance = AlertsComponent.AlertSettingsState.AlertDistance(
-                                        preferences[ALERT_DISTANCE] ?: 600
-                                    )
+                                    alertDistance = AlertDistance(preferences.alertDistance)
                                 )
                             }.collect {
                                 dispatch(Message.NewSettings(it))

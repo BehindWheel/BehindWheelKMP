@@ -5,15 +5,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.egoriku.grodnoroads.R
-import com.egoriku.grodnoroads.foundation.button.DialogButton
-import com.egoriku.grodnoroads.foundation.dialog.common.DialogContent
-import com.egoriku.grodnoroads.foundation.dialog.common.ListItems
-import com.egoriku.grodnoroads.foundation.dialog.common.content.RadioButtonItem
-import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
+import com.egoriku.grodnoroads.foundation.dialog.content.RadioButtonItem
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun ListSingleChoiceDialog(
@@ -61,7 +59,7 @@ fun ListSingleChoiceDialog(
     }
 }
 
-@Preview(showBackground = true)
+@GrodnoRoadsPreview
 @Composable
 fun PreviewListSingleChoiceDialog() {
     GrodnoRoadsTheme {

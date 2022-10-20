@@ -2,12 +2,13 @@ package com.egoriku.grodnoroads.screen.settings.map.ui.dialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity.City.Companion.toResource
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.toResource
 
 @Composable
 fun DefaultLocationDialog(
@@ -29,10 +30,9 @@ fun DefaultLocationDialog(
     )
 }
 
-@Preview
-@Preview(locale = "ru")
+@GrodnoRoadsPreview
 @Composable
-private fun PreviewDefaultLocationDialog() {
+private fun PreviewDefaultLocationDialog() = GrodnoRoadsTheme {
     DefaultLocationDialog(
         defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
         onClose = {},

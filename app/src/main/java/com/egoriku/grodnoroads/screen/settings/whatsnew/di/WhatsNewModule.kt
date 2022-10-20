@@ -13,7 +13,8 @@ val whatsNewModule = module {
     factory {
         WhatsNewStoreFactory(
             storeFactory = get(),
-            whatsNewRepository = get()
+            whatsNewRepository = get(),
+            crashlyticsTracker = get()
         ).create()
     }
 }

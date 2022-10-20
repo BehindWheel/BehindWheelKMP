@@ -13,7 +13,8 @@ val faqModule = module {
     factory {
         FaqStoreFactory(
             storeFactory = get(),
-            faqRepository = get()
+            faqRepository = get(),
+            crashlyticsTracker = get()
         ).create()
     }
 }

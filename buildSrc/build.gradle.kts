@@ -8,9 +8,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly(gradleApi())
-    compileOnly(localGroovy())
+    implementation(gradleApi())
+    implementation(localGroovy())
 
-    compileOnly(libs.gradle.plugin.buildtools)
-    compileOnly(libs.gradle.plugin.kotlin)
+    implementation(libs.gradle.plugin.buildtools)
+    implementation(libs.gradle.plugin.kotlin)
 }

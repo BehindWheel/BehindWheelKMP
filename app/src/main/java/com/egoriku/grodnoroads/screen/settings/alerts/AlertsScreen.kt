@@ -10,8 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.R
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore
 
