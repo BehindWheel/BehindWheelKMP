@@ -11,7 +11,6 @@ dependencies {
     implementation(projects.libraries.extensions)
 
     implementation(libs.coroutines)
-    implementation(libs.coroutines.playservices)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)

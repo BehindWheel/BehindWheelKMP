@@ -91,7 +91,7 @@ dependencies {
     implementation(libs.maps.compose)
 
     implementation(libs.gms.location)
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.7.0")
 
     implementation(libs.accompanist.systemuicontroller)
 
