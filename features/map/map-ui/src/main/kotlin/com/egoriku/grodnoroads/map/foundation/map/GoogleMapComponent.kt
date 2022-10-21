@@ -46,6 +46,8 @@ fun GoogleMapComponent(
     locationState: LocationState,
     onMarkerClick: (Reports) -> Unit,
 ) {
+    var isMapLoaded by remember { mutableStateOf(false) }
+
     val zoomLevel = mapConfig.zoomLevel
 
     val markerCache = get<MarkerCache>()
@@ -60,6 +62,7 @@ fun GoogleMapComponent(
 
     LaunchedEffect(locationState, cameraPositionValues) {
         if (!cameraPositionChangeEnabled) return@LaunchedEffect
+        if (!isMapLoaded) return@LaunchedEffect
 
         if (appMode == AppMode.Drive) {
             if (locationState != LocationState.None && cameraPositionValues.targetLatLngWithOffset != LocationState.None.latLng) {
@@ -125,7 +128,10 @@ fun GoogleMapComponent(
         cameraPositionState = cameraPositionState,
         properties = rememberMapProperties(locationState, mapConfig),
         uiSettings = rememberUiSettings(),
-        contentPadding = WindowInsets.statusBars.asPaddingValues()
+        contentPadding = WindowInsets.statusBars.asPaddingValues(),
+        onMapLoaded = {
+            isMapLoaded = true
+        }
     ) {
         mapEvents.forEach { mapEvent ->
             when (mapEvent) {
