@@ -10,6 +10,7 @@ dependencies {
     implementation(projects.libraries.extensions)
 
     implementation(libs.coroutines)
+    implementation(libs.coroutines.playservices)
 
     implementation(libs.koin.android)
 

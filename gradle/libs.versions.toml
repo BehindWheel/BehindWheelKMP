@@ -49,6 +49,7 @@ androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
