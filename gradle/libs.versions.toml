@@ -60,7 +60,8 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx"
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
-gms-location = "com.google.android.gms:play-services-location:21.0.0"
+# https://issuetracker.google.com/issues/254981466
+gms-location = "com.google.android.gms:play-services-location:20.0.0"
 gms-maps = "com.google.android.gms:play-services-maps:18.1.0"
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
