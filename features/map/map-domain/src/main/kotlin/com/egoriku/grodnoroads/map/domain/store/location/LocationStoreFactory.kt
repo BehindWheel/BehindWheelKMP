@@ -9,7 +9,7 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.location.LocationHelper
 import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
 import com.egoriku.grodnoroads.resources.R
@@ -35,7 +35,7 @@ internal class LocationStoreFactory(
                         locationHelper.getLastKnownLocation()?.run {
                             dispatch(
                                 Message.OnNewLocation(
-                                    locationState = LocationState(latLng, bearing, speed)
+                                    lastLocation = LastLocation(latLng, bearing, speed)
                                 )
                             )
                         }
@@ -44,7 +44,7 @@ internal class LocationStoreFactory(
                         dataStore.data.map { it.defaultCity }.collect {
                             dispatch(
                                 Message.OnNewLocation(
-                                    locationState = LocationState(it.latLng, 0f, 0)
+                                    lastLocation = LastLocation(it.latLng, 0f, 0)
                                 )
                             )
                         }
@@ -53,13 +53,14 @@ internal class LocationStoreFactory(
                 onIntent<StartLocationUpdates> {
                     locationHelper.startLocationUpdates()
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Drive))
+                    dispatch(Message.OnNewLocation(LastLocation.None))
 
                     launch {
                         locationHelper.lastLocationFlow
                             .filterNotNull()
-                            .map { LocationState(it.latLng, it.bearing, it.speed) }
+                            .map { LastLocation(it.latLng, it.bearing, it.speed) }
                             .collect {
-                                dispatch(Message.OnNewLocation(locationState = it))
+                                dispatch(Message.OnNewLocation(lastLocation = it))
 
                                 publish(Label.NewLocation(it.latLng))
                             }
@@ -77,7 +78,7 @@ internal class LocationStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.OnNewLocation -> copy(locationState = message.locationState)
+                    is Message.OnNewLocation -> copy(lastLocation = message.lastLocation)
                     is Message.ChangeAppMode -> copy(appMode = message.appMode)
                 }
             }

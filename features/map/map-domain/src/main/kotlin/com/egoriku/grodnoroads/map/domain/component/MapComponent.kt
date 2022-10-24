@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface MapComponent {
 
     val appMode: Flow<AppMode>
-    val location: Flow<LocationState>
+    val lastLocation: Flow<LastLocation>
     val mapAlertDialog: Flow<MapAlertDialog>
     val mapConfig: Flow<MapConfig>
     val mapEvents: Flow<StableList<MapEvent>>

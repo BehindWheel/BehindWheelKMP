@@ -12,7 +12,7 @@ import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.Alert
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.mode.drive.action.ReportAction
@@ -22,7 +22,7 @@ import com.egoriku.grodnoroads.resources.R
 @Composable
 fun DriveMode(
     alerts: List<Alert>,
-    location: LocationState,
+    lastLocation: LastLocation,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
     reportIncident: () -> Unit
@@ -36,7 +36,7 @@ fun DriveMode(
         ) {
             CurrentSpeedRect(
                 modifier = Modifier.statusBarsPadding(),
-                speed = location.speed.toString()
+                speed = lastLocation.speed.toString()
             )
             Alerts(alerts = alerts)
         }
@@ -72,7 +72,7 @@ fun DriveMode(
 private fun DriveModePReview() = GrodnoRoadsTheme {
     DriveMode(
         alerts = emptyList(),
-        location = LocationState.None,
+        lastLocation = LastLocation.None,
         stopDrive = {},
         reportPolice = {},
         reportIncident = {}

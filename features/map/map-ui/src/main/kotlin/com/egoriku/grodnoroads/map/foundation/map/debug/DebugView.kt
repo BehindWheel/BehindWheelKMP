@@ -1,6 +1,11 @@
 package com.egoriku.grodnoroads.map.foundation.map.debug
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,9 +20,6 @@ fun DebugView(cameraPositionState: CameraPositionState) {
             .statusBarsPadding(),
         verticalArrangement = Arrangement.Center
     ) {
-        val moving =
-            if (cameraPositionState.isMoving) "moving" else "not moving"
-        Text(text = "Camera is $moving")
         Text(text = "Camera position is ${cameraPositionState.position}")
         Spacer(modifier = Modifier.height(4.dp))
     }

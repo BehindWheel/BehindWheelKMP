@@ -2,17 +2,14 @@ package com.egoriku.grodnoroads.map.foundation.map
 
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.forEachGesture
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import com.egoriku.grodnoroads.extensions.common.StableList
 import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
@@ -43,48 +40,46 @@ fun GoogleMapComponent(
     appMode: AppMode,
     mapConfig: MapConfig,
     mapEvents: StableList<MapEvent>,
-    locationState: LocationState,
+    lastLocation: LastLocation,
     onMarkerClick: (Reports) -> Unit,
+    isMapLoaded: MutableState<Boolean>,
+    loading: @Composable BoxScope.() -> Unit
 ) {
-    var isMapLoaded by remember { mutableStateOf(false) }
+    if (mapConfig == MapConfig.EMPTY) return
+
+    var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
 
     val zoomLevel = mapConfig.zoomLevel
 
     val markerCache = get<MarkerCache>()
 
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(locationState.latLng, 12.5f)
-    }
+    val cameraPositionState = rememberCameraPositionState()
+    val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, lastLocation)
 
-    var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
-
-    val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, locationState)
-
-    LaunchedEffect(locationState, cameraPositionValues) {
+    LaunchedEffect(lastLocation, cameraPositionValues) {
         if (!cameraPositionChangeEnabled) return@LaunchedEffect
-        if (!isMapLoaded) return@LaunchedEffect
+        if (!isMapLoaded.value) return@LaunchedEffect
 
-        if (appMode == AppMode.Drive) {
-            if (locationState != LocationState.None && cameraPositionValues.targetLatLngWithOffset != LocationState.None.latLng) {
-                if (zoomLevel == cameraPositionState.position.zoom) {
-                    cameraPositionState.animate(
-                        buildCameraPosition(
-                            target = cameraPositionValues.targetLatLngWithOffset,
-                            bearing = cameraPositionValues.bearing,
-                            zoomLevel = zoomLevel
-                        ),
-                        700
-                    )
-                } else {
-                    cameraPositionState.animate(
-                        buildCameraPosition(
-                            target = cameraPositionValues.initialLatLng,
-                            bearing = cameraPositionValues.bearing,
-                            zoomLevel = zoomLevel
-                        ),
-                        700
-                    )
-                }
+        if (lastLocation == LastLocation.None) return@LaunchedEffect
+
+        if (appMode == AppMode.Drive && zoomLevel != -1f) {
+            if (zoomLevel == cameraPositionState.position.zoom) {
+                cameraPositionState.animate(
+                    update = buildCameraPosition(
+                        target = cameraPositionValues.targetLatLngWithOffset,
+                        bearing = cameraPositionValues.bearing,
+                        zoomLevel = zoomLevel
+                    ),
+                    durationMs = 700
+                )
+            } else {
+                cameraPositionState.animate(
+                    update = CameraUpdateFactory.newLatLngZoom(
+                        /* latLng = */ cameraPositionValues.initialLatLng,
+                        /* zoom = */ zoomLevel
+                    ),
+                    durationMs = 700
+                )
             }
         } else {
             cameraPositionState.animate(
@@ -99,60 +94,70 @@ fun GoogleMapComponent(
         }
     }
 
-    GoogleMap(
-        modifier = modifier
-            .fillMaxSize()
-            .pointerInput(Unit) {
-                coroutineScope {
-                    var cameraPositionJob: Job? = null
+    Box(modifier = modifier.fillMaxSize()) {
+        GoogleMap(
+            modifier = Modifier
+                .matchParentSize()
+                .pointerInput(Unit) {
+                    coroutineScope {
+                        var cameraPositionJob: Job? = null
 
-                    forEachGesture {
-                        awaitPointerEventScope {
-                            awaitFirstDown(requireUnconsumed = false)
+                        forEachGesture {
+                            awaitPointerEventScope {
+                                awaitFirstDown(requireUnconsumed = false)
 
-                            do {
-                                val event = awaitPointerEvent()
-                                cameraPositionChangeEnabled = false
+                                do {
+                                    val event = awaitPointerEvent()
+                                    cameraPositionChangeEnabled = false
 
-                            } while (event.changes.any { it.pressed })
+                                } while (event.changes.any { it.pressed })
 
-                            cameraPositionJob?.cancel()
-                            cameraPositionJob = launch {
-                                delay(3000)
-                                cameraPositionChangeEnabled = true
+                                cameraPositionJob?.cancel()
+                                cameraPositionJob = launch {
+                                    delay(3000)
+                                    cameraPositionChangeEnabled = true
+                                }
                             }
                         }
                     }
+                },
+            cameraPositionState = cameraPositionState,
+            properties = rememberMapProperties(lastLocation, mapConfig, appMode),
+            uiSettings = rememberUiSettings(),
+            contentPadding = WindowInsets.statusBars.asPaddingValues(),
+            onMapLoaded = {
+                cameraPositionState.move(
+                    update = CameraUpdateFactory.newLatLngZoom(
+                        /* latLng = */ lastLocation.latLng,
+                        /* zoom = */ 12.5f
+                    )
+                )
+                isMapLoaded.value = true
+            }
+        ) {
+            mapEvents.forEach { mapEvent ->
+                when (mapEvent) {
+                    is StationaryCamera -> StationaryCameraMarker(mapEvent, markerCache)
+                    is Reports -> ReportsMarker(mapEvent, onMarkerClick)
+                    is MobileCamera -> MobileCameraMarker(mapEvent, markerCache)
                 }
-            },
-        cameraPositionState = cameraPositionState,
-        properties = rememberMapProperties(locationState, mapConfig),
-        uiSettings = rememberUiSettings(),
-        contentPadding = WindowInsets.statusBars.asPaddingValues(),
-        onMapLoaded = {
-            isMapLoaded = true
-        }
-    ) {
-        mapEvents.forEach { mapEvent ->
-            when (mapEvent) {
-                is StationaryCamera -> StationaryCameraMarker(mapEvent, markerCache)
-                is Reports -> ReportsMarker(mapEvent, onMarkerClick)
-                is MobileCamera -> MobileCameraMarker(mapEvent, markerCache)
+            }
+
+            if (appMode != AppMode.Default && lastLocation != LastLocation.None) {
+                Marker(
+                    state = MarkerState(position = lastLocation.latLng),
+                    icon = markerCache.getVector(id = R.drawable.ic_arrow),
+                    rotation = cameraPositionValues.markerRotation,
+                    anchor = Offset(0.5f, 0.5f),
+                    zIndex = 1f
+                )
             }
         }
 
-        if (locationState != LocationState.None && appMode != AppMode.Default) {
-            Marker(
-                state = MarkerState(position = locationState.latLng),
-                icon = markerCache.getVector(id = R.drawable.ic_arrow),
-                rotation = cameraPositionValues.markerRotation,
-                anchor = Offset(0.5f, 0.5f),
-                zIndex = 1f
-            )
-        }
-    }
+        loading()
 
-    // DebugView(cameraPositionState = cameraPositionState)
+        //DebugView(cameraPositionState = cameraPositionState)
+    }
 }
 
 private fun buildCameraPosition(

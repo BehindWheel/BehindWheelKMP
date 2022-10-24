@@ -5,7 +5,7 @@ import com.egoriku.grodnoroads.extensions.util.distanceTo
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
 import com.google.android.gms.maps.model.LatLng
@@ -15,61 +15,71 @@ private const val MIN_SPEED = 10
 
 fun alertMessagesTransformation(): suspend (
     List<MapEvent>,
-    LocationState,
+    LastLocation,
     Int
 ) -> List<Alert> =
     { mapEvents: List<MapEvent>,
-      locationState: LocationState,
+      lastLocation: LastLocation,
       alertDistance: Int ->
-        when {
-            locationState.speed > MIN_SPEED -> makeAlertMessage(
-                mapEvents = mapEvents,
-                locationState = locationState,
-                distanceRadius = alertDistance
-            )
-            else -> emptyList()
+        when (lastLocation) {
+            LastLocation.None -> emptyList()
+            else -> when {
+                lastLocation.speed > MIN_SPEED -> makeAlertMessage(
+                    mapEvents = mapEvents,
+                    lastLocation = lastLocation,
+                    distanceRadius = alertDistance
+                )
+                else -> emptyList()
+            }
         }
     }
 
 private fun makeAlertMessage(
     mapEvents: List<MapEvent>,
-    locationState: LocationState,
+    lastLocation: LastLocation,
     distanceRadius: Int
 ) = mapEvents.mapNotNull { event ->
-    val distance = computeDistance(
-        eventLatLng = event.position,
-        offsetLatLng = computeOffset(
-            from = locationState.latLng,
-            distance = distanceRadius.toDouble(),
-            heading = locationState.bearing.toDouble()
-        ),
-        currentLatLnt = locationState.latLng,
-        distanceRadius = distanceRadius
-    )
+    when (lastLocation) {
+        LastLocation.None -> null
+        else -> {
+            val distance = computeDistance(
+                eventLatLng = event.position,
+                offsetLatLng = computeOffset(
+                    from = lastLocation.latLng,
+                    distance = distanceRadius.toDouble(),
+                    heading = lastLocation.bearing.toDouble()
+                ),
+                currentLatLnt = lastLocation.latLng,
+                distanceRadius = distanceRadius
+            )
 
-    when (distance) {
-        null -> null
-        else -> when (event) {
-            is StationaryCamera -> {
-                CameraAlert(
-                    distance = distance,
-                    speedLimit = event.speed,
-                    mapEventType = event.mapEventType
-                )
-            }
-            is Reports -> {
-                IncidentAlert(
-                    distance = distance,
-                    messages = event.messages,
-                    mapEventType = event.mapEventType
-                )
-            }
-            is MobileCamera -> {
-                CameraAlert(
-                    distance = distance,
-                    speedLimit = event.speed,
-                    mapEventType = event.mapEventType
-                )
+            when (distance) {
+                null -> null
+                else -> when (event) {
+                    is StationaryCamera -> {
+                        CameraAlert(
+                            distance = distance,
+                            speedLimit = event.speed,
+                            mapEventType = event.mapEventType
+                        )
+                    }
+
+                    is Reports -> {
+                        IncidentAlert(
+                            distance = distance,
+                            messages = event.messages,
+                            mapEventType = event.mapEventType
+                        )
+                    }
+
+                    is MobileCamera -> {
+                        CameraAlert(
+                            distance = distance,
+                            speedLimit = event.speed,
+                            mapEventType = event.mapEventType
+                        )
+                    }
+                }
             }
         }
     }
@@ -90,6 +100,7 @@ private fun computeDistance(
                 else -> null
             }
         }
+
         else -> null
     }
 }

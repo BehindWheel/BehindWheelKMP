@@ -5,7 +5,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.map.R
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -16,7 +17,11 @@ import com.google.maps.android.compose.MapType
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun rememberMapProperties(locationState: LocationState, mapConfig: MapConfig): MapProperties {
+fun rememberMapProperties(
+    lastLocation: LastLocation,
+    mapConfig: MapConfig,
+    appMode: AppMode
+): MapProperties {
     val context = LocalContext.current
 
     val locationPermissionsState = rememberMultiplePermissionsState(
@@ -39,10 +44,10 @@ fun rememberMapProperties(locationState: LocationState, mapConfig: MapConfig): M
         Style.Unknown -> error("googleMap style can't be unknown")
     }
 
-    val mapProperties by remember(locationState, mapStyle, mapConfig) {
+    val mapProperties by remember(lastLocation, mapStyle, mapConfig, appMode) {
         mutableStateOf(
             MapProperties(
-                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && locationState == LocationState.None,
+                isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && lastLocation != LastLocation.None && appMode != AppMode.Drive,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
                 minZoomPreference = 7.0f,

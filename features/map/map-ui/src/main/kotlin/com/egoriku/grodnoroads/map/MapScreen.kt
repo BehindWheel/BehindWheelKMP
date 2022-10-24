@@ -1,15 +1,12 @@
 package com.egoriku.grodnoroads.map
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.extensions.common.StableList
@@ -19,12 +16,13 @@ import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
@@ -44,57 +42,69 @@ fun MapScreen(
     ) {
         val alerts by component.alerts.collectAsState(initial = StableList(emptyList()))
         val appMode by component.appMode.collectAsState(AppMode.Default)
-        val location by component.location.collectAsState(LocationState.None)
+        val location by component.lastLocation.collectAsState(LastLocation.None)
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
         val mapEvents by component.mapEvents.collectAsState(initial = StableList(emptyList()))
 
         LabelsSubscription(component)
 
         Box(modifier = Modifier.fillMaxSize()) {
-            if (mapConfig != MapConfig.EMPTY && location != LocationState.None) {
-                GoogleMapComponent(
-                    mapEvents = mapEvents,
-                    appMode = appMode,
-                    mapConfig = mapConfig,
-                    locationState = location,
-                    onMarkerClick = component::showMarkerInfoDialog
-                )
+            val isMapLoaded = remember { mutableStateOf(false) }
+
+            GoogleMapComponent(
+                mapEvents = mapEvents,
+                appMode = appMode,
+                mapConfig = mapConfig,
+                lastLocation = location,
+                onMarkerClick = component::showMarkerInfoDialog,
+                isMapLoaded = isMapLoaded
+            ) {
+                AnimatedVisibility(
+                    modifier = Modifier.matchParentSize(),
+                    visible = !isMapLoaded.value,
+                    enter = EnterTransition.None,
+                    exit = fadeOut()
+                ) {
+                    LogoProgressIndicator()
+                }
             }
 
-            AnimatedContent(targetState = appMode) { state ->
-                when (state) {
-                    AppMode.Default -> {
-                        DefaultMode(
-                            onLocationEnabled = component::startLocationUpdates,
-                            onLocationDisabled = component::onLocationDisabled,
-                            openDrawer = openDrawer
-                        )
-                    }
+            if (isMapLoaded.value) {
+                AnimatedContent(targetState = appMode) { state ->
+                    when (state) {
+                        AppMode.Default -> {
+                            DefaultMode(
+                                onLocationEnabled = component::startLocationUpdates,
+                                onLocationDisabled = component::onLocationDisabled,
+                                openDrawer = openDrawer
+                            )
+                        }
 
-                    AppMode.Drive -> {
-                        DriveMode(
-                            alerts = alerts,
-                            location = location,
-                            stopDrive = component::stopLocationUpdates,
-                            reportPolice = {
-                                if (location != LocationState.None) {
-                                    component.openReportFlow(
-                                        reportDialogFlow = MapComponent.ReportDialogFlow.TrafficPolice(
-                                            location.latLng
+                        AppMode.Drive -> {
+                            DriveMode(
+                                alerts = alerts,
+                                lastLocation = location,
+                                stopDrive = component::stopLocationUpdates,
+                                reportPolice = {
+                                    if (location != LastLocation.None) {
+                                        component.openReportFlow(
+                                            reportDialogFlow = MapComponent.ReportDialogFlow.TrafficPolice(
+                                                location.latLng
+                                            )
                                         )
-                                    )
-                                }
-                            },
-                            reportIncident = {
-                                if (location != LocationState.None) {
-                                    component.openReportFlow(
-                                        reportDialogFlow = MapComponent.ReportDialogFlow.RoadIncident(
-                                            location.latLng
+                                    }
+                                },
+                                reportIncident = {
+                                    if (location != LastLocation.None) {
+                                        component.openReportFlow(
+                                            reportDialogFlow = MapComponent.ReportDialogFlow.RoadIncident(
+                                                location.latLng
+                                            )
                                         )
-                                    )
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
@@ -115,6 +125,7 @@ private fun AlertDialogs(component: MapComponent) {
                 }
             )
         }
+
         is PoliceDialog -> {
             ReportDialog(
                 onClose = { component.closeDialog() },
@@ -130,6 +141,7 @@ private fun AlertDialogs(component: MapComponent) {
                 }
             )
         }
+
         is RoadIncidentDialog -> {
             IncidentDialog(
                 onClose = { component.closeDialog() },
@@ -145,6 +157,7 @@ private fun AlertDialogs(component: MapComponent) {
                 }
             )
         }
+
         is None -> Unit
     }
 }

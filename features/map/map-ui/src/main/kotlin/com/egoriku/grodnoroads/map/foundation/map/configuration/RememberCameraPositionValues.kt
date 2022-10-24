@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.map.foundation.map.configuration
 import android.graphics.Point
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
-import com.egoriku.grodnoroads.map.domain.model.LocationState
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import com.google.maps.android.compose.CameraPositionState
@@ -11,7 +11,7 @@ import com.google.maps.android.compose.CameraPositionState
 @Composable
 fun rememberCameraPositionValues(
     cameraPositionState: CameraPositionState,
-    locationState: LocationState
+    lastLocation: LastLocation
 ): CameraPositionValues {
     val screenHeight = LocalConfiguration.current.screenHeightDp
 
@@ -19,32 +19,32 @@ fun rememberCameraPositionValues(
 
     val screenLocation by remember(projection) {
         mutableStateOf(
-            projection?.toScreenLocation(locationState.latLng)?.apply {
+            projection?.toScreenLocation(lastLocation.latLng)?.apply {
                 set(x, y - screenHeight / 3)
             } ?: Point()
         )
     }
-    val fromScreenLocation by remember(projection, locationState) {
-        mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: locationState.latLng)
+    val fromScreenLocation by remember(projection, lastLocation) {
+        mutableStateOf(projection?.fromScreenLocation(screenLocation) ?: lastLocation.latLng)
     }
 
     var lastBearing by remember { mutableStateOf(0.0f) }
-    val directionBearing by remember(locationState) {
+    val directionBearing by remember(lastLocation) {
         mutableStateOf(
             when {
-                locationState.speed > 10 -> {
-                    lastBearing = locationState.bearing
-                    locationState.bearing
+                lastLocation.speed > 10 -> {
+                    lastBearing = lastLocation.bearing
+                    lastLocation.bearing
                 }
                 else -> lastBearing
             }
         )
     }
 
-    val computeHeading = SphericalUtil.computeHeading(locationState.latLng, fromScreenLocation)
+    val computeHeading = SphericalUtil.computeHeading(lastLocation.latLng, fromScreenLocation)
 
     return CameraPositionValues(
-        initialLatLng = locationState.latLng,
+        initialLatLng = lastLocation.latLng,
         targetLatLngWithOffset = fromScreenLocation,
         bearing = directionBearing,
         markerRotation = (directionBearing - computeHeading).toFloat()

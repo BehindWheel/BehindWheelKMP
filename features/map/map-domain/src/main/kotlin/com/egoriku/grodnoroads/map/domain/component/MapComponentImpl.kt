@@ -72,13 +72,13 @@ internal class MapComponentImpl(
         ).map(List<MapEvent>::asStableList)
             .flowOn(Dispatchers.Default)
 
-    override val location: Flow<LocationState>
-        get() = locationStore.states.map { it.locationState }
+    override val lastLocation: Flow<LastLocation>
+        get() = locationStore.states.map { it.lastLocation }
 
     override val alerts: Flow<StableList<Alert>>
         get() = combine(
             flow = mapEvents,
-            flow2 = location,
+            flow2 = lastLocation,
             flow3 = alertDistance,
             transform = alertMessagesTransformation()
         ).map(List<Alert>::asStableList)

@@ -49,11 +49,13 @@ class MainActivity : LocalizedActivity() {
                 val systemUiController = rememberSystemUiController()
                 val useDarkIcons = MaterialTheme.colors.isLight
 
-                SideEffect {
+                DisposableEffect(systemUiController, useDarkIcons) {
                     systemUiController.setStatusBarColor(
                         color = Color.Transparent,
                         darkIcons = useDarkIcons
                     )
+
+                    onDispose {}
                 }
                 RootContent(roadsRootComponent = root)
             }
