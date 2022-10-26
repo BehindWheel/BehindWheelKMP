@@ -13,10 +13,8 @@ import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.Update
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampDispatcher
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.language
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -39,7 +37,6 @@ class RootStoreFactory(
 
     data class State(
         val theme: Theme = Theme.System,
-        val language: Language = Language.Russian,
         val headLampType: HeadLampType = HeadLampType.None
     )
 
@@ -52,10 +49,7 @@ class RootStoreFactory(
                     launch {
                         dataStore.data
                             .map { preferences ->
-                                State(
-                                    theme = Theme.fromOrdinal(preferences.appTheme.theme),
-                                    language = Language.localeToLanguage(preferences.language.lang)
-                                )
+                                State(theme = Theme.fromOrdinal(preferences.appTheme.theme))
                             }
                             .collect {
                                 dispatch(Message.NewState(state = it))
@@ -74,10 +68,7 @@ class RootStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.NewState -> copy(
-                        theme = message.state.theme,
-                        language = message.state.language,
-                    )
+                    is Message.NewState -> copy(theme = message.state.theme)
                     is UpdateHeadLampDialog -> copy(headLampType = message.headLampType)
                 }
             }

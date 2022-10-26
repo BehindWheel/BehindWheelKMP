@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.screen.settings.appearance.domain.component
 
+import android.os.Build
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore
@@ -30,7 +31,14 @@ interface AppearanceComponent {
 
         data class AppLanguage(
             val current: Language = Russian,
-            val values: List<Language> = listOf(Russian, Belarusian, English)
+            val values: List<Language> = buildList {
+                add(Russian)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    add(Belarusian)
+                }
+                add(English)
+            }
         ) : AppearancePref
     }
 

@@ -11,7 +11,7 @@ gradleSecrets = "2.0.1"
 gradleVersionCheck = "0.43.0"
 
 accompanist = "0.25.1"
-appcompat = "1.5.1"
+appcompat = "1.6.0-rc01"
 browser = "1.4.0"
 compose = "1.2.1"
 composeCompiler = "1.3.2"
