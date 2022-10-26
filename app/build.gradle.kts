@@ -9,12 +9,13 @@ plugins {
 }
 
 android {
-    compileSdk = 33
-
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads"
-        minSdk = 21
-        targetSdk = 33
+
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
+
         versionCode = 122
         versionName = "1.0.22"
         resourceConfigurations += listOf("en", "ru", "be-rBY")
@@ -88,7 +89,6 @@ dependencies {
     implementation(libs.firebase.firestore)
 
     implementation(libs.maps)
-    implementation(libs.maps.compose)
 
     implementation(libs.gms.location)
     implementation("com.google.android.material:material:1.7.0")

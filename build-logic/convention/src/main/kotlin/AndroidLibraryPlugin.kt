@@ -15,11 +15,10 @@ class AndroidLibraryPlugin : Plugin<Project> {
         }
 
         extensions.configure<LibraryExtension> {
-            compileSdk = libs.versions.compileSdk.get().toInt()
-
             defaultConfig {
                 minSdk = libs.versions.minSdk.get().toInt()
                 compileSdk = libs.versions.compileSdk.get().toInt()
+                targetSdk = libs.versions.compileSdk.get().toInt()
 
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
