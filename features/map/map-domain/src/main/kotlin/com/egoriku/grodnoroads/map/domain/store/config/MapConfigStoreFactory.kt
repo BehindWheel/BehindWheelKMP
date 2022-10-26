@@ -60,26 +60,25 @@ internal class MapConfigStoreFactory(
                     }
                 }
                 onIntent<CheckLocation> {
-                    launch(Dispatchers.Default) {
-                        val latLng = it.latLng
-                        val isInCity = when {
-                            PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.skidelTop, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.skidelBottom, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
-                            else -> false
-                        }
-
-                        val zoomLevel = if (isInCity) {
-                            state.mapInternalConfig.zoomLevelInCity
-                        } else {
-                            state.mapInternalConfig.zoomLevelOutOfCity
-                        }
-                        dispatch(Message.OnZoomLevel(zoomLevel))
+                    val latLng = it.latLng
+                    val isInCity = when {
+                        PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.skidelTop, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.skidelBottom, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
+                        else -> false
                     }
+
+                    val zoomLevel = if (isInCity) {
+                        state.mapInternalConfig.zoomLevelInCity
+                    } else {
+                        state.mapInternalConfig.zoomLevelOutOfCity
+                    }
+
+                    dispatch(Message.OnZoomLevel(zoomLevel))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
