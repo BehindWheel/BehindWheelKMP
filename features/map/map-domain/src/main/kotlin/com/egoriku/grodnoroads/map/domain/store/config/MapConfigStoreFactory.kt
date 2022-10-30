@@ -25,8 +25,7 @@ import kotlinx.coroutines.launch
 
 
 internal class MapConfigStoreFactory(
-    private val storeFactory: StoreFactory,
-    private val dataStore: DataStore<Preferences>
+    private val storeFactory: StoreFactory, private val dataStore: DataStore<Preferences>
 ) {
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -36,8 +35,7 @@ internal class MapConfigStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        dataStore.data
-                            .map { pref ->
+                        dataStore.data.map { pref ->
                                 MapInternalConfig(
                                     zoomLevelInCity = pref.mapZoomInCity,
                                     zoomLevelOutOfCity = pref.mapZoomOutCity,
@@ -60,26 +58,23 @@ internal class MapConfigStoreFactory(
                     }
                 }
                 onIntent<CheckLocation> {
-                    launch(Dispatchers.Default) {
-                        val latLng = it.latLng
-                        val isInCity = when {
-                            PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.skidelTop, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.skidelBottom, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
-                            PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
-                            else -> false
-                        }
-
-                        val zoomLevel = if (isInCity) {
-                            state.mapInternalConfig.zoomLevelInCity
-                        } else {
-                            state.mapInternalConfig.zoomLevelOutOfCity
-                        }
-                        dispatch(Message.OnZoomLevel(zoomLevel))
+                    val latLng = it.latLng
+                    val isInCity = when {
+                        PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
+                        else -> false
                     }
+
+                    val zoomLevel = if (isInCity) {
+                        state.mapInternalConfig.zoomLevelInCity
+                    } else {
+                        state.mapInternalConfig.zoomLevelOutOfCity
+                    }
+                    dispatch(Message.OnZoomLevel(zoomLevel))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
@@ -88,6 +83,5 @@ internal class MapConfigStoreFactory(
                     is Message.OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is Message.OnZoomLevel -> copy(zoomLevelDriveMode = message.zoomLevel)
                 }
-            }
-        ) {}
+            }) {}
 }
