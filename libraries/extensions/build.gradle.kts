@@ -8,7 +8,10 @@ android {
 
 dependencies {
     implementation(libs.androidx.appcompat)
+
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime)
+
     implementation(libs.coroutines)
 
     implementation(platform(libs.firebase.bom))
