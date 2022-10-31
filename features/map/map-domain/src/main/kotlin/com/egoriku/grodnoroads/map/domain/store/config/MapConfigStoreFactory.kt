@@ -36,8 +36,7 @@ internal class MapConfigStoreFactory(
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     launch {
-                        dataStore.data
-                            .map { pref ->
+                        dataStore.data.map { pref ->
                                 MapInternalConfig(
                                     zoomLevelInCity = pref.mapZoomInCity,
                                     zoomLevelOutOfCity = pref.mapZoomOutCity,
@@ -64,8 +63,7 @@ internal class MapConfigStoreFactory(
                     val isInCity = when {
                         PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.skidelTop, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.skidelBottom, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
@@ -87,6 +85,5 @@ internal class MapConfigStoreFactory(
                     is Message.OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is Message.OnZoomLevel -> copy(zoomLevelDriveMode = message.zoomLevel)
                 }
-            }
-        ) {}
+            }) {}
 }

@@ -87,6 +87,7 @@
     <string name="map_default_location_ozery">Озёры</string>
     <string name="map_default_location_porechye">Поречье</string>
     <string name="map_default_location_berestovitca">Большая Берестовица</string>
+    <string name="map_default_location_shuchin">Щучин</string>
 
     <string name="map_header_drive_mode">Режим навигации</string>
     <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>

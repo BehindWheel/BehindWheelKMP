@@ -5,7 +5,8 @@ import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsC
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.supportedCities
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Grodno
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 import kotlinx.coroutines.flow.Flow
 
@@ -59,7 +60,7 @@ interface MapSettingsComponent {
 
         data class DefaultCity(
             val current: City = Grodno,
-            val values: List<City> = listOf(Grodno, Skidel, Volkovysk, Ozery, Porechye)
+            val values: List<City> = supportedCities
         ) : MapPref
     }
 
