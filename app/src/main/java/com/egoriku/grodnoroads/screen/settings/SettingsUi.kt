@@ -2,7 +2,10 @@ package com.egoriku.grodnoroads.screen.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Help
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
@@ -32,13 +35,14 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
                 onSettingClick(Page.Map)
             }
         )
-        SettingsItem(
+        // Temporary disable
+        /*SettingsItem(
             icon = Icons.Filled.NotificationImportant,
             text = stringResource(R.string.settings_section_alerts),
             onClick = {
                 onSettingClick(Page.Alerts)
             }
-        )
+        )*/
         SettingsItem(
             icon = Icons.Filled.NewReleases,
             text = stringResource(R.string.settings_section_whats_new),
@@ -46,20 +50,14 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
                 onSettingClick(Page.WhatsNew)
             }
         )
-        SettingsItem(
+        // Temporary disable
+        /*SettingsItem(
             icon = Icons.Filled.Build,
             text = stringResource(R.string.settings_section_next_features),
             onClick = {
                 onSettingClick(Page.NextFeatures)
             }
-        )
-        SettingsItem(
-            icon = Icons.Filled.FiberNew,
-            text = stringResource(R.string.settings_section_beta_features),
-            onClick = {
-                onSettingClick(Page.BetaFeatures)
-            }
-        )
+        )*/
         SettingsItem(
             icon = Icons.Filled.Help,
             text = stringResource(R.string.settings_section_faq),

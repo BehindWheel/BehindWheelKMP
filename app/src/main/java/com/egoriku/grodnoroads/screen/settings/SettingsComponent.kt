@@ -31,7 +31,6 @@ interface SettingsComponent {
         Alerts,
         WhatsNew,
         NextFeatures,
-        BetaFeatures,
         FAQ
     }
 

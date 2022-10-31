@@ -39,7 +39,6 @@ class SettingsComponentImpl(
             Page.Alerts -> navigation.push(Config.Alerts)
             Page.WhatsNew -> navigation.push(Config.WhatsNew)
             Page.NextFeatures -> navigation.push(Config.NextFeatures)
-            Page.BetaFeatures -> navigation.push(Config.BetaFeatures)
             Page.FAQ -> navigation.push(Config.FAQ)
         }
     }
@@ -58,7 +57,6 @@ class SettingsComponentImpl(
         is Config.Alerts -> Alerts(
             alertsComponent = AlertsComponentImpl(componentContext)
         )
-        is Config.BetaFeatures -> TODO()
         is Config.Map -> Map(
             mapSettingsComponent = MapSettingsComponentImpl(componentContext)
         )
@@ -89,9 +87,6 @@ class SettingsComponentImpl(
 
         @Parcelize
         object NextFeatures : Config()
-
-        @Parcelize
-        object BetaFeatures : Config()
 
         @Parcelize
         object FAQ : Config()
