@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.dialog.StepperDialog
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
@@ -32,6 +34,8 @@ fun MapSettingsScreen(
     mapSettingsComponent: MapSettingsComponent,
     onBack: () -> Unit
 ) {
+    BottomBarVisibility(HIDDEN)
+
     val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = MapSettingState())
     val isLoading by mapSettingsComponent.isLoading.collectAsState(initial = false)
 

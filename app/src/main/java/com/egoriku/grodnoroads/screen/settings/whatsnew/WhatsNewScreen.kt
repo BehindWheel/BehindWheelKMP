@@ -14,6 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.BuildConfig
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore
@@ -24,6 +26,8 @@ fun WhatsNewScreen(
     whatsNewComponent: WhatsNewComponent,
     onBack: () -> Unit
 ) {
+    BottomBarVisibility(HIDDEN)
+
     Scaffold(
         topBar = {
             SettingsTopBar(

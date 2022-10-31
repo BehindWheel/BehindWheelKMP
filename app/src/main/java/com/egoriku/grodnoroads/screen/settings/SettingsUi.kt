@@ -5,6 +5,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.SHOWN
 import com.egoriku.grodnoroads.foundation.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
@@ -13,6 +15,8 @@ import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 
 @Composable
 fun SettingsUi(onSettingClick: (Page) -> Unit) {
+    BottomBarVisibility(SHOWN)
+
     Column {
         SettingsItem(
             icon = Icons.Filled.Style,
