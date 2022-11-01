@@ -15,7 +15,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackA
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.settings.alerts.AlertsScreen
 import com.egoriku.grodnoroads.screen.settings.appearance.AppearanceScreen
-import com.egoriku.grodnoroads.screen.settings.faq.FaqScreen
+import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.screen.settings.map.MapSettingsScreen
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewScreen
 

@@ -17,6 +17,8 @@ include(":features:map:map-data")
 include(":features:map:map-domain")
 include(":features:map:map-ui")
 
+include(":features:settings:faq")
+
 include(":libraries:analytics")
 include(":libraries:crashlytics")
 include(":libraries:extensions")

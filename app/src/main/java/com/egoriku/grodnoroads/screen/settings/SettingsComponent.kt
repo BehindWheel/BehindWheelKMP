@@ -5,9 +5,9 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent
-import com.egoriku.grodnoroads.screen.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewComponent
+import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 
 interface SettingsComponent {
 

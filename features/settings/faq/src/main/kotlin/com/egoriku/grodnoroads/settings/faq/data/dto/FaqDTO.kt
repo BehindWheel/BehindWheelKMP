@@ -1,8 +1,8 @@
-package com.egoriku.grodnoroads.screen.settings.faq.data
+package com.egoriku.grodnoroads.settings.faq.data.dto
 
 import com.google.firebase.firestore.PropertyName
 
-class FaqResponse(
+internal class FaqDTO(
     @PropertyName("q")
     @JvmField
     val question: String = "",

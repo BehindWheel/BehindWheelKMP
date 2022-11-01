@@ -10,11 +10,12 @@ import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponentImpl
-import com.egoriku.grodnoroads.screen.settings.faq.domain.component.FaqComponentImpl
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import org.koin.core.parameter.parametersOf
 
 class SettingsComponentImpl(
     componentContext: ComponentContext
@@ -65,7 +66,7 @@ class SettingsComponentImpl(
             whatsNewComponent = WhatsNewComponentImpl(componentContext)
         )
         is Config.FAQ -> FAQ(
-            faqComponent = FaqComponentImpl(componentContext)
+            faqComponent = get { parametersOf(componentContext) }
         )
     }
 

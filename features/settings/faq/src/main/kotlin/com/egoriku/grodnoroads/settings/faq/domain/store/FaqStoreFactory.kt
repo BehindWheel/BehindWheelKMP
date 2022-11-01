@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.faq.domain.store
+package com.egoriku.grodnoroads.settings.faq.domain.store
 
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
@@ -7,14 +7,13 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf
-import com.egoriku.grodnoroads.screen.settings.faq.data.FaqRepository
-import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.Message
-import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State
-import com.egoriku.grodnoroads.screen.settings.faq.domain.store.FaqStore.State.FAQ
+import com.egoriku.grodnoroads.settings.faq.domain.repository.FaqRepository
+import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore.Message
+import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FaqStoreFactory(
+internal class FaqStoreFactory(
     private val storeFactory: StoreFactory,
     private val faqRepository: FaqRepository,
     private val crashlyticsTracker: CrashlyticsTracker
@@ -30,18 +29,7 @@ class FaqStoreFactory(
                         dispatch(Message.Loading(true))
 
                         when (val result = faqRepository.load()) {
-                            is ResultOf.Success -> {
-                                dispatch(
-                                    Message.Success(
-                                        faq = result.value.map {
-                                            FAQ(
-                                                question = it.question,
-                                                answer = it.answer.replace("\\n", "\n")
-                                            )
-                                        }
-                                    )
-                                )
-                            }
+                            is ResultOf.Success -> dispatch(Message.Success(result.value))
                             is ResultOf.Failure -> crashlyticsTracker.recordException(result.exception)
                         }
                         dispatch(Message.Loading(false))

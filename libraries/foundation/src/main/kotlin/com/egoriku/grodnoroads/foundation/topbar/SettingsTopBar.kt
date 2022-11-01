@@ -31,7 +31,5 @@ fun SettingsTopBar(
 @GrodnoRoadsPreview
 @Composable
 private fun SettingsTopBarPreview() = GrodnoRoadsTheme {
-    SettingsTopBar(title = "Test") {
-
-    }
+    SettingsTopBar(title = "Test", onBack = {})
 }
