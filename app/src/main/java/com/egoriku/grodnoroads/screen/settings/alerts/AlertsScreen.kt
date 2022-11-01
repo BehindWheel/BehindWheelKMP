@@ -13,14 +13,14 @@ import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
 
 @Composable
 fun AlertsScreen(
     alertsComponent: AlertsComponent,
     onBack: () -> Unit
 ) {
-    val state by alertsComponent.state.collectAsState(initial = AppearanceStore.State())
+    val state by alertsComponent.state.collectAsState(initial = AlertSettingsState())
 
     Scaffold(
         topBar = {

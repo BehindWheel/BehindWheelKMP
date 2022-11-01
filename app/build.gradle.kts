@@ -84,6 +84,7 @@ dependencies {
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
+    implementation(projects.features.settings.appearance)
     implementation(projects.features.settings.faq)
 
     implementation(platform(libs.firebase.bom))

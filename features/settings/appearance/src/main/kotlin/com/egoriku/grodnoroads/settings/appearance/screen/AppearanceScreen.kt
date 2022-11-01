@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.appearance
+package com.egoriku.grodnoroads.settings.appearance.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +18,14 @@ import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HID
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.State
-import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppLanguageDialog
-import com.egoriku.grodnoroads.screen.settings.appearance.ui.dialog.AppThemeDialog
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
+import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppLanguageDialog
+import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppThemeDialog
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.Companion.toStringResource
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 

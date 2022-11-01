@@ -1,9 +1,9 @@
-package com.egoriku.grodnoroads.screen.settings.appearance.domain.component
+package com.egoriku.grodnoroads.settings.appearance.domain.component
 
 import android.os.Build
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.*
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppearanceComponent {
 
-    val state: Flow<AppearanceStore.State>
+    val state: Flow<State>
 
     fun modify(preference: AppearancePref)
     fun update(preference: AppearancePref)

@@ -14,7 +14,6 @@ import com.egoriku.grodnoroads.map.domain.di.mapDomainModule
 import com.egoriku.grodnoroads.screen.main.koin.mainModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.screen.settings.alerts.di.alertsModule
-import com.egoriku.grodnoroads.screen.settings.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.screen.settings.di.settingsModule
 import com.egoriku.grodnoroads.screen.settings.map.di.mapSettingsModule
 import com.egoriku.grodnoroads.screen.settings.whatsnew.di.whatsNewModule
@@ -52,7 +51,6 @@ class RoadsApplication : Application() {
                 rootModule,
                 
                 alertsModule,
-                appearanceModule,
                 faqModule,
                 mapSettingsModule,
                 whatsNewModule

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.appearance.domain.store
+package com.egoriku.grodnoroads.settings.appearance.domain.store
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -10,13 +10,13 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponent.AppearanceState
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.*
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.store.AppearanceStore.Intent.Modify
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceState
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.*
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.Modify
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
@@ -91,11 +91,7 @@ class AppearanceStoreFactory(
                                 LocaleListCompat.forLanguageTags(language.lang)
                             )
 
-                            dispatch(
-                                Message.UpdateLanguage(
-                                    AppLanguage(current = language)
-                                )
-                            )
+                            dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
                         }
                     }
                 }

@@ -9,7 +9,6 @@ import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponentImpl
-import com.egoriku.grodnoroads.screen.settings.appearance.domain.component.AppearanceComponentImpl
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import kotlinx.parcelize.Parcelize
@@ -53,7 +52,7 @@ class SettingsComponentImpl(
         is Config.Settings -> Settings
 
         is Config.Appearance -> Appearance(
-            appearanceComponent = AppearanceComponentImpl(componentContext)
+            appearanceComponent = get { parametersOf(componentContext) }
         )
         is Config.Alerts -> Alerts(
             alertsComponent = AlertsComponentImpl(componentContext)
