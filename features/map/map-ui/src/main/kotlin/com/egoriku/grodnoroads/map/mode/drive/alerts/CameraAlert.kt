@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -27,7 +26,7 @@ import com.egoriku.grodnoroads.resources.R
 fun CameraAlert(
     distance: Int,
     speedLimit: Int,
-    painter: Painter,
+    drawableId: Int,
     title: String
 ) {
     Card(modifier = Modifier.fillMaxWidth(), elevation = 5.dp) {
@@ -38,7 +37,7 @@ fun CameraAlert(
             ) {
                 Image(
                     modifier = Modifier.size(46.dp),
-                    painter = painter,
+                    painter = painterResource(id = drawableId),
                     contentDescription = null
                 )
                 Column(
@@ -78,25 +77,25 @@ private fun PreviewStationaryAlert() = GrodnoRoadsTheme {
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            painter = painterResource(id = R.drawable.ic_stationary_camera),
+            drawableId = R.drawable.ic_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            painter = painterResource(id = R.drawable.ic_stationary_camera),
+            drawableId = R.drawable.ic_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            painter = painterResource(id = R.drawable.ic_mobile_camera),
+            drawableId = R.drawable.ic_mobile_camera,
             title = stringResource(R.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            painter = painterResource(id = R.drawable.ic_mobile_camera),
+            drawableId = R.drawable.ic_mobile_camera,
             title = stringResource(R.string.alerts_mobile_camera)
         )
     }

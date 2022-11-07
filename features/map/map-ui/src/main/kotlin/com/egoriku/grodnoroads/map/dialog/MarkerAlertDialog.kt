@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -58,7 +59,7 @@ private
 fun PreviewMarkerAlertDialog() = GrodnoRoadsTheme {
     MarkerAlertDialog(
         reports = Reports(
-            messages = listOf(
+            messages = persistentListOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",
                     source = Source.App

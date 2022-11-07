@@ -7,7 +7,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
@@ -18,7 +17,7 @@ import com.egoriku.grodnoroads.resources.R
 @Composable
 fun ReportAction(
     modifier: Modifier = Modifier,
-    painter: Painter,
+    drawableId: Int,
     onClick: () -> Unit
 ) {
     Card(
@@ -30,7 +29,7 @@ fun ReportAction(
         Box(modifier = Modifier.padding(16.dp)) {
             Image(
                 modifier = Modifier.size(48.dp),
-                painter = painter,
+                painter = painterResource(id = drawableId),
                 contentDescription = ""
             )
         }
@@ -42,8 +41,8 @@ fun ReportAction(
 private fun ReportActionPreview() {
     GrodnoRoadsTheme {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            ReportAction(painter = painterResource(id = R.drawable.ic_traffic_police)) {}
-            ReportAction(painter = painterResource(id = R.drawable.ic_warning)) {}
+            ReportAction(drawableId = R.drawable.ic_traffic_police) {}
+            ReportAction(drawableId = R.drawable.ic_warning) {}
         }
     }
 }

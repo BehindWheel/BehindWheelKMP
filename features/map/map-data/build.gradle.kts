@@ -19,5 +19,7 @@ dependencies {
 
     implementation(libs.gms.maps)
 
+    implementation(libs.immutable.collections)
+
     testImplementation(libs.kotlin.tests)
 }

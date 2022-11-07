@@ -51,6 +51,7 @@ fun rememberCameraPositionValues(
     )
 }
 
+@Stable
 data class CameraPositionValues(
     val initialLatLng: LatLng,
     val targetLatLngWithOffset: LatLng,

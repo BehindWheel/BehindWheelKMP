@@ -1,16 +1,18 @@
 package com.egoriku.grodnoroads.map.domain.util
 
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 internal fun filterMapEvents(): suspend (
     List<Reports>,
     List<StationaryCamera>,
     List<MobileCamera>,
     MapInfo
-) -> List<MapEvent> = { reports, stationary, mobile, mapInfo ->
+) -> ImmutableList<MapEvent> = { reports, stationary, mobile, mapInfo ->
     (reports + stationary + mobile).mapNotNull { mapEvent ->
 
         when (mapEvent) {
@@ -62,5 +64,5 @@ internal fun filterMapEvents(): suspend (
                 }
             }
         }
-    }
+    }.toImmutableList()
 }

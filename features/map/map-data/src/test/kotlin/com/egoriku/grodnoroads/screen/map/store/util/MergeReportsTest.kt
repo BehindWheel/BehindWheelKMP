@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.map.data.mapper.ReportsMapper
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.map.domain.model.Source.*
+import com.google.android.gms.maps.model.LatLng
 import org.junit.Before
 import org.junit.Test
 import java.util.*

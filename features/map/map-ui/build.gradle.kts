@@ -26,6 +26,8 @@ dependencies {
 
     implementation(libs.gms.location)
 
+    implementation(libs.immutable.collections)
+
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
 

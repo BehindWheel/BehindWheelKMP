@@ -6,7 +6,6 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
@@ -18,10 +17,12 @@ import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.mode.drive.action.ReportAction
 import com.egoriku.grodnoroads.map.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun DriveMode(
-    alerts: List<Alert>,
+    alerts: ImmutableList<Alert>,
     lastLocation: LastLocation,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
@@ -48,11 +49,11 @@ fun DriveMode(
                 .padding(bottom = 48.dp)
         ) {
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_traffic_police),
+                drawableId = R.drawable.ic_traffic_police,
                 onClick = reportPolice
             )
             ReportAction(
-                painter = painterResource(id = R.drawable.ic_warning),
+                drawableId = R.drawable.ic_warning,
                 onClick = reportIncident
             )
         }
@@ -71,7 +72,7 @@ fun DriveMode(
 @Composable
 private fun DriveModePReview() = GrodnoRoadsTheme {
     DriveMode(
-        alerts = emptyList(),
+        alerts = persistentListOf(),
         lastLocation = LastLocation.None,
         stopDrive = {},
         reportPolice = {},

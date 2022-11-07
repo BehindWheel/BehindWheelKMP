@@ -9,7 +9,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.egoriku.grodnoroads.extensions.common.StableList
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
@@ -26,6 +25,7 @@ import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
+import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -40,11 +40,11 @@ fun MapScreen(
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
-        val alerts by component.alerts.collectAsState(initial = StableList(emptyList()))
+        val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(AppMode.Default)
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
-        val mapEvents by component.mapEvents.collectAsState(initial = StableList(emptyList()))
+        val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
 
         LabelsSubscription(component)
 

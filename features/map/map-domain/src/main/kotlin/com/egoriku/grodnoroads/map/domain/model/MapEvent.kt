@@ -1,9 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.model
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.MobileCamera
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.StationaryCamera
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 sealed interface MapEvent {
 
     val position: LatLng
@@ -19,7 +22,7 @@ sealed interface MapEvent {
     data class Reports(
         val markerMessage: String,
         val dialogTitle: String,
-        val messages: List<MessageItem>,
+        val messages: ImmutableList<MessageItem>,
         override val position: LatLng,
         override val mapEventType: MapEventType
     ) : MapEvent
