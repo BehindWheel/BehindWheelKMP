@@ -61,8 +61,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx"
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
-# https://issuetracker.google.com/issues/254981466
-gms-location = "com.google.android.gms:play-services-location:20.0.0"
+gms-location = "com.google.android.gms:play-services-location:21.0.1"
 gms-maps = "com.google.android.gms:play-services-maps:18.1.0"
 
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
