@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
-import com.egoriku.grodnoroads.extensions.common.StableList
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -28,6 +27,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -39,7 +39,7 @@ fun GoogleMapComponent(
     modifier: Modifier = Modifier,
     appMode: AppMode,
     mapConfig: MapConfig,
-    mapEvents: StableList<MapEvent>,
+    mapEvents: ImmutableList<MapEvent>,
     lastLocation: LastLocation,
     onMarkerClick: (Reports) -> Unit,
     isMapLoaded: MutableState<Boolean>,
@@ -137,9 +137,14 @@ fun GoogleMapComponent(
         ) {
             mapEvents.forEach { mapEvent ->
                 when (mapEvent) {
-                    is StationaryCamera -> StationaryCameraMarker(mapEvent, markerCache)
+                    is StationaryCamera -> StationaryCameraMarker(
+                        stationaryCamera = mapEvent,
+                        onFromCache = { markerCache.getVector(id = it) }
+                    )
                     is Reports -> ReportsMarker(mapEvent, onMarkerClick)
-                    is MobileCamera -> MobileCameraMarker(mapEvent, markerCache)
+                    is MobileCamera -> MobileCameraMarker(
+                        mobileCamera = mapEvent,
+                        onFromCache = { markerCache.getVector(id = it) })
                 }
             }
 

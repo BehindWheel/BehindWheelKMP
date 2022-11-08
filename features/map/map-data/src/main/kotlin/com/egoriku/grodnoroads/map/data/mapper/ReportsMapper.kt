@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.map.data.mapper;
+package com.egoriku.grodnoroads.map.data.mapper
 
 import com.egoriku.grodnoroads.extensions.appendIfNotEmpty
 import com.egoriku.grodnoroads.extensions.util.DateUtil
@@ -9,6 +9,9 @@ import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.collections.immutable.mutate
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 
 private const val MERGE_ALERT_DISTANCE = 200
 
@@ -35,21 +38,20 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                 val item: Reports = mergedReports[index]
 
                 mergedReports[index] = item.copy(
-                    messages = item.messages.toMutableList().apply {
-                        add(
-                            MessageItem(
+                    messages = item.messages.toPersistentList()
+                        .mutate {
+                            it += MessageItem(
                                 message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message}",
                                 source = Source.sourceFromString(data.source)
                             )
-                        )
-                    },
+                        },
                     position = item.position,
                     dialogTitle = buildDialogTitle(data),
                     markerMessage = buildMarkerShortMessage(data)
                 )
             } else {
                 val action = Reports(
-                    messages = listOf(
+                    messages = persistentListOf(
                         MessageItem(
                             message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message}",
                             source = Source.sourceFromString(data.source)

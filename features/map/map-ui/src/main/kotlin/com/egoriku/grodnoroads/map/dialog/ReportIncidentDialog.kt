@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.map.dialog.common.CommonReportDialog
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun IncidentDialog(
@@ -36,7 +37,7 @@ fun IncidentDialog(
     }
     CommonReportDialog(
         titleRes = R.string.dialog_incident,
-        actions = actions.keys.toList(),
+        actions = actions.keys.toImmutableList(),
         onClose = onClose,
         onSelected = { index, inputText ->
             val pair = actions.toList()[index]

@@ -6,8 +6,6 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.extensions.common.StableList
-import com.egoriku.grodnoroads.extensions.common.asStableList
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
@@ -17,6 +15,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -62,27 +61,25 @@ internal class MapComponentImpl(
             )
         }
 
-    override val mapEvents: Flow<StableList<MapEvent>>
+    override val mapEvents: Flow<ImmutableList<MapEvent>>
         get() = combine(
             flow = reports,
             flow2 = stationary,
             flow3 = mobile,
             flow4 = mapInfo,
             transform = filterMapEvents()
-        ).map(List<MapEvent>::asStableList)
-            .flowOn(Dispatchers.Default)
+        ).flowOn(Dispatchers.Default)
 
     override val lastLocation: Flow<LastLocation>
         get() = locationStore.states.map { it.lastLocation }
 
-    override val alerts: Flow<StableList<Alert>>
+    override val alerts: Flow<ImmutableList<Alert>>
         get() = combine(
             flow = mapEvents,
             flow2 = lastLocation,
             flow3 = alertDistance,
             transform = alertMessagesTransformation()
-        ).map(List<Alert>::asStableList)
-            .flowOn(Dispatchers.Default)
+        ).flowOn(Dispatchers.Default)
 
     override val labels: Flow<LocationStore.Label> = locationStore.labels
 
@@ -92,8 +89,7 @@ internal class MapComponentImpl(
     override fun stopLocationUpdates() =
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
 
-    override fun onLocationDisabled() =
-        locationStore.accept(LocationStore.Intent.DisabledLocation)
+    override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
     override fun reportAction(params: MapEventsStore.Intent.ReportAction.Params) {
         mapEventsStore.accept(MapEventsStore.Intent.ReportAction(params = params))

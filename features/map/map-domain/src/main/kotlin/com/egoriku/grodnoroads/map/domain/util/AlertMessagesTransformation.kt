@@ -9,6 +9,9 @@ import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
@@ -17,19 +20,19 @@ fun alertMessagesTransformation(): suspend (
     List<MapEvent>,
     LastLocation,
     Int
-) -> List<Alert> =
+) -> ImmutableList<Alert> =
     { mapEvents: List<MapEvent>,
       lastLocation: LastLocation,
       alertDistance: Int ->
         when (lastLocation) {
-            LastLocation.None -> emptyList()
+            LastLocation.None -> persistentListOf()
             else -> when {
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents,
                     lastLocation = lastLocation,
                     distanceRadius = alertDistance
                 )
-                else -> emptyList()
+                else -> persistentListOf()
             }
         }
     }
@@ -83,7 +86,7 @@ private fun makeAlertMessage(
             }
         }
     }
-}
+}.toImmutableList()
 
 private fun computeDistance(
     eventLatLng: LatLng,

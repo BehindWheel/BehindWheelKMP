@@ -25,6 +25,8 @@ import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -32,7 +34,7 @@ fun IncidentAlert(
     emoji: String,
     title: String,
     distance: Int,
-    messages: List<MessageItem>
+    messages: ImmutableList<MessageItem>
 ) {
     Card(modifier = Modifier.fillMaxWidth(), elevation = 5.dp) {
         Column(modifier = Modifier.padding(8.dp)) {
@@ -73,7 +75,7 @@ private fun PreviewIncidentAlert() = GrodnoRoadsTheme {
             emoji = MapEventType.RoadIncident.emoji,
             title = stringResource(R.string.alerts_incident),
             distance = 200,
-            messages = listOf(
+            messages = persistentListOf(
                 MessageItem(
                     message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
                     source = Source.App
@@ -89,7 +91,7 @@ private fun PreviewIncidentAlert() = GrodnoRoadsTheme {
             emoji = TrafficPolice.emoji,
             title = stringResource(R.string.alerts_traffic_police),
             distance = 350,
-            messages = listOf(
+            messages = persistentListOf(
                 MessageItem(
                     message = "(15:30) Славинского беларуснефть на скорость",
                     source = Source.App

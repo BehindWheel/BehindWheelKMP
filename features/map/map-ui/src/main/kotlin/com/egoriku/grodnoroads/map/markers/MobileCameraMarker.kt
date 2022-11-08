@@ -16,13 +16,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.MobileCamera
 import com.egoriku.grodnoroads.map.foundation.SpeedLimitSign
-import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberMarkerState
 
 @Composable
-fun MobileCameraMarker(mobileCamera: MobileCamera, markerCache: MarkerCache) {
+fun MobileCameraMarker(mobileCamera: MobileCamera, onFromCache: (Int) -> BitmapDescriptor) {
     // https://github.com/googlemaps/android-maps-compose/issues/46
     val markerState = rememberMarkerState(position = mobileCamera.position)
 
@@ -32,7 +32,7 @@ fun MobileCameraMarker(mobileCamera: MobileCamera, markerCache: MarkerCache) {
 
     MarkerInfoWindow(
         state = markerState,
-        icon = markerCache.getVector(id = R.drawable.ic_mobile_camera)
+        icon = onFromCache(R.drawable.ic_mobile_camera)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

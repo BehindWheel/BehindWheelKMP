@@ -25,6 +25,8 @@ dependencies {
 
     implementation(libs.gms.maps)
 
+    implementation(libs.immutable.collections)
+
     implementation(libs.maps.utils)
 
     implementation(libs.koin.android)

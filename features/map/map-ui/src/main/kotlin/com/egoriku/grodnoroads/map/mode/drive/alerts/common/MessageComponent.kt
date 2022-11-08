@@ -10,9 +10,11 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-fun MessageComponent(messages: List<MessageItem>) {
+fun MessageComponent(messages: ImmutableList<MessageItem>) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -28,7 +30,7 @@ fun MessageComponent(messages: List<MessageItem>) {
 fun PreviewMessageComponent() {
     GrodnoRoadsTheme {
         MessageComponent(
-            messages = listOf(
+            messages = persistentListOf(
                 MessageItem(message = "Test message 1", source = Source.App),
                 MessageItem(message = "Test message 2", source = Source.Viber),
                 MessageItem(message = "Test message 3", source = Source.Telegram)

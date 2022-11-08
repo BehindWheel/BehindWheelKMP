@@ -16,11 +16,12 @@ import com.egoriku.grodnoroads.foundation.dialog.ListItems
 import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.content.RadioButtonItem
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun CommonReportDialog(
     titleRes: Int,
-    actions: List<String>,
+    actions: ImmutableList<String>,
     onClose: () -> Unit,
     onSelected: (selected: Int, inputText: String) -> Unit
 ) {

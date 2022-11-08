@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
@@ -20,11 +19,13 @@ import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun Alerts(
     modifier: Modifier = Modifier,
-    alerts: List<Alert>
+    alerts: ImmutableList<Alert>
 ) {
     LazyColumn(
         modifier = modifier
@@ -59,14 +60,14 @@ fun Alerts(
                         else -> throw IllegalArgumentException("title not applicable")
                     }
                     val icon = when (alert.mapEventType) {
-                        StationaryCamera -> painterResource(id = R.drawable.ic_stationary_camera)
-                        MobileCamera -> painterResource(id = R.drawable.ic_mobile_camera)
+                        StationaryCamera -> R.drawable.ic_stationary_camera
+                        MobileCamera -> R.drawable.ic_mobile_camera
                         else -> throw IllegalArgumentException("title not applicable")
                     }
                     CameraAlert(
                         distance = alert.distance,
                         speedLimit = alert.speedLimit,
-                        painter = icon,
+                        drawableId = icon,
                         title = title
                     )
                 }
@@ -81,11 +82,11 @@ private fun AlertsPreview() {
     GrodnoRoadsTheme {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Alerts(
-                alerts = listOf(
+                alerts = persistentListOf(
                     IncidentAlert(
                         mapEventType = TrafficPolice,
                         distance = 1,
-                        messages = listOf(
+                        messages = persistentListOf(
                             MessageItem(
                                 message = "Славинского беларуснефть на скорость",
                                 source = Source.Viber
@@ -95,7 +96,7 @@ private fun AlertsPreview() {
                 )
             )
             Alerts(
-                alerts = listOf(
+                alerts = persistentListOf(
                     CameraAlert(
                         distance = 2,
                         speedLimit = 60,
@@ -104,10 +105,10 @@ private fun AlertsPreview() {
                 )
             )
             Alerts(
-                alerts = listOf(
+                alerts = persistentListOf(
                     IncidentAlert(
                         distance = 5,
-                        messages = listOf(
+                        messages = persistentListOf(
                             MessageItem(
                                 message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
                                 source = Source.Viber
@@ -122,12 +123,12 @@ private fun AlertsPreview() {
                 )
             )
             Alerts(
-                alerts = listOf(
+                alerts = persistentListOf(
                     CameraAlert(distance = 220, speedLimit = -1, mapEventType = MobileCamera)
                 )
             )
             Alerts(
-                alerts = listOf(
+                alerts = persistentListOf(
                     CameraAlert(distance = 220, speedLimit = 60, mapEventType = MobileCamera)
                 )
             )
