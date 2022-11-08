@@ -71,6 +71,7 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
                     bearing = location.bearing,
                     speed = 0
                 )
+
                 else -> null
             }
         }
@@ -79,11 +80,11 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
     }
 
     companion object {
-        private val highPrecisionLowIntervalRequest = LocationRequest.create()
-            .apply {
-                interval = 1000
-                fastestInterval = 1000
-                priority = Priority.PRIORITY_HIGH_ACCURACY
-            }
+
+        private val highPrecisionLowIntervalRequest =
+            LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
+                .setMinUpdateDistanceMeters(10f)
+                .setMinUpdateIntervalMillis(1000)
+                .build()
     }
 }
