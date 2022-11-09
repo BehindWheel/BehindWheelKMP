@@ -8,6 +8,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl.Configuration.Main
@@ -44,7 +45,8 @@ class RoadsRootComponentImpl(
 
     override val childStack: Value<ChildStack<*, Child>> = stack
 
-    override val state: Flow<Theme> = rootStore.states.map { it.theme }
+    override val themeState: Flow<StateData<Theme>> =
+        rootStore.states.map { StateData.Loaded(it.theme) }
 
     override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
 
