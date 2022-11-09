@@ -67,6 +67,7 @@
     <string name="map_default_location_porechye">Porechye</string>
     <string name="map_default_location_berestovitca">Berestovitca</string>
     <string name="map_default_location_shuchin">Shuchin</string>
+    <string name="map_default_location_mosty">Mosty</string>
 
     <string name="map_header_drive_mode">Navigation mode</string>
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
