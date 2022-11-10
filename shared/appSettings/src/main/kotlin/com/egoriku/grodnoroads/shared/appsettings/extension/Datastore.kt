@@ -22,7 +22,6 @@ suspend fun <T> DataStore<Preferences>.put(key: String, value: T) {
     }
 }
 
-// TODO: Migrate in all places
 suspend inline fun DataStore<Preferences>.edit(
     noinline transform: suspend MutablePreferences.() -> Unit
 ) = edit(transform)
