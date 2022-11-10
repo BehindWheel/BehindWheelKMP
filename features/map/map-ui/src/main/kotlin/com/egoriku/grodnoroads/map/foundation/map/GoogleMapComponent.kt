@@ -49,8 +49,6 @@ fun GoogleMapComponent(
 
     var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
 
-    val zoomLevel = mapConfig.zoomLevel
-
     val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState()
@@ -62,13 +60,13 @@ fun GoogleMapComponent(
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
 
-        if (appMode == AppMode.Drive && zoomLevel != -1f) {
-            if (zoomLevel == cameraPositionState.position.zoom) {
+        if (appMode == AppMode.Drive) {
+            if (mapConfig.zoomLevel == cameraPositionState.position.zoom) {
                 cameraPositionState.animate(
                     update = buildCameraPosition(
                         target = cameraPositionValues.targetLatLngWithOffset,
                         bearing = cameraPositionValues.bearing,
-                        zoomLevel = zoomLevel
+                        zoomLevel = mapConfig.zoomLevel
                     ),
                     durationMs = 700
                 )
@@ -76,7 +74,7 @@ fun GoogleMapComponent(
                 cameraPositionState.animate(
                     update = CameraUpdateFactory.newLatLngZoom(
                         /* latLng = */ cameraPositionValues.initialLatLng,
-                        /* zoom = */ zoomLevel
+                        /* zoom = */ mapConfig.zoomLevel
                     ),
                     durationMs = 700
                 )
@@ -84,9 +82,9 @@ fun GoogleMapComponent(
         } else {
             cameraPositionState.animate(
                 buildCameraPosition(
-                    target = cameraPositionValues.initialLatLng,
+                    target = cameraPositionValues.targetLatLngWithOffset,
                     bearing = cameraPositionValues.bearing,
-                    zoomLevel = 12.5f,
+                    zoomLevel = mapConfig.zoomLevel,
                     tilt = 0.0f
                 ),
                 700
@@ -129,7 +127,7 @@ fun GoogleMapComponent(
                 cameraPositionState.move(
                     update = CameraUpdateFactory.newLatLngZoom(
                         /* latLng = */ lastLocation.latLng,
-                        /* zoom = */ 12.5f
+                        /* zoom = */ mapConfig.zoomLevel
                     )
                 )
                 isMapLoaded.value = true
@@ -141,6 +139,7 @@ fun GoogleMapComponent(
                         stationaryCamera = mapEvent,
                         onFromCache = { markerCache.getVector(id = it) }
                     )
+
                     is Reports -> ReportsMarker(mapEvent, onMarkerClick)
                     is MobileCamera -> MobileCameraMarker(
                         mobileCamera = mapEvent,

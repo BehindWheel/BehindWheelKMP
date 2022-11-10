@@ -12,6 +12,7 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
+import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
@@ -47,7 +48,7 @@ internal class MapComponentImpl(
     }
 
     override val appMode: Flow<AppMode>
-        get() = locationStore.states.map { it.appMode }
+        get() = mapConfigStore.states.map { it.appMode }
 
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }
@@ -55,7 +56,7 @@ internal class MapComponentImpl(
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
-                zoomLevel = it.zoomLevelDriveMode,
+                zoomLevel = it.zoomLevel,
                 googleMapStyle = it.mapInternalConfig.googleMapStyle,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap
             )
@@ -81,13 +82,17 @@ internal class MapComponentImpl(
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 
-    override val labels: Flow<LocationStore.Label> = locationStore.labels
+    override val labels: Flow<Label> = locationStore.labels
 
-    override fun startLocationUpdates() =
+    override fun startLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
+        mapConfigStore.accept(Intent.StartDriveMode)
+    }
 
-    override fun stopLocationUpdates() =
+    override fun stopLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
+        mapConfigStore.accept(Intent.StopDriveMode)
+    }
 
     override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
@@ -112,8 +117,8 @@ internal class MapComponentImpl(
 
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
-    private fun bindLocationLabel(label: LocationStore.Label) = when (label) {
-        is LocationStore.Label.NewLocation -> mapConfigStore.accept(Intent.CheckLocation(label.latLng))
+    private fun bindLocationLabel(label: Label) = when (label) {
+        is Label.NewLocation -> mapConfigStore.accept(Intent.CheckLocation(label.latLng))
         else -> Unit
     }
 }
