@@ -14,7 +14,7 @@ val Preferences.trafficJamOnMap: Boolean
 val Preferences.googleMapStyle: Style
     get() = Style.values()
         .firstOrNull { it.type == this[GOOGLE_MAP_STYLE] }
-        ?: Style.Minimal
+        ?: Style.Detailed
 
 fun MutablePreferences.updateTrafficJamAppearance(value: Boolean) {
     this[IS_SHOW_TRAFFIC_JAM_APPEARANCE] = value
