@@ -3,6 +3,11 @@ name: Deploy App CI
 on:
   push:
     branches: [ release ]
+    paths-ignore:
+      - '**/README.md'
+      - '.github/**'
+
+  workflow_dispatch:
 
 jobs:
   build_aab:
@@ -43,6 +48,10 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "app/keystore.jks"
+          
+      - name: Increment build number 
+        run: ./increment.sh
+        shell: bash   
 
       - name: Build Release AAB
         id: buildRelease
@@ -69,3 +78,15 @@ jobs:
           track: beta
           mappingFile: app/build/outputs/mapping/release/mapping.txt
           status: completed
+      
+      - name: Commit files
+        run: |
+          git config --local user.email "egorikftp@gmail.com"
+          git config --local user.name "egorikftp"
+          git commit -m "Increment build version" -a
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}
