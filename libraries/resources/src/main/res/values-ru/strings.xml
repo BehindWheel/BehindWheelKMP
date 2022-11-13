@@ -54,6 +54,7 @@
     <string name="appearance_app_language_ru">Русский</string>
     <string name="appearance_app_language_en">Английский</string>
     <string name="appearance_app_language_be">Белорусский</string>
+    <string name="appearance_app_language_system">Системный</string>
 
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>

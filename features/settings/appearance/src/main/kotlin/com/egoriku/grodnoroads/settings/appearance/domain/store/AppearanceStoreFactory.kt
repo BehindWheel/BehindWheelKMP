@@ -1,7 +1,5 @@
 package com.egoriku.grodnoroads.settings.appearance.domain.store
 
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
@@ -9,13 +7,16 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.*
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceState
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.Modify
+import com.egoriku.grodnoroads.settings.appearance.domain.util.currentAppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.util.resetAppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.util.setAppLanguage
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
@@ -39,8 +40,8 @@ class AppearanceStoreFactory(
                             AppearanceState(
                                 appTheme = AppTheme(current = preferences.appTheme),
                                 appLanguage = AppLanguage(
-                                    current = Language.localeToLanguage(AppCompatDelegate.getApplicationLocales()[0]?.language)
-                                        ?: Language.English
+                                    current = Language.localeToLanguage(currentAppLanguage)
+                                        ?: Language.System
                                 )
                             )
                         }.collect {
@@ -49,32 +50,25 @@ class AppearanceStoreFactory(
                     }
                 }
                 onIntent<CloseDialog> {
-                    dispatch(Message.Dialog(dialogState = AppearanceDialogState.None))
+                    dispatch(Message.Dialog(dialogState = None))
                 }
                 onIntent<Modify> {
                     when (it.preference) {
                         is AppTheme -> {
                             dispatch(
-                                Message.Dialog(
-                                    dialogState = AppearanceDialogState.ThemeDialogState(
-                                        it.preference
-                                    )
-                                )
+                                Message.Dialog(dialogState = ThemeDialogState(it.preference))
                             )
                         }
+
                         is AppLanguage -> {
                             dispatch(
-                                Message.Dialog(
-                                    dialogState = AppearanceDialogState.LanguageDialogState(
-                                        it.preference
-                                    )
-                                )
+                                Message.Dialog(dialogState = LanguageDialogState(it.preference))
                             )
                         }
                     }
                 }
                 onIntent<Intent.Update> { dialogResult ->
-                    dispatch(Message.Dialog(dialogState = AppearanceDialogState.None))
+                    dispatch(Message.Dialog(dialogState = None))
 
                     when (dialogResult.preference) {
                         is AppTheme -> {
@@ -84,12 +78,14 @@ class AppearanceStoreFactory(
                                 }
                             }
                         }
+
                         is AppLanguage -> {
                             val language = dialogResult.preference.current
 
-                            AppCompatDelegate.setApplicationLocales(
-                                LocaleListCompat.forLanguageTags(language.lang)
-                            )
+                            when (language) {
+                                Language.System -> resetAppLanguage()
+                                else -> setAppLanguage(language.lang)
+                            }
 
                             dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
                         }

@@ -5,9 +5,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.*
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.*
 import kotlinx.coroutines.flow.Flow
 
 interface AppearanceComponent {
@@ -25,19 +23,20 @@ interface AppearanceComponent {
 
     sealed interface AppearancePref {
         data class AppTheme(
-            val current: Theme = System,
-            val values: List<Theme> = listOf(System, Light, Dark)
+            val current: Theme = Theme.System,
+            val values: List<Theme> = listOf(Theme.System, Theme.Light, Theme.Dark)
         ) : AppearancePref
 
         data class AppLanguage(
-            val current: Language = Russian,
+            val current: Language = Language.Russian,
             val values: List<Language> = buildList {
-                add(Russian)
+                add(Language.System)
+                add(Language.Russian)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    add(Belarusian)
+                    add(Language.Belarusian)
                 }
-                add(English)
+                add(Language.English)
             }
         ) : AppearancePref
     }

@@ -56,6 +56,7 @@
     <string name="appearance_app_language_ru">Russian</string>
     <string name="appearance_app_language_en">English</string>
     <string name="appearance_app_language_be">Belarusian</string>
+    <string name="appearance_app_language_system">System</string>
 
     <!-- Map -->
     <string name="map_header_default_location">Default location</string>
