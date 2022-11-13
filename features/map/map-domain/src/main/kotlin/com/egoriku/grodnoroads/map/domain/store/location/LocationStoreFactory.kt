@@ -8,7 +8,6 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.location.LocationHelper
-import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
@@ -52,7 +51,7 @@ internal class LocationStoreFactory(
                 }
                 onIntent<StartLocationUpdates> {
                     locationHelper.startLocationUpdates()
-                    dispatch(Message.ChangeAppMode(appMode = AppMode.Drive))
+
                     dispatch(Message.OnNewLocation(LastLocation.None))
 
                     launch {
@@ -68,8 +67,6 @@ internal class LocationStoreFactory(
                 }
                 onIntent<StopLocationUpdates> {
                     locationHelper.stopLocationUpdates()
-
-                    dispatch(Message.ChangeAppMode(appMode = AppMode.Default))
                 }
                 onIntent<DisabledLocation> {
                     publish(Label.ShowToast(resId = R.string.toast_location_disabled))
@@ -79,7 +76,6 @@ internal class LocationStoreFactory(
             reducer = { message: Message ->
                 when (message) {
                     is Message.OnNewLocation -> copy(lastLocation = message.lastLocation)
-                    is Message.ChangeAppMode -> copy(appMode = message.appMode)
                 }
             }
         ) {}

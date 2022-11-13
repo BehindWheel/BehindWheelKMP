@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.map.domain.store.config
 
 import com.arkivanov.mvikotlin.core.store.Store
+import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
@@ -10,15 +11,13 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
     sealed interface Intent {
         data class CheckLocation(val latLng: LatLng) : Intent
+        object StartDriveMode : Intent
+        object StopDriveMode : Intent
     }
 
     data class StoreState(
         val mapInternalConfig: MapInternalConfig = MapInternalConfig.EMPTY,
-        val zoomLevelDriveMode: Float = -1f
+        val zoomLevel: Float = 12.5f,
+        val appMode: AppMode = AppMode.Default,
     )
-
-    sealed interface Message {
-        data class OnMapConfigInternal(val mapConfig: MapInternalConfig) : Message
-        data class OnZoomLevel(val zoomLevel: Float) : Message
-    }
 }

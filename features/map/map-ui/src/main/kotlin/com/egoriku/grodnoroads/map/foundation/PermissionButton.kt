@@ -75,6 +75,7 @@ internal fun rememberGmsLocationPermissionsState(
                 logD("GMS location Accepted")
                 onAccepted()
             }
+
             else -> {
                 logD("GMS location Denied")
                 onDenied()
@@ -103,12 +104,11 @@ internal class MutableGmsLocationPermissionState(
     private val onAccepted: () -> Unit
 ) : GmsLocationPermissionState {
 
-    private val highPrecisionLowIntervalRequest = LocationRequest.create().apply {
-        interval = 1000
-        fastestInterval = 1000
-        priority = Priority.PRIORITY_HIGH_ACCURACY
-        smallestDisplacement = 10f
-    }
+    private val highPrecisionLowIntervalRequest =
+        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
+            .setMinUpdateDistanceMeters(10f)
+            .setMinUpdateIntervalMillis(1000)
+            .build()
 
     private val builder = LocationSettingsRequest.Builder()
         .addLocationRequest(highPrecisionLowIntervalRequest)

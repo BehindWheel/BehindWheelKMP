@@ -11,6 +11,7 @@ fun rememberUiSettings(): MapUiSettings {
     val uiSettings by remember {
         mutableStateOf(
             MapUiSettings(
+                zoomControlsEnabled = false,
                 mapToolbarEnabled = false,
                 compassEnabled = false,
                 myLocationButtonEnabled = false

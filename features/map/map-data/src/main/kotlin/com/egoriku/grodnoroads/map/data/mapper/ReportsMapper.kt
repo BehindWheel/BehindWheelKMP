@@ -45,7 +45,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                                 source = Source.sourceFromString(data.source)
                             )
                         },
-                    position = item.position,
+                    position = LatLng(data.latitude, data.longitude),
                     dialogTitle = buildDialogTitle(data),
                     markerMessage = buildMarkerShortMessage(data)
                 )

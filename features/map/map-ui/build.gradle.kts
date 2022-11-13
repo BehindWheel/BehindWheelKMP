@@ -22,6 +22,7 @@ dependencies {
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material.icons)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.gms.location)

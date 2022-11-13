@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -17,6 +16,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.Modify
+import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
@@ -80,7 +80,7 @@ class AppearanceStoreFactory(
                         is AppTheme -> {
                             launch {
                                 dataStore.edit {
-                                    it.updateAppTheme(dialogResult.preference.current.theme)
+                                    updateAppTheme(dialogResult.preference.current.theme)
                                 }
                             }
                         }

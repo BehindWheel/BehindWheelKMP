@@ -3,10 +3,15 @@ package com.egoriku.grodnoroads.map.foundation.map
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -18,6 +23,7 @@ import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettin
 import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
 import com.egoriku.grodnoroads.map.markers.ReportsMarker
 import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
+import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -49,12 +55,12 @@ fun GoogleMapComponent(
 
     var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
 
-    val zoomLevel = mapConfig.zoomLevel
-
     val markerCache = get<MarkerCache>()
 
     val cameraPositionState = rememberCameraPositionState()
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, lastLocation)
+
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(lastLocation, cameraPositionValues) {
         if (!cameraPositionChangeEnabled) return@LaunchedEffect
@@ -62,13 +68,13 @@ fun GoogleMapComponent(
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
 
-        if (appMode == AppMode.Drive && zoomLevel != -1f) {
-            if (zoomLevel == cameraPositionState.position.zoom) {
+        if (appMode == AppMode.Drive) {
+            if (mapConfig.zoomLevel == cameraPositionState.position.zoom) {
                 cameraPositionState.animate(
                     update = buildCameraPosition(
                         target = cameraPositionValues.targetLatLngWithOffset,
                         bearing = cameraPositionValues.bearing,
-                        zoomLevel = zoomLevel
+                        zoomLevel = mapConfig.zoomLevel
                     ),
                     durationMs = 700
                 )
@@ -76,7 +82,7 @@ fun GoogleMapComponent(
                 cameraPositionState.animate(
                     update = CameraUpdateFactory.newLatLngZoom(
                         /* latLng = */ cameraPositionValues.initialLatLng,
-                        /* zoom = */ zoomLevel
+                        /* zoom = */ mapConfig.zoomLevel
                     ),
                     durationMs = 700
                 )
@@ -84,9 +90,9 @@ fun GoogleMapComponent(
         } else {
             cameraPositionState.animate(
                 buildCameraPosition(
-                    target = cameraPositionValues.initialLatLng,
+                    target = cameraPositionValues.targetLatLngWithOffset,
                     bearing = cameraPositionValues.bearing,
-                    zoomLevel = 12.5f,
+                    zoomLevel = mapConfig.zoomLevel,
                     tilt = 0.0f
                 ),
                 700
@@ -129,7 +135,7 @@ fun GoogleMapComponent(
                 cameraPositionState.move(
                     update = CameraUpdateFactory.newLatLngZoom(
                         /* latLng = */ lastLocation.latLng,
-                        /* zoom = */ 12.5f
+                        /* zoom = */ mapConfig.zoomLevel
                     )
                 )
                 isMapLoaded.value = true
@@ -141,6 +147,7 @@ fun GoogleMapComponent(
                         stationaryCamera = mapEvent,
                         onFromCache = { markerCache.getVector(id = it) }
                     )
+
                     is Reports -> ReportsMarker(mapEvent, onMarkerClick)
                     is MobileCamera -> MobileCameraMarker(
                         mobileCamera = mapEvent,
@@ -159,9 +166,33 @@ fun GoogleMapComponent(
             }
         }
 
+        OverlayActions(
+            modifier = Modifier.padding(end = 16.dp),
+            zoomIn = {
+                coroutineScope.launch {
+                    cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
+                }
+            }, zoomOut = {
+                coroutineScope.launch {
+                    cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
+                }
+            })
+
         loading()
 
         //DebugView(cameraPositionState = cameraPositionState)
+    }
+}
+
+@Composable
+private fun BoxScope.OverlayActions(
+    modifier: Modifier = Modifier,
+    zoomIn: () -> Unit,
+    zoomOut: () -> Unit
+) {
+    Column(modifier = modifier.align(Alignment.CenterEnd)) {
+        CloseAction(imageVector = Icons.Default.Add, onClick = zoomIn)
+        CloseAction(imageVector = Icons.Default.Remove, onClick = zoomOut)
     }
 }
 

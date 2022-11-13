@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.floatPreferencesKey
 
 const val DEFAULT_MAP_ZOOM_IN_CITY = 15.0f
-const val DEFAULT_MAP_ZOOM_OUT_CITY = 12.5f
+const val DEFAULT_MAP_ZOOM_OUT_CITY = 13.0f
 
 private val MAP_ZOOM_IN_CITY = floatPreferencesKey("map_zoom_in_city")
 private val MAP_ZOOM_OUTSIDE_CITY = floatPreferencesKey("map_zoom_outside_city")

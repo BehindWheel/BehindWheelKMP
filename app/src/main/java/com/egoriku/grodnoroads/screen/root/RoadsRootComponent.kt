@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.screen.root
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
+import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
@@ -11,7 +12,8 @@ interface RoadsRootComponent {
 
     val childStack: Value<ChildStack<*, Child>>
 
-    val state: Flow<Theme>
+    val themeState: Flow<StateData<Theme>>
+
     val headlampDialogState: Flow<HeadLampType>
 
     fun closeHeadlampDialog()
