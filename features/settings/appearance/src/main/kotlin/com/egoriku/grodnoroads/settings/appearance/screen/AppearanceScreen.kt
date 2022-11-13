@@ -23,6 +23,8 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppLanguageDialog
 import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppThemeDialog
@@ -56,16 +58,16 @@ fun AppearanceScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            AppTheme(state = state, appearanceComponent = appearanceComponent)
-            Language(state = state, appearanceComponent = appearanceComponent)
+            AppThemeSection(state = state, onModify = appearanceComponent::modify)
+            LanguageSection(state = state, onModify = appearanceComponent::modify)
         }
     }
 }
 
 @Composable
-private fun Language(
+private fun LanguageSection(
     state: State,
-    appearanceComponent: AppearanceComponent
+    onModify: (AppLanguage) -> Unit
 ) {
     val language = state.appearanceState.appLanguage
 
@@ -73,15 +75,14 @@ private fun Language(
         icon = Icons.Default.Language,
         text = stringResource(R.string.appearance_app_language),
         value = stringResource(id = language.current.toStringResource()),
-    ) {
-        appearanceComponent.modify(language)
-    }
+        onClick = { onModify(language) },
+    )
 }
 
 @Composable
-private fun AppTheme(
+private fun AppThemeSection(
     state: State,
-    appearanceComponent: AppearanceComponent
+    onModify: (AppTheme) -> Unit,
 ) {
     val appTheme = state.appearanceState.appTheme
 
@@ -89,9 +90,8 @@ private fun AppTheme(
         icon = Icons.Default.DarkMode,
         text = stringResource(R.string.appearance_app_theme),
         value = stringResource(id = appTheme.current.toStringResource()),
-    ) {
-        appearanceComponent.modify(appTheme)
-    }
+        onClick = { onModify(appTheme) },
+    )
 }
 
 @Composable
@@ -108,6 +108,7 @@ private fun DialogHandler(
                 onResult = onResult
             )
         }
+
         is LanguageDialogState -> {
             AppLanguageDialog(
                 languageDialogState = dialogState,
@@ -115,6 +116,7 @@ private fun DialogHandler(
                 onResult = onResult
             )
         }
+
         else -> {}
     }
 }
