@@ -15,7 +15,8 @@ interface WhatsNewStore : Store<Nothing, State, Nothing> {
         val releaseNotes: List<ReleaseNotes> = emptyList()
     ) {
         data class ReleaseNotes(
-            val version: String,
+            val versionCode: Int,
+            val versionName: String,
             val notes: String
         )
     }

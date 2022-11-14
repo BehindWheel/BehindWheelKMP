@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.screen.settings.whatsnew
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.BuildConfig
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
@@ -35,29 +34,33 @@ fun WhatsNewScreen(
                 onBack = onBack
             )
         }
-    ) {
+    ) { paddingValues ->
         val state by whatsNewComponent.state.collectAsState(initial = WhatsNewStore.State())
 
         if (state.isLoading) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
             }
         } else {
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 contentPadding = PaddingValues(vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(state.releaseNotes) {
+                itemsIndexed(state.releaseNotes) { index, releaseNotes ->
                     Card(
                         onClick = {},
                         elevation = 3.dp,
                         shape = RoundedCornerShape(10.dp),
-                        contentColor = when (BuildConfig.VERSION_NAME) {
-                            it.version -> MaterialTheme.colors.secondary.copy(alpha = 0.5f)
+                        contentColor = when (index) {
+                            0 -> MaterialTheme.colors.secondary.copy(alpha = 0.5f)
                             else -> contentColorFor(MaterialTheme.colors.surface)
                         },
                     ) {
@@ -66,8 +69,8 @@ fun WhatsNewScreen(
                                 .fillMaxWidth()
                                 .padding(all = 16.dp)
                         ) {
-                            Text(text = it.version, fontWeight = FontWeight.Bold)
-                            Text(text = it.notes)
+                            Text(text = releaseNotes.versionName, fontWeight = FontWeight.Bold)
+                            Text(text = releaseNotes.notes)
                         }
                     }
                 }

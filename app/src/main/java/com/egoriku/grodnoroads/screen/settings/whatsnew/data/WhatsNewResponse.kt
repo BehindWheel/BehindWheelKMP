@@ -3,9 +3,13 @@ package com.egoriku.grodnoroads.screen.settings.whatsnew.data
 import com.google.firebase.firestore.PropertyName
 
 class WhatsNewResponse(
-    @PropertyName("version")
+    @PropertyName("name")
     @JvmField
-    val version: String = "",
+    val name: String = "",
+
+    @PropertyName("code")
+    @JvmField
+    val code: Int = 0,
 
     @PropertyName("notes")
     @JvmField

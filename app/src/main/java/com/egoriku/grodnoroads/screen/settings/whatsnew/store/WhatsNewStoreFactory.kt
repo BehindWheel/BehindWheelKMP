@@ -35,7 +35,8 @@ class WhatsNewStoreFactory(
                                     Message.Success(
                                         releaseNotes = result.value.map {
                                             ReleaseNotes(
-                                                version = it.version,
+                                                versionCode = it.code,
+                                                versionName = it.name,
                                                 notes = it.notes.replace("\\n", "\n")
                                             )
                                         }
