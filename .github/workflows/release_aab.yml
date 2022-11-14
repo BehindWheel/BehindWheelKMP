@@ -1,4 +1,4 @@
-name: Deploy App CI
+name: Deploy App Bundle
 
 on:
   workflow_dispatch:
