@@ -1,12 +1,6 @@
 name: Deploy App CI
 
 on:
-  push:
-    branches: [ release ]
-    paths-ignore:
-      - '**/README.md'
-      - '.github/**'
-
   workflow_dispatch:
 
 jobs:
