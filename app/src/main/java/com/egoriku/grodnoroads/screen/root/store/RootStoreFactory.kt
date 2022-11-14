@@ -36,7 +36,7 @@ class RootStoreFactory(
     }
 
     data class State(
-        val theme: Theme = Theme.System,
+        val theme: Theme? = null,
         val headLampType: HeadLampType = HeadLampType.None
     )
 
