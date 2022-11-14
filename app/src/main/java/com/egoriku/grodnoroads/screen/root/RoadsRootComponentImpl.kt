@@ -8,13 +8,14 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl.Configuration.Main
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.screen.settings.domain.Theme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
@@ -26,7 +27,7 @@ class RoadsRootComponentImpl(
     componentContext: ComponentContext
 ) : RoadsRootComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val rootStore = instanceKeeper.getStore { get<RootStore>() }
+    private val rootStore: RootStore = instanceKeeper.getStore(::get)
 
     private val main: (ComponentContext) -> MainComponent = {
         get { parametersOf(componentContext) }
@@ -44,7 +45,8 @@ class RoadsRootComponentImpl(
 
     override val childStack: Value<ChildStack<*, Child>> = stack
 
-    override val themeState: Flow<Theme> = rootStore.states.map { it.theme }
+    override val themeState: Flow<StateData<Theme>> =
+        rootStore.states.map { StateData.Loaded(it.theme) }
 
     override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
 

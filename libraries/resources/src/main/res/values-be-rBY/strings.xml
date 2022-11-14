@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">За рулём (Гродна)</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метры</item>
+        <item quantity="many">%1$d метраў</item>
+        <item quantity="other">%1$d метраў</item>
+    </plurals>
+
+    <string name="tab_map">Мапа</string>
+    <string name="tab_chat">Чат</string>
+    <string name="tab_settings">Наладкі</string>
+    <string name="toast_location_disabled">Для навігацыі патрэбен доступ да геолокации</string>
+    <string name="current_speed_template">%1$s км/г</string>
+    <string name="alerts_stationary_camera">Стацыянарная камера</string>
+    <string name="alerts_mobile_camera">Часовая камера</string>
+    <string name="alerts_incident">Дарожнае здарэнне</string>
+    <string name="alerts_traffic_police">Экіпаж ДАІ</string>
+    <string name="alerts_car_crash">ДПТ</string>
+    <string name="alerts_traffic_jam">Затор</string>
+    <string name="alerts_wild_animals">Дзікія жывёлы</string>
+    <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
+    <string name="terms_of_service">Умовы выкарыстання</string>
+    <string name="privacy_policy">Палітыка прыватнасці</string>
+    <string name="drawer_telegram_section">Абмеркаванне</string>
+    <string name="drawer_share_app_section">Падзяліцца дадаткам</string>
+    <string name="drawer_app_version">Версія: %1$s</string>
+    <string name="settings_section_appearance">Знешні выгляд</string>
+    <string name="settings_section_map">Мапа</string>
+    <string name="settings_section_alerts">Паведамленні</string>
+    <string name="settings_section_whats_new">Што новага</string>
+    <string name="settings_section_next_features">Будучыя фічы</string>
+    <string name="settings_section_faq">Часта задаюць пытанні</string>
+    <string name="appearance_app_theme">Тэма</string>
+    <string name="appearance_app_theme_system">Сістэмная</string>
+    <string name="appearance_app_theme_dark">Цёмная</string>
+    <string name="appearance_app_theme_light">Светлая</string>
+    <string name="appearance_app_language">Мова</string>
+    <string name="appearance_app_language_ru">Руская</string>
+    <string name="appearance_app_language_en">Англійская</string>
+    <string name="appearance_app_language_be">Беларуская</string>
+    <string name="appearance_app_language_system">Сістэмная</string>
+    <string name="map_header_appearance">Знешні выгляд</string>
+    <string name="map_traffic_jam_appearance">Заторы на карце</string>
+    <string name="map_google_map_style_minimal">Мінімалізм</string>
+    <string name="map_google_map_style_detailed">Падрабязная</string>
+    <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="map_markers_mobile_cameras">Мабільныя камеры</string>
+    <string name="map_markers_traffic_police">ДАІ</string>
+    <string name="map_markers_incidents">Праблемы на дарозе</string>
+    <string name="map_markers_car_crash">ДПТ</string>
+    <string name="map_markers_traffic_jam">Заторы</string>
+    <string name="map_markers_wild_animals">Дзікія жывёлы</string>
+    <string name="dialog_report_police">Паведаміць аб ДАІ</string>
+    <string name="dialog_incident">Паведаміць аб праблеме</string>
+    <string name="dialog_input_hint">Апцыянальнае паведамленне</string>
+    <string name="cancel">Скасаваць</string>
+    <string name="ok">ОК</string>
+    <string name="send">Адправіць</string>
+    <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
+    <string name="map_default_location">Мой Горад</string>
+    <string name="map_default_location_grodno">Гродна</string>
+    <string name="map_default_location_skidel">Скідзель</string>
+    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_ozery">Азёры</string>>
+    <string name="map_default_location_porechye">Парэчча</string>>
+    <string name="map_default_location_berestovitca">Вялікая Бераставіца</string>
+    <string name="map_default_location_shuchin">Шчучын</string>
+    <string name="map_default_location_mosty">Масты</string>
+
+    <string name="map_header_drive_mode">Рэжым навігацыі</string>
+    <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
+</resources>

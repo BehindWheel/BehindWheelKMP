@@ -9,15 +9,16 @@ plugins {
 }
 
 android {
-    compileSdk = 32
-
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads"
-        minSdk = 21
-        targetSdk = 32
+
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
+
         versionCode = provideVersionCode()
         versionName = provideVersionName()
-        resourceConfigurations += listOf("en", "ru")
+        resourceConfigurations += listOf("en", "ru", "be-rBY")
     }
 
     signingConfigs {
@@ -66,24 +67,36 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    namespace = "com.egoriku.grodnoroads"
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.3.0"))
+    implementation(projects.shared.appSettings)
 
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-database-ktx")
+    implementation(projects.libraries.analytics)
+    implementation(projects.libraries.crashlytics)
+    implementation(projects.libraries.extensions)
+    implementation(projects.libraries.foundation)
+    implementation(projects.libraries.location)
+    implementation(projects.libraries.resources)
 
-    implementation("com.google.maps.android:android-maps-utils:2.3.0")
-    implementation("com.google.maps.android:maps-ktx:3.4.0")
-    implementation(libs.maps.compose)
+    implementation(projects.features.map.mapData)
+    implementation(projects.features.map.mapDomain)
+    implementation(projects.features.map.mapUi)
 
-    implementation("com.google.android.gms:play-services-location:20.0.0")
-    implementation("com.google.android.material:material:1.6.1")
+    implementation(projects.features.settings.appearance)
+    implementation(projects.features.settings.faq)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+
+    implementation(libs.maps)
+
+    implementation(libs.gms.location)
+    implementation("com.google.android.material:material:1.7.0")
 
     implementation(libs.accompanist.systemuicontroller)
-    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
@@ -96,21 +109,18 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core)
-    implementation(libs.androidx.datastore)
 
-    implementation(libs.coroutines.play.services)
+    implementation(libs.coroutines)
 
-    implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
 
-    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.1")
-    implementation("com.arkivanov.mvikotlin:mvikotlin-main:3.0.1")
-    implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.1")
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.10")
+    implementation(libs.mvikotlin.extensions)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin)
 }
 
 secrets {

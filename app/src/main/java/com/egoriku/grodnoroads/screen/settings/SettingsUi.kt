@@ -1,71 +1,75 @@
 package com.egoriku.grodnoroads.screen.settings
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Help
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Pref
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.DialogState.ThemeDialog
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.SettingsState
-import com.egoriku.grodnoroads.screen.settings.ui.AppSettings
-import com.egoriku.grodnoroads.screen.settings.ui.MapEventsSettings
-import com.egoriku.grodnoroads.screen.settings.ui.MapPreferencesSettings
-import com.egoriku.grodnoroads.screen.settings.ui.dialog.AppThemeDialog
+import androidx.compose.ui.res.stringResource
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
+import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.SHOWN
+import com.egoriku.grodnoroads.foundation.list.SettingsItem
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
 
 @Composable
-fun SettingsUi(settingsComponent: SettingsComponent) {
-    val settingsState by settingsComponent.settingsState.collectAsState(initial = SettingsState())
-    val dialogState by settingsComponent.dialogState.collectAsState(initial = DialogState.None)
+fun SettingsUi(onSettingClick: (Page) -> Unit) {
+    BottomBarVisibility(SHOWN)
 
-    DialogHandler(
-        dialogState = dialogState,
-        closeDialog = settingsComponent::closeDialog,
-        processResult = settingsComponent::processResult
-    )
-
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .statusBarsPadding()
-                .padding(horizontal = 16.dp)
-                .verticalScroll(state = rememberScrollState())
-        ) {
-            AppSettings(settingsState, settingsComponent::process)
-            MapEventsSettings(
-                mapInfo = settingsState.mapInfo,
-                onCheckedChange = settingsComponent::onCheckedChanged
-            )
-            MapPreferencesSettings(
-                mapAppearance = settingsState.mapAppearance,
-                onCheckedChange = settingsComponent::onCheckedChanged
-            )
-        }
+    Column {
+        SettingsItem(
+            icon = Icons.Filled.Style,
+            text = stringResource(R.string.settings_section_appearance),
+            onClick = {
+                onSettingClick(Page.Appearance)
+            }
+        )
+        SettingsItem(
+            icon = Icons.Filled.Map,
+            text = stringResource(R.string.settings_section_map),
+            onClick = {
+                onSettingClick(Page.Map)
+            }
+        )
+        // Temporary disable
+        /*SettingsItem(
+            icon = Icons.Filled.NotificationImportant,
+            text = stringResource(R.string.settings_section_alerts),
+            onClick = {
+                onSettingClick(Page.Alerts)
+            }
+        )*/
+        SettingsItem(
+            icon = Icons.Filled.NewReleases,
+            text = stringResource(R.string.settings_section_whats_new),
+            onClick = {
+                onSettingClick(Page.WhatsNew)
+            }
+        )
+        // Temporary disable
+        /*SettingsItem(
+            icon = Icons.Filled.Build,
+            text = stringResource(R.string.settings_section_next_features),
+            onClick = {
+                onSettingClick(Page.NextFeatures)
+            }
+        )*/
+        SettingsItem(
+            icon = Icons.Filled.Help,
+            text = stringResource(R.string.settings_section_faq),
+            onClick = {
+                onSettingClick(Page.FAQ)
+            }
+        )
     }
 }
 
+@GrodnoRoadsPreview
 @Composable
-fun DialogHandler(
-    dialogState: DialogState,
-    closeDialog: () -> Unit,
-    processResult: (Pref) -> Unit
-) {
-    when (dialogState) {
-        is ThemeDialog -> {
-            AppThemeDialog(
-                dialogState = dialogState,
-                closeDialog = closeDialog,
-                processResult = processResult
-            )
-        }
-        else -> {}
-    }
+private fun SettingUiPreview() = GrodnoRoadsTheme {
+    SettingsUi(onSettingClick = {})
 }

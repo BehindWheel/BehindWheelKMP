@@ -1,44 +1,94 @@
 package com.egoriku.grodnoroads.screen.settings
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.mvikotlin.core.instancekeeper.getStore
-import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStore
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.*
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.OnCheckedChanged
-import com.egoriku.grodnoroads.screen.settings.store.SettingsStoreFactory.Intent.ProcessPreferenceClick
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.arkivanov.decompose.router.stack.*
+import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
+import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
+import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponentImpl
+import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponentImpl
+import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
+import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.parameter.parametersOf
 
 class SettingsComponentImpl(
     componentContext: ComponentContext
 ) : SettingsComponent, KoinComponent, ComponentContext by componentContext {
 
-    private val settingsStore = instanceKeeper.getStore { get<SettingsStore>() }
+    private val navigation = StackNavigation<Config>()
 
-    override val settingsState: Flow<SettingsState> = settingsStore.states.map {
-        it.settingsState
+    private val stack: Value<ChildStack<Config, Child>> = childStack(
+        source = navigation,
+        initialConfiguration = Config.Settings,
+        handleBackButton = true,
+        key = "Settings",
+        childFactory = ::child
+    )
+
+    override val childStack: Value<ChildStack<*, Child>> = stack
+
+    override fun open(page: Page) {
+        when (page) {
+            Page.Appearance -> navigation.push(Config.Appearance)
+            Page.Map -> navigation.push(Config.Map)
+            Page.Alerts -> navigation.push(Config.Alerts)
+            Page.WhatsNew -> navigation.push(Config.WhatsNew)
+            Page.NextFeatures -> navigation.push(Config.NextFeatures)
+            Page.FAQ -> navigation.push(Config.FAQ)
+        }
     }
 
-    override val dialogState: Flow<DialogState> = settingsStore.states.map {
-        it.dialogState
+    override fun onBack() = navigation.pop()
+
+    private fun child(
+        configuration: Config,
+        componentContext: ComponentContext,
+    ) = when (configuration) {
+        is Config.Settings -> Settings
+
+        is Config.Appearance -> Appearance(
+            appearanceComponent = get { parametersOf(componentContext) }
+        )
+        is Config.Alerts -> Alerts(
+            alertsComponent = AlertsComponentImpl(componentContext)
+        )
+        is Config.Map -> Map(
+            mapSettingsComponent = MapSettingsComponentImpl(componentContext)
+        )
+        is Config.NextFeatures -> TODO()
+        is Config.WhatsNew -> WhatsNew(
+            whatsNewComponent = WhatsNewComponentImpl(componentContext)
+        )
+        is Config.FAQ -> FAQ(
+            faqComponent = get { parametersOf(componentContext) }
+        )
     }
 
-    override fun onCheckedChanged(preference: SettingsComponent.Pref) {
-        settingsStore.accept(OnCheckedChanged(preference))
-    }
+    private sealed class Config : Parcelable {
+        @Parcelize
+        object Settings : Config()
 
-    override fun process(preference: SettingsComponent.Pref) {
-        settingsStore.accept(ProcessPreferenceClick(preference = preference))
-    }
+        @Parcelize
+        object Appearance : Config()
 
-    override fun processResult(preference: SettingsComponent.Pref) {
-        settingsStore.accept(Intent.ProcessDialogResult(preference = preference))
-    }
+        @Parcelize
+        object Map : Config()
 
-    override fun closeDialog() {
-        settingsStore.accept(Intent.CloseDialog)
+        @Parcelize
+        object Alerts : Config()
+
+        @Parcelize
+        object WhatsNew : Config()
+
+        @Parcelize
+        object NextFeatures : Config()
+
+        @Parcelize
+        object FAQ : Config()
     }
 }

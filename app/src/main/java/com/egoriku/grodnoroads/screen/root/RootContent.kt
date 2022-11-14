@@ -8,8 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
-import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.egoriku.grodnoroads.screen.main.MainUi
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child.Main
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
@@ -28,10 +26,7 @@ fun RootContent(roadsRootComponent: RoadsRootComponent) {
             )
         }
 
-        Children(
-            stack = roadsRootComponent.childStack,
-            animation = stackAnimation(fade())
-        ) {
+        Children(stack = roadsRootComponent.childStack) {
             when (val child = it.instance) {
                 is Main -> MainUi(component = child.component)
             }

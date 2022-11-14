@@ -1,21 +1,24 @@
 package com.egoriku.grodnoroads
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.screen.root.RoadsRootComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
-import com.egoriku.grodnoroads.screen.settings.domain.Theme
-import com.egoriku.grodnoroads.ui.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.extensions.common.StateData
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import java.util.*
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,29 +26,36 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            val root by remember {
+            val root: RoadsRootComponent by remember {
                 mutableStateOf(RoadsRootComponentImpl(defaultComponentContext()))
             }
 
-            val themeState by root.themeState.collectAsState(initial = Theme.System)
+            val themeState by root.themeState.collectAsState(initial = StateData.Idle)
 
-            val darkTheme = when (themeState) {
-                Theme.System -> isSystemInDarkTheme()
-                Theme.Dark -> true
-                Theme.Light -> false
-            }
+            when (val theme = themeState) {
+                is StateData.Loaded -> {
+                    val darkTheme = when (theme.data) {
+                        Theme.System -> isSystemInDarkTheme()
+                        Theme.Dark -> true
+                        Theme.Light -> false
+                    }
 
-            GrodnoRoadsTheme(darkTheme = darkTheme) {
-                val systemUiController = rememberSystemUiController()
-                val useDarkIcons = MaterialTheme.colors.isLight
+                    GrodnoRoadsTheme(darkTheme) {
+                        val systemUiController = rememberSystemUiController()
+                        val useDarkIcons = MaterialTheme.colors.isLight
 
-                SideEffect {
-                    systemUiController.setStatusBarColor(
-                        color = Color.Transparent,
-                        darkIcons = useDarkIcons
-                    )
+                        DisposableEffect(systemUiController, useDarkIcons) {
+                            systemUiController.setStatusBarColor(
+                                color = Color.Transparent, darkIcons = useDarkIcons
+                            )
+
+                            onDispose {}
+                        }
+                        RootContent(roadsRootComponent = root)
+                    }
                 }
-                RootContent(roadsRootComponent = root)
+
+                else -> {}
             }
         }
     }

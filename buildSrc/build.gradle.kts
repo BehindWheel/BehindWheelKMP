@@ -13,5 +13,4 @@ dependencies {
 
     implementation(libs.gradle.plugin.buildtools)
     implementation(libs.gradle.plugin.kotlin)
-    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

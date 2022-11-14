@@ -9,13 +9,12 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent.CloseDialog
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.NewTheme
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.UpdateHeadLampDialog
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampDispatcher
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.screen.settings.domain.Theme
-import com.egoriku.grodnoroads.screen.settings.store.preferences.APP_THEME
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -32,7 +31,7 @@ class RootStoreFactory(
     }
 
     sealed interface Message {
-        data class NewTheme(val theme: Theme) : Message
+        data class NewState(val state: State) : Message
         data class UpdateHeadLampDialog(val headLampType: HeadLampType) : Message
     }
 
@@ -50,10 +49,10 @@ class RootStoreFactory(
                     launch {
                         dataStore.data
                             .map { preferences ->
-                                Theme.fromOrdinal(preferences[APP_THEME] ?: Theme.System.theme)
+                                State(theme = Theme.fromOrdinal(preferences.appTheme.theme))
                             }
                             .collect {
-                                dispatch(NewTheme(theme = it))
+                                dispatch(Message.NewState(state = it))
                             }
                     }
                     launch {
@@ -69,7 +68,7 @@ class RootStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is NewTheme -> copy(theme = message.theme)
+                    is Message.NewState -> copy(theme = message.state.theme)
                     is UpdateHeadLampDialog -> copy(headLampType = message.headLampType)
                 }
             }

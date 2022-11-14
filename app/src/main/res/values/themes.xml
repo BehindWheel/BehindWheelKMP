@@ -3,6 +3,7 @@
 
     <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">#FF4A6572</item>
+        <item name="colorPrimary">#FF4A6572</item>
     </style>
 
     <style name="GrodnoRoadsTheme" parent="Base.AppTheme" />
