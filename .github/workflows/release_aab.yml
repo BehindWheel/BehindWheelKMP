@@ -42,7 +42,10 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "app/keystore.jks"
-          
+
+      - name: Make sh executable
+        run: chmod +x ./increment.sh
+
       - name: Increment build number 
         run: ./increment.sh
         shell: bash   
