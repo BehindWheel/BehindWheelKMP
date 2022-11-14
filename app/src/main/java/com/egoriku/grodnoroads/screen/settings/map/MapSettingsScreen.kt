@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.screen.settings.map
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
@@ -48,7 +49,7 @@ fun MapSettingsScreen(
         }
     ) {
         if (isLoading) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxSize().padding(it)) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
         } else {
@@ -95,7 +96,7 @@ private fun LoadedState(
             mapInfo = mapSettingState.mapSettings.mapInfo,
             onCheckedChange = mapSettingsComponent::modify
         )
-        HSpacer(dp = 48.dp)
+        HSpacer(dp = 16.dp)
     }
 }
 
