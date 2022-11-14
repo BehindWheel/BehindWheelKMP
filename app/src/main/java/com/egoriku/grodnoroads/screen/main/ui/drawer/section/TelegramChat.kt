@@ -17,13 +17,13 @@ import com.egoriku.grodnoroads.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun TelegramSection(onClick: (String) -> Unit) {
-    val url = stringResource(R.string.tg_link)
+fun TelegramChat(onClick: (String) -> Unit) {
+    val url = stringResource(R.string.tg_chat_link)
 
     ListItem(
         modifier = Modifier.clickable { onClick(url) },
         text = {
-            Text(text = stringResource(R.string.drawer_telegram_section))
+            Text(text = stringResource(R.string.drawer_telegram_chat))
         },
         icon = {
             Image(
@@ -39,6 +39,6 @@ fun TelegramSection(onClick: (String) -> Unit) {
 @Composable
 private fun TelegramSectionPreview() {
     GrodnoRoadsTheme {
-        TelegramSection(onClick = {})
+        TelegramChat(onClick = {})
     }
 }

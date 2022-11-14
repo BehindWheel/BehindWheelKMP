@@ -12,10 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
-import com.egoriku.grodnoroads.screen.main.ui.drawer.section.PrivacyPolicySection
-import com.egoriku.grodnoroads.screen.main.ui.drawer.section.ShareAppSection
-import com.egoriku.grodnoroads.screen.main.ui.drawer.section.TelegramSection
-import com.egoriku.grodnoroads.screen.main.ui.drawer.section.VersionSection
+import com.egoriku.grodnoroads.screen.main.ui.drawer.section.*
 
 @Composable
 fun DrawerContent(modifier: Modifier = Modifier) {
@@ -42,7 +39,8 @@ fun DrawerContent(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
-            TelegramSection(onClick = openUrl)
+            TelegramChat(onClick = openUrl)
+            TelegramChannel(onClick = openUrl)
             ShareAppSection(onClick = share)
 
             Spacer(modifier = Modifier.weight(1f))

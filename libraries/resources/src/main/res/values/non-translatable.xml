@@ -3,6 +3,7 @@
     <string name="bullet_separator" translatable="false">•</string>
     <string name="terms_of_service_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/TermsConditions.md</string>
     <string name="privacy_policy_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/PrivacyPolicy.md</string>
-    <string name="tg_link" translatable="false">https://t.me/grodno_roads</string>
+    <string name="tg_channel_link" translatable="false">https://t.me/grodno_roads</string>
+    <string name="tg_chat_link" translatable="false">https://t.me/grodnoroads_chat</string>
     <string name="play_store_link" translatable="false">https://play.google.com/store/apps/details?id=com.egoriku.grodnoroads</string>
 </resources>

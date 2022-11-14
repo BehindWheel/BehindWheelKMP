@@ -34,7 +34,8 @@
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
 
-    <string name="drawer_telegram_section">Discussion</string>
+    <string name="drawer_telegram_chat">Chat</string>
+    <string name="drawer_telegram_channel">Channel</string>
     <string name="drawer_share_app_section">Share App</string>
     <string name="drawer_app_version">Version: %1$s</string>
 
