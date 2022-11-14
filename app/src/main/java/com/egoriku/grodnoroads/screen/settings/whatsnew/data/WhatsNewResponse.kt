@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.screen.settings.whatsnew.data
 
 import com.google.firebase.firestore.PropertyName
+import java.util.Date
 
 class WhatsNewResponse(
     @PropertyName("name")
@@ -13,5 +14,9 @@ class WhatsNewResponse(
 
     @PropertyName("notes")
     @JvmField
-    val notes: String = ""
+    val notes: String = "",
+
+    @PropertyName("date")
+    @JvmField
+    val releaseDate: Date = Date()
 )

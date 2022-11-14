@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.screen.settings.whatsnew.data.WhatsNewRepository
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.Message
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.State
 import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.State.ReleaseNotes
+import com.egoriku.grodnoroads.screen.settings.whatsnew.util.ddMMMyyyy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -37,12 +38,14 @@ class WhatsNewStoreFactory(
                                             ReleaseNotes(
                                                 versionCode = it.code,
                                                 versionName = it.name,
-                                                notes = it.notes.replace("\\n", "\n")
+                                                notes = it.notes.replace("\\n", "\n"),
+                                                releaseDate = it.releaseDate.ddMMMyyyy
                                             )
                                         }
                                     )
                                 )
                             }
+
                             is ResultOf.Failure -> crashlyticsTracker.recordException(result.exception)
                         }
                         dispatch(Message.Loading(false))
