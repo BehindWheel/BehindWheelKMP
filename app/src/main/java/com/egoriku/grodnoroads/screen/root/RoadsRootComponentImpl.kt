@@ -46,7 +46,12 @@ class RoadsRootComponentImpl(
     override val childStack: Value<ChildStack<*, Child>> = stack
 
     override val themeState: Flow<StateData<Theme>> =
-        rootStore.states.map { StateData.Loaded(it.theme) }
+        rootStore.states.map {
+            when (it.theme) {
+                null -> StateData.Idle
+                else -> StateData.Loaded(it.theme)
+            }
+        }
 
     override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
 
