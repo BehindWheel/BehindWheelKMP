@@ -19,6 +19,7 @@ include(":features:map:map-ui")
 
 include(":features:settings:appearance")
 include(":features:settings:faq")
+include(":features:settings:root")
 
 include(":libraries:analytics")
 include(":libraries:crashlytics")

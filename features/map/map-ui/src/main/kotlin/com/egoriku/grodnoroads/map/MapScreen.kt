@@ -29,10 +29,7 @@ import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MapScreen(
-    component: MapComponent,
-    openDrawer: () -> Unit
-) {
+fun MapScreen(component: MapComponent) {
     AlertDialogs(component)
 
     Surface(
@@ -75,8 +72,7 @@ fun MapScreen(
                         AppMode.Default -> {
                             DefaultMode(
                                 onLocationEnabled = component::startLocationUpdates,
-                                onLocationDisabled = component::onLocationDisabled,
-                                openDrawer = openDrawer
+                                onLocationDisabled = component::onLocationDisabled
                             )
                         }
 

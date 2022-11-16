@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.main.ui.drawer.section
+package com.egoriku.grodnoroads.settings.root.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,16 +16,19 @@ import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.settings.root.ui.util.rememberCustomTabIntent
 
 @Composable
-fun PrivacyPolicySection(openUrl: (String) -> Unit) {
+fun PrivacyPolicySection() {
+    val customTabsIntent = rememberCustomTabIntent()
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         LinkButton(
-            openUrl = openUrl,
+            openUrl = { customTabsIntent(it) },
             description = stringResource(R.string.terms_of_service),
             url = stringResource(R.string.terms_of_service_link)
         )
@@ -34,7 +37,7 @@ fun PrivacyPolicySection(openUrl: (String) -> Unit) {
             modifier = Modifier.padding(horizontal = 4.dp)
         )
         LinkButton(
-            openUrl = openUrl,
+            openUrl = { customTabsIntent(it) },
             description = stringResource(R.string.privacy_policy),
             url = stringResource(R.string.privacy_policy_link)
         )
@@ -62,6 +65,6 @@ private fun LinkButton(
 @Composable
 private fun PrivacyPolicySectionPreview() {
     GrodnoRoadsTheme {
-        PrivacyPolicySection {}
+        PrivacyPolicySection()
     }
 }

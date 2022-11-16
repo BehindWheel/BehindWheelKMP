@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.main.ui.drawer.section
+package com.egoriku.grodnoroads.screen.settings.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,7 +21,7 @@ fun VersionSection() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 16.dp),
+            .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

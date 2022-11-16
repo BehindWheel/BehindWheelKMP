@@ -18,7 +18,7 @@ fun SourceImage(modifier: Modifier = Modifier, source: Source) {
         modifier = modifier.size(24.dp),
         painter = when (source) {
             Source.Viber -> painterResource(R.drawable.ic_viber)
-            Source.Telegram -> painterResource(R.drawable.ic_telegram)
+            Source.Telegram -> painterResource(R.drawable.ic_telegram_logo)
             Source.App -> painterResource(R.drawable.ic_app_logo)
             // TODO: Add Zello icon
             Source.Zello -> painterResource(R.drawable.ic_app_logo)

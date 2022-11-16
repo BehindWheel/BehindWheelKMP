@@ -86,6 +86,7 @@ dependencies {
 
     implementation(projects.features.settings.appearance)
     implementation(projects.features.settings.faq)
+    implementation(projects.features.settings.root)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
@@ -107,7 +108,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.browser)
     implementation(libs.androidx.core)
 
     implementation(libs.coroutines)
