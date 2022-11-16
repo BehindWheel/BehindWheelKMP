@@ -4,17 +4,19 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewComponent
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 
 interface SettingsComponent {
 
     val childStack: Value<ChildStack<*, Child>>
 
+    val appVersion: String
+
     sealed class Child {
-        object Settings : Child()
+        data class Settings(val settingsComponent: SettingsComponent) : Child()
 
         data class Appearance(val appearanceComponent: AppearanceComponent) : Child()
         data class Map(val mapSettingsComponent: MapSettingsComponent) : Child()

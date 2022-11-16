@@ -3,6 +3,8 @@ package com.egoriku.grodnoroads.koin
 import android.content.Context
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
+import com.egoriku.grodnoroads.AppBuildConfigImpl
+import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
 import com.egoriku.grodnoroads.shared.appsettings.extension.dataStore
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
@@ -15,6 +17,8 @@ val appScopeModule = module {
     single { Firebase.database.reference }
     single { Firebase.firestore }
     single { get<Context>().dataStore }
+
+    singleOf(::AppBuildConfigImpl) { bind<AppBuildConfig>() }
 
     singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }
 }

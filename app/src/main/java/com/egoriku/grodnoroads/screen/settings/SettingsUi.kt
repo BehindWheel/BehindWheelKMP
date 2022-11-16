@@ -27,7 +27,10 @@ import com.egoriku.grodnoroads.settings.root.ui.PrivacyPolicySection
 import com.egoriku.grodnoroads.settings.root.ui.SocialNetworkSection
 
 @Composable
-fun SettingsUi(onSettingClick: (Page) -> Unit) {
+fun SettingsUi(
+    appVersion: String,
+    onSettingClick: (Page) -> Unit
+) {
     BottomBarVisibility(SHOWN)
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -79,7 +82,7 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
 
             Spacer(modifier = Modifier.weight(1f))
             SocialNetworkSection()
-            VersionSection()
+            VersionSection(appVersion = appVersion)
             Divider()
             PrivacyPolicySection()
         }
@@ -89,5 +92,5 @@ fun SettingsUi(onSettingClick: (Page) -> Unit) {
 @GrodnoRoadsPreview
 @Composable
 private fun SettingUiPreview() = GrodnoRoadsTheme {
-    SettingsUi(onSettingClick = {})
+    SettingsUi(onSettingClick = {}, appVersion = "1.0.0")
 }

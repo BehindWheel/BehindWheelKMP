@@ -29,3 +29,4 @@ include(":libraries:location")
 include(":libraries:resources")
 
 include(":shared:appSettings")
+include(":shared:appComponent")

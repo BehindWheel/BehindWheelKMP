@@ -11,13 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.BuildConfig
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
-fun VersionSection() {
+fun VersionSection(appVersion: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,7 +25,7 @@ fun VersionSection() {
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.drawer_app_version, BuildConfig.VERSION_NAME),
+            text = stringResource(R.string.drawer_app_version, appVersion),
             style = MaterialTheme.typography.caption
         )
     }
@@ -36,6 +35,6 @@ fun VersionSection() {
 @Composable
 fun PreviewVersionSection() {
     GrodnoRoadsTheme {
-        VersionSection()
+        VersionSection("1.0.0")
     }
 }

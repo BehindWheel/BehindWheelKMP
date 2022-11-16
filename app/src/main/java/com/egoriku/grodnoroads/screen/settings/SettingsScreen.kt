@@ -14,10 +14,10 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.screen.settings.alerts.AlertsScreen
-import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
-import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.screen.settings.map.MapSettingsScreen
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewScreen
+import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
+import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
@@ -36,9 +36,10 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
                 animation = stackAnimation(slide())
             ) { created ->
                 when (val child = created.instance) {
-                    is SettingsComponent.Child.Settings -> SettingsUi { page ->
-                        settingsComponent.open(page)
-                    }
+                    is SettingsComponent.Child.Settings -> SettingsUi(
+                        appVersion = child.settingsComponent.appVersion,
+                        onSettingClick = settingsComponent::open
+                    )
                     is SettingsComponent.Child.Appearance -> AppearanceScreen(
                         appearanceComponent = child.appearanceComponent,
                         onBack = settingsComponent::onBack

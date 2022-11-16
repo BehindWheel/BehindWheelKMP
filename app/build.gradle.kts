@@ -72,6 +72,7 @@ android {
 
 dependencies {
     implementation(projects.shared.appSettings)
+    implementation(projects.shared.appComponent)
 
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
