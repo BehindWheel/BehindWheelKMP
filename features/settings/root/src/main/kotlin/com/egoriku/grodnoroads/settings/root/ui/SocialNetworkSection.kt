@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.settings.root.ui.component.SocialNetwork
+import com.egoriku.grodnoroads.settings.root.ui.foundation.SocialNetwork
 import com.egoriku.grodnoroads.settings.root.ui.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.settings.root.ui.util.rememberShareIntent
 

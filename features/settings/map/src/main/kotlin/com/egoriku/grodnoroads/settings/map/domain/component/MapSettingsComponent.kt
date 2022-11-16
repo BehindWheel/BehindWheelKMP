@@ -1,7 +1,7 @@
-package com.egoriku.grodnoroads.screen.settings.map.domain.component
+package com.egoriku.grodnoroads.settings.map.domain.component
 
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City

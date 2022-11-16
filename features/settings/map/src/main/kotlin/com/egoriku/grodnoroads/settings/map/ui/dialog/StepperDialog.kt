@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.dialog
+package com.egoriku.grodnoroads.settings.map.ui.dialog
 
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.egoriku.grodnoroads.extensions.logD
+import com.egoriku.grodnoroads.foundation.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
@@ -23,7 +23,7 @@ import com.egoriku.grodnoroads.resources.R
 import kotlin.math.roundToInt
 
 @Composable
-fun StepperDialog(
+internal fun StepperDialog(
     initial: Float,
     min: Float,
     max: Float,
@@ -66,7 +66,6 @@ fun StepperDialog(
                     valueRange = min..max,
                     onValueChange = {
                         sliderPosition = it
-                        logD(sliderPosition.toString())
                     }
                 )
 

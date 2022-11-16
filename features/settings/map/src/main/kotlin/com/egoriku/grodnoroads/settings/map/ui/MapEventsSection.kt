@@ -1,20 +1,20 @@
-package com.egoriku.grodnoroads.screen.settings.map.ui
+package com.egoriku.grodnoroads.settings.map.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
-import com.egoriku.grodnoroads.screen.settings.ui.SettingsHeader
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 
 @Composable
-fun MapEventsSection(
+internal fun MapEventsSection(
     mapInfo: MapInfo,
     onCheckedChange: (MapPref) -> Unit
 ) {

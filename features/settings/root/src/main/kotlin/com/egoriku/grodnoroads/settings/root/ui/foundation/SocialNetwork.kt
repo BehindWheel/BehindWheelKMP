@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.root.ui.component
+package com.egoriku.grodnoroads.settings.root.ui.foundation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

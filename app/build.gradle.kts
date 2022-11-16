@@ -87,6 +87,7 @@ dependencies {
 
     implementation(projects.features.settings.appearance)
     implementation(projects.features.settings.faq)
+    implementation(projects.features.settings.map)
     implementation(projects.features.settings.root)
 
     implementation(platform(libs.firebase.bom))

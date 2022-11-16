@@ -1,18 +1,18 @@
-package com.egoriku.grodnoroads.screen.settings.map.domain.component
+package com.egoriku.grodnoroads.settings.map.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettingState
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.Intent
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
+import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore
+import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.Intent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
-class MapSettingsComponentImpl(
+internal class MapSettingsComponentImpl(
     componentContext: ComponentContext
 ) : MapSettingsComponent, ComponentContext by componentContext, KoinComponent {
 

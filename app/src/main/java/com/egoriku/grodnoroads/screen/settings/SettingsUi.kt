@@ -22,9 +22,9 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
-import com.egoriku.grodnoroads.screen.settings.ui.VersionSection
 import com.egoriku.grodnoroads.settings.root.ui.PrivacyPolicySection
 import com.egoriku.grodnoroads.settings.root.ui.SocialNetworkSection
+import com.egoriku.grodnoroads.settings.root.ui.VersionSection
 
 @Composable
 fun SettingsUi(

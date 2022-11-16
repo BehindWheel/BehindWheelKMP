@@ -1,17 +1,17 @@
-package com.egoriku.grodnoroads.screen.settings.map.ui.dialog
+package com.egoriku.grodnoroads.settings.map.ui.dialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.toResource
 
 @Composable
-fun DefaultLocationDialog(
+internal fun DefaultLocationDialog(
     defaultLocationState: DefaultLocationDialogState,
     onClose: () -> Unit,
     onResult: (MapPref) -> Unit

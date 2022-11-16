@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.ui
+package com.egoriku.grodnoroads.foundation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme

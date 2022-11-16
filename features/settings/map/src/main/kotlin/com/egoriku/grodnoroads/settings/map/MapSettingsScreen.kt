@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.map
+package com.egoriku.grodnoroads.settings.map
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,17 +18,17 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.HSpacer
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
-import com.egoriku.grodnoroads.foundation.dialog.StepperDialog
+import com.egoriku.grodnoroads.settings.map.ui.dialog.StepperDialog
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
-import com.egoriku.grodnoroads.screen.settings.map.ui.DefaultLocationSection
-import com.egoriku.grodnoroads.screen.settings.map.ui.DrivingModeSection
-import com.egoriku.grodnoroads.screen.settings.map.ui.MapEventsSection
-import com.egoriku.grodnoroads.screen.settings.map.ui.MapStyleSection
-import com.egoriku.grodnoroads.screen.settings.map.ui.dialog.DefaultLocationDialog
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
+import com.egoriku.grodnoroads.settings.map.ui.DefaultLocationSection
+import com.egoriku.grodnoroads.settings.map.ui.DrivingModeSection
+import com.egoriku.grodnoroads.settings.map.ui.MapEventsSection
+import com.egoriku.grodnoroads.settings.map.ui.MapStyleSection
+import com.egoriku.grodnoroads.settings.map.ui.dialog.DefaultLocationDialog
 
 @Composable
 fun MapSettingsScreen(

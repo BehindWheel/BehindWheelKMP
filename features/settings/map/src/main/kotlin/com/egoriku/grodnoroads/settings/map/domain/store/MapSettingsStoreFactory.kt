@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.map.domain.store
+package com.egoriku.grodnoroads.settings.map.domain.store
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,11 +7,11 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.*
-import com.egoriku.grodnoroads.screen.settings.map.domain.store.MapSettingsStore.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.*
+import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.*
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
@@ -28,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class MapSettingsStoreFactory(
+internal class MapSettingsStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {

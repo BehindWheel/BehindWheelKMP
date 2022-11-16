@@ -1,26 +1,22 @@
-package com.egoriku.grodnoroads.screen.settings.map.ui
+package com.egoriku.grodnoroads.settings.map.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CheckableCard
+import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.screen.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
-import com.egoriku.grodnoroads.screen.settings.ui.SettingsHeader
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 
 @Composable
-fun MapStyleSection(
+internal fun MapStyleSection(
     mapStyle: MapStyle,
     onCheckedChange: (MapPref) -> Unit
 ) {
