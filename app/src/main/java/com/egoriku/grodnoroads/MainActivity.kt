@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                     GrodnoRoadsTheme(darkTheme) {
                         val systemUiController = rememberSystemUiController()
                         val useDarkIcons = MaterialTheme.colors.isLight
-                            val color = MaterialTheme.colors.surface
 
                         DisposableEffect(systemUiController, useDarkIcons) {
                             systemUiController.setStatusBarColor(
