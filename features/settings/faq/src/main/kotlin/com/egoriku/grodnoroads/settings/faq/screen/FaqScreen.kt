@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.settings.faq.screen
 
-import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,7 +24,7 @@ import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Question
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FaqScreen(
     faqComponent: FaqComponent,
@@ -43,37 +42,36 @@ fun FaqScreen(
     ) {
         val state by faqComponent.state.collectAsState(initial = FaqStore.State())
 
-        AnimatedContent(
-            targetState = state.isLoading,
-            transitionSpec = { fadeIn() with fadeOut() })
-        { isLoading ->
-            if (isLoading) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(state.faq) {
-                        Card(
-                            onClick = {},
-                            elevation = 3.dp,
-                            shape = RoundedCornerShape(10.dp),
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it),
+                contentPadding = PaddingValues(vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(state.faq) {
+                    Card(
+                        onClick = {},
+                        elevation = 3.dp,
+                        shape = RoundedCornerShape(10.dp),
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(all = 16.dp)
                         ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(all = 16.dp)
-                            ) {
-                                Question(text = it.question)
-                                Answer(text = it.answer)
-                            }
+                            Question(text = it.question)
+                            Answer(text = it.answer)
                         }
                     }
                 }
