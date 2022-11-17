@@ -3,15 +3,13 @@ package com.egoriku.grodnoroads.settings.root.screen.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Help
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.NewReleases
-import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,7 +25,9 @@ import com.egoriku.grodnoroads.settings.root.domain.model.Page
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.VersionSection
+import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsAlertsEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsGroupsEnabled
+import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsNextFeaturesEnabled
 
 @Composable
 internal fun SettingsUi(
@@ -37,12 +37,15 @@ internal fun SettingsUi(
     BottomBarVisibility(SHOWN)
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-
+        Column(
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
             if (settingsGroupsEnabled) {
                 SettingsHeader(
                     title = stringResource(R.string.settings_category_main),
-                    top = 8.dp
+                    top = 0.dp
                 )
             }
             SettingsItem(
@@ -59,33 +62,37 @@ internal fun SettingsUi(
                     onSettingClick(Page.Map)
                 }
             )
-            // Temporary disable
-            /*SettingsItem(
-                icon = Icons.Filled.NotificationImportant,
-                text = stringResource(R.string.settings_section_alerts),
-                onClick = {
-                    onSettingClick(Page.Alerts)
-                }
-            )*/
+
+            if (settingsAlertsEnabled) {
+                SettingsItem(
+                    icon = Icons.Filled.NotificationImportant,
+                    text = stringResource(R.string.settings_section_alerts),
+                    onClick = {
+                        onSettingClick(Page.Alerts)
+                    }
+                )
+            }
 
             if (settingsGroupsEnabled) {
                 SettingsHeader(title = stringResource(R.string.settings_category_other))
             }
+
+            if (settingsNextFeaturesEnabled) {
+                SettingsItem(
+                    icon = Icons.Filled.NewReleases,
+                    text = stringResource(R.string.settings_section_whats_new),
+                    onClick = {
+                        onSettingClick(Page.WhatsNew)
+                    }
+                )
+            }
             SettingsItem(
-                icon = Icons.Filled.NewReleases,
-                text = stringResource(R.string.settings_section_whats_new),
-                onClick = {
-                    onSettingClick(Page.WhatsNew)
-                }
-            )
-            // Temporary disable
-            /*SettingsItem(
                 icon = Icons.Filled.Build,
                 text = stringResource(R.string.settings_section_next_features),
                 onClick = {
                     onSettingClick(Page.NextFeatures)
                 }
-            )*/
+            )
             SettingsItem(
                 icon = Icons.Filled.Help,
                 text = stringResource(R.string.settings_section_faq),
