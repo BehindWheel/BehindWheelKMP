@@ -37,6 +37,11 @@
     <string name="settings_section_whats_new">Што новага</string>
     <string name="settings_section_next_features">Будучыя фічы</string>
     <string name="settings_section_faq">Часта задаюць пытанні</string>
+
+    <!-- Settings categories -->
+    <string name="settings_category_main">Асноўныя</string>
+    <string name="settings_category_other">Іншыя</string>
+
     <string name="appearance_app_theme">Тэма</string>
     <string name="appearance_app_theme_system">Сістэмная</string>
     <string name="appearance_app_theme_dark">Цёмная</string>

@@ -47,6 +47,10 @@
     <string name="settings_section_next_features">Next features</string>
     <string name="settings_section_faq">FAQ</string>
 
+    <!-- Settings categories -->
+    <string name="settings_category_main">Main</string>
+    <string name="settings_category_other">Other</string>
+
     <!-- Appearance -->
     <string name="appearance_app_theme">Theme</string>
     <string name="appearance_app_theme_system">System</string>

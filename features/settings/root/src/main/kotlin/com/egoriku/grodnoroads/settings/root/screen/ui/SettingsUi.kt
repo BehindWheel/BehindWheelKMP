@@ -15,6 +15,8 @@ import androidx.compose.material.icons.filled.Style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.SHOWN
 import com.egoriku.grodnoroads.foundation.list.SettingsItem
@@ -25,6 +27,7 @@ import com.egoriku.grodnoroads.settings.root.domain.model.Page
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.VersionSection
+import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsGroupsEnabled
 
 @Composable
 internal fun SettingsUi(
@@ -35,6 +38,13 @@ internal fun SettingsUi(
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+
+            if (settingsGroupsEnabled) {
+                SettingsHeader(
+                    title = stringResource(R.string.settings_category_main),
+                    top = 8.dp
+                )
+            }
             SettingsItem(
                 icon = Icons.Filled.Style,
                 text = stringResource(R.string.settings_section_appearance),
@@ -57,6 +67,10 @@ internal fun SettingsUi(
                     onSettingClick(Page.Alerts)
                 }
             )*/
+
+            if (settingsGroupsEnabled) {
+                SettingsHeader(title = stringResource(R.string.settings_category_other))
+            }
             SettingsItem(
                 icon = Icons.Filled.NewReleases,
                 text = stringResource(R.string.settings_section_whats_new),
