@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.whatsnew.store
+package com.egoriku.grodnoroads.settings.whatsnew.domain.store
 
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
@@ -7,15 +7,13 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf
-import com.egoriku.grodnoroads.screen.settings.whatsnew.data.WhatsNewRepository
-import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.Message
-import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.State
-import com.egoriku.grodnoroads.screen.settings.whatsnew.store.WhatsNewStore.State.ReleaseNotes
-import com.egoriku.grodnoroads.screen.settings.whatsnew.util.ddMMMyyyy
+import com.egoriku.grodnoroads.settings.whatsnew.domain.repository.WhatsNewRepository
+import com.egoriku.grodnoroads.settings.whatsnew.domain.store.WhatsNewStore.Message
+import com.egoriku.grodnoroads.settings.whatsnew.domain.store.WhatsNewStore.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WhatsNewStoreFactory(
+internal class WhatsNewStoreFactory(
     private val storeFactory: StoreFactory,
     private val whatsNewRepository: WhatsNewRepository,
     private val crashlyticsTracker: CrashlyticsTracker
@@ -31,21 +29,7 @@ class WhatsNewStoreFactory(
                         dispatch(Message.Loading(true))
 
                         when (val result = whatsNewRepository.load()) {
-                            is ResultOf.Success -> {
-                                dispatch(
-                                    Message.Success(
-                                        releaseNotes = result.value.map {
-                                            ReleaseNotes(
-                                                versionCode = it.code,
-                                                versionName = it.name,
-                                                notes = it.notes.replace("\\n", "\n"),
-                                                releaseDate = it.releaseDate.ddMMMyyyy
-                                            )
-                                        }
-                                    )
-                                )
-                            }
-
+                            is ResultOf.Success -> dispatch(Message.Success(releaseNotes = result.value))
                             is ResultOf.Failure -> crashlyticsTracker.recordException(result.exception)
                         }
                         dispatch(Message.Loading(false))

@@ -1,9 +1,9 @@
-package com.egoriku.grodnoroads.screen.settings.whatsnew.data
+package com.egoriku.grodnoroads.settings.whatsnew.data.dto
 
 import com.google.firebase.firestore.PropertyName
 import java.util.Date
 
-class WhatsNewResponse(
+class WhatsNewDTO(
     @PropertyName("name")
     @JvmField
     val name: String = "",

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.whatsnew.util
+package com.egoriku.grodnoroads.settings.whatsnew.domain.util
 
 import java.text.SimpleDateFormat
 import java.util.Locale

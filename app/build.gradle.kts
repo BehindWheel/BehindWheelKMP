@@ -90,6 +90,7 @@ dependencies {
     implementation(projects.features.settings.faq)
     implementation(projects.features.settings.map)
     implementation(projects.features.settings.root)
+    implementation(projects.features.settings.whatsnew)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)

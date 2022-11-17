@@ -22,6 +22,7 @@ include(":features:settings:appearance")
 include(":features:settings:faq")
 include(":features:settings:map")
 include(":features:settings:root")
+include(":features:settings:whatsnew")
 
 include(":libraries:analytics")
 include(":libraries:crashlytics")

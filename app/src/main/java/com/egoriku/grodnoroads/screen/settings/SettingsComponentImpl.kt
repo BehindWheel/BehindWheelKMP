@@ -8,7 +8,6 @@ import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
-import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
@@ -54,27 +53,12 @@ class SettingsComponentImpl(
         componentContext: ComponentContext,
     ) = when (configuration) {
         is Config.Settings -> Settings(this)
-
-        is Config.Appearance -> Appearance(
-            appearanceComponent = get { parametersOf(componentContext) }
-        )
-
-        is Config.Alerts -> Alerts(
-            alertsComponent = get { parametersOf(componentContext) }
-        )
-
-        is Config.Map -> Map(
-            mapSettingsComponent = get { parametersOf(componentContext) }
-        )
-
+        is Config.Appearance -> Appearance(appearanceComponent = get { parametersOf(componentContext) })
+        is Config.Alerts -> Alerts(alertsComponent = get { parametersOf(componentContext) })
+        is Config.Map -> Map(mapSettingsComponent = get { parametersOf(componentContext) })
         is Config.NextFeatures -> TODO()
-        is Config.WhatsNew -> WhatsNew(
-            whatsNewComponent = WhatsNewComponentImpl(componentContext)
-        )
-
-        is Config.FAQ -> FAQ(
-            faqComponent = get { parametersOf(componentContext) }
-        )
+        is Config.WhatsNew -> WhatsNew(whatsNewComponent = get { parametersOf(componentContext) })
+        is Config.FAQ -> FAQ(faqComponent = get { parametersOf(componentContext) })
     }
 
     private sealed class Config : Parcelable {
