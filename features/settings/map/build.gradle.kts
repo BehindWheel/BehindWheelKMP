@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.setting.map"
+    namespace = "com.egoriku.grodnoroads.settings.map"
 }
 
 dependencies {

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.setting.appearance"
+    namespace = "com.egoriku.grodnoroads.settings.appearance"
 }
 
 dependencies {
