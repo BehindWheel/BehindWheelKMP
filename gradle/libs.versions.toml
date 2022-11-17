@@ -46,6 +46,7 @@ androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core = "androidx.core:core-ktx:1.9.0"
+androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"

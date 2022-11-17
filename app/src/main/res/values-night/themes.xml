@@ -2,16 +2,9 @@
 <resources>
 
     <style name="SplashTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FFFFFFFF</item>
+        <item name="windowSplashScreenBackground">#FF242f3e</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
         <item name="windowSplashScreenAnimationDuration">800</item>
         <item name="postSplashScreenTheme">@style/GrodnoRoadsTheme</item>
     </style>
-
-    <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">#FF4A6572</item>
-        <item name="colorPrimary">#FF4A6572</item>
-    </style>
-
-    <style name="GrodnoRoadsTheme" parent="Base.AppTheme" />
 </resources>
