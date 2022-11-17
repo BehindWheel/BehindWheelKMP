@@ -9,7 +9,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent
+import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get

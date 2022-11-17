@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState
 import com.egoriku.grodnoroads.foundation.bottombar.LocalBottomBarVisibilityController
 import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.screen.settings.SettingsScreen
+import com.egoriku.grodnoroads.settings.root.screen.SettingsScreen
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.root.ui.util
+package com.egoriku.grodnoroads.settings.root.screen.ui.util
 
 import android.content.Intent
 import androidx.compose.runtime.Composable

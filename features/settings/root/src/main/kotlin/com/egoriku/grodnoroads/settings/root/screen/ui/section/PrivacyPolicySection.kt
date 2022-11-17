@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.root.ui
+package com.egoriku.grodnoroads.settings.root.screen.ui.section
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.settings.root.ui.util.rememberCustomTabIntent
+import com.egoriku.grodnoroads.settings.root.screen.ui.util.rememberCustomTabIntent
 
 @Composable
 fun PrivacyPolicySection() {

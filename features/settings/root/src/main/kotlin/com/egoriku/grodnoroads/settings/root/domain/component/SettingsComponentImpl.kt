@@ -1,13 +1,13 @@
-package com.egoriku.grodnoroads.screen.settings
+package com.egoriku.grodnoroads.settings.root.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
-import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
+import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent.Child
+import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent.Child.*
+import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent.Child.Map
+import com.egoriku.grodnoroads.settings.root.domain.model.Page
 import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
@@ -15,7 +15,7 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import org.koin.core.parameter.parametersOf
 
-class SettingsComponentImpl(
+internal class SettingsComponentImpl(
     componentContext: ComponentContext
 ) : SettingsComponent, KoinComponent, ComponentContext by componentContext {
 

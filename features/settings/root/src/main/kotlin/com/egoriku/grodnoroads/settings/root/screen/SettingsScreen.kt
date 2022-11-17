@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings
+package com.egoriku.grodnoroads.settings.root.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,11 +13,13 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import com.egoriku.grodnoroads.settings.whatsnew.screen.WhatsNewScreen
 import com.egoriku.grodnoroads.settings.alerts.AlertsScreen
 import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.settings.map.MapSettingsScreen
+import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent
+import com.egoriku.grodnoroads.settings.root.screen.ui.SettingsUi
+import com.egoriku.grodnoroads.settings.whatsnew.screen.WhatsNewScreen
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable
