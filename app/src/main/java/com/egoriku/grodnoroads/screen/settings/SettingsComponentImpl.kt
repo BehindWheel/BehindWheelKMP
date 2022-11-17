@@ -8,7 +8,6 @@ import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.*
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Child.Map
 import com.egoriku.grodnoroads.screen.settings.SettingsComponent.Page
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponentImpl
 import com.egoriku.grodnoroads.screen.settings.whatsnew.component.WhatsNewComponentImpl
 import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
 import kotlinx.parcelize.Parcelize
@@ -61,7 +60,7 @@ class SettingsComponentImpl(
         )
 
         is Config.Alerts -> Alerts(
-            alertsComponent = AlertsComponentImpl(componentContext)
+            alertsComponent = get { parametersOf(componentContext) }
         )
 
         is Config.Map -> Map(

@@ -13,11 +13,11 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import com.egoriku.grodnoroads.screen.settings.alerts.AlertsScreen
-import com.egoriku.grodnoroads.settings.map.MapSettingsScreen
 import com.egoriku.grodnoroads.screen.settings.whatsnew.WhatsNewScreen
+import com.egoriku.grodnoroads.settings.alerts.AlertsScreen
 import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
+import com.egoriku.grodnoroads.settings.map.MapSettingsScreen
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.alerts.domain.store
+package com.egoriku.grodnoroads.settings.alerts.domain.store
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,16 +7,16 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState.AlertDistance
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.Message
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.store.AlertsStore.State
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettingsState.AlertDistance
+import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore.Message
+import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class AlertsStoreFactory(
+internal class AlertsStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {

@@ -1,10 +1,10 @@
-package com.egoriku.grodnoroads.screen.settings.alerts.domain.component
+package com.egoriku.grodnoroads.settings.alerts.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 
-class AlertsComponentImpl(
+internal class AlertsComponentImpl(
     componentContext: ComponentContext
 ) : AlertsComponent, ComponentContext by componentContext, KoinComponent {
 

@@ -17,6 +17,7 @@ include(":features:map:map-data")
 include(":features:map:map-domain")
 include(":features:map:map-ui")
 
+include(":features:settings:alerts")
 include(":features:settings:appearance")
 include(":features:settings:faq")
 include(":features:settings:map")

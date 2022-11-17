@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.settings.alerts.domain.component
+package com.egoriku.grodnoroads.settings.alerts.domain.component
 
 import kotlinx.coroutines.flow.Flow
 

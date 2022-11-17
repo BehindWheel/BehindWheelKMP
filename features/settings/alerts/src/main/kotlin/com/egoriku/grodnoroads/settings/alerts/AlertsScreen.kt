@@ -1,7 +1,8 @@
-package com.egoriku.grodnoroads.screen.settings.alerts
+package com.egoriku.grodnoroads.settings.alerts
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
@@ -12,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent
-import com.egoriku.grodnoroads.screen.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettingsState
 
 @Composable
 fun AlertsScreen(
@@ -33,6 +34,7 @@ fun AlertsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .verticalScroll(rememberScrollState())
         ) {}
     }
