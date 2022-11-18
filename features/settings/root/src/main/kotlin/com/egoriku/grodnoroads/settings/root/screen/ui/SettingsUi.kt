@@ -77,22 +77,23 @@ internal fun SettingsUi(
                 SettingsHeader(title = stringResource(R.string.settings_category_other))
             }
 
+            SettingsItem(
+                icon = Icons.Filled.NewReleases,
+                text = stringResource(R.string.settings_section_whats_new),
+                onClick = {
+                    onSettingClick(Page.WhatsNew)
+                }
+            )
+
             if (settingsNextFeaturesEnabled) {
                 SettingsItem(
-                    icon = Icons.Filled.NewReleases,
-                    text = stringResource(R.string.settings_section_whats_new),
+                    icon = Icons.Filled.Build,
+                    text = stringResource(R.string.settings_section_next_features),
                     onClick = {
-                        onSettingClick(Page.WhatsNew)
+                        onSettingClick(Page.NextFeatures)
                     }
                 )
             }
-            SettingsItem(
-                icon = Icons.Filled.Build,
-                text = stringResource(R.string.settings_section_next_features),
-                onClick = {
-                    onSettingClick(Page.NextFeatures)
-                }
-            )
             SettingsItem(
                 icon = Icons.Filled.Help,
                 text = stringResource(R.string.settings_section_faq),
