@@ -36,6 +36,7 @@ fun rememberCameraPositionValues(
                     lastBearing = lastLocation.bearing
                     lastLocation.bearing
                 }
+
                 else -> lastBearing
             }
         )
@@ -43,12 +44,14 @@ fun rememberCameraPositionValues(
 
     val computeHeading = SphericalUtil.computeHeading(lastLocation.latLng, fromScreenLocation)
 
-    return CameraPositionValues(
-        initialLatLng = lastLocation.latLng,
-        targetLatLngWithOffset = fromScreenLocation,
-        bearing = directionBearing,
-        markerRotation = (directionBearing - computeHeading).toFloat()
-    )
+    return remember(lastLocation, fromScreenLocation, directionBearing, computeHeading) {
+        CameraPositionValues(
+            initialLatLng = lastLocation.latLng,
+            targetLatLngWithOffset = fromScreenLocation,
+            bearing = directionBearing,
+            markerRotation = (directionBearing - computeHeading).toFloat()
+        )
+    }
 }
 
 @Stable

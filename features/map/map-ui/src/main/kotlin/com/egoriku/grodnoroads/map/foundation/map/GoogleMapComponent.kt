@@ -90,7 +90,7 @@ fun GoogleMapComponent(
         } else {
             cameraPositionState.animate(
                 buildCameraPosition(
-                    target = cameraPositionValues.targetLatLngWithOffset,
+                    target = cameraPositionValues.initialLatLng,
                     bearing = cameraPositionValues.bearing,
                     zoomLevel = mapConfig.zoomLevel,
                     tilt = 0.0f
