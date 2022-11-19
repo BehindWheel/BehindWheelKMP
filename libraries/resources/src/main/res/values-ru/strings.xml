@@ -24,7 +24,7 @@
     <string name="alerts_mobile_camera">Временная камера</string>
     <string name="alerts_incident">Дорожное происшествие</string>
     <string name="alerts_traffic_police">Экипаж ГАИ</string>
-    <string name="alerts_car_crash">ДПТ</string>
+    <string name="alerts_car_crash">ДТП</string>
     <string name="alerts_traffic_jam">Пробка</string>
     <string name="alerts_wild_animals">Дикие животные</string>
     <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
@@ -72,7 +72,7 @@
     <string name="map_markers_mobile_cameras">Мобильные камеры</string>
     <string name="map_markers_traffic_police">ГАИ</string>
     <string name="map_markers_incidents">Проблемы на дороге</string>
-    <string name="map_markers_car_crash">ДПТ</string>
+    <string name="map_markers_car_crash">ДТП</string>
     <string name="map_markers_traffic_jam">Пробки</string>
     <string name="map_markers_wild_animals">Дикие животные</string>
 
