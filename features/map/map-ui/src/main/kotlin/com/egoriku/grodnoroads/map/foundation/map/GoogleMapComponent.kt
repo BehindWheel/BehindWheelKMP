@@ -17,6 +17,7 @@ import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
+import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
@@ -49,11 +50,13 @@ fun GoogleMapComponent(
     lastLocation: LastLocation,
     onMarkerClick: (Reports) -> Unit,
     isMapLoaded: MutableState<Boolean>,
+    containsOverlay: Boolean,
     loading: @Composable BoxScope.() -> Unit
 ) {
     if (mapConfig == MapConfig.EMPTY) return
 
-    var cameraPositionChangeEnabled by remember { mutableStateOf(true) }
+    var cameraPositionChangeCount by remember { mutableStateOf(0) }
+    var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
 
     val markerCache = get<MarkerCache>()
 
@@ -61,6 +64,18 @@ fun GoogleMapComponent(
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, lastLocation)
 
     val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(cameraPositionChangeCount, containsOverlay) {
+        if (cameraPositionChangeCount != 0) {
+            cameraPositionJob = reLaunch(cameraPositionJob) {
+                delay(3000)
+                cameraPositionChangeCount = 0
+            }
+        }
+        if (containsOverlay) {
+            cameraPositionJob?.cancel()
+        }
+    }
 
     LaunchedEffect(appMode) {
         if (appMode == AppMode.Default) {
@@ -77,7 +92,7 @@ fun GoogleMapComponent(
     }
 
     LaunchedEffect(lastLocation, cameraPositionValues) {
-        if (!cameraPositionChangeEnabled) return@LaunchedEffect
+        if (cameraPositionChangeCount != 0) return@LaunchedEffect
         if (!isMapLoaded.value) return@LaunchedEffect
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
@@ -110,23 +125,15 @@ fun GoogleMapComponent(
                 .matchParentSize()
                 .pointerInput(Unit) {
                     coroutineScope {
-                        var cameraPositionJob: Job? = null
-
                         forEachGesture {
                             awaitPointerEventScope {
                                 awaitFirstDown(requireUnconsumed = false)
 
                                 do {
                                     val event = awaitPointerEvent()
-                                    cameraPositionChangeEnabled = false
+                                    cameraPositionChangeCount++
 
                                 } while (event.changes.any { it.pressed })
-
-                                cameraPositionJob?.cancel()
-                                cameraPositionJob = launch {
-                                    delay(3000)
-                                    cameraPositionChangeEnabled = true
-                                }
                             }
                         }
                     }
@@ -175,10 +182,13 @@ fun GoogleMapComponent(
             zoomIn = {
                 coroutineScope.launch {
                     cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
+                    cameraPositionChangeCount++
                 }
-            }, zoomOut = {
+            },
+            zoomOut = {
                 coroutineScope.launch {
                     cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
+                    cameraPositionChangeCount++
                 }
             })
 

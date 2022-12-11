@@ -16,6 +16,7 @@ import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
@@ -30,8 +31,6 @@ import kotlinx.collections.immutable.persistentListOf
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MapScreen(component: MapComponent) {
-    AlertDialogs(component)
-
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -42,7 +41,13 @@ fun MapScreen(component: MapComponent) {
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
+        val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
 
+        AlertDialogs(
+            mapAlertDialog = mapAlertDialog,
+            onClose = component::closeDialog,
+            reportAction = component::reportAction
+        )
         LabelsSubscription(component)
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -54,7 +59,8 @@ fun MapScreen(component: MapComponent) {
                 mapConfig = mapConfig,
                 lastLocation = location,
                 onMarkerClick = component::showMarkerInfoDialog,
-                isMapLoaded = isMapLoaded
+                isMapLoaded = isMapLoaded,
+                containsOverlay = mapAlertDialog != None
             ) {
                 AnimatedVisibility(
                     modifier = Modifier.matchParentSize(),
@@ -109,24 +115,24 @@ fun MapScreen(component: MapComponent) {
 }
 
 @Composable
-private fun AlertDialogs(component: MapComponent) {
-    val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
-
+private fun AlertDialogs(
+    mapAlertDialog: MapAlertDialog,
+    onClose: () -> Unit,
+    reportAction: (ReportAction.Params) -> Unit
+) {
     when (val state = mapAlertDialog) {
         is MarkerInfoDialog -> {
             MarkerAlertDialog(
                 reports = state.reports,
-                onClose = {
-                    component.closeDialog()
-                }
+                onClose = onClose
             )
         }
 
         is PoliceDialog -> {
             ReportDialog(
-                onClose = { component.closeDialog() },
+                onClose = onClose,
                 onSend = { mapEvent, shortMessage, message ->
-                    component.reportAction(
+                    reportAction(
                         ReportAction.Params(
                             latLng = state.currentLatLng,
                             mapEventType = mapEvent,
@@ -140,9 +146,9 @@ private fun AlertDialogs(component: MapComponent) {
 
         is RoadIncidentDialog -> {
             IncidentDialog(
-                onClose = { component.closeDialog() },
+                onClose = onClose,
                 onSend = { mapEvent, shortMessage, message ->
-                    component.reportAction(
+                    reportAction(
                         ReportAction.Params(
                             latLng = state.currentLatLng,
                             mapEventType = mapEvent,
