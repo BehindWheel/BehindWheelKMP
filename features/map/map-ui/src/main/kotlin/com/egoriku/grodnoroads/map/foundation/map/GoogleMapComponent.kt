@@ -62,6 +62,20 @@ fun GoogleMapComponent(
 
     val coroutineScope = rememberCoroutineScope()
 
+    LaunchedEffect(appMode) {
+        if (appMode == AppMode.Default) {
+            cameraPositionState.animate(
+                buildCameraPosition(
+                    target = cameraPositionValues.initialLatLng,
+                    bearing = cameraPositionValues.bearing,
+                    zoomLevel = mapConfig.zoomLevel,
+                    tilt = 0.0f
+                ),
+                700
+            )
+        }
+    }
+
     LaunchedEffect(lastLocation, cameraPositionValues) {
         if (!cameraPositionChangeEnabled) return@LaunchedEffect
         if (!isMapLoaded.value) return@LaunchedEffect
@@ -87,16 +101,6 @@ fun GoogleMapComponent(
                     durationMs = 700
                 )
             }
-        } else {
-            cameraPositionState.animate(
-                buildCameraPosition(
-                    target = cameraPositionValues.initialLatLng,
-                    bearing = cameraPositionValues.bearing,
-                    zoomLevel = mapConfig.zoomLevel,
-                    tilt = 0.0f
-                ),
-                700
-            )
         }
     }
 
