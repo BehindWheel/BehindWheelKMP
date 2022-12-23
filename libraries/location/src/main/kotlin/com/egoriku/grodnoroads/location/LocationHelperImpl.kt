@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.location
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
 import androidx.core.location.LocationRequestCompat.QUALITY_HIGH_ACCURACY
@@ -38,6 +39,7 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun startLocationUpdates() {
         fusedLocationProvider.removeLocationUpdates(locationCallback)
         fusedLocationProvider.requestLocationUpdates(
@@ -51,6 +53,7 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
         fusedLocationProvider.removeLocationUpdates(locationCallback)
     }
 
+    @SuppressLint("MissingPermission")
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
             val cancellationTokenSource = CancellationTokenSource()
