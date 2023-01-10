@@ -14,23 +14,29 @@ import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
+import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
+import com.egoriku.grodnoroads.map.markers.ReportsMarker
+import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
+import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
+import com.egoriku.grodnoroads.map.util.MarkerCache
 import kotlinx.collections.immutable.persistentListOf
+import org.koin.androidx.compose.get
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MapScreen(component: MapComponent) {
+    val markerCache = get<MarkerCache>()
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -51,34 +57,53 @@ fun MapScreen(component: MapComponent) {
         LabelsSubscription(component)
 
         Box(modifier = Modifier.fillMaxSize()) {
-            val isMapLoaded = remember { mutableStateOf(false) }
+            var isMapLoaded by remember { mutableStateOf(false) }
 
             GoogleMapComponent(
-                mapEvents = mapEvents,
                 appMode = appMode,
                 mapConfig = mapConfig,
                 lastLocation = location,
-                onMarkerClick = component::showMarkerInfoDialog,
-                isMapLoaded = isMapLoaded,
-                containsOverlay = mapAlertDialog != None
-            ) {
-                AnimatedVisibility(
-                    modifier = Modifier.matchParentSize(),
-                    visible = !isMapLoaded.value,
-                    enter = EnterTransition.None,
-                    exit = fadeOut()
-                ) {
-                    LogoProgressIndicator()
-                }
-            }
+                onMapLoaded = { isMapLoaded = true },
+                containsOverlay = mapAlertDialog != None,
+                loading = {
+                    AnimatedVisibility(
+                        modifier = Modifier.matchParentSize(),
+                        visible = !isMapLoaded,
+                        enter = EnterTransition.None,
+                        exit = fadeOut()
+                    ) {
+                        LogoProgressIndicator()
+                    }
+                },
+                content = {
+                    mapEvents.forEach { mapEvent ->
+                        when (mapEvent) {
+                            is MapEvent.StationaryCamera -> StationaryCameraMarker(
+                                stationaryCamera = mapEvent,
+                                onFromCache = { markerCache.getVector(id = it) }
+                            )
 
-            if (isMapLoaded.value) {
+                            is MapEvent.Reports -> ReportsMarker(
+                                mapEvent,
+                                component::showMarkerInfoDialog
+                            )
+
+                            is MapEvent.MobileCamera -> MobileCameraMarker(
+                                mobileCamera = mapEvent,
+                                onFromCache = { markerCache.getVector(id = it) })
+                        }
+                    }
+                }
+            )
+
+            if (isMapLoaded) {
                 AnimatedContent(targetState = appMode) { state ->
                     when (state) {
                         AppMode.Default -> {
                             DefaultMode(
                                 onLocationEnabled = component::startLocationUpdates,
-                                onLocationDisabled = component::onLocationDisabled
+                                onLocationDisabled = component::onLocationDisabled,
+                                report = component::reportWithoutLocation
                             )
                         }
 
@@ -90,7 +115,7 @@ fun MapScreen(component: MapComponent) {
                                 reportPolice = {
                                     if (location != LastLocation.None) {
                                         component.openReportFlow(
-                                            reportDialogFlow = MapComponent.ReportDialogFlow.TrafficPolice(
+                                            reportDialogFlow = ReportDialogFlow.TrafficPolice(
                                                 location.latLng
                                             )
                                         )
@@ -99,13 +124,17 @@ fun MapScreen(component: MapComponent) {
                                 reportIncident = {
                                     if (location != LastLocation.None) {
                                         component.openReportFlow(
-                                            reportDialogFlow = MapComponent.ReportDialogFlow.RoadIncident(
+                                            reportDialogFlow = ReportDialogFlow.RoadIncident(
                                                 location.latLng
                                             )
                                         )
                                     }
                                 }
                             )
+                        }
+
+                        AppMode.ChooseLocation -> {
+                            ChooseLocation()
                         }
                     }
                 }

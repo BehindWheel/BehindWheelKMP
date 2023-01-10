@@ -12,29 +12,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
 import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
-import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
-import com.egoriku.grodnoroads.map.markers.ReportsMarker
-import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
 import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
-import kotlinx.collections.immutable.ImmutableList
+import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.compose.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -46,14 +39,14 @@ fun GoogleMapComponent(
     modifier: Modifier = Modifier,
     appMode: AppMode,
     mapConfig: MapConfig,
-    mapEvents: ImmutableList<MapEvent>,
     lastLocation: LastLocation,
-    onMarkerClick: (Reports) -> Unit,
-    isMapLoaded: MutableState<Boolean>,
+    onMapLoaded: () -> Unit,
     containsOverlay: Boolean,
-    loading: @Composable BoxScope.() -> Unit
+    loading: @Composable BoxScope.() -> Unit,
+    content: (@Composable @GoogleMapComposable () -> Unit),
 ) {
     if (mapConfig == MapConfig.EMPTY) return
+    var isMapLoaded by remember { mutableStateOf(false) }
 
     var cameraPositionChangeCount by remember { mutableStateOf(0) }
     var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
@@ -62,6 +55,13 @@ fun GoogleMapComponent(
 
     val cameraPositionState = rememberCameraPositionState()
     val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, lastLocation)
+
+    val chooseLocationState = rememberMarkerState(position = lastLocation.latLng)
+    var chosenLocation by remember { mutableStateOf(chooseLocationState.position) }
+
+    if (chooseLocationState.dragState == DragState.END) {
+        chosenLocation = chooseLocationState.position
+    }
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -93,7 +93,7 @@ fun GoogleMapComponent(
 
     LaunchedEffect(lastLocation, cameraPositionValues) {
         if (cameraPositionChangeCount != 0) return@LaunchedEffect
-        if (!isMapLoaded.value) return@LaunchedEffect
+        if (!isMapLoaded) return@LaunchedEffect
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
 
@@ -149,30 +149,34 @@ fun GoogleMapComponent(
                         /* zoom = */ mapConfig.zoomLevel
                     )
                 )
-                isMapLoaded.value = true
+                isMapLoaded = true
+                onMapLoaded()
             }
         ) {
-            mapEvents.forEach { mapEvent ->
-                when (mapEvent) {
-                    is StationaryCamera -> StationaryCameraMarker(
-                        stationaryCamera = mapEvent,
-                        onFromCache = { markerCache.getVector(id = it) }
-                    )
-
-                    is Reports -> ReportsMarker(mapEvent, onMarkerClick)
-                    is MobileCamera -> MobileCameraMarker(
-                        mobileCamera = mapEvent,
-                        onFromCache = { markerCache.getVector(id = it) })
-                }
-            }
-
-            if (appMode != AppMode.Default && lastLocation != LastLocation.None) {
+            content()
+            if (appMode == AppMode.Drive && lastLocation != LastLocation.None) {
                 Marker(
                     state = MarkerState(position = lastLocation.latLng),
                     icon = markerCache.getVector(id = R.drawable.ic_arrow),
                     rotation = cameraPositionValues.markerRotation,
                     anchor = Offset(0.5f, 0.5f),
                     zIndex = 1f
+                )
+            }
+
+            val markerClick: (Marker) -> Boolean = {
+                logD("${it.title} was clicked")
+                cameraPositionState.projection?.let { projection ->
+                    logD("The current projection is: $projection")
+                }
+                false
+            }
+
+            if (appMode == AppMode.ChooseLocation) {
+                Marker(
+                    state = chooseLocationState,
+                    title = "Choose Location",
+                    onClick = markerClick
                 )
             }
         }
@@ -190,9 +194,12 @@ fun GoogleMapComponent(
                     cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
                     cameraPositionChangeCount++
                 }
-            })
+            }
+        )
 
-        loading()
+        if (!isMapLoaded) {
+            loading()
+        }
 
         //DebugView(cameraPositionState = cameraPositionState)
     }

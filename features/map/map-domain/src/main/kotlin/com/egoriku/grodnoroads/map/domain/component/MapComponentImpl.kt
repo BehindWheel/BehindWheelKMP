@@ -101,6 +101,10 @@ internal class MapComponentImpl(
         dialogStore.accept(DialogStore.Intent.CloseDialog)
     }
 
+    override fun reportWithoutLocation() {
+        mapConfigStore.accept(Intent.ReportWithoutLocation)
+    }
+
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
         dialogStore.accept(DialogStore.Intent.OpenMarkerInfoDialog(reports = reports))
 

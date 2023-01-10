@@ -93,6 +93,9 @@ internal class MapConfigStoreFactory(
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Default))
                     dispatch(Message.OnZoomLevel(zoomLevel = 12.5f))
                 }
+                onIntent<ReportWithoutLocation> {
+                    dispatch(Message.ChangeAppMode(appMode = AppMode.ChooseLocation))
+                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->

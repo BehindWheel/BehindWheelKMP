@@ -13,6 +13,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
         data class CheckLocation(val latLng: LatLng) : Intent
         object StartDriveMode : Intent
         object StopDriveMode : Intent
+        object ReportWithoutLocation : Intent
     }
 
     data class StoreState(
