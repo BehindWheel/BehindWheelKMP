@@ -24,11 +24,13 @@ interface MapEventsStore : Store<Intent, State, Nothing> {
         data class OnStationary(val data: List<MapEvent.StationaryCamera>) : Message
         data class OnNewReports(val data: List<MapEvent.Reports>) : Message
         data class OnMobileCamera(val data: List<MapEvent.MobileCamera>) : Message
+        data class OnUserCount(val data: Int) : Message
     }
 
     data class State(
         val stationaryCameras: List<MapEvent.StationaryCamera> = emptyList(),
         val reports: List<MapEvent.Reports> = emptyList(),
-        val mobileCamera: List<MapEvent.MobileCamera> = emptyList()
+        val mobileCamera: List<MapEvent.MobileCamera> = emptyList(),
+        val userCount: Int = 0
     )
 }

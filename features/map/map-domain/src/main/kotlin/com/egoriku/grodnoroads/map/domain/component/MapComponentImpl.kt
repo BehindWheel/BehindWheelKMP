@@ -53,6 +53,9 @@ internal class MapComponentImpl(
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }
 
+    override val userCount: Flow<Int>
+        get() = mapEventsStore.states.map { it.userCount }
+
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
@@ -109,6 +112,7 @@ internal class MapComponentImpl(
             is ReportDialogFlow.TrafficPolice -> dialogStore.accept(
                 intent = DialogStore.Intent.OpenReportTrafficPoliceDialog(reportDialogFlow.latLng)
             )
+
             is ReportDialogFlow.RoadIncident -> dialogStore.accept(
                 intent = DialogStore.Intent.OpenRoadIncidentDialog(reportDialogFlow.latLng)
             )

@@ -93,6 +93,7 @@
     <string name="map_markers_traffic_jam">Traffic jam</string>
     <string name="map_markers_wild_animals">Wild animals</string>
 
+    <string name="map_user_count">Online: %1$s</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>

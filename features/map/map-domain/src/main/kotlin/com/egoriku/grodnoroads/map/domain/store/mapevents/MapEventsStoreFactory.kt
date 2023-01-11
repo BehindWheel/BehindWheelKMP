@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
 import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
 import com.egoriku.grodnoroads.map.domain.repository.ReportsRepository
 import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
+import com.egoriku.grodnoroads.map.domain.repository.UserCountRepository
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.*
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.*
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ internal class MapEventsStoreFactory(
     private val storeFactory: StoreFactory,
     private val mobileCameraRepository: MobileCameraRepository,
     private val stationaryCameraRepository: StationaryCameraRepository,
+    private val userCountRepository: UserCountRepository,
     private val reportsRepository: ReportsRepository,
     private val analyticsTracker: AnalyticsTracker,
     private val crashlyticsTracker: CrashlyticsTracker
@@ -48,6 +50,11 @@ internal class MapEventsStoreFactory(
                     launch {
                         subscribeForReports {
                             dispatch(OnNewReports(data = it))
+                        }
+                    }
+                    launch {
+                        subscribeForUserCount {
+                            dispatch(OnUserCount(data = it))
                         }
                     }
                 }
@@ -79,6 +86,7 @@ internal class MapEventsStoreFactory(
                     is OnStationary -> copy(stationaryCameras = message.data)
                     is OnNewReports -> copy(reports = message.data)
                     is OnMobileCamera -> copy(mobileCamera = message.data)
+                    is OnUserCount -> copy(userCount = message.data)
                 }
             }
         ) {}
@@ -103,6 +111,15 @@ internal class MapEventsStoreFactory(
 
     private suspend fun subscribeForStationaryCameras(onLoaded: (List<StationaryCamera>) -> Unit) {
         stationaryCameraRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is Success -> onLoaded(result.value)
+                is Failure -> crashlyticsTracker.recordException(result.exception)
+            }
+        }
+    }
+
+    private suspend fun subscribeForUserCount(onLoaded: (Int) -> Unit) {
+        userCountRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
                 is Failure -> crashlyticsTracker.recordException(result.exception)

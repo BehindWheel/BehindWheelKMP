@@ -83,4 +83,6 @@
     <string name="map_header_drive_mode">Рэжым навігацыі</string>
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
+
+    <string name="map_user_count">Анлайн: %1$s</string>
 </resources>
