@@ -85,4 +85,5 @@
     <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
 
     <string name="map_user_count">Анлайн: %1$s</string>
+    <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
 </resources>

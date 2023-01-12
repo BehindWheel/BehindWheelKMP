@@ -100,4 +100,5 @@
     <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
 
     <string name="map_user_count">Онлайн: %1$s</string>
+    <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.map.foundation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -15,13 +16,63 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.map.R
+import com.skydoves.balloon.ArrowPositionRules
+import com.skydoves.balloon.compose.Balloon
+import com.skydoves.balloon.compose.rememberBalloonBuilder
+import com.skydoves.balloon.compose.setBackgroundColor
+import com.skydoves.balloon.compose.setTextColor
 import com.egoriku.grodnoroads.resources.R as R_resources
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
-    Surface(modifier = modifier.clip(RoundedCornerShape(10.dp))) {
+    val bgColor = MaterialTheme.colors.surface
+    val textColor = MaterialTheme.colors.onSurface
+
+    val builder = rememberBalloonBuilder {
+        setArrowSize(7)
+        setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+        setPaddingTop(4)
+        setPaddingBottom(4)
+        setPaddingLeft(8)
+        setPaddingRight(8)
+        setMarginHorizontal(12)
+        setCornerRadius(4f)
+        setAlpha(0.9f)
+        setBackgroundColor(bgColor)
+        setTextColor(textColor)
+    }
+
+    Balloon(
+        modifier = modifier,
+        builder = builder,
+        balloonContent = {
+            Text(
+                text = stringResource(id = R_resources.string.map_user_count_hint),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    ) { balloonWindow ->
+
+        UsersCountBadge(
+            onClick = {
+                balloonWindow.showAlignTop()
+            },
+            count = count
+        )
+    }
+}
+
+@Composable
+private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
+    Surface(modifier = Modifier
+        .clip(RoundedCornerShape(10.dp))
+        .clickable { onClick() }
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(2.dp),
