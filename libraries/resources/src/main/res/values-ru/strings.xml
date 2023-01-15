@@ -95,6 +95,8 @@
     <string name="map_default_location_berestovitca">Большая Берестовица</string>
     <string name="map_default_location_shuchin">Щучин</string>
     <string name="map_default_location_mosty">Мосты</string>
+    <string name="map_default_location_slonim">Слоним</string>
+    <string name="map_default_location_lida">Лида</string>
 
     <string name="map_header_drive_mode">Режим навигации</string>
     <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>

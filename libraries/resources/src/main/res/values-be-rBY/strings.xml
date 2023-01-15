@@ -82,6 +82,8 @@
     <string name="map_default_location_berestovitca">Вялікая Бераставіца</string>
     <string name="map_default_location_shuchin">Шчучын</string>
     <string name="map_default_location_mosty">Масты</string>
+    <string name="map_default_location_slonim">Слонім</string>
+    <string name="map_default_location_lida">Ліда</string>
 
     <string name="map_header_drive_mode">Рэжым навігацыі</string>
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
