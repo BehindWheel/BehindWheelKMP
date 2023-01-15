@@ -2,14 +2,15 @@ package com.egoriku.grodnoroads.map
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
+import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
@@ -23,6 +24,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
+import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
@@ -42,6 +44,7 @@ fun MapScreen(component: MapComponent) {
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
+        val userCount by component.userCount.collectAsState(initial = 0)
 
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
@@ -50,29 +53,30 @@ fun MapScreen(component: MapComponent) {
         )
         LabelsSubscription(component)
 
-        Box(modifier = Modifier.fillMaxSize()) {
-            val isMapLoaded = remember { mutableStateOf(false) }
+        val isMapLoaded = remember { mutableStateOf(false) }
 
-            GoogleMapComponent(
-                mapEvents = mapEvents,
-                appMode = appMode,
-                mapConfig = mapConfig,
-                lastLocation = location,
-                onMarkerClick = component::showMarkerInfoDialog,
-                isMapLoaded = isMapLoaded,
-                containsOverlay = mapAlertDialog != None
+        GoogleMapComponent(
+            mapEvents = mapEvents,
+            appMode = appMode,
+            mapConfig = mapConfig,
+            lastLocation = location,
+            onMarkerClick = component::showMarkerInfoDialog,
+            isMapLoaded = isMapLoaded,
+            containsOverlay = mapAlertDialog != None
+        ) {
+            AnimatedVisibility(
+                modifier = Modifier.matchParentSize(),
+                visible = !isMapLoaded.value,
+                enter = EnterTransition.None,
+                exit = fadeOut()
             ) {
-                AnimatedVisibility(
-                    modifier = Modifier.matchParentSize(),
-                    visible = !isMapLoaded.value,
-                    enter = EnterTransition.None,
-                    exit = fadeOut()
-                ) {
-                    LogoProgressIndicator()
-                }
+                LogoProgressIndicator()
             }
+        }
 
-            if (isMapLoaded.value) {
+        if (isMapLoaded.value) {
+            AlwaysKeepScreenOn(mapConfig.keepScreenOn)
+            Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(targetState = appMode) { state ->
                     when (state) {
                         AppMode.Default -> {
@@ -109,9 +113,20 @@ fun MapScreen(component: MapComponent) {
                         }
                     }
                 }
+                UsersCount(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(bottom = 4.dp, end = 8.dp),
+                    count = userCount
+                )
             }
         }
     }
+}
+
+@Composable
+private fun AlwaysKeepScreenOn(enabled: Boolean) {
+    KeepScreenOn(enabled)
 }
 
 @Composable

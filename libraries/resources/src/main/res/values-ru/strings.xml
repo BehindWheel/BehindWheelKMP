@@ -61,6 +61,8 @@
     <string name="appearance_app_language_be">Белорусский</string>
     <string name="appearance_app_language_system">Системный</string>
 
+    <string name="appearance_keep_screen_on">Не выключать экран</string>
+
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>
     <string name="map_traffic_jam_appearance">Пробки на карте</string>
@@ -75,7 +77,6 @@
     <string name="map_markers_car_crash">ДТП</string>
     <string name="map_markers_traffic_jam">Пробки</string>
     <string name="map_markers_wild_animals">Дикие животные</string>
-
 
     <string name="dialog_report_police">Сообщить о ГАИ</string>
     <string name="dialog_incident">Сообщить о проблеме</string>
@@ -98,4 +99,7 @@
     <string name="map_header_drive_mode">Режим навигации</string>
     <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
+
+    <string name="map_user_count">Онлайн: %1$s</string>
+    <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
 </resources>

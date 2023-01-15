@@ -8,8 +8,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.*
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.*
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceState
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
@@ -18,9 +17,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.util.currentAppLanguag
 import com.egoriku.grodnoroads.settings.appearance.domain.util.resetAppLanguage
 import com.egoriku.grodnoroads.settings.appearance.domain.util.setAppLanguage
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -42,7 +39,8 @@ class AppearanceStoreFactory(
                                 appLanguage = AppLanguage(
                                     current = Language.localeToLanguage(currentAppLanguage)
                                         ?: Language.System
-                                )
+                                ),
+                                keepScreenOn = KeepScreenOn(enabled = preferences.keepScreenOn)
                             )
                         }.collect {
                             dispatch(Message.NewSettings(it))
@@ -65,6 +63,8 @@ class AppearanceStoreFactory(
                                 Message.Dialog(dialogState = LanguageDialogState(it.preference))
                             )
                         }
+
+                        is KeepScreenOn -> error("Not supported")
                     }
                 }
                 onIntent<Intent.Update> { dialogResult ->
@@ -88,6 +88,13 @@ class AppearanceStoreFactory(
                             }
 
                             dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
+                        }
+                        is KeepScreenOn -> {
+                            launch {
+                                dataStore.edit {
+                                    updateKeepScreenOn(dialogResult.preference.enabled)
+                                }
+                            }
                         }
                     }
                 }

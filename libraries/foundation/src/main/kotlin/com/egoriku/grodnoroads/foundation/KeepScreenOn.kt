@@ -5,11 +5,11 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalView
 
 @Composable
-fun KeepScreenOn() {
+fun KeepScreenOn(enabled: Boolean = true) {
     val currentView = LocalView.current
 
-    DisposableEffect(Unit) {
-        currentView.keepScreenOn = true
+    DisposableEffect(enabled) {
+        currentView.keepScreenOn = enabled
         onDispose {
             currentView.keepScreenOn = false
         }

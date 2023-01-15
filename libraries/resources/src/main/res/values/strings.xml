@@ -63,6 +63,8 @@
     <string name="appearance_app_language_be">Belarusian</string>
     <string name="appearance_app_language_system">System</string>
 
+    <string name="appearance_keep_screen_on">Keep screen on</string>
+
     <!-- Map -->
     <string name="map_header_default_location">Default location</string>
     <string name="map_default_location">My City</string>
@@ -93,6 +95,8 @@
     <string name="map_markers_traffic_jam">Traffic jam</string>
     <string name="map_markers_wild_animals">Wild animals</string>
 
+    <string name="map_user_count">Online: %1$s</string>
+    <string name="map_user_count_hint">Based on user activity in the last 10 minutes</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>

@@ -8,7 +8,8 @@ internal data class MapInternalConfig(
     val alertDistance: Int,
     val mapInfo: MapInfo,
     val googleMapStyle: Style,
-    val trafficJanOnMap: Boolean
+    val trafficJanOnMap: Boolean,
+    val keepScreenOn: Boolean
 ) {
     internal data class MapInfo(
         val showMobileCameras: Boolean,
@@ -35,7 +36,8 @@ internal data class MapInternalConfig(
                 showWildAnimals = false
             ),
             googleMapStyle = Style.Minimal,
-            trafficJanOnMap = false
+            trafficJanOnMap = false,
+            keepScreenOn = false
         )
     }
 }

@@ -2,10 +2,12 @@ package com.egoriku.grodnoroads.settings.appearance.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Brightness7
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.runtime.Composable
@@ -13,8 +15,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
+import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
@@ -23,8 +27,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppLanguageDialog
 import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppThemeDialog
@@ -56,10 +59,14 @@ fun AppearanceScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .verticalScroll(rememberScrollState())
         ) {
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
+
+            SettingsHeader(title = stringResource(id = R.string.settings_category_other))
+            KeepScreenOnSettings(state = state, onModify = appearanceComponent::update)
         }
     }
 }
@@ -91,6 +98,23 @@ private fun AppThemeSection(
         text = stringResource(R.string.appearance_app_theme),
         value = stringResource(id = appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },
+    )
+}
+
+@Composable
+private fun KeepScreenOnSettings(
+    state: State,
+    onModify: (KeepScreenOn) -> Unit
+) {
+    val keepScreenOn = state.appearanceState.keepScreenOn
+
+    CheckboxSettings(
+        imageVector = Icons.Default.Brightness7,
+        stringResId = R.string.appearance_keep_screen_on,
+        isChecked = keepScreenOn.enabled,
+        onCheckedChange = {
+            onModify(keepScreenOn.copy(enabled = it))
+        }
     )
 }
 

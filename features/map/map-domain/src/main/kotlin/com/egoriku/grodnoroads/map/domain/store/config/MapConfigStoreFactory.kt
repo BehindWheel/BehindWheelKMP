@@ -14,6 +14,7 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.util.CityArea
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
@@ -58,7 +59,8 @@ internal class MapConfigStoreFactory(
                                     showWildAnimals = pref.isShowWildAnimals
                                 ),
                                 googleMapStyle = pref.googleMapStyle,
-                                trafficJanOnMap = pref.trafficJamOnMap
+                                trafficJanOnMap = pref.trafficJamOnMap,
+                                keepScreenOn = pref.keepScreenOn
                             )
                         }.collect {
                             dispatch(Message.OnMapConfigInternal(it))
