@@ -40,7 +40,7 @@ private fun StationaryCameras(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_stationary_camera,
-        textRes = R.string.map_markers_stationary_cameras,
+        stringResId = R.string.map_markers_stationary_cameras,
         isChecked = stationaryCameras.isShow,
         onCheckedChange = {
             onCheckedChange(stationaryCameras.copy(isShow = it))
@@ -57,7 +57,7 @@ private fun MobileCameras(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_mobile_camera,
-        textRes = R.string.map_markers_mobile_cameras,
+        stringResId = R.string.map_markers_mobile_cameras,
         isChecked = mobileCameras.isShow,
         onCheckedChange = {
             onCheckedChange(mobileCameras.copy(isShow = it))
@@ -74,7 +74,7 @@ private fun TrafficPolice(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_traffic_police,
-        textRes = R.string.map_markers_traffic_police,
+        stringResId = R.string.map_markers_traffic_police,
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
             onCheckedChange(trafficPolice.copy(isShow = it))
@@ -91,7 +91,7 @@ private fun RoadIncidents(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_warning,
-        textRes = R.string.map_markers_incidents,
+        stringResId = R.string.map_markers_incidents,
         isChecked = roadIncident.isShow,
         onCheckedChange = {
             onCheckedChange(roadIncident.copy(isShow = it))
@@ -108,7 +108,7 @@ private fun CarCrash(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_car_crash,
-        textRes = R.string.map_markers_car_crash,
+        stringResId = R.string.map_markers_car_crash,
         isChecked = carCrash.isShow,
         onCheckedChange = {
             onCheckedChange(carCrash.copy(isShow = it))
@@ -125,7 +125,7 @@ private fun TrafficJam(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_traffic_jam,
-        textRes = R.string.map_markers_traffic_jam,
+        stringResId = R.string.map_markers_traffic_jam,
         isChecked = trafficJam.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJam.copy(isShow = it))
@@ -142,7 +142,7 @@ private fun WildAnimals(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_wild_animals,
-        textRes = R.string.map_markers_wild_animals,
+        stringResId = R.string.map_markers_wild_animals,
         isChecked = wildAnimals.isShow,
         onCheckedChange = {
             onCheckedChange(wildAnimals.copy(isShow = it))

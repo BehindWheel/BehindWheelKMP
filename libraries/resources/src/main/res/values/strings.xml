@@ -63,6 +63,8 @@
     <string name="appearance_app_language_be">Belarusian</string>
     <string name="appearance_app_language_system">System</string>
 
+    <string name="appearance_keep_screen_on">Keep screen on</string>
+
     <!-- Map -->
     <string name="map_header_default_location">Default location</string>
     <string name="map_default_location">My City</string>

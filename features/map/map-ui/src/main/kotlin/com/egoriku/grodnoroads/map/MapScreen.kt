@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
+import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
@@ -74,6 +75,7 @@ fun MapScreen(component: MapComponent) {
         }
 
         if (isMapLoaded.value) {
+            AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(targetState = appMode) { state ->
                     when (state) {
@@ -120,6 +122,11 @@ fun MapScreen(component: MapComponent) {
             }
         }
     }
+}
+
+@Composable
+private fun AlwaysKeepScreenOn(enabled: Boolean) {
+    KeepScreenOn(enabled)
 }
 
 @Composable

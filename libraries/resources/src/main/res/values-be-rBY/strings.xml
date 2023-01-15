@@ -51,6 +51,9 @@
     <string name="appearance_app_language_en">Англійская</string>
     <string name="appearance_app_language_be">Беларуская</string>
     <string name="appearance_app_language_system">Сістэмная</string>
+
+    <string name="appearance_keep_screen_on">Не выключаць экран</string>
+
     <string name="map_header_appearance">Знешні выгляд</string>
     <string name="map_traffic_jam_appearance">Заторы на карце</string>
     <string name="map_google_map_style_minimal">Мінімалізм</string>

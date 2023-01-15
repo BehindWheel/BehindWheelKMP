@@ -61,7 +61,8 @@ internal class MapComponentImpl(
             MapConfig(
                 zoomLevel = it.zoomLevel,
                 googleMapStyle = it.mapInternalConfig.googleMapStyle,
-                trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap
+                trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
+                keepScreenOn = it.mapInternalConfig.keepScreenOn
             )
         }
 
