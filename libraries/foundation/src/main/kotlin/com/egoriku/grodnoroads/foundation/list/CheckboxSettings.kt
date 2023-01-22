@@ -64,7 +64,7 @@ fun CheckboxSettings(
             )
             .padding(start = 8.dp),
         icon = {
-            Image(
+            Icon(
                 imageVector = imageVector,
                 contentDescription = null
             )
