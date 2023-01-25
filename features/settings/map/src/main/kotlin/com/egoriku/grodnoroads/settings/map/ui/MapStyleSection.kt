@@ -69,7 +69,7 @@ private fun TrafficJam(
 
     CheckboxSettings(
         iconRes = R.drawable.ic_traffic_light,
-        textRes = R.string.map_traffic_jam_appearance,
+        stringResId = R.string.map_traffic_jam_appearance,
         isChecked = trafficJamOnMap.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJamOnMap.copy(isShow = it))

@@ -15,6 +15,7 @@ interface MapComponent {
     val mapAlertDialog: Flow<MapAlertDialog>
     val mapConfig: Flow<MapConfig>
     val mapEvents: Flow<ImmutableList<MapEvent>>
+    val userCount: Flow<Int>
 
     val labels: Flow<LocationStore.Label>
 

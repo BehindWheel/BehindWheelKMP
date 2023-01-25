@@ -78,7 +78,7 @@ fun GoogleMapComponent(
     }
 
     LaunchedEffect(appMode) {
-        if (appMode == AppMode.Default) {
+        if (appMode == AppMode.Default && isMapLoaded.value) {
             cameraPositionState.animate(
                 buildCameraPosition(
                     target = cameraPositionValues.initialLatLng,
@@ -99,22 +99,26 @@ fun GoogleMapComponent(
 
         if (appMode == AppMode.Drive) {
             if (mapConfig.zoomLevel == cameraPositionState.position.zoom) {
-                cameraPositionState.animate(
-                    update = buildCameraPosition(
-                        target = cameraPositionValues.targetLatLngWithOffset,
-                        bearing = cameraPositionValues.bearing,
-                        zoomLevel = mapConfig.zoomLevel
-                    ),
-                    durationMs = 700
-                )
+                if (isMapLoaded.value) {
+                    cameraPositionState.animate(
+                        update = buildCameraPosition(
+                            target = cameraPositionValues.targetLatLngWithOffset,
+                            bearing = cameraPositionValues.bearing,
+                            zoomLevel = mapConfig.zoomLevel
+                        ),
+                        durationMs = 700
+                    )
+                }
             } else {
-                cameraPositionState.animate(
-                    update = CameraUpdateFactory.newLatLngZoom(
-                        /* latLng = */ cameraPositionValues.initialLatLng,
-                        /* zoom = */ mapConfig.zoomLevel
-                    ),
-                    durationMs = 700
-                )
+                if (isMapLoaded.value) {
+                    cameraPositionState.animate(
+                        update = CameraUpdateFactory.newLatLngZoom(
+                            /* latLng = */ cameraPositionValues.initialLatLng,
+                            /* zoom = */ mapConfig.zoomLevel
+                        ),
+                        durationMs = 700
+                    )
+                }
             }
         }
     }
@@ -185,14 +189,18 @@ fun GoogleMapComponent(
             modifier = Modifier.padding(end = 16.dp),
             zoomIn = {
                 coroutineScope.launch {
-                    cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
-                    cameraPositionChangeCount++
+                    if (isMapLoaded.value) {
+                        cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
+                        cameraPositionChangeCount++
+                    }
                 }
             },
             zoomOut = {
                 coroutineScope.launch {
-                    cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
-                    cameraPositionChangeCount++
+                    if (isMapLoaded.value) {
+                        cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
+                        cameraPositionChangeCount++
+                    }
                 }
             }
         )

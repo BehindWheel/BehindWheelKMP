@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.settings.root.screen.ui.section
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContactSupport
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,10 +36,7 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(chatUrl) }
         ) {
             Icon(
-                modifier = Modifier
-                    .size(32.dp)
-                    .padding(end = 2.dp),
-                painter = painterResource(id = R.drawable.ic_telegram_logo_minimal),
+                imageVector = Icons.Default.ContactSupport,
                 contentDescription = null
             )
         }
@@ -48,7 +46,7 @@ fun SocialNetworkSection() {
         ) {
             Icon(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(24.dp)
                     .padding(end = 2.dp),
                 painter = painterResource(id = R.drawable.ic_telegram_logo_minimal),
                 contentDescription = null

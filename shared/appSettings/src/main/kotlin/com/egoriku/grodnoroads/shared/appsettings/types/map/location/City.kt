@@ -11,17 +11,21 @@ enum class City(val cityName: String, val latLng: LatLng) {
     Porechye(cityName = "porechye", latLng = LatLng(53.885623, 24.137678)),
     Berestovitca(cityName = "berestovitca", latLng = LatLng(53.191924, 24.018453)),
     Shuchin(cityName = "shuchin", latLng = LatLng(53.604412, 24.742567)),
-    Mosty(cityName = "mosty", latLng = LatLng(53.413523, 24.542953));
+    Mosty(cityName = "mosty", latLng = LatLng(53.413523, 24.542953)),
+    Slonim(cityName = "slonim", latLng = LatLng(53.092705, 25.319268)),
+    Lida(cityName = "lida", latLng = LatLng(53.891667, 25.302254));
 
     companion object {
         val supportedCities = listOf(
             Berestovitca,
             Volkovysk,
             Grodno,
+            Lida,
             Mosty,
             Ozery,
             Porechye,
             Skidel,
+            Slonim,
             Shuchin,
         )
 
@@ -37,6 +41,8 @@ enum class City(val cityName: String, val latLng: LatLng) {
             Berestovitca -> R.string.map_default_location_berestovitca
             Shuchin -> R.string.map_default_location_shuchin
             Mosty -> R.string.map_default_location_mosty
+            Slonim -> R.string.map_default_location_slonim
+            Lida -> R.string.map_default_location_lida
         }
     }
 }

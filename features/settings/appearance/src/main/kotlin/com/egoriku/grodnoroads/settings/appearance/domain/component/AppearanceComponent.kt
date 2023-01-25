@@ -1,8 +1,7 @@
 package com.egoriku.grodnoroads.settings.appearance.domain.component
 
 import android.os.Build
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
@@ -19,6 +18,7 @@ interface AppearanceComponent {
     data class AppearanceState(
         val appTheme: AppTheme = AppTheme(),
         val appLanguage: AppLanguage = AppLanguage(),
+        val keepScreenOn: KeepScreenOn = KeepScreenOn()
     )
 
     sealed interface AppearancePref {
@@ -39,6 +39,10 @@ interface AppearanceComponent {
                 add(Language.English)
             }
         ) : AppearancePref
+
+        data class KeepScreenOn(
+            val enabled: Boolean = false
+        ): AppearancePref
     }
 
     sealed interface AppearanceDialogState {
