@@ -1,16 +1,17 @@
-import java.io.FileInputStream
-import java.util.*
+package com.egoriku.grodnoroads.extension
+
+import java.util.Properties
 
 fun Properties.propertyInt(key: String): Int {
     val property = getProperty(key)
 
     if (property.isNullOrEmpty()) {
-        throw IllegalArgumentException("property $key is null")
+        error("property $key is null")
     }
 
     return try {
         property.toInt()
     } catch (exception: NumberFormatException) {
-        throw IllegalArgumentException("Cast exception for $key")
+        error("Cast exception for $key")
     }
 }

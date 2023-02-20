@@ -1,6 +1,7 @@
 @file:Suppress("unused")
 
 import com.android.build.gradle.LibraryExtension
+import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
 import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -42,5 +43,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
                 buildConfig = false
             }
         }
+
+        configureKotlinAndroidToolchain()
     }
 }

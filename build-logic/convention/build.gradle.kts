@@ -13,13 +13,17 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("grodnoroadsLibrary") {
+        register("grodnoroads.library") {
             id = "grodnoroads.library"
             implementationClass = "AndroidLibraryPlugin"
         }
-        register("grodnoroadsLibraryCompose") {
+        register("grodnoroads.library.compose") {
             id = "grodnoroads.library.compose"
             implementationClass = "AndroidLibraryComposePlugin"
+        }
+        register("grodnoroads.application") {
+            id = "grodnoroads.application"
+            implementationClass = "AndroidApplicationPlugin"
         }
     }
 }

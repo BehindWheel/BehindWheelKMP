@@ -1,5 +1,7 @@
+package com.egoriku.grodnoroads.extension
+
 import java.io.FileInputStream
-import java.util.*
+import java.util.Properties
 
 fun provideVersionCode(): Int {
     val properties: Properties = loadVersionProperties()

@@ -1,11 +1,15 @@
+import com.egoriku.grodnoroads.extension.debug
+import com.egoriku.grodnoroads.extension.provideVersionCode
+import com.egoriku.grodnoroads.extension.provideVersionName
+import com.egoriku.grodnoroads.extension.release
+
 plugins {
-    id("com.android.application")
+    id("grodnoroads.application")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
-    kotlin("android")
 }
 
 android {
