@@ -87,15 +87,6 @@ dependencies {
 
     implementation(projects.features.settings.root)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
-
-    implementation(libs.maps)
-
-    implementation(libs.gms.location)
-    implementation("com.google.android.material:material:1.7.0")
-
     implementation(libs.accompanist.systemuicontroller)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -113,15 +104,20 @@ dependencies {
 
     implementation(libs.coroutines)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
-
+    implementation(libs.google.maps)
+    implementation(libs.google.material)
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)
+    implementation(libs.play.services.location)
 }
 
 secrets {

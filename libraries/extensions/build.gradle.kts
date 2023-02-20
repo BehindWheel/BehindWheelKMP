@@ -8,14 +8,12 @@ android {
 
 dependencies {
     implementation(libs.androidx.appcompat)
-
     implementation(libs.coroutines)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
 
-    implementation(libs.gms.maps)
-
-    implementation(libs.maps.utils)
+    implementation(libs.google.maps.utils)
+    implementation(libs.play.services.maps)
 }
