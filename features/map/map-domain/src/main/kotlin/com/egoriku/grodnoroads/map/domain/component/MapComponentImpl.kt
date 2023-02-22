@@ -8,14 +8,20 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.*
+import com.egoriku.grodnoroads.map.domain.model.ReportType.RoadIncident
+import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
+import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.Intent.OpenReportTrafficPoliceDialog
+import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.Intent.OpenRoadIncidentDialog
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -90,23 +96,41 @@ internal class MapComponentImpl(
 
     override fun startLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
-        mapConfigStore.accept(Intent.StartDriveMode)
+        mapConfigStore.accept(StartDriveMode)
     }
 
     override fun stopLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
-        mapConfigStore.accept(Intent.StopDriveMode)
+        mapConfigStore.accept(StopDriveMode)
     }
 
     override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
-    override fun reportAction(params: MapEventsStore.Intent.ReportAction.Params) {
-        mapEventsStore.accept(MapEventsStore.Intent.ReportAction(params = params))
+    override fun reportAction(params: ReportAction.Params) {
+        mapEventsStore.accept(ReportAction(params = params))
         dialogStore.accept(DialogStore.Intent.CloseDialog)
+
+        if (mapConfigStore.state.reportType != null) {
+            mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+        }
     }
 
-    override fun reportWithoutLocation() {
-        mapConfigStore.accept(Intent.ReportWithoutLocation)
+    override fun openChooseLocation(reportType: ReportType) {
+        mapConfigStore.accept(ChooseLocation.OpenChooseLocation(reportType))
+    }
+
+    override fun cancelChooseLocationFlow() {
+        mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+    }
+
+    override fun reportChooseLocation(latLng: LatLng) {
+        val reportType = mapConfigStore.state.reportType ?: return
+
+        when (reportType) {
+            TrafficPolice -> dialogStore.accept(intent = OpenReportTrafficPoliceDialog(latLng))
+            RoadIncident -> dialogStore.accept(intent = OpenRoadIncidentDialog(latLng))
+        }
+        //locationStore.accept(LocationStore.Intent.SetLocation(latLng))
     }
 
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
@@ -115,11 +139,11 @@ internal class MapComponentImpl(
     override fun openReportFlow(reportDialogFlow: ReportDialogFlow) {
         when (reportDialogFlow) {
             is ReportDialogFlow.TrafficPolice -> dialogStore.accept(
-                intent = DialogStore.Intent.OpenReportTrafficPoliceDialog(reportDialogFlow.latLng)
+                intent = OpenReportTrafficPoliceDialog(reportDialogFlow.latLng)
             )
 
             is ReportDialogFlow.RoadIncident -> dialogStore.accept(
-                intent = DialogStore.Intent.OpenRoadIncidentDialog(reportDialogFlow.latLng)
+                intent = OpenRoadIncidentDialog(reportDialogFlow.latLng)
             )
         }
     }
@@ -127,7 +151,7 @@ internal class MapComponentImpl(
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
-        is Label.NewLocation -> mapConfigStore.accept(Intent.CheckLocation(label.latLng))
+        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
         else -> Unit
     }
 }

@@ -11,22 +11,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.extension.reLaunch
-import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberCameraPositionValues
+import com.egoriku.grodnoroads.map.foundation.map.configuration.calculateCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
 import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
@@ -43,9 +43,13 @@ fun GoogleMapComponent(
     onMapLoaded: () -> Unit,
     containsOverlay: Boolean,
     loading: @Composable BoxScope.() -> Unit,
+    onPositionChanged: (LatLng) -> Unit = {},
+    onCameraMoving: (Boolean) -> Unit,
+    onProjection: (Projection?) -> Unit,
     content: (@Composable @GoogleMapComposable () -> Unit),
 ) {
     if (mapConfig == MapConfig.EMPTY) return
+
     var isMapLoaded by remember { mutableStateOf(false) }
 
     var cameraPositionChangeCount by remember { mutableStateOf(0) }
@@ -53,8 +57,20 @@ fun GoogleMapComponent(
 
     val markerCache = get<MarkerCache>()
 
+    val screenHeight = LocalConfiguration.current.screenHeightDp
     val cameraPositionState = rememberCameraPositionState()
-    val cameraPositionValues = rememberCameraPositionValues(cameraPositionState, lastLocation)
+
+    val cameraPositionValues by remember(cameraPositionState, lastLocation) {
+        derivedStateOf {
+            val projection = cameraPositionState.projection
+
+            calculateCameraPositionValues(
+                screenHeight = screenHeight,
+                projection = projection,
+                lastLocation = lastLocation
+            )
+        }
+    }
 
     val chooseLocationState = rememberMarkerState(position = lastLocation.latLng)
     var chosenLocation by remember { mutableStateOf(chooseLocationState.position) }
@@ -63,7 +79,17 @@ fun GoogleMapComponent(
         chosenLocation = chooseLocationState.position
     }
 
-    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(cameraPositionState.position) {
+        onPositionChanged(cameraPositionState.position.target)
+    }
+
+    LaunchedEffect(cameraPositionState.isMoving) {
+        onCameraMoving(cameraPositionState.isMoving)
+    }
+
+    LaunchedEffect(cameraPositionState.projection) {
+        onProjection(cameraPositionState.projection)
+    }
 
     LaunchedEffect(cameraPositionChangeCount, containsOverlay) {
         if (cameraPositionChangeCount != 0) {
@@ -78,10 +104,21 @@ fun GoogleMapComponent(
     }
 
     LaunchedEffect(appMode) {
-        if (appMode == AppMode.Default && isMapLoaded.value) {
+        if (appMode == AppMode.Default && isMapLoaded) {
             cameraPositionState.animate(
                 buildCameraPosition(
                     target = cameraPositionValues.initialLatLng,
+                    bearing = cameraPositionValues.bearing,
+                    zoomLevel = mapConfig.zoomLevel,
+                    tilt = 0.0f
+                ),
+                700
+            )
+        }
+        if (appMode == AppMode.ChooseLocation && isMapLoaded) {
+            cameraPositionState.animate(
+                buildCameraPosition(
+                    target = cameraPositionState.position.target,
                     bearing = cameraPositionValues.bearing,
                     zoomLevel = mapConfig.zoomLevel,
                     tilt = 0.0f
@@ -99,26 +136,22 @@ fun GoogleMapComponent(
 
         if (appMode == AppMode.Drive) {
             if (mapConfig.zoomLevel == cameraPositionState.position.zoom) {
-                if (isMapLoaded.value) {
-                    cameraPositionState.animate(
-                        update = buildCameraPosition(
-                            target = cameraPositionValues.targetLatLngWithOffset,
-                            bearing = cameraPositionValues.bearing,
-                            zoomLevel = mapConfig.zoomLevel
-                        ),
-                        durationMs = 700
-                    )
-                }
+                cameraPositionState.animate(
+                    update = buildCameraPosition(
+                        target = cameraPositionValues.targetLatLngWithOffset,
+                        bearing = cameraPositionValues.bearing,
+                        zoomLevel = mapConfig.zoomLevel
+                    ),
+                    durationMs = 700
+                )
             } else {
-                if (isMapLoaded.value) {
-                    cameraPositionState.animate(
-                        update = CameraUpdateFactory.newLatLngZoom(
-                            /* latLng = */ cameraPositionValues.initialLatLng,
-                            /* zoom = */ mapConfig.zoomLevel
-                        ),
-                        durationMs = 700
-                    )
-                }
+                cameraPositionState.animate(
+                    update = CameraUpdateFactory.newLatLngZoom(
+                        /* latLng = */ cameraPositionValues.initialLatLng,
+                        /* zoom = */ mapConfig.zoomLevel
+                    ),
+                    durationMs = 700
+                )
             }
         }
     }
@@ -167,61 +200,54 @@ fun GoogleMapComponent(
                     zIndex = 1f
                 )
             }
-
-            val markerClick: (Marker) -> Boolean = {
-                logD("${it.title} was clicked")
-                cameraPositionState.projection?.let { projection ->
-                    logD("The current projection is: $projection")
-                }
-                false
-            }
-
-            if (appMode == AppMode.ChooseLocation) {
-                Marker(
-                    state = chooseLocationState,
-                    title = "Choose Location",
-                    onClick = markerClick
-                )
-            }
         }
-
-        OverlayActions(
-            modifier = Modifier.padding(end = 16.dp),
-            zoomIn = {
-                coroutineScope.launch {
-                    if (isMapLoaded.value) {
-                        cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
-                        cameraPositionChangeCount++
-                    }
-                }
-            },
-            zoomOut = {
-                coroutineScope.launch {
-                    if (isMapLoaded.value) {
-                        cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
-                        cameraPositionChangeCount++
-                    }
-                }
-            }
-        )
 
         if (!isMapLoaded) {
             loading()
         }
-
-        //DebugView(cameraPositionState = cameraPositionState)
     }
+
+    if (isMapLoaded) {
+        MapOverlayActions(
+            cameraPositionState = cameraPositionState,
+            onChanged = { cameraPositionChangeCount++ }
+        )
+    }
+    // DebugView(cameraPositionState = cameraPositionState)
 }
 
 @Composable
-private fun BoxScope.OverlayActions(
-    modifier: Modifier = Modifier,
-    zoomIn: () -> Unit,
-    zoomOut: () -> Unit
+fun MapOverlayActions(
+    cameraPositionState: CameraPositionState,
+    onChanged: () -> Unit
 ) {
-    Column(modifier = modifier.align(Alignment.CenterEnd)) {
-        CloseAction(imageVector = Icons.Default.Add, onClick = zoomIn)
-        CloseAction(imageVector = Icons.Default.Remove, onClick = zoomOut)
+    val coroutineScope = rememberCoroutineScope()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .padding(end = 16.dp)
+                .align(Alignment.CenterEnd)
+        ) {
+            CloseAction(
+                imageVector = Icons.Default.Add,
+                onClick = {
+                    coroutineScope.launch {
+                        cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
+                        onChanged()
+                    }
+                }
+            )
+            CloseAction(
+                imageVector = Icons.Default.Remove,
+                onClick = {
+                    coroutineScope.launch {
+                        cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
+                        onChanged()
+                    }
+                }
+            )
+        }
     }
 }
 

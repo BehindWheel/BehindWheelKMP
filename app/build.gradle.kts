@@ -20,8 +20,8 @@ android {
         compileSdk = libs.versions.compileSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
 
-        versionCode = provideVersionCode()
-        versionName = provideVersionName()
+        versionCode = provideVersionCode("app/version.properties")
+        versionName = provideVersionName("app/version.properties")
         resourceConfigurations += listOf("en", "ru", "be-rBY")
     }
 

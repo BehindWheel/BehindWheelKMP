@@ -9,7 +9,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -21,7 +20,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.logD
@@ -54,15 +52,8 @@ fun PermissionButton(
         }
     }
 
-    val borderColor = when {
-        MaterialTheme.colors.isLight -> Color.Black
-        else -> MaterialTheme.colors.onSurface
-    }
-
     Button(
-        modifier = modifier
-            .size(80.dp)
-            .border(1.dp, borderColor, CircleShape),
+        modifier = modifier.size(80.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
         shape = CircleShape,
         onClick = {

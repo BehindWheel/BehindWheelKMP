@@ -10,6 +10,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
+import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.util.CityArea
@@ -35,6 +36,7 @@ internal class MapConfigStoreFactory(
         data class OnMapConfigInternal(val mapConfig: MapInternalConfig) : Message
         data class OnZoomLevel(val zoomLevel: Float) : Message
         data class ChangeAppMode(val appMode: AppMode) : Message
+        data class UpdateReportType(val reportType: ReportType?) : Message
     }
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -95,8 +97,15 @@ internal class MapConfigStoreFactory(
                     dispatch(Message.ChangeAppMode(appMode = AppMode.Default))
                     dispatch(Message.OnZoomLevel(zoomLevel = 12.5f))
                 }
-                onIntent<ReportWithoutLocation> {
+                onIntent<ChooseLocation.OpenChooseLocation> {
                     dispatch(Message.ChangeAppMode(appMode = AppMode.ChooseLocation))
+                    dispatch(Message.OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    dispatch(Message.UpdateReportType(reportType = it.reportType))
+                }
+                onIntent<ChooseLocation.CancelChooseLocation> {
+                    dispatch(Message.ChangeAppMode(appMode = AppMode.Default))
+                    dispatch(Message.OnZoomLevel(zoomLevel = 12.5f))
+                    dispatch(Message.UpdateReportType(reportType = null))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
@@ -106,6 +115,7 @@ internal class MapConfigStoreFactory(
                     is Message.OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is Message.OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
                     is Message.ChangeAppMode -> copy(appMode = message.appMode)
+                    is Message.UpdateReportType -> copy(reportType = message.reportType)
                 }
             }) {}
 }
