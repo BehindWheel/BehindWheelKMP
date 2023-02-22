@@ -46,6 +46,7 @@ fun GoogleMapComponent(
     onPositionChanged: (LatLng) -> Unit = {},
     onCameraMoving: (Boolean) -> Unit,
     onProjection: (Projection?) -> Unit,
+    onMapZoom: (Float) -> Unit,
     content: (@Composable @GoogleMapComposable () -> Unit),
 ) {
     if (mapConfig == MapConfig.EMPTY) return
@@ -89,6 +90,9 @@ fun GoogleMapComponent(
 
     LaunchedEffect(cameraPositionState.projection) {
         onProjection(cameraPositionState.projection)
+    }
+    LaunchedEffect(cameraPositionState.position.zoom) {
+        onMapZoom(cameraPositionState.position.zoom)
     }
 
     LaunchedEffect(cameraPositionChangeCount, containsOverlay) {
@@ -207,6 +211,10 @@ fun GoogleMapComponent(
         if (!isMapLoaded) {
             loading()
         }
+        /* DebugView(
+             modifier = Modifier.align(Alignment.TopCenter),
+             cameraPositionState = cameraPositionState
+         )*/
     }
 
     if (isMapLoaded) {
@@ -215,7 +223,6 @@ fun GoogleMapComponent(
             onChanged = { cameraPositionChangeCount++ }
         )
     }
-    // DebugView(cameraPositionState = cameraPositionState)
 }
 
 @Composable

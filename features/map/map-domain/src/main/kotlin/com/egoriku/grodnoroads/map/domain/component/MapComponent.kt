@@ -26,6 +26,7 @@ interface MapComponent {
 
     fun openChooseLocation(reportType: ReportType)
     fun reportChooseLocation(latLng: LatLng)
+    fun setUserMapZoom(zoom: Float)
     fun cancelChooseLocationFlow()
 
     fun startLocationUpdates()

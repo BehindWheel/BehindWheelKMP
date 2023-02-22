@@ -130,7 +130,10 @@ internal class MapComponentImpl(
             TrafficPolice -> dialogStore.accept(intent = OpenReportTrafficPoliceDialog(latLng))
             RoadIncident -> dialogStore.accept(intent = OpenRoadIncidentDialog(latLng))
         }
-        //locationStore.accept(LocationStore.Intent.SetLocation(latLng))
+    }
+
+    override fun setUserMapZoom(zoom: Float) {
+        mapConfigStore.accept(ChooseLocation.UserMapZoom(zoom))
     }
 
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =

@@ -17,6 +17,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
         sealed interface ChooseLocation {
             data class OpenChooseLocation(val reportType: ReportType) : Intent
+            data class UserMapZoom(val zoom: Float) : Intent
             object CancelChooseLocation : Intent
         }
     }
@@ -24,6 +25,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
     data class StoreState(
         val mapInternalConfig: MapInternalConfig = MapInternalConfig.EMPTY,
         val zoomLevel: Float = 12.5f,
+        val userZoomLevel: Float = 0f,
         val appMode: AppMode = AppMode.Default,
         val reportType: ReportType? = null
     )

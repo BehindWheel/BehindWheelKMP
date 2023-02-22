@@ -71,17 +71,6 @@ internal class LocationStoreFactory(
                 onIntent<DisabledLocation> {
                     publish(Label.ShowToast(resId = R.string.toast_location_disabled))
                 }
-                onIntent<SetLocation> {
-                   /* dispatch(
-                        Message.OnNewLocation(
-                            lastLocation = LastLocation(
-                                latLng = it.latLng,
-                                bearing = 0f,
-                                speed = -1
-                            )
-                        )
-                    )*/
-                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
