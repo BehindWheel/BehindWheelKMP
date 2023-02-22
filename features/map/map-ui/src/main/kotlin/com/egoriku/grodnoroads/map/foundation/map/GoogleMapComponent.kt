@@ -104,6 +104,8 @@ fun GoogleMapComponent(
     }
 
     LaunchedEffect(appMode) {
+        if (lastLocation == LastLocation.None) return@LaunchedEffect
+
         if (appMode == AppMode.Default && isMapLoaded) {
             cameraPositionState.animate(
                 buildCameraPosition(
