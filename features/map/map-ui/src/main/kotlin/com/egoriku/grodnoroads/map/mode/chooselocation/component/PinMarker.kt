@@ -41,8 +41,8 @@ fun PinMarker(
     animate: Boolean,
     onGloballyPositioned: (Offset) -> Unit
 ) {
-    val startColor = LocalContentColor.current.copy(alpha = 0.4f)
-    val endColor = LocalContentColor.current.copy(alpha = 0.85f)
+    val startColor = LocalContentColor.current.copy(alpha = 0.85f)
+    val endColor = LocalContentColor.current.copy(alpha = 0.4f)
 
     var markerOffset by rememberMutableState(animate) { if (animate) -verticalOffset else 0.dp }
     val markerTranslation by animateDpAsState(target = markerOffset, duration = duration) {
