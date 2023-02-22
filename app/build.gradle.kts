@@ -3,13 +3,14 @@ import com.egoriku.grodnoroads.extension.provideVersionCode
 import com.egoriku.grodnoroads.extension.provideVersionName
 import com.egoriku.grodnoroads.extension.release
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("grodnoroads.application")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.devtools.ksp")
-    id("kotlin-parcelize")
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.secrets)
 }
 
 android {

@@ -2,11 +2,11 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.epmedu.animeal"
+group = "com.egoriku.grodnoroads"
 
 dependencies {
-    compileOnly(libs.gradle.plugin.buildtools)
-    compileOnly(libs.gradle.plugin.kotlin)
+    compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.gradle.plugin)
 
     compileOnly(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

@@ -5,15 +5,14 @@ import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
 import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 
 class AndroidLibraryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        with(pluginManager) {
-            apply("com.android.library")
-            apply("org.jetbrains.kotlin.android")
-        }
+        apply(plugin = libs.plugins.kotlin.android.get().pluginId)
+        apply(plugin = libs.plugins.android.library.get().pluginId)
 
         extensions.configure<LibraryExtension> {
             defaultConfig {
