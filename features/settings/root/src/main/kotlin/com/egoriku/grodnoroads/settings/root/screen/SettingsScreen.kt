@@ -8,7 +8,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
@@ -21,7 +20,6 @@ import com.egoriku.grodnoroads.settings.root.domain.component.SettingsComponent
 import com.egoriku.grodnoroads.settings.root.screen.ui.SettingsUi
 import com.egoriku.grodnoroads.settings.whatsnew.screen.WhatsNewScreen
 
-@OptIn(ExperimentalDecomposeApi::class)
 @Composable
 fun SettingsScreen(settingsComponent: SettingsComponent) {
     Surface(
