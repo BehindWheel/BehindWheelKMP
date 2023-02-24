@@ -25,7 +25,10 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamO
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateGoogleMapStyle
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateTrafficJamAppearance
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class MapSettingsStoreFactory(
@@ -39,39 +42,37 @@ internal class MapSettingsStoreFactory(
             initialState = StoreState(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dispatch(Message.Loading(true))
-
-                        dataStore.data
-                            .map { pref ->
-                                MapSettings(
-                                    mapInfo = MapInfo(
-                                        stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
-                                        mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
-                                        trafficPolice = TrafficPolice(isShow = pref.isShowTrafficPolice),
-                                        roadIncident = RoadIncident(isShow = pref.isShowRoadIncidents),
-                                        carCrash = CarCrash(isShow = pref.isShowCarCrash),
-                                        trafficJam = TrafficJam(isShow = pref.isShowTrafficJam),
-                                        wildAnimals = WildAnimals(isShow = pref.isShowWildAnimals),
-                                    ),
-                                    mapStyle = MapStyle(
-                                        trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
-                                        googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
-                                    ),
-                                    locationInfo = LocationInfo(
-                                        defaultCity = DefaultCity(current = pref.defaultCity),
-                                    ),
-                                    driveModeZoom = DriveModeZoom(
-                                        mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
-                                        mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity)
-                                    )
+                    dataStore.data
+                        .map { pref ->
+                            MapSettings(
+                                mapInfo = MapInfo(
+                                    stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
+                                    mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
+                                    trafficPolice = TrafficPolice(isShow = pref.isShowTrafficPolice),
+                                    roadIncident = RoadIncident(isShow = pref.isShowRoadIncidents),
+                                    carCrash = CarCrash(isShow = pref.isShowCarCrash),
+                                    trafficJam = TrafficJam(isShow = pref.isShowTrafficJam),
+                                    wildAnimals = WildAnimals(isShow = pref.isShowWildAnimals),
+                                ),
+                                mapStyle = MapStyle(
+                                    trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
+                                    googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
+                                ),
+                                locationInfo = LocationInfo(
+                                    defaultCity = DefaultCity(current = pref.defaultCity),
+                                ),
+                                driveModeZoom = DriveModeZoom(
+                                    mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
+                                    mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity)
                                 )
-                            }
-                            .collect {
-                                dispatch(Message.NewSettings(it))
-                                dispatch(Message.Loading(false))
-                            }
-                    }
+                            )
+                        }
+                        .distinctUntilChanged()
+                        .onEach {
+                            dispatch(Message.NewSettings(it))
+                            dispatch(Message.Loading(false))
+                        }
+                        .launchIn(this)
                 }
                 onIntent<Intent.Modify> { onCheckedChanged ->
                     val preference = onCheckedChanged.preference

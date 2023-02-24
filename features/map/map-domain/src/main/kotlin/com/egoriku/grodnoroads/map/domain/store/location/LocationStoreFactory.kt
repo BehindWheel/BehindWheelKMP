@@ -14,8 +14,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 internal class LocationStoreFactory(
@@ -39,15 +38,17 @@ internal class LocationStoreFactory(
                             )
                         }
                     }
-                    launch {
-                        dataStore.data.map { it.defaultCity }.collect {
+                    dataStore.data
+                        .map { it.defaultCity }
+                        .distinctUntilChanged()
+                        .onEach {
                             dispatch(
                                 Message.OnNewLocation(
                                     lastLocation = LastLocation(it.latLng, 0f, 0)
                                 )
                             )
                         }
-                    }
+                        .launchIn(this)
                 }
                 onIntent<StartLocationUpdates> {
                     locationHelper.startLocationUpdates()

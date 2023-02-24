@@ -24,8 +24,10 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapSt
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
 
 
 internal class MapConfigStoreFactory(
@@ -47,8 +49,8 @@ internal class MapConfigStoreFactory(
             initialState = StoreState(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dataStore.data.map { pref ->
+                    dataStore.data
+                        .map { pref ->
                             MapInternalConfig(
                                 zoomLevelInCity = pref.mapZoomInCity,
                                 zoomLevelOutOfCity = pref.mapZoomOutCity,
@@ -66,10 +68,10 @@ internal class MapConfigStoreFactory(
                                 trafficJanOnMap = pref.trafficJamOnMap,
                                 keepScreenOn = pref.keepScreenOn
                             )
-                        }.collect {
-                            dispatch(OnMapConfigInternal(it))
                         }
-                    }
+                        .distinctUntilChanged()
+                        .onEach { dispatch(OnMapConfigInternal(it)) }
+                        .launchIn(this)
                 }
                 onIntent<CheckLocation> {
                     val latLng = it.latLng
