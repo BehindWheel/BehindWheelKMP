@@ -48,7 +48,7 @@ fun MainUi(component: MainComponent) {
             VerticalSlideAnimatedVisibility(
                 visible = bottomBarVisibility.isShown()
             ) {
-                BottomNavigation {
+                BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
                     bottomNavItems.forEach { screen ->
                         BottomNavigationItem(
                             selected = screen.index == childStack.active.instance.index,
