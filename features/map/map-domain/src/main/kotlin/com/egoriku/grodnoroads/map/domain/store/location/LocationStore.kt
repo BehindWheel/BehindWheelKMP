@@ -11,10 +11,13 @@ interface LocationStore : Store<Intent, State, Label> {
         object StartLocationUpdates : Intent
         object StopLocationUpdates : Intent
         object DisabledLocation : Intent
+        data class SetUserLocation(val latLng: LatLng) : Intent
+        object InvalidateLocation : Intent
     }
 
     sealed interface Message {
         data class OnNewLocation(val lastLocation: LastLocation) : Message
+        data class OnUserLocation(val lastLocation: LastLocation) : Message
     }
 
     sealed interface Label {
@@ -24,6 +27,7 @@ interface LocationStore : Store<Intent, State, Label> {
     }
 
     data class State(
-        val lastLocation: LastLocation = LastLocation.None
+        val lastLocation: LastLocation = LastLocation.None,
+        val userLocation: LastLocation = LastLocation.None,
     )
 }

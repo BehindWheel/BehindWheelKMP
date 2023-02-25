@@ -86,11 +86,10 @@ fun MapScreen(component: MapComponent) {
                 isCameraMoving = it
             },
             onProjection = { projection = it },
-            onMapZoom = {
-                if (appMode == AppMode.ChooseLocation) {
-                    component.setUserMapZoom(it)
-                }
-            },
+            mapZoomChangeEnabled = appMode == AppMode.ChooseLocation,
+            onMapZoom = component::setUserMapZoom,
+            locationChangeEnabled = appMode == AppMode.ChooseLocation,
+            onLocation = component::setLocation,
             content = {
                 mapEvents.forEach { mapEvent ->
                     when (mapEvent) {

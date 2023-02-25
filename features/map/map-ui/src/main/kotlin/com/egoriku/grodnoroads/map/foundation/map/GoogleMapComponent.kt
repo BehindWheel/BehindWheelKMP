@@ -31,6 +31,8 @@ import com.google.maps.android.compose.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.get
 
@@ -46,7 +48,10 @@ fun GoogleMapComponent(
     onPositionChanged: (LatLng) -> Unit = {},
     onCameraMoving: (Boolean) -> Unit,
     onProjection: (Projection?) -> Unit,
+    mapZoomChangeEnabled: Boolean,
     onMapZoom: (Float) -> Unit,
+    locationChangeEnabled: Boolean,
+    onLocation: (LatLng) -> Unit,
     content: (@Composable @GoogleMapComposable () -> Unit),
 ) {
     if (mapConfig == MapConfig.EMPTY) return
@@ -91,8 +96,20 @@ fun GoogleMapComponent(
     LaunchedEffect(cameraPositionState.projection) {
         onProjection(cameraPositionState.projection)
     }
-    LaunchedEffect(cameraPositionState.position.zoom) {
-        onMapZoom(cameraPositionState.position.zoom)
+
+    if (mapZoomChangeEnabled) {
+        LaunchedEffect(cameraPositionState.position.zoom) {
+            onMapZoom(cameraPositionState.position.zoom)
+        }
+    }
+
+    if (locationChangeEnabled) {
+        LaunchedEffect(cameraPositionState.position.target) {
+            snapshotFlow { cameraPositionState.position.target }
+                .distinctUntilChanged()
+                .debounce(100)
+                .collect(onLocation)
+        }
     }
 
     LaunchedEffect(cameraPositionChangeCount, containsOverlay) {

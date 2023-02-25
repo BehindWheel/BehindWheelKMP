@@ -72,11 +72,26 @@ internal class LocationStoreFactory(
                 onIntent<DisabledLocation> {
                     publish(Label.ShowToast(resId = R.string.toast_location_disabled))
                 }
+                onIntent<SetUserLocation> {
+                    dispatch(
+                        Message.OnUserLocation(
+                            lastLocation = LastLocation(
+                                latLng = it.latLng,
+                                bearing = state.lastLocation.bearing,
+                                speed = state.lastLocation.speed
+                            )
+                        )
+                    )
+                }
+                onIntent<InvalidateLocation> {
+                    dispatch(Message.OnNewLocation(lastLocation = state.userLocation))
+                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
                     is Message.OnNewLocation -> copy(lastLocation = message.lastLocation)
+                    is Message.OnUserLocation -> copy(userLocation = message.lastLocation)
                 }
             }
         ) {}

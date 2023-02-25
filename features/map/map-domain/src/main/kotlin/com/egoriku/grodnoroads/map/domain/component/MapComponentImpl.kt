@@ -106,11 +106,16 @@ internal class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
+    override fun setLocation(latLng: LatLng) {
+        locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
+    }
+
     override fun reportAction(params: ReportAction.Params) {
         mapEventsStore.accept(ReportAction(params = params))
         dialogStore.accept(DialogStore.Intent.CloseDialog)
 
         if (mapConfigStore.state.reportType != null) {
+            locationStore.accept(LocationStore.Intent.InvalidateLocation)
             mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
         }
     }
@@ -121,6 +126,7 @@ internal class MapComponentImpl(
 
     override fun cancelChooseLocationFlow() {
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+        locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
     override fun reportChooseLocation(latLng: LatLng) {
