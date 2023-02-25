@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.map.mode.drive.action
+package com.egoriku.grodnoroads.foundation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CloseAction(
+fun ActionButton(
     modifier: Modifier = Modifier,
     imageVector: ImageVector,
     onClick: () -> Unit
@@ -31,7 +31,7 @@ fun CloseAction(
         Box(modifier = Modifier.padding(8.dp)) {
             Icon(
                 imageVector = imageVector,
-                contentDescription = "Close"
+                contentDescription = null
             )
         }
     }
@@ -39,8 +39,8 @@ fun CloseAction(
 
 @GrodnoRoadsPreview
 @Composable
-private fun CloseActionPreview() {
+private fun ActionButtonPreview() {
     GrodnoRoadsTheme {
-        CloseAction(imageVector = Icons.Default.Close) {}
+        ActionButton(imageVector = Icons.Default.Close) {}
     }
 }

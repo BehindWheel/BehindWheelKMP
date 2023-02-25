@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -20,7 +21,6 @@ import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.map.configuration.calculateCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
-import com.egoriku.grodnoroads.map.mode.drive.action.CloseAction
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -255,7 +255,7 @@ fun MapOverlayActions(
                 .padding(end = 16.dp)
                 .align(Alignment.CenterEnd)
         ) {
-            CloseAction(
+            ActionButton(
                 imageVector = Icons.Default.Add,
                 onClick = {
                     coroutineScope.launch {
@@ -264,7 +264,7 @@ fun MapOverlayActions(
                     }
                 }
             )
-            CloseAction(
+            ActionButton(
                 imageVector = Icons.Default.Remove,
                 onClick = {
                     coroutineScope.launch {
