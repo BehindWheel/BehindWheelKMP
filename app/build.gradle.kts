@@ -1,11 +1,16 @@
+import com.egoriku.grodnoroads.extension.debug
+import com.egoriku.grodnoroads.extension.provideVersionCode
+import com.egoriku.grodnoroads.extension.provideVersionName
+import com.egoriku.grodnoroads.extension.release
+
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.devtools.ksp")
-    id("kotlin-parcelize")
-    kotlin("android")
+    id("grodnoroads.application")
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.secrets)
 }
 
 android {
@@ -16,8 +21,8 @@ android {
         compileSdk = libs.versions.compileSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
 
-        versionCode = provideVersionCode()
-        versionName = provideVersionName()
+        versionCode = provideVersionCode("app/version.properties")
+        versionName = provideVersionName("app/version.properties")
         resourceConfigurations += listOf("en", "ru", "be-rBY")
     }
 
@@ -87,15 +92,6 @@ dependencies {
 
     implementation(projects.features.settings.root)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
-
-    implementation(libs.maps)
-
-    implementation(libs.gms.location)
-    implementation("com.google.android.material:material:1.7.0")
-
     implementation(libs.accompanist.systemuicontroller)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -113,15 +109,20 @@ dependencies {
 
     implementation(libs.coroutines)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
-
+    implementation(libs.google.maps)
+    implementation(libs.google.material)
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)
+    implementation(libs.play.services.location)
 }
 
 secrets {

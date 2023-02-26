@@ -8,7 +8,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
-import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.foundation.animation.VerticalSlideAnimatedVisibility
@@ -18,7 +17,6 @@ import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.settings.root.screen.SettingsScreen
 
-@OptIn(ExperimentalDecomposeApi::class)
 @Composable
 fun MainUi(component: MainComponent) {
     val bottomNavItems = listOf(Screen.Map, Screen.Settings)
@@ -50,7 +48,7 @@ fun MainUi(component: MainComponent) {
             VerticalSlideAnimatedVisibility(
                 visible = bottomBarVisibility.isShown()
             ) {
-                BottomNavigation {
+                BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
                     bottomNavItems.forEach { screen ->
                         BottomNavigationItem(
                             selected = screen.index == childStack.active.instance.index,

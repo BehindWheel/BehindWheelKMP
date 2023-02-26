@@ -15,7 +15,7 @@ internal interface MapSettingsStore : Store<Intent, StoreState, Nothing> {
     }
 
     data class StoreState(
-        val isLoading: Boolean = false,
+        val isLoading: Boolean = true,
         val mapSettings: MapSettings = MapSettings(),
         val mapDialogState: MapDialogState = None
     )

@@ -24,6 +24,13 @@ interface MapComponent {
     fun openReportFlow(reportDialogFlow: ReportDialogFlow)
     fun reportAction(params: ReportAction.Params)
 
+    fun setLocation(latLng: LatLng)
+
+    fun openChooseLocation(reportType: ReportType)
+    fun reportChooseLocation(latLng: LatLng)
+    fun setUserMapZoom(zoom: Float)
+    fun cancelChooseLocationFlow()
+
     fun startLocationUpdates()
     fun stopLocationUpdates()
 

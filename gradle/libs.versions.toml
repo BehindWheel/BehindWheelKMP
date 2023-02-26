@@ -3,32 +3,20 @@ compileSdk = "33"
 minSdk = "21"
 targetSdk = "33"
 
-gradleBuildTools = "7.4.0"
-gradleCrashlytics = "2.9.2"
-gradleGoogleServices = "4.3.15"
-gradleKsp = "1.8.0-1.0.8"
-gradleSecrets = "2.0.1"
-gradleVersionCheck = "0.44.0"
-
+agp = "7.4.1"
 accompanist = "0.28.0"
-appcompat = "1.6.0"
-browser = "1.4.0"
 compose-bom = "2023.01.00"
-composeCompiler = "1.4.0"
-decompose = "1.0.0-beta-04"
-koin-android = "3.3.2"
-koin-compose = "3.4.1"
-kotlin = "1.8.0"
-mvikotlin = "3.0.2"
+composeCompiler = "1.4.2"
+decompose = "1.0.0"
+koin-android = "3.3.3"
+koin-compose = "3.4.2"
+kotlin = "1.8.10"
+mvikotlin = "3.1.0"
 
 [libraries]
-gradle-plugin-buildtools = { module = "com.android.tools.build:gradle", version.ref = "gradleBuildTools" }
-gradle-plugin-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "gradleCrashlytics" }
-gradle-plugin-googleservices = { module = "com.google.gms:google-services", version.ref = "gradleGoogleServices" }
-gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradle-plugin-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "gradleKsp" }
-gradle-plugin-versioncheck = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersionCheck" }
-gradle-plugin-secrets = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "gradleSecrets" }
+# Dependencies of the included build-logic
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 androidx-compose-bom = "androidx.compose:compose-bom:2023.01.00"
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
@@ -43,8 +31,8 @@ accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-browser = "androidx.browser:browser:1.5.0"
 androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
@@ -57,14 +45,16 @@ coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-service
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:31.2.0"
+firebase-bom = "com.google.firebase:firebase-bom:31.2.2"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
-gms-location = "com.google.android.gms:play-services-location:21.0.1"
-gms-maps = "com.google.android.gms:play-services-maps:18.1.0"
+google-maps = "com.google.maps.android:maps-ktx:3.4.0"
+google-maps-compose = "com.google.maps.android:maps-compose:2.11.0"
+google-maps-utils = "com.google.maps.android:android-maps-utils:3.4.0"
+google-material = "com.google.android.material:material:1.8.0"
 
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
@@ -73,10 +63,20 @@ koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = 
 
 kotlin-tests = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
-maps = "com.google.maps.android:maps-ktx:3.4.0"
-maps-compose = "com.google.maps.android:maps-compose:2.8.1"
-maps-utils = "com.google.maps.android:android-maps-utils:3.1.1"
-
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
-mvikotlin-extensions = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
+mvikotlin-extensions = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version = "3.1.0" }
+
+play-services-location = "com.google.android.gms:play-services-location:21.0.1"
+play-services-maps = "com.google.android.gms:play-services-maps:18.1.0"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.4" }
+google-services = { id = "com.google.gms.google-services", version = "4.3.15" }
+gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.46.0" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
+secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }

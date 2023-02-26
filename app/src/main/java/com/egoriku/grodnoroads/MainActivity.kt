@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                         val useDarkIcons = MaterialTheme.colors.isLight
 
                         DisposableEffect(systemUiController, useDarkIcons) {
-                            systemUiController.setStatusBarColor(
+                            systemUiController.setSystemBarsColor(
                                 color = Color.Transparent,
                                 darkIcons = useDarkIcons
                             )

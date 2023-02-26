@@ -1,40 +1,23 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
-apply(plugin = "com.github.ben-manes.versions")
-
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath(libs.gradle.plugin.buildtools)
-        classpath(libs.gradle.plugin.crashlytics)
-        classpath(libs.gradle.plugin.googleservices)
-        classpath(libs.gradle.plugin.kotlin)
-        classpath(libs.gradle.plugin.ksp)
-        classpath(libs.gradle.plugin.versioncheck)
-        classpath(libs.gradle.plugin.secrets)
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven("https://jitpack.io")
-    }
+// Remove after https://github.com/gradle/gradle/issues/22797 (~gradle 8.1)
+@Suppress("DSL_SCOPE_VIOLATION")
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.gradle.dependency.check)
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.secrets) apply false
 }
 
 tasks {
     registering(Delete::class) {
         delete(buildDir)
     }
-}
-
-tasks {
     withType<DependencyUpdatesTask> {
         rejectVersionIf {
             isNonStable(candidate.version)

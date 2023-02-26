@@ -28,15 +28,11 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.balloon.compose)
-
-    implementation(libs.gms.location)
-
+    implementation(libs.google.maps)
+    implementation(libs.google.maps.compose)
+    implementation(libs.google.maps.utils)
     implementation(libs.immutable.collections)
-
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-
-    implementation(libs.maps)
-    implementation(libs.maps.compose)
-    implementation(libs.maps.utils)
+    implementation(libs.play.services.location)
 }

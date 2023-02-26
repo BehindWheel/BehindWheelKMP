@@ -8,8 +8,10 @@ data class LastLocation(
     val speed: Int
 ) {
     companion object {
+        val DEFAULT_LOCATION = LatLng(0.0, 0.0)
+
         val None = LastLocation(
-            latLng = LatLng(0.0, 0.0),
+            latLng = DEFAULT_LOCATION,
             bearing = -1f,
             speed = 0
         )

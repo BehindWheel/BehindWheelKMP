@@ -16,7 +16,10 @@ import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 interface RootStore : Store<Intent, State, Nothing>
@@ -46,15 +49,14 @@ class RootStoreFactory(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dataStore.data
-                            .map { preferences ->
-                                State(theme = Theme.fromOrdinal(preferences.appTheme.theme))
-                            }
-                            .collect {
-                                dispatch(Message.NewState(state = it))
-                            }
-                    }
+                    dataStore.data
+                        .map { preferences ->
+                            State(theme = Theme.fromOrdinal(preferences.appTheme.theme))
+                        }
+                        .distinctUntilChanged()
+                        .onEach { dispatch(Message.NewState(state = it)) }
+                        .launchIn(this)
+
                     launch {
                         dispatch(UpdateHeadLampDialog(headLampType = HeadLampDispatcher.calculateType()))
                     }

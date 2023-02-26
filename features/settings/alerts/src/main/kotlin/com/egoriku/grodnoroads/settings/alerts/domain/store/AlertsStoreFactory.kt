@@ -13,8 +13,10 @@ import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore.Message
 import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
 
 internal class AlertsStoreFactory(
     private val storeFactory: StoreFactory,
@@ -26,16 +28,17 @@ internal class AlertsStoreFactory(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dataStore.data
-                            .map { preferences ->
-                                AlertsComponent.AlertSettingsState(
-                                    alertDistance = AlertDistance(preferences.alertDistance)
-                                )
-                            }.collect {
-                                dispatch(Message.NewSettings(it))
-                            }
-                    }
+                    dataStore.data
+                        .map { preferences ->
+                            AlertsComponent.AlertSettingsState(
+                                alertDistance = AlertDistance(preferences.alertDistance)
+                            )
+                        }
+                        .distinctUntilChanged()
+                        .onEach {
+                            dispatch(Message.NewSettings(it))
+                        }
+                        .launchIn(this)
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),

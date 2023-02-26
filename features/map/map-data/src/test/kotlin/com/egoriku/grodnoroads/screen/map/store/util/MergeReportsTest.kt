@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.map.domain.model.Source.*
 import com.google.android.gms.maps.model.LatLng
 import org.junit.Before
 import org.junit.Test
-import java.util.*
+import java.util.TimeZone
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
@@ -36,7 +36,7 @@ class MergeReportsTest {
             reportsDTO = listOf(
                 ReportsDTO(
                     timestamp = (0.hours + 30.minutes).inWholeMilliseconds,
-                    message = "Long message",
+                    message = "Long message (policecar)",
                     source = App.source,
                     shortMessage = "Short message",
                     latitude = 53.666199,
@@ -55,7 +55,7 @@ class MergeReportsTest {
 
             with(messages) {
                 assertEquals(1, size)
-                assertEquals("(0:30) Long message", first().message)
+                assertEquals("(0:30) Long message \uD83D\uDE93", first().message)
                 assertEquals(App, first().source)
             }
         }
@@ -256,7 +256,7 @@ class MergeReportsTest {
             assertEquals(RoadIncident, mapEventType)
             assertEquals("(12:51) ${RoadIncident.emoji} (Short message 2)", markerMessage)
             assertEquals("${RoadIncident.emoji} Short message 2", dialogTitle)
-            assertEquals(LatLng(53.666199, 23.784990), position)
+            assertEquals(LatLng(53.666216, 23.785078), position)
 
             assertEquals(2, messages.size)
             with(messages.first()) {
@@ -311,7 +311,7 @@ class MergeReportsTest {
             assertEquals(TrafficPolice, mapEventType)
             assertEquals("(12:51) ${TrafficPolice.emoji} (Short message 2)", markerMessage)
             assertEquals("${TrafficPolice.emoji} Short message 2", dialogTitle)
-            assertEquals(LatLng(53.666199, 23.784990), position)
+            assertEquals(LatLng(53.666216, 23.785078), position)
 
             assertEquals(2, messages.size)
             with(messages.first()) {

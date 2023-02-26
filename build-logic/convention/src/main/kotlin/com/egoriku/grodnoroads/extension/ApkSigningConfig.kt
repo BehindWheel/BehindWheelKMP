@@ -1,3 +1,5 @@
+package com.egoriku.grodnoroads.extension
+
 import com.android.build.api.dsl.ApkSigningConfig
 import org.gradle.api.NamedDomainObjectContainer as Container
 

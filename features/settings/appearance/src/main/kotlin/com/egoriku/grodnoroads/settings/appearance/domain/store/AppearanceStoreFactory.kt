@@ -19,7 +19,10 @@ import com.egoriku.grodnoroads.settings.appearance.domain.util.setAppLanguage
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class AppearanceStoreFactory(
@@ -32,8 +35,8 @@ class AppearanceStoreFactory(
         Store<Intent, State, Nothing> by storeFactory.create(initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dataStore.data.map { preferences ->
+                    dataStore.data
+                        .map { preferences ->
                             AppearanceState(
                                 appTheme = AppTheme(current = preferences.appTheme),
                                 appLanguage = AppLanguage(
@@ -42,10 +45,10 @@ class AppearanceStoreFactory(
                                 ),
                                 keepScreenOn = KeepScreenOn(enabled = preferences.keepScreenOn)
                             )
-                        }.collect {
-                            dispatch(Message.NewSettings(it))
                         }
-                    }
+                        .distinctUntilChanged()
+                        .onEach { dispatch(Message.NewSettings(it)) }
+                        .launchIn(this)
                 }
                 onIntent<CloseDialog> {
                     dispatch(Message.Dialog(dialogState = None))
@@ -89,6 +92,7 @@ class AppearanceStoreFactory(
 
                             dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
                         }
+
                         is KeepScreenOn -> {
                             launch {
                                 dataStore.edit {

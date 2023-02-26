@@ -16,10 +16,8 @@ dependencies {
     implementation(libs.firebase.database)
 
     implementation(libs.koin.android)
-
-    implementation(libs.gms.maps)
-
     implementation(libs.immutable.collections)
+    implementation(libs.play.services.maps)
 
     testImplementation(libs.kotlin.tests)
 }

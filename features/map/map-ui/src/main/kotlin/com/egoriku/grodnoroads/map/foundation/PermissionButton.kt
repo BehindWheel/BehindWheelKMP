@@ -9,13 +9,19 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material.IconButton
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.logD
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -31,7 +37,7 @@ fun PermissionButton(
     modifier: Modifier = Modifier,
     onLocationEnabled: () -> Unit,
     onLocationDisabled: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable RowScope.() -> Unit
 ) {
     val gmsLocationPermissionsState = rememberGmsLocationPermissionsState(
         onAccepted = onLocationEnabled,
@@ -46,15 +52,16 @@ fun PermissionButton(
         }
     }
 
-    IconButton(
+    Button(
+        modifier = modifier.size(80.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
+        shape = CircleShape,
         onClick = {
             locationPermissionsState.launchMultiplePermissionRequest()
         },
-        modifier = modifier,
         content = content
     )
 }
-
 
 @Composable
 internal fun rememberGmsLocationPermissionsState(
@@ -71,15 +78,8 @@ internal fun rememberGmsLocationPermissionsState(
         contract = ActivityResultContracts.StartIntentSenderForResult()
     ) { activityResult ->
         when (activityResult.resultCode) {
-            Activity.RESULT_OK -> {
-                logD("GMS location Accepted")
-                onAccepted()
-            }
-
-            else -> {
-                logD("GMS location Denied")
-                onDenied()
-            }
+            Activity.RESULT_OK -> onAccepted()
+            else -> onDenied()
         }
     }
 

@@ -41,7 +41,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     messages = item.messages.toPersistentList()
                         .mutate {
                             it += MessageItem(
-                                message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message}",
+                                message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
                                 source = Source.sourceFromString(data.source)
                             )
                         },
@@ -53,7 +53,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                 val action = Reports(
                     messages = persistentListOf(
                         MessageItem(
-                            message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message}",
+                            message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
                             source = Source.sourceFromString(data.source)
                         )
                     ),
@@ -123,5 +123,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
             }
             else -> data.shortMessage
         }
+
+    private fun String.emojiFix() = replace("(policecar)", "\uD83D\uDE93")
 }
 

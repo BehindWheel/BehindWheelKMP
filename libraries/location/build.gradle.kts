@@ -11,10 +11,7 @@ dependencies {
 
     implementation(libs.coroutines)
     implementation(libs.coroutines.playservices)
-
     implementation(libs.koin.android)
-
-    implementation(libs.gms.location)
-
-    implementation(libs.maps)
+    implementation(libs.google.maps)
+    implementation(libs.play.services.location)
 }

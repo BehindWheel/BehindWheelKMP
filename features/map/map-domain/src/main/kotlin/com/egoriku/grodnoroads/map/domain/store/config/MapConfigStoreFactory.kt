@@ -10,8 +10,10 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
+import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
 import com.egoriku.grodnoroads.map.domain.util.CityArea
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
@@ -22,8 +24,10 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapSt
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
 
 
 internal class MapConfigStoreFactory(
@@ -34,7 +38,9 @@ internal class MapConfigStoreFactory(
     private sealed interface Message {
         data class OnMapConfigInternal(val mapConfig: MapInternalConfig) : Message
         data class OnZoomLevel(val zoomLevel: Float) : Message
+        data class OnUserZoomLevel(val userZoomLevel: Float) : Message
         data class ChangeAppMode(val appMode: AppMode) : Message
+        data class UpdateReportType(val reportType: ReportType?) : Message
     }
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -43,8 +49,8 @@ internal class MapConfigStoreFactory(
             initialState = StoreState(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
-                    launch {
-                        dataStore.data.map { pref ->
+                    dataStore.data
+                        .map { pref ->
                             MapInternalConfig(
                                 zoomLevelInCity = pref.mapZoomInCity,
                                 zoomLevelOutOfCity = pref.mapZoomOutCity,
@@ -62,10 +68,10 @@ internal class MapConfigStoreFactory(
                                 trafficJanOnMap = pref.trafficJamOnMap,
                                 keepScreenOn = pref.keepScreenOn
                             )
-                        }.collect {
-                            dispatch(Message.OnMapConfigInternal(it))
                         }
-                    }
+                        .distinctUntilChanged()
+                        .onEach { dispatch(OnMapConfigInternal(it)) }
+                        .launchIn(this)
                 }
                 onIntent<CheckLocation> {
                     val latLng = it.latLng
@@ -85,24 +91,39 @@ internal class MapConfigStoreFactory(
                         state.mapInternalConfig.zoomLevelOutOfCity
                     }
 
-                    dispatch(Message.OnZoomLevel(zoomLevel))
+                    dispatch(OnZoomLevel(zoomLevel))
                 }
                 onIntent<StartDriveMode> {
-                    dispatch(Message.ChangeAppMode(appMode = AppMode.Drive))
-                    dispatch(Message.OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    dispatch(ChangeAppMode(appMode = AppMode.Drive))
+                    dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                 }
                 onIntent<StopDriveMode> {
-                    dispatch(Message.ChangeAppMode(appMode = AppMode.Default))
-                    dispatch(Message.OnZoomLevel(zoomLevel = 12.5f))
+                    dispatch(ChangeAppMode(appMode = AppMode.Default))
+                    dispatch(OnZoomLevel(zoomLevel = 12.5f))
+                }
+                onIntent<ChooseLocation.OpenChooseLocation> {
+                    dispatch(ChangeAppMode(appMode = AppMode.ChooseLocation))
+                    dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    dispatch(UpdateReportType(reportType = it.reportType))
+                }
+                onIntent<ChooseLocation.CancelChooseLocation> {
+                    dispatch(ChangeAppMode(appMode = AppMode.Default))
+                    dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
+                    dispatch(UpdateReportType(reportType = null))
+                }
+                onIntent<ChooseLocation.UserMapZoom> {
+                    dispatch(OnUserZoomLevel(it.zoom))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 // TODO: Try https://github.com/kopykat-kt/kopykat
                 when (message) {
-                    is Message.OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
-                    is Message.OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
-                    is Message.ChangeAppMode -> copy(appMode = message.appMode)
+                    is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
+                    is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
+                    is ChangeAppMode -> copy(appMode = message.appMode)
+                    is UpdateReportType -> copy(reportType = message.reportType)
+                    is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
                 }
             }) {}
 }

@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.map
 
+import android.graphics.Point
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
@@ -11,28 +12,36 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
+import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
+import com.egoriku.grodnoroads.map.markers.ReportsMarker
+import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
+import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
+import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.google.android.gms.maps.Projection
 import kotlinx.collections.immutable.persistentListOf
+import org.koin.androidx.compose.get
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MapScreen(component: MapComponent) {
+    val markerCache = get<MarkerCache>()
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -53,28 +62,56 @@ fun MapScreen(component: MapComponent) {
         )
         LabelsSubscription(component)
 
-        val isMapLoaded = remember { mutableStateOf(false) }
+        var isMapLoaded by rememberMutableState { false }
+        var isCameraMoving by rememberMutableState { true }
+        var projection by rememberMutableState<Projection?> { null }
 
         GoogleMapComponent(
-            mapEvents = mapEvents,
             appMode = appMode,
             mapConfig = mapConfig,
             lastLocation = location,
-            onMarkerClick = component::showMarkerInfoDialog,
-            isMapLoaded = isMapLoaded,
-            containsOverlay = mapAlertDialog != None
-        ) {
-            AnimatedVisibility(
-                modifier = Modifier.matchParentSize(),
-                visible = !isMapLoaded.value,
-                enter = EnterTransition.None,
-                exit = fadeOut()
-            ) {
-                LogoProgressIndicator()
-            }
-        }
+            onMapLoaded = { isMapLoaded = true },
+            containsOverlay = mapAlertDialog != None,
+            loading = {
+                AnimatedVisibility(
+                    modifier = Modifier.matchParentSize(),
+                    visible = !isMapLoaded,
+                    enter = EnterTransition.None,
+                    exit = fadeOut()
+                ) {
+                    LogoProgressIndicator()
+                }
+            },
+            onCameraMoving = {
+                isCameraMoving = it
+            },
+            onProjection = { projection = it },
+            mapZoomChangeEnabled = appMode == AppMode.ChooseLocation,
+            onMapZoom = component::setUserMapZoom,
+            locationChangeEnabled = appMode == AppMode.ChooseLocation,
+            onLocation = component::setLocation,
+            content = {
+                mapEvents.forEach { mapEvent ->
+                    when (mapEvent) {
+                        is MapEvent.StationaryCamera -> StationaryCameraMarker(
+                            stationaryCamera = mapEvent,
+                            onFromCache = { markerCache.getVector(id = it) }
+                        )
 
-        if (isMapLoaded.value) {
+                        is MapEvent.Reports -> ReportsMarker(
+                            mapEvent,
+                            component::showMarkerInfoDialog
+                        )
+
+                        is MapEvent.MobileCamera -> MobileCameraMarker(
+                            mobileCamera = mapEvent,
+                            onFromCache = { markerCache.getVector(id = it) })
+                    }
+                }
+            }
+        )
+
+        if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(targetState = appMode) { state ->
@@ -82,7 +119,8 @@ fun MapScreen(component: MapComponent) {
                         AppMode.Default -> {
                             DefaultMode(
                                 onLocationEnabled = component::startLocationUpdates,
-                                onLocationDisabled = component::onLocationDisabled
+                                onLocationDisabled = component::onLocationDisabled,
+                                report = component::openChooseLocation
                             )
                         }
 
@@ -94,7 +132,7 @@ fun MapScreen(component: MapComponent) {
                                 reportPolice = {
                                     if (location != LastLocation.None) {
                                         component.openReportFlow(
-                                            reportDialogFlow = MapComponent.ReportDialogFlow.TrafficPolice(
+                                            reportDialogFlow = ReportDialogFlow.TrafficPolice(
                                                 location.latLng
                                             )
                                         )
@@ -103,11 +141,27 @@ fun MapScreen(component: MapComponent) {
                                 reportIncident = {
                                     if (location != LastLocation.None) {
                                         component.openReportFlow(
-                                            reportDialogFlow = MapComponent.ReportDialogFlow.RoadIncident(
+                                            reportDialogFlow = ReportDialogFlow.RoadIncident(
                                                 location.latLng
                                             )
                                         )
                                     }
+                                }
+                            )
+                        }
+
+                        AppMode.ChooseLocation -> {
+                            ChooseLocation(
+                                isCameraMoving = isCameraMoving,
+                                onCancel = component::cancelChooseLocationFlow,
+                                onLocationSelected = {
+                                    val latLng = projection?.fromScreenLocation(
+                                        Point(
+                                            /* x = */ it.x.toInt(),
+                                            /* y = */ it.y.toInt()
+                                        )
+                                    ) ?: return@ChooseLocation
+                                    component.reportChooseLocation(latLng)
                                 }
                             )
                         }

@@ -10,6 +10,6 @@ dependencies {
     implementation(projects.libraries.resources)
 
     api(libs.androidx.datastore)
-    implementation(libs.gms.maps)
     implementation(libs.coroutines)
+    implementation(libs.play.services.maps)
 }

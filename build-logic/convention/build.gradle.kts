@@ -2,24 +2,28 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.epmedu.animeal"
+group = "com.egoriku.grodnoroads"
 
 dependencies {
-    compileOnly(libs.gradle.plugin.buildtools)
-    compileOnly(libs.gradle.plugin.kotlin)
+    compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.gradle.plugin)
 
     compileOnly(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 gradlePlugin {
     plugins {
-        register("grodnoroadsLibrary") {
+        register("grodnoroads.library") {
             id = "grodnoroads.library"
             implementationClass = "AndroidLibraryPlugin"
         }
-        register("grodnoroadsLibraryCompose") {
+        register("grodnoroads.library.compose") {
             id = "grodnoroads.library.compose"
             implementationClass = "AndroidLibraryComposePlugin"
+        }
+        register("grodnoroads.application") {
+            id = "grodnoroads.application"
+            implementationClass = "AndroidApplicationPlugin"
         }
     }
 }
