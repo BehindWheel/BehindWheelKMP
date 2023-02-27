@@ -107,18 +107,6 @@ internal class MapSettingsStoreFactory(
                             )
                         )
 
-                        is MapZoomInCity -> dispatch(
-                            Message.NewDialogState(
-                                mapDialogState = MapZoomInCityDialogState(mapZoomInCity = it.preference)
-                            )
-                        )
-
-                        is MapZoomOutCity -> dispatch(
-                            Message.NewDialogState(
-                                mapDialogState = MapZoomOutCityDialogState(mapZoomOutCity = it.preference)
-                            )
-                        )
-
                         else -> throw UnsupportedOperationException("${it.preference} not supported")
                     }
                 }

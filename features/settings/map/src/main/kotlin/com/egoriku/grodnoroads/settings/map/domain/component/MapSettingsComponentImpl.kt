@@ -21,13 +21,11 @@ internal class MapSettingsComponentImpl(
     override val mapSettingsState: Flow<MapSettingState>
         get() = mapSettingsStore.states.map { storeState ->
             MapSettingState(
+                isLoading = storeState.isLoading,
                 mapSettings = storeState.mapSettings,
                 mapDialogState = storeState.mapDialogState,
             )
         }
-
-    override val isLoading: Flow<Boolean>
-        get() = mapSettingsStore.states.map { it.isLoading }
 
     override fun modify(preference: MapPref) {
         mapSettingsStore.accept(Intent.Modify(preference))
