@@ -9,8 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.ClickableRange
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
+import com.egoriku.grodnoroads.foundation.list.ActionSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
@@ -20,7 +21,8 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 @Composable
 internal fun DrivingModeSection(
     driveModeZoom: DriveModeZoom,
-    onChange: (MapPref) -> Unit
+    modify: (MapPref) -> Unit,
+    reset: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         SettingsHeader(
@@ -28,24 +30,33 @@ internal fun DrivingModeSection(
             top = 16.dp
         )
 
-        MapZoomInCity(driveModeZoom = driveModeZoom, onChange = onChange)
-        MapZoomOutCity(driveModeZoom = driveModeZoom, onChange = onChange)
+        MapZoomInCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
+        MapZoomOutCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
     }
 }
 
 @Composable
 private fun MapZoomInCity(
     driveModeZoom: DriveModeZoom,
-    onChange: (MapPref) -> Unit
+    modify: (MapPref) -> Unit,
+    reset: (MapPref) -> Unit
 ) {
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
-    MoreActionSettings(
+    ActionSettings(
         icon = Icons.Default.CenterFocusStrong,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
-        value = mapZoomInCity.current.toString(),
-        onClick = {
-            onChange(mapZoomInCity)
+        trailing = {
+            ClickableRange(
+                value = mapZoomInCity.current,
+                min = mapZoomInCity.min,
+                max = mapZoomInCity.max,
+                step = mapZoomInCity.stepSize,
+                onLongClick = { reset(driveModeZoom.mapZoomInCity) },
+                onValueChange = {
+                    modify(mapZoomInCity.copy(current = it))
+                },
+            )
         }
     )
 }
@@ -53,24 +64,33 @@ private fun MapZoomInCity(
 @Composable
 private fun MapZoomOutCity(
     driveModeZoom: DriveModeZoom,
-    onChange: (MapPref) -> Unit
+    modify: (MapPref) -> Unit,
+    reset: (MapPref) -> Unit
 ) {
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
-    MoreActionSettings(
+    ActionSettings(
         icon = Icons.Default.CenterFocusWeak,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
-        value = mapZoomOutCity.current.toString(),
-        onClick = {
-            onChange(mapZoomOutCity)
+        trailing = {
+            ClickableRange(
+                value = mapZoomOutCity.current,
+                min = mapZoomOutCity.min,
+                max = mapZoomOutCity.max,
+                step = mapZoomOutCity.stepSize,
+                onLongClick = { reset(mapZoomOutCity) },
+                onValueChange = {
+                    modify(mapZoomOutCity.copy(current = it))
+                },
+            )
         }
     )
 }
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewDrivingModeSectionSection() {
+private fun DrivingModeSectionSectionPreview() {
     GrodnoRoadsTheme {
-        DrivingModeSection(driveModeZoom = DriveModeZoom()) {}
+        DrivingModeSection(driveModeZoom = DriveModeZoom(), modify = {}, reset = {})
     }
 }

@@ -10,10 +10,9 @@ fun GrodnoRoadsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    Surface {
-        MaterialTheme(
-            colors = if (darkTheme) DarkColors else LightColors,
-            content = content
-        )
+    MaterialTheme(
+        colors = if (darkTheme) DarkColors else LightColors,
+    ) {
+        Surface(content = content)
     }
 }

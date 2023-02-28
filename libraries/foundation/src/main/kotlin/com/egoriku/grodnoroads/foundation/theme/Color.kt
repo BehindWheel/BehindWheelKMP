@@ -18,7 +18,7 @@ val LightColors = lightColors(
     primaryVariant = Slate600,
     secondary = Orange700,
     secondaryVariant = Orange500,
-    onSecondary = Color.Black,
+    onSecondary = Color.White,
     background = Color.White
 )
 

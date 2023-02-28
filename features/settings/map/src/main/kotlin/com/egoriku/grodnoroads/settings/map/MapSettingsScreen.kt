@@ -6,24 +6,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.HSpacer
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
-import com.egoriku.grodnoroads.settings.map.ui.dialog.StepperDialog
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.*
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.ui.DefaultLocationSection
 import com.egoriku.grodnoroads.settings.map.ui.DrivingModeSection
 import com.egoriku.grodnoroads.settings.map.ui.MapEventsSection
@@ -38,25 +36,36 @@ fun MapSettingsScreen(
     BottomBarVisibility(HIDDEN)
 
     val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = MapSettingState())
-    val isLoading by mapSettingsComponent.isLoading.collectAsState(initial = false)
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             SettingsTopBar(
                 title = stringResource(id = R.string.settings_section_map),
                 onBack = onBack
             )
         }
-    ) {
-        if (isLoading) {
-            Box(modifier = Modifier.fillMaxSize().padding(it)) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
-        } else {
-            LoadedState(
-                mapSettingState = state,
-                mapSettingsComponent = mapSettingsComponent
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
+            DialogHandler(
+                dialogState = state.mapDialogState,
+                onClose = mapSettingsComponent::closeDialog,
+                onResult = {
+                    mapSettingsComponent.apply {
+                        modify(it)
+                        closeDialog()
+                    }
+                }
             )
+
+            if (!state.isLoading) {
+                LoadedState(
+                    mapSettingState = state,
+                    openDialog = mapSettingsComponent::openDialog,
+                    modify = mapSettingsComponent::modify,
+                    reset = mapSettingsComponent::reset
+                )
+            }
         }
     }
 }
@@ -64,17 +73,10 @@ fun MapSettingsScreen(
 @Composable
 private fun LoadedState(
     mapSettingState: MapSettingState,
-    mapSettingsComponent: MapSettingsComponent
+    openDialog: (MapPref) -> Unit,
+    modify: (MapPref) -> Unit,
+    reset: (MapPref) -> Unit
 ) {
-    DialogHandler(
-        dialogState = mapSettingState.mapDialogState,
-        onClose = mapSettingsComponent::closeDialog,
-        onResult = {
-            mapSettingsComponent.modify(it)
-            mapSettingsComponent.closeDialog()
-        }
-    )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,19 +84,20 @@ private fun LoadedState(
     ) {
         DefaultLocationSection(
             locationInfo = mapSettingState.mapSettings.locationInfo,
-            onCheckedChange = mapSettingsComponent::openDialog
+            onCheckedChange = openDialog
         )
         DrivingModeSection(
             driveModeZoom = mapSettingState.mapSettings.driveModeZoom,
-            onChange = mapSettingsComponent::openDialog
+            modify = modify,
+            reset = reset
         )
         MapStyleSection(
             mapStyle = mapSettingState.mapSettings.mapStyle,
-            onCheckedChange = mapSettingsComponent::modify
+            onCheckedChange = modify
         )
         MapEventsSection(
             mapInfo = mapSettingState.mapSettings.mapInfo,
-            onCheckedChange = mapSettingsComponent::modify
+            onCheckedChange = modify
         )
         HSpacer(dp = 16.dp)
     }
@@ -115,36 +118,6 @@ private fun DialogHandler(
             )
         }
 
-        is MapZoomInCityDialogState -> {
-            val mapZoomInCity = dialogState.mapZoomInCity
-
-            StepperDialog(
-                initial = mapZoomInCity.current,
-                min = mapZoomInCity.min,
-                max = mapZoomInCity.max,
-                step = mapZoomInCity.stepSize,
-                onClose = onClose,
-                onSelected = {
-                    onResult(mapZoomInCity.copy(current = it))
-                }
-            )
-        }
-
-        is MapZoomOutCityDialogState -> {
-            val mapZoomOutCity = dialogState.mapZoomOutCity
-
-            StepperDialog(
-                initial = mapZoomOutCity.current,
-                min = mapZoomOutCity.min,
-                max = mapZoomOutCity.max,
-                step = mapZoomOutCity.stepSize,
-                onClose = onClose,
-                onSelected = {
-                    onResult(mapZoomOutCity.copy(current = it))
-                }
-            )
-        }
-
-        else -> {}
+        is None -> {}
     }
 }

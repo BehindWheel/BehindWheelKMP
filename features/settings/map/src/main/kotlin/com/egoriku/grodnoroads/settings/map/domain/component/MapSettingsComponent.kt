@@ -13,22 +13,20 @@ import kotlinx.coroutines.flow.Flow
 interface MapSettingsComponent {
 
     val mapSettingsState: Flow<MapSettingState>
-    val isLoading: Flow<Boolean>
 
     fun modify(preference: MapPref)
+    fun reset(preference: MapPref)
     fun openDialog(preference: MapPref)
     fun closeDialog()
 
     data class MapSettingState(
+        val isLoading: Boolean = true,
         val mapSettings: MapSettings = MapSettings(),
         val mapDialogState: MapDialogState = None
     )
 
     sealed interface MapDialogState {
         data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
-        data class MapZoomInCityDialogState(val mapZoomInCity: MapZoomInCity) : MapDialogState
-        data class MapZoomOutCityDialogState(val mapZoomOutCity: MapZoomOutCity) : MapDialogState
-
         object None : MapDialogState
     }
 
