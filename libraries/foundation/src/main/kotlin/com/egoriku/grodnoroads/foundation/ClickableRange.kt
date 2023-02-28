@@ -1,7 +1,12 @@
 package com.egoriku.grodnoroads.foundation
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
@@ -14,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
@@ -21,7 +27,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun ClickableRange(
     modifier: Modifier = Modifier,
@@ -29,6 +35,7 @@ fun ClickableRange(
     max: Float,
     step: Float,
     value: Float,
+    onLongClick: () -> Unit,
     onValueChange: (Float) -> Unit
 ) {
     var isError by rememberMutableState { false }
@@ -99,7 +106,10 @@ fun ClickableRange(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
-                    .offset(offsetX.value.dp, 0.dp),
+                    .offset(offsetX.value.dp, 0.dp)
+                    .pointerInput(Unit) {
+                        detectTapGestures(onLongPress = { onLongClick() })
+                    },
                 text = targetCount.toString(),
                 color = color,
                 style = MaterialTheme.typography.caption
@@ -136,6 +146,7 @@ private fun RangeSettingPreview() {
                 max = 15f,
                 step = 1f,
                 value = value,
+                onLongClick = {},
                 onValueChange = { value = it }
             )
         }

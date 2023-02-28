@@ -13,10 +13,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.*
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.*
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.updateMapZoomInCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.updateMapZoomOutsideCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.updateDefaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
@@ -112,6 +109,19 @@ internal class MapSettingsStoreFactory(
                 }
                 onIntent<Intent.CloseDialog> {
                     dispatch(message = Message.NewDialogState(mapDialogState = None))
+                }
+                onIntent<Intent.Reset> {
+                    val preference = it.preference
+
+                    launch {
+                        dataStore.edit {
+                            when (preference) {
+                                is MapZoomInCity -> updateMapZoomInCity(DEFAULT_MAP_ZOOM_IN_CITY)
+                                is MapZoomOutCity -> updateMapZoomOutsideCity(DEFAULT_MAP_ZOOM_OUT_CITY)
+                                else -> {}
+                            }
+                        }
+                    }
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),

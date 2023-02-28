@@ -31,6 +31,10 @@ internal class MapSettingsComponentImpl(
         mapSettingsStore.accept(Intent.Modify(preference))
     }
 
+    override fun reset(preference: MapPref) {
+        mapSettingsStore.accept(Intent.Reset(preference))
+    }
+
     override fun openDialog(preference: MapPref) {
         mapSettingsStore.accept(Intent.OpenDialog(preference))
     }

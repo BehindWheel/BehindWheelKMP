@@ -15,6 +15,7 @@ interface MapSettingsComponent {
     val mapSettingsState: Flow<MapSettingState>
 
     fun modify(preference: MapPref)
+    fun reset(preference: MapPref)
     fun openDialog(preference: MapPref)
     fun closeDialog()
 

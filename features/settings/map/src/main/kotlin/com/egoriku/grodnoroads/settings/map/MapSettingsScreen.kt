@@ -62,7 +62,8 @@ fun MapSettingsScreen(
                 LoadedState(
                     mapSettingState = state,
                     openDialog = mapSettingsComponent::openDialog,
-                    modify = mapSettingsComponent::modify
+                    modify = mapSettingsComponent::modify,
+                    reset = mapSettingsComponent::reset
                 )
             }
         }
@@ -73,7 +74,8 @@ fun MapSettingsScreen(
 private fun LoadedState(
     mapSettingState: MapSettingState,
     openDialog: (MapPref) -> Unit,
-    modify: (MapPref) -> Unit
+    modify: (MapPref) -> Unit,
+    reset: (MapPref) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -86,7 +88,8 @@ private fun LoadedState(
         )
         DrivingModeSection(
             driveModeZoom = mapSettingState.mapSettings.driveModeZoom,
-            modify = modify
+            modify = modify,
+            reset = reset
         )
         MapStyleSection(
             mapStyle = mapSettingState.mapSettings.mapStyle,
