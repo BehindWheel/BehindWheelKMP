@@ -46,7 +46,11 @@ fun MapSettingsScreen(
             )
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
             DialogHandler(
                 dialogState = state.mapDialogState,
                 onClose = mapSettingsComponent::closeDialog,
