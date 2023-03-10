@@ -19,5 +19,5 @@ dependencies {
     implementation(libs.immutable.collections)
     implementation(libs.play.services.maps)
 
-    testImplementation(libs.kotlin.tests)
+    testImplementation(libs.kotlin.test)
 }

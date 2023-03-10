@@ -3,10 +3,10 @@ compileSdk = "33"
 minSdk = "21"
 targetSdk = "33"
 
-agp = "7.4.1"
+agp = "7.4.2"
 accompanist = "0.28.0"
 compose-bom = "2023.01.00"
-composeCompiler = "1.4.2"
+composeCompiler = "1.4.3"
 decompose = "1.0.0"
 koin-android = "3.3.3"
 koin-compose = "3.4.2"
@@ -37,7 +37,8 @@ androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.5.2"
+#https://github.com/skydoves/Balloon/issues/412
+balloon-compose = "com.github.skydoves:balloon-compose:1.5.3-SNAPSHOT"
 
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
@@ -45,14 +46,14 @@ coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-service
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:31.2.2"
+firebase-bom = "com.google.firebase:firebase-bom:31.2.3"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
 google-maps = "com.google.maps.android:maps-ktx:3.4.0"
-google-maps-compose = "com.google.maps.android:maps-compose:2.11.0"
+google-maps-compose = "com.google.maps.android:maps-compose:2.11.1"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.4.0"
 google-material = "com.google.android.material:material:1.8.0"
 
@@ -61,7 +62,7 @@ immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose" }
 
-kotlin-tests = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
