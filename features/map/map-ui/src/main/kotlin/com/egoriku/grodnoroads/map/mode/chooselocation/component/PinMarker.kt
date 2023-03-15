@@ -45,19 +45,31 @@ fun PinMarker(
     val endColor = LocalContentColor.current.copy(alpha = 0.4f)
 
     var markerOffset by rememberMutableState(animate) { if (animate) -verticalOffset else 0.dp }
-    val markerTranslation by animateDpAsState(target = markerOffset, duration = duration) {
+    val markerTranslation by animateDpAsState(
+        target = markerOffset,
+        duration = duration,
+        label = "markerTranslation"
+    ) {
         if (!animate) return@animateDpAsState
         markerOffset = if (it == -verticalOffset) 0.dp else -verticalOffset
     }
 
     var scale by rememberMutableState(animate) { if (animate) shadowScaleMin else shadowScaleMax }
-    val scaleTranslation by animateFloatAsState(target = scale, duration = duration) {
+    val scaleTranslation by animateFloatAsState(
+        target = scale,
+        duration = duration,
+        label = "scaleTranslation"
+    ) {
         if (!animate) return@animateFloatAsState
         scale = if (it == shadowScaleMax) shadowScaleMin else shadowScaleMax
     }
 
     var color by rememberMutableState(animate) { if (animate) endColor else startColor }
-    val colorTransition by animateColorAsState(target = color, duration = duration) {
+    val colorTransition by animateColorAsState(
+        target = color,
+        duration = duration,
+        label = "colorTransition"
+    ) {
         if (!animate) return@animateColorAsState
         color = if (it == endColor) startColor else endColor
     }
@@ -109,33 +121,39 @@ fun PinMarker(
 private fun animateDpAsState(
     target: Dp,
     duration: Int,
+    label: String,
     finishedListener: ((Dp) -> Unit)? = null
 ) = animateDpAsState(
     targetValue = target,
     animationSpec = tween(duration, easing = LinearEasing),
-    finishedListener = finishedListener
+    finishedListener = finishedListener,
+    label = label
 )
 
 @Composable
 private fun animateFloatAsState(
     target: Float,
     duration: Int,
+    label: String,
     finishedListener: ((Float) -> Unit)? = null
 ) = animateFloatAsState(
     targetValue = target,
     animationSpec = tween(duration, easing = LinearEasing),
-    finishedListener = finishedListener
+    finishedListener = finishedListener,
+    label = label
 )
 
 @Composable
 private fun animateColorAsState(
     target: Color,
     duration: Int,
+    label: String,
     finishedListener: ((Color) -> Unit)? = null
 ) = animateColorAsState(
     targetValue = target,
     animationSpec = tween(duration, easing = LinearEasing),
-    finishedListener = finishedListener
+    finishedListener = finishedListener,
+    label = label
 )
 
 @Preview(device = "id:Nexus One")

@@ -72,7 +72,8 @@ fun ClickableRange(
             val offsetX = remember { Animatable(0f) }
             val color by animateColorAsState(
                 targetValue = if (isError) MaterialTheme.colors.error else LocalContentColor.current,
-                animationSpec = tween(durationMillis = 250)
+                animationSpec = tween(durationMillis = 250),
+                label = "color"
             )
 
             LaunchedEffect(offsetX.isRunning) {
