@@ -25,6 +25,7 @@ import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -43,7 +44,7 @@ fun ClickableRange(
         Icon(
             modifier = Modifier
                 .unboundClickable {
-                    val decrement = value - step
+                    val decrement = decrement(value, step)
                     if (decrement >= min) {
                         onValueChange(decrement)
                     } else {
@@ -119,7 +120,7 @@ fun ClickableRange(
         Icon(
             modifier = Modifier
                 .unboundClickable {
-                    val increment = value + step
+                    val increment = increment(value, step)
                     if (increment <= max) {
                         onValueChange(increment)
                     } else {
@@ -133,6 +134,16 @@ fun ClickableRange(
     }
 }
 
+private fun increment(value: Float, step: Float): Float {
+    val result = value + step
+    return (result * 10.0f).roundToInt() / 10.0f
+}
+
+private fun decrement(value: Float, step: Float): Float {
+    val result = value - step
+    return (result * 10.0f).roundToInt() / 10.0f
+}
+
 @GrodnoRoadsPreview
 @Composable
 private fun RangeSettingPreview() {
@@ -144,7 +155,7 @@ private fun RangeSettingPreview() {
                 modifier = Modifier.align(Center),
                 min = 10f,
                 max = 15f,
-                step = 1f,
+                step = 0.1f,
                 value = value,
                 onLongClick = {},
                 onValueChange = { value = it }
