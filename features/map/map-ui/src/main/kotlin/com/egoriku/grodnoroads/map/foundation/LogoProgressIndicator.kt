@@ -17,14 +17,15 @@ import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun LogoProgressIndicator() {
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
     val color by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
             animation = tween(1000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
-        )
+        ),
+        label = "color"
     )
 
     Surface {

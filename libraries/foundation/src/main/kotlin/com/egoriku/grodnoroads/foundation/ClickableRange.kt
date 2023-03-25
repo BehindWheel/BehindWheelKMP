@@ -68,7 +68,8 @@ fun ClickableRange(
                 }.using(
                     SizeTransform(clip = false)
                 )
-            }
+            },
+            label = "slide + fade animation"
         ) { targetCount ->
             val offsetX = remember { Animatable(0f) }
             val color by animateColorAsState(
