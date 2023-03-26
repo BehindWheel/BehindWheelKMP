@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.foundation.map
 
+import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -185,16 +185,9 @@ fun GoogleMapComponent(
                 .matchParentSize()
                 .pointerInput(Unit) {
                     coroutineScope {
-                        forEachGesture {
-                            awaitPointerEventScope {
-                                awaitFirstDown(requireUnconsumed = false)
-
-                                do {
-                                    val event = awaitPointerEvent()
-                                    cameraPositionChangeCount++
-
-                                } while (event.changes.any { it.pressed })
-                            }
+                        awaitEachGesture {
+                            awaitFirstDown(requireUnconsumed = false)
+                            cameraPositionChangeCount++
                         }
                     }
                 },

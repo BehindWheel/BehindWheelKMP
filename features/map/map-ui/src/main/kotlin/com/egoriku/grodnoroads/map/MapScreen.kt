@@ -114,7 +114,7 @@ fun MapScreen(component: MapComponent) {
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
-                AnimatedContent(targetState = appMode) { state ->
+                AnimatedContent(targetState = appMode, label = "app mode") { state ->
                     when (state) {
                         AppMode.Default -> {
                             DefaultMode(

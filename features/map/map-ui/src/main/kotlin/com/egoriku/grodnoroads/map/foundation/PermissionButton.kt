@@ -106,7 +106,7 @@ internal class MutableGmsLocationPermissionState(
 
     private val highPrecisionLowIntervalRequest =
         LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
-            .setMinUpdateDistanceMeters(10f)
+            .setMinUpdateDistanceMeters(0f)
             .setMinUpdateIntervalMillis(1000)
             .build()
 

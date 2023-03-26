@@ -5,7 +5,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -26,8 +25,9 @@ import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ClickableRange(
     modifier: Modifier = Modifier,
@@ -44,7 +44,7 @@ fun ClickableRange(
         Icon(
             modifier = Modifier
                 .unboundClickable {
-                    val decrement = value - step
+                    val decrement = decrement(value, step)
                     if (decrement >= min) {
                         onValueChange(decrement)
                     } else {
@@ -68,12 +68,14 @@ fun ClickableRange(
                 }.using(
                     SizeTransform(clip = false)
                 )
-            }
+            },
+            label = "slide + fade animation"
         ) { targetCount ->
             val offsetX = remember { Animatable(0f) }
             val color by animateColorAsState(
                 targetValue = if (isError) MaterialTheme.colors.error else LocalContentColor.current,
-                animationSpec = tween(durationMillis = 250)
+                animationSpec = tween(durationMillis = 250),
+                label = "color"
             )
 
             LaunchedEffect(offsetX.isRunning) {
@@ -119,7 +121,7 @@ fun ClickableRange(
         Icon(
             modifier = Modifier
                 .unboundClickable {
-                    val increment = value + step
+                    val increment = increment(value, step)
                     if (increment <= max) {
                         onValueChange(increment)
                     } else {
@@ -133,6 +135,16 @@ fun ClickableRange(
     }
 }
 
+private fun increment(value: Float, step: Float): Float {
+    val result = value + step
+    return (result * 10.0f).roundToInt() / 10.0f
+}
+
+private fun decrement(value: Float, step: Float): Float {
+    val result = value - step
+    return (result * 10.0f).roundToInt() / 10.0f
+}
+
 @GrodnoRoadsPreview
 @Composable
 private fun RangeSettingPreview() {
@@ -144,7 +156,7 @@ private fun RangeSettingPreview() {
                 modifier = Modifier.align(Center),
                 min = 10f,
                 max = 15f,
-                step = 1f,
+                step = 0.1f,
                 value = value,
                 onLongClick = {},
                 onValueChange = { value = it }
