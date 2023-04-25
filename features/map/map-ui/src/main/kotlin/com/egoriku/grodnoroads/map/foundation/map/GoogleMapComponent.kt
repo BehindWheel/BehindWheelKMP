@@ -71,6 +71,7 @@ fun GoogleMapComponent(
             val projection = cameraPositionState.projection
 
             calculateCameraPositionValues(
+                isMapLoaded = isMapLoaded,
                 screenHeight = screenHeight,
                 projection = projection,
                 lastLocation = lastLocation

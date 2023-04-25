@@ -13,11 +13,12 @@ private fun LatLng.isValid(): Boolean {
 }
 
 fun calculateCameraPositionValues(
+    isMapLoaded: Boolean,
     screenHeight: Int,
     projection: Projection?,
     lastLocation: LastLocation
 ): CameraPositionValues {
-    if (projection == null || !lastLocation.latLng.isValid()) {
+    if (!isMapLoaded || projection == null || !lastLocation.latLng.isValid()) {
         return CameraPositionValues(
             initialLatLng = lastLocation.latLng,
             targetLatLngWithOffset = lastLocation.latLng,
