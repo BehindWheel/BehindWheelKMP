@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.settings.alerts.AlertsScreen
 import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
@@ -31,10 +33,7 @@ fun SettingsScreen(settingsComponent: SettingsComponent) {
             Children(
                 modifier = Modifier.statusBarsPadding(),
                 stack = childStack,
-                /**
-                Temporary disable due to https://github.com/arkivanov/Decompose/issues/330
-                 */
-                //  animation = stackAnimation(slide())
+                animation = stackAnimation(slide())
             ) { created ->
                 when (val child = created.instance) {
                     is SettingsComponent.Child.Settings -> SettingsUi(
