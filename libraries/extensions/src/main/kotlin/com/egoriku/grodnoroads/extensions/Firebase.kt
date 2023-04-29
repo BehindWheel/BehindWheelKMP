@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.extensions
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.google.firebase.FirebaseException
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -14,7 +13,7 @@ inline fun <reified T> Query.awaitValueEventListener(): Flow<ResultOf<List<T>>> 
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
                     val entityList = snapshot.children.mapNotNull { dataSnapshot ->
-                        dataSnapshot.getValue<T>()
+                        dataSnapshot.valueOf<T>()
                     }
 
                     trySend(ResultOf.Success(entityList))
@@ -42,7 +41,7 @@ inline fun <reified T> DatabaseReference.awaitValueEventListener(): Flow<ResultO
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
                     val entityList = snapshot.children.mapNotNull { dataSnapshot ->
-                        dataSnapshot.getValue<T>()
+                        dataSnapshot.valueOf<T>()
                     }
 
                     trySend(ResultOf.Success(entityList))
@@ -70,7 +69,7 @@ inline fun <reified T> DatabaseReference.awaitSingleValueEventListener(): Flow<R
                 try {
                     val entityList = mutableListOf<T>()
                     snapshot.children.forEach { dataSnapshot ->
-                        dataSnapshot.getValue<T>()?.let {
+                        dataSnapshot.valueOf<T>()?.let {
                             entityList.add(it)
                         }
                     }
@@ -107,4 +106,8 @@ fun getErrorMessage(errorCode: Int): String {
         DatabaseError.UNKNOWN_ERROR -> "unknown.error"
         else -> "other error"
     }
+}
+
+inline fun <reified T> DataSnapshot.valueOf(): T? {
+    return getValue(T::class.java)
 }
