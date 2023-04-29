@@ -34,7 +34,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 fun GoogleMapComponent(
@@ -61,7 +61,7 @@ fun GoogleMapComponent(
     var cameraPositionChangeCount by remember { mutableStateOf(0) }
     var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
 
-    val markerCache = get<MarkerCache>()
+    val markerCache = koinInject<MarkerCache>()
 
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val cameraPositionState = rememberCameraPositionState()

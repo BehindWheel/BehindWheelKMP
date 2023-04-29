@@ -1,8 +1,6 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import java.util.Locale
 
-// Remove after https://github.com/gradle/gradle/issues/22797 (~gradle 8.1)
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false

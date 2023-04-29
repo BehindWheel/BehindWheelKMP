@@ -1,8 +1,10 @@
 package com.egoriku.grodnoroads.settings.whatsnew.data.dto
 
+import androidx.annotation.Keep
 import com.google.firebase.firestore.PropertyName
 import java.util.Date
 
+@Keep
 class WhatsNewDTO(
     @PropertyName("name")
     @JvmField
