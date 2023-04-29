@@ -3,7 +3,6 @@ import com.egoriku.grodnoroads.extension.provideVersionCode
 import com.egoriku.grodnoroads.extension.provideVersionName
 import com.egoriku.grodnoroads.extension.release
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("grodnoroads.application")
     alias(libs.plugins.firebase.crashlytics)
@@ -14,6 +13,8 @@ plugins {
 }
 
 android {
+    namespace = "com.egoriku.grodnoroads"
+
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads"
 
@@ -67,12 +68,11 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    namespace = "com.egoriku.grodnoroads"
 }
 
 dependencies {

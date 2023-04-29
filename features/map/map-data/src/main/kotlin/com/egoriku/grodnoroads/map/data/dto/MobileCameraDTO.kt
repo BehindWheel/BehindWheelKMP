@@ -1,7 +1,9 @@
 package com.egoriku.grodnoroads.map.data.dto
 
+import androidx.annotation.Keep
 import com.google.firebase.database.PropertyName
 
+@Keep
 internal class MobileCameraDTO(
     @PropertyName("name")
     @JvmField

@@ -35,12 +35,12 @@ import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.google.android.gms.maps.Projection
 import kotlinx.collections.immutable.persistentListOf
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MapScreen(component: MapComponent) {
-    val markerCache = get<MarkerCache>()
+    val markerCache = koinInject<MarkerCache>()
 
     Surface(
         modifier = Modifier
