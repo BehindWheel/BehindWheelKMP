@@ -75,13 +75,13 @@ private fun PreviewStationaryAlert() = GrodnoRoadsTheme {
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableId = R.drawable.ic_map_stationary_camera,
+            drawableId = R.drawable.ic_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableId = R.drawable.ic_map_stationary_camera,
+            drawableId = R.drawable.ic_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(

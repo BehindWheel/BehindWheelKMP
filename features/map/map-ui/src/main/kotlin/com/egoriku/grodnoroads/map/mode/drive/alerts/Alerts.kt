@@ -60,7 +60,7 @@ fun Alerts(
                         else -> error("title not applicable")
                     }
                     val icon = when (alert.mapEventType) {
-                        StationaryCamera -> R.drawable.ic_map_stationary_camera
+                        StationaryCamera -> R.drawable.ic_stationary_camera
                         MobileCamera -> R.drawable.ic_mobile_camera
                         else -> error("title not applicable")
                     }
