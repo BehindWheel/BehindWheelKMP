@@ -32,6 +32,7 @@ fun alertMessagesTransformation(): suspend (
                     lastLocation = lastLocation,
                     distanceRadius = alertDistance
                 )
+
                 else -> persistentListOf()
             }
         }
@@ -60,11 +61,20 @@ private fun makeAlertMessage(
                 null -> null
                 else -> when (event) {
                     is StationaryCamera -> {
-                        CameraAlert(
-                            distance = distance,
-                            speedLimit = event.speed,
-                            mapEventType = event.mapEventType
+                        val inRange = isAngleInRange(
+                            cameraAngle = event.angle,
+                            bidirectional = event.bidirectional,
+                            bearing = lastLocation.bearing
                         )
+
+                        if (inRange) {
+                            CameraAlert(
+                                distance = distance,
+                                // TODO: handle car type
+                                speedLimit = event.speedCar,
+                                mapEventType = event.mapEventType
+                            )
+                        } else null
                     }
 
                     is Reports -> {

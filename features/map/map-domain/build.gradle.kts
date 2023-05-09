@@ -28,4 +28,6 @@ dependencies {
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.play.services.maps)
+
+    testImplementation(libs.kotlin.test)
 }

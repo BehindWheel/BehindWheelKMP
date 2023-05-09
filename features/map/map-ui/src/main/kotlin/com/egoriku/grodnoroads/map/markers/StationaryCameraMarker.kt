@@ -44,12 +44,12 @@ fun StationaryCameraMarker(
                 .padding(8.dp)
         ) {
             Text(
-                text = stationaryCamera.message,
+                text = stationaryCamera.name,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
             )
             Spacer(modifier = Modifier.width(8.dp))
-            SpeedLimitSign(limit = stationaryCamera.speed)
+            SpeedLimitSign(limit = stationaryCamera.speedCar)
         }
     }
 }

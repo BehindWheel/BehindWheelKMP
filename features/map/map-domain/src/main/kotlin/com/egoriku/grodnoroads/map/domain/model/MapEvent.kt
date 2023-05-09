@@ -13,8 +13,13 @@ sealed interface MapEvent {
     val mapEventType: MapEventType
 
     data class StationaryCamera(
-        val message: String,
-        val speed: Int,
+        val id: Int,
+        val name: String,
+        val angle: Float,
+        val bidirectional: Boolean,
+        val updateTime: Long,
+        val speedCar: Int,
+        val speedTruck: Int,
         override val position: LatLng,
         override val mapEventType: MapEventType = StationaryCamera
     ) : MapEvent
