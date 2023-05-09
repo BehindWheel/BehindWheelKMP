@@ -28,7 +28,6 @@ import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun IncidentAlert(
     emoji: String,

@@ -23,7 +23,6 @@ import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MarkerAlertDialog(
     reports: Reports,

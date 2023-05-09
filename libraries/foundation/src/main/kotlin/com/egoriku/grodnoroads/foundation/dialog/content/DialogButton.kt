@@ -23,7 +23,7 @@ fun DialogButton(
     textResId: Int,
     onClick: () -> Unit
 ) {
-    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
         TextButton(
             enabled = enabled,
             shape = RoundedCornerShape(0.dp),

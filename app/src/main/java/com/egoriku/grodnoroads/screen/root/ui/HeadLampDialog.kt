@@ -19,7 +19,6 @@ import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Spring
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
     val dialogContent = when (headlampType) {

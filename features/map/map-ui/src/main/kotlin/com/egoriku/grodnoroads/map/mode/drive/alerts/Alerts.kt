@@ -57,12 +57,12 @@ fun Alerts(
                     val title = when (alert.mapEventType) {
                         StationaryCamera -> stringResource(R.string.alerts_stationary_camera)
                         MobileCamera -> stringResource(R.string.alerts_mobile_camera)
-                        else -> throw IllegalArgumentException("title not applicable")
+                        else -> error("title not applicable")
                     }
                     val icon = when (alert.mapEventType) {
-                        StationaryCamera -> R.drawable.ic_stationary_camera
+                        StationaryCamera -> R.drawable.ic_map_stationary_camera
                         MobileCamera -> R.drawable.ic_mobile_camera
-                        else -> throw IllegalArgumentException("title not applicable")
+                        else -> error("title not applicable")
                     }
                     CameraAlert(
                         distance = alert.distance,

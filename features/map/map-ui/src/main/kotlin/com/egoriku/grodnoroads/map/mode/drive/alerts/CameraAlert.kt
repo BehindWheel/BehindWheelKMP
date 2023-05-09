@@ -7,7 +7,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -21,7 +20,6 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.resources.R
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CameraAlert(
     distance: Int,
@@ -77,13 +75,13 @@ private fun PreviewStationaryAlert() = GrodnoRoadsTheme {
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableId = R.drawable.ic_stationary_camera,
+            drawableId = R.drawable.ic_map_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableId = R.drawable.ic_stationary_camera,
+            drawableId = R.drawable.ic_map_stationary_camera,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(

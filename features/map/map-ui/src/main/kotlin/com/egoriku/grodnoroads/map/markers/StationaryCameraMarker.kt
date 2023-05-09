@@ -35,7 +35,7 @@ fun StationaryCameraMarker(
 
     MarkerInfoWindow(
         state = markerState,
-        icon = onFromCache(R.drawable.ic_stationary_camera),
+        icon = onFromCache(R.drawable.ic_map_stationary_camera),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
