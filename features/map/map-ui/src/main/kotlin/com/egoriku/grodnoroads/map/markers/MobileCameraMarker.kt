@@ -32,7 +32,7 @@ fun MobileCameraMarker(mobileCamera: MobileCamera, onFromCache: (Int) -> BitmapD
 
     MarkerInfoWindow(
         state = markerState,
-        icon = onFromCache(R.drawable.ic_mobile_camera)
+        icon = onFromCache(R.drawable.ic_map_mobile_camera)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
