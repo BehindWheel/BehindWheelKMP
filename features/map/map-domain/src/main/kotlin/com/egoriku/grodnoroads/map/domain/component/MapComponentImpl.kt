@@ -40,8 +40,9 @@ internal class MapComponentImpl(
     private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
     private val mapEventsStore: MapEventsStore = instanceKeeper.getStore(::get)
 
-    private val mobile = mapEventsStore.states.map { it.mobileCamera }
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
+    private val mediumSpeed = mapEventsStore.states.map { it.mediumSpeedCameras }
+    private val mobile = mapEventsStore.states.map { it.mobileCameras }
     private val reports = mapEventsStore.states.map { it.reports }
 
     private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertDistance }
@@ -77,7 +78,8 @@ internal class MapComponentImpl(
             flow = reports,
             flow2 = stationary,
             flow3 = mobile,
-            flow4 = mapInfo,
+            flow4 = mediumSpeed,
+            flow5 = mapInfo,
             transform = filterMapEvents()
         ).flowOn(Dispatchers.Default)
 

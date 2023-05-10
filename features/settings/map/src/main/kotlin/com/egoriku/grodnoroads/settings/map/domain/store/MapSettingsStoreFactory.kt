@@ -44,6 +44,7 @@ internal class MapSettingsStoreFactory(
                             MapSettings(
                                 mapInfo = MapInfo(
                                     stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
+                                    mediumSpeedCameras = MediumSpeedCameras(isShow = pref.isShowMediumSpeedCameras),
                                     mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
                                     trafficPolice = TrafficPolice(isShow = pref.isShowTrafficPolice),
                                     roadIncident = RoadIncident(isShow = pref.isShowRoadIncidents),
@@ -78,6 +79,7 @@ internal class MapSettingsStoreFactory(
                         dataStore.edit {
                             when (preference) {
                                 is StationaryCameras -> updateStationaryCameras(preference.isShow)
+                                is MediumSpeedCameras -> updateMediumSpeedCameras(preference.isShow)
                                 is MobileCameras -> updateMobileCameras(preference.isShow)
                                 is TrafficPolice -> updateTrafficPolice(preference.isShow)
                                 is RoadIncident -> updateRoadIncidents(preference.isShow)
@@ -117,7 +119,10 @@ internal class MapSettingsStoreFactory(
                         dataStore.edit {
                             when (preference) {
                                 is MapZoomInCity -> updateMapZoomInCity(DEFAULT_MAP_ZOOM_IN_CITY)
-                                is MapZoomOutCity -> updateMapZoomOutsideCity(DEFAULT_MAP_ZOOM_OUT_CITY)
+                                is MapZoomOutCity -> updateMapZoomOutsideCity(
+                                    DEFAULT_MAP_ZOOM_OUT_CITY
+                                )
+
                                 else -> {}
                             }
                         }

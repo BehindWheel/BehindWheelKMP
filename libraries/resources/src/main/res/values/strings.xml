@@ -24,6 +24,7 @@
 
     <string name="alerts_stationary_camera">Stationary camera</string>
     <string name="alerts_mobile_camera">Mobile camera</string>
+    <string name="alerts_medium_speed_camera">Medium speed camera</string>
     <string name="alerts_incident">Road incident</string>
     <string name="alerts_traffic_police">Traffic police</string>
     <string name="alerts_car_crash">Car crash</string>
@@ -90,6 +91,7 @@
 
     <string name="map_header_markers">Markers</string>
     <string name="map_markers_stationary_cameras">Stationary cameras</string>
+    <string name="map_markers_medium_speed_cameras">Medium speed cameras</string>
     <string name="map_markers_mobile_cameras">Mobile cameras</string>
     <string name="map_markers_traffic_police">Traffic Police</string>
     <string name="map_markers_incidents">Incidents on road</string>

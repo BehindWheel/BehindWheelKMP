@@ -56,8 +56,9 @@ internal class MapConfigStoreFactory(
                                 zoomLevelOutOfCity = pref.mapZoomOutCity,
                                 alertDistance = pref.alertDistance,
                                 mapInfo = MapInfo(
-                                    showMobileCameras = pref.isShowMobileCameras,
                                     showStationaryCameras = pref.isShowStationaryCameras,
+                                    showMediumSpeedCameras = pref.isShowMediumSpeedCameras,
+                                    showMobileCameras = pref.isShowMobileCameras,
                                     showRoadIncident = pref.isShowRoadIncidents,
                                     showTrafficPolice = pref.isShowTrafficPolice,
                                     showTrafficJam = pref.isShowTrafficJam,

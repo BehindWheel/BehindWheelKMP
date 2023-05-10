@@ -22,6 +22,7 @@ internal fun MapEventsSection(
         SettingsHeader(title = stringResource(id = R.string.map_header_markers))
 
         StationaryCameras(mapInfo, onCheckedChange)
+        MediumSpeedCameras(mapInfo, onCheckedChange)
         MobileCameras(mapInfo, onCheckedChange)
         TrafficPolice(mapInfo, onCheckedChange)
         RoadIncidents(mapInfo, onCheckedChange)
@@ -44,6 +45,23 @@ private fun StationaryCameras(
         isChecked = stationaryCameras.isShow,
         onCheckedChange = {
             onCheckedChange(stationaryCameras.copy(isShow = it))
+        }
+    )
+}
+
+@Composable
+private fun MediumSpeedCameras(
+    mapInfo: MapInfo,
+    onCheckedChange: (MapPref) -> Unit
+) {
+    val mediumSpeedCameras = mapInfo.mediumSpeedCameras
+
+    CheckboxSettings(
+        iconRes = R.drawable.ic_medium_speed_camera,
+        stringResId = R.string.map_markers_medium_speed_cameras,
+        isChecked = mediumSpeedCameras.isShow,
+        onCheckedChange = {
+            onCheckedChange(mediumSpeedCameras.copy(isShow = it))
         }
     )
 }

@@ -7,9 +7,6 @@ enum class MapEventType(
     @Deprecated("Legacy event type")
     RoadAccident(type = "accident", emoji = "❗"),
 
-    StationaryCamera(type = "stationary", emoji = "📷"),
-    MobileCamera(type = "mobile", emoji = "📸"),
-
     TrafficPolice(type = "police", emoji = "👮"),
     RoadIncident(type = "road_incident", emoji = "❗"),
     CarCrash(type = "car_crash", emoji = "💥🚗"),

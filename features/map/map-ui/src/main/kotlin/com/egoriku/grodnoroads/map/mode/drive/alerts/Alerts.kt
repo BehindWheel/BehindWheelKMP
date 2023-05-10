@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.map.domain.model.CameraType.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
@@ -53,15 +54,18 @@ fun Alerts(
                     )
 
                 }
+
                 is CameraAlert -> {
-                    val title = when (alert.mapEventType) {
+                    val title = when (alert.cameraType) {
                         StationaryCamera -> stringResource(R.string.alerts_stationary_camera)
                         MobileCamera -> stringResource(R.string.alerts_mobile_camera)
+                        MediumSpeedCamera -> stringResource(R.string.alerts_medium_speed_camera)
                         else -> error("title not applicable")
                     }
-                    val icon = when (alert.mapEventType) {
+                    val icon = when (alert.cameraType) {
                         StationaryCamera -> R.drawable.ic_stationary_camera
                         MobileCamera -> R.drawable.ic_mobile_camera
+                        MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
                         else -> error("title not applicable")
                     }
                     CameraAlert(
@@ -100,7 +104,7 @@ private fun AlertsPreview() {
                     CameraAlert(
                         distance = 2,
                         speedLimit = 60,
-                        mapEventType = StationaryCamera
+                        cameraType = StationaryCamera
                     )
                 )
             )
@@ -124,12 +128,12 @@ private fun AlertsPreview() {
             )
             Alerts(
                 alerts = persistentListOf(
-                    CameraAlert(distance = 220, speedLimit = -1, mapEventType = MobileCamera)
+                    CameraAlert(distance = 220, speedLimit = -1, cameraType = MobileCamera)
                 )
             )
             Alerts(
                 alerts = persistentListOf(
-                    CameraAlert(distance = 220, speedLimit = 60, mapEventType = MobileCamera)
+                    CameraAlert(distance = 220, speedLimit = 60, cameraType = MobileCamera)
                 )
             )
         }

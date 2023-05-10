@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.map.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -23,7 +23,7 @@ import com.google.maps.android.compose.rememberMarkerState
 
 @Composable
 fun StationaryCameraMarker(
-    stationaryCamera: MapEvent.StationaryCamera,
+    stationaryCamera: StationaryCamera,
     onFromCache: (Int) -> BitmapDescriptor
 ) {
     // https://github.com/googlemaps/android-maps-compose/issues/46

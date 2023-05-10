@@ -19,6 +19,7 @@ val mapDomainModule = module {
             storeFactory = get(),
             mobileCameraRepository = get(),
             stationaryCameraRepository = get(),
+            mediumSpeedCameraRepository = get(),
             userCountRepository = get(),
             reportsRepository = get(),
             analyticsTracker = get(),

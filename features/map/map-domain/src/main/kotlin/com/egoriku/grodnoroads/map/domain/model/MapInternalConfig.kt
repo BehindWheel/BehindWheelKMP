@@ -12,8 +12,9 @@ internal data class MapInternalConfig(
     val keepScreenOn: Boolean
 ) {
     internal data class MapInfo(
-        val showMobileCameras: Boolean,
         val showStationaryCameras: Boolean,
+        val showMediumSpeedCameras: Boolean,
+        val showMobileCameras: Boolean,
         val showRoadIncident: Boolean,
         val showTrafficPolice: Boolean,
         val showCarCrash: Boolean,
@@ -27,8 +28,9 @@ internal data class MapInternalConfig(
             zoomLevelOutOfCity = -1f,
             alertDistance = -1,
             mapInfo = MapInfo(
-                showMobileCameras = false,
                 showStationaryCameras = false,
+                showMediumSpeedCameras = false,
+                showMobileCameras = false,
                 showRoadIncident = false,
                 showTrafficPolice = false,
                 showCarCrash = false,

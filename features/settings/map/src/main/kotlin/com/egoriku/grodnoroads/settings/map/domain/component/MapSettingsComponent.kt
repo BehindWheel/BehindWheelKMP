@@ -32,6 +32,7 @@ interface MapSettingsComponent {
 
     sealed interface MapPref {
         data class StationaryCameras(val isShow: Boolean = true) : MapPref
+        data class MediumSpeedCameras(val isShow: Boolean = true) : MapPref
         data class MobileCameras(val isShow: Boolean = true) : MapPref
         data class TrafficPolice(val isShow: Boolean = true) : MapPref
         data class RoadIncident(val isShow: Boolean = true) : MapPref
@@ -79,6 +80,7 @@ interface MapSettingsComponent {
 
         data class MapInfo(
             val stationaryCameras: StationaryCameras = StationaryCameras(),
+            val mediumSpeedCameras: MediumSpeedCameras = MediumSpeedCameras(),
             val mobileCameras: MobileCameras = MobileCameras(),
             val trafficPolice: TrafficPolice = TrafficPolice(),
             val roadIncident: RoadIncident = RoadIncident(),

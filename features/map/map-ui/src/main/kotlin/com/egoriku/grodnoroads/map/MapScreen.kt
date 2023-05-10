@@ -20,12 +20,14 @@ import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
+import com.egoriku.grodnoroads.map.markers.MediumSpeedCameraMarker
 import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
 import com.egoriku.grodnoroads.map.markers.ReportsMarker
 import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
@@ -93,19 +95,27 @@ fun MapScreen(component: MapComponent) {
             content = {
                 mapEvents.forEach { mapEvent ->
                     when (mapEvent) {
-                        is MapEvent.StationaryCamera -> StationaryCameraMarker(
-                            stationaryCamera = mapEvent,
-                            onFromCache = { markerCache.getVector(id = it) }
-                        )
+                        is MapEvent.Camera -> {
+                            when (mapEvent) {
+                                is StationaryCamera -> StationaryCameraMarker(
+                                    stationaryCamera = mapEvent,
+                                    onFromCache = { markerCache.getVector(id = it) }
+                                )
+
+                                is MediumSpeedCamera -> MediumSpeedCameraMarker(
+                                    mediumSpeedCamera = mapEvent,
+                                    onFromCache = { markerCache.getVector(id = it) })
+
+                                is MobileCamera -> MobileCameraMarker(
+                                    mobileCamera = mapEvent,
+                                    onFromCache = { markerCache.getVector(id = it) })
+                            }
+                        }
 
                         is MapEvent.Reports -> ReportsMarker(
                             mapEvent,
                             component::showMarkerInfoDialog
                         )
-
-                        is MapEvent.MobileCamera -> MobileCameraMarker(
-                            mobileCamera = mapEvent,
-                            onFromCache = { markerCache.getVector(id = it) })
                     }
                 }
             }
