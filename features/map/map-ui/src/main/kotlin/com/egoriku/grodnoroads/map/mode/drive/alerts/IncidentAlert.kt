@@ -10,13 +10,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
@@ -50,7 +49,7 @@ fun IncidentAlert(
                     },
                     style = MaterialTheme.typography.body1,
                 )
-                HSpacer(dp = 4.dp)
+                VerticalSpacer(4.dp)
                 Text(
                     text = pluralStringResource(
                         R.plurals.camera_alerts_plurals_distance,

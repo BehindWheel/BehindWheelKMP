@@ -30,6 +30,9 @@
     <string name="alerts_wild_animals">Дикие животные</string>
     <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
 
+    <string name="camera_info_last_update">Обновлено %1$s</string>
+    <string name="camera_info_report">Сообщить о проблеме</string>
+
     <string name="terms_of_service">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
 

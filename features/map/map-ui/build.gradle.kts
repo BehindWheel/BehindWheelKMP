@@ -23,6 +23,8 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
+    // Workaround to fix crash in BottomSheet
+    implementation(libs.androidx.compose.material.alpha)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
@@ -34,5 +36,6 @@ dependencies {
     implementation(libs.immutable.collections)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.modalsheet)
     implementation(libs.play.services.location)
 }

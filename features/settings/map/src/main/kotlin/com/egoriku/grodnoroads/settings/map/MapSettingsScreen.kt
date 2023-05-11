@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.HSpacer
+import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
@@ -103,7 +103,7 @@ private fun LoadedState(
             mapInfo = mapSettingState.mapSettings.mapInfo,
             onCheckedChange = modify
         )
-        HSpacer(dp = 16.dp)
+        VerticalSpacer(16.dp)
     }
 }
 

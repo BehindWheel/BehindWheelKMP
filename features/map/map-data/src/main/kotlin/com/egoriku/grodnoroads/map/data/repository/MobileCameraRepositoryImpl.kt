@@ -24,7 +24,7 @@ internal class MobileCameraRepositoryImpl(
                 is Failure -> Failure(resultOf.exception)
                 is Success -> Success(resultOf.value.map { data ->
                     MobileCamera(
-                        message = data.name,
+                        name = data.name,
                         position = LatLng(data.latitude, data.longitude),
                         speed = data.speed
                     )
