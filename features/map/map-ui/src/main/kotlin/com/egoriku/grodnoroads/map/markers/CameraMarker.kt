@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.map.markers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.egoriku.grodnoroads.extensions.unConsume
+import com.egoriku.grodnoroads.extensions.consume
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.maps.android.compose.Marker
@@ -25,7 +25,7 @@ fun CameraMarker(
         state = markerState,
         icon = provideIcon(),
         onClick = {
-            unConsume {
+            consume {
                 onClick()
             }
         }

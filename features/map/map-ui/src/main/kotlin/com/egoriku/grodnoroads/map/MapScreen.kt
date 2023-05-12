@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +32,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
+import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
 import com.egoriku.grodnoroads.map.markers.CameraMarker
@@ -42,12 +43,10 @@ import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
-import eu.wewox.modalsheet.ExperimentalSheetApi
-import eu.wewox.modalsheet.ModalSheet
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalSheetApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(component: MapComponent) {
     val markerCache = koinInject<MarkerCache>()
@@ -57,6 +56,8 @@ fun MapScreen(component: MapComponent) {
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
+        var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
+
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(AppMode.Default)
         val location by component.lastLocation.collectAsState(LastLocation.None)
@@ -64,17 +65,6 @@ fun MapScreen(component: MapComponent) {
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
         val userCount by component.userCount.collectAsState(initial = 0)
-
-        var cameraDetail by rememberMutableState<MapEvent.Camera?> { null }
-
-        ModalSheet(
-            visible = cameraDetail != null,
-            onVisibleChange = { cameraDetail = null },
-            shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
-        ) {
-            val state = cameraDetail ?: return@ModalSheet
-            CameraInfo(state)
-        }
 
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
@@ -119,19 +109,19 @@ fun MapScreen(component: MapComponent) {
                                 is StationaryCamera -> CameraMarker(
                                     camera = mapEvent,
                                     provideIcon = { markerCache.getVector(id = R.drawable.ic_map_stationary_camera) },
-                                    onClick = { cameraDetail = mapEvent }
+                                    onClick = { cameraInfo = mapEvent }
                                 )
 
                                 is MediumSpeedCamera -> CameraMarker(
                                     camera = mapEvent,
                                     provideIcon = { markerCache.getVector(id = R.drawable.ic_map_medium_speed_camera) },
-                                    onClick = { cameraDetail = mapEvent }
+                                    onClick = { cameraInfo = mapEvent }
                                 )
 
                                 is MobileCamera -> CameraMarker(
                                     camera = mapEvent,
                                     provideIcon = { markerCache.getVector(id = R.drawable.ic_map_mobile_camera) },
-                                    onClick = { cameraDetail = mapEvent }
+                                    onClick = { cameraInfo = mapEvent }
                                 )
                             }
                         }
@@ -208,6 +198,13 @@ fun MapScreen(component: MapComponent) {
                     count = userCount
                 )
             }
+        }
+
+        ModalBottomSheet(
+            data = cameraInfo,
+            onDismissRequest = { cameraInfo = null },
+        ) {
+            CameraInfo(it)
         }
     }
 }

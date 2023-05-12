@@ -31,41 +31,22 @@ import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 
 @Composable
-fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) {
-    Box(modifier = modifier.wrapContentHeight()) {
-        Column {
-            DragHandle()
-            Info(
-                camera = camera,
-                iconId = when (camera) {
-                    is StationaryCamera -> R.drawable.ic_stationary_camera
-                    is MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
-                    is MobileCamera -> R.drawable.ic_mobile_camera
-                },
-                cameraTypeId = when (camera) {
-                    is StationaryCamera -> R.string.alerts_stationary_camera
-                    is MediumSpeedCamera -> R.string.alerts_medium_speed_camera
-                    is MobileCamera -> R.string.alerts_mobile_camera
-                }
-            )
-            VerticalSpacer(32.dp)
-        }
-    }
-}
-
-@Composable
-private fun DragHandle() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .size(32.dp, 4.dp)
-                .background(Color(0xFFD9D9D9))
+fun CameraInfo(camera: MapEvent.Camera) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Info(
+            camera = camera,
+            iconId = when (camera) {
+                is StationaryCamera -> R.drawable.ic_stationary_camera
+                is MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
+                is MobileCamera -> R.drawable.ic_mobile_camera
+            },
+            cameraTypeId = when (camera) {
+                is StationaryCamera -> R.string.alerts_stationary_camera
+                is MediumSpeedCamera -> R.string.alerts_medium_speed_camera
+                is MobileCamera -> R.string.alerts_mobile_camera
+            }
         )
+        VerticalSpacer(32.dp)
     }
 }
 
@@ -102,36 +83,38 @@ private fun Info(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
+            SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_speed_limit_car),
-                    contentDescription = null
-                )
-                HorizontalSpacer(18.dp)
-                SpeedLimit(value = camera.speedCar)
-            }
-            Row(
+                speed = camera.speedCar,
+                iconId = R.drawable.ic_speed_limit_car
+            )
+            SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_speed_limit_truck),
-                    contentDescription = null
-                )
-                HorizontalSpacer(18.dp)
-                SpeedLimit(value = camera.speedTruck)
-            }
+                speed = camera.speedTruck,
+                iconId = R.drawable.ic_speed_limit_truck
+            )
         }
         VerticalSpacer(24.dp)
         OutlinedButton(
             id = R.string.camera_info_report,
             onClick = {}
         )
+    }
+}
+
+@Composable
+private fun SpeedLimitGroup(modifier: Modifier = Modifier, iconId: Int, speed: Int) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            painter = painterResource(iconId),
+            contentDescription = null
+        )
+        HorizontalSpacer(18.dp)
+        SpeedLimit(value = speed)
     }
 }
 
