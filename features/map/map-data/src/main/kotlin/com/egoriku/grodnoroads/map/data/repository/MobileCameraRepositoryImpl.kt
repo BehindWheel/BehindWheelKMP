@@ -26,7 +26,8 @@ internal class MobileCameraRepositoryImpl(
                     MobileCamera(
                         name = data.name,
                         position = LatLng(data.latitude, data.longitude),
-                        speed = data.speed
+                        speedCar = data.speed,
+                        speedTruck = data.speed,
                     )
                 })
             }

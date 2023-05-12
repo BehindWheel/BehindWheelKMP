@@ -89,7 +89,7 @@ private fun makeAlertMessage(
                     is Camera.MobileCamera -> {
                         CameraAlert(
                             distance = distance,
-                            speedLimit = event.speed,
+                            speedLimit = event.speedCar,
                             cameraType = event.cameraType
                         )
                     }
