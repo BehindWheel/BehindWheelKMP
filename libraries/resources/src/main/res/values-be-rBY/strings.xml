@@ -84,6 +84,10 @@
     <string name="map_default_location_mosty">Масты</string>
     <string name="map_default_location_slonim">Слонім</string>
     <string name="map_default_location_lida">Ліда</string>
+    <string name="map_default_location_indura">Індура</string>
+    <string name="map_default_location_dyatlovo">Дзятлава</string>
+    <string name="map_default_location_novogrudok">Навагрудак</string>
+    <string name="map_default_location_korelichi">Карэлічы</string>
 
     <string name="map_header_drive_mode">Рэжым навігацыі</string>
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>

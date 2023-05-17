@@ -78,6 +78,10 @@
     <string name="map_default_location_mosty">Mosty</string>
     <string name="map_default_location_slonim">Slonim</string>
     <string name="map_default_location_lida">Lida</string>
+    <string name="map_default_location_indura">Indura</string>
+    <string name="map_default_location_dyatlovo">Dyatlovo</string>
+    <string name="map_default_location_novogrudok">Novogrudok</string>
+    <string name="map_default_location_korelichi">Korelichi</string>
 
     <string name="map_header_drive_mode">Navigation mode</string>
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
