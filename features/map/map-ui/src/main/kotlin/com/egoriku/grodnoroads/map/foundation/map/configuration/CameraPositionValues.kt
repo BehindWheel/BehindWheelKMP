@@ -1,3 +1,5 @@
+@file:Suppress("USELESS_ELVIS")
+
 package com.egoriku.grodnoroads.map.foundation.map.configuration
 
 import androidx.compose.runtime.Stable
@@ -31,6 +33,12 @@ fun calculateCameraPositionValues(
     }
 
     val fromScreenLocation = projection.fromScreenLocation(screenLocation)
+        ?: return CameraPositionValues(
+            initialLatLng = lastLocation.latLng,
+            targetLatLngWithOffset = lastLocation.latLng,
+            bearing = 0f,
+            markerRotation = 0f
+        )
 
     val directionBearing =
         when {
