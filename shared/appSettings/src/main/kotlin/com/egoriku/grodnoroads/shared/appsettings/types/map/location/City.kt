@@ -13,15 +13,23 @@ enum class City(val cityName: String, val latLng: LatLng) {
     Shuchin(cityName = "shuchin", latLng = LatLng(53.604412, 24.742567)),
     Mosty(cityName = "mosty", latLng = LatLng(53.413523, 24.542953)),
     Slonim(cityName = "slonim", latLng = LatLng(53.092705, 25.319268)),
-    Lida(cityName = "lida", latLng = LatLng(53.891667, 25.302254));
+    Lida(cityName = "lida", latLng = LatLng(53.891667, 25.302254)),
+    Indura(cityName = "indura", latLng = LatLng(53.459580, 23.883849)),
+    Dyatlovo(cityName = "dyatlovo", latLng = LatLng(53.465115, 25.407569)),
+    Novogrudok(cityName = "novogrudok", latLng = LatLng(53.598095, 25.825635)),
+    Korelichi(cityName = "korelichi", latLng = LatLng(53.570510, 26.139959));
 
     companion object {
         val supportedCities = listOf(
             Berestovitca,
             Volkovysk,
             Grodno,
+            Dyatlovo,
+            Indura,
+            Korelichi,
             Lida,
             Mosty,
+            Novogrudok,
             Ozery,
             Porechye,
             Skidel,
@@ -43,6 +51,10 @@ enum class City(val cityName: String, val latLng: LatLng) {
             Mosty -> R.string.map_default_location_mosty
             Slonim -> R.string.map_default_location_slonim
             Lida -> R.string.map_default_location_lida
+            Indura -> R.string.map_default_location_indura
+            Dyatlovo -> R.string.map_default_location_dyatlovo
+            Novogrudok -> R.string.map_default_location_novogrudok
+            Korelichi -> R.string.map_default_location_korelichi
         }
     }
 }
