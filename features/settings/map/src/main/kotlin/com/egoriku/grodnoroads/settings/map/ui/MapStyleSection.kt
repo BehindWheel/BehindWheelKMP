@@ -8,8 +8,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CheckableCard
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
@@ -79,8 +79,6 @@ private fun TrafficJam(
 
 @GrodnoRoadsPreview
 @Composable
-fun PreviewMapStyleSection() {
-    GrodnoRoadsTheme {
-        MapStyleSection(mapStyle = MapStyle()) { }
-    }
+fun PreviewMapStyleSection() = GrodnoRoadsM3ThemePreview {
+    MapStyleSection(mapStyle = MapStyle()) { }
 }

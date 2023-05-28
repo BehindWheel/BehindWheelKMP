@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.iconpack.GrodnoRoadsIcons
 import com.egoriku.grodnoroads.foundation.iconpack.icons.icPinMarker
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 
 @Composable
 fun PinMarker(
@@ -163,25 +166,21 @@ private fun animateColorAsState(
 @Preview(device = "id:Nexus 7")
 @Preview(device = "id:pixel_c")
 @Composable
-private fun PinMarkerPreview() {
-    GrodnoRoadsTheme {
-        Surface {
-            Box(Modifier.size(300.dp)) {
-                var animate by remember { mutableStateOf(false) }
+private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
+    Box(Modifier.size(300.dp)) {
+        var animate by remember { mutableStateOf(false) }
 
-                Button(
-                    modifier = Modifier.align(Alignment.BottomCenter),
-                    onClick = { animate = !animate },
-                ) {
-                    Text("enabled: $animate")
-                }
-
-                PinMarker(
-                    modifier = Modifier.align(Alignment.Center),
-                    animate = animate,
-                    onGloballyPositioned = {}
-                )
-            }
+        Button(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            onClick = { animate = !animate },
+        ) {
+            Text("enabled: $animate")
         }
+
+        PinMarker(
+            modifier = Modifier.align(Alignment.Center),
+            animate = animate,
+            onGloballyPositioned = {}
+        )
     }
 }

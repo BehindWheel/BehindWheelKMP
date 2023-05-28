@@ -3,31 +3,27 @@ package com.egoriku.grodnoroads.settings.whatsnew.screen.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.settings.whatsnew.domain.model.ReleaseNotes
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun WhatsNewItem(
     isLatestRelease: Boolean,
     release: ReleaseNotes
 ) {
     Card(
         onClick = {},
-        elevation = 3.dp,
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
         shape = RoundedCornerShape(10.dp),
-        contentColor = when {
-            isLatestRelease -> MaterialTheme.colors.secondary.copy(alpha = 0.5f)
-            else -> contentColorFor(MaterialTheme.colors.surface)
-        },
     ) {
         Column(
             modifier = Modifier
@@ -41,8 +37,7 @@ internal fun WhatsNewItem(
             Text(text = versionName, fontWeight = FontWeight.Bold)
             Text(
                 text = release.releaseDate,
-                modifier = Modifier.alpha(ContentAlpha.medium),
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.bodySmall
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = release.notes)
@@ -53,7 +48,7 @@ internal fun WhatsNewItem(
 @GrodnoRoadsPreview
 @Composable
 private fun WhatsNewItemPreview(@PreviewParameter(LoremIpsum::class) lorem: String) {
-    GrodnoRoadsTheme {
+    GrodnoRoadsM3ThemePreview {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             WhatsNewItem(
                 isLatestRelease = true,

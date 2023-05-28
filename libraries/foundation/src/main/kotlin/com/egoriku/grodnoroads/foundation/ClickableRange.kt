@@ -7,13 +7,13 @@ import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.RemoveCircle
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -22,12 +22,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ClickableRange(
     modifier: Modifier = Modifier,
@@ -52,7 +51,7 @@ fun ClickableRange(
                     }
                 },
             imageVector = Icons.Default.RemoveCircle,
-            tint = MaterialTheme.colors.secondary,
+            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null,
         )
         AnimatedContent(
@@ -60,10 +59,10 @@ fun ClickableRange(
             targetState = value,
             transitionSpec = {
                 if (targetState > initialState) {
-                    slideInVertically { height -> height } + fadeIn() with
+                    (slideInVertically { height -> height } + fadeIn()) togetherWith
                             slideOutVertically { height -> -height } + fadeOut()
                 } else {
-                    slideInVertically { height -> -height } + fadeIn() with
+                    slideInVertically { height -> -height } + fadeIn() togetherWith
                             slideOutVertically { height -> height } + fadeOut()
                 }.using(
                     SizeTransform(clip = false)
@@ -73,7 +72,7 @@ fun ClickableRange(
         ) { targetCount ->
             val offsetX = remember { Animatable(0f) }
             val color by animateColorAsState(
-                targetValue = if (isError) MaterialTheme.colors.error else LocalContentColor.current,
+                targetValue = if (isError) MaterialTheme.colorScheme.error else LocalContentColor.current,
                 animationSpec = tween(durationMillis = 250),
                 label = "color"
             )
@@ -114,7 +113,7 @@ fun ClickableRange(
                     },
                 text = targetCount.toString(),
                 color = color,
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.bodySmall
             )
         }
 
@@ -129,7 +128,7 @@ fun ClickableRange(
                     }
                 },
             imageVector = Icons.Default.AddCircle,
-            tint = MaterialTheme.colors.secondary,
+            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null,
         )
     }
@@ -147,20 +146,18 @@ private fun decrement(value: Float, step: Float): Float {
 
 @GrodnoRoadsPreview
 @Composable
-private fun RangeSettingPreview() {
-    GrodnoRoadsTheme {
-        Box(modifier = Modifier.size(200.dp, 50.dp)) {
-            var value by rememberMutableState { 10f }
+private fun RangeSettingPreview() = GrodnoRoadsM3ThemePreview {
+    Box(modifier = Modifier.size(200.dp, 50.dp)) {
+        var value by rememberMutableState { 10f }
 
-            ClickableRange(
-                modifier = Modifier.align(Center),
-                min = 10f,
-                max = 15f,
-                step = 0.1f,
-                value = value,
-                onLongClick = {},
-                onValueChange = { value = it }
-            )
-        }
+        ClickableRange(
+            modifier = Modifier.align(Center),
+            min = 10f,
+            max = 15f,
+            step = 0.1f,
+            value = value,
+            onLongClick = {},
+            onValueChange = { value = it }
+        )
     }
 }

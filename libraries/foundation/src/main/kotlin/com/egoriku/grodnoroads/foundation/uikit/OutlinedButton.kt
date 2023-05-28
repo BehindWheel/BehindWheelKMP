@@ -1,20 +1,20 @@
-package com.egoriku.grodnoroads.foundation.designsystem
+package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -28,9 +28,9 @@ fun OutlinedButton(
             .fillMaxWidth()
             .height(48.dp),
         shape = RoundedCornerShape(8.dp),
-        border = ButtonDefaults.outlinedBorder.copy(
+        border = ButtonDefaults.outlinedButtonBorder.copy(
             width = 2.dp,
-            brush = SolidColor(MaterialTheme.colors.primary.copy(alpha = 0.5f))
+            brush = SolidColor(MaterialTheme.colorScheme.outline)
         ),
         onClick = onClick
     ) {
@@ -38,9 +38,9 @@ fun OutlinedButton(
     }
 }
 
-@Preview
+@GrodnoRoadsPreview
 @Composable
-private fun OutlinedButtonPreview() = GrodnoRoadsTheme {
+private fun OutlinedButtonPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(300.dp, 100.dp)) {
         OutlinedButton(
             modifier = Modifier

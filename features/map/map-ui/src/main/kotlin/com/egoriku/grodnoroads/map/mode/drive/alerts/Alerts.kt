@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
@@ -82,60 +82,58 @@ fun Alerts(
 
 @GrodnoRoadsPreview
 @Composable
-private fun AlertsPreview() {
-    GrodnoRoadsTheme {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            Alerts(
-                alerts = persistentListOf(
-                    IncidentAlert(
-                        mapEventType = TrafficPolice,
-                        distance = 1,
-                        messages = persistentListOf(
-                            MessageItem(
-                                message = "Славинского беларуснефть на скорость",
-                                source = Source.Viber
-                            )
+private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Alerts(
+            alerts = persistentListOf(
+                IncidentAlert(
+                    mapEventType = TrafficPolice,
+                    distance = 1,
+                    messages = persistentListOf(
+                        MessageItem(
+                            message = "Славинского беларуснефть на скорость",
+                            source = Source.Viber
                         )
                     )
                 )
             )
-            Alerts(
-                alerts = persistentListOf(
-                    CameraAlert(
-                        distance = 2,
-                        speedLimit = 60,
-                        cameraType = StationaryCamera
-                    )
+        )
+        Alerts(
+            alerts = persistentListOf(
+                CameraAlert(
+                    distance = 2,
+                    speedLimit = 60,
+                    cameraType = StationaryCamera
                 )
             )
-            Alerts(
-                alerts = persistentListOf(
-                    IncidentAlert(
-                        distance = 5,
-                        messages = persistentListOf(
-                            MessageItem(
-                                message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
-                                source = Source.Viber
-                            ),
-                            MessageItem(
-                                message = "(15:45) Новый мост в левой полосе по направлению",
-                                source = Source.Viber
-                            )
+        )
+        Alerts(
+            alerts = persistentListOf(
+                IncidentAlert(
+                    distance = 5,
+                    messages = persistentListOf(
+                        MessageItem(
+                            message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
+                            source = Source.Viber
                         ),
-                        mapEventType = RoadIncident
-                    )
+                        MessageItem(
+                            message = "(15:45) Новый мост в левой полосе по направлению",
+                            source = Source.Viber
+                        )
+                    ),
+                    mapEventType = RoadIncident
                 )
             )
-            Alerts(
-                alerts = persistentListOf(
-                    CameraAlert(distance = 220, speedLimit = -1, cameraType = MobileCamera)
-                )
+        )
+        Alerts(
+            alerts = persistentListOf(
+                CameraAlert(distance = 220, speedLimit = -1, cameraType = MobileCamera)
             )
-            Alerts(
-                alerts = persistentListOf(
-                    CameraAlert(distance = 220, speedLimit = 60, cameraType = MobileCamera)
-                )
+        )
+        Alerts(
+            alerts = persistentListOf(
+                CameraAlert(distance = 220, speedLimit = 60, cameraType = MobileCamera)
             )
-        }
+        )
     }
 }

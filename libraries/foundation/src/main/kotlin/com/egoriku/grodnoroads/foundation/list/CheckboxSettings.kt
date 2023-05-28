@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.foundation.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -12,7 +12,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CheckboxSettings(
     iconRes: Int,
@@ -28,17 +27,20 @@ fun CheckboxSettings(
                 onValueChange = onCheckedChange
             )
             .padding(start = 8.dp),
-        icon = {
+        leadingContent = {
             Image(
                 painter = painterResource(id = iconRes),
                 contentDescription = null
             )
         },
-        text = {
+        headlineContent = {
             Text(text = stringResource(id = stringResId))
         },
-        trailing = {
+        trailingContent = {
             Checkbox(
+                colors = CheckboxDefaults.colors(
+                    checkedColor = MaterialTheme.colorScheme.secondary
+                ),
                 checked = isChecked,
                 onCheckedChange = onCheckedChange
             )
@@ -47,7 +49,6 @@ fun CheckboxSettings(
     Divider()
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CheckboxSettings(
     imageVector: ImageVector,
@@ -63,17 +64,20 @@ fun CheckboxSettings(
                 onValueChange = onCheckedChange
             )
             .padding(start = 8.dp),
-        icon = {
+        leadingContent = {
             Icon(
                 imageVector = imageVector,
                 contentDescription = null
             )
         },
-        text = {
+        headlineContent = {
             Text(text = stringResource(id = stringResId))
         },
-        trailing = {
+        trailingContent = {
             Checkbox(
+                colors = CheckboxDefaults.colors(
+                    checkedColor = MaterialTheme.colorScheme.secondary
+                ),
                 checked = isChecked,
                 onCheckedChange = onCheckedChange
             )

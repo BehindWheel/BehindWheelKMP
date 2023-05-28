@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.map.ui.dialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
@@ -32,7 +32,7 @@ internal fun DefaultLocationDialog(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewDefaultLocationDialog() = GrodnoRoadsTheme {
+private fun PreviewDefaultLocationDialog() = GrodnoRoadsM3ThemePreview {
     DefaultLocationDialog(
         defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
         onClose = {},

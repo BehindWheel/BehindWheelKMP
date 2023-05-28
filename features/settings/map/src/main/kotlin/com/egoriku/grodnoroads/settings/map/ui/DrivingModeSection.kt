@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ClickableRange
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.ActionSettings
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
@@ -89,8 +89,10 @@ private fun MapZoomOutCity(
 
 @GrodnoRoadsPreview
 @Composable
-private fun DrivingModeSectionSectionPreview() {
-    GrodnoRoadsTheme {
-        DrivingModeSection(driveModeZoom = DriveModeZoom(), modify = {}, reset = {})
-    }
+private fun DrivingModeSectionSectionPreview() = GrodnoRoadsM3ThemePreview {
+    DrivingModeSection(
+        driveModeZoom = DriveModeZoom(),
+        modify = {},
+        reset = {}
+    )
 }

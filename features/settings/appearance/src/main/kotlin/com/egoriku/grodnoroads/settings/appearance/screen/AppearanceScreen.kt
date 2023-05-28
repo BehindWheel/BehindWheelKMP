@@ -5,15 +5,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Brightness7
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
@@ -34,6 +37,7 @@ import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppThemeDialog
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.Companion.toStringResource
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppearanceScreen(
     appearanceComponent: AppearanceComponent,
@@ -42,6 +46,7 @@ fun AppearanceScreen(
     BottomBarVisibility(HIDDEN)
 
     val state by appearanceComponent.state.collectAsState(initial = State())
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     DialogHandler(
         dialogState = state.dialogState,
@@ -49,10 +54,12 @@ fun AppearanceScreen(
         onResult = appearanceComponent::update
     )
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SettingsTopBar(
                 title = stringResource(id = R.string.settings_section_appearance),
-                onBack = onBack
+                onBack = onBack,
+                scrollBehavior = scrollBehavior
             )
         }
     ) {

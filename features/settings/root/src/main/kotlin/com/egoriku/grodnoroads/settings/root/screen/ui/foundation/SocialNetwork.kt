@@ -1,19 +1,18 @@
 package com.egoriku.grodnoroads.settings.root.screen.ui.foundation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -31,12 +30,10 @@ fun SocialNetwork(
         ) {
             icon()
         }
-
         Text(
             modifier = Modifier
-                .alpha(ContentAlpha.medium)
                 .padding(top = 8.dp),
-            style = MaterialTheme.typography.caption,
+            style = MaterialTheme.typography.bodySmall,
             text = title
         )
     }
@@ -44,9 +41,8 @@ fun SocialNetwork(
 
 @GrodnoRoadsPreview
 @Composable
-private fun SocialNetworkPreview() {
-    GrodnoRoadsTheme {
-
+private fun SocialNetworkPreview() = GrodnoRoadsM3ThemePreview {
+    Box(modifier = Modifier.padding(32.dp)) {
         SocialNetwork(title = "Channel", onClick = {}) {
             Icon(
                 modifier = Modifier

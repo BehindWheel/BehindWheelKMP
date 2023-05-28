@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.appearance.screen.dialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
@@ -32,12 +32,10 @@ fun AppThemeDialog(
 
 @GrodnoRoadsPreview
 @Composable
-fun PreviewAppThemeDialog() {
-    GrodnoRoadsTheme {
-        AppThemeDialog(
-            themeDialogState = ThemeDialogState(themes = AppTheme()),
-            onClose = {},
-            onResult = {}
-        )
-    }
+fun PreviewAppThemeDialog() = GrodnoRoadsM3ThemePreview {
+    AppThemeDialog(
+        themeDialogState = ThemeDialogState(themes = AppTheme()),
+        onClose = {},
+        onResult = {}
+    )
 }

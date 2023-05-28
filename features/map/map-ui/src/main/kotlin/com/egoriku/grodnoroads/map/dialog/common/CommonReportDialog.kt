@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.map.dialog.common
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,7 +25,7 @@ fun CommonReportDialog(
     onClose: () -> Unit,
     onSelected: (selected: Int, inputText: String) -> Unit
 ) {
-    var selectedItem by remember { mutableStateOf(-1) }
+    var selectedItem by remember { mutableIntStateOf(-1) }
     var inputText by remember { mutableStateOf("") }
 
     val sendButtonEnable by remember(selectedItem) {

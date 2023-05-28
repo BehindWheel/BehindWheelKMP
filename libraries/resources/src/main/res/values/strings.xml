@@ -33,7 +33,7 @@
     <string name="alerts_unsupported_message">Unsupported message</string>
 
     <string name="camera_info_last_update">Updated %1$s</string>
-    <string name="camera_info_report">Report problem</string>
+    <string name="camera_info_report">Report an error</string>
 
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>

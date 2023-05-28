@@ -1,19 +1,24 @@
 package com.egoriku.grodnoroads.foundation.topbar
 
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsTopBar(
     title: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
-    TopAppBar(
-        backgroundColor = MaterialTheme.colors.surface,
+    CenterAlignedTopAppBar(
+        windowInsets = WindowInsets.statusBars,
+        scrollBehavior = scrollBehavior,
         navigationIcon = {
             IconButton(onClick = onBack) {
                 Icon(
@@ -28,8 +33,13 @@ fun SettingsTopBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @GrodnoRoadsPreview
 @Composable
-private fun SettingsTopBarPreview() = GrodnoRoadsTheme {
-    SettingsTopBar(title = "Test", onBack = {})
+private fun SettingsTopBarPreview() = GrodnoRoadsM3ThemePreview {
+    SettingsTopBar(
+        title = "Test",
+        onBack = {},
+        scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    )
 }

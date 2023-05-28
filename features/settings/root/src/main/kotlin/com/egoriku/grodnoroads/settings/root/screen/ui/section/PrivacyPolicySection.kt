@@ -5,16 +5,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.root.screen.ui.util.rememberCustomTabIntent
 
@@ -63,8 +63,6 @@ private fun LinkButton(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PrivacyPolicySectionPreview() {
-    GrodnoRoadsTheme {
-        PrivacyPolicySection()
-    }
+private fun PrivacyPolicySectionPreview() = GrodnoRoadsM3ThemePreview {
+    PrivacyPolicySection()
 }

@@ -1,13 +1,9 @@
 package com.egoriku.grodnoroads.settings.root.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
@@ -22,16 +18,11 @@ import com.egoriku.grodnoroads.settings.whatsnew.screen.WhatsNewScreen
 
 @Composable
 fun SettingsScreen(settingsComponent: SettingsComponent) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding()
-    ) {
+    Surface {
         Column {
             val childStack by settingsComponent.childStack.subscribeAsState()
 
             Children(
-                modifier = Modifier.statusBarsPadding(),
                 stack = childStack,
                 animation = stackAnimation(slide())
             ) { created ->

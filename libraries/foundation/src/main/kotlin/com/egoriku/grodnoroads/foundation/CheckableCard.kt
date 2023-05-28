@@ -4,10 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -16,11 +16,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckableCard(
     title: Int,
@@ -34,7 +34,7 @@ fun CheckableCard(
             onClick = onClick,
             shape = RoundedCornerShape(20.dp),
             border = when {
-                selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colors.secondary)
+                selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.secondary)
                 else -> null
             }
         ) {
@@ -53,7 +53,7 @@ fun CheckableCard(
                 .padding(top = 4.dp),
             text = stringResource(id = title),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyMedium,
             fontWeight = when {
                 selected -> FontWeight.Bold
                 else -> null
@@ -64,7 +64,7 @@ fun CheckableCard(
 
 @GrodnoRoadsPreview
 @Composable
-private fun CheckableCardPreview() = GrodnoRoadsTheme {
+private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
     Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
         CheckableCard(
             title = R.string.map_google_map_style_minimal,

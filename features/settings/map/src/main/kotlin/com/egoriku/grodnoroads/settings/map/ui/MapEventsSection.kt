@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
@@ -170,8 +170,6 @@ private fun WildAnimals(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewMapEventsSection() {
-    GrodnoRoadsTheme {
-        MapEventsSection(mapInfo = MapInfo()) { }
-    }
+private fun PreviewMapEventsSection() = GrodnoRoadsM3ThemePreview {
+    MapEventsSection(mapInfo = MapInfo()) { }
 }

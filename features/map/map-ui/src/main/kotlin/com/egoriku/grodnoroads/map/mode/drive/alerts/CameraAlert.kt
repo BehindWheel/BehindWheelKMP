@@ -2,9 +2,10 @@ package com.egoriku.grodnoroads.map.mode.drive.alerts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,8 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.foundation.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.resources.R
 
@@ -27,7 +28,10 @@ fun CameraAlert(
     drawableId: Int,
     title: String
 ) {
-    Card(modifier = Modifier.fillMaxWidth(), elevation = 5.dp) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
+    ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -45,7 +49,7 @@ fun CameraAlert(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         text = title,
-                        style = MaterialTheme.typography.body1
+                        style = MaterialTheme.typography.bodyLarge
                     )
                     VerticalSpacer(4.dp)
                     Text(
@@ -56,7 +60,7 @@ fun CameraAlert(
                             distance,
                             distance
                         ),
-                        style = MaterialTheme.typography.body2
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
 
@@ -70,7 +74,7 @@ fun CameraAlert(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewStationaryAlert() = GrodnoRoadsTheme {
+private fun PreviewStationaryAlert() = GrodnoRoadsM3ThemePreview {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         CameraAlert(
             distance = 200,

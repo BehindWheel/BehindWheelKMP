@@ -2,9 +2,9 @@ package com.egoriku.grodnoroads.settings.appearance.screen.dialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.dialog.ListSingleChoiceDialog
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
@@ -32,12 +32,10 @@ fun AppLanguageDialog(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewLanguageDialog() {
-    GrodnoRoadsTheme {
-        AppLanguageDialog(
-            languageDialogState = LanguageDialogState(languages = AppLanguage()),
-            onClose = {},
-            onResult = {}
-        )
-    }
+private fun PreviewLanguageDialog() = GrodnoRoadsM3ThemePreview {
+    AppLanguageDialog(
+        languageDialogState = LanguageDialogState(languages = AppLanguage()),
+        onClose = {},
+        onResult = {}
+    )
 }

@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.resources.R
 
@@ -29,7 +29,7 @@ fun SourceImage(modifier: Modifier = Modifier, source: Source) {
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewSourceImage() = GrodnoRoadsTheme {
+private fun PreviewSourceImage() = GrodnoRoadsM3ThemePreview {
     Column {
         SourceImage(source = Source.App)
         SourceImage(source = Source.Viber)

@@ -1,15 +1,12 @@
 package com.egoriku.grodnoroads.settings.root.screen.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,8 +15,8 @@ import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.SHOWN
 import com.egoriku.grodnoroads.foundation.list.SettingsItem
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.root.domain.model.Page
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.PrivacyPolicySection
@@ -36,7 +33,11 @@ internal fun SettingsUi(
 ) {
     BottomBarVisibility(SHOWN)
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
         Column(
             modifier = Modifier
                 .padding(top = 8.dp)
@@ -113,6 +114,6 @@ internal fun SettingsUi(
 
 @GrodnoRoadsPreview
 @Composable
-private fun SettingUiPreview() = GrodnoRoadsTheme {
+private fun SettingUiPreview() = GrodnoRoadsM3ThemePreview {
     SettingsUi(onSettingClick = {}, appVersion = "1.0.0")
 }

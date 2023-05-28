@@ -3,13 +3,16 @@ package com.egoriku.grodnoroads.settings.whatsnew.screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
@@ -20,6 +23,7 @@ import com.egoriku.grodnoroads.settings.whatsnew.domain.component.WhatsNewCompon
 import com.egoriku.grodnoroads.settings.whatsnew.domain.store.WhatsNewStore
 import com.egoriku.grodnoroads.settings.whatsnew.screen.ui.WhatsNewItem
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WhatsNewScreen(
     whatsNewComponent: WhatsNewComponent,
@@ -27,9 +31,14 @@ fun WhatsNewScreen(
 ) {
     BottomBarVisibility(HIDDEN)
 
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
+                scrollBehavior = scrollBehavior,
                 title = stringResource(id = R.string.settings_section_whats_new),
                 onBack = onBack
             )
@@ -51,8 +60,11 @@ fun WhatsNewScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
-                contentPadding = PaddingValues(vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                contentPadding = WindowInsets
+                    .navigationBars
+                    .add(WindowInsets(left = 16.dp, right = 16.dp, top = 16.dp, bottom = 16.dp))
+                    .asPaddingValues(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 itemsIndexed(state.releaseNotes) { index, releaseNotes ->
                     WhatsNewItem(isLatestRelease = index == 0, release = releaseNotes)

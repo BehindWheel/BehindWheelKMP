@@ -195,7 +195,6 @@ fun GoogleMapComponent(
             cameraPositionState = cameraPositionState,
             properties = rememberMapProperties(lastLocation, mapConfig, appMode),
             uiSettings = rememberUiSettings(),
-            contentPadding = WindowInsets.statusBars.asPaddingValues(),
             onMapLoaded = {
                 cameraPositionState.move(
                     update = CameraUpdateFactory.newLatLngZoom(

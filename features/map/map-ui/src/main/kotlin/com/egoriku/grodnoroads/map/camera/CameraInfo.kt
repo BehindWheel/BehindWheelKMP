@@ -5,14 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,9 +19,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.VerticalSpacer
-import com.egoriku.grodnoroads.foundation.designsystem.OutlinedButton
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.uikit.DisabledText
+import com.egoriku.grodnoroads.foundation.uikit.OutlinedButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
@@ -65,16 +64,15 @@ private fun Info(
             )
             HorizontalSpacer(16.dp)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(text = camera.name, style = MaterialTheme.typography.h6)
+                Text(text = camera.name, style = MaterialTheme.typography.titleLarge)
                 Text(
                     text = stringResource(cameraTypeId),
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.bodyMedium
                 )
                 val formattedDate = DateTimeFormatter.toDate(camera.updateTime)
-                Text(
-                    modifier = Modifier.alpha(ContentAlpha.disabled),
+                DisabledText(
                     text = stringResource(R.string.camera_info_last_update, formattedDate),
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
@@ -128,7 +126,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center),
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             text = value.toString()
@@ -138,7 +136,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
 
 @GrodnoRoadsPreview
 @Composable
-private fun CameraInfoPreview() = GrodnoRoadsTheme {
+private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
     CameraInfo(
         camera = StationaryCamera(
             id = 0,

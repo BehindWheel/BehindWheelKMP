@@ -10,8 +10,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.LocationInfo
@@ -41,8 +41,6 @@ internal fun DefaultLocationSection(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewDefaultLocationSection() {
-    GrodnoRoadsTheme {
-        DefaultLocationSection(locationInfo = LocationInfo()) {}
-    }
+private fun PreviewDefaultLocationSection() = GrodnoRoadsM3ThemePreview {
+    DefaultLocationSection(locationInfo = LocationInfo()) {}
 }

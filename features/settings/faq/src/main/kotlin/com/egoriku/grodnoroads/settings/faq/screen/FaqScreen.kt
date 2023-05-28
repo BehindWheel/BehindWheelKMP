@@ -4,15 +4,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
@@ -24,19 +22,22 @@ import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Question
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FaqScreen(
     faqComponent: FaqComponent,
     onBack: () -> Unit
 ) {
     BottomBarVisibility(HIDDEN)
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SettingsTopBar(
                 title = stringResource(id = R.string.settings_section_faq),
-                onBack = onBack
+                onBack = onBack,
+                scrollBehavior = scrollBehavior
             )
         }
     ) {
@@ -56,13 +57,13 @@ fun FaqScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(it),
-                contentPadding = PaddingValues(vertical = 8.dp),
+                contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(state.faq) {
                     Card(
                         onClick = {},
-                        elevation = 3.dp,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
                         shape = RoundedCornerShape(10.dp),
                     ) {
                         Column(
