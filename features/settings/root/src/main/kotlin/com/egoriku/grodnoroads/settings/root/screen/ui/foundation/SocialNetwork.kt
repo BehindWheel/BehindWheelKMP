@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.settings.root.screen.ui.foundation
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -25,7 +24,6 @@ fun SocialNetwork(
         OutlinedButton(
             onClick = onClick,
             modifier = Modifier.size(50.dp),
-            shape = CircleShape,
             contentPadding = PaddingValues(0.dp),
         ) {
             icon()
