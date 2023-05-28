@@ -9,6 +9,8 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.toResource
+import java.text.Collator
+import java.util.Locale
 
 @Composable
 internal fun DefaultLocationDialog(
@@ -21,7 +23,7 @@ internal fun DefaultLocationDialog(
     ListSingleChoiceDialog(
         list = defaultCity.values.map {
             stringResource(id = it.toResource())
-        },
+        }.sortedWith(Collator.getInstance(Locale.getDefault())),
         initialSelection = defaultCity.values.indexOf(defaultCity.current),
         onClose = onClose,
         onSelected = { position ->

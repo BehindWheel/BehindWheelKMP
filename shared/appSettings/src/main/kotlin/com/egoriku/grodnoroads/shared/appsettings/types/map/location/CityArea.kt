@@ -1,10 +1,11 @@
-package com.egoriku.grodnoroads.map.domain.util
+package com.egoriku.grodnoroads.shared.appsettings.types.map.location
 
 import com.google.android.gms.maps.model.LatLng
 
 object CityArea {
 
-    val grodnoArea = listOf(
+    // TODO: Add model to store bounds + polyline = optimizations
+    val grodno = listOf(
         LatLng(53.677865, 23.7364759),
         LatLng(53.677258, 23.7517825),
         LatLng(53.6958691, 23.7523566),
@@ -67,7 +68,7 @@ object CityArea {
         LatLng(53.7325917, 24.1361288)
     )
 
-    val porechie = listOf(
+    val porechye = listOf(
         LatLng(53.8724632, 24.1232477),
         LatLng(53.8676351, 24.1401893),
         LatLng(53.8736557, 24.1598826),
@@ -77,7 +78,7 @@ object CityArea {
         LatLng(53.8724632, 24.1232477)
     )
 
-    val volkovisk = listOf(
+    val volkovysk = listOf(
         LatLng(53.1762187, 24.4098844),
         LatLng(53.1501803, 24.3906566),
         LatLng(53.1213524, 24.391343),

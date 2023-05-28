@@ -14,11 +14,11 @@ import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.map.domain.util.CityArea
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
@@ -77,12 +77,12 @@ internal class MapConfigStoreFactory(
                 onIntent<CheckLocation> {
                     val latLng = it.latLng
                     val isInCity = when {
-                        PolyUtil.containsLocation(latLng, CityArea.grodnoArea, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.grodno, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.porechie, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.volkovisk, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.porechye, false) -> true
+                        PolyUtil.containsLocation(latLng, CityArea.volkovysk, false) -> true
                         else -> false
                     }
 
