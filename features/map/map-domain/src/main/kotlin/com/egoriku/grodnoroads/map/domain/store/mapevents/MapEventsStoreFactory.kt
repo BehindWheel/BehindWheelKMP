@@ -9,8 +9,9 @@ import com.egoriku.grodnoroads.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.Source.App
 import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
 import com.egoriku.grodnoroads.map.domain.repository.*
@@ -127,7 +128,9 @@ internal class MapEventsStoreFactory(
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.exception).also {
+                    logD("Error loading stationary: ${result.exception.message}")
+                }
             }
         }
     }

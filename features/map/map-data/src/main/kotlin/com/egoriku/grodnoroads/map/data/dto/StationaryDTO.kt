@@ -7,7 +7,7 @@ import com.google.firebase.database.PropertyName
 internal class StationaryDTO(
     @PropertyName("id")
     @JvmField
-    val id: Int = -1,
+    val id: String = "",
 
     @PropertyName("name")
     @JvmField

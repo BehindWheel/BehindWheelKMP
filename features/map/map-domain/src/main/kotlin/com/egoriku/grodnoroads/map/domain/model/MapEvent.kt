@@ -16,7 +16,7 @@ sealed interface MapEvent {
         val updateTime: Long
 
         data class StationaryCamera(
-            val id: Int,
+            val id: String,
             val angle: Float,
             val bidirectional: Boolean,
             override val cameraType: CameraType = CameraType.StationaryCamera,
@@ -38,7 +38,7 @@ sealed interface MapEvent {
         ) : Camera
 
         data class MediumSpeedCamera(
-            val id: Int,
+            val id: String,
             val angle: Float,
             val bidirectional: Boolean,
             override val cameraType: CameraType = CameraType.MediumSpeedCamera,

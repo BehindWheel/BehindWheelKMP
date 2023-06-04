@@ -139,7 +139,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
 private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
     CameraInfo(
         camera = StationaryCamera(
-            id = 0,
+            id = "",
             name = "Гродно, ул. Магистральная",
             angle = -1.0f,
             bidirectional = false,
