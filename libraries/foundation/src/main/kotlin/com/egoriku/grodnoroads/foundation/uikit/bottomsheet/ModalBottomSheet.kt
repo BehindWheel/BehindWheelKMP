@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Shape
 @Composable
 fun ModalBottomSheet(
     onDismissRequest: () -> Unit,
-    state: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    sheetState: SheetState,
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     dragHandle: @Composable (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -18,7 +18,7 @@ fun ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         shape = shape,
         dragHandle = dragHandle,
-        sheetState = state,
+        sheetState = sheetState,
         windowInsets = WindowInsets(0),
         content = content
     )

@@ -32,8 +32,8 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.*
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
-import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppLanguageDialog
-import com.egoriku.grodnoroads.settings.appearance.screen.dialog.AppThemeDialog
+import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppLanguageBottomSheet
+import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppThemeBottomSheet
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.Companion.toStringResource
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
@@ -133,17 +133,17 @@ private fun DialogHandler(
 ) {
     when (dialogState) {
         is ThemeDialogState -> {
-            AppThemeDialog(
+            AppThemeBottomSheet(
                 themeDialogState = dialogState,
-                onClose = onClose,
+                onCancel = onClose,
                 onResult = onResult
             )
         }
 
         is LanguageDialogState -> {
-            AppLanguageDialog(
+            AppLanguageBottomSheet(
                 languageDialogState = dialogState,
-                onClose = onClose,
+                onCancel = onClose,
                 onResult = onResult
             )
         }

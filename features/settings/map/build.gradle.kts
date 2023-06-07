@@ -22,6 +22,7 @@ dependencies {
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
+    implementation(libs.immutable.collections)
     implementation(libs.koin.android)
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

@@ -1,20 +1,20 @@
 package com.egoriku.grodnoroads.map.dialog
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
-import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
+import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.rememberSheetCloseBehaviour
+import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
@@ -24,13 +24,21 @@ import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarkerInfoBottomSheet(
     reports: Reports,
     onClose: () -> Unit
 ) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val sheetCloseBehaviour = rememberSheetCloseBehaviour(
+        sheetState = { sheetState },
+        onCancel = onClose,
+    )
+
     BasicModalBottomSheet(
-        onDismiss = onClose,
+        sheetState = sheetState,
+        onCancel = onClose,
         content = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -38,20 +46,22 @@ fun MarkerInfoBottomSheet(
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center
             )
-            VerticalSpacer(dp = 16.dp)
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(16.dp),
+            ) {
                 items(reports.messages) {
                     MessageRow(messageItem = it)
                 }
             }
+            Divider()
         },
         footer = {
-            OutlinedButton(
+            TextButton(
                 modifier = Modifier.fillMaxWidth(),
                 id = R.string.ok,
-                onClick = onClose
+                onClick = { sheetCloseBehaviour.cancel() }
             )
-            VerticalSpacer(dp = 16.dp)
         }
     )
 }

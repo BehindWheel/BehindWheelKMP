@@ -12,10 +12,12 @@ import com.egoriku.grodnoroads.foundation.dialog.content.RadioButtonItem
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun ListSingleChoiceDialog(
-    list: List<String>,
+    list: ImmutableList<String>,
     initialSelection: Int,
     onClose: () -> Unit,
     onSelected: (selected: Int) -> Unit
@@ -63,7 +65,7 @@ fun ListSingleChoiceDialog(
 @Composable
 fun PreviewListSingleChoiceDialog() = GrodnoRoadsM3ThemePreview {
     ListSingleChoiceDialog(
-        list = listOf("System", "Dark", "Light"),
+        list = listOf("System", "Dark", "Light").toImmutableList(),
         initialSelection = 0,
         onClose = {},
         onSelected = {}

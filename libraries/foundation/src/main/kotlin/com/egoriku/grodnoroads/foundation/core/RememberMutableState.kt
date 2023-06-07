@@ -9,6 +9,11 @@ inline fun <T> rememberMutableState(
 ) = remember { mutableStateOf(calculation(), policy) }
 
 @Composable
+inline fun rememberMutableIntState(
+    crossinline value: @DisallowComposableCalls () -> Int
+) = remember { mutableIntStateOf(value()) }
+
+@Composable
 inline fun <T> rememberMutableState(
     key1: Any?,
     policy: SnapshotMutationPolicy<T> = structuralEqualityPolicy(),
