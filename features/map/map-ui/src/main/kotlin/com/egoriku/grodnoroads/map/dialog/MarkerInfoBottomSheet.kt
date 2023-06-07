@@ -1,63 +1,66 @@
 package com.egoriku.grodnoroads.map.dialog
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.DialogProperties
-import com.egoriku.grodnoroads.foundation.dialog.DialogContent
-import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
+import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
+import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
-import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageComponent
+import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MarkerAlertDialog(
+fun MarkerInfoBottomSheet(
     reports: Reports,
     onClose: () -> Unit
 ) {
-    AlertDialog(
-        properties = DialogProperties(
-            usePlatformDefaultWidth = true
-        ),
-        onDismissRequest = onClose
-    ) {
-        DialogContent {
-            Column(verticalArrangement = Arrangement.Center) {
-                Text(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                    text = reports.dialogTitle,
-                    style = MaterialTheme.typography.titleLarge
-                )
-                MessageComponent(messages = reports.messages)
-                Divider()
-                DialogButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    textResId = R.string.ok,
-                    onClick = onClose
-                )
+    BasicModalBottomSheet(
+        onDismiss = onClose,
+        content = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = reports.dialogTitle,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center
+            )
+            VerticalSpacer(dp = 16.dp)
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                items(reports.messages) {
+                    MessageRow(messageItem = it)
+                }
             }
+        },
+        footer = {
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                id = R.string.ok,
+                onClick = onClose
+            )
+            VerticalSpacer(dp = 16.dp)
         }
-    }
+    )
 }
 
 @GrodnoRoadsPreview
 @Composable
 private
-fun PreviewMarkerAlertDialog() = GrodnoRoadsM3ThemePreview {
-    MarkerAlertDialog(
+fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
+    MarkerInfoBottomSheet(
         reports = Reports(
             messages = persistentListOf(
                 MessageItem(

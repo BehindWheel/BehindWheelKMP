@@ -22,7 +22,7 @@ import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.OutlinedButton
+import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
@@ -94,6 +94,7 @@ private fun Info(
         }
         VerticalSpacer(24.dp)
         OutlinedButton(
+            modifier = Modifier.fillMaxWidth(),
             id = R.string.camera_info_report,
             onClick = {}
         )
