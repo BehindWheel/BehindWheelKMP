@@ -41,15 +41,20 @@ internal fun DefaultLocationBottomSheet(
         sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onCancel,
         content = {
+            val sortedCityValues = defaultCity.values
+                .mapIndexed { index, value ->
+                    CityValue(index, stringResource(id = value.toResource()))
+                }.sortedWith(compareBy(Collator.getInstance(Locale.getDefault())) { it.value })
+
             SingleChoiceLazyColumn(
-                list = defaultCity.values.map {
-                    stringResource(id = it.toResource())
-                }.sortedWith(Collator.getInstance(Locale.getDefault()))
-                    .toImmutableList(),
+                list = sortedCityValues.map { it.value }.toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
-                initialSelection = defaultCity.values.indexOf(defaultCity.current),
+                initialSelection = sortedCityValues.indexOfFirst { cityValue ->
+                    cityValue.index == defaultCity.values.indexOf(defaultCity.current)
+                },
                 onSelected = { position ->
-                    defaultCity = defaultCity.copy(current = defaultCity.values[position])
+                    defaultCity =
+                        defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index])
                 }
             )
             Divider()
@@ -62,6 +67,12 @@ internal fun DefaultLocationBottomSheet(
         }
     )
 }
+
+private data class CityValue(
+    val index: Int,
+    val value: String
+)
+
 
 @GrodnoRoadsPreview
 @Composable
