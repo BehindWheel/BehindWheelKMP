@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.common
+package com.egoriku.grodnoroads.foundation.uikit.bottomsheet.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

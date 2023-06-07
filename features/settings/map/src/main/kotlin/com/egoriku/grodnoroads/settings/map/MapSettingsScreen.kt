@@ -24,7 +24,7 @@ import com.egoriku.grodnoroads.settings.map.ui.DefaultLocationSection
 import com.egoriku.grodnoroads.settings.map.ui.DrivingModeSection
 import com.egoriku.grodnoroads.settings.map.ui.MapEventsSection
 import com.egoriku.grodnoroads.settings.map.ui.MapStyleSection
-import com.egoriku.grodnoroads.settings.map.ui.dialog.DefaultLocationDialog
+import com.egoriku.grodnoroads.settings.map.ui.bottomsheet.DefaultLocationBottomSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,9 +117,9 @@ private fun DialogHandler(
 ) {
     when (dialogState) {
         is DefaultLocationDialogState -> {
-            DefaultLocationDialog(
+            DefaultLocationBottomSheet(
                 defaultLocationState = dialogState,
-                onClose = onClose,
+                onCancel = onClose,
                 onResult = onResult
             )
         }

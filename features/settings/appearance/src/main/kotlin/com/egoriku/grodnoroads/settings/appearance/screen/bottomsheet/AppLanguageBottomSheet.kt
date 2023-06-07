@@ -10,10 +10,10 @@ import com.egoriku.grodnoroads.foundation.lazycolumn.SingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
+import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
-import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Language.Companion.toStringResource
 import kotlinx.collections.immutable.toImmutableList
 
@@ -26,17 +26,13 @@ fun AppLanguageBottomSheet(
 ) {
     var language by rememberMutableState { languageDialogState.languages }
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val sheetCloseBehaviour = rememberSheetCloseBehaviour(
-        sheetState = { sheetState },
         onCancel = onCancel,
-        onResult = {
-            onResult(language)
-        }
+        onResult = { onResult(language) }
     )
 
     BasicModalBottomSheet(
-        sheetState = sheetState,
+        sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onCancel,
         content = {
             SingleChoiceLazyColumn(

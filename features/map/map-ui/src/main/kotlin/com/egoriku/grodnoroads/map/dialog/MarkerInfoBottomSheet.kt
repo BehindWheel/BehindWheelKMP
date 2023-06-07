@@ -30,14 +30,10 @@ fun MarkerInfoBottomSheet(
     reports: Reports,
     onClose: () -> Unit
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val sheetCloseBehaviour = rememberSheetCloseBehaviour(
-        sheetState = { sheetState },
-        onCancel = onClose,
-    )
+    val sheetCloseBehaviour = rememberSheetCloseBehaviour(onCancel = onClose)
 
     BasicModalBottomSheet(
-        sheetState = sheetState,
+        sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onClose,
         content = {
             Text(

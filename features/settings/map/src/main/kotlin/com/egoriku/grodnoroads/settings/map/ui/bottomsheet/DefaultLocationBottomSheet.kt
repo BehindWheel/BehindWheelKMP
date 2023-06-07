@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet
+package com.egoriku.grodnoroads.settings.map.ui.bottomsheet
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Divider
@@ -15,24 +15,26 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.rememberSheetCloseBehaviour
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.toResource
 import kotlinx.collections.immutable.toImmutableList
+import java.text.Collator
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppThemeBottomSheet(
-    themeDialogState: ThemeDialogState,
+internal fun DefaultLocationBottomSheet(
+    defaultLocationState: DefaultLocationDialogState,
     onCancel: () -> Unit,
-    onResult: (AppearancePref) -> Unit
+    onResult: (MapPref) -> Unit
 ) {
-    var theme by rememberMutableState { themeDialogState.themes }
+    var defaultCity by rememberMutableState { defaultLocationState.defaultCity }
 
     val sheetCloseBehaviour = rememberSheetCloseBehaviour(
         onCancel = onCancel,
-        onResult = { onResult(theme) }
+        onResult = { onResult(defaultCity) }
     )
 
     BasicModalBottomSheet(
@@ -40,13 +42,14 @@ fun AppThemeBottomSheet(
         onCancel = onCancel,
         content = {
             SingleChoiceLazyColumn(
-                list = theme.values.map {
-                    stringResource(id = it.toStringResource())
-                }.toImmutableList(),
+                list = defaultCity.values.map {
+                    stringResource(id = it.toResource())
+                }.sortedWith(Collator.getInstance(Locale.getDefault()))
+                    .toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
-                initialSelection = theme.values.indexOf(theme.current),
+                initialSelection = defaultCity.values.indexOf(defaultCity.current),
                 onSelected = { position ->
-                    theme = theme.copy(current = theme.values[position])
+                    defaultCity = defaultCity.copy(current = defaultCity.values[position])
                 }
             )
             Divider()
@@ -62,9 +65,9 @@ fun AppThemeBottomSheet(
 
 @GrodnoRoadsPreview
 @Composable
-fun PreviewAppThemeBottomSheet() = GrodnoRoadsM3ThemePreview {
-    AppThemeBottomSheet(
-        themeDialogState = ThemeDialogState(themes = AppTheme()),
+private fun PreviewDefaultLocationBottomSheet() = GrodnoRoadsM3ThemePreview {
+    DefaultLocationBottomSheet(
+        defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
         onCancel = {},
         onResult = {}
     )

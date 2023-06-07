@@ -13,15 +13,15 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun rememberSheetCloseBehaviour(
-    sheetState: () -> SheetState,
     onCancel: () -> Unit,
     onResult: () -> Unit = {},
 ): SheetCloseBehaviour {
     val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     return remember {
         SheetCloseBehaviour(
             scope = scope,
-            sheetState = sheetState(),
+            sheetState = sheetState,
             onCancel = onCancel,
             onResult = onResult
         )
@@ -31,7 +31,7 @@ fun rememberSheetCloseBehaviour(
 @OptIn(ExperimentalMaterial3Api::class)
 class SheetCloseBehaviour(
     private val scope: CoroutineScope,
-    private val sheetState: SheetState,
+    val sheetState: SheetState,
     private val onCancel: () -> Unit,
     private val onResult: () -> Unit,
 ) {
