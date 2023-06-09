@@ -56,12 +56,7 @@ fun MapSettingsScreen(
             DialogHandler(
                 dialogState = state.mapDialogState,
                 onClose = mapSettingsComponent::closeDialog,
-                onResult = {
-                    mapSettingsComponent.apply {
-                        modify(it)
-                        closeDialog()
-                    }
-                }
+                onResult = mapSettingsComponent::modify
             )
 
             if (!state.isLoading) {

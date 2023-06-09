@@ -71,8 +71,6 @@ class AppearanceStoreFactory(
                     }
                 }
                 onIntent<Intent.Update> { dialogResult ->
-                    dispatch(Message.Dialog(dialogState = None))
-
                     when (dialogResult.preference) {
                         is AppTheme -> {
                             launch {

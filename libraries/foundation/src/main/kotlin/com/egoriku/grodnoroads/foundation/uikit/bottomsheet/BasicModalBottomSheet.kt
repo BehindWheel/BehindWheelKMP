@@ -47,10 +47,11 @@ class SheetCloseBehaviour(
 
     fun hideWithResult() {
         scope.launch {
+            onResult()
             sheetState.hide()
         }.invokeOnCompletion {
             if (!sheetState.isVisible) {
-                onResult()
+                onCancel()
             }
         }
     }
