@@ -7,7 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CheckableCard
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
+import com.egoriku.grodnoroads.foundation.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
@@ -67,7 +67,7 @@ private fun TrafficJam(
 ) {
     val trafficJamOnMap = mapStyle.trafficJamOnMap
 
-    CheckboxSettings(
+    SwitchSettings(
         iconRes = R.drawable.ic_traffic_light,
         stringResId = R.string.map_traffic_jam_appearance,
         isChecked = trafficJamOnMap.isShow,

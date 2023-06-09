@@ -21,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
 import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
-import com.egoriku.grodnoroads.foundation.list.CheckboxSettings
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
+import com.egoriku.grodnoroads.foundation.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
@@ -115,7 +115,7 @@ private fun KeepScreenOnSettings(
 ) {
     val keepScreenOn = state.appearanceState.keepScreenOn
 
-    CheckboxSettings(
+    SwitchSettings(
         imageVector = Icons.Default.Brightness7,
         stringResId = R.string.appearance_keep_screen_on,
         isChecked = keepScreenOn.enabled,
