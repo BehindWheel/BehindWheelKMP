@@ -114,7 +114,7 @@ private fun BasicSwitchSettings(
 
 @GrodnoRoadsPreview
 @Composable
-fun PreviewSwitchSettings() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSwitchSettings() = GrodnoRoadsM3ThemePreview {
     Column {
         SwitchSettings(
             imageVector = Icons.Default.Add,
