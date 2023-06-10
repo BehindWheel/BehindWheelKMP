@@ -97,6 +97,7 @@
     <string name="map_google_map_style_detailed">Detailed</string>
 
     <string name="map_header_markers">Markers</string>
+    <string name="map_markers_select_all">Select All</string>
     <string name="map_markers_stationary_cameras">Stationary cameras</string>
     <string name="map_markers_medium_speed_cameras">Medium speed cameras</string>
     <string name="map_markers_mobile_cameras">Mobile cameras</string>

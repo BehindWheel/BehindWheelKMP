@@ -2,10 +2,11 @@ package com.egoriku.grodnoroads.foundation.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -16,7 +17,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.Checkbox
@@ -27,10 +27,12 @@ fun CheckboxSettings(
     iconRes: Int,
     stringResId: Int,
     isChecked: Boolean,
+    leadingPaddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit = {}
 ) {
     BasicCheckboxSettings(
         iconRes = iconRes,
+        leadingPaddingValues = leadingPaddingValues,
         stringResId = stringResId,
         isChecked = isChecked,
         onCheckedChange = onCheckedChange
@@ -54,6 +56,7 @@ fun CheckboxSettings(
 
 @Composable
 private fun BasicCheckboxSettings(
+    leadingPaddingValues: PaddingValues = PaddingValues(),
     imageVector: ImageVector? = null,
     iconRes: Int? = null,
     stringResId: Int,
@@ -66,9 +69,18 @@ private fun BasicCheckboxSettings(
                 value = isChecked,
                 role = Role.Checkbox,
                 onValueChange = onCheckedChange
-            )
-            .padding(start = 8.dp),
+            ),
         leadingContent = {
+            Checkbox(
+                modifier = Modifier.padding(leadingPaddingValues),
+                isChecked = isChecked,
+                onCheckedChange = onCheckedChange
+            )
+        },
+        headlineContent = {
+            Text(text = stringResource(id = stringResId))
+        },
+        trailingContent = {
             if (imageVector != null) {
                 Icon(
                     imageVector = imageVector,
@@ -81,15 +93,6 @@ private fun BasicCheckboxSettings(
                     contentDescription = null
                 )
             }
-        },
-        headlineContent = {
-            Text(text = stringResource(id = stringResId))
-        },
-        trailingContent = {
-            Checkbox(
-                isChecked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
         }
     )
     Divider()
@@ -100,13 +103,13 @@ private fun BasicCheckboxSettings(
 private fun PreviewCheckboxSettings() = GrodnoRoadsM3ThemePreview {
     Column {
         CheckboxSettings(
-            imageVector = Icons.Default.Add,
+            imageVector = Icons.Default.Settings,
             stringResId = R.string.app_name,
             isChecked = true,
             onCheckedChange = {}
         )
         CheckboxSettings(
-            imageVector = Icons.Default.Add,
+            imageVector = Icons.Default.Settings,
             stringResId = R.string.app_name,
             isChecked = false,
             onCheckedChange = {}

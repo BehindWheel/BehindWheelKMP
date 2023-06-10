@@ -41,16 +41,41 @@ internal class MapSettingsStoreFactory(
                 onAction<Unit> {
                     dataStore.data
                         .map { pref ->
+                            val showStationaryCameras = pref.isShowStationaryCameras
+                            val showMediumSpeedCameras = pref.isShowMediumSpeedCameras
+                            val showMobileCameras = pref.isShowMobileCameras
+                            val showTrafficPolice = pref.isShowTrafficPolice
+                            val showRoadIncidents = pref.isShowRoadIncidents
+                            val showCarCrash = pref.isShowCarCrash
+                            val showTrafficJam = pref.isShowTrafficJam
+                            val showWildAnimals = pref.isShowWildAnimals
+
+                            val isShowMarkers = listOf(
+                                showStationaryCameras, showMediumSpeedCameras,
+                                showMobileCameras, showTrafficPolice,
+                                showRoadIncidents, showCarCrash,
+                                showTrafficJam, showWildAnimals
+                            )
+
+                            val isAllMarkersDisabled = isShowMarkers.none { it }
+                            val isAllMarkersEnabled = isShowMarkers.all { it }
+                            val selectable = when {
+                                isAllMarkersDisabled -> MapInfo.Selectable.AllDisabled
+                                isAllMarkersEnabled -> MapInfo.Selectable.AllEnabled
+                                else -> MapInfo.Selectable.Mixed
+                            }
+
                             MapSettings(
                                 mapInfo = MapInfo(
-                                    stationaryCameras = StationaryCameras(isShow = pref.isShowStationaryCameras),
-                                    mediumSpeedCameras = MediumSpeedCameras(isShow = pref.isShowMediumSpeedCameras),
-                                    mobileCameras = MobileCameras(isShow = pref.isShowMobileCameras),
-                                    trafficPolice = TrafficPolice(isShow = pref.isShowTrafficPolice),
-                                    roadIncident = RoadIncident(isShow = pref.isShowRoadIncidents),
-                                    carCrash = CarCrash(isShow = pref.isShowCarCrash),
-                                    trafficJam = TrafficJam(isShow = pref.isShowTrafficJam),
-                                    wildAnimals = WildAnimals(isShow = pref.isShowWildAnimals),
+                                    stationaryCameras = StationaryCameras(isShow = showStationaryCameras),
+                                    mediumSpeedCameras = MediumSpeedCameras(isShow = showMediumSpeedCameras),
+                                    mobileCameras = MobileCameras(isShow = showMobileCameras),
+                                    trafficPolice = TrafficPolice(isShow = showTrafficPolice),
+                                    roadIncident = RoadIncident(isShow = showRoadIncidents),
+                                    carCrash = CarCrash(isShow = showCarCrash),
+                                    trafficJam = TrafficJam(isShow = showTrafficJam),
+                                    wildAnimals = WildAnimals(isShow = showWildAnimals),
+                                    selectable = selectable
                                 ),
                                 mapStyle = MapStyle(
                                     trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
@@ -86,6 +111,16 @@ internal class MapSettingsStoreFactory(
                                 is CarCrash -> updateCarCrash(preference.isShow)
                                 is TrafficJam -> updateTrafficJam(preference.isShow)
                                 is WildAnimals -> updateWildAnimals(preference.isShow)
+                                is Selectable -> {
+                                    updateStationaryCameras(preference.selectAll)
+                                    updateMediumSpeedCameras(preference.selectAll)
+                                    updateMobileCameras(preference.selectAll)
+                                    updateTrafficPolice(preference.selectAll)
+                                    updateRoadIncidents(preference.selectAll)
+                                    updateCarCrash(preference.selectAll)
+                                    updateTrafficJam(preference.selectAll)
+                                    updateWildAnimals(preference.selectAll)
+                                }
 
                                 is TrafficJamOnMap -> updateTrafficJamAppearance(preference.isShow)
                                 is GoogleMapStyle -> updateGoogleMapStyle(preference.style.type)

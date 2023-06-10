@@ -39,6 +39,7 @@ interface MapSettingsComponent {
         data class TrafficJam(val isShow: Boolean = true) : MapPref
         data class WildAnimals(val isShow: Boolean = true) : MapPref
         data class CarCrash(val isShow: Boolean = true) : MapPref
+        data class Selectable(val selectAll: Boolean = true) : MapPref
 
         data class TrafficJamOnMap(val isShow: Boolean = false) : MapPref
         data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref
@@ -87,7 +88,14 @@ interface MapSettingsComponent {
             val carCrash: CarCrash = CarCrash(),
             val trafficJam: TrafficJam = TrafficJam(),
             val wildAnimals: WildAnimals = WildAnimals(),
-        )
+            val selectable: Selectable = Selectable.AllEnabled
+        ) {
+            enum class Selectable {
+                AllEnabled,
+                AllDisabled,
+                Mixed
+            }
+        }
 
         data class MapStyle(
             val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),

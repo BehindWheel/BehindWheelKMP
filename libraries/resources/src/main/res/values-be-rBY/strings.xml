@@ -64,7 +64,9 @@
     <string name="map_traffic_jam_appearance">Заторы на карце</string>
     <string name="map_google_map_style_minimal">Мінімалізм</string>
     <string name="map_google_map_style_detailed">Падрабязная</string>
+
     <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбраць усе</string>
     <string name="map_markers_stationary_cameras">Стацыянарныя камеры</string>
     <string name="map_markers_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
     <string name="map_markers_mobile_cameras">Мабільныя камеры</string>

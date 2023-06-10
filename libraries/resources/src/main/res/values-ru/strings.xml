@@ -74,6 +74,7 @@
     <string name="map_google_map_style_detailed">Подробная</string>
 
     <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбрать все</string>
     <string name="map_markers_stationary_cameras">Стационарные камеры</string>
     <string name="map_markers_medium_speed_cameras">Камеры средней скорости</string>
     <string name="map_markers_mobile_cameras">Мобильные камеры</string>
