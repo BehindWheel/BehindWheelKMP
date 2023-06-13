@@ -12,10 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 
 @Composable
 fun CircleButton(
@@ -42,7 +42,7 @@ fun CircleButton(
     )
 }
 
-@Preview
+@GrodnoRoadsPreview
 @Composable
 private fun CircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     CircleButton(onClick = {}) {
