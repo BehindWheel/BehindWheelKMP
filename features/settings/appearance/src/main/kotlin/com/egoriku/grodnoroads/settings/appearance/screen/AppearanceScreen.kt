@@ -144,7 +144,10 @@ private fun DialogHandler(
             AppLanguageBottomSheet(
                 languageDialogState = dialogState,
                 onCancel = onClose,
-                onResult = onResult
+                onResult = {
+                    onClose()
+                    onResult(it)
+                }
             )
         }
 
