@@ -19,6 +19,10 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
 import com.google.android.gms.maps.model.LatLng
@@ -39,6 +43,7 @@ internal class MapComponentImpl(
     private val locationStore: LocationStore = instanceKeeper.getStore(::get)
     private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
     private val mapEventsStore: MapEventsStore = instanceKeeper.getStore(::get)
+    private val quickActionsStore: QuickActionsStore = instanceKeeper.getStore(::get)
 
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
     private val mediumSpeed = mapEventsStore.states.map { it.mediumSpeedCameras }
@@ -62,6 +67,9 @@ internal class MapComponentImpl(
 
     override val userCount: Flow<Int>
         get() = mapEventsStore.states.map { it.userCount }
+
+    override val quickActionsState: Flow<QuickActionsState>
+        get() = quickActionsStore.states
 
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
@@ -164,5 +172,9 @@ internal class MapComponentImpl(
     private fun bindLocationLabel(label: Label) = when (label) {
         is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
         else -> Unit
+    }
+
+    override fun updatePreferences(pref: QuickActionsPref) {
+        quickActionsStore.accept(QuickActionsIntent.Update(pref))
     }
 }

@@ -104,4 +104,6 @@
 
     <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
+
+    <string name="map_quick_actions_header">Хуткія налады</string>
 </resources>

@@ -28,6 +28,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
@@ -37,6 +38,8 @@ import com.egoriku.grodnoroads.map.markers.ReportsMarker
 import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
+import com.egoriku.grodnoroads.map.popup.ActionsContent
+import com.egoriku.grodnoroads.map.popup.QuickActionsPopup
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
@@ -58,6 +61,7 @@ fun MapScreen(component: MapComponent) {
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
         val userCount by component.userCount.collectAsState(initial = 0)
+        val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
 
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
@@ -131,6 +135,22 @@ fun MapScreen(component: MapComponent) {
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
+                var quickActionsVisible by rememberMutableState { false }
+                QuickActionsPopup(
+                    modifier = Modifier.statusBarsPadding(),
+                    opened = quickActionsVisible,
+                    onExpand = { quickActionsVisible = true },
+                    onClosed = { quickActionsVisible = false },
+                ) {
+                    ActionsContent(
+                        quickActionsState = quickActionsState,
+                        onChanged = {
+                            quickActionsVisible = false
+                            component.updatePreferences(it)
+                        }
+                    )
+                }
+
                 AnimatedContent(targetState = appMode, label = "app mode") { state ->
                     when (state) {
                         AppMode.Default -> {
