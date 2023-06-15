@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+fun buildMapSettingsComponent(
+    componentContext: ComponentContext
+): MapSettingsComponent = MapSettingsComponentImpl(componentContext)
+
 internal class MapSettingsComponentImpl(
     componentContext: ComponentContext
 ) : MapSettingsComponent, ComponentContext by componentContext, KoinComponent {

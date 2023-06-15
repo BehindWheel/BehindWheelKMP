@@ -79,6 +79,12 @@ dependencies {
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)
 
+    implementation(projects.features.settings.alerts)
+    implementation(projects.features.settings.appearance)
+    implementation(projects.features.settings.faq)
+    implementation(projects.features.settings.map)
+    implementation(projects.features.settings.whatsnew)
+
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)

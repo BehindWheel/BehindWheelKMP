@@ -21,8 +21,8 @@ import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
 import com.google.android.gms.maps.model.LatLng
@@ -34,6 +34,11 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+
+fun buildMapComponent(
+    componentContext: ComponentContext
+): MapComponent = MapComponentImpl(componentContext)
+
 
 internal class MapComponentImpl(
     componentContext: ComponentContext

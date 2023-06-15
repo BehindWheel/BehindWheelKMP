@@ -8,6 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+fun buildWhatsNewComponent(
+    componentContext: ComponentContext
+): WhatsNewComponent = WhatsNewComponentImpl(componentContext)
+
 internal class WhatsNewComponentImpl(
     componentContext: ComponentContext
 ) : WhatsNewComponent, KoinComponent, ComponentContext by componentContext {

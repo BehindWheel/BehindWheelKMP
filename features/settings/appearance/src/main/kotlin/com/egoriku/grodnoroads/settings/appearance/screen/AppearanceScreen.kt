@@ -19,8 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
@@ -43,8 +41,6 @@ fun AppearanceScreen(
     appearanceComponent: AppearanceComponent,
     onBack: () -> Unit
 ) {
-    BottomBarVisibility(HIDDEN)
-
     val state by appearanceComponent.state.collectAsState(initial = State())
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 

@@ -12,8 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.HIDDEN
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
@@ -32,8 +30,6 @@ fun MapSettingsScreen(
     mapSettingsComponent: MapSettingsComponent,
     onBack: () -> Unit
 ) {
-    BottomBarVisibility(HIDDEN)
-
     val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = MapSettingState())
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 

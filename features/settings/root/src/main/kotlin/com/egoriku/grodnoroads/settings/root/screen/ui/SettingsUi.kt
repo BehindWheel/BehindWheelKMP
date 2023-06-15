@@ -12,27 +12,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibility
-import com.egoriku.grodnoroads.foundation.bottombar.BottomBarVisibilityState.SHOWN
 import com.egoriku.grodnoroads.foundation.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.settings.root.domain.model.Page
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.settings.root.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsAlertsEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsGroupsEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsNextFeaturesEnabled
+import com.egoriku.grodnoroads.shared.appcomponent.Page
 
 @Composable
 internal fun SettingsUi(
     appVersion: String,
     onSettingClick: (Page) -> Unit
 ) {
-    BottomBarVisibility(SHOWN)
-
     Surface(
         modifier = Modifier
             .fillMaxSize()

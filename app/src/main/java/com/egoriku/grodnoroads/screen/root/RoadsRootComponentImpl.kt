@@ -2,26 +2,28 @@ package com.egoriku.grodnoroads.screen.root
 
 import android.os.Parcelable
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.extensions.common.StateData
-import com.egoriku.grodnoroads.screen.main.MainComponent
+import com.egoriku.grodnoroads.screen.main.buildMainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
-import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl.Configuration.Main
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
+import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
+import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
+import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
+import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
+import com.egoriku.grodnoroads.settings.whatsnew.domain.component.buildWhatsNewComponent
+import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import org.koin.core.parameter.parametersOf
 
 class RoadsRootComponentImpl(
     componentContext: ComponentContext
@@ -29,15 +31,11 @@ class RoadsRootComponentImpl(
 
     private val rootStore: RootStore = instanceKeeper.getStore(::get)
 
-    private val main: (ComponentContext) -> MainComponent = {
-        get { parametersOf(componentContext) }
-    }
+    private val navigation = StackNavigation<Config>()
 
-    private val navigation = StackNavigation<Configuration>()
-
-    private val stack: Value<ChildStack<Configuration, Child>> = childStack(
+    private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
-        initialConfiguration = Main,
+        initialConfiguration = Config.Main,
         handleBackButton = true,
         key = "Root",
         childFactory = ::child
@@ -59,15 +57,64 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
-    private fun child(
-        configuration: Configuration,
-        componentContext: ComponentContext,
-    ) = when (configuration) {
-        is Main -> Child.Main(main(componentContext))
+    override fun open(page: Page) {
+        when (page) {
+            Page.Appearance -> navigation.push(Config.Appearance)
+            Page.Map -> navigation.push(Config.MapSettings)
+            Page.Alerts -> navigation.push(Config.Alerts)
+            Page.WhatsNew -> navigation.push(Config.WhatsNew)
+            Page.NextFeatures -> navigation.push(Config.NextFeatures)
+            Page.FAQ -> navigation.push(Config.FAQ)
+        }
     }
 
-    private sealed class Configuration : Parcelable {
+    override fun onBack() = navigation.pop()
+
+    private fun child(config: Config, componentContext: ComponentContext) = when (config) {
+        is Config.Main -> Child.Main(
+            component = buildMainComponent(
+                componentContext = componentContext,
+                onOpen = ::open
+            )
+        )
+
+        is Config.Appearance -> Child.Appearance(
+            appearanceComponent = buildAppearanceComponent(componentContext)
+        )
+
+        is Config.Alerts -> Child.Alerts(alertsComponent = buildAlertsComponent(componentContext))
+        is Config.MapSettings -> Child.Map(
+            mapSettingsComponent = buildMapSettingsComponent(componentContext)
+        )
+
+        is Config.NextFeatures -> TODO()
+        is Config.WhatsNew -> Child.WhatsNew(
+            whatsNewComponent = buildWhatsNewComponent(componentContext)
+        )
+
+        is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
+    }
+
+    private sealed class Config : Parcelable {
         @Parcelize
-        object Main : Configuration()
+        object Main : Config()
+
+        @Parcelize
+        object Appearance : Config()
+
+        @Parcelize
+        object MapSettings : Config()
+
+        @Parcelize
+        object Alerts : Config()
+
+        @Parcelize
+        object WhatsNew : Config()
+
+        @Parcelize
+        object NextFeatures : Config()
+
+        @Parcelize
+        object FAQ : Config()
     }
 }

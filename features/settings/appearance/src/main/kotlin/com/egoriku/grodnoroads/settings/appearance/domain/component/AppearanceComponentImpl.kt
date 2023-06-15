@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+fun buildAppearanceComponent(
+    componentContext: ComponentContext
+): AppearanceComponent = AppearanceComponentImpl(componentContext)
+
 internal class AppearanceComponentImpl(
     componentContext: ComponentContext
 ) : AppearanceComponent, ComponentContext by componentContext, KoinComponent {

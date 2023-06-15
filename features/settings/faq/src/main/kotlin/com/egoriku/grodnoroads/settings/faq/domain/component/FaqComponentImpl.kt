@@ -8,6 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+fun buildFaqComponent(
+    componentContext: ComponentContext
+): FaqComponent = FaqComponentImpl(componentContext)
+
 internal class FaqComponentImpl(
     componentContext: ComponentContext
 ) : FaqComponent, KoinComponent, ComponentContext by componentContext {

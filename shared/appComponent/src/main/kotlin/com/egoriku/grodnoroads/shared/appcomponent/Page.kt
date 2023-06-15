@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.root.domain.model
+package com.egoriku.grodnoroads.shared.appcomponent
 
 enum class Page {
     Alerts,
