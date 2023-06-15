@@ -6,11 +6,11 @@ import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
-import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
-import com.egoriku.grodnoroads.settings.whatsnew.domain.component.WhatsNewComponent
+import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent
+import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent
+import com.egoriku.grodnoroads.setting.faq.domain.component.FaqComponent
+import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
+import com.egoriku.grodnoroads.setting.whatsnew.domain.component.WhatsNewComponent
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow

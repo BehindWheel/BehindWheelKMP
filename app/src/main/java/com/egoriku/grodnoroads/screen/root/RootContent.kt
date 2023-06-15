@@ -12,11 +12,11 @@ import com.egoriku.grodnoroads.screen.main.MainUi
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
-import com.egoriku.grodnoroads.settings.alerts.AlertsScreen
-import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
-import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
-import com.egoriku.grodnoroads.settings.map.MapSettingsScreen
-import com.egoriku.grodnoroads.settings.whatsnew.screen.WhatsNewScreen
+import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
+import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
+import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
+import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
+import com.egoriku.grodnoroads.setting.whatsnew.screen.WhatsNewScreen
 
 @Composable
 fun RootContent(roadsRootComponent: RoadsRootComponent) {

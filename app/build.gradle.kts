@@ -76,14 +76,20 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.map.mapData)
+    implementation(projects.features.map.mapDomain)
+    implementation(projects.features.map.mapUi)
+
+    implementation(projects.features.settings)
+
+    implementation(projects.features.setting.alerts)
+    implementation(projects.features.setting.appearance)
+    implementation(projects.features.setting.faq)
+    implementation(projects.features.setting.map)
+    implementation(projects.features.setting.whatsnew)
+
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)
-
-    implementation(projects.features.settings.alerts)
-    implementation(projects.features.settings.appearance)
-    implementation(projects.features.settings.faq)
-    implementation(projects.features.settings.map)
-    implementation(projects.features.settings.whatsnew)
 
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
@@ -91,12 +97,6 @@ dependencies {
     implementation(projects.libraries.foundation)
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
-
-    implementation(projects.features.map.mapData)
-    implementation(projects.features.map.mapDomain)
-    implementation(projects.features.map.mapUi)
-
-    implementation(projects.features.settings.root)
 
     implementation(libs.accompanist.systemuicontroller)
 

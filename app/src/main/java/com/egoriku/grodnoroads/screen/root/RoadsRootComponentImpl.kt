@@ -12,11 +12,11 @@ import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
-import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
-import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
-import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
-import com.egoriku.grodnoroads.settings.whatsnew.domain.component.buildWhatsNewComponent
+import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsComponent
+import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
+import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
+import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
+import com.egoriku.grodnoroads.setting.whatsnew.domain.component.buildWhatsNewComponent
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow

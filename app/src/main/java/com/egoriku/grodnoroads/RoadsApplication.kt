@@ -12,11 +12,11 @@ import com.egoriku.grodnoroads.map.data.di.mapDataModule
 import com.egoriku.grodnoroads.map.di.mapUiModule
 import com.egoriku.grodnoroads.map.domain.di.mapDomainModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
-import com.egoriku.grodnoroads.settings.alerts.di.alertsModule
-import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
-import com.egoriku.grodnoroads.settings.faq.di.faqModule
-import com.egoriku.grodnoroads.settings.map.di.mapSettingsModule
-import com.egoriku.grodnoroads.settings.whatsnew.di.whatsNewModule
+import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
+import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
+import com.egoriku.grodnoroads.setting.faq.di.faqModule
+import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
+import com.egoriku.grodnoroads.setting.whatsnew.di.whatsNewModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

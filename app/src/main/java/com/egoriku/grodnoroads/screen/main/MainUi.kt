@@ -16,7 +16,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.settings.root.screen.SettingsScreen
+import com.egoriku.grodnoroads.setting.screen.SettingsScreen
 
 @Composable
 fun MainUi(component: MainComponent) {
