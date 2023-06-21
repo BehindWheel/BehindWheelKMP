@@ -3,6 +3,7 @@
 import com.android.build.gradle.LibraryExtension
 import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
 import com.egoriku.grodnoroads.internal.libs
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -40,6 +41,11 @@ class AndroidLibraryPlugin : Plugin<Project> {
 
             buildFeatures {
                 buildConfig = false
+            }
+
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
             }
         }
 
