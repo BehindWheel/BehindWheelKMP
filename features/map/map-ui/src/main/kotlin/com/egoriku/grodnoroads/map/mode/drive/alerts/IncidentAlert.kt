@@ -1,9 +1,6 @@
 package com.egoriku.grodnoroads.map.mode.drive.alerts
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,7 +9,6 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
@@ -35,33 +31,36 @@ fun IncidentAlert(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Column(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    textAlign = TextAlign.Center,
-                    text = buildString {
-                        append(emoji)
-                        append(" ")
-                        append(title)
-                    },
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-                VerticalSpacer(4.dp)
-                Text(
-                    text = pluralStringResource(
-                        R.plurals.camera_alerts_plurals_distance,
-                        distance,
-                        distance
-                    ),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
-            MessageComponent(messages = messages)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                textAlign = TextAlign.Center,
+                text = buildString {
+                    append(emoji)
+                    append(" ")
+                    append(title)
+                },
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            Text(
+                text = pluralStringResource(
+                    R.plurals.camera_alerts_plurals_distance,
+                    distance,
+                    distance
+                ),
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
+        Divider()
+        MessageComponent(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            messages = messages
+        )
     }
 }
 

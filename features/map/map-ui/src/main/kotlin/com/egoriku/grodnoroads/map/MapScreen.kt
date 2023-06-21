@@ -35,11 +35,10 @@ import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
 import com.egoriku.grodnoroads.map.markers.CameraMarker
 import com.egoriku.grodnoroads.map.markers.ReportsMarker
+import com.egoriku.grodnoroads.map.mode.DefaultOverlay
 import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
-import com.egoriku.grodnoroads.map.popup.ActionsContent
-import com.egoriku.grodnoroads.map.popup.QuickActionsPopup
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
@@ -61,6 +60,7 @@ fun MapScreen(component: MapComponent) {
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
         val userCount by component.userCount.collectAsState(initial = 0)
+        val speedLimit by component.speedLimit.collectAsState(initial = -1)
         val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
 
         AlertDialogs(
@@ -135,22 +135,6 @@ fun MapScreen(component: MapComponent) {
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
-                var quickActionsVisible by rememberMutableState { false }
-                QuickActionsPopup(
-                    modifier = Modifier.statusBarsPadding(),
-                    opened = quickActionsVisible,
-                    onExpand = { quickActionsVisible = true },
-                    onClosed = { quickActionsVisible = false },
-                ) {
-                    ActionsContent(
-                        quickActionsState = quickActionsState,
-                        onChanged = {
-                            quickActionsVisible = false
-                            component.updatePreferences(it)
-                        }
-                    )
-                }
-
                 AnimatedContent(targetState = appMode, label = "app mode") { state ->
                     when (state) {
                         AppMode.Default -> {
@@ -163,8 +147,6 @@ fun MapScreen(component: MapComponent) {
 
                         AppMode.Drive -> {
                             DriveMode(
-                                alerts = alerts,
-                                lastLocation = location,
                                 stopDrive = component::stopLocationUpdates,
                                 reportPolice = {
                                     if (location != LastLocation.None) {
@@ -209,6 +191,14 @@ fun MapScreen(component: MapComponent) {
                         .align(Alignment.BottomEnd)
                         .padding(bottom = 4.dp, end = 8.dp),
                     count = userCount
+                )
+                DefaultOverlay(
+                    showSpeed = appMode == AppMode.Drive,
+                    currentSpeed = location.speed,
+                    speedLimit = speedLimit,
+                    quickActionsState = quickActionsState,
+                    alerts = alerts,
+                    onPreferenceChange = component::updatePreferences
                 )
             }
         }

@@ -11,36 +11,17 @@ import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.map.domain.model.Alert
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.foundation.CurrentSpeedRect
 import com.egoriku.grodnoroads.map.mode.drive.action.ReportAction
-import com.egoriku.grodnoroads.map.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.resources.R
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun DriveMode(
-    alerts: ImmutableList<Alert>,
-    lastLocation: LastLocation,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
     reportIncident: () -> Unit
 ) {
     KeepScreenOn()
     Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            CurrentSpeedRect(
-                modifier = Modifier.statusBarsPadding(),
-                speed = lastLocation.speed.toString()
-            )
-            Alerts(alerts = alerts)
-        }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -72,8 +53,6 @@ fun DriveMode(
 @Composable
 private fun DriveModePReview() = GrodnoRoadsM3ThemePreview {
     DriveMode(
-        alerts = persistentListOf(),
-        lastLocation = LastLocation.None,
         stopDrive = {},
         reportPolice = {},
         reportIncident = {}

@@ -28,10 +28,7 @@ import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -106,6 +103,9 @@ internal class MapComponentImpl(
             flow3 = alertDistance,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
+
+    override val speedLimit: Flow<Int>
+        get() = alerts.filterIsInstance<Alert.CameraAlert>().map { it.speedLimit }
 
     override val labels: Flow<Label> = locationStore.labels
 

@@ -18,8 +18,6 @@
         <item quantity="other">%1$d метра</item>
     </plurals>
 
-    <string name="current_speed_template">%1$s км/ч</string>
-
     <string name="alerts_stationary_camera">Стационарная камера</string>
     <string name="alerts_mobile_camera">Временная камера</string>
     <string name="alerts_medium_speed_camera">Камера средней скорости</string>

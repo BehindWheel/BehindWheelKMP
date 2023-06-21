@@ -60,7 +60,7 @@ fun CameraAlert(
                             distance,
                             distance
                         ),
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodySmall
                     )
                 }
 

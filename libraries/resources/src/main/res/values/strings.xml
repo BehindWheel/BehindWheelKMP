@@ -20,8 +20,6 @@
         <item quantity="other">%1$d meters</item>
     </plurals>
 
-    <string name="current_speed_template">%1$s km/h</string>
-
     <string name="alerts_stationary_camera">Stationary camera</string>
     <string name="alerts_mobile_camera">Mobile camera</string>
     <string name="alerts_medium_speed_camera">Medium speed camera</string>
