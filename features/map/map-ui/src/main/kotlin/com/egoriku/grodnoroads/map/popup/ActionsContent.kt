@@ -53,6 +53,9 @@ fun ActionsContent(
                     } else {
                         null
                     },
+                    border = FilterChipDefaults.filterChipBorder(
+                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+                    ),
                     onClick = {
                         onChanged(appTheme.copy(current = theme))
                     }
