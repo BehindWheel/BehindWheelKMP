@@ -1,10 +1,7 @@
 package com.egoriku.grodnoroads.screen.main
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.bringToFront
-import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.egoriku.grodnoroads.map.domain.component.buildMapComponent
@@ -40,13 +37,11 @@ internal class MainComponentImpl(
     override val childStack: Value<ChildStack<*, Child>> = stack
 
     override fun onSelectTab(index: Int) {
-        navigation.bringToFront(
-            when (index) {
-                0 -> Config.Map
-                1 -> Config.Settings
-                else -> throw IllegalArgumentException("index $index is not defined in app")
-            }
-        )
+        if (index == 0) {
+            navigation.replaceAll(Config.Map)
+        } else {
+            navigation.bringToFront(Config.Settings)
+        }
     }
 
     private fun child(
