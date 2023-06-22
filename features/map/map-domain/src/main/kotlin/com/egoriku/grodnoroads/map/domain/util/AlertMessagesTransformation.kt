@@ -17,14 +17,8 @@ import kotlinx.collections.immutable.toImmutableList
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
-fun alertMessagesTransformation(): suspend (
-    List<MapEvent>,
-    LastLocation,
-    Int
-) -> ImmutableList<Alert> =
-    { mapEvents: List<MapEvent>,
-      lastLocation: LastLocation,
-      alertDistance: Int ->
+fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, Int) -> ImmutableList<Alert> =
+    { mapEvents, lastLocation, alertDistance ->
         when (lastLocation) {
             LastLocation.None -> persistentListOf()
             else -> when {
