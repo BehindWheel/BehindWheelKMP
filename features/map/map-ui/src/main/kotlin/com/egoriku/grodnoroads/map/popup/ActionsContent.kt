@@ -54,6 +54,8 @@ fun ActionsContent(
                         null
                     },
                     border = FilterChipDefaults.filterChipBorder(
+                        selectedBorderWidth = 1.dp,
+                        selectedBorderColor = MaterialTheme.colorScheme.outline,
                         borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
                     ),
                     onClick = {
