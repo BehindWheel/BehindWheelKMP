@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.map.mode.drive.alerts
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,6 +29,7 @@ fun Alerts(
 ) {
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
     ) {
         items(alerts) { alert ->
@@ -81,57 +81,47 @@ fun Alerts(
 @GrodnoRoadsPreview
 @Composable
 private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Alerts(
-            alerts = persistentListOf(
-                IncidentAlert(
-                    mapEventType = TrafficPolice,
-                    distance = 1,
-                    messages = persistentListOf(
-                        MessageItem(
-                            message = "Славинского беларуснефть на скорость",
-                            source = Source.Viber
-                        )
+    Alerts(
+        alerts = persistentListOf(
+            IncidentAlert(
+                mapEventType = TrafficPolice,
+                distance = 1,
+                messages = persistentListOf(
+                    MessageItem(
+                        message = "Славинского беларуснефть на скорость",
+                        source = Source.Viber
                     )
                 )
-            )
-        )
-        Alerts(
-            alerts = persistentListOf(
-                CameraAlert(
-                    distance = 2,
-                    speedLimit = 60,
-                    cameraType = StationaryCamera
-                )
-            )
-        )
-        Alerts(
-            alerts = persistentListOf(
-                IncidentAlert(
-                    distance = 5,
-                    messages = persistentListOf(
-                        MessageItem(
-                            message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
-                            source = Source.Viber
-                        ),
-                        MessageItem(
-                            message = "(15:45) Новый мост в левой полосе по направлению",
-                            source = Source.Viber
-                        )
+            ),
+            CameraAlert(
+                distance = 2,
+                speedLimit = 60,
+                cameraType = StationaryCamera
+            ),
+            IncidentAlert(
+                distance = 5,
+                messages = persistentListOf(
+                    MessageItem(
+                        message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
+                        source = Source.Viber
                     ),
-                    mapEventType = RoadIncident
-                )
+                    MessageItem(
+                        message = "(15:45) Новый мост в левой полосе по направлению",
+                        source = Source.Viber
+                    )
+                ),
+                mapEventType = RoadIncident
+            ),
+            CameraAlert(
+                distance = 220,
+                speedLimit = -1,
+                cameraType = MobileCamera
+            ),
+            CameraAlert(
+                distance = 220,
+                speedLimit = 60,
+                cameraType = MobileCamera
             )
         )
-        Alerts(
-            alerts = persistentListOf(
-                CameraAlert(distance = 220, speedLimit = -1, cameraType = MobileCamera)
-            )
-        )
-        Alerts(
-            alerts = persistentListOf(
-                CameraAlert(distance = 220, speedLimit = 60, cameraType = MobileCamera)
-            )
-        )
-    }
+    )
 }

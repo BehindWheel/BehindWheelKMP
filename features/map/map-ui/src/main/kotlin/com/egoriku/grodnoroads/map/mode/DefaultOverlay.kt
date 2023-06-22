@@ -180,6 +180,16 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                             source = Source.Viber
                         )
                     )
+                ),
+                IncidentAlert(
+                    mapEventType = MapEventType.CarCrash,
+                    distance = 120,
+                    messages = persistentListOf(
+                        MessageItem(
+                            message = "Славинского ДТП",
+                            source = Source.Viber
+                        )
+                    )
                 )
             ),
             onPreferenceChange = {}
