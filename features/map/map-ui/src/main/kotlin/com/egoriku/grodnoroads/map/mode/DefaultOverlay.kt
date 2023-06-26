@@ -88,7 +88,7 @@ fun DefaultOverlay(
 @Composable
 private fun CarSpeed(modifier: Modifier = Modifier, speed: Int) {
     Card(
-        modifier = modifier.size(72.dp),
+        modifier = modifier.size(64.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
         shape = CircleShape
     ) {
@@ -97,7 +97,7 @@ private fun CarSpeed(modifier: Modifier = Modifier, speed: Int) {
                 modifier = Modifier.align(Alignment.Center),
                 text = speed.toString(),
                 textAlign = TextAlign.Center,
-                fontSize = 24.sp,
+                fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -131,7 +131,7 @@ private fun SpeedLimit(limit: Int) {
         }
     }
 
-    Box(modifier = Modifier.size(56.dp)) {
+    Box(modifier = Modifier.size(48.dp)) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             circles.forEach { animatable ->
                 drawCircle(
@@ -162,7 +162,7 @@ private fun SpeedLimit(limit: Int) {
 @Preview
 @Composable
 private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
-    var limit by rememberMutableState { 100 }
+    var limit by rememberMutableState { -1 }
 
     Box {
         DefaultOverlay(
