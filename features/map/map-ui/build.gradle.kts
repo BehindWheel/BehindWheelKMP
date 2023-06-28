@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.media)
 
     implementation(libs.balloon.compose)
     implementation(libs.google.maps)

@@ -38,12 +38,13 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun DefaultOverlay(
-    showSpeed: Boolean,
+    isDriveMode: Boolean,
     currentSpeed: Int,
     speedLimit: Int,
     quickActionsState: QuickActionsState,
     alerts: ImmutableList<Alert>,
-    onPreferenceChange: (QuickActionsPref) -> Unit
+    onPreferenceChange: (QuickActionsPref) -> Unit,
+    onOverSpeed: () -> Unit,
 ) {
     var quickActionsVisible by rememberMutableState { false }
     Box {
@@ -51,7 +52,7 @@ fun DefaultOverlay(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (showSpeed) {
+            if (isDriveMode) {
                 Row(
                     modifier = Modifier
                         .padding(start = 16.dp)
@@ -62,11 +63,14 @@ fun DefaultOverlay(
                 ) {
                     CarSpeed(speed = currentSpeed)
                     if (speedLimit != -1) {
+                        LaunchedEffect(Unit) {
+                            onOverSpeed()
+                        }
                         SpeedLimit(limit = speedLimit)
                     }
                 }
+                Alerts(alerts = alerts)
             }
-            Alerts(alerts = alerts)
         }
         QuickActionsPopup(
             modifier = Modifier.statusBarsPadding(),
@@ -166,7 +170,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
 
     Box {
         DefaultOverlay(
-            showSpeed = true,
+            isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
             quickActionsState = QuickActionsState(),
@@ -192,7 +196,8 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     )
                 )
             ),
-            onPreferenceChange = {}
+            onPreferenceChange = {},
+            onOverSpeed = {}
         )
         Row(
             modifier = Modifier

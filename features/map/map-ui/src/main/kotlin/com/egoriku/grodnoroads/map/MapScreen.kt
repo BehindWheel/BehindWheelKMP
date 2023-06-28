@@ -40,6 +40,7 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.egoriku.grodnoroads.map.util.SoundUtil
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import kotlinx.collections.immutable.persistentListOf
@@ -49,6 +50,7 @@ import org.koin.compose.koinInject
 @Composable
 fun MapScreen(component: MapComponent) {
     val markerCache = koinInject<MarkerCache>()
+    val soundUtil = koinInject<SoundUtil>()
 
     Surface {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
@@ -124,8 +126,8 @@ fun MapScreen(component: MapComponent) {
                         }
 
                         is MapEvent.Reports -> ReportsMarker(
-                            mapEvent,
-                            component::showMarkerInfoDialog
+                            reports = mapEvent,
+                            onMarkerClick = component::showMarkerInfoDialog
                         )
                     }
                 }
@@ -193,12 +195,13 @@ fun MapScreen(component: MapComponent) {
                     count = userCount
                 )
                 DefaultOverlay(
-                    showSpeed = appMode == AppMode.Drive,
+                    isDriveMode = appMode == AppMode.Drive,
                     currentSpeed = location.speed,
                     speedLimit = speedLimit,
                     quickActionsState = quickActionsState,
                     alerts = alerts,
-                    onPreferenceChange = component::updatePreferences
+                    onPreferenceChange = component::updatePreferences,
+                    onOverSpeed = soundUtil::playOverSpeedSoundSound
                 )
             }
         }
