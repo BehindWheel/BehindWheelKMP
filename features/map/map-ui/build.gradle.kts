@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(projects.features.map.mapDomain)
 
+    implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
 
     implementation(projects.libraries.extensions)

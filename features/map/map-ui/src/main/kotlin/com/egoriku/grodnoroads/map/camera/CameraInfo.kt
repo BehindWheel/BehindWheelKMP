@@ -27,6 +27,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags
 import com.google.android.gms.maps.model.LatLng
 
 @Composable
@@ -93,11 +94,14 @@ private fun Info(
             )
         }
         VerticalSpacer(24.dp)
-        OutlinedButton(
-            modifier = Modifier.fillMaxWidth(),
-            id = R.string.camera_info_report,
-            onClick = {}
-        )
+
+        if (FeatureFlags.screenReportCameraProblemEnabled) {
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                id = R.string.camera_info_report,
+                onClick = {}
+            )
+        }
     }
 }
 
