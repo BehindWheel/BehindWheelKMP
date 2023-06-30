@@ -3,8 +3,7 @@ package com.egoriku.grodnoroads.foundation.list
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.filled.NavigateNext
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
@@ -22,7 +21,7 @@ fun SettingsItem(
     ListItem(
         modifier = Modifier
             .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp),
+            .padding(start = 8.dp),
         leadingContent = {
             Icon(
                 imageVector = icon,
@@ -34,10 +33,9 @@ fun SettingsItem(
         },
         trailingContent = {
             Icon(
-                Icons.Filled.ArrowForwardIos,
+                Icons.Filled.NavigateNext,
                 contentDescription = null
             )
         }
     )
-    Divider()
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -32,10 +31,6 @@ fun Switch(
     }
     Switch(
         modifier = Modifier.scale(0.9f),
-        colors = SwitchDefaults.colors(
-            checkedThumbColor = MaterialTheme.colorScheme.onSecondary,
-            checkedTrackColor = MaterialTheme.colorScheme.secondary
-        ),
         checked = isChecked,
         onCheckedChange = onCheckedChange,
         thumbContent = icon

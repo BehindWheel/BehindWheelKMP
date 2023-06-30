@@ -26,7 +26,7 @@ fun ActionButton(
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         onClick = onClick
     ) {
         Box(modifier = Modifier.padding(8.dp)) {

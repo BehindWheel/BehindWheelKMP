@@ -60,7 +60,7 @@ fun FaqScreen(
                 items(state.faq) {
                     Card(
                         onClick = {},
-                        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
                         shape = RoundedCornerShape(10.dp),
                     ) {
                         Column(

@@ -5,7 +5,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,7 +19,6 @@ import com.egoriku.grodnoroads.setting.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.setting.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.setting.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsAlertsEnabled
-import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsGroupsEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsNextFeaturesEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 
@@ -39,12 +37,10 @@ internal fun SettingsUi(
                 .padding(top = 8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            if (settingsGroupsEnabled) {
-                SettingsHeader(
-                    title = stringResource(R.string.settings_category_main),
-                    top = 0.dp
-                )
-            }
+            SettingsHeader(
+                title = stringResource(R.string.settings_category_main),
+                top = 0.dp
+            )
             SettingsItem(
                 icon = Icons.Filled.Style,
                 text = stringResource(R.string.settings_section_appearance),
@@ -70,10 +66,7 @@ internal fun SettingsUi(
                 )
             }
 
-            if (settingsGroupsEnabled) {
-                SettingsHeader(title = stringResource(R.string.settings_category_other))
-            }
-
+            SettingsHeader(title = stringResource(R.string.settings_category_other))
             SettingsItem(
                 icon = Icons.Filled.NewReleases,
                 text = stringResource(R.string.settings_section_whats_new),
@@ -102,7 +95,6 @@ internal fun SettingsUi(
             Spacer(modifier = Modifier.weight(1f))
             SocialNetworkSection()
             VersionSection(appVersion = appVersion)
-            Divider()
             PrivacyPolicySection()
         }
     }

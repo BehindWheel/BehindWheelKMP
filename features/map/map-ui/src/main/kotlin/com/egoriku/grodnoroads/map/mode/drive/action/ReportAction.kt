@@ -23,7 +23,7 @@ fun ReportAction(
 ) {
     Card(
         modifier = modifier,
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = CircleShape,
         onClick = onClick
     ) {

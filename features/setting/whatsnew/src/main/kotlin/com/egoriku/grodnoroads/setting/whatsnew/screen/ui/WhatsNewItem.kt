@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.setting.whatsnew.domain.model.ReleaseNotes
 
 @Composable
@@ -22,7 +23,7 @@ internal fun WhatsNewItem(
 ) {
     Card(
         onClick = {},
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = RoundedCornerShape(10.dp),
     ) {
         Column(
@@ -31,16 +32,23 @@ internal fun WhatsNewItem(
                 .padding(all = 16.dp)
         ) {
             val versionName = when {
-                isLatestRelease -> "${release.versionName} \uD83C\uDD95"
+                isLatestRelease -> "${release.versionName} \uD83D\uDD25"
                 else -> release.versionName
             }
-            Text(text = versionName, fontWeight = FontWeight.Bold)
             Text(
+                text = versionName,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            DisabledText(
                 text = release.releaseDate,
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.labelSmall
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = release.notes)
+            Text(
+                text = release.notes,
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }

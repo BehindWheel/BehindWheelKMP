@@ -26,7 +26,7 @@ fun VersionSection(appVersion: String) {
     ) {
         Text(
             text = stringResource(R.string.drawer_app_version, appVersion),
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.labelSmall
         )
     }
 }

@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,9 +22,6 @@ fun Checkbox(
 ) {
     Checkbox(
         modifier = modifier,
-        colors = CheckboxDefaults.colors(
-            checkedColor = MaterialTheme.colorScheme.secondary
-        ),
         checked = isChecked,
         onCheckedChange = onCheckedChange
     )
@@ -41,9 +36,6 @@ fun TriStateCheckbox(
     TriStateCheckbox(
         modifier = modifier,
         state = state,
-        colors = CheckboxDefaults.colors(
-            checkedColor = MaterialTheme.colorScheme.secondary
-        ),
         onClick = onCheckedChange
     )
 }

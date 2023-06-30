@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.setting.map.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.outlined.HomeWork
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -30,7 +30,7 @@ internal fun DefaultLocationSection(
 
         val defaultCity = locationInfo.defaultCity
         MoreActionSettings(
-            icon = Icons.Default.LocationCity,
+            icon = Icons.Outlined.HomeWork,
             text = stringResource(id = R.string.map_default_location),
             value = stringResource(id = defaultCity.current.toResource())
         ) {

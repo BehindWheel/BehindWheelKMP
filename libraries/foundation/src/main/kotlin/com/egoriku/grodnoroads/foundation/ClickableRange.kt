@@ -51,7 +51,6 @@ fun ClickableRange(
                     }
                 },
             imageVector = Icons.Default.RemoveCircle,
-            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null,
         )
         AnimatedContent(
@@ -128,7 +127,6 @@ fun ClickableRange(
                     }
                 },
             imageVector = Icons.Default.AddCircle,
-            tint = MaterialTheme.colorScheme.secondary,
             contentDescription = null,
         )
     }

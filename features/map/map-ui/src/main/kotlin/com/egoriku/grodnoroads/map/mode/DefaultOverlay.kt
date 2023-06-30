@@ -93,7 +93,7 @@ fun DefaultOverlay(
 private fun CarSpeed(modifier: Modifier = Modifier, speed: Int) {
     Card(
         modifier = modifier.size(64.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         shape = CircleShape
     ) {
         Box(modifier = Modifier.fillMaxSize()) {

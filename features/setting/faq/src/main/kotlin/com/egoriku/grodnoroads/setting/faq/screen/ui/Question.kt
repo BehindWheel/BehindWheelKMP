@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 fun Question(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.Bold
     )
 }

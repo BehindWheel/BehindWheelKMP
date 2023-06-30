@@ -32,9 +32,7 @@ fun CircleButton(
             contentColor = MaterialTheme.colorScheme.onSurface
         ),
         shape = CircleShape,
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 3.dp
-        ),
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 1.dp),
         contentPadding = PaddingValues(top = 8.dp, bottom = 8.dp),
         enabled = enabled,
         onClick = onClick,
