@@ -34,6 +34,7 @@ include(":features:setting:map")
 include(":features:setting:whatsnew")
 
 include(":libraries:analytics")
+include(":libraries:audioplayer")
 include(":libraries:crashlytics")
 include(":libraries:extensions")
 include(":libraries:foundation")

@@ -29,6 +29,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.map.domain.util.SoundUtil
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
@@ -40,7 +41,6 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
-import com.egoriku.grodnoroads.map.util.SoundUtil
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import kotlinx.collections.immutable.persistentListOf
@@ -201,7 +201,7 @@ fun MapScreen(component: MapComponent) {
                     quickActionsState = quickActionsState,
                     alerts = alerts,
                     onPreferenceChange = component::updatePreferences,
-                    onOverSpeed = soundUtil::playOverSpeedSoundSound
+                    onOverSpeed = soundUtil::playOverSpeed
                 )
             }
         }
