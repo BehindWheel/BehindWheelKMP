@@ -93,9 +93,9 @@ private fun Info(
                 iconId = R.drawable.ic_speed_limit_truck
             )
         }
-        VerticalSpacer(24.dp)
 
         if (FeatureFlags.screenReportCameraProblemEnabled) {
+            VerticalSpacer(24.dp)
             OutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
                 id = R.string.camera_info_report,
