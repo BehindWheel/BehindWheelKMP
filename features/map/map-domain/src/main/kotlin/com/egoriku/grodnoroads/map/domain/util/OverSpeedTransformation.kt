@@ -3,8 +3,7 @@ package com.egoriku.grodnoroads.map.domain.util
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 
-private const val GEO_SPEED_ACCURACY = 4
-private const val ALLOWED_OVER_SPEED = 5
+private const val ALLOWED_OVER_SPEED = 7
 
 fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int =
     { alerts, lastLocation ->
@@ -16,10 +15,9 @@ fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int =
             val speedLimit = cameraEvents.first().speedLimit
             val currentSpeed = lastLocation.speed
 
-            if (currentSpeed + GEO_SPEED_ACCURACY >= speedLimit + ALLOWED_OVER_SPEED) {
-                speedLimit
-            } else {
-                -1
+            when {
+                currentSpeed >= speedLimit + ALLOWED_OVER_SPEED -> speedLimit
+                else -> -1
             }
         }
     }
