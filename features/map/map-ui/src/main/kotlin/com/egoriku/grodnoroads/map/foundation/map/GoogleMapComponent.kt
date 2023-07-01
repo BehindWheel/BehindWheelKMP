@@ -21,8 +21,10 @@ import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.map.configuration.calculateCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
+import com.egoriku.grodnoroads.map.foundation.map.debug.DebugView
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.MAP_DEBUG_OVERLAY_ENABLED
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.model.CameraPosition
@@ -221,10 +223,14 @@ fun GoogleMapComponent(
         if (!isMapLoaded) {
             loading()
         }
-        /* DebugView(
-             modifier = Modifier.align(Alignment.TopCenter),
-             cameraPositionState = cameraPositionState
-         )*/
+        if (MAP_DEBUG_OVERLAY_ENABLED) {
+            DebugView(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(start = 16.dp),
+                cameraPositionState = cameraPositionState
+            )
+        }
     }
 
     if (isMapLoaded) {

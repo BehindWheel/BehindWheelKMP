@@ -51,7 +51,7 @@ fun rememberMapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && lastLocation != LastLocation.None && appMode != AppMode.Drive,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
-                minZoomPreference = 7.0f,
+                minZoomPreference = 6.0f,
                 maxZoomPreference = 17.5f,
                 isTrafficEnabled = mapConfig.trafficJanOnMap,
             )
