@@ -3,19 +3,17 @@ package com.egoriku.grodnoroads.foundation.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.Checkbox
@@ -26,6 +24,7 @@ fun CheckboxSettings(
     iconRes: Int,
     stringResId: Int,
     isChecked: Boolean,
+    useTint: Boolean = false,
     leadingPaddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit = {}
 ) {
@@ -34,59 +33,48 @@ fun CheckboxSettings(
         leadingPaddingValues = leadingPaddingValues,
         stringResId = stringResId,
         isChecked = isChecked,
+        useTint = useTint,
         onCheckedChange = onCheckedChange
     )
 }
 
-@Composable
-fun CheckboxSettings(
-    imageVector: ImageVector,
-    stringResId: Int,
-    isChecked: Boolean,
-    onCheckedChange: (Boolean) -> Unit = {}
-) {
-    BasicCheckboxSettings(
-        imageVector = imageVector,
-        stringResId = stringResId,
-        isChecked = isChecked,
-        onCheckedChange = onCheckedChange
-    )
-}
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BasicCheckboxSettings(
-    leadingPaddingValues: PaddingValues = PaddingValues(),
-    imageVector: ImageVector? = null,
-    iconRes: Int? = null,
+    iconRes: Int,
     stringResId: Int,
     isChecked: Boolean,
+    useTint: Boolean = false,
+    leadingPaddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit = {}
 ) {
     ListItem(
         modifier = Modifier
+            .height(48.dp)
             .toggleable(
                 value = isChecked,
                 role = Role.Checkbox,
                 onValueChange = onCheckedChange
             ),
         leadingContent = {
-            Checkbox(
-                modifier = Modifier.padding(leadingPaddingValues),
-                isChecked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
+            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                Checkbox(
+                    modifier = Modifier.padding(leadingPaddingValues),
+                    isChecked = isChecked,
+                    onCheckedChange = onCheckedChange
+                )
+            }
         },
         headlineContent = {
             Text(text = stringResource(id = stringResId))
         },
         trailingContent = {
-            if (imageVector != null) {
+            if (useTint) {
                 Icon(
-                    imageVector = imageVector,
+                    painter = painterResource(id = iconRes),
                     contentDescription = null
                 )
-            }
-            if (iconRes != null) {
+            } else {
                 Image(
                     painter = painterResource(id = iconRes),
                     contentDescription = null
@@ -101,15 +89,17 @@ private fun BasicCheckboxSettings(
 private fun PreviewCheckboxSettings() = GrodnoRoadsM3ThemePreview {
     Column {
         CheckboxSettings(
-            imageVector = Icons.Default.Settings,
+            iconRes = R.drawable.ic_traffic_jam,
             stringResId = R.string.app_name,
             isChecked = true,
+            useTint = true,
             onCheckedChange = {}
         )
         CheckboxSettings(
-            imageVector = Icons.Default.Settings,
+            iconRes = R.drawable.ic_traffic_jam,
             stringResId = R.string.app_name,
             isChecked = false,
+            useTint = true,
             onCheckedChange = {}
         )
     }

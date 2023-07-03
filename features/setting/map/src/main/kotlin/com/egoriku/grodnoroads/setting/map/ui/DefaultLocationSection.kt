@@ -2,12 +2,9 @@ package com.egoriku.grodnoroads.setting.map.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.HomeWork
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
@@ -23,14 +20,11 @@ internal fun DefaultLocationSection(
     onCheckedChange: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsHeader(
-            title = stringResource(id = R.string.map_header_default_location),
-            top = 16.dp
-        )
+        SettingsHeader(title = stringResource(id = R.string.map_header_default_location))
 
         val defaultCity = locationInfo.defaultCity
         MoreActionSettings(
-            icon = Icons.Outlined.HomeWork,
+            iconResId = R.drawable.ic_my_city,
             text = stringResource(id = R.string.map_default_location),
             value = stringResource(id = defaultCity.current.toResource())
         ) {

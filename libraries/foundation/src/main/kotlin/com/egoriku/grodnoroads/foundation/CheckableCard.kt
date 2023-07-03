@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
@@ -32,7 +31,7 @@ fun CheckableCard(
         Card(
             modifier = Modifier.size(120.dp),
             onClick = onClick,
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(10.dp),
             border = when {
                 selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.primary)
                 else -> null
@@ -53,11 +52,7 @@ fun CheckableCard(
                 .padding(top = 4.dp),
             text = stringResource(id = title),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = when {
-                selected -> FontWeight.Bold
-                else -> null
-            }
+            style = MaterialTheme.typography.titleSmall,
         )
     }
 }

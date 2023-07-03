@@ -24,7 +24,7 @@ internal fun MapStyleSection(
         SettingsHeader(title = stringResource(id = R.string.map_header_appearance))
 
         GoogleMapStyle(mapStyle, onCheckedChange)
-        TrafficJam(mapStyle, onCheckedChange)
+        TrafficConditions(mapStyle, onCheckedChange)
     }
 }
 
@@ -39,7 +39,7 @@ private fun GoogleMapStyle(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
+            .padding(vertical = 8.dp)
     ) {
         CheckableCard(
             title = R.string.map_google_map_style_minimal,
@@ -61,15 +61,15 @@ private fun GoogleMapStyle(
 }
 
 @Composable
-private fun TrafficJam(
+private fun TrafficConditions(
     mapStyle: MapStyle,
     onCheckedChange: (MapPref) -> Unit
 ) {
     val trafficJamOnMap = mapStyle.trafficJamOnMap
 
     SwitchSettings(
-        iconRes = R.drawable.ic_traffic_light,
-        stringResId = R.string.map_traffic_jam_appearance,
+        modifier = Modifier.padding(start = 8.dp),
+        stringResId = R.string.map_traffic_conditions_appearance,
         isChecked = trafficJamOnMap.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJamOnMap.copy(isShow = it))

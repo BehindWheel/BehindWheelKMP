@@ -2,13 +2,9 @@ package com.egoriku.grodnoroads.setting.map.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CenterFocusStrong
-import androidx.compose.material.icons.filled.CenterFocusWeak
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ClickableRange
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.ActionSettings
@@ -25,10 +21,7 @@ internal fun DrivingModeSection(
     reset: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsHeader(
-            title = stringResource(id = R.string.map_header_drive_mode),
-            top = 16.dp
-        )
+        SettingsHeader(title = stringResource(id = R.string.map_header_drive_mode))
 
         MapZoomInCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
         MapZoomOutCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
@@ -44,7 +37,7 @@ private fun MapZoomInCity(
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
     ActionSettings(
-        icon = Icons.Default.CenterFocusStrong,
+        iconResId = R.drawable.ic_inside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
         trailing = {
             ClickableRange(
@@ -70,7 +63,7 @@ private fun MapZoomOutCity(
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
     ActionSettings(
-        icon = Icons.Default.CenterFocusWeak,
+        iconResId = R.drawable.ic_outside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
         trailing = {
             ClickableRange(

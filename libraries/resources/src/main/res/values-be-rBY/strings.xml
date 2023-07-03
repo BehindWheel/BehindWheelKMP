@@ -60,7 +60,7 @@
     <string name="appearance_keep_screen_on">Не выключаць экран</string>
 
     <string name="map_header_appearance">Знешні выгляд</string>
-    <string name="map_traffic_jam_appearance">Заторы на карце</string>
+    <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
     <string name="map_google_map_style_minimal">Мінімалізм</string>
     <string name="map_google_map_style_detailed">Падрабязная</string>
 
@@ -81,7 +81,7 @@
     <string name="ok">ОК</string>
     <string name="send">Адправіць</string>
     <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
-    <string name="map_default_location">Мой Горад</string>
+    <string name="map_default_location">Мой горад</string>
     <string name="map_default_location_grodno">Гродна</string>
     <string name="map_default_location_skidel">Скідзель</string>
     <string name="map_default_location_volkovysk">Ваўкавыск</string>>

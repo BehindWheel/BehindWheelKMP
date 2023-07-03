@@ -67,7 +67,7 @@
 
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>
-    <string name="map_traffic_jam_appearance">Пробки на карте</string>
+    <string name="map_traffic_conditions_appearance">Загруженность дорог</string>
     <string name="map_google_map_style_minimal">Минимализм</string>
     <string name="map_google_map_style_detailed">Подробная</string>
 
@@ -90,7 +90,7 @@
     <string name="ok">ОК</string>
     <string name="send">Отправить</string>
     <string name="map_header_default_location">Местоположение по умолчанию</string>
-    <string name="map_default_location">Мой Город</string>
+    <string name="map_default_location">Мой город</string>
     <string name="map_default_location_grodno">Гродно</string>
     <string name="map_default_location_skidel">Скидель</string>
     <string name="map_default_location_volkovysk">Волковыск</string>

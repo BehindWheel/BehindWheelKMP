@@ -2,11 +2,14 @@ package com.egoriku.grodnoroads.setting.map.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.triStateToggleable
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
@@ -22,6 +25,7 @@ import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo.Selectable
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MapEventsSection(
     mapInfo: MapInfo,
@@ -43,30 +47,35 @@ internal fun MapEventsSection(
         }
 
         SettingsHeader(title = stringResource(id = R.string.map_header_markers))
-        Row(
+        ListItem(
             modifier = Modifier
-                .fillMaxWidth()
+                .height(48.dp)
                 .triStateToggleable(state = state, onClick = onToggle),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TriStateCheckbox(
-                modifier = Modifier.padding(start = 8.dp),
-                state = state,
-                onCheckedChange = onToggle
-            )
-            Text(text = stringResource(id = R.string.map_markers_select_all))
-        }
-
+            leadingContent = {
+                CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                    TriStateCheckbox(
+                        modifier = Modifier.padding(start = 6.dp),
+                        state = state,
+                        onCheckedChange = onToggle
+                    )
+                }
+            },
+            headlineContent = {
+                Text(text = stringResource(id = R.string.map_markers_select_all))
+            },
+        )
         StationaryCameras(mapInfo, onCheckedChange)
         MediumSpeedCameras(mapInfo, onCheckedChange)
         MobileCameras(mapInfo, onCheckedChange)
         TrafficPolice(mapInfo, onCheckedChange)
         RoadIncidents(mapInfo, onCheckedChange)
         CarCrash(mapInfo, onCheckedChange)
-        TrafficJam(mapInfo, onCheckedChange)
+        TrafficConditions(mapInfo, onCheckedChange)
         WildAnimals(mapInfo, onCheckedChange)
     }
 }
+
+private val subGroupPadding = 44.dp
 
 @Composable
 private fun StationaryCameras(
@@ -76,7 +85,7 @@ private fun StationaryCameras(
     val stationaryCameras = mapInfo.stationaryCameras
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_stationary_camera,
         stringResId = R.string.map_markers_stationary_cameras,
         isChecked = stationaryCameras.isShow,
@@ -94,7 +103,7 @@ private fun MediumSpeedCameras(
     val mediumSpeedCameras = mapInfo.mediumSpeedCameras
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_medium_speed_camera,
         stringResId = R.string.map_markers_medium_speed_cameras,
         isChecked = mediumSpeedCameras.isShow,
@@ -112,7 +121,7 @@ private fun MobileCameras(
     val mobileCameras = mapInfo.mobileCameras
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_mobile_camera,
         stringResId = R.string.map_markers_mobile_cameras,
         isChecked = mobileCameras.isShow,
@@ -130,7 +139,7 @@ private fun TrafficPolice(
     val trafficPolice = mapInfo.trafficPolice
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_traffic_police,
         stringResId = R.string.map_markers_traffic_police,
         isChecked = trafficPolice.isShow,
@@ -148,7 +157,7 @@ private fun RoadIncidents(
     val roadIncident = mapInfo.roadIncident
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_warning,
         stringResId = R.string.map_markers_incidents,
         isChecked = roadIncident.isShow,
@@ -166,10 +175,11 @@ private fun CarCrash(
     val carCrash = mapInfo.carCrash
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_car_crash,
         stringResId = R.string.map_markers_car_crash,
         isChecked = carCrash.isShow,
+        useTint = true,
         onCheckedChange = {
             onCheckedChange(carCrash.copy(isShow = it))
         }
@@ -177,16 +187,17 @@ private fun CarCrash(
 }
 
 @Composable
-private fun TrafficJam(
+private fun TrafficConditions(
     mapInfo: MapInfo,
     onCheckedChange: (MapPref) -> Unit
 ) {
     val trafficJam = mapInfo.trafficJam
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_traffic_jam,
         stringResId = R.string.map_markers_traffic_jam,
+        useTint = true,
         isChecked = trafficJam.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJam.copy(isShow = it))
@@ -202,9 +213,10 @@ private fun WildAnimals(
     val wildAnimals = mapInfo.wildAnimals
 
     CheckboxSettings(
-        leadingPaddingValues = PaddingValues(start = 16.dp),
+        leadingPaddingValues = PaddingValues(start = subGroupPadding),
         iconRes = R.drawable.ic_wild_animals,
         stringResId = R.string.map_markers_wild_animals,
+        useTint = true,
         isChecked = wildAnimals.isShow,
         onCheckedChange = {
             onCheckedChange(wildAnimals.copy(isShow = it))

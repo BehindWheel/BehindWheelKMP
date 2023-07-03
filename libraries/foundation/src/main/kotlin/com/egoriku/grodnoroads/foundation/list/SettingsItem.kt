@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.foundation.list
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NavigateNext
@@ -21,6 +22,7 @@ fun SettingsItem(
     ListItem(
         modifier = Modifier
             .clickable(onClick = onClick)
+            .height(48.dp)
             .padding(start = 8.dp),
         leadingContent = {
             Icon(

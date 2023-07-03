@@ -90,7 +90,7 @@
     <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
 
     <string name="map_header_appearance">Appearance</string>
-    <string name="map_traffic_jam_appearance">Traffic jam on map</string>
+    <string name="map_traffic_conditions_appearance">Traffic conditions</string>
     <string name="map_google_map_style_minimal">Minimal</string>
     <string name="map_google_map_style_detailed">Detailed</string>
 
