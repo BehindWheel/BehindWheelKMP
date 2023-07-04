@@ -18,16 +18,18 @@
         <item quantity="other">%1$d метра</item>
     </plurals>
 
-    <string name="current_speed_template">%1$s км/ч</string>
-
     <string name="alerts_stationary_camera">Стационарная камера</string>
     <string name="alerts_mobile_camera">Временная камера</string>
+    <string name="alerts_medium_speed_camera">Камера средней скорости</string>
     <string name="alerts_incident">Дорожное происшествие</string>
     <string name="alerts_traffic_police">Экипаж ГАИ</string>
     <string name="alerts_car_crash">ДТП</string>
     <string name="alerts_traffic_jam">Пробка</string>
     <string name="alerts_wild_animals">Дикие животные</string>
     <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
+
+    <string name="camera_info_last_update">Обновлено %1$s</string>
+    <string name="camera_info_report">Сообщить об ошибке</string>
 
     <string name="terms_of_service">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
@@ -65,12 +67,14 @@
 
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>
-    <string name="map_traffic_jam_appearance">Пробки на карте</string>
+    <string name="map_traffic_conditions_appearance">Загруженность дорог</string>
     <string name="map_google_map_style_minimal">Минимализм</string>
     <string name="map_google_map_style_detailed">Подробная</string>
 
     <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбрать все</string>
     <string name="map_markers_stationary_cameras">Стационарные камеры</string>
+    <string name="map_markers_medium_speed_cameras">Камеры средней скорости</string>
     <string name="map_markers_mobile_cameras">Мобильные камеры</string>
     <string name="map_markers_traffic_police">ГАИ</string>
     <string name="map_markers_incidents">Проблемы на дороге</string>
@@ -86,7 +90,7 @@
     <string name="ok">ОК</string>
     <string name="send">Отправить</string>
     <string name="map_header_default_location">Местоположение по умолчанию</string>
-    <string name="map_default_location">Мой Город</string>
+    <string name="map_default_location">Мой город</string>
     <string name="map_default_location_grodno">Гродно</string>
     <string name="map_default_location_skidel">Скидель</string>
     <string name="map_default_location_volkovysk">Волковыск</string>
@@ -108,4 +112,6 @@
 
     <string name="map_user_count">Онлайн: %1$s</string>
     <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
+
+    <string name="map_quick_actions_header">Быстрые настройки</string>
 </resources>

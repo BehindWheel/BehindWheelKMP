@@ -9,18 +9,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.dialog.content.RadioButtonItem
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun ListSingleChoiceDialog(
-    list: List<String>,
+    list: ImmutableList<String>,
     initialSelection: Int,
     onClose: () -> Unit,
     onSelected: (selected: Int) -> Unit
 ) {
-    var selectedItem by remember { mutableStateOf(initialSelection) }
+    var selectedItem by remember { mutableIntStateOf(initialSelection) }
 
     Dialog(onDismissRequest = onClose) {
         DialogContent {
@@ -61,13 +63,11 @@ fun ListSingleChoiceDialog(
 
 @GrodnoRoadsPreview
 @Composable
-fun PreviewListSingleChoiceDialog() {
-    GrodnoRoadsTheme {
-        ListSingleChoiceDialog(
-            list = listOf("System", "Dark", "Light"),
-            initialSelection = 0,
-            onClose = {},
-            onSelected = {}
-        )
-    }
+fun PreviewListSingleChoiceDialog() = GrodnoRoadsM3ThemePreview {
+    ListSingleChoiceDialog(
+        list = listOf("System", "Dark", "Light").toImmutableList(),
+        initialSelection = 0,
+        onClose = {},
+        onSelected = {}
+    )
 }

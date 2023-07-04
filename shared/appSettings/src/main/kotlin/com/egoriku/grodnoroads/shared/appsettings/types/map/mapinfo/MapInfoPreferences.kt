@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 
 private val IS_SHOW_STATIONARY_CAMERAS = booleanPreferencesKey("is_show_stationary_cameras")
+private val IS_SHOW_MEDIUM_SPEED_CAMERAS = booleanPreferencesKey("is_show_medium_speed_cameras")
 private val IS_SHOW_MOBILE_CAMERAS = booleanPreferencesKey("is_show_mobile_cameras")
 private val IS_SHOW_TRAFFIC_POLICE_EVENTS = booleanPreferencesKey("is_show_traffic_police_events")
 private val IS_SHOW_INCIDENT_EVENTS = booleanPreferencesKey("is_show_incident_events")
@@ -14,6 +15,9 @@ private val IS_SHOW_WILD_ANIMALS_EVENTS = booleanPreferencesKey("is_show_wild_an
 
 val Preferences.isShowStationaryCameras: Boolean
     get() = this[IS_SHOW_STATIONARY_CAMERAS] ?: true
+
+val Preferences.isShowMediumSpeedCameras: Boolean
+    get() = this[IS_SHOW_MEDIUM_SPEED_CAMERAS] ?: true
 
 val Preferences.isShowMobileCameras: Boolean
     get() = this[IS_SHOW_MOBILE_CAMERAS] ?: true
@@ -35,6 +39,10 @@ val Preferences.isShowWildAnimals: Boolean
 
 fun MutablePreferences.updateStationaryCameras(value: Boolean) {
     this[IS_SHOW_STATIONARY_CAMERAS] = value
+}
+
+fun MutablePreferences.updateMediumSpeedCameras(value: Boolean) {
+    this[IS_SHOW_MEDIUM_SPEED_CAMERAS] = value
 }
 
 fun MutablePreferences.updateMobileCameras(value: Boolean) {

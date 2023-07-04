@@ -6,7 +6,6 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.*
 import kotlinx.coroutines.Dispatchers
 

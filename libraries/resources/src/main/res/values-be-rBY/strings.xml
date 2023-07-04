@@ -16,15 +16,20 @@
     <string name="tab_chat">Чат</string>
     <string name="tab_settings">Наладкі</string>
     <string name="toast_location_disabled">Для навігацыі патрэбен доступ да геолокации</string>
-    <string name="current_speed_template">%1$s км/г</string>
+
     <string name="alerts_stationary_camera">Стацыянарная камера</string>
     <string name="alerts_mobile_camera">Часовая камера</string>
+    <string name="alerts_medium_speed_camera">Камера сярэдняй хуткасці</string>
     <string name="alerts_incident">Дарожнае здарэнне</string>
     <string name="alerts_traffic_police">Экіпаж ДАІ</string>
     <string name="alerts_car_crash">ДТЗ</string>
     <string name="alerts_traffic_jam">Затор</string>
     <string name="alerts_wild_animals">Дзікія жывёлы</string>
     <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
+
+    <string name="camera_info_last_update">Абноўлена %1$s</string>
+    <string name="camera_info_report">Паведаміць пра памылку</string>
+
     <string name="terms_of_service">Умовы выкарыстання</string>
     <string name="privacy_policy">Палітыка прыватнасці</string>
     <string name="social_telegram_chat">Чат</string>
@@ -55,11 +60,14 @@
     <string name="appearance_keep_screen_on">Не выключаць экран</string>
 
     <string name="map_header_appearance">Знешні выгляд</string>
-    <string name="map_traffic_jam_appearance">Заторы на карце</string>
+    <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
     <string name="map_google_map_style_minimal">Мінімалізм</string>
     <string name="map_google_map_style_detailed">Падрабязная</string>
+
     <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбраць усе</string>
     <string name="map_markers_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="map_markers_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
     <string name="map_markers_mobile_cameras">Мабільныя камеры</string>
     <string name="map_markers_traffic_police">ДАІ</string>
     <string name="map_markers_incidents">Праблемы на дарозе</string>
@@ -73,7 +81,7 @@
     <string name="ok">ОК</string>
     <string name="send">Адправіць</string>
     <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
-    <string name="map_default_location">Мой Горад</string>
+    <string name="map_default_location">Мой горад</string>
     <string name="map_default_location_grodno">Гродна</string>
     <string name="map_default_location_skidel">Скідзель</string>
     <string name="map_default_location_volkovysk">Ваўкавыск</string>>
@@ -95,4 +103,6 @@
 
     <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
+
+    <string name="map_quick_actions_header">Хуткія налады</string>
 </resources>

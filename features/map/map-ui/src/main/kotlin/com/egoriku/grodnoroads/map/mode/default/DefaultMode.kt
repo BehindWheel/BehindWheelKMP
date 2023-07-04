@@ -46,11 +46,14 @@ private fun ActionsRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        CircleButton(onClick = { report(TrafficPolice) }) {
+        CircleButton(
+            size = 64.dp,
+            onClick = { report(TrafficPolice) }
+        ) {
             Image(
                 modifier = Modifier.size(32.dp),
                 painter = painterResource(R.drawable.ic_traffic_police),
-                contentDescription = ""
+                contentDescription = null
             )
         }
         PermissionButton(
@@ -58,16 +61,19 @@ private fun ActionsRow(
             onLocationDisabled = onLocationDisabled
         ) {
             Image(
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(40.dp),
                 painter = painterResource(id = R.drawable.ic_car),
                 contentDescription = null
             )
         }
-        CircleButton(onClick = { report(RoadIncident) }) {
+        CircleButton(
+            size = 64.dp,
+            onClick = { report(RoadIncident) }
+        ) {
             Image(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(32.dp),
                 painter = painterResource(R.drawable.ic_warning),
-                contentDescription = ""
+                contentDescription = null
             )
         }
     }

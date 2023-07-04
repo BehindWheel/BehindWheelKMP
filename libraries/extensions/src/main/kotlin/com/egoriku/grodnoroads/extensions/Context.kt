@@ -3,8 +3,12 @@
 package com.egoriku.grodnoroads.extensions
 
 import android.content.Context
+import android.media.AudioManager
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+
+val Context.audioManager: AudioManager
+    get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
 fun Context.toast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()

@@ -2,14 +2,16 @@ package com.egoriku.grodnoroads.foundation.dialog.content
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.*
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RadioButtonItem(
     item: String,
@@ -21,7 +23,7 @@ fun RadioButtonItem(
         modifier = Modifier
             .height(48.dp)
             .clickable { onSelect(index) },
-        icon = {
+        leadingContent = {
             RadioButton(
                 selected = selected,
                 onClick = {
@@ -29,10 +31,10 @@ fun RadioButtonItem(
                 },
             )
         },
-        text = {
+        headlineContent = {
             Text(
                 item,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
     )
@@ -40,13 +42,11 @@ fun RadioButtonItem(
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewRadioButtonItem() {
-    GrodnoRoadsTheme {
-        RadioButtonItem(
-            item = "test",
-            index = 0,
-            selected = true,
-            onSelect = {}
-        )
-    }
+private fun PreviewRadioButtonItem() = GrodnoRoadsM3ThemePreview {
+    RadioButtonItem(
+        item = "test",
+        index = 0,
+        selected = true,
+        onSelect = {}
+    )
 }

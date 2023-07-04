@@ -1,26 +1,26 @@
 [versions]
 compileSdk = "33"
-minSdk = "21"
+minSdk = "23"
 targetSdk = "33"
 
-agp = "8.0.0"
+agp = "8.0.2"
 accompanist = "0.30.1"
-compose-bom = "2023.04.01"
-composeCompiler = "1.4.6"
-decompose = "1.0.0"
-koin-android = "3.4.0"
-koin-compose = "3.4.4"
-kotlin = "1.8.20"
-mvikotlin = "3.2.0"
+compose-bom = "2023.05.01"
+composeCompiler = "1.4.8"
+decompose = "2.0.0"
+koin-android = "3.4.2"
+koin-compose = "3.4.5"
+kotlin = "1.8.22"
+mvikotlin = "3.2.1"
 
 [libraries]
 # Dependencies of the included build-logic
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-androidx-compose-bom = "androidx.compose:compose-bom:2023.04.01"
+androidx-compose-bom = "androidx.compose:compose-bom:2023.06.01"
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
-androidx-compose-material = { module = "androidx.compose.material:material" }
+androidx-compose-material3 = "androidx.compose.material3:material3:1.2.0-alpha02"
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
@@ -30,22 +30,23 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.7.1"
+androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-browser = "androidx.browser:browser:1.5.0"
-androidx-core = "androidx.core:core-ktx:1.10.0"
+androidx-core = "androidx.core:core-ktx:1.10.1"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
+androidx-media = "androidx.media:media:1.6.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.5.3"
+balloon-compose = "com.github.skydoves:balloon-compose:1.5.4"
 
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2"
+coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.2"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:31.5.0"
+firebase-bom = "com.google.firebase:firebase-bom:32.1.1"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
@@ -54,7 +55,7 @@ firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 google-maps = "com.google.maps.android:maps-ktx:3.4.0"
 google-maps-compose = "com.google.maps.android:maps-compose:2.11.4"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.4.0"
-google-material = "com.google.android.material:material:1.8.0"
+google-material = "com.google.android.material:material:1.9.0"
 
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
@@ -73,10 +74,10 @@ play-services-maps = "com.google.android.gms:play-services-maps:18.1.0"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.5" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.6" }
 google-services = { id = "com.google.gms.google-services", version = "4.3.15" }
-gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.46.0" }
+gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.47.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "1.8.20-1.0.11" }
+ksp = { id = "com.google.devtools.ksp", version = "1.8.22-1.0.11" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }

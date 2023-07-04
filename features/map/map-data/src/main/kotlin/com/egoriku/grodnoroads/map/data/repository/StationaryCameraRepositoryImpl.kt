@@ -5,7 +5,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.map.data.dto.StationaryDTO
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.StationaryCamera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DatabaseReference
@@ -20,15 +20,20 @@ internal class StationaryCameraRepositoryImpl(
 
     override fun loadAsFlow(): Flow<ResultOf<List<StationaryCamera>>> {
         return databaseReference
-            .child("stationary_camera")
+            .child("v2/stationary_cameras")
             .awaitSingleValueEventListener<StationaryDTO>()
             .map { resultOf ->
                 when (resultOf) {
                     is Failure -> Failure(resultOf.exception)
                     is Success -> Success(resultOf.value.map { data ->
                         StationaryCamera(
-                            message = data.message,
-                            speed = data.speed,
+                            id = data.id,
+                            name = data.name,
+                            angle = data.angle,
+                            bidirectional = data.bidirectional,
+                            updateTime = data.updateTime,
+                            speedCar = data.speedCar,
+                            speedTruck = data.speedTruck,
                             position = LatLng(data.latitude, data.longitude)
                         )
                     })

@@ -4,20 +4,20 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.extensions.common.StateData
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsTheme
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        setContent {
-            val root: RoadsRootComponent by remember {
-                mutableStateOf(RoadsRootComponentImpl(defaultComponentContext()))
-            }
+        val root: RoadsRootComponent = RoadsRootComponentImpl(defaultComponentContext())
 
+        setContent {
             val themeState by root.themeState.collectAsState(initial = StateData.Idle)
 
             when (val theme = themeState) {
@@ -46,16 +44,16 @@ class MainActivity : AppCompatActivity() {
                         Theme.Light -> false
                     }
 
-                    GrodnoRoadsTheme(darkTheme) {
+                    GrodnoRoadsM3Theme(darkTheme) {
                         val systemUiController = rememberSystemUiController()
-                        val useDarkIcons = MaterialTheme.colors.isLight
 
-                        DisposableEffect(systemUiController, useDarkIcons) {
-                            systemUiController.setSystemBarsColor(
-                                color = Color.Transparent,
-                                darkIcons = useDarkIcons
-                            )
-
+                        DisposableEffect(systemUiController, darkTheme) {
+                            systemUiController.apply {
+                                setSystemBarsColor(color = Color.Transparent, darkIcons = darkTheme)
+                                isNavigationBarContrastEnforced = false
+                                statusBarDarkContentEnabled = !darkTheme
+                                navigationBarDarkContentEnabled = !darkTheme
+                            }
                             onDispose {}
                         }
                         RootContent(roadsRootComponent = root)

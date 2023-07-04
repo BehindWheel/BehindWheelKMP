@@ -1,31 +1,34 @@
 package com.egoriku.grodnoroads.foundation.list
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ActionSettings(
-    icon: ImageVector,
+    iconResId: Int,
     text: String,
     trailing: @Composable (() -> Unit)
 ) {
     ListItem(
-        modifier = Modifier.padding(horizontal = 8.dp),
-        icon = {
+        modifier = Modifier
+            .height(48.dp)
+            .padding(start = 8.dp),
+        leadingContent = {
             Icon(
-                imageVector = icon,
+                painter = painterResource(iconResId),
                 contentDescription = null
             )
         },
-        text = {
+        headlineContent = {
             Text(text = text)
         },
-        trailing = trailing
+        trailingContent = trailing
     )
-    Divider()
 }

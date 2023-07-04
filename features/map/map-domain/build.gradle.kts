@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.libraries.analytics)
+    implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
@@ -28,4 +29,6 @@ dependencies {
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.play.services.maps)
+
+    testImplementation(libs.kotlin.test)
 }

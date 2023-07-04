@@ -11,6 +11,6 @@ internal val Project.libs
 
 internal fun Project.configureKotlinAndroidToolchain() {
     extensions.configure<KotlinAndroidProjectExtension> {
-        jvmToolchain(8)
+        jvmToolchain(17)
     }
 }

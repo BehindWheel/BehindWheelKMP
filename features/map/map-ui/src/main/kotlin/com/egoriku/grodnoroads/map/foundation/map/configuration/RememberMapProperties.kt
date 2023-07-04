@@ -1,9 +1,10 @@
 package com.egoriku.grodnoroads.map.foundation.map.configuration
 
 import android.Manifest
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.R
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
@@ -31,13 +32,13 @@ fun rememberMapProperties(
     val mapStyle = when (mapConfig.googleMapStyle) {
         Style.Minimal -> {
             when {
-                MaterialTheme.colors.isLight -> R.raw.map_style_light_minimal
+                MaterialTheme.colorScheme.isLight -> R.raw.map_style_light_minimal
                 else -> R.raw.map_style_dark_minimal
             }
         }
         Style.Detailed -> {
             when {
-                MaterialTheme.colors.isLight -> R.raw.map_style_light_detailed
+                MaterialTheme.colorScheme.isLight -> R.raw.map_style_light_detailed
                 else -> R.raw.map_style_dark_detailed
             }
         }
@@ -50,7 +51,7 @@ fun rememberMapProperties(
                 isMyLocationEnabled = locationPermissionsState.allPermissionsGranted && lastLocation != LastLocation.None && appMode != AppMode.Drive,
                 mapType = MapType.NORMAL,
                 mapStyleOptions = MapStyleOptions.loadRawResourceStyle(context, mapStyle),
-                minZoomPreference = 7.0f,
+                minZoomPreference = 6.0f,
                 maxZoomPreference = 17.5f,
                 isTrafficEnabled = mapConfig.trafficJanOnMap,
             )

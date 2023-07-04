@@ -9,13 +9,12 @@ import com.egoriku.grodnoroads.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.*
+import com.egoriku.grodnoroads.extensions.logD
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.Source.App
 import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
-import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
-import com.egoriku.grodnoroads.map.domain.repository.ReportsRepository
-import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
-import com.egoriku.grodnoroads.map.domain.repository.UserCountRepository
+import com.egoriku.grodnoroads.map.domain.repository.*
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.*
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.*
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +23,7 @@ import kotlinx.coroutines.launch
 internal class MapEventsStoreFactory(
     private val storeFactory: StoreFactory,
     private val mobileCameraRepository: MobileCameraRepository,
+    private val mediumSpeedCameraRepository: MediumSpeedCameraRepository,
     private val stationaryCameraRepository: StationaryCameraRepository,
     private val userCountRepository: UserCountRepository,
     private val reportsRepository: ReportsRepository,
@@ -40,6 +40,11 @@ internal class MapEventsStoreFactory(
                     launch {
                         subscribeForStationaryCameras {
                             dispatch(OnStationary(data = it))
+                        }
+                    }
+                    launch {
+                        subscribeForMediumSpeedCameras {
+                            dispatch(OnMediumSpeed(data = it))
                         }
                     }
                     launch {
@@ -84,8 +89,9 @@ internal class MapEventsStoreFactory(
             reducer = { message: Message ->
                 when (message) {
                     is OnStationary -> copy(stationaryCameras = message.data)
+                    is OnMediumSpeed -> copy(mediumSpeedCameras = message.data)
                     is OnNewReports -> copy(reports = message.data)
-                    is OnMobileCamera -> copy(mobileCamera = message.data)
+                    is OnMobileCamera -> copy(mobileCameras = message.data)
                     is OnUserCount -> copy(userCount = message.data)
                 }
             }
@@ -93,6 +99,15 @@ internal class MapEventsStoreFactory(
 
     private suspend fun subscribeForMobileCameras(onLoaded: (List<MobileCamera>) -> Unit) {
         mobileCameraRepository.loadAsFlow().collect { result ->
+            when (result) {
+                is Success -> onLoaded(result.value)
+                is Failure -> crashlyticsTracker.recordException(result.exception)
+            }
+        }
+    }
+
+    private suspend fun subscribeForMediumSpeedCameras(onLoaded: (List<MediumSpeedCamera>) -> Unit) {
+        mediumSpeedCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
                 is Failure -> crashlyticsTracker.recordException(result.exception)
@@ -113,7 +128,9 @@ internal class MapEventsStoreFactory(
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.exception).also {
+                    logD("Error loading stationary: ${result.exception.message}")
+                }
             }
         }
     }

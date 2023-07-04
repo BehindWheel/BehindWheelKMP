@@ -1,10 +1,13 @@
 package com.egoriku.grodnoroads.map
 
 import android.graphics.Point
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,40 +16,45 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
-import com.egoriku.grodnoroads.map.dialog.MarkerAlertDialog
+import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.map.domain.util.SoundUtil
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
+import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.foundation.map.GoogleMapComponent
-import com.egoriku.grodnoroads.map.markers.MobileCameraMarker
+import com.egoriku.grodnoroads.map.markers.CameraMarker
 import com.egoriku.grodnoroads.map.markers.ReportsMarker
-import com.egoriku.grodnoroads.map.markers.StationaryCameraMarker
+import com.egoriku.grodnoroads.map.mode.DefaultOverlay
 import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(component: MapComponent) {
     val markerCache = koinInject<MarkerCache>()
+    val soundUtil = koinInject<SoundUtil>()
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding()
-    ) {
+    Surface {
+        var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
+
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(AppMode.Default)
         val location by component.lastLocation.collectAsState(LastLocation.None)
@@ -54,6 +62,8 @@ fun MapScreen(component: MapComponent) {
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
         val userCount by component.userCount.collectAsState(initial = 0)
+        val speedLimit by component.speedLimit.collectAsState(initial = -1)
+        val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
 
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
@@ -93,19 +103,32 @@ fun MapScreen(component: MapComponent) {
             content = {
                 mapEvents.forEach { mapEvent ->
                     when (mapEvent) {
-                        is MapEvent.StationaryCamera -> StationaryCameraMarker(
-                            stationaryCamera = mapEvent,
-                            onFromCache = { markerCache.getVector(id = it) }
-                        )
+                        is MapEvent.Camera -> {
+                            when (mapEvent) {
+                                is StationaryCamera -> CameraMarker(
+                                    camera = mapEvent,
+                                    provideIcon = { markerCache.getVector(id = R.drawable.ic_map_stationary_camera) },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+
+                                is MediumSpeedCamera -> CameraMarker(
+                                    camera = mapEvent,
+                                    provideIcon = { markerCache.getVector(id = R.drawable.ic_map_medium_speed_camera) },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+
+                                is MobileCamera -> CameraMarker(
+                                    camera = mapEvent,
+                                    provideIcon = { markerCache.getVector(id = R.drawable.ic_map_mobile_camera) },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+                            }
+                        }
 
                         is MapEvent.Reports -> ReportsMarker(
-                            mapEvent,
-                            component::showMarkerInfoDialog
+                            reports = mapEvent,
+                            onMarkerClick = component::showMarkerInfoDialog
                         )
-
-                        is MapEvent.MobileCamera -> MobileCameraMarker(
-                            mobileCamera = mapEvent,
-                            onFromCache = { markerCache.getVector(id = it) })
                     }
                 }
             }
@@ -126,8 +149,6 @@ fun MapScreen(component: MapComponent) {
 
                         AppMode.Drive -> {
                             DriveMode(
-                                alerts = alerts,
-                                lastLocation = location,
                                 stopDrive = component::stopLocationUpdates,
                                 reportPolice = {
                                     if (location != LastLocation.None) {
@@ -173,7 +194,23 @@ fun MapScreen(component: MapComponent) {
                         .padding(bottom = 4.dp, end = 8.dp),
                     count = userCount
                 )
+                DefaultOverlay(
+                    isDriveMode = appMode == AppMode.Drive,
+                    currentSpeed = location.speed,
+                    speedLimit = speedLimit,
+                    quickActionsState = quickActionsState,
+                    alerts = alerts,
+                    onPreferenceChange = component::updatePreferences,
+                    onOverSpeed = soundUtil::playOverSpeed
+                )
             }
+        }
+
+        ModalBottomSheet(
+            data = cameraInfo,
+            onDismissRequest = { cameraInfo = null },
+        ) {
+            CameraInfo(it)
         }
     }
 }
@@ -191,7 +228,7 @@ private fun AlertDialogs(
 ) {
     when (val state = mapAlertDialog) {
         is MarkerInfoDialog -> {
-            MarkerAlertDialog(
+            MarkerInfoBottomSheet(
                 reports = state.reports,
                 onClose = onClose
             )

@@ -1,83 +1,106 @@
 package com.egoriku.grodnoroads.foundation.list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.Checkbox
+import com.egoriku.grodnoroads.resources.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CheckboxSettings(
     iconRes: Int,
     stringResId: Int,
     isChecked: Boolean,
+    useTint: Boolean = false,
+    leadingPaddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit = {}
 ) {
-    ListItem(
-        modifier = Modifier
-            .toggleable(
-                value = isChecked,
-                role = Role.Checkbox,
-                onValueChange = onCheckedChange
-            )
-            .padding(start = 8.dp),
-        icon = {
-            Image(
-                painter = painterResource(id = iconRes),
-                contentDescription = null
-            )
-        },
-        text = {
-            Text(text = stringResource(id = stringResId))
-        },
-        trailing = {
-            Checkbox(
-                checked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
-        }
+    BasicCheckboxSettings(
+        iconRes = iconRes,
+        leadingPaddingValues = leadingPaddingValues,
+        stringResId = stringResId,
+        isChecked = isChecked,
+        useTint = useTint,
+        onCheckedChange = onCheckedChange
     )
-    Divider()
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CheckboxSettings(
-    imageVector: ImageVector,
+private fun BasicCheckboxSettings(
+    iconRes: Int,
     stringResId: Int,
     isChecked: Boolean,
+    useTint: Boolean = false,
+    leadingPaddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit = {}
 ) {
     ListItem(
         modifier = Modifier
+            .height(48.dp)
             .toggleable(
                 value = isChecked,
                 role = Role.Checkbox,
                 onValueChange = onCheckedChange
-            )
-            .padding(start = 8.dp),
-        icon = {
-            Icon(
-                imageVector = imageVector,
-                contentDescription = null
-            )
+            ),
+        leadingContent = {
+            CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                Checkbox(
+                    modifier = Modifier.padding(leadingPaddingValues),
+                    isChecked = isChecked,
+                    onCheckedChange = onCheckedChange
+                )
+            }
         },
-        text = {
+        headlineContent = {
             Text(text = stringResource(id = stringResId))
         },
-        trailing = {
-            Checkbox(
-                checked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
+        trailingContent = {
+            if (useTint) {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = null
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = null
+                )
+            }
         }
     )
-    Divider()
+}
+
+@GrodnoRoadsPreview
+@Composable
+private fun PreviewCheckboxSettings() = GrodnoRoadsM3ThemePreview {
+    Column {
+        CheckboxSettings(
+            iconRes = R.drawable.ic_traffic_jam,
+            stringResId = R.string.app_name,
+            isChecked = true,
+            useTint = true,
+            onCheckedChange = {}
+        )
+        CheckboxSettings(
+            iconRes = R.drawable.ic_traffic_jam,
+            stringResId = R.string.app_name,
+            isChecked = false,
+            useTint = true,
+            onCheckedChange = {}
+        )
+    }
 }

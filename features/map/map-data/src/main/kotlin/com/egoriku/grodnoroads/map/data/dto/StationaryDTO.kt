@@ -5,13 +5,13 @@ import com.google.firebase.database.PropertyName
 
 @Keep
 internal class StationaryDTO(
-    @PropertyName("message")
+    @PropertyName("id")
     @JvmField
-    val message: String = "",
+    val id: String = "",
 
-    @PropertyName("speed")
+    @PropertyName("name")
     @JvmField
-    val speed: Int = 0,
+    val name: String = "",
 
     @PropertyName("latitude")
     @JvmField
@@ -21,7 +21,23 @@ internal class StationaryDTO(
     @JvmField
     val longitude: Double = 0.0,
 
-    @PropertyName("last_update_time")
+    @PropertyName("angle")
     @JvmField
-    val lastUpdateTime: Long = 0L
+    val angle: Float = 0.0f,
+
+    @PropertyName("bidirectional")
+    @JvmField
+    val bidirectional: Boolean = false,
+
+    @PropertyName("update_time")
+    @JvmField
+    val updateTime: Long = 0L,
+
+    @PropertyName("speed_car")
+    @JvmField
+    val speedCar: Int = -1,
+
+    @PropertyName("speed_truck")
+    @JvmField
+    val speedTruck: Int = -1,
 )

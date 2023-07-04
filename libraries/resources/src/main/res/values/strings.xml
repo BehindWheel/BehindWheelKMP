@@ -20,16 +20,18 @@
         <item quantity="other">%1$d meters</item>
     </plurals>
 
-    <string name="current_speed_template">%1$s km/h</string>
-
     <string name="alerts_stationary_camera">Stationary camera</string>
     <string name="alerts_mobile_camera">Mobile camera</string>
+    <string name="alerts_medium_speed_camera">Medium speed camera</string>
     <string name="alerts_incident">Road incident</string>
     <string name="alerts_traffic_police">Traffic police</string>
     <string name="alerts_car_crash">Car crash</string>
     <string name="alerts_traffic_jam">Traffic jam</string>
     <string name="alerts_wild_animals">Wild animals</string>
     <string name="alerts_unsupported_message">Unsupported message</string>
+
+    <string name="camera_info_last_update">Updated %1$s</string>
+    <string name="camera_info_report">Report an error</string>
 
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
@@ -88,12 +90,14 @@
     <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
 
     <string name="map_header_appearance">Appearance</string>
-    <string name="map_traffic_jam_appearance">Traffic jam on map</string>
+    <string name="map_traffic_conditions_appearance">Traffic conditions</string>
     <string name="map_google_map_style_minimal">Minimal</string>
     <string name="map_google_map_style_detailed">Detailed</string>
 
     <string name="map_header_markers">Markers</string>
+    <string name="map_markers_select_all">Select All</string>
     <string name="map_markers_stationary_cameras">Stationary cameras</string>
+    <string name="map_markers_medium_speed_cameras">Medium speed cameras</string>
     <string name="map_markers_mobile_cameras">Mobile cameras</string>
     <string name="map_markers_traffic_police">Traffic Police</string>
     <string name="map_markers_incidents">Incidents on road</string>
@@ -103,6 +107,8 @@
 
     <string name="map_user_count">Online: %1$s</string>
     <string name="map_user_count_hint">Based on user activity in the last 10 minutes</string>
+
+    <string name="map_quick_actions_header">Quick settings</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>

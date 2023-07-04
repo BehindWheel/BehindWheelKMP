@@ -19,8 +19,13 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
+import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +36,11 @@ import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+fun buildMapComponent(
+    componentContext: ComponentContext
+): MapComponent = MapComponentImpl(componentContext)
+
+
 internal class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
@@ -39,9 +49,11 @@ internal class MapComponentImpl(
     private val locationStore: LocationStore = instanceKeeper.getStore(::get)
     private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
     private val mapEventsStore: MapEventsStore = instanceKeeper.getStore(::get)
+    private val quickActionsStore: QuickActionsStore = instanceKeeper.getStore(::get)
 
-    private val mobile = mapEventsStore.states.map { it.mobileCamera }
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
+    private val mediumSpeed = mapEventsStore.states.map { it.mediumSpeedCameras }
+    private val mobile = mapEventsStore.states.map { it.mobileCameras }
     private val reports = mapEventsStore.states.map { it.reports }
 
     private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertDistance }
@@ -62,6 +74,9 @@ internal class MapComponentImpl(
     override val userCount: Flow<Int>
         get() = mapEventsStore.states.map { it.userCount }
 
+    override val quickActionsState: Flow<QuickActionsState>
+        get() = quickActionsStore.states
+
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
@@ -77,7 +92,8 @@ internal class MapComponentImpl(
             flow = reports,
             flow2 = stationary,
             flow3 = mobile,
-            flow4 = mapInfo,
+            flow4 = mediumSpeed,
+            flow5 = mapInfo,
             transform = filterMapEvents()
         ).flowOn(Dispatchers.Default)
 
@@ -91,6 +107,13 @@ internal class MapComponentImpl(
             flow3 = alertDistance,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
+
+    override val speedLimit: Flow<Int>
+        get() = combine(
+            flow = alerts,
+            flow2 = lastLocation,
+            transform = overSpeedTransformation()
+        )
 
     override val labels: Flow<Label> = locationStore.labels
 
@@ -162,5 +185,9 @@ internal class MapComponentImpl(
     private fun bindLocationLabel(label: Label) = when (label) {
         is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
         else -> Unit
+    }
+
+    override fun updatePreferences(pref: QuickActionsPref) {
+        quickActionsStore.accept(QuickActionsIntent.Update(pref))
     }
 }

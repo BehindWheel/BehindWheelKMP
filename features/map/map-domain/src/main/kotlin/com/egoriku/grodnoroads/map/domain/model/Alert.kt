@@ -13,7 +13,7 @@ sealed interface Alert {
     ) : Alert
 
     data class CameraAlert(
-        val mapEventType: MapEventType,
+        val cameraType: CameraType,
         val distance: Int,
         val speedLimit: Int
     ) : Alert

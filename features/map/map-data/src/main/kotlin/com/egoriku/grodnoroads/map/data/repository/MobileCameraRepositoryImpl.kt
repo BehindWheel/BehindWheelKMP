@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.extensions.awaitValueEventListener
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.map.data.dto.MobileCameraDTO
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.MobileCamera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DatabaseReference
@@ -24,9 +24,10 @@ internal class MobileCameraRepositoryImpl(
                 is Failure -> Failure(resultOf.exception)
                 is Success -> Success(resultOf.value.map { data ->
                     MobileCamera(
-                        message = data.name,
+                        name = data.name,
                         position = LatLng(data.latitude, data.longitude),
-                        speed = data.speed
+                        speedCar = data.speed,
+                        speedTruck = data.speed,
                     )
                 })
             }

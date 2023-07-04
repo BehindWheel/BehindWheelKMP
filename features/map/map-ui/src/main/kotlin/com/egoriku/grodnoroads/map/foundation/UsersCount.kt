@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,8 +29,8 @@ import com.egoriku.grodnoroads.resources.R as R_resources
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
-    val bgColor = MaterialTheme.colors.surface
-    val textColor = MaterialTheme.colors.onSurface
+    val bgColor = MaterialTheme.colorScheme.surface
+    val textColor = MaterialTheme.colorScheme.onSurface
 
     val builder = rememberBalloonBuilder {
         setArrowSize(7)
@@ -69,9 +69,10 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
 
 @Composable
 private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
-    Surface(modifier = Modifier
-        .clip(RoundedCornerShape(10.dp))
-        .clickable { onClick() }
+    Surface(
+        modifier = Modifier
+            .clip(RoundedCornerShape(10.dp))
+            .clickable { onClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -85,7 +86,7 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
             )
             Text(
                 text = stringResource(id = R_resources.string.map_user_count, count),
-                style = MaterialTheme.typography.overline
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }
