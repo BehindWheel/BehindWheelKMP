@@ -13,8 +13,7 @@
     <a target="_blank" href="https://t.me/grodno_roads"><img src="https://img.shields.io/badge/Telegram%20Channel-blue"></a>
 </p>
 
-![Download Status](https://playbadges.pavi2410.me/badge/downloads?id=com.egoriku.grodnoroads) ![Rating Status](https://PlayBadges.pavi2410.me/badge/ratings?id=com.egoriku.grodnoroads)
-
+![Download Status](https://playbadges.pavi2410.me/badge/full?id=com.egoriku.grodnoroads)
 
 # EN
 The application shows on the map the current situation on the roads of Grodno and the region.
