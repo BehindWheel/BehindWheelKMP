@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import java.util.UUID
 
 internal class MobileCameraRepositoryImpl(
     private val databaseReference: DatabaseReference
@@ -24,6 +25,8 @@ internal class MobileCameraRepositoryImpl(
                 is Failure -> Failure(resultOf.exception)
                 is Success -> Success(resultOf.value.map { data ->
                     MobileCamera(
+                        // TODO: use from backend
+                        id = UUID.randomUUID().toString(),
                         name = data.name,
                         position = LatLng(data.latitude, data.longitude),
                         speedCar = data.speed,

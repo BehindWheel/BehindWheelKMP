@@ -29,7 +29,6 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.map.domain.util.SoundUtil
 import com.egoriku.grodnoroads.map.foundation.LogoProgressIndicator
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
@@ -50,7 +49,6 @@ import org.koin.compose.koinInject
 @Composable
 fun MapScreen(component: MapComponent) {
     val markerCache = koinInject<MarkerCache>()
-    val soundUtil = koinInject<SoundUtil>()
 
     Surface {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
@@ -200,8 +198,7 @@ fun MapScreen(component: MapComponent) {
                     speedLimit = speedLimit,
                     quickActionsState = quickActionsState,
                     alerts = alerts,
-                    onPreferenceChange = component::updatePreferences,
-                    onOverSpeed = soundUtil::playOverSpeed
+                    onPreferenceChange = component::updatePreferences
                 )
             }
         }

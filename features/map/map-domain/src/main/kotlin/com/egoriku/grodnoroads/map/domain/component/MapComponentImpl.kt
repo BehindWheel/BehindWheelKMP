@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.ReportType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
@@ -23,18 +24,17 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.map.domain.util.SoundUtil
 import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
 import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.component.inject
 
 fun buildMapComponent(
     componentContext: ComponentContext
@@ -59,10 +59,50 @@ internal class MapComponentImpl(
     private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertDistance }
     private val mapInfo = mapConfigStore.states.map { it.mapInternalConfig.mapInfo }
 
+    private val coroutineScope = coroutineScope(Dispatchers.Main)
+
+    private val soundUtil by inject<SoundUtil>()
+
     init {
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
             locationStore.labels bindTo ::bindLocationLabel
         }
+        alerts
+            .distinctUntilChanged()
+            .map {
+                // TODO: add filtering
+                it
+            }
+            .onEach { data ->
+                data.onEach { alert ->
+                    when (alert) {
+                        is Alert.CameraAlert -> {
+                            soundUtil.playCameraLimit(
+                                id = alert.id,
+                                speedLimit = alert.speedLimit,
+                                cameraType = alert.cameraType
+                            )
+                        }
+
+                        is Alert.IncidentAlert -> {
+                            soundUtil.playIncident(
+                                id = alert.id,
+                                mapEventType = alert.mapEventType
+                            )
+                        }
+                    }
+                }
+            }
+            .launchIn(coroutineScope)
+
+        speedLimit
+            .distinctUntilChanged()
+            .onEach {
+                if (it != -1) {
+                    soundUtil.playOverSpeed()
+                }
+            }
+            .launchIn(coroutineScope)
     }
 
     override val appMode: Flow<AppMode>
@@ -113,7 +153,7 @@ internal class MapComponentImpl(
             flow = alerts,
             flow2 = lastLocation,
             transform = overSpeedTransformation()
-        )
+        ).flowOn(Dispatchers.Default)
 
     override val labels: Flow<Label> = locationStore.labels
 

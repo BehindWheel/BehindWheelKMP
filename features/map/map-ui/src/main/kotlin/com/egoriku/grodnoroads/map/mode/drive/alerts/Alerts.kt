@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import java.util.UUID
 
 @Composable
 fun Alerts(
@@ -86,6 +87,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
             IncidentAlert(
                 mapEventType = TrafficPolice,
                 distance = 1,
+                id = UUID.randomUUID().toString(),
                 messages = persistentListOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
@@ -94,11 +96,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 )
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 2,
                 speedLimit = 60,
                 cameraType = StationaryCamera
             ),
             IncidentAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 5,
                 messages = persistentListOf(
                     MessageItem(
@@ -113,11 +117,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 mapEventType = RoadIncident
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 220,
                 speedLimit = -1,
                 cameraType = MobileCamera
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 220,
                 speedLimit = 60,
                 cameraType = MobileCamera

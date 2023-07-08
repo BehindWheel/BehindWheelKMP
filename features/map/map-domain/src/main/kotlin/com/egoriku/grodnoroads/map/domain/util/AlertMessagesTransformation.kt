@@ -17,10 +17,12 @@ import kotlinx.collections.immutable.toImmutableList
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
+private val emptyList = persistentListOf<Alert>()
+
 fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, Int) -> ImmutableList<Alert> =
     { mapEvents, lastLocation, alertDistance ->
         when (lastLocation) {
-            LastLocation.None -> persistentListOf()
+            LastLocation.None -> emptyList
             else -> when {
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents,
@@ -28,7 +30,7 @@ fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, Int) -
                     distanceRadius = alertDistance
                 )
 
-                else -> persistentListOf()
+                else -> emptyList
             }
         }
     }
@@ -64,6 +66,7 @@ private fun makeAlertMessage(
 
                         if (inRange) {
                             CameraAlert(
+                                id = event.id,
                                 distance = distance,
                                 // TODO: handle car type
                                 speedLimit = event.speedCar,
@@ -74,6 +77,7 @@ private fun makeAlertMessage(
 
                     is Reports -> {
                         IncidentAlert(
+                            id = event.id,
                             distance = distance,
                             messages = event.messages,
                             mapEventType = event.mapEventType
@@ -82,6 +86,7 @@ private fun makeAlertMessage(
 
                     is Camera.MobileCamera -> {
                         CameraAlert(
+                            id = event.id,
                             distance = distance,
                             speedLimit = event.speedCar,
                             cameraType = event.cameraType
@@ -89,6 +94,7 @@ private fun makeAlertMessage(
                     }
 
                     is Camera.MediumSpeedCamera -> CameraAlert(
+                        id = event.id,
                         distance = distance,
                         speedLimit = event.speedCar,
                         cameraType = event.cameraType

@@ -24,7 +24,6 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
 
         override fun onLocationResult(locationResult: LocationResult) {
             val location = locationResult.lastLocation ?: return
-            logD("locationCallback: ${location.latitude}, ${location.longitude}, ${location.bearing}")
 
             lastLocationFlow.tryEmit(
                 LocationInfo(
