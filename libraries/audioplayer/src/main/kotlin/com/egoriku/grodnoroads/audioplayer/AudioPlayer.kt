@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.audioplayer
 
 import android.content.Context
 import android.content.IntentFilter
+import android.content.res.Configuration
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -12,11 +13,14 @@ import androidx.media.AudioManagerCompat
 import com.egoriku.grodnoroads.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.audioplayer.broadcast.VolumeChangeReceiver
 import com.egoriku.grodnoroads.extensions.audioManager
+import com.egoriku.grodnoroads.extensions.uiModeManager
 import kotlin.math.roundToInt
 
 class AudioPlayer(private val context: Context) {
 
     private val audioManager = context.audioManager
+    private val uiModeManager = context.uiModeManager
+
     private val audioFocusRequest =
         AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE)
             .setOnAudioFocusChangeListener {}
@@ -27,8 +31,15 @@ class AudioPlayer(private val context: Context) {
     private var isPlaying = false
 
     private var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-    private val maxVolume =
-        (audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * 0.8).roundToInt()
+    private val maxVolume = when (uiModeManager.currentModeType) {
+        Configuration.UI_MODE_TYPE_CAR -> {
+            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        }
+
+        else -> {
+            (audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * 0.8).roundToInt()
+        }
+    }
 
     private val volumeChangeReceiver = VolumeChangeReceiver {
         if (!isPlaying) currentVolume = it
