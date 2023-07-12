@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.screen.main
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -83,7 +82,6 @@ private fun HorizontalOrientationLayout(
 ) {
     Row(modifier = Modifier.fillMaxSize()) {
         NavigationRail {
-            Spacer(modifier = Modifier.weight(1f))
             bottomNavItems.forEach { screen ->
                 NavigationRailItem(
                     selected = screen.index == childStack.active.instance.index,
@@ -99,7 +97,6 @@ private fun HorizontalOrientationLayout(
                     }
                 )
             }
-            Spacer(modifier = Modifier.weight(1f))
         }
         Children(
             modifier = Modifier.weight(1f),
