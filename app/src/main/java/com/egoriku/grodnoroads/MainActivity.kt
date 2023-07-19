@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,10 +20,12 @@ import com.egoriku.grodnoroads.screen.root.RoadsRootComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
+import com.egoriku.grodnoroads.util.LocalWindowSizeClass
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : AppCompatActivity() {
 
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
 
@@ -56,7 +61,11 @@ class MainActivity : AppCompatActivity() {
                             }
                             onDispose {}
                         }
-                        RootContent(roadsRootComponent = root)
+                        CompositionLocalProvider(
+                            LocalWindowSizeClass provides calculateWindowSizeClass(this),
+                        ) {
+                            RootContent(roadsRootComponent = root)
+                        }
                     }
                 }
 
