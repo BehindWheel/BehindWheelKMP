@@ -15,7 +15,7 @@ class AndroidLibraryComposePlugin : Plugin<Project> {
             }
 
             composeOptions {
-                kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+                kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
             }
         }
     }
