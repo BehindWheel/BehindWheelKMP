@@ -5,6 +5,6 @@ import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 sealed interface QuickActionsPref {
     data class AppTheme(
         val current: Theme = Theme.System,
-        val values: List<Theme> = listOf(Theme.System, Theme.Light, Theme.Dark)
+        val values: List<Theme> = Theme.entries
     ) : QuickActionsPref
 }

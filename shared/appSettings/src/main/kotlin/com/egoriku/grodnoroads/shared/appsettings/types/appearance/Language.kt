@@ -9,7 +9,7 @@ enum class Language(val lang: String) {
     Belarusian("be");
 
     companion object {
-        fun localeToLanguage(value: String?) = values().find { it.lang == value }
+        fun localeToLanguage(value: String?) = entries.find { it.lang == value } ?: System
 
         fun Language.toStringResource() = when (this) {
             Russian -> R.string.appearance_app_language_ru

@@ -20,25 +20,7 @@ enum class City(val cityName: String, val latLng: LatLng) {
     Korelichi(cityName = "korelichi", latLng = LatLng(53.570510, 26.139959));
 
     companion object {
-        val supportedCities = listOf(
-            Berestovitca,
-            Volkovysk,
-            Grodno,
-            Dyatlovo,
-            Indura,
-            Korelichi,
-            Lida,
-            Mosty,
-            Novogrudok,
-            Ozery,
-            Porechye,
-            Skidel,
-            Slonim,
-            Shuchin,
-        )
-
-        fun toCity(value: String) =
-            checkNotNull(values().find { it.cityName == value })
+        fun toCity(value: String) = checkNotNull(entries.find { it.cityName == value })
 
         fun City.toResource(): Int = when (this) {
             Grodno -> R.string.map_default_location_grodno

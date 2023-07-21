@@ -12,13 +12,13 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
     sealed interface Intent {
         data class CheckLocation(val latLng: LatLng) : Intent
-        object StartDriveMode : Intent
-        object StopDriveMode : Intent
+        data object StartDriveMode : Intent
+        data object StopDriveMode : Intent
 
         sealed interface ChooseLocation {
             data class OpenChooseLocation(val reportType: ReportType) : Intent
             data class UserMapZoom(val zoom: Float) : Intent
-            object CancelChooseLocation : Intent
+            data object CancelChooseLocation : Intent
         }
     }
 

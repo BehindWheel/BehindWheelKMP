@@ -8,7 +8,7 @@ enum class Source(val source: String) {
 
     companion object {
         fun sourceFromString(value: String): Source {
-            return requireNotNull(values().find { it.source == value })
+            return requireNotNull(entries.find { it.source == value })
         }
     }
 }

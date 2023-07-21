@@ -27,7 +27,7 @@ interface MapSettingsComponent {
 
     sealed interface MapDialogState {
         data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
-        object None : MapDialogState
+        data object None : MapDialogState
     }
 
     sealed interface MapPref {

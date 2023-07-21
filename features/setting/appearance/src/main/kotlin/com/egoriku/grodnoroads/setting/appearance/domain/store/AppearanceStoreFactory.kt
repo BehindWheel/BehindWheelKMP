@@ -41,7 +41,6 @@ class AppearanceStoreFactory(
                                 appTheme = AppTheme(current = preferences.appTheme),
                                 appLanguage = AppLanguage(
                                     current = Language.localeToLanguage(currentAppLanguage)
-                                        ?: Language.System
                                 ),
                                 keepScreenOn = KeepScreenOn(enabled = preferences.keepScreenOn)
                             )

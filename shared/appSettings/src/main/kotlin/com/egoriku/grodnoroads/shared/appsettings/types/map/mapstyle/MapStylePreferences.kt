@@ -12,7 +12,7 @@ val Preferences.trafficJamOnMap: Boolean
     get() = this[IS_SHOW_TRAFFIC_JAM_APPEARANCE] ?: false
 
 val Preferences.googleMapStyle: Style
-    get() = Style.values()
+    get() = Style.entries
         .firstOrNull { it.type == this[GOOGLE_MAP_STYLE] }
         ?: Style.Detailed
 

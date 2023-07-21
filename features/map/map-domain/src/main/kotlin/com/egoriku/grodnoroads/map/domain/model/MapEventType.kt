@@ -16,6 +16,6 @@ enum class MapEventType(
     Unsupported(type = "unsupported", emoji = "\uD83D\uDE12");
 
     companion object {
-        fun eventFromString(value: String) = values().find { it.type == value } ?: Unsupported
+        fun eventFromString(value: String) = entries.find { it.type == value } ?: Unsupported
     }
 }

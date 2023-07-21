@@ -49,6 +49,6 @@ interface AppearanceComponent {
         data class ThemeDialogState(val themes: AppTheme) : AppearanceDialogState
         data class LanguageDialogState(val languages: AppLanguage) : AppearanceDialogState
 
-        object None : AppearanceDialogState
+        data object None : AppearanceDialogState
     }
 }

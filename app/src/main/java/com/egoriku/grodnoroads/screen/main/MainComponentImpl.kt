@@ -59,9 +59,9 @@ internal class MainComponentImpl(
 
     private sealed class Config : Parcelable {
         @Parcelize
-        object Map : Config()
+        data object Map : Config()
 
         @Parcelize
-        object Settings : Config()
+        data object Settings : Config()
     }
 }
