@@ -56,7 +56,8 @@ internal class MapComponentImpl(
     private val mobile = mapEventsStore.states.map { it.mobileCameras }
     private val reports = mapEventsStore.states.map { it.reports }
 
-    private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertDistance }
+    // TODO: handle city and out city
+    private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertsDistanceInCity }
     private val mapInfo = mapConfigStore.states.map { it.mapInternalConfig.mapInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)

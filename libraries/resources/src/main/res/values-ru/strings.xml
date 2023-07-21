@@ -42,7 +42,7 @@
     <!-- Settings Header -->
     <string name="settings_section_appearance">Внешний вид</string>
     <string name="settings_section_map">Карта</string>
-    <string name="settings_section_alerts">Уведомления</string>
+    <string name="settings_section_alerts">Оповещения</string>
     <string name="settings_section_whats_new">Что нового</string>
     <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
@@ -64,6 +64,28 @@
     <string name="appearance_app_language_system">Системный</string>
 
     <string name="appearance_keep_screen_on">Не выключать экран</string>
+
+    <!-- Alert -->
+    <string name="alerts_header_volume_level">Уровень громкости</string>
+    <string name="alerts_volume_level_low">Низкий</string>
+    <string name="alerts_volume_level_medium">Средний</string>
+    <string name="alerts_volume_level_high">Высокий</string>
+
+    <string name="alerts_header_notification_radius">Радиус оповещения</string>
+    <string name="alerts_notification_radius_in_city">В городе</string>
+    <string name="alerts_notification_radius_outside_city">За городом</string>
+    <string name="alerts_notification_radius_postfix">м</string>
+
+    <string name="alerts_header_voice_alerts">Голосовые оповещения</string>
+    <string name="alerts_notifications_select_all">Выбрать все</string>
+    <string name="alerts_notifications_stationary_cameras">Стационарные камеры</string>
+    <string name="alerts_notifications_medium_speed_cameras">Камеры средней скорости</string>
+    <string name="alerts_notifications_mobile_cameras">Мобильные камеры</string>
+    <string name="alerts_notifications_traffic_police">ГАИ</string>
+    <string name="alerts_notifications_incidents">Проблемы на дороге</string>
+    <string name="alerts_notifications_car_crash">ДТП</string>
+    <string name="alerts_notifications_traffic_jam">Пробки</string>
+    <string name="alerts_notifications_wild_animals">Дикие животные</string>
 
     <!-- Map -->
     <string name="map_header_appearance">Внешний вид</string>

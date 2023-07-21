@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.ClickableRange
+import com.egoriku.grodnoroads.foundation.ClickableFloatRange
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.ActionSettings
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
@@ -40,7 +40,7 @@ private fun MapZoomInCity(
         iconResId = R.drawable.ic_inside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
         trailing = {
-            ClickableRange(
+            ClickableFloatRange(
                 value = mapZoomInCity.current,
                 min = mapZoomInCity.min,
                 max = mapZoomInCity.max,
@@ -66,7 +66,7 @@ private fun MapZoomOutCity(
         iconResId = R.drawable.ic_outside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
         trailing = {
-            ClickableRange(
+            ClickableFloatRange(
                 value = mapZoomOutCity.current,
                 min = mapZoomOutCity.min,
                 max = mapZoomOutCity.max,

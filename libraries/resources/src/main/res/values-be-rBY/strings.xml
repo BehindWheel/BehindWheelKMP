@@ -59,6 +59,28 @@
 
     <string name="appearance_keep_screen_on">Не выключаць экран</string>
 
+    <!-- Alert -->
+    <string name="alerts_header_volume_level">Узровень гучнасці</string>
+    <string name="alerts_volume_level_low">Нізкі</string>
+    <string name="alerts_volume_level_medium">Сярэдні</string>
+    <string name="alerts_volume_level_high">Высокі</string>
+
+    <string name="alerts_header_notification_radius">Радыус паведамлення</string>
+    <string name="alerts_notification_radius_in_city">У горадзе</string>
+    <string name="alerts_notification_radius_outside_city">За межамі горада</string>
+    <string name="alerts_notification_radius_postfix">м</string>
+
+    <string name="alerts_header_voice_alerts">Галасавыя абвесткі</string>
+    <string name="alerts_notifications_select_all">Выбраць усе</string>
+    <string name="alerts_notifications_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="alerts_notifications_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
+    <string name="alerts_notifications_mobile_cameras">Мабільныя камеры</string>
+    <string name="alerts_notifications_traffic_police">ДАІ</string>
+    <string name="alerts_notifications_incidents">Праблемы на дарозе</string>
+    <string name="alerts_notifications_car_crash">ДТЗ</string>
+    <string name="alerts_notifications_traffic_jam">Заторы</string>
+    <string name="alerts_notifications_wild_animals">Дзікія жывёлы</string>
+
     <string name="map_header_appearance">Знешні выгляд</string>
     <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
     <string name="map_google_map_style_minimal">Мінімалізм</string>
@@ -74,6 +96,7 @@
     <string name="map_markers_car_crash">ДТЗ</string>
     <string name="map_markers_traffic_jam">Заторы</string>
     <string name="map_markers_wild_animals">Дзікія жывёлы</string>
+
     <string name="dialog_report_police">Паведаміць аб ДАІ</string>
     <string name="dialog_incident">Паведаміць аб праблеме</string>
     <string name="dialog_input_hint">Апцыянальнае паведамленне</string>

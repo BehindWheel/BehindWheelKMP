@@ -23,7 +23,7 @@ import com.egoriku.grodnoroads.foundation.uikit.TriStateCheckbox
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo.Selectable
+import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +42,7 @@ internal fun MapEventsSection(
         val onToggle = remember(mapInfo.selectable) {
             {
                 val selectAll = mapInfo.selectable != Selectable.AllEnabled
-                onCheckedChange(MapPref.Selectable(selectAll = selectAll))
+                onCheckedChange(MapPref.SelectAll(selectAll = selectAll))
             }
         }
 

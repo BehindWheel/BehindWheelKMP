@@ -2,10 +2,10 @@ package com.egoriku.grodnoroads.setting.map.domain.component
 
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.*
+import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.supportedCities
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Grodno
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +39,7 @@ interface MapSettingsComponent {
         data class TrafficJam(val isShow: Boolean = true) : MapPref
         data class WildAnimals(val isShow: Boolean = true) : MapPref
         data class CarCrash(val isShow: Boolean = true) : MapPref
-        data class Selectable(val selectAll: Boolean = true) : MapPref
+        data class SelectAll(val selectAll: Boolean = true) : MapPref
 
         data class TrafficJamOnMap(val isShow: Boolean = false) : MapPref
         data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref
@@ -60,7 +60,7 @@ interface MapSettingsComponent {
 
         data class DefaultCity(
             val current: City = Grodno,
-            val values: List<City> = supportedCities
+            val values: List<City> = City.entries
         ) : MapPref
     }
 
@@ -89,13 +89,7 @@ interface MapSettingsComponent {
             val trafficJam: TrafficJam = TrafficJam(),
             val wildAnimals: WildAnimals = WildAnimals(),
             val selectable: Selectable = Selectable.AllEnabled
-        ) {
-            enum class Selectable {
-                AllEnabled,
-                AllDisabled,
-                Mixed
-            }
-        }
+        )
 
         data class MapStyle(
             val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),

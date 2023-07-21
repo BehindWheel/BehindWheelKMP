@@ -5,7 +5,8 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 internal data class MapInternalConfig(
     val zoomLevelInCity: Float,
     val zoomLevelOutOfCity: Float,
-    val alertDistance: Int,
+    val alertsDistanceInCity: Int,
+    val alertsDistanceOutCity: Int,
     val mapInfo: MapInfo,
     val googleMapStyle: Style,
     val trafficJanOnMap: Boolean,
@@ -26,7 +27,8 @@ internal data class MapInternalConfig(
         val EMPTY = MapInternalConfig(
             zoomLevelInCity = -1f,
             zoomLevelOutOfCity = -1f,
-            alertDistance = -1,
+            alertsDistanceInCity = -1,
+            alertsDistanceOutCity = -1,
             mapInfo = MapInfo(
                 showStationaryCameras = false,
                 showMediumSpeedCameras = false,

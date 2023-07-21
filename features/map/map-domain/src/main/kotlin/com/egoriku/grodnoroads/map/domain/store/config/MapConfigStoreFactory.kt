@@ -11,10 +11,12 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
 import com.egoriku.grodnoroads.map.domain.model.ReportType
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.*
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertDistance
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertsDistanceInCity
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertsDistanceOutsideCity
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
@@ -54,7 +56,8 @@ internal class MapConfigStoreFactory(
                             MapInternalConfig(
                                 zoomLevelInCity = pref.mapZoomInCity,
                                 zoomLevelOutOfCity = pref.mapZoomOutCity,
-                                alertDistance = pref.alertDistance,
+                                alertsDistanceInCity = pref.alertsDistanceInCity,
+                                alertsDistanceOutCity = pref.alertsDistanceOutsideCity,
                                 mapInfo = MapInfo(
                                     showStationaryCameras = pref.isShowStationaryCameras,
                                     showMediumSpeedCameras = pref.isShowMediumSpeedCameras,
