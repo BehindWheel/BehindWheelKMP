@@ -6,7 +6,6 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
-import androidx.core.net.toUri
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import com.egoriku.grodnoroads.audioplayer.broadcast.VOLUME_CHANGE_ACTION
@@ -77,8 +76,9 @@ class AudioPlayer(private val context: Context) {
                 mediaPlayer.setDataSource(assetFileDescriptor)
             } else {
                 mediaPlayer.setDataSource(
-                    context,
-                    "android.resource://${context.packageName}/${assetFileDescriptor.fileDescriptor}".toUri()
+                    assetFileDescriptor.fileDescriptor,
+                    assetFileDescriptor.startOffset,
+                    assetFileDescriptor.length
                 )
             }
             mediaPlayer.prepare()
