@@ -38,7 +38,7 @@ internal fun SettingsUi(
         ) {
             SettingsHeader(
                 title = stringResource(R.string.settings_category_main),
-                top = 0.dp
+                paddingValues = PaddingValues(start = 24.dp, bottom = 4.dp),
             )
             SettingsItem(
                 icon = Icons.Filled.Style,

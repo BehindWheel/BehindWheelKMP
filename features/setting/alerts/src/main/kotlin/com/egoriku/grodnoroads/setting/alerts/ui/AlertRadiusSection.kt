@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.setting.alerts.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,8 +22,8 @@ fun AlertRadiusSection(
 ) {
     Column {
         SettingsHeader(
-            top = 0.dp,
-            title = stringResource(id = R.string.alerts_header_notification_radius)
+            title = stringResource(id = R.string.alerts_header_notification_radius),
+            paddingValues = PaddingValues(start = 24.dp, bottom = 4.dp)
         )
 
         val postfix = stringResource(id = R.string.alerts_notification_radius_postfix)

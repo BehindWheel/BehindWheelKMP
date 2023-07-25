@@ -26,8 +26,8 @@ fun VoiceLevelSection(
 ) {
     Column {
         SettingsHeader(
-            top = 0.dp,
-            title = stringResource(id = R.string.alerts_header_volume_level)
+            title = stringResource(id = R.string.alerts_header_volume_level),
+            paddingValues = PaddingValues(start = 24.dp, bottom = 4.dp)
         )
         Row(
             modifier = Modifier
