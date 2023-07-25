@@ -56,8 +56,6 @@ internal class MapComponentImpl(
     private val mobile = mapEventsStore.states.map { it.mobileCameras }
     private val reports = mapEventsStore.states.map { it.reports }
 
-    // TODO: handle city and out city
-    private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertsDistanceInCity }
     private val mapInfo = mapConfigStore.states.map { it.mapInternalConfig.mapInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)
@@ -124,7 +122,8 @@ internal class MapComponentImpl(
                 zoomLevel = it.zoomLevel,
                 googleMapStyle = it.mapInternalConfig.googleMapStyle,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
-                keepScreenOn = it.mapInternalConfig.keepScreenOn
+                keepScreenOn = it.mapInternalConfig.keepScreenOn,
+                alertRadius = it.alertRadius
             )
         }
 
@@ -145,7 +144,7 @@ internal class MapComponentImpl(
         get() = combine(
             flow = mapEvents,
             flow2 = lastLocation,
-            flow3 = alertDistance,
+            flow3 = mapConfig,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 

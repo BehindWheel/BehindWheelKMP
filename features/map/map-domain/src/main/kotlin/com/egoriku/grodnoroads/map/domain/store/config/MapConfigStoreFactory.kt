@@ -40,6 +40,7 @@ internal class MapConfigStoreFactory(
     private sealed interface Message {
         data class OnMapConfigInternal(val mapConfig: MapInternalConfig) : Message
         data class OnZoomLevel(val zoomLevel: Float) : Message
+        data class OnAlertRadius(val radius: Int) : Message
         data class OnUserZoomLevel(val userZoomLevel: Float) : Message
         data class ChangeAppMode(val appMode: AppMode) : Message
         data class UpdateReportType(val reportType: ReportType?) : Message
@@ -79,7 +80,7 @@ internal class MapConfigStoreFactory(
                 }
                 onIntent<CheckLocation> {
                     val latLng = it.latLng
-                    val isInCity = when {
+                    val isCityArea = when {
                         PolyUtil.containsLocation(latLng, CityArea.grodno, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
@@ -89,13 +90,18 @@ internal class MapConfigStoreFactory(
                         else -> false
                     }
 
-                    val zoomLevel = if (isInCity) {
-                        state.mapInternalConfig.zoomLevelInCity
-                    } else {
-                        state.mapInternalConfig.zoomLevelOutOfCity
+                    val internalConfig = state.mapInternalConfig
+                    val zoomLevel = when {
+                        isCityArea -> internalConfig.zoomLevelInCity
+                        else -> internalConfig.zoomLevelOutOfCity
                     }
-
                     dispatch(OnZoomLevel(zoomLevel))
+
+                    val alertRadius = when {
+                        isCityArea -> internalConfig.alertsDistanceInCity
+                        else -> internalConfig.alertsDistanceOutCity
+                    }
+                    dispatch(OnAlertRadius(radius = alertRadius))
                 }
                 onIntent<StartDriveMode> {
                     dispatch(ChangeAppMode(appMode = AppMode.Drive))
@@ -128,6 +134,7 @@ internal class MapConfigStoreFactory(
                     is ChangeAppMode -> copy(appMode = message.appMode)
                     is UpdateReportType -> copy(reportType = message.reportType)
                     is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
+                    is OnAlertRadius -> copy(alertRadius = message.radius)
                 }
             }) {}
 }
