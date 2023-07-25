@@ -7,13 +7,20 @@ import com.egoriku.grodnoroads.map.domain.model.CameraType
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import java.util.UUID
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 class SoundUtil(context: Context) {
 
     private val audioPlayer = AudioPlayer(context)
     private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
 
-    fun playOverSpeed() = playSound(Sound.OverSpeed)
+    private val overSpeedId = UUID.randomUUID().toString()
+
+    fun playOverSpeed() = playSound(
+        sound = Sound.OverSpeed,
+        id = overSpeedId,
+        expiration = FIVE_SECONDS
+    )
 
     fun playIncident(id: String, mapEventType: MapEventType) {
         when (mapEventType) {
@@ -84,6 +91,7 @@ class SoundUtil(context: Context) {
     )
 
     companion object {
+        val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
         val ONE_MINUTE = 3.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }
