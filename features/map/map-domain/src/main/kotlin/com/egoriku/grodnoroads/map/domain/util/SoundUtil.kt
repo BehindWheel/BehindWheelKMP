@@ -24,7 +24,6 @@ class SoundUtil(context: Context) {
 
     fun playIncident(id: String, mapEventType: MapEventType) {
         when (mapEventType) {
-            MapEventType.RoadAccident -> Sound.RoadIncident
             MapEventType.TrafficPolice -> Sound.TrafficPolice
             MapEventType.RoadIncident -> Sound.RoadIncident
             MapEventType.CarCrash -> Sound.CarCrash
