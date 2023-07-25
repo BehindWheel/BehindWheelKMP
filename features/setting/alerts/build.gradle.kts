@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.foundation)
     implementation(projects.libraries.resources)
 
@@ -16,13 +17,17 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
 
+    implementation(libs.immutable.collections)
+
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

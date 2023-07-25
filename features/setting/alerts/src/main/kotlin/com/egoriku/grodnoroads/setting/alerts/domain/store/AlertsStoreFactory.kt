@@ -58,6 +58,10 @@ internal class AlertsStoreFactory(
                             }
 
                             AlertSettings(
+                                alertAvailability = AlertAvailability(
+                                    alertFeatureEnabled = pref.alertsEnabled,
+                                    voiceAlertEnabled = pref.alertsVoiceAlertEnabled
+                                ),
                                 volumeInfo = VolumeInfo(
                                     alertVolumeLevel = AlertVolumeLevel(
                                         current = pref.alertsVolumeLevel
@@ -95,7 +99,17 @@ internal class AlertsStoreFactory(
                     launch {
                         dataStore.edit {
                             when (val pref = it.pref) {
-                                is AlertVolumeLevel -> updateAlertsVolumeInfo(pref.current.level)
+                                is AlertAvailability -> {
+                                    if (pref.alertFeatureEnabled) {
+                                        updateAlertsAvailability(pref.alertFeatureEnabled)
+                                        updateAlertsVoiceAlertAvailability(pref.voiceAlertEnabled)
+                                    } else {
+                                        updateAlertsAvailability(false)
+                                        updateAlertsVoiceAlertAvailability(false)
+                                    }
+                                }
+
+                                is AlertVolumeLevel -> updateAlertsVolumeInfo(pref.current.levelName)
 
                                 is AlertRadiusInCity -> updateAlertsDistanceInCity(pref.current)
                                 is AlertRadiusOutCity -> updateAlertsDistanceOutsideCity(pref.current)

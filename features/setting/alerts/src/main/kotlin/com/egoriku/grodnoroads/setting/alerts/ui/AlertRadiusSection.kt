@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.setting.alerts.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ClickableIntRange
 import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.ActionSettings
@@ -19,7 +20,10 @@ fun AlertRadiusSection(
     reset: (AlertsPref) -> Unit
 ) {
     Column {
-        SettingsHeader(title = stringResource(id = R.string.alerts_header_notification_radius))
+        SettingsHeader(
+            top = 0.dp,
+            title = stringResource(id = R.string.alerts_header_notification_radius)
+        )
 
         val postfix = stringResource(id = R.string.alerts_notification_radius_postfix)
         val radiusInCity = alertRadius.alertRadiusInCity

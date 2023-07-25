@@ -5,6 +5,9 @@ import androidx.datastore.preferences.core.*
 const val DEFAULT_ALERT_DISTANCE_IN_CITY = 600
 const val DEFAULT_ALERT_DISTANCE_OUTSIDE_CITY = 1000
 
+private val ALERTS_AVAILABILITY = booleanPreferencesKey("alerts_feature_availability")
+private val ALERTS_VOICE_ALERT_AVAILABILITY = booleanPreferencesKey("alerts_voice_alert_availability")
+
 private val ALERTS_VOLUME_LEVEL = stringPreferencesKey("alerts_volume_level")
 private val ALERTS_DISTANCE_IN_CITY = intPreferencesKey("alerts_distance_in_city")
 private val ALERTS_DISTANCE_OUTSIDE_CITY = intPreferencesKey("alerts_distance_outside_city")
@@ -18,10 +21,16 @@ private val ALERTS_NOTIFY_CAR_CRASH_EVENTS = booleanPreferencesKey("alerts_notif
 private val ALERTS_NOTIFY_TRAFFIC_JAM_EVENTS = booleanPreferencesKey("alerts_notify_traffic_jam_events")
 private val ALERTS_NOTIFY_WILD_ANIMALS_EVENTS = booleanPreferencesKey("alerts_notify_wild_animals_events")
 
+val Preferences.alertsEnabled: Boolean
+    get() = this[ALERTS_AVAILABILITY] ?: true
+
+val Preferences.alertsVoiceAlertEnabled: Boolean
+    get() = this[ALERTS_VOICE_ALERT_AVAILABILITY] ?: true
+
 val Preferences.alertsVolumeLevel: VolumeLevel
     get() = VolumeLevel.entries
-        .firstOrNull { it.level == this[ALERTS_VOLUME_LEVEL] }
-        ?: VolumeLevel.Medium
+        .firstOrNull { it.levelName == this[ALERTS_VOLUME_LEVEL] }
+        ?: VolumeLevel.High
 
 val Preferences.alertsDistanceInCity: Int
     get() = this[ALERTS_DISTANCE_IN_CITY] ?: DEFAULT_ALERT_DISTANCE_IN_CITY
@@ -52,6 +61,14 @@ val Preferences.isNotifyTrafficJam: Boolean
 
 val Preferences.isNotifyWildAnimals: Boolean
     get() = this[ALERTS_NOTIFY_WILD_ANIMALS_EVENTS] ?: true
+
+fun MutablePreferences.updateAlertsAvailability(value: Boolean) {
+    this[ALERTS_AVAILABILITY] = value
+}
+
+fun MutablePreferences.updateAlertsVoiceAlertAvailability(value: Boolean) {
+    this[ALERTS_VOICE_ALERT_AVAILABILITY] = value
+}
 
 fun MutablePreferences.updateAlertsVolumeInfo(value: String) {
     this[ALERTS_VOLUME_LEVEL] = value

@@ -55,7 +55,7 @@ internal fun SettingsUi(
                 }
             )
             SettingsItem(
-                icon = Icons.Filled.NotificationImportant,
+                icon = Icons.Default.Notifications,
                 text = stringResource(R.string.settings_section_alerts),
                 onClick = {
                     onSettingClick(Page.Alerts)

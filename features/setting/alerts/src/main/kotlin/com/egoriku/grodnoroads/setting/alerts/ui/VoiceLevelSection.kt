@@ -14,6 +14,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel.Companion.toResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,9 +22,13 @@ import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel.Compan
 fun VoiceLevelSection(
     alertVolumeLevel: AlertVolumeLevel,
     modify: (AlertsPref) -> Unit,
+    playSound: (VolumeLevel) -> Unit
 ) {
     Column {
-        SettingsHeader(title = stringResource(id = R.string.alerts_header_volume_level))
+        SettingsHeader(
+            top = 0.dp,
+            title = stringResource(id = R.string.alerts_header_volume_level)
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -36,8 +41,8 @@ fun VoiceLevelSection(
                 FilterChip(
                     selected = selected,
                     onClick = {
-                        // TODO: play audio 
                         modify(alertVolumeLevel.copy(current = volumeLevel))
+                        playSound(volumeLevel)
                     },
                     label = {
                         Text(text = stringResource(id = volumeLevel.toResource()))
@@ -67,5 +72,9 @@ fun VoiceLevelSection(
 @GrodnoRoadsPreview
 @Composable
 private fun VoiceLevelSectionPreview() = GrodnoRoadsM3ThemePreview {
-    VoiceLevelSection(alertVolumeLevel = AlertVolumeLevel()) {}
+    VoiceLevelSection(
+        alertVolumeLevel = AlertVolumeLevel(),
+        modify = {},
+        playSound = {}
+    )
 }

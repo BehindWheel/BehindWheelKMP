@@ -66,6 +66,12 @@
     <string name="appearance_keep_screen_on">Не выключать экран</string>
 
     <!-- Alert -->
+    <string name="alerts_availability">Оповещения</string>
+    <string name="alerts_availability_description">Показываются на экране при приближении к событию на карте</string>
+    <string name="alerts_voice_alerts">Голосовые оповещения</string>
+    <string name="alerts_voice_alerts_description">Включаются при приближении к событию на карте</string>
+
+
     <string name="alerts_header_volume_level">Уровень громкости</string>
     <string name="alerts_volume_level_low">Низкий</string>
     <string name="alerts_volume_level_medium">Средний</string>
@@ -76,7 +82,7 @@
     <string name="alerts_notification_radius_outside_city">За городом</string>
     <string name="alerts_notification_radius_postfix">м</string>
 
-    <string name="alerts_header_voice_alerts">Голосовые оповещения</string>
+    <string name="alerts_header_voice_alerts">Типы оповещений</string>
     <string name="alerts_notifications_select_all">Выбрать все</string>
     <string name="alerts_notifications_stationary_cameras">Стационарные камеры</string>
     <string name="alerts_notifications_medium_speed_cameras">Камеры средней скорости</string>

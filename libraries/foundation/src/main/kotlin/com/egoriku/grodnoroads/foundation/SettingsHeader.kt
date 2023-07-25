@@ -15,6 +15,7 @@ fun SettingsHeader(
     top: Dp = 16.dp,
     bottom: Dp = 4.dp
 ) {
+    // TODO: use PaddingValues 
     Text(
         modifier = Modifier.padding(start = start, top = top, bottom = bottom),
         style = MaterialTheme.typography.titleMedium,

@@ -60,10 +60,10 @@ class SoundUtil(context: Context) {
 
         if (item == null) {
             soundHistory[id] = SoundTimeStamp(sound = sound, timestamp = currentTimeMillis)
-            audioPlayer.playSound(sound)
+            audioPlayer.enqueueSound(sound)
         } else if (currentTimeMillis - item.timestamp > expiration) {
             soundHistory[id] = item.copy(timestamp = currentTimeMillis)
-            audioPlayer.playSound(sound)
+            audioPlayer.enqueueSound(sound)
         }
 
         invalidateOldSounds()

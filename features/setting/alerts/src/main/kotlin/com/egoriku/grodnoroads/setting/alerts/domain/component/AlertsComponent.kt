@@ -5,6 +5,8 @@ import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.DEFAULT_ALERT_DISTANCE_IN_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.DEFAULT_ALERT_DISTANCE_OUTSIDE_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 
 interface AlertsComponent {
@@ -20,9 +22,14 @@ interface AlertsComponent {
     )
 
     sealed interface AlertsPref {
+        data class AlertAvailability(
+            val alertFeatureEnabled: Boolean = false,
+            val voiceAlertEnabled: Boolean = false
+        ) : AlertsPref
+
         data class AlertVolumeLevel(
-            val current: VolumeLevel = VolumeLevel.Medium,
-            val values: List<VolumeLevel> = VolumeLevel.entries
+            val current: VolumeLevel = VolumeLevel.High,
+            val values: ImmutableList<VolumeLevel> = VolumeLevel.entries.toImmutableList()
         ) : AlertsPref
 
         data class AlertRadiusInCity(
@@ -51,6 +58,7 @@ interface AlertsComponent {
     }
 
     data class AlertSettings(
+        val alertAvailability: AlertAvailability = AlertAvailability(),
         val volumeInfo: VolumeInfo = VolumeInfo(),
         val alertRadius: AlertRadius = AlertRadius(),
         val alertEvents: AlertEvents = AlertEvents()

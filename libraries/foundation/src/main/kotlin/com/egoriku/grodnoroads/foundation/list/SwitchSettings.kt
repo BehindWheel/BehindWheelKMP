@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -51,7 +52,48 @@ fun SwitchSettings(
                 onValueChange = onCheckedChange
             ),
         headlineContent = {
-            Text(text = stringResource(id = stringResId))
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(id = stringResId),
+            )
+        },
+        trailingContent = {
+            Switch(
+                isChecked = isChecked,
+                onCheckedChange = onCheckedChange,
+            )
+        }
+    )
+}
+
+@Composable
+fun SwitchSettings(
+    stringResId: Int,
+    supportingResId: Int,
+    isChecked: Boolean,
+    modifier: Modifier = Modifier,
+    onCheckedChange: (Boolean) -> Unit = {}
+) {
+    ListItem(
+        modifier = modifier
+            .toggleable(
+                value = isChecked,
+                role = Role.Checkbox,
+                onValueChange = onCheckedChange
+            ),
+        headlineContent = {
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(id = stringResId),
+                style = MaterialTheme.typography.titleMedium
+            )
+        },
+        supportingContent = {
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(id = supportingResId),
+                style = MaterialTheme.typography.bodyMedium
+            )
         },
         trailingContent = {
             Switch(
@@ -88,7 +130,10 @@ private fun BasicSwitchSettings(
             }
         },
         headlineContent = {
-            Text(text = stringResource(id = stringResId))
+            Text(
+                text = stringResource(id = stringResId),
+                style = MaterialTheme.typography.titleMedium
+            )
         },
         trailingContent = {
             Switch(
@@ -118,6 +163,12 @@ private fun PreviewSwitchSettings() = GrodnoRoadsM3ThemePreview {
         )
         SwitchSettings(
             stringResId = R.string.app_name,
+            isChecked = false,
+            onCheckedChange = {}
+        )
+        SwitchSettings(
+            stringResId = R.string.app_name,
+            supportingResId = R.string.app_name,
             isChecked = false,
             onCheckedChange = {}
         )

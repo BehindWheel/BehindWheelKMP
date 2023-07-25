@@ -11,6 +11,7 @@ import androidx.media.AudioManagerCompat
 import com.egoriku.grodnoroads.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.audioplayer.broadcast.VolumeChangeReceiver
 import com.egoriku.grodnoroads.extensions.audioManager
+import kotlin.math.roundToInt
 
 class AudioPlayer(private val context: Context) {
 
@@ -27,6 +28,8 @@ class AudioPlayer(private val context: Context) {
 
     private var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
     private val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+
+    private var volumeLevel = 1f
 
     private val volumeChangeReceiver = VolumeChangeReceiver {
         if (!isPlaying) currentVolume = it
@@ -47,7 +50,7 @@ class AudioPlayer(private val context: Context) {
                     AudioManagerCompat.abandonAudioFocusRequest(audioManager, audioFocusRequest)
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0)
                 }
-                playNextSound()
+                enqueueNextSound()
             }
         }
         context.applicationContext.registerReceiver(
@@ -56,36 +59,53 @@ class AudioPlayer(private val context: Context) {
         )
     }
 
-    fun playSound(sound: Sound) {
+    fun setVolumeLevel(level: Float) {
+        volumeLevel = level
+    }
+
+    fun enqueueSound(sound: Sound) {
         soundQueue.add(sound)
-        if (!isPlaying) {
-            playNextSound()
+        if (!isPlaying) enqueueNextSound()
+    }
+
+    fun playSound(sound: Sound) {
+        AudioManagerCompat.requestAudioFocus(audioManager, audioFocusRequest)
+        audioManager.setStreamVolume(
+            /* streamType = */ AudioManager.STREAM_MUSIC,
+            /* index = */ (maxVolume * volumeLevel).roundToInt(),
+            /* flags = */ 0
+        )
+
+        mediaPlayer.reset()
+
+        val assetFileDescriptor = context.assets.openFd(sound.path)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            mediaPlayer.setDataSource(assetFileDescriptor)
+        } else {
+            mediaPlayer.setDataSource(
+                assetFileDescriptor.fileDescriptor,
+                assetFileDescriptor.startOffset,
+                assetFileDescriptor.length
+            )
+        }
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+    }
+
+    private fun enqueueNextSound() {
+        isPlaying = when {
+            soundQueue.isNotEmpty() -> {
+                playSound(soundQueue.removeAt(0))
+                true
+            }
+            else -> false
         }
     }
 
-    private fun playNextSound() {
-        if (soundQueue.isNotEmpty()) {
-            AudioManagerCompat.requestAudioFocus(audioManager, audioFocusRequest)
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0)
-
-            val sound = soundQueue.removeAt(0)
-            mediaPlayer.reset()
-
-            val assetFileDescriptor = context.assets.openFd(sound.assetPath)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                mediaPlayer.setDataSource(assetFileDescriptor)
-            } else {
-                mediaPlayer.setDataSource(
-                    assetFileDescriptor.fileDescriptor,
-                    assetFileDescriptor.startOffset,
-                    assetFileDescriptor.length
-                )
-            }
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            isPlaying = true
-        } else {
-            isPlaying = false
-        }
+    fun release() {
+        context.applicationContext.unregisterReceiver(volumeChangeReceiver)
+        AudioManagerCompat.abandonAudioFocusRequest(audioManager, audioFocusRequest)
+        mediaPlayer.release()
+        soundQueue.clear()
     }
 }
