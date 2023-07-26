@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.map.domain.model
 import androidx.compose.runtime.Stable
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
-import java.util.UUID
 
 @Stable
 sealed interface MapEvent {
@@ -53,7 +52,7 @@ sealed interface MapEvent {
     }
 
     data class Reports(
-        val id: String = UUID.randomUUID().toString(),
+        val id: String,
         val markerMessage: String,
         val dialogTitle: String,
         val messages: ImmutableList<MessageItem>,

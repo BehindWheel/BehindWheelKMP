@@ -24,13 +24,11 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.map.domain.util.SoundUtil
-import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
-import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
-import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
+import com.egoriku.grodnoroads.map.domain.util.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -41,6 +39,7 @@ fun buildMapComponent(
 ): MapComponent = MapComponentImpl(componentContext)
 
 
+@OptIn(FlowPreview::class)
 internal class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
@@ -57,6 +56,7 @@ internal class MapComponentImpl(
     private val reports = mapEventsStore.states.map { it.reports }
 
     private val mapInfo = mapConfigStore.states.map { it.mapInternalConfig.mapInfo }
+    private val alertInfo = mapConfigStore.states.map { it.mapInternalConfig.alertsInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)
 
@@ -66,12 +66,13 @@ internal class MapComponentImpl(
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
             locationStore.labels bindTo ::bindLocationLabel
         }
-        alerts
-            .distinctUntilChanged()
-            .map {
-                // TODO: add filtering
-                it
-            }
+
+        combine(
+            flow = alerts,
+            flow2 = alertInfo,
+            transform = alertSoundTransformation()
+        ).distinctUntilChanged()
+            .debounce(1000)
             .onEach { data ->
                 data.onEach { alert ->
                     when (alert) {
@@ -146,7 +147,8 @@ internal class MapComponentImpl(
             flow2 = lastLocation,
             flow3 = mapConfig,
             transform = alertMessagesTransformation()
-        ).flowOn(Dispatchers.Default)
+        ).debounce(1000)
+            .flowOn(Dispatchers.Default)
 
     override val speedLimit: Flow<Int>
         get() = combine(

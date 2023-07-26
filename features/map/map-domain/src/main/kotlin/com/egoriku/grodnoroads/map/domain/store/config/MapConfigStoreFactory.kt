@@ -9,14 +9,13 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.*
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertsDistanceInCity
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertsDistanceOutsideCity
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.*
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
@@ -68,6 +67,16 @@ internal class MapConfigStoreFactory(
                                     showTrafficJam = pref.isShowTrafficJam,
                                     showCarCrash = pref.isShowCarCrash,
                                     showWildAnimals = pref.isShowWildAnimals
+                                ),
+                                alertsInfo = AlertsInfo(
+                                    notifyStationaryCameras = pref.isNotifyStationaryCameras,
+                                    notifyMediumSpeedCameras = pref.isNotifyMediumSpeedCameras,
+                                    notifyMobileCameras = pref.isNotifyMobileCameras,
+                                    notifyRoadIncident = pref.isNotifyRoadIncidents,
+                                    notifyTrafficPolice = pref.isNotifyTrafficPolice,
+                                    notifyTrafficJam = pref.isNotifyTrafficJam,
+                                    notifyCarCrash = pref.isNotifyCarCrash,
+                                    notifyWildAnimals = pref.isNotifyWildAnimals
                                 ),
                                 googleMapStyle = pref.googleMapStyle,
                                 trafficJanOnMap = pref.trafficJamOnMap,

@@ -8,6 +8,7 @@ internal data class MapInternalConfig(
     val alertsDistanceInCity: Int,
     val alertsDistanceOutCity: Int,
     val mapInfo: MapInfo,
+    val alertsInfo: AlertsInfo,
     val googleMapStyle: Style,
     val trafficJanOnMap: Boolean,
     val keepScreenOn: Boolean
@@ -21,6 +22,17 @@ internal data class MapInternalConfig(
         val showCarCrash: Boolean,
         val showTrafficJam: Boolean,
         val showWildAnimals: Boolean,
+    )
+
+    internal data class AlertsInfo(
+        val notifyStationaryCameras: Boolean,
+        val notifyMediumSpeedCameras: Boolean,
+        val notifyMobileCameras: Boolean,
+        val notifyRoadIncident: Boolean,
+        val notifyTrafficPolice: Boolean,
+        val notifyCarCrash: Boolean,
+        val notifyTrafficJam: Boolean,
+        val notifyWildAnimals: Boolean,
     )
 
     companion object {
@@ -38,6 +50,16 @@ internal data class MapInternalConfig(
                 showCarCrash = false,
                 showTrafficJam = false,
                 showWildAnimals = false
+            ),
+            alertsInfo = AlertsInfo(
+                notifyStationaryCameras = false,
+                notifyMediumSpeedCameras = false,
+                notifyMobileCameras = false,
+                notifyRoadIncident = false,
+                notifyTrafficPolice = false,
+                notifyCarCrash = false,
+                notifyTrafficJam = false,
+                notifyWildAnimals = false
             ),
             googleMapStyle = Style.Minimal,
             trafficJanOnMap = false,

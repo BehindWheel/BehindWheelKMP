@@ -41,8 +41,8 @@ androidx-media = "androidx.media:media:1.6.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.5.4"
 
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2"
-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.2"
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
