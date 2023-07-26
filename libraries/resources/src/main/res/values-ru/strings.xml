@@ -19,7 +19,7 @@
     </plurals>
 
     <string name="alerts_stationary_camera">Стационарная камера</string>
-    <string name="alerts_mobile_camera">Временная камера</string>
+    <string name="alerts_mobile_camera">Мобильная камера</string>
     <string name="alerts_medium_speed_camera">Камера средней скорости</string>
     <string name="alerts_incident">Дорожное происшествие</string>
     <string name="alerts_traffic_police">Экипаж ГАИ</string>
