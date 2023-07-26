@@ -51,7 +51,7 @@ fun MarkerInfoBottomSheet(
                     MessageRow(messageItem = it)
                 }
             }
-            Divider()
+            HorizontalDivider()
         },
         footer = {
             TextButton(

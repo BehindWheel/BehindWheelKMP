@@ -45,7 +45,7 @@ fun AppLanguageBottomSheet(
                     language = language.copy(current = language.values[position])
                 }
             )
-            Divider()
+            HorizontalDivider()
         },
         footer = {
             ConfirmationFooter(

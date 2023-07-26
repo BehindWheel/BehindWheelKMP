@@ -56,7 +56,7 @@ fun IncidentAlert(
                 style = MaterialTheme.typography.bodyLarge
             )
         }
-        Divider()
+        HorizontalDivider()
         MessageComponent(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             messages = messages

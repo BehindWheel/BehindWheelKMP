@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.foundation.dialog
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,7 +50,7 @@ fun DialogTitle(
 private fun PreviewDialogTitle() = GrodnoRoadsM3ThemePreview {
     Column(modifier = Modifier.fillMaxWidth()) {
         DialogTitle(titleRes = R.string.app_name)
-        Divider()
+        HorizontalDivider()
         DialogTitle(titleRes = R.string.app_name, center = true)
     }
 }
