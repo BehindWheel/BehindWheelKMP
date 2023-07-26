@@ -97,6 +97,7 @@ internal class MapComponentImpl(
 
         speedLimit
             .distinctUntilChanged()
+            .debounce(1000)
             .onEach {
                 if (it != -1) {
                     soundUtil.playOverSpeed()
