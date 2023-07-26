@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Locale
 
 plugins {
@@ -39,7 +40,7 @@ fun isNonStable(version: String): Boolean {
 
 //assembleRelease -Pgrodnoroads.enableComposeCompilerReports=true
 subprojects {
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             if (project.findProperty("grodnoroads.enableComposeCompilerReports") == "true") {
                 freeCompilerArgs = freeCompilerArgs +
