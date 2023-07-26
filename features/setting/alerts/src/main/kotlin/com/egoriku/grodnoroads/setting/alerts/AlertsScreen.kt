@@ -101,10 +101,6 @@ fun AlertsScreen(
                             modify = alertsComponent::modify,
                             reset = alertsComponent::reset
                         )
-                        AlertEventsSection(
-                            alertEvents = settings.alertEvents,
-                            onCheckedChange = alertsComponent::modify
-                        )
                         SwitchSettings(
                             stringResId = R.string.alerts_voice_alerts,
                             supportingResId = R.string.alerts_voice_alerts_description,
@@ -128,6 +124,10 @@ fun AlertsScreen(
                                     }
                                 )
                             }
+                        )
+                        AlertEventsSection(
+                            alertEvents = settings.alertEvents,
+                            onCheckedChange = alertsComponent::modify
                         )
                     }
                 }

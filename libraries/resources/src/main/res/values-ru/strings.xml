@@ -82,7 +82,7 @@
     <string name="alerts_notification_radius_outside_city">За городом</string>
     <string name="alerts_notification_radius_postfix">м</string>
 
-    <string name="alerts_header_voice_alerts">Типы оповещений</string>
+    <string name="alerts_header_voice_alerts">Типы голосовых оповещений</string>
     <string name="alerts_notifications_select_all">Выбрать все</string>
     <string name="alerts_notifications_stationary_cameras">Стационарные камеры</string>
     <string name="alerts_notifications_medium_speed_cameras">Камеры средней скорости</string>

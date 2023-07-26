@@ -125,7 +125,8 @@ internal class MapComponentImpl(
                 googleMapStyle = it.mapInternalConfig.googleMapStyle,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
-                alertRadius = it.alertRadius
+                alertRadius = it.alertRadius,
+                alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled
             )
         }
 
@@ -148,8 +149,7 @@ internal class MapComponentImpl(
             flow2 = lastLocation,
             flow3 = mapConfig,
             transform = alertMessagesTransformation()
-        ).debounce(1000)
-            .flowOn(Dispatchers.Default)
+        ).flowOn(Dispatchers.Default)
 
     override val speedLimit: Flow<Int>
         get() = combine(

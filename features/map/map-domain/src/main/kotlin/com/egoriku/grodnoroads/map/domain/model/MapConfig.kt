@@ -7,6 +7,7 @@ data class MapConfig(
     val googleMapStyle: Style,
     val trafficJanOnMap: Boolean,
     val keepScreenOn: Boolean,
+    val alertsEnabled: Boolean,
     val alertRadius: Int,
 ) {
     companion object {
@@ -15,6 +16,7 @@ data class MapConfig(
             googleMapStyle = Style.Unknown,
             trafficJanOnMap = false,
             keepScreenOn = false,
+            alertsEnabled = false,
             alertRadius = -1
         )
     }

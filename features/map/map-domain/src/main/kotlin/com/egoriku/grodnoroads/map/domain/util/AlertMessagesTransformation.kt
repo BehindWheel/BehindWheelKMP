@@ -2,9 +2,12 @@ package com.egoriku.grodnoroads.map.domain.util
 
 import com.egoriku.grodnoroads.extensions.util.computeOffset
 import com.egoriku.grodnoroads.extensions.util.distanceTo
-import com.egoriku.grodnoroads.map.domain.model.*
+import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapConfig
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.google.android.gms.maps.model.LatLng
@@ -22,6 +25,7 @@ fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, MapCon
         when (lastLocation) {
             LastLocation.None -> emptyList
             else -> when {
+                !config.alertsEnabled -> emptyList
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents,
                     lastLocation = lastLocation,

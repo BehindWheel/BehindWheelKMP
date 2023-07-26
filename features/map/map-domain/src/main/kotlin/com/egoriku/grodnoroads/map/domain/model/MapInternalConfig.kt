@@ -25,6 +25,8 @@ internal data class MapInternalConfig(
     )
 
     internal data class AlertsInfo(
+        val alertsEnabled: Boolean,
+        val voiceAlertsEnabled: Boolean,
         val notifyStationaryCameras: Boolean,
         val notifyMediumSpeedCameras: Boolean,
         val notifyMobileCameras: Boolean,
@@ -52,6 +54,8 @@ internal data class MapInternalConfig(
                 showWildAnimals = false
             ),
             alertsInfo = AlertsInfo(
+                alertsEnabled = false,
+                voiceAlertsEnabled = false,
                 notifyStationaryCameras = false,
                 notifyMediumSpeedCameras = false,
                 notifyMobileCameras = false,

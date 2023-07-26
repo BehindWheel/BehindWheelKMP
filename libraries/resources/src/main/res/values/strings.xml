@@ -83,7 +83,7 @@
     <string name="alerts_notification_radius_outside_city">Outside city</string>
     <string name="alerts_notification_radius_postfix">m</string>
 
-    <string name="alerts_header_voice_alerts">Types of alerts</string>
+    <string name="alerts_header_voice_alerts">Types of voice alerts</string>
     <string name="alerts_notifications_select_all">Select All</string>
     <string name="alerts_notifications_stationary_cameras">Stationary cameras</string>
     <string name="alerts_notifications_medium_speed_cameras">Medium speed cameras</string>

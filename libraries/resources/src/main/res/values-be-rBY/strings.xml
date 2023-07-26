@@ -75,7 +75,7 @@
     <string name="alerts_notification_radius_outside_city">За межамі горада</string>
     <string name="alerts_notification_radius_postfix">м</string>
 
-    <string name="alerts_header_voice_alerts">Тыпы абвестак</string>
+    <string name="alerts_header_voice_alerts">Тыпы галасавых абвестак</string>
     <string name="alerts_notifications_select_all">Выбраць усе</string>
     <string name="alerts_notifications_stationary_cameras">Стацыянарныя камеры</string>
     <string name="alerts_notifications_medium_speed_cameras">Камеры сярэдняй хуткасці</string>

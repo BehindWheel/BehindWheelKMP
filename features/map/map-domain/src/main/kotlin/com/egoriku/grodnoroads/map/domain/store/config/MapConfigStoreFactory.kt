@@ -69,6 +69,8 @@ internal class MapConfigStoreFactory(
                                     showWildAnimals = pref.isShowWildAnimals
                                 ),
                                 alertsInfo = AlertsInfo(
+                                    alertsEnabled = pref.alertsEnabled,
+                                    voiceAlertsEnabled = pref.alertsVoiceAlertEnabled,
                                     notifyStationaryCameras = pref.isNotifyStationaryCameras,
                                     notifyMediumSpeedCameras = pref.isNotifyMediumSpeedCameras,
                                     notifyMobileCameras = pref.isNotifyMobileCameras,
