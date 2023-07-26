@@ -1,8 +1,14 @@
 name: Deploy App Bundle
 
 on:
+  push:
+    branches: [ release ]
+    paths-ignore:
+      - '**/README.md'
+      - '.github/**'
+      
   workflow_dispatch:
-
+  
 jobs:
   build_aab:
     runs-on: ubuntu-latest
