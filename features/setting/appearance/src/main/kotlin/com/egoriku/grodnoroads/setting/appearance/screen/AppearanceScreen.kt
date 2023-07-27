@@ -114,6 +114,7 @@ private fun KeepScreenOnSettings(
     SwitchSettings(
         imageVector = Icons.Default.Brightness7,
         stringResId = R.string.appearance_keep_screen_on,
+        supportingResId = R.string.appearance_keep_screen_on_description,
         isChecked = keepScreenOn.enabled,
         onCheckedChange = {
             onModify(keepScreenOn.copy(enabled = it))

@@ -66,6 +66,7 @@
     <string name="appearance_app_language_system">System</string>
 
     <string name="appearance_keep_screen_on">Keep screen on</string>
+    <string name="appearance_keep_screen_on_description">Keeps the Map screen always on (may increase battery consumption)</string>
 
     <!-- Alert -->
     <string name="alerts_availability">Alerts</string>

@@ -68,6 +68,52 @@ fun SwitchSettings(
 
 @Composable
 fun SwitchSettings(
+    imageVector: ImageVector,
+    stringResId: Int,
+    supportingResId: Int,
+    isChecked: Boolean,
+    modifier: Modifier = Modifier,
+    onCheckedChange: (Boolean) -> Unit = {}
+) {
+    ListItem(
+        modifier = modifier
+            .toggleable(
+                value = isChecked,
+                role = Role.Checkbox,
+                onValueChange = onCheckedChange
+            ),
+        leadingContent = {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = null
+            )
+        },
+        headlineContent = {
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(id = stringResId),
+                style = MaterialTheme.typography.titleMedium
+            )
+        },
+        supportingContent = {
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(id = supportingResId),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        },
+        trailingContent = {
+            Switch(
+                isChecked = isChecked,
+                onCheckedChange = onCheckedChange,
+            )
+        }
+    )
+}
+
+
+@Composable
+fun SwitchSettings(
     stringResId: Int,
     supportingResId: Int,
     isChecked: Boolean,

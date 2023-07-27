@@ -40,9 +40,7 @@ interface AppearanceComponent {
             }
         ) : AppearancePref
 
-        data class KeepScreenOn(
-            val enabled: Boolean = false
-        ): AppearancePref
+        data class KeepScreenOn(val enabled: Boolean = false): AppearancePref
     }
 
     sealed interface AppearanceDialogState {

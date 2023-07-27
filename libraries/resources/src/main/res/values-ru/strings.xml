@@ -64,6 +64,7 @@
     <string name="appearance_app_language_system">Системный</string>
 
     <string name="appearance_keep_screen_on">Не выключать экран</string>
+    <string name="appearance_keep_screen_on_description">Сохраняет экран Карты всегда включенным (может увеличить расход батареи)</string>
 
     <!-- Alert -->
     <string name="alerts_availability">Оповещения</string>
