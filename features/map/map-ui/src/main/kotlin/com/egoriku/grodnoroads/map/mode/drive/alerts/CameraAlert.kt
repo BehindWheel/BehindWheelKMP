@@ -26,10 +26,11 @@ fun CameraAlert(
     distance: Int,
     speedLimit: Int,
     drawableId: Int,
-    title: String
+    title: String,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(modifier = Modifier.padding(8.dp)) {

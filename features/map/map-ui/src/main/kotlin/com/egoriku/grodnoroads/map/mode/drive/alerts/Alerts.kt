@@ -1,5 +1,8 @@
 package com.egoriku.grodnoroads.map.mode.drive.alerts
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +26,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import java.util.UUID
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Alerts(
     modifier: Modifier = Modifier,
@@ -33,7 +37,7 @@ fun Alerts(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
     ) {
-        items(alerts) { alert ->
+        items(items = alerts, key = { it.id }) { alert ->
             when (alert) {
                 is IncidentAlert -> {
                     val title = when (alert.mapEventType) {
@@ -46,6 +50,12 @@ fun Alerts(
                     }
 
                     IncidentAlert(
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(
+                                durationMillis = 500,
+                                easing = LinearOutSlowInEasing,
+                            )
+                        ),
                         emoji = alert.mapEventType.emoji,
                         title = title,
                         distance = alert.distance,
@@ -68,6 +78,12 @@ fun Alerts(
                         else -> error("title not applicable")
                     }
                     CameraAlert(
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(
+                                durationMillis = 500,
+                                easing = LinearOutSlowInEasing,
+                            )
+                        ),
                         distance = alert.distance,
                         speedLimit = alert.speedLimit,
                         drawableId = icon,

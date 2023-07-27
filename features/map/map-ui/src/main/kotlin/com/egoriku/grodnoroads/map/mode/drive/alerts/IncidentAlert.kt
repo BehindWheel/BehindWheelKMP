@@ -25,10 +25,11 @@ fun IncidentAlert(
     emoji: String,
     title: String,
     distance: Int,
-    messages: ImmutableList<MessageItem>
+    messages: ImmutableList<MessageItem>,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
         Row(
