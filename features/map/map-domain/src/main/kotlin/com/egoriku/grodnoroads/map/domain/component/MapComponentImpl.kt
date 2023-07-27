@@ -72,7 +72,7 @@ internal class MapComponentImpl(
             flow2 = alertInfo,
             transform = alertSoundTransformation()
         ).distinctUntilChanged()
-            .debounce(1000)
+            .debounce(500)
             .onEach { data ->
                 data.onEach { alert ->
                     when (alert) {
@@ -97,7 +97,7 @@ internal class MapComponentImpl(
 
         speedLimit
             .distinctUntilChanged()
-            .debounce(1000)
+            .debounce(500)
             .onEach {
                 if (it != -1) {
                     soundUtil.playOverSpeed()
