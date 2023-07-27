@@ -30,6 +30,7 @@ fun FaqScreen(
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
                 title = stringResource(id = R.string.settings_section_faq),
@@ -37,14 +38,14 @@ fun FaqScreen(
                 scrollBehavior = scrollBehavior
             )
         }
-    ) {
+    ) { paddingValues ->
         val state by faqComponent.state.collectAsState(initial = FaqStore.State())
 
         if (state.isLoading) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it),
+                    .padding(paddingValues),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -53,8 +54,11 @@ fun FaqScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it),
-                contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+                    .padding(paddingValues),
+                contentPadding = WindowInsets
+                    .navigationBars
+                    .add(WindowInsets(left = 16.dp, right = 16.dp, top = 16.dp, bottom = 16.dp))
+                    .asPaddingValues(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(state.faq) {

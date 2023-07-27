@@ -97,24 +97,24 @@ class RoadsRootComponentImpl(
 
     private sealed class Config : Parcelable {
         @Parcelize
-        object Main : Config()
+        data object Main : Config()
 
         @Parcelize
-        object Appearance : Config()
+        data object Appearance : Config()
 
         @Parcelize
-        object MapSettings : Config()
+        data object MapSettings : Config()
 
         @Parcelize
-        object Alerts : Config()
+        data object Alerts : Config()
 
         @Parcelize
-        object WhatsNew : Config()
+        data object WhatsNew : Config()
 
         @Parcelize
-        object NextFeatures : Config()
+        data object NextFeatures : Config()
 
         @Parcelize
-        object FAQ : Config()
+        data object FAQ : Config()
     }
 }

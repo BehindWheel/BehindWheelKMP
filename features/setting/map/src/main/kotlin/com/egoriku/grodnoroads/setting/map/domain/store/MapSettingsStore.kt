@@ -12,7 +12,7 @@ internal interface MapSettingsStore : Store<Intent, StoreState, Nothing> {
         data class Modify(val preference: MapPref) : Intent
         data class Reset(val preference: MapPref) : Intent
         data class OpenDialog(val preference: MapPref) : Intent
-        object CloseDialog : Intent
+        data object CloseDialog : Intent
     }
 
     data class StoreState(

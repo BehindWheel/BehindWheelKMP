@@ -7,12 +7,14 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.*
+import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
+import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.*
 import com.egoriku.grodnoroads.setting.map.domain.store.MapSettingsStore.*
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
+import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.updateDefaultCity
@@ -60,9 +62,9 @@ internal class MapSettingsStoreFactory(
                             val isAllMarkersDisabled = isShowMarkers.none { it }
                             val isAllMarkersEnabled = isShowMarkers.all { it }
                             val selectable = when {
-                                isAllMarkersDisabled -> MapInfo.Selectable.AllDisabled
-                                isAllMarkersEnabled -> MapInfo.Selectable.AllEnabled
-                                else -> MapInfo.Selectable.Mixed
+                                isAllMarkersDisabled -> Selectable.AllDisabled
+                                isAllMarkersEnabled -> Selectable.AllEnabled
+                                else -> Selectable.Mixed
                             }
 
                             MapSettings(
@@ -111,7 +113,7 @@ internal class MapSettingsStoreFactory(
                                 is CarCrash -> updateCarCrash(preference.isShow)
                                 is TrafficJam -> updateTrafficJam(preference.isShow)
                                 is WildAnimals -> updateWildAnimals(preference.isShow)
-                                is Selectable -> {
+                                is SelectAll -> {
                                     updateStationaryCameras(preference.selectAll)
                                     updateMediumSpeedCameras(preference.selectAll)
                                     updateMobileCameras(preference.selectAll)
@@ -158,7 +160,7 @@ internal class MapSettingsStoreFactory(
                                     DEFAULT_MAP_ZOOM_OUT_CITY
                                 )
 
-                                else -> {}
+                                else -> Unit
                             }
                         }
                     }

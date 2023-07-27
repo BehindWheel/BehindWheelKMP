@@ -4,9 +4,6 @@ enum class MapEventType(
     val type: String,
     val emoji: String
 ) {
-    @Deprecated("Legacy event type")
-    RoadAccident(type = "accident", emoji = "❗"),
-
     TrafficPolice(type = "police", emoji = "👮"),
     RoadIncident(type = "road_incident", emoji = "❗"),
     CarCrash(type = "car_crash", emoji = "💥🚗"),
@@ -16,6 +13,6 @@ enum class MapEventType(
     Unsupported(type = "unsupported", emoji = "\uD83D\uDE12");
 
     companion object {
-        fun eventFromString(value: String) = values().find { it.type == value } ?: Unsupported
+        fun eventFromString(value: String) = entries.find { it.type == value } ?: Unsupported
     }
 }

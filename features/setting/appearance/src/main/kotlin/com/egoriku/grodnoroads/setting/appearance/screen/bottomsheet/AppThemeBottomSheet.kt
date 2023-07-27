@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.setting.appearance.screen.bottomsheet
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -49,7 +49,7 @@ fun AppThemeBottomSheet(
                     theme = theme.copy(current = theme.values[position])
                 }
             )
-            Divider()
+            HorizontalDivider()
         },
         footer = {
             ConfirmationFooter(

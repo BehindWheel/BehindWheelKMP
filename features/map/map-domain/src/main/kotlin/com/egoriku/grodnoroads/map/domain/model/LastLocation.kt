@@ -8,7 +8,7 @@ data class LastLocation(
     val speed: Int
 ) {
     companion object {
-        val DEFAULT_LOCATION = LatLng(0.0, 0.0)
+        private val DEFAULT_LOCATION = LatLng(0.0, 0.0)
 
         val None = LastLocation(
             latLng = DEFAULT_LOCATION,

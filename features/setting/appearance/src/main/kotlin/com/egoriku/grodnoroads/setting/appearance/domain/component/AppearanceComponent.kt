@@ -40,15 +40,13 @@ interface AppearanceComponent {
             }
         ) : AppearancePref
 
-        data class KeepScreenOn(
-            val enabled: Boolean = false
-        ): AppearancePref
+        data class KeepScreenOn(val enabled: Boolean = false): AppearancePref
     }
 
     sealed interface AppearanceDialogState {
         data class ThemeDialogState(val themes: AppTheme) : AppearanceDialogState
         data class LanguageDialogState(val languages: AppLanguage) : AppearanceDialogState
 
-        object None : AppearanceDialogState
+        data object None : AppearanceDialogState
     }
 }

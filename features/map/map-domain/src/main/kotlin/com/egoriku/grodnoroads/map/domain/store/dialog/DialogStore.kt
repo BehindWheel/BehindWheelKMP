@@ -12,7 +12,7 @@ interface DialogStore : Store<Intent, State, Message> {
         data class OpenMarkerInfoDialog(val reports: MapEvent.Reports) : Intent
         data class OpenReportTrafficPoliceDialog(val latLng: LatLng) : Intent
         data class OpenRoadIncidentDialog(val latLng: LatLng) : Intent
-        object CloseDialog : Intent
+        data object CloseDialog : Intent
     }
 
     sealed interface Message {

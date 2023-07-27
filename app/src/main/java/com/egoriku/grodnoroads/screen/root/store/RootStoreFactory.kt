@@ -30,7 +30,7 @@ class RootStoreFactory(
 ) {
 
     sealed interface Intent {
-        object CloseDialog : Intent
+        data object CloseDialog : Intent
     }
 
     sealed interface Message {

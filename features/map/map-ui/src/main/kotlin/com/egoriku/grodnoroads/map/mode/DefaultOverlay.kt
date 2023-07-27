@@ -35,6 +35,7 @@ import com.egoriku.grodnoroads.map.popup.QuickActionsPopup
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
+import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
@@ -44,7 +45,6 @@ fun DefaultOverlay(
     quickActionsState: QuickActionsState,
     alerts: ImmutableList<Alert>,
     onPreferenceChange: (QuickActionsPref) -> Unit,
-    onOverSpeed: () -> Unit,
 ) {
     var quickActionsVisible by rememberMutableState { false }
     Box {
@@ -63,9 +63,6 @@ fun DefaultOverlay(
                 ) {
                     CarSpeed(speed = currentSpeed)
                     if (speedLimit != -1) {
-                        LaunchedEffect(Unit) {
-                            onOverSpeed()
-                        }
                         SpeedLimit(limit = speedLimit)
                     }
                 }
@@ -176,6 +173,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(
+                    id = UUID.randomUUID().toString(),
                     mapEventType = MapEventType.TrafficPolice,
                     distance = 1,
                     messages = persistentListOf(
@@ -186,6 +184,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     )
                 ),
                 IncidentAlert(
+                    id = UUID.randomUUID().toString(),
                     mapEventType = MapEventType.CarCrash,
                     distance = 120,
                     messages = persistentListOf(
@@ -195,10 +194,8 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                         )
                     )
                 )
-            ),
-            onPreferenceChange = {},
-            onOverSpeed = {}
-        )
+            )
+        ) {}
         Row(
             modifier = Modifier
                 .fillMaxWidth()

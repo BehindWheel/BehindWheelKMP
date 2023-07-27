@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.ReportType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
@@ -23,24 +24,22 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
-import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
-import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
+import com.egoriku.grodnoroads.map.domain.util.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.component.inject
 
 fun buildMapComponent(
     componentContext: ComponentContext
 ): MapComponent = MapComponentImpl(componentContext)
 
 
+@OptIn(FlowPreview::class)
 internal class MapComponentImpl(
     componentContext: ComponentContext
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
@@ -56,13 +55,55 @@ internal class MapComponentImpl(
     private val mobile = mapEventsStore.states.map { it.mobileCameras }
     private val reports = mapEventsStore.states.map { it.reports }
 
-    private val alertDistance = mapConfigStore.states.map { it.mapInternalConfig.alertDistance }
     private val mapInfo = mapConfigStore.states.map { it.mapInternalConfig.mapInfo }
+    private val alertInfo = mapConfigStore.states.map { it.mapInternalConfig.alertsInfo }
+
+    private val coroutineScope = coroutineScope(Dispatchers.Main)
+
+    private val soundUtil by inject<SoundUtil>()
 
     init {
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
             locationStore.labels bindTo ::bindLocationLabel
         }
+
+        combine(
+            flow = alerts,
+            flow2 = alertInfo,
+            transform = alertSoundTransformation()
+        ).distinctUntilChanged()
+            .debounce(500)
+            .onEach { data ->
+                data.onEach { alert ->
+                    when (alert) {
+                        is Alert.CameraAlert -> {
+                            soundUtil.playCameraLimit(
+                                id = alert.id,
+                                speedLimit = alert.speedLimit,
+                                cameraType = alert.cameraType
+                            )
+                        }
+
+                        is Alert.IncidentAlert -> {
+                            soundUtil.playIncident(
+                                id = alert.id,
+                                mapEventType = alert.mapEventType
+                            )
+                        }
+                    }
+                }
+            }
+            .launchIn(coroutineScope)
+
+        speedLimit
+            .distinctUntilChanged()
+            .debounce(500)
+            .onEach {
+                if (it != -1) {
+                    soundUtil.playOverSpeed()
+                }
+            }
+            .launchIn(coroutineScope)
     }
 
     override val appMode: Flow<AppMode>
@@ -83,7 +124,9 @@ internal class MapComponentImpl(
                 zoomLevel = it.zoomLevel,
                 googleMapStyle = it.mapInternalConfig.googleMapStyle,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
-                keepScreenOn = it.mapInternalConfig.keepScreenOn
+                keepScreenOn = it.mapInternalConfig.keepScreenOn,
+                alertRadius = it.alertRadius,
+                alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled
             )
         }
 
@@ -104,7 +147,7 @@ internal class MapComponentImpl(
         get() = combine(
             flow = mapEvents,
             flow2 = lastLocation,
-            flow3 = alertDistance,
+            flow3 = mapConfig,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 
@@ -113,7 +156,7 @@ internal class MapComponentImpl(
             flow = alerts,
             flow2 = lastLocation,
             transform = overSpeedTransformation()
-        )
+        ).flowOn(Dispatchers.Default)
 
     override val labels: Flow<Label> = locationStore.labels
 

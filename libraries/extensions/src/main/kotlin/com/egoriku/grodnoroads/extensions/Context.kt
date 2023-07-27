@@ -2,6 +2,7 @@
 
 package com.egoriku.grodnoroads.extensions
 
+import android.app.UiModeManager
 import android.content.Context
 import android.media.AudioManager
 import android.widget.Toast
@@ -9,6 +10,10 @@ import androidx.appcompat.content.res.AppCompatResources
 
 val Context.audioManager: AudioManager
     get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+val Context.uiModeManager: UiModeManager
+    get() = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+
 
 fun Context.toast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()

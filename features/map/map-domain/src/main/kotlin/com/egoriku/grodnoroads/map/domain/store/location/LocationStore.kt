@@ -8,11 +8,11 @@ import com.google.android.gms.maps.model.LatLng
 interface LocationStore : Store<Intent, State, Label> {
 
     sealed interface Intent {
-        object StartLocationUpdates : Intent
-        object StopLocationUpdates : Intent
-        object DisabledLocation : Intent
+        data object StartLocationUpdates : Intent
+        data object StopLocationUpdates : Intent
+        data object DisabledLocation : Intent
         data class SetUserLocation(val latLng: LatLng) : Intent
-        object InvalidateLocation : Intent
+        data object InvalidateLocation : Intent
     }
 
     sealed interface Message {
@@ -21,7 +21,7 @@ interface LocationStore : Store<Intent, State, Label> {
     }
 
     sealed interface Label {
-        object None : Label
+        data object None : Label
         data class NewLocation(val latLng: LatLng) : Label
         data class ShowToast(val resId: Int) : Label
     }

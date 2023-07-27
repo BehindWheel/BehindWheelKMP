@@ -18,7 +18,7 @@
     <string name="toast_location_disabled">Для навігацыі патрэбен доступ да геолокации</string>
 
     <string name="alerts_stationary_camera">Стацыянарная камера</string>
-    <string name="alerts_mobile_camera">Часовая камера</string>
+    <string name="alerts_mobile_camera">Мабільная камера</string>
     <string name="alerts_medium_speed_camera">Камера сярэдняй хуткасці</string>
     <string name="alerts_incident">Дарожнае здарэнне</string>
     <string name="alerts_traffic_police">Экіпаж ДАІ</string>
@@ -38,7 +38,7 @@
     <string name="drawer_app_version">Версія: %1$s</string>
     <string name="settings_section_appearance">Знешні выгляд</string>
     <string name="settings_section_map">Мапа</string>
-    <string name="settings_section_alerts">Паведамленні</string>
+    <string name="settings_section_alerts">Абвесткі</string>
     <string name="settings_section_whats_new">Што новага</string>
     <string name="settings_section_next_features">Будучыя фічы</string>
     <string name="settings_section_faq">Часта задаюць пытанні</string>
@@ -58,6 +58,34 @@
     <string name="appearance_app_language_system">Сістэмная</string>
 
     <string name="appearance_keep_screen_on">Не выключаць экран</string>
+    <string name="appearance_keep_screen_on_description">Захоўвае экран Карты заўсёды уключаным (можа павялічыць расход батарэі)</string>
+
+    <!-- Alert -->
+    <string name="alerts_availability">Абвесткі</string>
+    <string name="alerts_availability_description">Паказваюцца на экране пры набліжэнні да падзеі на карце</string>
+    <string name="alerts_voice_alerts">Галасавыя абвесткі</string>
+    <string name="alerts_voice_alerts_description">Ўключаюцца пры набліжэнні да падзеі на карце</string>
+
+    <string name="alerts_header_volume_level">Узровень гучнасці</string>
+    <string name="alerts_volume_level_low">Нізкі</string>
+    <string name="alerts_volume_level_medium">Сярэдні</string>
+    <string name="alerts_volume_level_high">Высокі</string>
+
+    <string name="alerts_header_notification_radius">Радыус абвесткі</string>
+    <string name="alerts_notification_radius_in_city">У горадзе</string>
+    <string name="alerts_notification_radius_outside_city">За межамі горада</string>
+    <string name="alerts_notification_radius_postfix">м</string>
+
+    <string name="alerts_header_voice_alerts">Тыпы галасавых абвестак</string>
+    <string name="alerts_notifications_select_all">Выбраць усе</string>
+    <string name="alerts_notifications_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="alerts_notifications_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
+    <string name="alerts_notifications_mobile_cameras">Мабільныя камеры</string>
+    <string name="alerts_notifications_traffic_police">ДАІ</string>
+    <string name="alerts_notifications_incidents">Праблемы на дарозе</string>
+    <string name="alerts_notifications_car_crash">ДТЗ</string>
+    <string name="alerts_notifications_traffic_jam">Заторы</string>
+    <string name="alerts_notifications_wild_animals">Дзікія жывёлы</string>
 
     <string name="map_header_appearance">Знешні выгляд</string>
     <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
@@ -74,6 +102,7 @@
     <string name="map_markers_car_crash">ДТЗ</string>
     <string name="map_markers_traffic_jam">Заторы</string>
     <string name="map_markers_wild_animals">Дзікія жывёлы</string>
+
     <string name="dialog_report_police">Паведаміць аб ДАІ</string>
     <string name="dialog_incident">Паведаміць аб праблеме</string>
     <string name="dialog_input_hint">Апцыянальнае паведамленне</string>

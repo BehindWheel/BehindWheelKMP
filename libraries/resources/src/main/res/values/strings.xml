@@ -66,6 +66,34 @@
     <string name="appearance_app_language_system">System</string>
 
     <string name="appearance_keep_screen_on">Keep screen on</string>
+    <string name="appearance_keep_screen_on_description">Keeps the Map screen always on (may increase battery consumption)</string>
+
+    <!-- Alert -->
+    <string name="alerts_availability">Alerts</string>
+    <string name="alerts_availability_description">Are shown on the screen when approaching an event on the map</string>
+    <string name="alerts_voice_alerts">Voice alerts</string>
+    <string name="alerts_voice_alerts_description">Turn on when approaching an event on the map</string>
+
+    <string name="alerts_header_volume_level">Volume level</string>
+    <string name="alerts_volume_level_low">Low</string>
+    <string name="alerts_volume_level_medium">Medium</string>
+    <string name="alerts_volume_level_high">High</string>
+
+    <string name="alerts_header_notification_radius">Notification radius</string>
+    <string name="alerts_notification_radius_in_city">In city</string>
+    <string name="alerts_notification_radius_outside_city">Outside city</string>
+    <string name="alerts_notification_radius_postfix">m</string>
+
+    <string name="alerts_header_voice_alerts">Types of voice alerts</string>
+    <string name="alerts_notifications_select_all">Select All</string>
+    <string name="alerts_notifications_stationary_cameras">Stationary cameras</string>
+    <string name="alerts_notifications_medium_speed_cameras">Medium speed cameras</string>
+    <string name="alerts_notifications_mobile_cameras">Mobile cameras</string>
+    <string name="alerts_notifications_traffic_police">Traffic Police</string>
+    <string name="alerts_notifications_incidents">Incidents on road</string>
+    <string name="alerts_notifications_car_crash">Car crash</string>
+    <string name="alerts_notifications_traffic_jam">Traffic jam</string>
+    <string name="alerts_notifications_wild_animals">Wild animals</string>
 
     <!-- Map -->
     <string name="map_header_default_location">Default location</string>

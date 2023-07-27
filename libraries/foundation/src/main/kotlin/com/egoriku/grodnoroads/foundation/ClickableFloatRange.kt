@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 @Composable
-fun ClickableRange(
+fun ClickableFloatRange(
     modifier: Modifier = Modifier,
     min: Float,
     max: Float,
@@ -144,11 +144,11 @@ private fun decrement(value: Float, step: Float): Float {
 
 @GrodnoRoadsPreview
 @Composable
-private fun RangeSettingPreview() = GrodnoRoadsM3ThemePreview {
+private fun ClickableFloatRangePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(200.dp, 50.dp)) {
         var value by rememberMutableState { 10f }
 
-        ClickableRange(
+        ClickableFloatRange(
             modifier = Modifier.align(Center),
             min = 10f,
             max = 15f,

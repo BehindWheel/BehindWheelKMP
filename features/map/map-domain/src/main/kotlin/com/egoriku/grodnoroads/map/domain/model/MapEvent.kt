@@ -28,6 +28,7 @@ sealed interface MapEvent {
         ) : Camera
 
         data class MobileCamera(
+            val id: String,
             override val cameraType: CameraType = CameraType.MobileCamera,
             override val name: String,
             override val position: LatLng,
@@ -51,6 +52,7 @@ sealed interface MapEvent {
     }
 
     data class Reports(
+        val id: String,
         val markerMessage: String,
         val dialogTitle: String,
         val messages: ImmutableList<MessageItem>,

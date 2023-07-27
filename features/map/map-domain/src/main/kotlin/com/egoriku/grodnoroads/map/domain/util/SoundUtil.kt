@@ -3,26 +3,73 @@ package com.egoriku.grodnoroads.map.domain.util
 import android.content.Context
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
+import com.egoriku.grodnoroads.map.domain.model.CameraType
+import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import java.util.UUID
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 class SoundUtil(context: Context) {
 
     private val audioPlayer = AudioPlayer(context)
     private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
 
-    fun playOverSpeed() = playSound(Sound.OverSpeed)
+    private val overSpeedId = UUID.randomUUID().toString()
 
-    fun playSound(sound: Sound, id: String = UUID.randomUUID().toString()) {
+    fun playOverSpeed() = playSound(
+        sound = Sound.OverSpeed,
+        id = overSpeedId,
+        expiration = FIVE_SECONDS
+    )
+
+    fun playIncident(id: String, mapEventType: MapEventType) {
+        when (mapEventType) {
+            MapEventType.TrafficPolice -> Sound.TrafficPolice
+            MapEventType.RoadIncident -> Sound.RoadIncident
+            MapEventType.CarCrash -> Sound.CarCrash
+            MapEventType.TrafficJam -> Sound.TrafficJam
+            MapEventType.WildAnimals -> Sound.WildAnimals
+            MapEventType.Unsupported -> null
+        }?.let { playSound(sound = it, id = id) }
+    }
+
+    fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
+        val speedLimitSound = when (speedLimit) {
+            40 -> Sound.SpeedLimit40
+            50 -> Sound.SpeedLimit50
+            60 -> Sound.SpeedLimit60
+            70 -> Sound.SpeedLimit70
+            80 -> Sound.SpeedLimit80
+            90 -> Sound.SpeedLimit90
+            100 -> Sound.SpeedLimit100
+            110 -> Sound.SpeedLimit110
+            120 -> Sound.SpeedLimit120
+            else -> null
+        }
+        val cameraSound = when (cameraType) {
+            CameraType.StationaryCamera -> Sound.StationaryCamera
+            CameraType.MobileCamera -> Sound.MobileCamera
+            CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
+        }
+
+        playSound(sound = cameraSound, id = id)
+        speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
+    }
+
+    private fun playSound(
+        sound: Sound,
+        id: String = UUID.randomUUID().toString(),
+        expiration: Long = ONE_MINUTE
+    ) {
         val currentTimeMillis = System.currentTimeMillis()
         val item = soundHistory[id]
 
         if (item == null) {
             soundHistory[id] = SoundTimeStamp(sound = sound, timestamp = currentTimeMillis)
-            audioPlayer.playSound(sound)
-        } else if (currentTimeMillis - item.timestamp > ONE_MINUTE) {
+            audioPlayer.enqueueSound(sound)
+        } else if (currentTimeMillis - item.timestamp > expiration) {
             soundHistory[id] = item.copy(timestamp = currentTimeMillis)
-            audioPlayer.playSound(sound)
+            audioPlayer.enqueueSound(sound)
         }
 
         invalidateOldSounds()
@@ -34,7 +81,7 @@ class SoundUtil(context: Context) {
             .filterValues { currentTime - it.timestamp > THIRTY_MINUTES }
             .keys
 
-        invalidIds.forEach { soundHistory.remove(it) }
+        invalidIds.forEach(soundHistory::remove)
     }
 
     private data class SoundTimeStamp(
@@ -43,7 +90,8 @@ class SoundUtil(context: Context) {
     )
 
     companion object {
-        val ONE_MINUTE = 1.minutes.inWholeMilliseconds
+        val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
+        val ONE_MINUTE = 3.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }
 }

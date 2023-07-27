@@ -23,7 +23,7 @@ import com.egoriku.grodnoroads.foundation.uikit.TriStateCheckbox
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapInfo.Selectable
+import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +42,7 @@ internal fun MapEventsSection(
         val onToggle = remember(mapInfo.selectable) {
             {
                 val selectAll = mapInfo.selectable != Selectable.AllEnabled
-                onCheckedChange(MapPref.Selectable(selectAll = selectAll))
+                onCheckedChange(MapPref.SelectAll(selectAll = selectAll))
             }
         }
 
@@ -68,10 +68,10 @@ internal fun MapEventsSection(
         MediumSpeedCameras(mapInfo, onCheckedChange)
         MobileCameras(mapInfo, onCheckedChange)
         TrafficPolice(mapInfo, onCheckedChange)
-        RoadIncidents(mapInfo, onCheckedChange)
-        CarCrash(mapInfo, onCheckedChange)
-        TrafficConditions(mapInfo, onCheckedChange)
         WildAnimals(mapInfo, onCheckedChange)
+        RoadIncidents(mapInfo, onCheckedChange)
+        TrafficConditions(mapInfo, onCheckedChange)
+        CarCrash(mapInfo, onCheckedChange)
     }
 }
 
@@ -140,7 +140,7 @@ private fun TrafficPolice(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_traffic_police,
+        iconRes = R.drawable.ic_setting_traffic_police,
         stringResId = R.string.map_markers_traffic_police,
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
@@ -158,7 +158,7 @@ private fun RoadIncidents(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_warning,
+        iconRes = R.drawable.ic_settings_road_incident,
         stringResId = R.string.map_markers_incidents,
         isChecked = roadIncident.isShow,
         onCheckedChange = {
@@ -176,10 +176,9 @@ private fun CarCrash(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_car_crash,
+        iconRes = R.drawable.ic_settings_car_crash,
         stringResId = R.string.map_markers_car_crash,
         isChecked = carCrash.isShow,
-        useTint = true,
         onCheckedChange = {
             onCheckedChange(carCrash.copy(isShow = it))
         }
@@ -195,9 +194,8 @@ private fun TrafficConditions(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_traffic_jam,
+        iconRes = R.drawable.ic_settings_traffic_jam,
         stringResId = R.string.map_markers_traffic_jam,
-        useTint = true,
         isChecked = trafficJam.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJam.copy(isShow = it))
@@ -214,9 +212,8 @@ private fun WildAnimals(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_wild_animals,
+        iconRes = R.drawable.ic_settings_wild_animals,
         stringResId = R.string.map_markers_wild_animals,
-        useTint = true,
         isChecked = wildAnimals.isShow,
         onCheckedChange = {
             onCheckedChange(wildAnimals.copy(isShow = it))

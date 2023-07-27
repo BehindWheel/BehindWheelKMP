@@ -1,5 +1,8 @@
 package com.egoriku.grodnoroads.map.mode.drive.alerts
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +24,9 @@ import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import java.util.UUID
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Alerts(
     modifier: Modifier = Modifier,
@@ -32,7 +37,7 @@ fun Alerts(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
     ) {
-        items(alerts) { alert ->
+        items(items = alerts, key = { it.id }) { alert ->
             when (alert) {
                 is IncidentAlert -> {
                     val title = when (alert.mapEventType) {
@@ -45,6 +50,12 @@ fun Alerts(
                     }
 
                     IncidentAlert(
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(
+                                durationMillis = 500,
+                                easing = LinearOutSlowInEasing,
+                            )
+                        ),
                         emoji = alert.mapEventType.emoji,
                         title = title,
                         distance = alert.distance,
@@ -67,6 +78,12 @@ fun Alerts(
                         else -> error("title not applicable")
                     }
                     CameraAlert(
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(
+                                durationMillis = 500,
+                                easing = LinearOutSlowInEasing,
+                            )
+                        ),
                         distance = alert.distance,
                         speedLimit = alert.speedLimit,
                         drawableId = icon,
@@ -86,6 +103,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
             IncidentAlert(
                 mapEventType = TrafficPolice,
                 distance = 1,
+                id = UUID.randomUUID().toString(),
                 messages = persistentListOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
@@ -94,11 +112,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 )
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 2,
                 speedLimit = 60,
                 cameraType = StationaryCamera
             ),
             IncidentAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 5,
                 messages = persistentListOf(
                     MessageItem(
@@ -113,11 +133,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 mapEventType = RoadIncident
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 220,
                 speedLimit = -1,
                 cameraType = MobileCamera
             ),
             CameraAlert(
+                id = UUID.randomUUID().toString(),
                 distance = 220,
                 speedLimit = 60,
                 cameraType = MobileCamera

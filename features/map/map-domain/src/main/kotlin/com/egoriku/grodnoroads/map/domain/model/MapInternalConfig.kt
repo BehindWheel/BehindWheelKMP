@@ -5,8 +5,10 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 internal data class MapInternalConfig(
     val zoomLevelInCity: Float,
     val zoomLevelOutOfCity: Float,
-    val alertDistance: Int,
+    val alertsDistanceInCity: Int,
+    val alertsDistanceOutCity: Int,
     val mapInfo: MapInfo,
+    val alertsInfo: AlertsInfo,
     val googleMapStyle: Style,
     val trafficJanOnMap: Boolean,
     val keepScreenOn: Boolean
@@ -22,11 +24,25 @@ internal data class MapInternalConfig(
         val showWildAnimals: Boolean,
     )
 
+    internal data class AlertsInfo(
+        val alertsEnabled: Boolean,
+        val voiceAlertsEnabled: Boolean,
+        val notifyStationaryCameras: Boolean,
+        val notifyMediumSpeedCameras: Boolean,
+        val notifyMobileCameras: Boolean,
+        val notifyRoadIncident: Boolean,
+        val notifyTrafficPolice: Boolean,
+        val notifyCarCrash: Boolean,
+        val notifyTrafficJam: Boolean,
+        val notifyWildAnimals: Boolean,
+    )
+
     companion object {
         val EMPTY = MapInternalConfig(
             zoomLevelInCity = -1f,
             zoomLevelOutOfCity = -1f,
-            alertDistance = -1,
+            alertsDistanceInCity = -1,
+            alertsDistanceOutCity = -1,
             mapInfo = MapInfo(
                 showStationaryCameras = false,
                 showMediumSpeedCameras = false,
@@ -36,6 +52,18 @@ internal data class MapInternalConfig(
                 showCarCrash = false,
                 showTrafficJam = false,
                 showWildAnimals = false
+            ),
+            alertsInfo = AlertsInfo(
+                alertsEnabled = false,
+                voiceAlertsEnabled = false,
+                notifyStationaryCameras = false,
+                notifyMediumSpeedCameras = false,
+                notifyMobileCameras = false,
+                notifyRoadIncident = false,
+                notifyTrafficPolice = false,
+                notifyCarCrash = false,
+                notifyTrafficJam = false,
+                notifyWildAnimals = false
             ),
             googleMapStyle = Style.Minimal,
             trafficJanOnMap = false,

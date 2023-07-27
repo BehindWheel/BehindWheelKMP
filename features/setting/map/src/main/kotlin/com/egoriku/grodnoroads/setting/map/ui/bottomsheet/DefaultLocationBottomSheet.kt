@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.setting.map.ui.bottomsheet
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -57,7 +57,7 @@ internal fun DefaultLocationBottomSheet(
                         defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index])
                 }
             )
-            Divider()
+            HorizontalDivider()
         },
         footer = {
             ConfirmationFooter(

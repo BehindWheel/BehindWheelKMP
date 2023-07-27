@@ -25,10 +25,11 @@ fun IncidentAlert(
     emoji: String,
     title: String,
     distance: Int,
-    messages: ImmutableList<MessageItem>
+    messages: ImmutableList<MessageItem>,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
         Row(
@@ -56,7 +57,7 @@ fun IncidentAlert(
                 style = MaterialTheme.typography.bodyLarge
             )
         }
-        Divider()
+        HorizontalDivider()
         MessageComponent(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             messages = messages

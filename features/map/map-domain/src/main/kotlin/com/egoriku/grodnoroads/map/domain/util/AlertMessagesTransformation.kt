@@ -6,6 +6,7 @@ import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
@@ -17,18 +18,21 @@ import kotlinx.collections.immutable.toImmutableList
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
-fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, Int) -> ImmutableList<Alert> =
-    { mapEvents, lastLocation, alertDistance ->
+private val emptyList = persistentListOf<Alert>()
+
+fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, MapConfig) -> ImmutableList<Alert> =
+    { mapEvents, lastLocation, config ->
         when (lastLocation) {
-            LastLocation.None -> persistentListOf()
+            LastLocation.None -> emptyList
             else -> when {
+                !config.alertsEnabled -> emptyList
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents,
                     lastLocation = lastLocation,
-                    distanceRadius = alertDistance
+                    alertDistance = config.alertRadius
                 )
 
-                else -> persistentListOf()
+                else -> emptyList
             }
         }
     }
@@ -36,7 +40,7 @@ fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, Int) -
 private fun makeAlertMessage(
     mapEvents: List<MapEvent>,
     lastLocation: LastLocation,
-    distanceRadius: Int
+    alertDistance: Int
 ) = mapEvents.mapNotNull { event ->
     when (lastLocation) {
         LastLocation.None -> null
@@ -45,11 +49,11 @@ private fun makeAlertMessage(
                 eventLatLng = event.position,
                 offsetLatLng = computeOffset(
                     from = lastLocation.latLng,
-                    distance = distanceRadius.toDouble(),
+                    distance = alertDistance.toDouble(),
                     heading = lastLocation.bearing.toDouble()
                 ),
                 currentLatLnt = lastLocation.latLng,
-                distanceRadius = distanceRadius
+                distanceRadius = alertDistance
             )
 
             when (distance) {
@@ -64,6 +68,7 @@ private fun makeAlertMessage(
 
                         if (inRange) {
                             CameraAlert(
+                                id = event.id,
                                 distance = distance,
                                 // TODO: handle car type
                                 speedLimit = event.speedCar,
@@ -74,6 +79,7 @@ private fun makeAlertMessage(
 
                     is Reports -> {
                         IncidentAlert(
+                            id = event.id,
                             distance = distance,
                             messages = event.messages,
                             mapEventType = event.mapEventType
@@ -82,6 +88,7 @@ private fun makeAlertMessage(
 
                     is Camera.MobileCamera -> {
                         CameraAlert(
+                            id = event.id,
                             distance = distance,
                             speedLimit = event.speedCar,
                             cameraType = event.cameraType
@@ -89,6 +96,7 @@ private fun makeAlertMessage(
                     }
 
                     is Camera.MediumSpeedCamera -> CameraAlert(
+                        id = event.id,
                         distance = distance,
                         speedLimit = event.speedCar,
                         cameraType = event.cameraType

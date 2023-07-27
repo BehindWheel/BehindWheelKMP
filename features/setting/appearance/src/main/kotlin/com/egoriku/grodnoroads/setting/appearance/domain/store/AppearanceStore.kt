@@ -12,7 +12,7 @@ interface AppearanceStore : Store<Intent, State, Nothing> {
     sealed interface Intent {
         data class Modify(val preference: AppearancePref) : Intent
         data class Update(val preference: AppearancePref) : Intent
-        object CloseDialog : Intent
+        data object CloseDialog : Intent
     }
 
     data class State(

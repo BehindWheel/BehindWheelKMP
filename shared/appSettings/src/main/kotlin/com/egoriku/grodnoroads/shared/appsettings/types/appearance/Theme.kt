@@ -8,7 +8,7 @@ enum class Theme(val theme: Int) {
     Light(2);
 
     companion object {
-        fun fromOrdinal(ordinal: Int) = values()[ordinal]
+        fun fromOrdinal(ordinal: Int) = entries[ordinal]
 
         fun Theme.toStringResource() = when (this) {
             System -> R.string.appearance_app_theme_system

@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
+import java.util.UUID
 
 private const val MERGE_ALERT_DISTANCE = 200
 
@@ -51,6 +52,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                 )
             } else {
                 val action = Reports(
+                    id = UUID.randomUUID().toString(),
                     messages = persistentListOf(
                         MessageItem(
                             message = "(${DateUtil.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",

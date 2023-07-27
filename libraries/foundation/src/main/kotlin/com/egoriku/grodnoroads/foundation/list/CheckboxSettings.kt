@@ -89,17 +89,15 @@ private fun BasicCheckboxSettings(
 private fun PreviewCheckboxSettings() = GrodnoRoadsM3ThemePreview {
     Column {
         CheckboxSettings(
-            iconRes = R.drawable.ic_traffic_jam,
+            iconRes = R.drawable.ic_settings_traffic_jam,
             stringResId = R.string.app_name,
             isChecked = true,
-            useTint = true,
             onCheckedChange = {}
         )
         CheckboxSettings(
-            iconRes = R.drawable.ic_traffic_jam,
+            iconRes = R.drawable.ic_settings_traffic_jam,
             stringResId = R.string.app_name,
             isChecked = false,
-            useTint = true,
             onCheckedChange = {}
         )
     }

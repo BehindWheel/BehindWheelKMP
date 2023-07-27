@@ -23,6 +23,7 @@ import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +51,7 @@ fun MarkerInfoBottomSheet(
                     MessageRow(messageItem = it)
                 }
             }
-            Divider()
+            HorizontalDivider()
         },
         footer = {
             TextButton(
@@ -68,6 +69,7 @@ private
 fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
     MarkerInfoBottomSheet(
         reports = Reports(
+            id = UUID.randomUUID().toString(),
             messages = persistentListOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",

@@ -18,7 +18,6 @@ import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.setting.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.setting.screen.ui.section.VersionSection
-import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsAlertsEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsNextFeaturesEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 
@@ -39,7 +38,7 @@ internal fun SettingsUi(
         ) {
             SettingsHeader(
                 title = stringResource(R.string.settings_category_main),
-                top = 0.dp
+                paddingValues = PaddingValues(start = 24.dp, bottom = 4.dp),
             )
             SettingsItem(
                 icon = Icons.Filled.Style,
@@ -55,16 +54,13 @@ internal fun SettingsUi(
                     onSettingClick(Page.Map)
                 }
             )
-
-            if (settingsAlertsEnabled) {
-                SettingsItem(
-                    icon = Icons.Filled.NotificationImportant,
-                    text = stringResource(R.string.settings_section_alerts),
-                    onClick = {
-                        onSettingClick(Page.Alerts)
-                    }
-                )
-            }
+            SettingsItem(
+                icon = Icons.Default.Notifications,
+                text = stringResource(R.string.settings_section_alerts),
+                onClick = {
+                    onSettingClick(Page.Alerts)
+                }
+            )
 
             SettingsHeader(title = stringResource(R.string.settings_category_other))
             SettingsItem(
