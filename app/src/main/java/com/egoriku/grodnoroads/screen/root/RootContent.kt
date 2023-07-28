@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.*
 import com.egoriku.grodnoroads.screen.main.MainUi
@@ -18,6 +19,7 @@ import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
 import com.egoriku.grodnoroads.setting.whatsnew.screen.WhatsNewScreen
 
+@OptIn(FaultyDecomposeApi::class)
 @Composable
 fun RootContent(roadsRootComponent: RoadsRootComponent) {
     Surface(modifier = Modifier.fillMaxSize()) {
