@@ -9,20 +9,14 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.logD
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -38,7 +32,7 @@ fun PermissionButton(
     modifier: Modifier = Modifier,
     onLocationEnabled: () -> Unit,
     onLocationDisabled: () -> Unit,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     val gmsLocationPermissionsState = rememberGmsLocationPermissionsState(
         onAccepted = onLocationEnabled,
@@ -52,20 +46,11 @@ fun PermissionButton(
             gmsLocationPermissionsState.launchLocationRequest()
         }
     }
-
-    Button(
-        modifier = modifier.size(80.dp),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 3.dp
-        ),
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
-        shape = CircleShape,
-        contentPadding = PaddingValues(0.dp),
-        onClick = {
-            locationPermissionsState.launchMultiplePermissionRequest()
-        },
-        content = content
-    )
+    Box(modifier = modifier.clickable {
+        locationPermissionsState.launchMultiplePermissionRequest()
+    }) {
+        content()
+    }
 }
 
 @Composable

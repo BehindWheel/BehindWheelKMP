@@ -137,7 +137,7 @@ fun QuickActionsPopup(
                 exit = fadeOut(),
             ) {
                 CircleButton(
-                    size = 48.dp,
+                    modifier = Modifier.size(48.dp),
                     onClick = onExpand
                 ) {
                     Icon(
