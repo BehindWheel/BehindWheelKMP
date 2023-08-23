@@ -27,7 +27,7 @@ fun DefaultMode(
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(start = 16.dp, bottom = 20.dp),
+                .padding(start = 16.dp, bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             CircleButton(onClick = { report(TrafficPolice) }) {
