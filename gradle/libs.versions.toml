@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "23"
 targetSdk = "33"
 
-agp = "8.1.0"
+agp = "8.1.1"
 accompanist = "0.30.1"
 compose-compiler = "1.5.1"
 decompose = "2.0.1"
@@ -53,7 +53,7 @@ firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
 google-maps = "com.google.maps.android:maps-ktx:3.4.0"
-google-maps-compose = "com.google.maps.android:maps-compose:2.13.0"
+google-maps-compose = "com.google.maps.android:maps-compose:2.14.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.5.2"
 google-material = "com.google.android.material:material:1.9.0"
 
