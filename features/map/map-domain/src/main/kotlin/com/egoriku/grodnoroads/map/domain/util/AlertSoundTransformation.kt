@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.map.domain.util
 
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
+import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.CameraType.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
@@ -11,9 +12,9 @@ import kotlinx.collections.immutable.toImmutableList
 
 val alertPersistentList = persistentListOf<Alert>()
 
-internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsInfo) -> ImmutableList<Alert> =
-    { alerts, alertInfo ->
-        if (alertInfo.voiceAlertsEnabled) {
+internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsInfo, AppMode) -> ImmutableList<Alert> =
+    { alerts, alertInfo, appMode ->
+        if (alertInfo.voiceAlertsEnabled && appMode == AppMode.Drive) {
             alerts.mapNotNull { alert ->
                 when (alert) {
                     is CameraAlert -> {

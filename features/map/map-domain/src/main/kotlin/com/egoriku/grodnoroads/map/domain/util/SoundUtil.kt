@@ -16,6 +16,9 @@ class SoundUtil(context: Context) {
 
     private val overSpeedId = UUID.randomUUID().toString()
 
+    private val currentTimeMillis: Long
+        get() = System.currentTimeMillis()
+
     fun playOverSpeed() = playSound(
         sound = Sound.OverSpeed,
         id = overSpeedId,
@@ -23,14 +26,21 @@ class SoundUtil(context: Context) {
     )
 
     fun playIncident(id: String, mapEventType: MapEventType) {
-        when (mapEventType) {
+        val incidentSound = when (mapEventType) {
             MapEventType.TrafficPolice -> Sound.TrafficPolice
             MapEventType.RoadIncident -> Sound.RoadIncident
             MapEventType.CarCrash -> Sound.CarCrash
             MapEventType.TrafficJam -> Sound.TrafficJam
             MapEventType.WildAnimals -> Sound.WildAnimals
             MapEventType.Unsupported -> null
-        }?.let { playSound(sound = it, id = id) }
+        } ?: return
+
+        val isSkipByDuplicate = checkDuplicate(incidentSound)
+
+        when {
+            isSkipByDuplicate -> return
+            else -> playSound(sound = incidentSound, id = id)
+        }
     }
 
     fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
@@ -52,16 +62,34 @@ class SoundUtil(context: Context) {
             CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
         }
 
-        playSound(sound = cameraSound, id = id)
-        speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
+        val isSkipByDuplicate = checkDuplicate(cameraSound)
+        when {
+            isSkipByDuplicate -> return
+            else -> {
+                playSound(sound = cameraSound, id = id)
+                speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
+            }
+        }
     }
+
+    private fun checkDuplicate(sound: Sound, expiration: Long = FIVE_SECONDS): Boolean {
+        val currentTimeMillis = currentTimeMillis
+        return soundHistory
+            .filterValues { soundTimeStamp ->
+                soundTimeStamp.sound == sound &&
+                        soundTimeStamp.timestamp >= currentTimeMillis - expiration
+            }
+            .isNotEmpty()
+    }
+
+    fun setVolume(level: Float) = audioPlayer.setVolumeLevel(level)
 
     private fun playSound(
         sound: Sound,
         id: String = UUID.randomUUID().toString(),
         expiration: Long = ONE_MINUTE
     ) {
-        val currentTimeMillis = System.currentTimeMillis()
+        val currentTimeMillis = currentTimeMillis
         val item = soundHistory[id]
 
         if (item == null) {
@@ -76,7 +104,7 @@ class SoundUtil(context: Context) {
     }
 
     private fun invalidateOldSounds() {
-        val currentTime = System.currentTimeMillis()
+        val currentTime = currentTimeMillis
         val invalidIds = soundHistory
             .filterValues { currentTime - it.timestamp > THIRTY_MINUTES }
             .keys

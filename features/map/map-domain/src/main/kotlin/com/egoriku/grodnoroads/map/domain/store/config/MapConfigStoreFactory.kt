@@ -70,6 +70,7 @@ internal class MapConfigStoreFactory(
                                 ),
                                 alertsInfo = AlertsInfo(
                                     alertsEnabled = pref.alertsEnabled,
+                                    alertsVolumeLevel = pref.alertsVolumeLevel,
                                     voiceAlertsEnabled = pref.alertsVoiceAlertEnabled,
                                     notifyStationaryCameras = pref.isNotifyStationaryCameras,
                                     notifyMediumSpeedCameras = pref.isNotifyMediumSpeedCameras,

@@ -70,6 +70,7 @@ internal class MapComponentImpl(
         combine(
             flow = alerts,
             flow2 = alertInfo,
+            flow3 = appMode,
             transform = alertSoundTransformation()
         ).distinctUntilChanged()
             .debounce(500)
@@ -102,6 +103,13 @@ internal class MapComponentImpl(
                 if (it != -1) {
                     soundUtil.playOverSpeed()
                 }
+            }
+            .launchIn(coroutineScope)
+
+        alertInfo
+            .distinctUntilChanged()
+            .onEach {
+                soundUtil.setVolume(level = it.alertsVolumeLevel.level)
             }
             .launchIn(coroutineScope)
     }
@@ -148,6 +156,7 @@ internal class MapComponentImpl(
             flow = mapEvents,
             flow2 = lastLocation,
             flow3 = mapConfig,
+            flow4 = appMode,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 
