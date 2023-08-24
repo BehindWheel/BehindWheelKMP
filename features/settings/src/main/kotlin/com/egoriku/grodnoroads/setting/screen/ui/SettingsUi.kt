@@ -23,6 +23,7 @@ import com.egoriku.grodnoroads.shared.appcomponent.Page
 
 @Composable
 internal fun SettingsUi(
+    contentPadding: PaddingValues,
     appVersion: String,
     onSettingClick: (Page) -> Unit
 ) {
@@ -30,6 +31,7 @@ internal fun SettingsUi(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
+            .padding(contentPadding)
     ) {
         Column(
             modifier = Modifier
@@ -99,5 +101,9 @@ internal fun SettingsUi(
 @GrodnoRoadsPreview
 @Composable
 private fun SettingUiPreview() = GrodnoRoadsM3ThemePreview {
-    SettingsUi(onSettingClick = {}, appVersion = "1.0.0")
+    SettingsUi(
+        contentPadding = PaddingValues(),
+        onSettingClick = {},
+        appVersion = "1.0.0"
+    )
 }
