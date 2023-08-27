@@ -16,16 +16,12 @@ plugins {
 
 tasks {
     registering(Delete::class) {
-        delete(buildDir)
+        delete(layout.buildDirectory)
     }
     withType<DependencyUpdatesTask> {
         rejectVersionIf {
             isNonStable(candidate.version)
         }
-    }
-
-    registering(Delete::class) {
-        delete(buildDir)
     }
 }
 
