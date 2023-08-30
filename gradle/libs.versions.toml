@@ -5,11 +5,11 @@ targetSdk = "33"
 
 agp = "8.1.1"
 accompanist = "0.32.0"
-compose-compiler = "1.5.2"
+compose-compiler = "1.5.3"
 decompose = "2.0.1"
 koin-android = "3.4.3"
 koin-compose = "3.4.6"
-kotlin = "1.9.0"
+kotlin = "1.9.10"
 mvikotlin = "3.2.1"
 
 [libraries]
@@ -46,7 +46,7 @@ coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-service
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:32.2.2"
+firebase-bom = "com.google.firebase:firebase-bom:32.2.3"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
@@ -74,10 +74,9 @@ play-services-maps = "com.google.android.gms:play-services-maps:18.1.0"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.8" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
 google-services = { id = "com.google.gms.google-services", version = "4.3.15" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.47.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "1.9.0-1.0.12" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
