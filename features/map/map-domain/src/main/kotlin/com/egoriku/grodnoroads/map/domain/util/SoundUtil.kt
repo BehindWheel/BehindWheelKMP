@@ -72,7 +72,7 @@ class SoundUtil(context: Context) {
         }
     }
 
-    private fun checkDuplicate(sound: Sound, expiration: Long = FIVE_SECONDS): Boolean {
+    private fun checkDuplicate(sound: Sound, expiration: Long = ONE_MINUTE): Boolean {
         val currentTimeMillis = currentTimeMillis
         return soundHistory
             .filterValues { soundTimeStamp ->
@@ -119,6 +119,7 @@ class SoundUtil(context: Context) {
 
     companion object {
         val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
+        val ONE_MINUTE = 1.minutes.inWholeMilliseconds
         val FIVE_MINUTE = 5.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }
