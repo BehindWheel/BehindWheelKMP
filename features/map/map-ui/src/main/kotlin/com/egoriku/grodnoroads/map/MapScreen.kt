@@ -47,7 +47,7 @@ import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MapScreen(component: MapComponent) {
+fun MapScreen(contentPadding: PaddingValues, component: MapComponent) {
     val markerCache = koinInject<MarkerCache>()
 
     Surface {
@@ -75,6 +75,7 @@ fun MapScreen(component: MapComponent) {
         var projection by rememberMutableState<Projection?> { null }
 
         GoogleMapComponent(
+            paddingValues = contentPadding,
             appMode = appMode,
             mapConfig = mapConfig,
             lastLocation = location,
@@ -134,7 +135,10 @@ fun MapScreen(component: MapComponent) {
 
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+            ) {
                 AnimatedContent(targetState = appMode, label = "app mode") { state ->
                     when (state) {
                         AppMode.Default -> {
@@ -189,7 +193,7 @@ fun MapScreen(component: MapComponent) {
                 UsersCount(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(bottom = 4.dp, end = 8.dp),
+                        .padding(bottom = 4.dp, end = 16.dp),
                     count = userCount
                 )
                 DefaultOverlay(

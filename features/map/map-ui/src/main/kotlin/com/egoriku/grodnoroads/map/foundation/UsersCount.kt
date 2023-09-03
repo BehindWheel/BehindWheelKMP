@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.R
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
@@ -31,8 +32,9 @@ import com.egoriku.grodnoroads.resources.R as R_resources
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
     val bgColor = MaterialTheme.colorScheme.surface
     val textColor = MaterialTheme.colorScheme.onSurface
+    val isLight = MaterialTheme.colorScheme.isLight
 
-    val builder = rememberBalloonBuilder {
+    val builder = rememberBalloonBuilder(isLight) {
         setArrowSize(7)
         setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
         setPaddingTop(4)
@@ -40,7 +42,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
         setPaddingLeft(8)
         setPaddingRight(8)
         setMarginHorizontal(12)
-        setCornerRadius(4f)
+        setCornerRadius(10f)
         setAlpha(0.9f)
         setBackgroundColor(bgColor)
         setTextColor(textColor)
@@ -48,6 +50,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
 
     Balloon(
         modifier = modifier,
+        key = isLight,
         builder = builder,
         balloonContent = {
             Text(
@@ -57,7 +60,6 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
             )
         }
     ) { balloonWindow ->
-
         UsersCountBadge(
             onClick = {
                 balloonWindow.showAlignTop()

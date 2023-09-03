@@ -76,7 +76,8 @@ private fun makeAlertMessage(
 
                     is Reports -> {
                         IncidentAlert(
-                            id = event.id,
+                            // TODO: in future use id from Group
+                            id = event.markerMessage,
                             distance = distance,
                             messages = event.messages,
                             mapEventType = event.mapEventType

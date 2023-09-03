@@ -42,6 +42,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun GoogleMapComponent(
+    paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
     appMode: AppMode,
     mapConfig: MapConfig,
@@ -208,7 +209,8 @@ fun GoogleMapComponent(
                 )
                 isMapLoaded = true
                 onMapLoaded()
-            }
+            },
+            contentPadding = paddingValues
         ) {
             content()
             if (appMode == AppMode.Drive && lastLocation != LastLocation.None) {
