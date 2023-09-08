@@ -38,9 +38,12 @@ subprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             if (project.findProperty("grodnoroads.enableComposeCompilerReports") == "true") {
+                val reportsPath =
+                    project.layout.buildDirectory.dir("compose_metrics").get().asFile.absolutePath
+
                 freeCompilerArgs = freeCompilerArgs +
-                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.buildDir.absolutePath}/compose_metrics" +
-                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.buildDir.absolutePath}/compose_metrics"
+                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsPath" +
+                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$reportsPath"
             }
         }
     }
