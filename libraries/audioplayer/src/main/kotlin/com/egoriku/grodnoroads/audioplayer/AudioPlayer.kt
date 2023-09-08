@@ -41,7 +41,7 @@ class AudioPlayer(private val context: Context) {
             setAudioAttributes(
                 AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
                     .setLegacyStreamType(AudioManager.STREAM_MUSIC)
                     .build()
             )
