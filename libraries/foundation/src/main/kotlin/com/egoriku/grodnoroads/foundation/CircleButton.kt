@@ -19,7 +19,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
+import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun CircleButton(
@@ -28,8 +29,8 @@ fun CircleButton(
     enabled: Boolean = true,
     colors: CircleButtonColors = CircleButtonDefaults.buttonColors(),
     shape: Shape = ButtonDefaults.shape,
-    shadowElevation: Dp = if (enabled) 3.dp else 0.dp,
-    tonalElevation: Dp = if (MaterialTheme.colorScheme.isLight) 0.dp else 6.dp,
+    shadowElevation: Dp = if (enabled) defaultShadowElevation else 0.dp,
+    tonalElevation: Dp = MaterialTheme.tonalElevation,
     content: @Composable RowScope.() -> Unit
 ) {
     val containerColor = colors.containerColor(enabled).value

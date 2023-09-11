@@ -62,11 +62,7 @@ fun FaqScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(state.faq) {
-                    Card(
-                        onClick = {},
-                        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-                        shape = RoundedCornerShape(10.dp),
-                    ) {
+                    Card(shape = RoundedCornerShape(10.dp)) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()

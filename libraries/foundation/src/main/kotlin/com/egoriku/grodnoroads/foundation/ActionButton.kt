@@ -5,29 +5,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.*
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
     imageVector: ImageVector,
     onClick: () -> Unit
 ) {
-    Card(
+    Surface(
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-        onClick = onClick
+        onClick = onClick,
+        shadowElevation = defaultShadowElevation,
+        color = MaterialTheme.colorScheme.surfaceSurfaceVariant,
+        tonalElevation = MaterialTheme.tonalElevation
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
             Icon(

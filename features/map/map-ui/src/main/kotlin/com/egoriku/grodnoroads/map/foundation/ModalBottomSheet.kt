@@ -1,14 +1,13 @@
 package com.egoriku.grodnoroads.map.foundation
 
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,13 +19,15 @@ fun <T> ModalBottomSheet(
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     containerColor: Color = BottomSheetDefaults.ContainerColor,
     contentColor: Color = contentColorFor(containerColor),
-    tonalElevation: Dp = BottomSheetDefaults.Elevation,
+    tonalElevation: Dp = MaterialTheme.tonalElevation,
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
     dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaults.DragHandle() },
-    windowInsets: WindowInsets = WindowInsets.navigationBars,
+    windowInsets: WindowInsets = WindowInsets(0, 0, 0, 0),
     content: @Composable ColumnScope.(T) -> Unit,
 ) {
     if (data != null) {
+        val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+
         ModalBottomSheet(
             modifier = modifier,
             onDismissRequest = onDismissRequest,
@@ -39,7 +40,9 @@ fun <T> ModalBottomSheet(
             dragHandle = dragHandle,
             windowInsets = windowInsets
         ) {
-            content(data)
+            Column(modifier = Modifier.padding(bottom = bottomPadding)) {
+                content(data)
+            }
         }
     }
 }

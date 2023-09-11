@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CircleButton
+import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -20,7 +23,13 @@ fun ReportAction(
     drawableId: Int,
     onClick: () -> Unit
 ) {
-    CircleButton(modifier = modifier, onClick = onClick) {
+    CircleButton(
+        modifier = modifier,
+        colors = CircleButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
+        ),
+        onClick = onClick
+    ) {
         Image(
             modifier = Modifier
                 .padding(8.dp)
