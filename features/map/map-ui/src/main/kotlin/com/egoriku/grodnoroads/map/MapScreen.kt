@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
@@ -232,10 +231,10 @@ private fun AlertDialogs(
     onClose: () -> Unit,
     reportAction: (ReportAction.Params) -> Unit
 ) {
-    when (val state = mapAlertDialog) {
+    when (mapAlertDialog) {
         is MarkerInfoDialog -> {
             MarkerInfoBottomSheet(
-                reports = state.reports,
+                reports = mapAlertDialog.reports,
                 onClose = onClose
             )
         }
@@ -246,7 +245,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = state.currentLatLng,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
@@ -262,7 +261,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = state.currentLatLng,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
