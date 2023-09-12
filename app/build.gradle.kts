@@ -7,7 +7,7 @@ plugins {
     id("grodnoroads.application")
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.secrets)
 }
 

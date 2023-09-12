@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.screen.root
 
-import android.os.Parcelable
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
@@ -21,7 +20,7 @@ import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -35,6 +34,7 @@ class RoadsRootComponentImpl(
 
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.Main,
         handleBackButton = true,
         key = "Root",
@@ -95,26 +95,27 @@ class RoadsRootComponentImpl(
         is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
     }
 
-    private sealed class Config : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed class Config {
+        @Serializable
         data object Main : Config()
 
-        @Parcelize
+        @Serializable
         data object Appearance : Config()
 
-        @Parcelize
+        @Serializable
         data object MapSettings : Config()
 
-        @Parcelize
+        @Serializable
         data object Alerts : Config()
 
-        @Parcelize
+        @Serializable
         data object WhatsNew : Config()
 
-        @Parcelize
+        @Serializable
         data object NextFeatures : Config()
 
-        @Parcelize
+        @Serializable
         data object FAQ : Config()
     }
 }

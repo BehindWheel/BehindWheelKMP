@@ -1,7 +1,6 @@
 plugins {
     id("grodnoroads.library")
     id("grodnoroads.library.compose")
-    id("kotlin-parcelize")
 }
 
 android {
@@ -24,6 +23,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
     implementation(libs.koin.android)
 }
