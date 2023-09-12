@@ -2,7 +2,10 @@ package com.egoriku.grodnoroads.map.foundation.map.configuration
 
 import android.Manifest
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.R

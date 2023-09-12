@@ -2,7 +2,9 @@ package com.egoriku.grodnoroads.extensions.util
 
 import androidx.annotation.VisibleForTesting
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 object DateUtil {
 
