@@ -16,7 +16,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.Checkbox
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -60,7 +59,7 @@ private fun BasicCheckboxSettings(
             CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                 Checkbox(
                     modifier = Modifier.padding(leadingPaddingValues),
-                    isChecked = isChecked,
+                    checked = isChecked,
                     onCheckedChange = onCheckedChange
                 )
             }

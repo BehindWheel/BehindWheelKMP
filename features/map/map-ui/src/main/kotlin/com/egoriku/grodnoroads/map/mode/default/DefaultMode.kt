@@ -1,15 +1,17 @@
 package com.egoriku.grodnoroads.map.mode.default
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CircleButton
+import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
+import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.map.domain.model.ReportType
-import com.egoriku.grodnoroads.map.domain.model.ReportType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.map.foundation.PermissionButton
 import com.egoriku.grodnoroads.resources.R
@@ -21,59 +23,26 @@ fun DefaultMode(
     report: (ReportType) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        ActionsRow(
+        Column(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 24.dp),
-            onLocationEnabled = onLocationEnabled,
-            onLocationDisabled = onLocationDisabled,
-            report = report,
-        )
-    }
-}
-
-@Composable
-private fun ActionsRow(
-    modifier: Modifier = Modifier,
-    onLocationEnabled: () -> Unit,
-    onLocationDisabled: () -> Unit,
-    report: (ReportType) -> Unit,
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        CircleButton(
-            size = 64.dp,
-            onClick = { report(TrafficPolice) }
+                .align(Alignment.BottomStart)
+                .padding(start = 16.dp, bottom = 32.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Image(
-                modifier = Modifier.size(32.dp),
-                painter = painterResource(R.drawable.ic_traffic_police),
-                contentDescription = null
-            )
-        }
-        PermissionButton(
-            onLocationEnabled = onLocationEnabled,
-            onLocationDisabled = onLocationDisabled
-        ) {
-            Image(
-                modifier = Modifier.size(40.dp),
-                painter = painterResource(id = R.drawable.ic_car),
-                contentDescription = null
-            )
-        }
-        CircleButton(
-            size = 64.dp,
-            onClick = { report(RoadIncident) }
-        ) {
-            Image(
-                modifier = Modifier.size(32.dp),
-                painter = painterResource(R.drawable.ic_warning),
-                contentDescription = null
+            CircleButton(
+                colors = CircleButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
+                ),
+                onClick = { report(TrafficPolice) }) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    painter = painterResource(R.drawable.ic_pin_location),
+                    contentDescription = null
+                )
+            }
+            PermissionButton(
+                onLocationEnabled = onLocationEnabled,
+                onLocationDisabled = onLocationDisabled
             )
         }
     }

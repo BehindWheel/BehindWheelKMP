@@ -32,10 +32,12 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CircleButton
+import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.modifier.noIndicationClick
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -137,7 +139,10 @@ fun QuickActionsPopup(
                 exit = fadeOut(),
             ) {
                 CircleButton(
-                    size = 48.dp,
+                    modifier = Modifier.size(48.dp),
+                    colors = CircleButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
+                    ),
                     onClick = onExpand
                 ) {
                     Icon(

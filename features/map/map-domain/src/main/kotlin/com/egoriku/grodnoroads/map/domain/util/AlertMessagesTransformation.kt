@@ -2,12 +2,9 @@ package com.egoriku.grodnoroads.map.domain.util
 
 import com.egoriku.grodnoroads.extensions.util.computeOffset
 import com.egoriku.grodnoroads.extensions.util.distanceTo
-import com.egoriku.grodnoroads.map.domain.model.Alert
+import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.google.android.gms.maps.model.LatLng
@@ -20,12 +17,12 @@ private const val MIN_SPEED = 10
 
 private val emptyList = persistentListOf<Alert>()
 
-fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, MapConfig) -> ImmutableList<Alert> =
-    { mapEvents, lastLocation, config ->
+fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, MapConfig, AppMode) -> ImmutableList<Alert> =
+    { mapEvents, lastLocation, config, appMode ->
         when (lastLocation) {
             LastLocation.None -> emptyList
             else -> when {
-                !config.alertsEnabled -> emptyList
+                !config.alertsEnabled && appMode != AppMode.Drive -> emptyList
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents,
                     lastLocation = lastLocation,
@@ -79,7 +76,8 @@ private fun makeAlertMessage(
 
                     is Reports -> {
                         IncidentAlert(
-                            id = event.id,
+                            // TODO: in future use id from Group
+                            id = event.markerMessage,
                             distance = distance,
                             messages = event.messages,
                             mapEventType = event.mapEventType

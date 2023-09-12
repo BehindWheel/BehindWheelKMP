@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ActionButton
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -40,6 +42,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun GoogleMapComponent(
+    paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
     appMode: AppMode,
     mapConfig: MapConfig,
@@ -206,13 +209,17 @@ fun GoogleMapComponent(
                 )
                 isMapLoaded = true
                 onMapLoaded()
-            }
+            },
+            contentPadding = paddingValues
         ) {
             content()
             if (appMode == AppMode.Drive && lastLocation != LastLocation.None) {
+                val isLight = MaterialTheme.colorScheme.isLight
                 Marker(
                     state = MarkerState(position = lastLocation.latLng),
-                    icon = markerCache.getVector(id = R.drawable.ic_arrow),
+                    icon = markerCache.getVector(
+                        id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
+                    ),
                     rotation = cameraPositionValues.markerRotation,
                     anchor = Offset(0.5f, 0.5f),
                     zIndex = 1f

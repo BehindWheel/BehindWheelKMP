@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.map.domain.model
 
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 
 internal data class MapInternalConfig(
@@ -26,6 +27,7 @@ internal data class MapInternalConfig(
 
     internal data class AlertsInfo(
         val alertsEnabled: Boolean,
+        val alertsVolumeLevel: VolumeLevel,
         val voiceAlertsEnabled: Boolean,
         val notifyStationaryCameras: Boolean,
         val notifyMediumSpeedCameras: Boolean,
@@ -55,6 +57,7 @@ internal data class MapInternalConfig(
             ),
             alertsInfo = AlertsInfo(
                 alertsEnabled = false,
+                alertsVolumeLevel = VolumeLevel.High,
                 voiceAlertsEnabled = false,
                 notifyStationaryCameras = false,
                 notifyMediumSpeedCameras = false,

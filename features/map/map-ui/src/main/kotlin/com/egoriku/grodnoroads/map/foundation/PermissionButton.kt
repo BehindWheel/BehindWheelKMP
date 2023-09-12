@@ -9,12 +9,8 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -22,8 +18,13 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.logD
+import com.egoriku.grodnoroads.foundation.CircleButton
+import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
+import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.resources.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.common.api.ResolvableApiException
@@ -35,10 +36,8 @@ import com.google.android.gms.location.Priority
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun PermissionButton(
-    modifier: Modifier = Modifier,
     onLocationEnabled: () -> Unit,
-    onLocationDisabled: () -> Unit,
-    content: @Composable RowScope.() -> Unit
+    onLocationDisabled: () -> Unit
 ) {
     val gmsLocationPermissionsState = rememberGmsLocationPermissionsState(
         onAccepted = onLocationEnabled,
@@ -53,19 +52,22 @@ fun PermissionButton(
         }
     }
 
-    Button(
-        modifier = modifier.size(80.dp),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 3.dp
+    CircleButton(
+        onClick = { locationPermissionsState.launchMultiplePermissionRequest() },
+        colors = CircleButtonDefaults.buttonColors(
+            containerColor = if (MaterialTheme.colorScheme.isLight) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                MaterialTheme.colorScheme.surfaceVariant
+            }
         ),
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
-        shape = CircleShape,
-        contentPadding = PaddingValues(0.dp),
-        onClick = {
-            locationPermissionsState.launchMultiplePermissionRequest()
-        },
-        content = content
-    )
+    ) {
+        Image(
+            modifier = Modifier.size(24.dp),
+            painter = painterResource(R.drawable.ic_arrow),
+            contentDescription = null
+        )
+    }
 }
 
 @Composable
