@@ -17,13 +17,13 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.screen.SettingsScreen
 import com.egoriku.grodnoroads.util.LocalWindowSizeClass
 
-private val NavigationBarHeight : Dp = 80.dp
+private val NavigationBarHeight: Dp = 80.dp
 
 @Composable
 fun MainUi(component: MainComponent) {
@@ -80,7 +80,7 @@ private fun VerticalOrientationLayout(
             }
         }
 
-        val tonalElevation = if (MaterialTheme.colorScheme.isLight) 0.dp else 6.dp
+        val tonalElevation = MaterialTheme.tonalElevation
         NavigationBar(
             modifier = Modifier
                 .align(Alignment.BottomStart)
@@ -121,7 +121,7 @@ private fun HorizontalOrientationLayout(
     val bottomNavItems = remember { listOf(Screen.Map, Screen.Settings) }
 
     Row(modifier = Modifier.fillMaxSize()) {
-        val tonalElevation = if (MaterialTheme.colorScheme.isLight) 0.dp else 6.dp
+        val tonalElevation = MaterialTheme.tonalElevation
         val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
         NavigationRail(containerColor = containerColor) {

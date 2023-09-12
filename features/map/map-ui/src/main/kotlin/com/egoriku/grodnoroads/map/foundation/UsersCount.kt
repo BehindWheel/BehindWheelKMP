@@ -19,7 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
+import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.R
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
@@ -30,7 +33,7 @@ import com.egoriku.grodnoroads.resources.R as R_resources
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
-    val bgColor = MaterialTheme.colorScheme.surface
+    val bgColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
     val textColor = MaterialTheme.colorScheme.onSurface
     val isLight = MaterialTheme.colorScheme.isLight
 
@@ -72,6 +75,8 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
 @Composable
 private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
     Surface(
+        tonalElevation = MaterialTheme.tonalElevation,
+        shadowElevation = defaultShadowElevation,
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
             .clickable { onClick() }

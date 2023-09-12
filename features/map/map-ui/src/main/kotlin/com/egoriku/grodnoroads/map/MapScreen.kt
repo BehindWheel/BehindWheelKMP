@@ -11,16 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -30,18 +25,9 @@ import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.MarkerInfoDialog
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.None
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.PoliceDialog
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.RoadIncidentDialog
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MediumSpeedCamera
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MobileCamera
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
+import com.egoriku.grodnoroads.map.domain.model.*
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
@@ -227,11 +213,7 @@ fun MapScreen(contentPadding: PaddingValues, component: MapComponent) {
 
         ModalBottomSheet(
             data = cameraInfo,
-            onDismissRequest = {
-                logD("dismissed 2")
-                cameraInfo = null
-            },
-            tonalElevation = 0.dp
+            onDismissRequest = { cameraInfo = null },
         ) {
             CameraInfo(it)
         }
@@ -249,10 +231,10 @@ private fun AlertDialogs(
     onClose: () -> Unit,
     reportAction: (ReportAction.Params) -> Unit
 ) {
-    when (val state = mapAlertDialog) {
+    when (mapAlertDialog) {
         is MarkerInfoDialog -> {
             MarkerInfoBottomSheet(
-                reports = state.reports,
+                reports = mapAlertDialog.reports,
                 onClose = onClose
             )
         }
@@ -263,7 +245,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = state.currentLatLng,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
@@ -279,7 +261,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = state.currentLatLng,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
