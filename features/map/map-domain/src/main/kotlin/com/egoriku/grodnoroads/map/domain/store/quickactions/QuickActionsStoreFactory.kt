@@ -7,18 +7,20 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.*
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent.Update
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage.*
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage
+import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage.NewSettings
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class QuickActionsStoreFactory(

@@ -9,7 +9,8 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.*
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
