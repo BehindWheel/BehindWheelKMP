@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.di
 
-import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.map.domain.util.SoundUtil
+import com.egoriku.grodnoroads.map.util.MarkerCache
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
