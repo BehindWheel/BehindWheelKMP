@@ -25,5 +25,7 @@ dependencies {
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
+
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 }

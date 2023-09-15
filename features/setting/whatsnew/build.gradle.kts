@@ -27,6 +27,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
 
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
     implementation(libs.mvikotlin)

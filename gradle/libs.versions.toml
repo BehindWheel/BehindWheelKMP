@@ -7,8 +7,6 @@ agp = "8.1.1"
 accompanist = "0.32.0"
 compose-compiler = "1.5.3"
 decompose = "2.0.1"
-koin-android = "3.4.3"
-koin-compose = "3.4.6"
 kotlin = "1.9.10"
 mvikotlin = "3.2.1"
 
@@ -60,8 +58,9 @@ google-material = "com.google.android.material:material:1.9.0"
 
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose" }
+koin-bom = "io.insert-koin:koin-bom:3.5.0"
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
