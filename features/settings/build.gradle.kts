@@ -24,7 +24,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)

@@ -21,7 +21,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
     implementation(libs.immutable.collections)
 
     implementation(platform(libs.koin.bom))

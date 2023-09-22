@@ -22,7 +22,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
