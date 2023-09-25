@@ -24,6 +24,8 @@ dependencies {
 
     implementation(libs.decompose)
     implementation(libs.immutable.collections)
+
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
     implementation(libs.mvikotlin)

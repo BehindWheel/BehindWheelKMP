@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.*
+import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource

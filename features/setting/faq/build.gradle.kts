@@ -23,7 +23,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
+
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)

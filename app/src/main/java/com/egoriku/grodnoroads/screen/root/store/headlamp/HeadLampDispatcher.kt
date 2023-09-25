@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.screen.root.store.headlamp
 
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.*
-import java.util.*
+import java.util.Calendar
 
 private const val MAY = 5
 private val MAY_RANGE = 25..31
