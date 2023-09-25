@@ -20,22 +20,22 @@ fun calculateCameraPositionValues(
     projection: Projection?,
     lastLocation: LastLocation
 ): CameraPositionValues {
-    if (!isMapLoaded || projection == null || !lastLocation.latLng.isValid()) {
+    if (!isMapLoaded || projection == null || !lastLocation.latLng.value.isValid()) {
         return CameraPositionValues(
-            initialLatLng = lastLocation.latLng,
-            targetLatLngWithOffset = lastLocation.latLng,
+            initialLatLng = lastLocation.latLng.value,
+            targetLatLngWithOffset = lastLocation.latLng.value,
             bearing = 0f,
             markerRotation = 0f
         )
     }
-    val screenLocation = projection.toScreenLocation(lastLocation.latLng).apply {
+    val screenLocation = projection.toScreenLocation(lastLocation.latLng.value).apply {
         set(x, y - screenHeight / 3)
     }
 
     val fromScreenLocation = projection.fromScreenLocation(screenLocation)
         ?: return CameraPositionValues(
-            initialLatLng = lastLocation.latLng,
-            targetLatLngWithOffset = lastLocation.latLng,
+            initialLatLng = lastLocation.latLng.value,
+            targetLatLngWithOffset = lastLocation.latLng.value,
             bearing = 0f,
             markerRotation = 0f
         )
@@ -50,10 +50,10 @@ fun calculateCameraPositionValues(
             else -> lastBearing
         }
 
-    val computeHeading = SphericalUtil.computeHeading(lastLocation.latLng, fromScreenLocation)
+    val computeHeading = SphericalUtil.computeHeading(lastLocation.latLng.value, fromScreenLocation)
 
     return CameraPositionValues(
-        initialLatLng = lastLocation.latLng,
+        initialLatLng = lastLocation.latLng.value,
         targetLatLngWithOffset = fromScreenLocation,
         bearing = directionBearing,
         markerRotation = (directionBearing - computeHeading).toFloat()

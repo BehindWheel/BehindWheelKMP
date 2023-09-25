@@ -13,6 +13,7 @@ dependencies {
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
+    implementation(projects.libraries.mapsCore)
     implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)

@@ -40,6 +40,8 @@ include(":libraries:crashlytics")
 include(":libraries:extensions")
 include(":libraries:foundation")
 include(":libraries:location")
+include(":libraries:maps-core")
+include(":libraries:maps-wrapper")
 include(":libraries:resources")
 
 include(":shared:appSettings")

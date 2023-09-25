@@ -8,6 +8,7 @@ android {
 
 dependencies {
     implementation(projects.features.map.mapDomain)
+    implementation(projects.libraries.mapsCore)
     implementation(projects.libraries.extensions)
 
     implementation(libs.coroutines)

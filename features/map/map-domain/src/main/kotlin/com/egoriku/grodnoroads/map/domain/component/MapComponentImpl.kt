@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -181,7 +181,7 @@ internal class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
-    override fun setLocation(latLng: LatLng) {
+    override fun setLocation(latLng: StableLatLng) {
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }
 
@@ -204,7 +204,7 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
-    override fun reportChooseLocation(latLng: LatLng) {
+    override fun reportChooseLocation(latLng: StableLatLng) {
         val reportType = mapConfigStore.state.reportType ?: return
 
         when (reportType) {

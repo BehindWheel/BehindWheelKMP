@@ -1,7 +1,5 @@
 package com.egoriku.grodnoroads.map.foundation.map
 
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -11,17 +9,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.map.configuration.calculateCameraPositionValues
-import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberMapProperties
 import com.egoriku.grodnoroads.map.foundation.map.configuration.rememberUiSettings
 import com.egoriku.grodnoroads.map.foundation.map.debug.DebugView
 import com.egoriku.grodnoroads.map.util.MarkerCache
@@ -32,23 +28,19 @@ import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 @Composable
 fun GoogleMapComponent(
+    cameraPositionState: CameraPositionState,
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
     appMode: AppMode,
     mapConfig: MapConfig,
     lastLocation: LastLocation,
     onMapLoaded: () -> Unit,
-    containsOverlay: Boolean,
     loading: @Composable BoxScope.() -> Unit,
     onPositionChanged: (LatLng) -> Unit = {},
     onCameraMoving: (Boolean) -> Unit,
@@ -56,20 +48,18 @@ fun GoogleMapComponent(
     mapZoomChangeEnabled: Boolean,
     onMapZoom: (Float) -> Unit,
     locationChangeEnabled: Boolean,
+    animateCamera: Boolean,
     onLocation: (LatLng) -> Unit,
+    onCameraChanges: (Boolean) -> Unit,
     content: (@Composable @GoogleMapComposable () -> Unit),
 ) {
+    logD("animate = $animateCamera")
     if (mapConfig == MapConfig.EMPTY) return
-
     var isMapLoaded by remember { mutableStateOf(false) }
-
-    var cameraPositionChangeCount by remember { mutableStateOf(0) }
-    var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
 
     val markerCache = koinInject<MarkerCache>()
 
     val screenHeight = LocalConfiguration.current.screenHeightDp
-    val cameraPositionState = rememberCameraPositionState()
 
     val cameraPositionValues by remember(cameraPositionState, lastLocation) {
         derivedStateOf {
@@ -84,7 +74,7 @@ fun GoogleMapComponent(
         }
     }
 
-    val chooseLocationState = rememberMarkerState(position = lastLocation.latLng)
+    val chooseLocationState = rememberMarkerState(position = lastLocation.latLng.value)
     var chosenLocation by remember { mutableStateOf(chooseLocationState.position) }
 
     if (chooseLocationState.dragState == DragState.END) {
@@ -103,6 +93,15 @@ fun GoogleMapComponent(
         onProjection(cameraPositionState.projection)
     }
 
+    LaunchedEffect(animateCamera, appMode) {
+        when (appMode) {
+            AppMode.Default, AppMode.ChooseLocation -> {
+                onCameraChanges(true)
+            }
+            AppMode.Drive -> onCameraChanges(animateCamera)
+        }
+    }
+
     if (mapZoomChangeEnabled) {
         LaunchedEffect(cameraPositionState.position.zoom) {
             onMapZoom(cameraPositionState.position.zoom)
@@ -115,18 +114,6 @@ fun GoogleMapComponent(
                 .distinctUntilChanged()
                 .debounce(100)
                 .collect(onLocation)
-        }
-    }
-
-    LaunchedEffect(cameraPositionChangeCount, containsOverlay) {
-        if (cameraPositionChangeCount != 0) {
-            cameraPositionJob = reLaunch(cameraPositionJob) {
-                delay(3000)
-                cameraPositionChangeCount = 0
-            }
-        }
-        if (containsOverlay) {
-            cameraPositionJob?.cancel()
         }
     }
 
@@ -158,7 +145,7 @@ fun GoogleMapComponent(
     }
 
     LaunchedEffect(lastLocation, cameraPositionValues) {
-        if (cameraPositionChangeCount != 0) return@LaunchedEffect
+        if (!animateCamera) return@LaunchedEffect
         if (!isMapLoaded) return@LaunchedEffect
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
@@ -187,23 +174,12 @@ fun GoogleMapComponent(
 
     Box(modifier = modifier.fillMaxSize()) {
         GoogleMap(
-            modifier = Modifier
-                .matchParentSize()
-                .pointerInput(Unit) {
-                    coroutineScope {
-                        awaitEachGesture {
-                            awaitFirstDown(requireUnconsumed = false)
-                            cameraPositionChangeCount++
-                        }
-                    }
-                },
             cameraPositionState = cameraPositionState,
-            properties = rememberMapProperties(lastLocation, mapConfig, appMode),
             uiSettings = rememberUiSettings(),
             onMapLoaded = {
                 cameraPositionState.move(
                     update = CameraUpdateFactory.newLatLngZoom(
-                        /* latLng = */ lastLocation.latLng,
+                        /* latLng = */ lastLocation.latLng.value,
                         /* zoom = */ mapConfig.zoomLevel
                     )
                 )
@@ -216,7 +192,7 @@ fun GoogleMapComponent(
             if (appMode == AppMode.Drive && lastLocation != LastLocation.None) {
                 val isLight = MaterialTheme.colorScheme.isLight
                 Marker(
-                    state = MarkerState(position = lastLocation.latLng),
+                    state = MarkerState(position = lastLocation.latLng.value),
                     icon = markerCache.getVector(
                         id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
                     ),
@@ -239,47 +215,23 @@ fun GoogleMapComponent(
             )
         }
     }
-
-    if (isMapLoaded) {
-        MapOverlayActions(
-            cameraPositionState = cameraPositionState,
-            onChanged = { cameraPositionChangeCount++ }
-        )
-    }
 }
 
 @Composable
 fun MapOverlayActions(
-    cameraPositionState: CameraPositionState,
-    onChanged: () -> Unit
+    modifier: Modifier = Modifier,
+    zoomIn: () -> Unit,
+    zoomOut: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
-
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .padding(end = 16.dp)
-                .align(Alignment.CenterEnd)
-        ) {
-            ActionButton(
-                imageVector = Icons.Default.Add,
-                onClick = {
-                    coroutineScope.launch {
-                        cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
-                        onChanged()
-                    }
-                }
-            )
-            ActionButton(
-                imageVector = Icons.Default.Remove,
-                onClick = {
-                    coroutineScope.launch {
-                        cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
-                        onChanged()
-                    }
-                }
-            )
-        }
+    Column(modifier = modifier.padding(end = 16.dp)) {
+        ActionButton(
+            imageVector = Icons.Default.Add,
+            onClick = zoomIn
+        )
+        ActionButton(
+            imageVector = Icons.Default.Remove,
+            onClick = zoomOut
+        )
     }
 }
 

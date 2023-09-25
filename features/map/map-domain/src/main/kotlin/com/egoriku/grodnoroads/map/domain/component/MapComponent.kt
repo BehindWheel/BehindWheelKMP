@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
@@ -29,10 +29,10 @@ interface MapComponent {
     fun openReportFlow(reportDialogFlow: ReportDialogFlow)
     fun reportAction(params: ReportAction.Params)
 
-    fun setLocation(latLng: LatLng)
+    fun setLocation(latLng: StableLatLng)
 
     fun openChooseLocation(reportType: ReportType)
-    fun reportChooseLocation(latLng: LatLng)
+    fun reportChooseLocation(latLng: StableLatLng)
     fun setUserMapZoom(zoom: Float)
     fun cancelChooseLocationFlow()
 
@@ -47,7 +47,7 @@ interface MapComponent {
     fun closeDialog()
 
     sealed interface ReportDialogFlow {
-        data class TrafficPolice(val latLng: LatLng) : ReportDialogFlow
-        data class RoadIncident(val latLng: LatLng) : ReportDialogFlow
+        data class TrafficPolice(val latLng: StableLatLng) : ReportDialogFlow
+        data class RoadIncident(val latLng: StableLatLng) : ReportDialogFlow
     }
 }

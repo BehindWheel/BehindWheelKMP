@@ -6,12 +6,12 @@ import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
 
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
     sealed interface Intent {
-        data class CheckLocation(val latLng: LatLng) : Intent
+        data class CheckLocation(val latLng: StableLatLng) : Intent
         data object StartDriveMode : Intent
         data object StopDriveMode : Intent
 

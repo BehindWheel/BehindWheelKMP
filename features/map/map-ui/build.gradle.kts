@@ -15,6 +15,8 @@ dependencies {
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
+    implementation(projects.libraries.mapsCore)
+    implementation(projects.libraries.mapsWrapper)
     implementation(projects.libraries.resources)
 
     implementation(libs.accompanist.permissions)

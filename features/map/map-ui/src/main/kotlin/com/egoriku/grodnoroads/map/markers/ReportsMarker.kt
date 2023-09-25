@@ -2,39 +2,37 @@ package com.egoriku.grodnoroads.map.markers
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.mapswrapper.MapScope
+import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.rememberMarkerState
 import com.google.maps.android.ui.IconGenerator
 
 @Composable
-fun ReportsMarker(reports: MapEvent.Reports, onMarkerClick: (MapEvent.Reports) -> Unit) {
+fun MapScope.ReportsMarker(
+    latLng: StableLatLng,
+    message: String,
+    onClick: () -> Unit
+) {
     val context = LocalContext.current
     val iconGenerator by remember { mutableStateOf(IconGenerator(context)) }
-
-    // https://github.com/googlemaps/android-maps-compose/issues/46
-    val markerState = rememberMarkerState(position = reports.position)
-
-    val icon by remember(reports) {
+    val icon by remember(message) {
         mutableStateOf(
             BitmapDescriptorFactory.fromBitmap(
-                iconGenerator.makeIcon(reports.markerMessage)
+                iconGenerator.makeIcon(message)
             )
         )
     }
 
-    LaunchedEffect(key1 = reports.position) {
-        markerState.position = reports.position
+    DisposableEffect(message, latLng) {
+        onDispose {
+            removeMarker(latLng.value)
+        }
     }
 
-    Marker(
-        state = markerState,
+    addMarker(
+        position = latLng.value,
         icon = icon,
-        zIndex = 2f,
-        onClick = {
-            onMarkerClick(reports)
-            true
-        }
+        zIndex = 1.0f,
+        onClick = onClick
     )
 }

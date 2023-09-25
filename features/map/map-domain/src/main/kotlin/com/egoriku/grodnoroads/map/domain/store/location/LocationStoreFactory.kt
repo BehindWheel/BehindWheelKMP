@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.location.LocationHelper
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
+import com.egoriku.grodnoroads.mapswrapper.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +34,11 @@ internal class LocationStoreFactory(
                         locationHelper.getLastKnownLocation()?.run {
                             dispatch(
                                 Message.OnNewLocation(
-                                    lastLocation = LastLocation(latLng, bearing, speed)
+                                    lastLocation = LastLocation(
+                                        latLng = latLng.asStable(),
+                                        bearing = bearing,
+                                        speed = speed
+                                    )
                                 )
                             )
                         }
@@ -44,7 +49,11 @@ internal class LocationStoreFactory(
                         .onEach {
                             dispatch(
                                 Message.OnNewLocation(
-                                    lastLocation = LastLocation(it.latLng, 0f, 0)
+                                    lastLocation = LastLocation(
+                                        latLng = it.latLng.asStable(),
+                                        bearing = 0f,
+                                        speed = 0
+                                    )
                                 )
                             )
                         }
@@ -58,7 +67,7 @@ internal class LocationStoreFactory(
                     launch {
                         locationHelper.lastLocationFlow
                             .filterNotNull()
-                            .map { LastLocation(it.latLng, it.bearing, it.speed) }
+                            .map { LastLocation(it.latLng.asStable(), it.bearing, it.speed) }
                             .collect {
                                 dispatch(Message.OnNewLocation(lastLocation = it))
 

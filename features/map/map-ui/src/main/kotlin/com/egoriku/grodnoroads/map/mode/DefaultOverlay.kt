@@ -1,6 +1,9 @@
 package com.egoriku.grodnoroads.map.mode
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -39,6 +42,7 @@ import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
+    isOverlayVisible: Boolean,
     isDriveMode: Boolean,
     currentSpeed: Int,
     speedLimit: Int,
@@ -69,19 +73,25 @@ fun DefaultOverlay(
                 Alerts(alerts = alerts)
             }
         }
-        QuickActionsPopup(
-            modifier = Modifier.statusBarsPadding(),
-            opened = quickActionsVisible,
-            onExpand = { quickActionsVisible = true },
-            onClosed = { quickActionsVisible = false },
+        AnimatedVisibility(
+            visible = isOverlayVisible,
+            enter = fadeIn(),
+            exit = fadeOut()
         ) {
-            ActionsContent(
-                quickActionsState = quickActionsState,
-                onChanged = {
-                    quickActionsVisible = false
-                    onPreferenceChange(it)
-                }
-            )
+            QuickActionsPopup(
+                modifier = Modifier.statusBarsPadding(),
+                opened = quickActionsVisible,
+                onExpand = { quickActionsVisible = true },
+                onClosed = { quickActionsVisible = false },
+            ) {
+                ActionsContent(
+                    quickActionsState = quickActionsState,
+                    onChanged = {
+                        quickActionsVisible = false
+                        onPreferenceChange(it)
+                    }
+                )
+            }
         }
     }
 }
@@ -170,6 +180,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
+            isOverlayVisible = true,
             quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(

@@ -23,6 +23,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
+import com.egoriku.grodnoroads.mapswrapper.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
@@ -93,7 +94,7 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
-            position = LatLng(0.0, 0.0),
+            position = LatLng(0.0, 0.0).asStable(),
             mapEventType = RoadIncident
         )
     ) {

@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.mapswrapper.core.asStable
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
@@ -30,7 +31,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
 
         forEach { data ->
             val index = mergedReports.indexOfFirst { calcAction ->
-                val distance = calcAction.position distanceTo LatLng(data.latitude, data.longitude)
+                val distance = calcAction.position.value distanceTo LatLng(data.latitude, data.longitude)
 
                 distance < MERGE_ALERT_DISTANCE
             }
@@ -46,7 +47,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                                 source = Source.sourceFromString(data.source)
                             )
                         },
-                    position = LatLng(data.latitude, data.longitude),
+                    position = LatLng(data.latitude, data.longitude).asStable(),
                     dialogTitle = buildDialogTitle(data),
                     markerMessage = buildMarkerShortMessage(data)
                 )
@@ -61,7 +62,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     ),
                     markerMessage = buildMarkerShortMessage(data),
                     dialogTitle = buildDialogTitle(data),
-                    position = LatLng(data.latitude, data.longitude),
+                    position = LatLng(data.latitude, data.longitude).asStable(),
                     mapEventType = MapEventType.eventFromString(data.type)
                 )
 
