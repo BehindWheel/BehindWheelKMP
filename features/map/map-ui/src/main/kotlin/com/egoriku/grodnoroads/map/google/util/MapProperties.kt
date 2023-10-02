@@ -14,9 +14,9 @@ import com.egoriku.grodnoroads.map.R
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.mapswrapper.MapProperties
-import com.egoriku.grodnoroads.mapswrapper.MapType
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.compose.MapProperties
+import com.egoriku.grodnoroads.maps.compose.MapType
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState

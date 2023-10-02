@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.util
 
-import com.egoriku.grodnoroads.extensions.util.computeOffset
-import com.egoriku.grodnoroads.extensions.util.distanceTo
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.maps.core.extension.computeOffset
+import com.egoriku.grodnoroads.maps.core.extension.distanceTo
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

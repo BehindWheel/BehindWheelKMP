@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 

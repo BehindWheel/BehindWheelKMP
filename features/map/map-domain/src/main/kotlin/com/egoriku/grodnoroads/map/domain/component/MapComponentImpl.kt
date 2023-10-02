@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -150,6 +150,9 @@ internal class MapComponentImpl(
 
     override val lastLocation: Flow<LastLocation>
         get() = locationStore.states.map { it.lastLocation }
+
+    override val initialLocation: Flow<StableLatLng>
+        get() = locationStore.states.map { it.initialLocation }
 
     override val alerts: Flow<ImmutableList<Alert>>
         get() = combine(

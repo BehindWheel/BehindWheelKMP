@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.map
 
 import android.graphics.Point
-import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -29,6 +30,7 @@ import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -41,22 +43,26 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsS
 import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
-import com.egoriku.grodnoroads.map.foundation.map.MapOverlayActions
+import com.egoriku.grodnoroads.map.google.markers.CameraMarker
+import com.egoriku.grodnoroads.map.google.markers.NavigationMarker
+import com.egoriku.grodnoroads.map.google.markers.ReportsMarker
+import com.egoriku.grodnoroads.map.google.ui.MapOverlayActions
 import com.egoriku.grodnoroads.map.google.util.rememberMapProperties
-import com.egoriku.grodnoroads.map.markers.CameraMarker
-import com.egoriku.grodnoroads.map.markers.ReportsMarker
 import com.egoriku.grodnoroads.map.mode.DefaultOverlay
 import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
-import com.egoriku.grodnoroads.mapswrapper.GoogleMap
-import com.egoriku.grodnoroads.mapswrapper.core.asStable
+import com.egoriku.grodnoroads.maps.compose.GoogleMap
+import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.core.asStable
+import com.egoriku.grodnoroads.resources.R
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.Projection
+import com.google.android.gms.maps.model.CameraPosition
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.egoriku.grodnoroads.resources.R as R_res
 
@@ -74,10 +80,13 @@ fun MapScreen(
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(Default)
+
         val location by component.lastLocation.collectAsState(LastLocation.None)
+        val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
+
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
-        val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = None)
+        val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = MapAlertDialog.None)
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
         val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
@@ -94,16 +103,8 @@ fun MapScreen(
         var projection by rememberMutableState<Projection?> { null }
         var isOverlayVisible by remember { mutableStateOf(true) }
 
-        val coroutineScope = rememberCoroutineScope()
-
         var isUserTouchScreen by rememberMutableState { false }
         var isPointerInputCanceled by rememberMutableState { false }
-
-        val animateCamera by remember {
-            derivedStateOf {
-                mapAlertDialog != None || !isUserTouchScreen
-            }
-        }
 
         var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
 
@@ -116,14 +117,7 @@ fun MapScreen(
                 }
             }
         }
-
-        LaunchedEffect(appMode) {
-            when (appMode) {
-                Default -> onBottomNavigationVisibilityChange(true)
-                Drive -> onBottomNavigationVisibilityChange(false)
-                ChooseLocation -> onBottomNavigationVisibilityChange(true)
-            }
-        }
+        var mapUpdater by rememberMutableState<MapUpdater?> { null }
 
         if (mapConfig != MapConfig.EMPTY) {
             val mapProperties = rememberMapProperties(
@@ -135,41 +129,135 @@ fun MapScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
-                latLng = location.latLng,
-                zoomLevel = mapConfig.zoomLevel,
                 onMapLoaded = {
-                    Log.d("kek", "RootContent: on map loaded")
+                    logD("RootContent: on map loaded")
                     isMapLoaded = true
+                },
+                onInitialLocationTriggered = { googleMap ->
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            initialLocation.value,
+                            mapConfig.zoomLevel
+                        )
+                    )
+                },
+                onMapUpdaterChanged = {
+                    logD("set map scope")
+                    mapUpdater = it
                 }
-            ) {
-                logD("inside map scope")
-                mapEvents.forEach { mapEvent ->
-                    when (mapEvent) {
-                        is MapEvent.Camera -> {
-                            when (mapEvent) {
-                                is StationaryCamera -> CameraMarker(
-                                    latLng = mapEvent.position,
-                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_stationary_camera) },
-                                    onClick = { cameraInfo = mapEvent }
+            )
+
+            LaunchedEffect(location) {
+                @Suppress("NAME_SHADOWING")
+                val mapUpdater = mapUpdater ?: return@LaunchedEffect
+                if (location == LastLocation.None) return@LaunchedEffect
+
+                if (appMode == Drive) {
+                    mapUpdater.googleMap.animateCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition.builder()
+                                .target(location.latLng.value)
+                                .bearing(location.bearing)
+                                .zoom(mapConfig.zoomLevel)
+                                .tilt(25.0f)
+                                .build()
+                        ),
+                        700,
+                        null
+                    )
+                }
+
+                if (appMode == Default) {
+                    mapUpdater.googleMap.animateCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition.builder()
+                                .target(location.latLng.value)
+                                .bearing(location.bearing)
+                                .zoom(mapConfig.zoomLevel)
+                                .tilt(0.0f)
+                                .build()
+                        ),
+                        700,
+                        null
+                    )
+                }
+                if (appMode == ChooseLocation) {
+                    mapUpdater.googleMap.animateCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition.builder()
+                                .target(location.latLng.value)
+                                .bearing(location.bearing)
+                                .zoom(mapConfig.zoomLevel)
+                                .tilt(0.0f)
+                                .build()
+                        ),
+                        700,
+                        null
+                    )
+                }
+            }
+
+            LaunchedEffect(appMode) {
+                @Suppress("NAME_SHADOWING")
+                val mapUpdater = mapUpdater ?: return@LaunchedEffect
+
+                when (appMode) {
+                    Default, ChooseLocation -> mapUpdater.paddingDecorator.additionalPadding(top = 0)
+                    Drive -> mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
+                }
+                when (appMode) {
+                    Default -> onBottomNavigationVisibilityChange(true)
+                    Drive -> onBottomNavigationVisibilityChange(false)
+                    ChooseLocation -> onBottomNavigationVisibilityChange(true)
+                }
+            }
+
+            val scope = mapUpdater
+            if (scope != null) {
+                with(scope) {
+                    logD("inside map scope")
+                    if (appMode == Drive && location != LastLocation.None) {
+                        val isLight = MaterialTheme.colorScheme.isLight
+
+                        NavigationMarker(
+                            position = location.latLng,
+                            bearing = location.bearing,
+                            icon = {
+                                markerCache.getVector(
+                                    id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
                                 )
-                                is MediumSpeedCamera -> CameraMarker(
-                                    latLng = mapEvent.position,
-                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_medium_speed_camera) },
-                                    onClick = { cameraInfo = mapEvent }
-                                )
-                                is MobileCamera -> CameraMarker(
-                                    latLng = mapEvent.position,
-                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_mobile_camera) },
-                                    onClick = { cameraInfo = mapEvent }
+                            },
+                            rotation = location.bearing
+                        )
+                    }
+                    mapEvents.forEach { mapEvent ->
+                        when (mapEvent) {
+                            is MapEvent.Camera -> {
+                                when (mapEvent) {
+                                    is StationaryCamera -> CameraMarker(
+                                        position = mapEvent.position,
+                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_stationary_camera) },
+                                        onClick = { cameraInfo = mapEvent }
+                                    )
+                                    is MediumSpeedCamera -> CameraMarker(
+                                        position = mapEvent.position,
+                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_medium_speed_camera) },
+                                        onClick = { cameraInfo = mapEvent }
+                                    )
+                                    is MobileCamera -> CameraMarker(
+                                        position = mapEvent.position,
+                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_mobile_camera) },
+                                        onClick = { cameraInfo = mapEvent }
+                                    )
+                                }
+                            }
+                            is MapEvent.Reports -> {
+                                ReportsMarker(
+                                    position = mapEvent.position,
+                                    message = mapEvent.markerMessage,
+                                    onClick = { component.showMarkerInfoDialog(mapEvent) }
                                 )
                             }
-                        }
-                        is MapEvent.Reports -> {
-                            ReportsMarker(
-                                latLng = mapEvent.position,
-                                message = mapEvent.markerMessage,
-                                onClick = { component.showMarkerInfoDialog(mapEvent) }
-                            )
                         }
                     }
                 }
@@ -219,38 +307,6 @@ fun MapScreen(
                     isOverlayVisible = it
                     onBottomNavigationVisibilityChange(it)
                 },
-                content = {
-                    mapEvents.forEach { mapEvent ->
-                        when (mapEvent) {
-                            is MapEvent.Camera -> {
-                                when (mapEvent) {
-                                    is StationaryCamera -> CameraMarker(
-                                        camera = mapEvent,
-                                        provideIcon = { markerCache.getVector(id = R.drawable.ic_map_stationary_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-
-                                    is MediumSpeedCamera -> CameraMarker(
-                                        camera = mapEvent,
-                                        provideIcon = { markerCache.getVector(id = R.drawable.ic_map_medium_speed_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-
-                                    is MobileCamera -> CameraMarker(
-                                        camera = mapEvent,
-                                        provideIcon = { markerCache.getVector(id = R.drawable.ic_map_mobile_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-                                }
-                            }
-
-                            is MapEvent.Reports -> ReportsMarker(
-                                reports = mapEvent,
-                                onMarkerClick = component::showMarkerInfoDialog
-                            )
-                        }
-                    }
-                }
             )
         }*/
 
@@ -339,18 +395,9 @@ fun MapScreen(
                     exit = fadeOut()
                 ) {
                     MapOverlayActions(
-                        zoomIn = {
-                            coroutineScope.launch {
-                                //  cameraPositionState.animate(CameraUpdateFactory.zoomIn(), 200)
-                                // cameraPositionChangeCount++
-                            }
-                        }
-                    ) {
-                        coroutineScope.launch {
-                            // cameraPositionState.animate(CameraUpdateFactory.zoomOut(), 200)
-                            // cameraPositionChangeCount++
-                        }
-                    }
+                        zoomIn = { mapUpdater?.zoomIn() },
+                        zoomOut = { mapUpdater?.zoomOut() }
+                    )
                 }
             }
         }

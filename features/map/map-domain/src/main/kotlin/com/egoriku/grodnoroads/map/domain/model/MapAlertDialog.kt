@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.domain.model
 
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 
 sealed interface MapAlertDialog {
 

@@ -4,7 +4,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.*
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 
 interface DialogStore : Store<Intent, State, Message> {
 

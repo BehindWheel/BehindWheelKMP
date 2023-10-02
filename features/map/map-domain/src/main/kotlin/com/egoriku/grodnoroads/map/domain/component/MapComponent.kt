@@ -6,14 +6,16 @@ import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 interface MapComponent {
 
-    val appMode: Flow<AppMode>
     val lastLocation: Flow<LastLocation>
+    val initialLocation : Flow<StableLatLng>
+
+    val appMode: Flow<AppMode>
     val mapAlertDialog: Flow<MapAlertDialog>
     val mapConfig: Flow<MapConfig>
     val mapEvents: Flow<ImmutableList<MapEvent>>

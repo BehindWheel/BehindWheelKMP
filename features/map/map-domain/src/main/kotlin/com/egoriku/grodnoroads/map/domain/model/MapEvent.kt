@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.domain.model
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 
 @Stable

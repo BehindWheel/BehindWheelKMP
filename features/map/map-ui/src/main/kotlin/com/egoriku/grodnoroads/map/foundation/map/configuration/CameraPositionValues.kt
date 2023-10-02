@@ -10,17 +10,13 @@ import com.google.maps.android.SphericalUtil
 
 private var lastBearing = 0.0f
 
-private fun LatLng.isValid(): Boolean {
-    return latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180
-}
-
 fun calculateCameraPositionValues(
     isMapLoaded: Boolean,
     screenHeight: Int,
     projection: Projection?,
     lastLocation: LastLocation
 ): CameraPositionValues {
-    if (!isMapLoaded || projection == null || !lastLocation.latLng.value.isValid()) {
+    if (!isMapLoaded || projection == null) {
         return CameraPositionValues(
             initialLatLng = lastLocation.latLng.value,
             targetLatLngWithOffset = lastLocation.latLng.value,

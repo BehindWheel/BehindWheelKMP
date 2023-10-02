@@ -1,8 +1,6 @@
 package com.egoriku.grodnoroads.map.domain.model
 
-import com.egoriku.grodnoroads.mapswrapper.core.StableLatLng
-import com.egoriku.grodnoroads.mapswrapper.core.asStable
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 
 data class LastLocation(
     val latLng: StableLatLng,
@@ -10,7 +8,7 @@ data class LastLocation(
     val speed: Int
 ) {
     companion object {
-        val UNKNOWN_LOCATION = LatLng(0.0, 0.0).asStable()
+        val UNKNOWN_LOCATION = StableLatLng(0.0, 0.0)
 
         val None = LastLocation(
             latLng = UNKNOWN_LOCATION,

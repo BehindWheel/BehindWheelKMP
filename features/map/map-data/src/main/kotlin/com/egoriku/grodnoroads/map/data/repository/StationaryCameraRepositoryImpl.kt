@@ -7,8 +7,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.map.data.dto.StationaryDTO
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
-import com.egoriku.grodnoroads.mapswrapper.core.asStable
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -35,7 +34,7 @@ internal class StationaryCameraRepositoryImpl(
                             updateTime = data.updateTime,
                             speedCar = data.speedCar,
                             speedTruck = data.speedTruck,
-                            position = LatLng(data.latitude, data.longitude).asStable()
+                            position = StableLatLng(data.latitude, data.longitude)
                         )
                     })
                 }
