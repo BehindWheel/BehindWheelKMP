@@ -53,6 +53,7 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.egoriku.grodnoroads.maps.compose.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.core.asStable
@@ -99,8 +100,9 @@ fun MapScreen(
         LabelsSubscription(component)
 
         var isMapLoaded by rememberMutableState { false }
-        var isCameraMoving by rememberMutableState { true }
+        var isCameraMoving by rememberMutableState { false }
         var projection by rememberMutableState<Projection?> { null }
+
         var isOverlayVisible by remember { mutableStateOf(true) }
 
         var isUserTouchScreen by rememberMutableState { false }
@@ -130,7 +132,7 @@ fun MapScreen(
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
                 onMapLoaded = {
-                    logD("RootContent: on map loaded")
+                    logD("on map loaded")
                     isMapLoaded = true
                 },
                 onInitialLocationTriggered = { googleMap ->
@@ -140,10 +142,21 @@ fun MapScreen(
                             mapConfig.zoomLevel
                         )
                     )
+                    projection = googleMap.projection
                 },
                 onMapUpdaterChanged = {
-                    logD("set map scope")
+                    logD("set mapUpdater: $it")
                     mapUpdater = it
+                },
+                onProjectionChanged = {
+                    if (appMode == ChooseLocation) {
+                        projection = it
+                    }
+                },
+                cameraMoveStateChanged = { state ->
+                    if (appMode == ChooseLocation) {
+                        isCameraMoving = state == CameraMoveState.UserGesture
+                    }
                 }
             )
 
@@ -204,7 +217,6 @@ fun MapScreen(
             val scope = mapUpdater
             if (scope != null) {
                 with(scope) {
-                    logD("inside map scope")
                     if (appMode == Drive && location != LastLocation.None) {
                         val isLight = MaterialTheme.colorScheme.isLight
 
@@ -349,11 +361,11 @@ fun MapScreen(
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
                                 onCancel = component::cancelChooseLocationFlow,
-                                onLocationSelected = {
+                                onLocationSelected = { offset ->
                                     val latLng = projection?.fromScreenLocation(
                                         Point(
-                                            /* x = */ it.x.toInt(),
-                                            /* y = */ it.y.toInt()
+                                            /* x = */ offset.x.toInt(),
+                                            /* y = */ offset.y.toInt()
                                         )
                                     ) ?: return@ChooseLocation
                                     component.reportChooseLocation(latLng.asStable())

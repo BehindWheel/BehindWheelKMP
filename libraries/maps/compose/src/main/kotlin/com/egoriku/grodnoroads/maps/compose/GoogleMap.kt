@@ -20,7 +20,9 @@ import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.MapUpdaterImpl
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.*
 import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.awaitMap
 
 internal val NoPadding = PaddingValues()
@@ -33,7 +35,9 @@ fun GoogleMap(
     mapUiSettings: MapUiSettings = DefaultMapUiSettings,
     onMapLoaded: () -> Unit,
     onInitialLocationTriggered: (GoogleMap) -> Unit,
-    onMapUpdaterChanged: (MapUpdater?) -> Unit
+    onMapUpdaterChanged: (MapUpdater?) -> Unit,
+    onProjectionChanged: (Projection) -> Unit,
+    cameraMoveStateChanged: (CameraMoveState) -> Unit,
 ) {
     val context = LocalContext.current
     val density = LocalDensity.current
@@ -88,6 +92,21 @@ fun GoogleMap(
         val googleMap = map ?: return@LaunchedEffect
 
         googleMap.setOnMapLoadedCallback(onMapLoaded)
+        googleMap.setOnCameraIdleListener {
+            onProjectionChanged(googleMap.projection)
+        }
+        googleMap.setOnCameraMoveStartedListener { reason ->
+            val state = when (reason) {
+                REASON_GESTURE -> CameraMoveState.UserGesture
+                REASON_API_ANIMATION, REASON_DEVELOPER_ANIMATION -> CameraMoveState.Animating
+                else -> error("unsupported value")
+            }
+            cameraMoveStateChanged(state)
+        }
+        googleMap.setOnCameraIdleListener {
+            cameraMoveStateChanged(CameraMoveState.Idle)
+            onProjectionChanged(googleMap.projection)
+        }
         onInitialLocationTriggered(googleMap)
 
         updateMapProperties(googleMap, mapProperties)
@@ -95,6 +114,12 @@ fun GoogleMap(
     }
 
     MapLifecycle(mapView)
+}
+
+sealed interface CameraMoveState {
+    data object UserGesture : CameraMoveState
+    data object Animating : CameraMoveState
+    data object Idle : CameraMoveState
 }
 
 private fun MapPaddingDecorator.updateContentPadding(
@@ -105,7 +130,8 @@ private fun MapPaddingDecorator.updateContentPadding(
     with(density) {
         updateContentPadding(
             left = contentPadding.calculateLeftPadding(layoutDirection).roundToPx(),
-            top = contentPadding.calculateTopPadding().roundToPx(),
+            // make top padding the same as bottom
+            top = contentPadding.calculateBottomPadding().roundToPx(),
             right = contentPadding.calculateRightPadding(layoutDirection).roundToPx(),
             bottom = contentPadding.calculateBottomPadding().roundToPx()
         )

@@ -1,21 +1,26 @@
 package com.egoriku.grodnoroads.map.foundation.map
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.foundation.map.configuration.calculateCameraPositionValues
 import com.egoriku.grodnoroads.map.foundation.map.debug.DebugView
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.MAP_DEBUG_OVERLAY_ENABLED
 import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.*
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.GoogleMapComposable
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -27,8 +32,6 @@ fun GoogleMapComponent(
     appMode: AppMode,
     mapConfig: MapConfig,
     lastLocation: LastLocation,
-    onMapLoaded: () -> Unit,
-    loading: @Composable BoxScope.() -> Unit,
     onPositionChanged: (LatLng) -> Unit = {},
     onCameraMoving: (Boolean) -> Unit,
     onProjection: (Projection?) -> Unit,
@@ -38,33 +41,10 @@ fun GoogleMapComponent(
     animateCamera: Boolean,
     onLocation: (LatLng) -> Unit,
     onCameraChanges: (Boolean) -> Unit,
-    content: (@Composable @GoogleMapComposable () -> Unit),
+    content: @Composable @GoogleMapComposable () -> Unit,
 ) {
     logD("animate = $animateCamera")
     if (mapConfig == MapConfig.EMPTY) return
-    var isMapLoaded by remember { mutableStateOf(false) }
-
-    val screenHeight = LocalConfiguration.current.screenHeightDp
-
-    val cameraPositionValues by remember(cameraPositionState, lastLocation) {
-        derivedStateOf {
-            val projection = cameraPositionState.projection
-
-            calculateCameraPositionValues(
-                isMapLoaded = isMapLoaded,
-                screenHeight = screenHeight,
-                projection = projection,
-                lastLocation = lastLocation
-            )
-        }
-    }
-
-    val chooseLocationState = rememberMarkerState(position = lastLocation.latLng.value)
-    var chosenLocation by remember { mutableStateOf(chooseLocationState.position) }
-
-    if (chooseLocationState.dragState == DragState.END) {
-        chosenLocation = chooseLocationState.position
-    }
 
     LaunchedEffect(cameraPositionState.position) {
         onPositionChanged(cameraPositionState.position.target)
@@ -102,10 +82,8 @@ fun GoogleMapComponent(
         }
     }
 
-
-    LaunchedEffect(lastLocation, cameraPositionValues) {
+    LaunchedEffect(lastLocation) {
         if (!animateCamera) return@LaunchedEffect
-        if (!isMapLoaded) return@LaunchedEffect
 
         if (lastLocation == LastLocation.None) return@LaunchedEffect
 
@@ -122,9 +100,6 @@ fun GoogleMapComponent(
             content()
         }
 
-        if (!isMapLoaded) {
-            loading()
-        }
         if (MAP_DEBUG_OVERLAY_ENABLED) {
             DebugView(
                 modifier = Modifier
