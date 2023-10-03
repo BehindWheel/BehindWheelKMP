@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.LayoutScopeMarker
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
-import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
@@ -15,8 +15,6 @@ import com.google.android.gms.maps.model.Marker
 interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
 
-    @Deprecated("Should be private")
-    val googleMap : GoogleMap
     val mapView: MapView
 
     fun addMarker(
@@ -42,4 +40,6 @@ interface MapUpdater {
 
     fun zoomIn()
     fun zoomOut()
+
+    fun animateCamera(cameraUpdate: CameraUpdate, duration: Int = 700)
 }

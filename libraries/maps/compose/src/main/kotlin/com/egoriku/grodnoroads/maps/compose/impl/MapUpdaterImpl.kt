@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecoratorImpl
 import com.egoriku.grodnoroads.maps.compose.impl.model.InternalMarker
+import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -16,7 +17,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.ktx.addMarker
 
 internal class MapUpdaterImpl(
-    override val googleMap: GoogleMap,
+    private val googleMap: GoogleMap,
     override val mapView: MapView,
     override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap)
 ) : MapUpdater,
@@ -129,5 +130,9 @@ internal class MapUpdaterImpl(
     override fun zoomOut() {
         if (currentZoom <= minZoom) return
         googleMap.animateCamera(CameraUpdateFactory.zoomOut())
+    }
+
+    override fun animateCamera(cameraUpdate: CameraUpdate, duration: Int) {
+        googleMap.animateCamera(cameraUpdate, duration, null)
     }
 }

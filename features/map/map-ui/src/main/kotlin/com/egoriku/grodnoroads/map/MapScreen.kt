@@ -147,28 +147,23 @@ fun MapScreen(
                 }
             )
 
-            LaunchedEffect(location) {
+            LaunchedEffect(location, appMode) {
                 @Suppress("NAME_SHADOWING")
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
                 if (location == LastLocation.None) return@LaunchedEffect
 
-                if (appMode == Drive) {
-                    mapUpdater.googleMap.animateCamera(
+                when (appMode) {
+                    Drive -> mapUpdater.animateCamera(
                         CameraUpdateFactory.newCameraPosition(
                             CameraPosition.builder()
                                 .target(location.latLng.value)
                                 .bearing(location.bearing)
                                 .zoom(mapConfig.zoomLevel)
-                                .tilt(25.0f)
+                                .tilt(35.0f)
                                 .build()
-                        ),
-                        700,
-                        null
+                        )
                     )
-                }
-
-                if (appMode == Default) {
-                    mapUpdater.googleMap.animateCamera(
+                    Default -> mapUpdater.animateCamera(
                         CameraUpdateFactory.newCameraPosition(
                             CameraPosition.builder()
                                 .target(location.latLng.value)
@@ -176,13 +171,9 @@ fun MapScreen(
                                 .zoom(mapConfig.zoomLevel)
                                 .tilt(0.0f)
                                 .build()
-                        ),
-                        700,
-                        null
+                        )
                     )
-                }
-                if (appMode == ChooseLocation) {
-                    mapUpdater.googleMap.animateCamera(
+                    ChooseLocation -> mapUpdater.animateCamera(
                         CameraUpdateFactory.newCameraPosition(
                             CameraPosition.builder()
                                 .target(location.latLng.value)
@@ -190,9 +181,7 @@ fun MapScreen(
                                 .zoom(mapConfig.zoomLevel)
                                 .tilt(0.0f)
                                 .build()
-                        ),
-                        700,
-                        null
+                        )
                     )
                 }
             }
