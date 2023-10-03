@@ -5,20 +5,24 @@ import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Stable
 val ColorScheme.isLight
     @Composable
     get() = this.background.luminance() > 0.5f
 
+@Stable
 val MaterialTheme.tonalElevation: Dp
     @Composable
     get() = if (colorScheme.isLight) 0.dp else defaultTonalElevation
 
+@Stable
 val ColorScheme.surfaceSurfaceVariant: Color
     @Composable
     get() = if (isLight) surface else surfaceVariant

@@ -123,6 +123,7 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
+    implementation(libs.immutable.collections)
     implementation(libs.google.maps)
     implementation(libs.google.material)
     implementation(libs.mvikotlin.extensions)

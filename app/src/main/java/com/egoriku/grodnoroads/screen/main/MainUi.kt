@@ -29,6 +29,7 @@ import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.screen.SettingsScreen
 import com.egoriku.grodnoroads.util.LocalWindowSizeClass
+import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
 
@@ -56,15 +57,17 @@ fun MainUi(component: MainComponent) {
     when (windowSizeClass.widthSizeClass) {
         Expanded -> {
             HorizontalOrientationLayout(
-                childStack = childStack,
-                component = component
+                childStack = { childStack },
+                onSelectTab = component::onSelectTab,
+                activeIndex = { childStack.active.instance.index }
             )
         }
 
         else -> {
             VerticalOrientationLayout(
-                childStack = childStack,
-                component = component
+                childStack = { childStack },
+                onSelectTab = component::onSelectTab,
+                activeIndex = { childStack.active.instance.index }
             )
         }
     }
@@ -72,14 +75,15 @@ fun MainUi(component: MainComponent) {
 
 @Composable
 private fun VerticalOrientationLayout(
-    childStack: ChildStack<*, Child>,
-    component: MainComponent
+    childStack: () -> ChildStack<*, Child>,
+    activeIndex: () -> Int,
+    onSelectTab: (Int) -> Unit,
 ) {
-    val bottomNavItems = remember { listOf(Screen.Map, Screen.Settings) }
+    val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.Settings) }
     var isShowBottomBar by rememberMutableState { true }
 
     val bottomPadding by animateDpAsState(
-        targetValue = if(isShowBottomBar) NavigationBarHeight else 0.dp,
+        targetValue = if (isShowBottomBar) NavigationBarHeight else 0.dp,
         label = "bottomPadding"
     )
 
@@ -91,7 +95,7 @@ private fun VerticalOrientationLayout(
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(1f),
-            stack = childStack,
+            stack = childStack(),
         ) { created ->
             when (val child = created.instance) {
                 is Child.Map -> {
@@ -120,19 +124,8 @@ private fun VerticalOrientationLayout(
             ) {
                 bottomNavItems.forEach { screen ->
                     NavigationBarItem(
-                        selected = screen.index == childStack.active.instance.index,
-                        onClick = { component.onSelectTab(index = screen.index) },
-                        colors = NavigationBarItemDefaults.colors(
-                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                alpha = 0.45f
-                            ),
-                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                alpha = 0.45f
-                            ),
-                            indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
-                                tonalElevation
-                            )
-                        ),
+                        selected = screen.index == activeIndex(),
+                        onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
                                 painter = painterResource(id = screen.iconRes),
@@ -151,10 +144,11 @@ private fun VerticalOrientationLayout(
 
 @Composable
 private fun HorizontalOrientationLayout(
-    childStack: ChildStack<*, Child>,
-    component: MainComponent
+    childStack: () -> ChildStack<*, Child>,
+    activeIndex: () -> Int,
+    onSelectTab: (Int) -> Unit,
 ) {
-    val bottomNavItems = remember { listOf(Screen.Map, Screen.Settings) }
+    val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.Settings) }
     var isHideBottomBar by rememberMutableState { false }
 
     Row(modifier = Modifier.fillMaxSize()) {
@@ -174,8 +168,8 @@ private fun HorizontalOrientationLayout(
                             ),
                             indicatorColor = containerColor
                         ),
-                        selected = screen.index == childStack.active.instance.index,
-                        onClick = { component.onSelectTab(index = screen.index) },
+                        selected = screen.index == activeIndex(),
+                        onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
                                 painter = painterResource(id = screen.iconRes),
@@ -188,7 +182,7 @@ private fun HorizontalOrientationLayout(
         }
         Children(
             modifier = Modifier.weight(1f),
-            stack = childStack,
+            stack = childStack(),
         ) { created ->
             when (val child = created.instance) {
                 is Child.Map -> MapScreen(
