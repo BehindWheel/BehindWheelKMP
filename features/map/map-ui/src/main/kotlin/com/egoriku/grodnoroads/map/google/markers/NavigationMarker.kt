@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.geometry.Offset
+import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.maps.core.extension.distanceTo
@@ -14,16 +15,23 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
-private const val ANIMATE_DISTANCE_THRESHOLD = 100
+private const val ANIMATE_DISTANCE_THRESHOLD = 300
 
 @Composable
 fun MapUpdater.NavigationMarker(
+    appMode: AppMode,
     tag: String = "navigation_icon",
     position: StableLatLng,
     bearing: Float,
     icon: () -> BitmapDescriptor,
     rotation: Float,
 ) {
+    LaunchedEffect(appMode) {
+        updateMarker(
+            tag = tag,
+            position = position.value
+        )
+    }
     LaunchedEffect(position) {
         val marker = getMarker(tag) ?: return@LaunchedEffect
 

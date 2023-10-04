@@ -220,6 +220,7 @@ fun MapScreen(
                         val isLight = MaterialTheme.colorScheme.isLight
 
                         NavigationMarker(
+                            appMode = appMode,
                             position = location.latLng,
                             bearing = location.bearing,
                             icon = {
@@ -344,7 +345,7 @@ fun MapScreen(
                     )
                 }
                 DefaultOverlay(
-                    isOverlayVisible = !isCameraUpdatesEnabled,
+                    isOverlayVisible = overlayVisible,
                     isDriveMode = appMode == Drive,
                     currentSpeed = location.speed,
                     speedLimit = speedLimit,
