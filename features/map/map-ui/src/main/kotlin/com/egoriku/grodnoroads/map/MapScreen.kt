@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -126,10 +125,7 @@ fun MapScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
-                onMapLoaded = {
-                    logD("on map loaded")
-                    isMapLoaded = true
-                },
+                onMapLoaded = { isMapLoaded = true },
                 onInitialLocationTriggered = { googleMap ->
                     googleMap.moveCamera(
                         CameraUpdateFactory.newLatLngZoom(
@@ -139,10 +135,7 @@ fun MapScreen(
                     )
                     projection = googleMap.projection
                 },
-                onMapUpdaterChanged = {
-                    logD("set mapUpdater: $it")
-                    mapUpdater = it
-                },
+                onMapUpdaterChanged = { mapUpdater = it },
                 onProjectionChanged = {
                     if (appMode == ChooseLocation) {
                         projection = it
@@ -270,52 +263,6 @@ fun MapScreen(
                 }
             }
         }
-
-        /*Box {
-            GoogleMapComponent(
-                modifier = Modifier
-                    .pointerInput(Unit) {
-                        coroutineScope {
-                            awaitEachGesture {
-                                awaitFirstDown(requireUnconsumed = false)
-                                isUserTouchScreen = true
-
-                                waitForUpOrCancellation()
-                                isPointerInputCanceled = true
-                            }
-                        }
-                    },
-                cameraPositionState = cameraPositionState,
-                paddingValues = contentPadding,
-                appMode = appMode,
-                mapConfig = mapConfig,
-                lastLocation = location,
-                onMapLoaded = { isMapLoaded = true },
-                animateCamera = animateCamera,
-                loading = {
-                    AnimatedVisibility(
-                        modifier = Modifier.matchParentSize(),
-                        visible = !isMapLoaded,
-                        enter = EnterTransition.None,
-                        exit = fadeOut()
-                    ) {
-                        LogoProgressIndicator()
-                    }
-                },
-                onCameraMoving = {
-                    isCameraMoving = it
-                },
-                onProjection = { projection = it },
-                mapZoomChangeEnabled = appMode == AppMode.ChooseLocation,
-                onMapZoom = component::setUserMapZoom,
-                locationChangeEnabled = appMode == AppMode.ChooseLocation,
-                onLocation = component::setLocation,
-                onCameraChanges = {
-                    isOverlayVisible = it
-                    onBottomNavigationVisibilityChange(it)
-                },
-            )
-        }*/
 
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
