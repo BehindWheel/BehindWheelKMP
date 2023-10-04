@@ -99,26 +99,21 @@ fun MapScreen(
         )
         LabelsSubscription(component)
 
+        val coroutineScope = rememberCoroutineScope()
+        var cameraUpdatesJob = remember<Job?> { null }
+
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
-        var projection by rememberMutableState<Projection?> { null }
+        var isCameraUpdatesEnabled by rememberMutableState { true }
 
-        var isOverlayVisible by remember { mutableStateOf(true) }
-
-        var isUserTouchScreen by rememberMutableState { false }
-        var isPointerInputCanceled by rememberMutableState { false }
-
-        var cameraPositionJob by remember { mutableStateOf<Job?>(null) }
-
-        LaunchedEffect(isPointerInputCanceled) {
-            if (isPointerInputCanceled) {
-                cameraPositionJob = reLaunch(cameraPositionJob) {
-                    delay(3000)
-                    isUserTouchScreen = false
-                    isPointerInputCanceled = false
-                }
+        val overlayVisible by remember {
+            derivedStateOf {
+                !isCameraUpdatesEnabled || appMode != Drive
             }
         }
+
+        var projection by rememberMutableState<Projection?> { null }
+
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
 
         if (mapConfig != MapConfig.EMPTY) {
@@ -156,6 +151,16 @@ fun MapScreen(
                 cameraMoveStateChanged = { state ->
                     if (appMode == ChooseLocation) {
                         isCameraMoving = state == CameraMoveState.UserGesture
+                    } else if (appMode == Drive) {
+                        if (state == CameraMoveState.UserGesture) {
+                            cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
+                                isCameraUpdatesEnabled = false
+                                delay(5000)
+                                isCameraUpdatesEnabled = true
+                            }
+                        }
+                    } else {
+                        isCameraUpdatesEnabled = true
                     }
                 }
             )
@@ -164,6 +169,7 @@ fun MapScreen(
                 @Suppress("NAME_SHADOWING")
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
                 if (location == LastLocation.None) return@LaunchedEffect
+                if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
                 when (appMode) {
                     Drive -> mapUpdater.animateCamera(
@@ -313,13 +319,11 @@ fun MapScreen(
 
         if (isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(contentPadding)
-            ) {
+            Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(
-                    modifier = Modifier.matchParentSize(),
+                    modifier = Modifier
+                        .matchParentSize()
+                        .padding(contentPadding),
                     targetState = appMode,
                     label = "app mode"
                 ) { state ->
@@ -377,21 +381,13 @@ fun MapScreen(
                 UsersCount(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(bottom = 4.dp, end = 16.dp),
+                        .padding(bottom = 4.dp, end = 16.dp)
+                        .padding(contentPadding),
                     count = userCount
-                )
-                DefaultOverlay(
-                    isOverlayVisible = isOverlayVisible,
-                    isDriveMode = appMode == Drive,
-                    currentSpeed = location.speed,
-                    speedLimit = speedLimit,
-                    quickActionsState = quickActionsState,
-                    alerts = alerts,
-                    onPreferenceChange = component::updatePreferences
                 )
                 AnimatedVisibility(
                     modifier = Modifier.align(Alignment.CenterEnd),
-                    visible = isOverlayVisible,
+                    visible = overlayVisible,
                     enter = fadeIn(),
                     exit = fadeOut()
                 ) {
@@ -400,6 +396,15 @@ fun MapScreen(
                         zoomOut = { mapUpdater?.zoomOut() }
                     )
                 }
+                DefaultOverlay(
+                    isOverlayVisible = !isCameraUpdatesEnabled,
+                    isDriveMode = appMode == Drive,
+                    currentSpeed = location.speed,
+                    speedLimit = speedLimit,
+                    quickActionsState = quickActionsState,
+                    alerts = alerts,
+                    onPreferenceChange = component::updatePreferences
+                )
             }
         }
 

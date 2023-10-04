@@ -54,7 +54,6 @@ firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 
 google-maps = "com.google.maps.android:maps-ktx:3.4.0"
-google-maps-compose = "com.google.maps.android:maps-compose:2.14.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.5.3"
 google-material = "com.google.android.material:material:1.9.0"
 

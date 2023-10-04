@@ -32,7 +32,6 @@ dependencies {
 
     implementation(libs.balloon.compose)
     implementation(libs.google.maps)
-    implementation(libs.google.maps.compose)
     implementation(libs.google.maps.utils)
     implementation(libs.immutable.collections)
     implementation(libs.koin.android)

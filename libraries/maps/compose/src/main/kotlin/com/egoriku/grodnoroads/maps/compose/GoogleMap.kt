@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.MapUpdaterImpl
 import com.google.android.gms.maps.GoogleMap
@@ -51,8 +50,7 @@ fun GoogleMap(
 
     AndroidView(
         modifier = modifier,
-        factory = { mapView },
-        update = { logD("GoogleMap: update") }
+        factory = { mapView }
     )
 
     DisposableEffect(mapUpdater) {
@@ -92,9 +90,6 @@ fun GoogleMap(
         val googleMap = map ?: return@LaunchedEffect
 
         googleMap.setOnMapLoadedCallback(onMapLoaded)
-        googleMap.setOnCameraIdleListener {
-            onProjectionChanged(googleMap.projection)
-        }
         googleMap.setOnCameraMoveStartedListener { reason ->
             val state = when (reason) {
                 REASON_GESTURE -> CameraMoveState.UserGesture
