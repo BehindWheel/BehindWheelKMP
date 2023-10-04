@@ -22,12 +22,11 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
 
     implementation(libs.immutable.collections)
 
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)
