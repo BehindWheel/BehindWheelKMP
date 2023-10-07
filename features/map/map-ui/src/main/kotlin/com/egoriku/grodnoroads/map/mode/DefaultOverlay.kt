@@ -1,9 +1,6 @@
 package com.egoriku.grodnoroads.map.mode
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.map.domain.model.Alert
@@ -73,11 +71,7 @@ fun DefaultOverlay(
                 Alerts(alerts = alerts)
             }
         }
-        AnimatedVisibility(
-            visible = isOverlayVisible,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
+        FadeInOutAnimatedVisibility(visible = isOverlayVisible) {
             QuickActionsPopup(
                 modifier = Modifier.statusBarsPadding(),
                 opened = quickActionsVisible,

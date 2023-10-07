@@ -20,15 +20,26 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
 
     override val lastLocationFlow = MutableStateFlow<LocationInfo?>(null)
 
+    private var lastBearing = 0.0f
+
     private val locationCallback = object : LocationCallback() {
 
         override fun onLocationResult(locationResult: LocationResult) {
             val location = locationResult.lastLocation ?: return
 
+            val directionBearing =
+                when {
+                    location.hasSpeed() && location.speed > 10 -> {
+                        lastBearing = location.bearing
+                        lastBearing
+                    }
+                    else -> lastBearing
+                }
+
             lastLocationFlow.tryEmit(
                 LocationInfo(
                     latLng = LatLng(location.latitude, location.longitude),
-                    bearing = location.bearing,
+                    bearing = directionBearing,
                     speed = when {
                         location.hasSpeed() -> speedToKilometerPerHour(location.speed)
                         else -> 0

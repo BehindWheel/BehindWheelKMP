@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.LayoutScopeMarker
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
-import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
@@ -41,6 +40,6 @@ interface MapUpdater {
     fun zoomIn()
     fun zoomOut()
 
-    fun animateCamera(cameraUpdate: CameraUpdate, duration: Int = 700)
+    fun animateCamera(target: LatLng, bearing: Float, zoom: Float)
     fun animateZoom(zoom: Float)
 }

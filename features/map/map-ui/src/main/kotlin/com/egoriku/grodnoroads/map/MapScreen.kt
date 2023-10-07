@@ -2,9 +2,6 @@ package com.egoriku.grodnoroads.map
 
 import android.graphics.Point
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
+import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.camera.CameraInfo
@@ -74,6 +71,8 @@ fun MapScreen(
     component: MapComponent,
     onBottomNavigationVisibilityChange: (Boolean) -> Unit
 ) {
+    val context = LocalContext.current
+
     val markerCache = koinInject<MarkerCache>()
 
     Surface {
@@ -81,6 +80,8 @@ fun MapScreen(
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(Default)
+
+        val labels by component.labels.collectAsState(initial = Label.None)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
@@ -97,7 +98,13 @@ fun MapScreen(
             onClose = component::closeDialog,
             reportAction = component::reportAction
         )
-        LabelsSubscription(component)
+
+        LaunchedEffect(labels) {
+            when (val label = labels) {
+                is ShowToast -> context.toast(label.resId)
+                else -> {}
+            }
+        }
 
         val coroutineScope = rememberCoroutineScope()
         var cameraUpdatesJob = remember<Job?> { null }
@@ -107,13 +114,10 @@ fun MapScreen(
         var isCameraUpdatesEnabled by rememberMutableState { true }
 
         val overlayVisible by remember {
-            derivedStateOf {
-                !isCameraUpdatesEnabled || appMode != Drive
-            }
+            derivedStateOf { !isCameraUpdatesEnabled || appMode != Drive }
         }
 
         var projection by rememberMutableState<Projection?> { null }
-
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
 
         if (mapConfig != MapConfig.EMPTY) {
@@ -150,51 +154,43 @@ fun MapScreen(
                     }
                 },
                 cameraMoveStateChanged = { state ->
-                    if (appMode == ChooseLocation) {
-                        isCameraMoving = state == CameraMoveState.UserGesture
-                    } else if (appMode == Drive) {
-                        if (state == CameraMoveState.UserGesture) {
-                            cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
-                                isCameraUpdatesEnabled = false
-                                delay(5000)
-                                isCameraUpdatesEnabled = true
+                    when (appMode) {
+                        ChooseLocation -> {
+                            isCameraMoving = state == CameraMoveState.UserGesture
+                        }
+                        Drive -> {
+                            if (state == CameraMoveState.UserGesture) {
+                                cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
+                                    isCameraUpdatesEnabled = false
+                                    delay(5000)
+                                    isCameraUpdatesEnabled = true
+                                }
                             }
                         }
-                    } else {
-                        isCameraUpdatesEnabled = true
+                        else -> {
+                            isCameraUpdatesEnabled = true
+                        }
                     }
                 }
             )
 
             LaunchedEffect(location, appMode) {
-                logD("update: $location, $appMode, zoom=${mapConfig.zoomLevel}")
                 @Suppress("NAME_SHADOWING")
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
-                if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
                 when (appMode) {
                     Drive -> {
                         if (location == LastLocation.None) return@LaunchedEffect
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
                         mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
                         mapUpdater.animateCamera(
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition.builder()
-                                    .target(location.latLng.value)
-                                    .bearing(location.bearing)
-                                    .zoom(mapConfig.zoomLevel)
-                                    .tilt(35.0f)
-                                    .build()
-                            )
+                            target = location.latLng.value,
+                            bearing = location.bearing,
+                            zoom = mapConfig.zoomLevel
                         )
                     }
-
-                    Default -> {
-                        mapUpdater.paddingDecorator.additionalPadding(top = 0)
-                        mapUpdater.animateZoom(mapConfig.zoomLevel)
-                    }
-
-                    ChooseLocation -> {
+                    Default, ChooseLocation -> {
                         mapUpdater.paddingDecorator.additionalPadding(top = 0)
                         mapUpdater.animateZoom(mapConfig.zoomLevel)
                     }
@@ -203,9 +199,8 @@ fun MapScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default -> onBottomNavigationVisibilityChange(true)
+                    Default, ChooseLocation -> onBottomNavigationVisibilityChange(true)
                     Drive -> onBottomNavigationVisibilityChange(false)
-                    ChooseLocation -> onBottomNavigationVisibilityChange(true)
                 }
             }
 
@@ -264,7 +259,7 @@ fun MapScreen(
             }
         }
 
-        if (isMapLoaded) {
+        FadeInOutAnimatedVisibility(visible = isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(
@@ -272,7 +267,7 @@ fun MapScreen(
                         .matchParentSize()
                         .padding(contentPadding),
                     targetState = appMode,
-                    label = "app mode"
+                    label = "app_mode"
                 ) { state ->
                     when (state) {
                         Default -> {
@@ -332,11 +327,9 @@ fun MapScreen(
                         .padding(contentPadding),
                     count = userCount
                 )
-                AnimatedVisibility(
+                FadeInOutAnimatedVisibility(
                     modifier = Modifier.align(Alignment.CenterEnd),
                     visible = overlayVisible,
-                    enter = fadeIn(),
-                    exit = fadeOut()
                 ) {
                     MapOverlayActions(
                         zoomIn = { mapUpdater?.zoomIn() },
@@ -416,18 +409,5 @@ private fun AlertDialogs(
         }
 
         is None -> Unit
-    }
-}
-
-@Composable
-private fun LabelsSubscription(component: MapComponent) {
-    val context = LocalContext.current
-    val labels by component.labels.collectAsState(initial = Label.None)
-
-    LaunchedEffect(labels) {
-        when (val label = labels) {
-            is ShowToast -> context.toast(label.resId)
-            else -> {}
-        }
     }
 }

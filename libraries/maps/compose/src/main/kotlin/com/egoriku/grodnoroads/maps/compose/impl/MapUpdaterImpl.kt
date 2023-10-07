@@ -113,7 +113,7 @@ internal class MapUpdaterImpl(
     }
 
     override fun hideMarker(tag: Any?) {
-        logD("removeMarker: tag=$tag")
+        logD("hideMarker: tag=$tag")
         markers
             .find { it.marker.tag == tag }
             ?.run { marker.isVisible = false }
@@ -133,8 +133,16 @@ internal class MapUpdaterImpl(
         googleMap.animateCamera(CameraUpdateFactory.zoomOut())
     }
 
-    override fun animateCamera(cameraUpdate: CameraUpdate, duration: Int) {
-        googleMap.animateCamera(cameraUpdate, duration, null)
+    override fun animateCamera(target: LatLng, bearing: Float, zoom: Float) {
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(
+            CameraPosition.builder()
+                .target(target)
+                .bearing(bearing)
+                .zoom(zoom)
+                .tilt(35.0f)
+                .build()
+        )
+        animateCamera(cameraUpdate)
     }
 
     override fun animateZoom(zoom: Float) {
@@ -147,5 +155,9 @@ internal class MapUpdaterImpl(
                 .build()
         )
         animateCamera(cameraUpdate)
+    }
+
+    private fun animateCamera(cameraUpdate: CameraUpdate, duration: Int = 700) {
+        googleMap.animateCamera(cameraUpdate, duration, null)
     }
 }
