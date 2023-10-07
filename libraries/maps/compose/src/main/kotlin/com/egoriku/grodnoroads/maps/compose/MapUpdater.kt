@@ -42,4 +42,5 @@ interface MapUpdater {
     fun zoomOut()
 
     fun animateCamera(cameraUpdate: CameraUpdate, duration: Int = 700)
+    fun animateZoom(zoom: Float)
 }

@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.ktx.addMarker
@@ -134,5 +135,17 @@ internal class MapUpdaterImpl(
 
     override fun animateCamera(cameraUpdate: CameraUpdate, duration: Int) {
         googleMap.animateCamera(cameraUpdate, duration, null)
+    }
+
+    override fun animateZoom(zoom: Float) {
+        val target = googleMap.cameraPosition.target
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(
+            CameraPosition.builder()
+                .target(target)
+                .zoom(zoom)
+                .tilt(0.0f)
+                .build()
+        )
+        animateCamera(cameraUpdate)
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -128,9 +129,11 @@ fun MapScreen(
                 onMapLoaded = { isMapLoaded = true },
                 onInitialLocationTriggered = { googleMap ->
                     googleMap.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(
-                            initialLocation.value,
-                            mapConfig.zoomLevel
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition.Builder()
+                                .target(initialLocation.value)
+                                .zoom(mapConfig.zoomLevel)
+                                .build()
                         )
                     )
                     projection = googleMap.projection
@@ -139,6 +142,11 @@ fun MapScreen(
                 onProjectionChanged = {
                     if (appMode == ChooseLocation) {
                         projection = it
+                    }
+                },
+                onZoomChanged = { zoom ->
+                    if (appMode == ChooseLocation) {
+                        component.setUserMapZoom(zoom)
                     }
                 },
                 cameraMoveStateChanged = { state ->
@@ -159,13 +167,15 @@ fun MapScreen(
             )
 
             LaunchedEffect(location, appMode) {
+                logD("update: $location, $appMode, zoom=${mapConfig.zoomLevel}")
                 @Suppress("NAME_SHADOWING")
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
-                if (location == LastLocation.None) return@LaunchedEffect
                 if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
                 when (appMode) {
                     Drive -> {
+                        if (location == LastLocation.None) return@LaunchedEffect
+
                         mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
                         mapUpdater.animateCamera(
                             CameraUpdateFactory.newCameraPosition(
@@ -178,31 +188,15 @@ fun MapScreen(
                             )
                         )
                     }
+
                     Default -> {
                         mapUpdater.paddingDecorator.additionalPadding(top = 0)
-                        mapUpdater.animateCamera(
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition.builder()
-                                    .target(location.latLng.value)
-                                    .bearing(location.bearing)
-                                    .zoom(mapConfig.zoomLevel)
-                                    .tilt(0.0f)
-                                    .build()
-                            )
-                        )
+                        mapUpdater.animateZoom(mapConfig.zoomLevel)
                     }
+
                     ChooseLocation -> {
                         mapUpdater.paddingDecorator.additionalPadding(top = 0)
-                        mapUpdater.animateCamera(
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition.builder()
-                                    .target(location.latLng.value)
-                                    .bearing(location.bearing)
-                                    .zoom(mapConfig.zoomLevel)
-                                    .tilt(0.0f)
-                                    .build()
-                            )
-                        )
+                        mapUpdater.animateZoom(mapConfig.zoomLevel)
                     }
                 }
             }
@@ -242,11 +236,13 @@ fun MapScreen(
                                         icon = { markerCache.getVector(id = R_res.drawable.ic_map_stationary_camera) },
                                         onClick = { cameraInfo = mapEvent }
                                     )
+
                                     is MediumSpeedCamera -> CameraMarker(
                                         position = mapEvent.position,
                                         icon = { markerCache.getVector(id = R_res.drawable.ic_map_medium_speed_camera) },
                                         onClick = { cameraInfo = mapEvent }
                                     )
+
                                     is MobileCamera -> CameraMarker(
                                         position = mapEvent.position,
                                         icon = { markerCache.getVector(id = R_res.drawable.ic_map_mobile_camera) },
@@ -254,6 +250,7 @@ fun MapScreen(
                                     )
                                 }
                             }
+
                             is MapEvent.Reports -> {
                                 ReportsMarker(
                                     position = mapEvent.position,
