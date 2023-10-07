@@ -165,47 +165,49 @@ fun MapScreen(
                 if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
                 when (appMode) {
-                    Drive -> mapUpdater.animateCamera(
-                        CameraUpdateFactory.newCameraPosition(
-                            CameraPosition.builder()
-                                .target(location.latLng.value)
-                                .bearing(location.bearing)
-                                .zoom(mapConfig.zoomLevel)
-                                .tilt(35.0f)
-                                .build()
+                    Drive -> {
+                        mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
+                        mapUpdater.animateCamera(
+                            CameraUpdateFactory.newCameraPosition(
+                                CameraPosition.builder()
+                                    .target(location.latLng.value)
+                                    .bearing(location.bearing)
+                                    .zoom(mapConfig.zoomLevel)
+                                    .tilt(35.0f)
+                                    .build()
+                            )
                         )
-                    )
-                    Default -> mapUpdater.animateCamera(
-                        CameraUpdateFactory.newCameraPosition(
-                            CameraPosition.builder()
-                                .target(location.latLng.value)
-                                .bearing(location.bearing)
-                                .zoom(mapConfig.zoomLevel)
-                                .tilt(0.0f)
-                                .build()
+                    }
+                    Default -> {
+                        mapUpdater.paddingDecorator.additionalPadding(top = 0)
+                        mapUpdater.animateCamera(
+                            CameraUpdateFactory.newCameraPosition(
+                                CameraPosition.builder()
+                                    .target(location.latLng.value)
+                                    .bearing(location.bearing)
+                                    .zoom(mapConfig.zoomLevel)
+                                    .tilt(0.0f)
+                                    .build()
+                            )
                         )
-                    )
-                    ChooseLocation -> mapUpdater.animateCamera(
-                        CameraUpdateFactory.newCameraPosition(
-                            CameraPosition.builder()
-                                .target(location.latLng.value)
-                                .bearing(location.bearing)
-                                .zoom(mapConfig.zoomLevel)
-                                .tilt(0.0f)
-                                .build()
+                    }
+                    ChooseLocation -> {
+                        mapUpdater.paddingDecorator.additionalPadding(top = 0)
+                        mapUpdater.animateCamera(
+                            CameraUpdateFactory.newCameraPosition(
+                                CameraPosition.builder()
+                                    .target(location.latLng.value)
+                                    .bearing(location.bearing)
+                                    .zoom(mapConfig.zoomLevel)
+                                    .tilt(0.0f)
+                                    .build()
+                            )
                         )
-                    )
+                    }
                 }
             }
 
             LaunchedEffect(appMode) {
-                @Suppress("NAME_SHADOWING")
-                val mapUpdater = mapUpdater ?: return@LaunchedEffect
-
-                when (appMode) {
-                    Default, ChooseLocation -> mapUpdater.paddingDecorator.additionalPadding(top = 0)
-                    Drive -> mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
-                }
                 when (appMode) {
                     Default -> onBottomNavigationVisibilityChange(true)
                     Drive -> onBottomNavigationVisibilityChange(false)
