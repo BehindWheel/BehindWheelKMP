@@ -1,7 +1,7 @@
 [versions]
 compileSdk = "34"
 minSdk = "23"
-targetSdk = "33"
+targetSdk = "34"
 
 agp = "8.1.2"
 accompanist = "0.32.0"
