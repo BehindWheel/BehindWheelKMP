@@ -9,7 +9,7 @@ import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.core.StableLatLng
-import com.egoriku.grodnoroads.maps.core.extension.distanceTo
+import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.egoriku.grodnoroads.maps.core.util.LinearFixedInterpolator.Companion.linearFixedInterpolator
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
@@ -20,7 +20,7 @@ private const val ANIMATE_DISTANCE_THRESHOLD = 300
 @Composable
 fun MapUpdater.NavigationMarker(
     appMode: AppMode,
-    tag: String = "navigation_icon",
+    tag: String,
     position: StableLatLng,
     bearing: Float,
     icon: () -> BitmapDescriptor,
@@ -35,7 +35,7 @@ fun MapUpdater.NavigationMarker(
     LaunchedEffect(position) {
         val marker = getMarker(tag) ?: return@LaunchedEffect
 
-        if (marker.position distanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
+        if (marker.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
             updateMarker(
                 tag = tag,
                 position = position.value
@@ -57,15 +57,13 @@ fun MapUpdater.NavigationMarker(
             zIndex = 1f,
             rotation = bearing - rotation,
             tag = tag,
-            visible = true
         )
 
         onDispose {
-            hideMarker(tag)
+            removeMarker(tag)
         }
     }
 }
-
 
 /**
  * Method to animate marker to destination location

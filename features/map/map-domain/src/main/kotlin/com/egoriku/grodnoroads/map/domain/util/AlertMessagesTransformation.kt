@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.maps.core.extension.computeOffset
-import com.egoriku.grodnoroads.maps.core.extension.distanceTo
+import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -111,11 +111,11 @@ private fun computeDistance(
     currentLatLnt: LatLng,
     distanceRadius: Int
 ): Int? {
-    val distanceBetweenOffsetAndEvent = eventLatLng distanceTo offsetLatLng
+    val distanceBetweenOffsetAndEvent = eventLatLng roundDistanceTo offsetLatLng
 
     return when {
         distanceBetweenOffsetAndEvent < distanceRadius -> {
-            when (val distanceToEvent = currentLatLnt distanceTo eventLatLng) {
+            when (val distanceToEvent = currentLatLnt roundDistanceTo eventLatLng) {
                 in MIN_DISTANCE until distanceRadius -> distanceToEvent
                 else -> null
             }

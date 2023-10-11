@@ -22,7 +22,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.*
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.Projection
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.buildGoogleMapOptions
 
 internal val NoPadding = PaddingValues()
 
@@ -32,8 +34,8 @@ fun GoogleMap(
     contentPadding: PaddingValues = NoPadding,
     mapProperties: MapProperties = DefaultMapProperties,
     mapUiSettings: MapUiSettings = DefaultMapUiSettings,
-    onMapLoaded: () -> Unit,
-    onInitialLocationTriggered: (GoogleMap) -> Unit,
+    onMapLoaded: (GoogleMap) -> Unit,
+    cameraPositionProvider: () -> CameraPosition,
     onMapUpdaterChanged: (MapUpdater?) -> Unit,
     onProjectionChanged: (Projection) -> Unit,
     onZoomChanged: (Float) -> Unit,
@@ -43,10 +45,17 @@ fun GoogleMap(
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val mapView = remember { MapView(context) }
-    var map by remember { mutableStateOf<GoogleMap?>(null) }
-    var mapUpdater by remember(map) {
-        mutableStateOf(map?.let { MapUpdaterImpl(it, mapView) })
+    val mapView = remember {
+        MapView(
+            /* context = */ context,
+            /* options = */ buildGoogleMapOptions {
+                camera(cameraPositionProvider())
+            }
+        )
+    }
+    var googleMap by remember { mutableStateOf<GoogleMap?>(null) }
+    var mapUpdater by remember(googleMap) {
+        mutableStateOf(googleMap?.let { MapUpdaterImpl(it) })
     }
 
     AndroidView(
@@ -70,11 +79,13 @@ fun GoogleMap(
     }
 
     LaunchedEffect(mapView) {
-        map = mapView.awaitMap()
+        googleMap = mapView.awaitMap()
     }
 
     LaunchedEffect(contentPadding) {
-        mapUpdater?.updateContentPadding(
+        @Suppress("NAME_SHADOWING")
+        val mapUpdater = mapUpdater ?: return@LaunchedEffect
+        mapUpdater.updateContentPadding(
             contentPadding = contentPadding,
             density = density,
             layoutDirection = layoutDirection,
@@ -82,15 +93,15 @@ fun GoogleMap(
     }
 
     LaunchedEffect(mapProperties) {
-        val map = map ?: return@LaunchedEffect
-
+        val map = googleMap ?: return@LaunchedEffect
         updateMapProperties(map, mapProperties)
     }
 
-    LaunchedEffect(map) {
-        val googleMap = map ?: return@LaunchedEffect
+    LaunchedEffect(googleMap) {
+        @Suppress("NAME_SHADOWING")
+        val googleMap = googleMap ?: return@LaunchedEffect
 
-        googleMap.setOnMapLoadedCallback(onMapLoaded)
+        googleMap.setOnMapLoadedCallback { onMapLoaded(googleMap) }
         googleMap.setOnCameraMoveStartedListener { reason ->
             val state = when (reason) {
                 REASON_GESTURE -> CameraMoveState.UserGesture
@@ -107,7 +118,6 @@ fun GoogleMap(
             val zoomLevel = googleMap.cameraPosition.zoom
             onZoomChanged(zoomLevel)
         }
-        onInitialLocationTriggered(googleMap)
 
         updateMapProperties(googleMap, mapProperties)
         updateMapUiSettings(googleMap, mapUiSettings)
@@ -140,12 +150,13 @@ private fun MapPaddingDecorator.updateContentPadding(
 
 @SuppressLint("MissingPermission")
 private fun updateMapProperties(googleMap: GoogleMap, mapProperties: MapProperties) {
-    with(mapProperties) {
-        googleMap.isMyLocationEnabled = isMyLocationEnabled
-        googleMap.mapType = mapType.value
-        googleMap.setMapStyle(mapStyleOptions)
-        googleMap.setMinZoomPreference(minZoomPreference)
-        googleMap.setMaxZoomPreference(maxZoomPreference)
+    googleMap.apply {
+        isMyLocationEnabled = mapProperties.isMyLocationEnabled
+        mapType = mapProperties.mapType.value
+        isTrafficEnabled = mapProperties.isTrafficEnabled
+        setMapStyle(mapProperties.mapStyleOptions)
+        setMinZoomPreference(mapProperties.minZoomPreference)
+        setMaxZoomPreference(mapProperties.maxZoomPreference)
     }
 }
 

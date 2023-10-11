@@ -55,9 +55,8 @@ import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.Projection
-import com.google.android.gms.maps.model.CameraPosition
+import com.google.maps.android.ktx.model.cameraPosition
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -113,6 +112,8 @@ fun MapScreen(
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
 
+        var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
+
         val overlayVisible by remember {
             derivedStateOf { !isCameraUpdatesEnabled || appMode != Drive }
         }
@@ -130,17 +131,15 @@ fun MapScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
-                onMapLoaded = { isMapLoaded = true },
-                onInitialLocationTriggered = { googleMap ->
-                    googleMap.moveCamera(
-                        CameraUpdateFactory.newCameraPosition(
-                            CameraPosition.Builder()
-                                .target(initialLocation.value)
-                                .zoom(mapConfig.zoomLevel)
-                                .build()
-                        )
-                    )
-                    projection = googleMap.projection
+                onMapLoaded = { map ->
+                    projection = map.projection
+                    isMapLoaded = true
+                },
+                cameraPositionProvider = {
+                    cameraPosition {
+                        target(initialLocation.value)
+                        zoom(mapConfig.zoomLevel)
+                    }
                 },
                 onMapUpdaterChanged = { mapUpdater = it },
                 onProjectionChanged = {
@@ -154,6 +153,7 @@ fun MapScreen(
                     }
                 },
                 cameraMoveStateChanged = { state ->
+                    cameraMoveState = state
                     when (appMode) {
                         ChooseLocation -> {
                             isCameraMoving = state == CameraMoveState.UserGesture
@@ -181,17 +181,25 @@ fun MapScreen(
                 when (appMode) {
                     Drive -> {
                         if (location == LastLocation.None) return@LaunchedEffect
+                        if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
+
+                        if (mapUpdater.lastLocation == null) {
+                            mapUpdater.animateCamera(
+                                target = location.latLng.value,
+                                zoom = mapConfig.zoomLevel,
+                                bearing = location.bearing
+                            )
+                        }
+
                         if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
 
-                        mapUpdater.paddingDecorator.additionalPadding(top = mapUpdater.mapView.height / 3)
                         mapUpdater.animateCamera(
                             target = location.latLng.value,
-                            bearing = location.bearing,
-                            zoom = mapConfig.zoomLevel
+                            zoom = mapConfig.zoomLevel,
                         )
                     }
                     Default, ChooseLocation -> {
-                        mapUpdater.paddingDecorator.additionalPadding(top = 0)
+                        mapUpdater.lastLocation = null
                         mapUpdater.animateZoom(mapConfig.zoomLevel)
                     }
                 }
@@ -211,6 +219,7 @@ fun MapScreen(
                         val isLight = MaterialTheme.colorScheme.isLight
 
                         NavigationMarker(
+                            tag = if (isLight) "navigation_light" else "navigation_dark",
                             appMode = appMode,
                             position = location.latLng,
                             bearing = location.bearing,

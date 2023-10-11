@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.LayoutScopeMarker
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -13,8 +12,7 @@ import com.google.android.gms.maps.model.Marker
 @Immutable
 interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
-
-    val mapView: MapView
+    var lastLocation: LatLng?
 
     fun addMarker(
         position: LatLng,
@@ -24,7 +22,6 @@ interface MapUpdater {
         anchor: Offset = Offset(0.5f, 1.0f),
         rotation: Float = 0.0f,
         tag: Any? = null,
-        visible: Boolean = true,
     )
 
     fun updateMarker(
@@ -35,11 +32,12 @@ interface MapUpdater {
     fun getMarker(tag: Any?): Marker?
 
     fun removeMarker(position: LatLng)
-    fun hideMarker(tag: Any?)
+    fun removeMarker(tag: Any)
 
     fun zoomIn()
     fun zoomOut()
 
-    fun animateCamera(target: LatLng, bearing: Float, zoom: Float)
+    fun animateCamera(target: LatLng, zoom: Float, bearing: Float)
+    fun animateCamera(target: LatLng, zoom: Float)
     fun animateZoom(zoom: Float)
 }
