@@ -238,7 +238,7 @@ internal class MapComponentImpl(
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
-        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
+        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng.value))
         else -> Unit
     }
 
