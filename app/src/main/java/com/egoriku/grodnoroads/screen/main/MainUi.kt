@@ -1,10 +1,6 @@
 package com.egoriku.grodnoroads.screen.main
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -23,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
+import com.egoriku.grodnoroads.foundation.animation.HorizontalSlideAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.animation.VerticalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.MapScreen
@@ -32,21 +30,6 @@ import com.egoriku.grodnoroads.util.LocalWindowSizeClass
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
-
-@Composable
-fun VerticalSlideAnimatedVisibility(
-    visible: Boolean,
-    modifier: Modifier = Modifier,
-    content: @Composable AnimatedVisibilityScope.() -> Unit
-) {
-    AnimatedVisibility(
-        modifier = modifier,
-        visible = visible,
-        enter = slideInVertically { it },
-        exit = slideOutVertically { it },
-        content = content
-    )
-}
 
 @Composable
 fun MainUi(component: MainComponent) {
@@ -94,7 +77,7 @@ private fun VerticalOrientationLayout(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
-            modifier = Modifier.fillMaxSize(1f),
+            modifier = Modifier.fillMaxSize(),
             stack = childStack(),
         ) { created ->
             when (val child = created.instance) {
@@ -124,6 +107,13 @@ private fun VerticalOrientationLayout(
             ) {
                 bottomNavItems.forEach { screen ->
                     NavigationBarItem(
+                        colors = NavigationBarItemDefaults.colors(
+                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
+                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
+                            indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
+                                tonalElevation
+                            )
+                        ),
                         selected = screen.index == activeIndex(),
                         onClick = { onSelectTab(screen.index) },
                         icon = {
@@ -151,11 +141,34 @@ private fun HorizontalOrientationLayout(
     val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.Settings) }
     var isHideBottomBar by rememberMutableState { false }
 
-    Row(modifier = Modifier.fillMaxSize()) {
+    val leftPadding by animateDpAsState(
+        targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
+        label = "leftPadding"
+    )
+    val contentPaddingValues = WindowInsets(left = leftPadding).asPaddingValues()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Children(
+            modifier = Modifier.fillMaxSize(),
+            stack = childStack(),
+        ) { created ->
+            when (val child = created.instance) {
+                is Child.Map -> MapScreen(
+                    contentPadding = contentPaddingValues,
+                    component = child.component,
+                    onBottomNavigationVisibilityChange = { isHideBottomBar = it }
+                )
+
+                is Child.Settings -> SettingsScreen(
+                    contentPadding = contentPaddingValues,
+                    settingsComponent = child.component
+                )
+            }
+        }
         val tonalElevation = MaterialTheme.tonalElevation
         val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
-        VerticalSlideAnimatedVisibility(isHideBottomBar) {
+        HorizontalSlideAnimatedVisibility(isHideBottomBar) {
             NavigationRail(containerColor = containerColor) {
                 bottomNavItems.forEach { screen ->
                     NavigationRailItem(
@@ -178,23 +191,6 @@ private fun HorizontalOrientationLayout(
                         }
                     )
                 }
-            }
-        }
-        Children(
-            modifier = Modifier.weight(1f),
-            stack = childStack(),
-        ) { created ->
-            when (val child = created.instance) {
-                is Child.Map -> MapScreen(
-                    contentPadding = PaddingValues(),
-                    component = child.component,
-                    onBottomNavigationVisibilityChange = { isHideBottomBar = it }
-                )
-
-                is Child.Settings -> SettingsScreen(
-                    contentPadding = PaddingValues(),
-                    settingsComponent = child.component
-                )
             }
         }
     }
