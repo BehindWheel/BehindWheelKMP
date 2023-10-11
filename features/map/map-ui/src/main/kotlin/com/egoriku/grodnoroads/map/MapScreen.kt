@@ -29,7 +29,7 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.*
+import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.None
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
@@ -378,14 +378,14 @@ private fun AlertDialogs(
     reportAction: (ReportAction.Params) -> Unit
 ) {
     when (mapAlertDialog) {
-        is MarkerInfoDialog -> {
+        is MapAlertDialog.MarkerInfoDialog -> {
             MarkerInfoBottomSheet(
                 reports = mapAlertDialog.reports,
                 onClose = onClose
             )
         }
 
-        is PoliceDialog -> {
+        is MapAlertDialog.PoliceDialog -> {
             ReportDialog(
                 onClose = onClose,
                 onSend = { mapEvent, shortMessage, message ->
@@ -401,7 +401,7 @@ private fun AlertDialogs(
             )
         }
 
-        is RoadIncidentDialog -> {
+        is MapAlertDialog.RoadIncidentDialog -> {
             IncidentDialog(
                 onClose = onClose,
                 onSend = { mapEvent, shortMessage, message ->
