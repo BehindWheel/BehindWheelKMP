@@ -80,7 +80,7 @@ private fun animateMarker(
     val startRotation = marker.rotation
 
     ValueAnimator.ofFloat(0f, 1f).apply {
-        duration = 700
+        duration = 1000
         interpolator = LinearInterpolator()
         addUpdateListener { animation ->
             try {
