@@ -96,7 +96,7 @@ fun ClickableFloatRange(
                                     1 -> -4f
                                     else -> 0f
                                 }
-                                x at durationMillis / 10 * i with easing
+                                x at durationMillis / 10 * i using easing
                             }
                         },
                     )
