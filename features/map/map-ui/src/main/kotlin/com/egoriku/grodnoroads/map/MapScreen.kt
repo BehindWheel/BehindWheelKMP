@@ -129,6 +129,7 @@ fun MapScreen(
             )
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
+                backgroundColor = MaterialTheme.colorScheme.surface,
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
                 onMapLoaded = { map ->

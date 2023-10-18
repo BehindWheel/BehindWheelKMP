@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -31,6 +33,7 @@ internal val NoPadding = PaddingValues()
 @Composable
 fun GoogleMap(
     modifier: Modifier = Modifier,
+    backgroundColor: Color,
     contentPadding: PaddingValues = NoPadding,
     mapProperties: MapProperties = DefaultMapProperties,
     mapUiSettings: MapUiSettings = DefaultMapUiSettings,
@@ -49,6 +52,7 @@ fun GoogleMap(
         MapView(
             /* context = */ context,
             /* options = */ buildGoogleMapOptions {
+                backgroundColor(backgroundColor.toArgb())
                 camera(cameraPositionProvider())
             }
         )
