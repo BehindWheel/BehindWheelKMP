@@ -34,7 +34,8 @@ fun MapUpdater.ReportsMarker(
             position = position.value,
             icon = icon,
             zIndex = 2.0f,
-            onClick = onClick
+            onClick = onClick,
+            title = message
         )
     }
 }

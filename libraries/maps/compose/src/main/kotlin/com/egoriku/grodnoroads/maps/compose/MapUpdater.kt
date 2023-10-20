@@ -22,6 +22,7 @@ interface MapUpdater {
         anchor: Offset = Offset(0.5f, 1.0f),
         rotation: Float = 0.0f,
         tag: Any? = null,
+        title: String? = null
     )
 
     fun updateMarker(

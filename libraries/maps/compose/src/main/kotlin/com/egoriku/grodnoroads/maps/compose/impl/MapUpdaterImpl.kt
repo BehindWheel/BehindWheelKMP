@@ -77,10 +77,12 @@ internal class MapUpdaterImpl(
         anchor: Offset,
         rotation: Float,
         tag: Any?,
+        title: String?
     ) {
         val internalMarker = markers.find { it.marker.position == position }
         if (internalMarker == null) {
             val marker = googleMap.addMarker {
+                title(title)
                 position(position)
                 icon(icon)
                 zIndex(zIndex)
@@ -96,6 +98,7 @@ internal class MapUpdaterImpl(
             internalMarker.marker.apply {
                 this.position = position
                 this.zIndex = zIndex
+                setTitle(title)
                 setIcon(icon)
                 setAnchor(anchor.x, anchor.y)
                 setRotation(rotation)
