@@ -25,7 +25,7 @@ fun ReportsMarker(
     rememberIconMarker(
         position = position,
         icon = icon,
-        zIndex = 2.0f,
+        zIndex = 2f,
         title = message,
         onMarkerClick = onClick
     )

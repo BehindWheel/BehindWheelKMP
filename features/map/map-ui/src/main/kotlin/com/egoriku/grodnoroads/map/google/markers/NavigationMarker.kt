@@ -35,7 +35,7 @@ fun NavigationMarker(
             markerOptions {
                 position(position.value)
                 icon(icon())
-                zIndex(1f)
+                zIndex(0f)
                 anchor(0.5f, 0.5f)
                 rotation(bearing - rotation)
             }
