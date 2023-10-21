@@ -16,9 +16,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.ktx.addMarker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.ktx.markerClickEvents
 import com.google.maps.android.ktx.model.cameraPosition
+import com.google.maps.android.ktx.model.markerOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -75,13 +76,19 @@ internal class MapUpdaterImpl(
         anchor: Offset,
         rotation: Float,
         title: String?,
-    ): Marker? = googleMap.addMarker {
-        title(title)
-        position(position)
-        icon(icon)
-        zIndex(zIndex)
-        anchor(anchor.x, anchor.y)
-        rotation(rotation)
+    ): Marker? = addMarker(
+        markerOptions = markerOptions {
+            title(title)
+            position(position)
+            icon(icon)
+            zIndex(zIndex)
+            anchor(anchor.x, anchor.y)
+            rotation(rotation)
+        }
+    )
+
+    override fun addMarker(markerOptions: MarkerOptions): Marker? {
+        return googleMap.addMarker(markerOptions)
     }
 
     override fun detach() {

@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.maps.compose
 
 import androidx.compose.runtime.*
-import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -13,24 +13,12 @@ context(MapUpdater)
 @Composable
 fun rememberSimpleMarker(
     tag: String,
-    position: StableLatLng,
-    icon: () -> BitmapDescriptor,
-    zIndex: Float = 0.0f,
-    anchor: Offset = Offset(0.5f, 1.0f),
-    rotation: Float = 0.0f,
+    markerOptions: () -> MarkerOptions,
 ): Marker? {
-    var marker = remember<Marker?> { null }
+    var marker by remember { mutableStateOf<Marker?>(null) }
 
     DisposableEffect(tag) {
-        addMarker(
-            position = position.value,
-            icon = icon(),
-            zIndex = zIndex,
-            anchor = anchor,
-            rotation = rotation
-        ).also {
-            marker = it
-        }
+        marker = addMarker(markerOptions = markerOptions())
 
         onDispose {
             marker?.remove()
@@ -61,14 +49,13 @@ fun rememberIconMarker(
     }
 
     DisposableEffect(position, title) {
-        addMarker(
+        marker = addMarker(
             position = position.value,
             icon = icon(),
             zIndex = zIndex,
             title = title,
-        ).also {
-            marker = it
-        }
+        )
+
         onDispose {
             marker?.remove()
         }

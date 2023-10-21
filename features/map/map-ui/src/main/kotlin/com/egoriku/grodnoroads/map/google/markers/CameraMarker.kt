@@ -16,6 +16,7 @@ fun CameraMarker(
     rememberIconMarker(
         position = position,
         icon = icon,
-        onMarkerClick = onClick
+        onMarkerClick = onClick,
+        zIndex = 2f
     )
 }

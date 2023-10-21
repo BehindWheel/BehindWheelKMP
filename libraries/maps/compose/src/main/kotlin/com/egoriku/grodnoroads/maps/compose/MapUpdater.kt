@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.flow.SharedFlow
 
 @LayoutScopeMarker
@@ -25,6 +26,8 @@ interface MapUpdater {
         rotation: Float = 0.0f,
         title: String? = null
     ): Marker?
+
+    fun addMarker(markerOptions: MarkerOptions): Marker?
 
     fun zoomIn()
     fun zoomOut()

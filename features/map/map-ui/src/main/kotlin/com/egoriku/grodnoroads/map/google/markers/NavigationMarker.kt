@@ -6,7 +6,6 @@ import android.animation.ValueAnimator
 import android.view.animation.LinearInterpolator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.rememberSimpleMarker
@@ -16,6 +15,7 @@ import com.egoriku.grodnoroads.maps.core.util.LinearFixedInterpolator.Companion.
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.ktx.model.markerOptions
 
 private const val ANIMATE_DISTANCE_THRESHOLD = 300
 
@@ -31,11 +31,15 @@ fun NavigationMarker(
 ) {
     val marker = rememberSimpleMarker(
         tag = tag,
-        position = position,
-        icon = icon,
-        anchor = Offset(0.5f, 0.5f),
-        zIndex = 1f,
-        rotation = bearing - rotation,
+        markerOptions = {
+            markerOptions {
+                position(position.value)
+                icon(icon())
+                zIndex(1f)
+                anchor(0.5f, 0.5f)
+                rotation(bearing - rotation)
+            }
+        },
     )
 
     LaunchedEffect(appMode) {
