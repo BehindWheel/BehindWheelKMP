@@ -128,7 +128,6 @@ fun MapScreen(
                 appMode = appMode
             )
             GoogleMap(
-                modifier = Modifier.fillMaxSize(),
                 backgroundColor = MaterialTheme.colorScheme.surface,
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
@@ -157,10 +156,10 @@ fun MapScreen(
                     cameraMoveState = state
                     when (appMode) {
                         ChooseLocation -> {
-                            isCameraMoving = state == CameraMoveState.UserGesture
+                            isCameraMoving = cameraMoveState == CameraMoveState.UserGesture
                         }
                         Drive -> {
-                            if (state == CameraMoveState.UserGesture) {
+                            if (cameraMoveState == CameraMoveState.UserGesture) {
                                 cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
                                     isCameraUpdatesEnabled = false
                                     delay(5000)

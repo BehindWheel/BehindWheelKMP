@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -30,6 +34,7 @@ import com.google.maps.android.ktx.buildGoogleMapOptions
 
 internal val NoPadding = PaddingValues()
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun GoogleMap(
     modifier: Modifier = Modifier,
@@ -44,6 +49,13 @@ fun GoogleMap(
     onZoomChanged: (Float) -> Unit,
     cameraMoveStateChanged: (CameraMoveState) -> Unit,
 ) {
+    val updatedOnMapLoaded by rememberUpdatedState(onMapLoaded)
+    val updatedCameraPositionProvider by rememberUpdatedState(cameraPositionProvider)
+    val updatedOnMapUpdaterChanged by rememberUpdatedState(onMapUpdaterChanged)
+    val updatedOnProjectionChanged by rememberUpdatedState(onProjectionChanged)
+    val updatedOnZoomChanged by rememberUpdatedState(onZoomChanged)
+    val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChanged)
+
     val context = LocalContext.current
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
@@ -53,7 +65,7 @@ fun GoogleMap(
             /* context = */ context,
             /* options = */ buildGoogleMapOptions {
                 backgroundColor(backgroundColor.toArgb())
-                camera(cameraPositionProvider())
+                camera(updatedCameraPositionProvider())
             }
         )
     }
@@ -63,7 +75,16 @@ fun GoogleMap(
     }
 
     AndroidView(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxSize()
+            .pointerInteropFilter {
+                when (it.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        updatedCameraMoveState(CameraMoveState.UserGesture)
+                    }
+                }
+                false
+            },
         factory = { mapView }
     )
 
@@ -75,7 +96,7 @@ fun GoogleMap(
 
             updateContentPadding(contentPadding, density, layoutDirection)
         }
-        onMapUpdaterChanged(mapUpdater)
+        updatedOnMapUpdaterChanged(mapUpdater)
         onDispose {
             mapUpdater?.detach()
             mapUpdater = null
@@ -105,22 +126,22 @@ fun GoogleMap(
         @Suppress("NAME_SHADOWING")
         val googleMap = googleMap ?: return@LaunchedEffect
 
-        googleMap.setOnMapLoadedCallback { onMapLoaded(googleMap) }
+        googleMap.setOnMapLoadedCallback { updatedOnMapLoaded(googleMap) }
         googleMap.setOnCameraMoveStartedListener { reason ->
             val state = when (reason) {
                 REASON_GESTURE -> CameraMoveState.UserGesture
                 REASON_API_ANIMATION, REASON_DEVELOPER_ANIMATION -> CameraMoveState.Animating
                 else -> error("unsupported value")
             }
-            cameraMoveStateChanged(state)
+            updatedCameraMoveState(state)
         }
         googleMap.setOnCameraIdleListener {
-            cameraMoveStateChanged(CameraMoveState.Idle)
-            onProjectionChanged(googleMap.projection)
+            updatedCameraMoveState(CameraMoveState.Idle)
+            updatedOnProjectionChanged(googleMap.projection)
         }
         googleMap.setOnCameraMoveListener {
             val zoomLevel = googleMap.cameraPosition.zoom
-            onZoomChanged(zoomLevel)
+            updatedOnZoomChanged(zoomLevel)
         }
 
         updateMapProperties(googleMap, mapProperties)
