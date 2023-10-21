@@ -1,13 +1,15 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.egoriku.grodnoroads.map.google.markers
 
 import android.animation.ValueAnimator
 import android.view.animation.LinearInterpolator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.rememberSimpleMarker
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.egoriku.grodnoroads.maps.core.util.LinearFixedInterpolator.Companion.linearFixedInterpolator
@@ -17,8 +19,9 @@ import com.google.android.gms.maps.model.Marker
 
 private const val ANIMATE_DISTANCE_THRESHOLD = 300
 
+context(MapUpdater)
 @Composable
-fun MapUpdater.NavigationMarker(
+fun NavigationMarker(
     appMode: AppMode,
     tag: String,
     position: StableLatLng,
@@ -26,41 +29,31 @@ fun MapUpdater.NavigationMarker(
     icon: () -> BitmapDescriptor,
     rotation: Float,
 ) {
+    val marker = rememberSimpleMarker(
+        tag = tag,
+        position = position,
+        icon = icon,
+        anchor = Offset(0.5f, 0.5f),
+        zIndex = 1f,
+        rotation = bearing - rotation,
+    )
+
     LaunchedEffect(appMode) {
-        updateMarker(
-            tag = tag,
-            position = position.value
-        )
+        val marker = marker ?: return@LaunchedEffect
+        marker.position = position.value
     }
+
     LaunchedEffect(position) {
-        val marker = getMarker(tag) ?: return@LaunchedEffect
+        val marker = marker ?: return@LaunchedEffect
 
         if (marker.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
-            updateMarker(
-                tag = tag,
-                position = position.value
-            )
+            marker.position = position.value
         } else {
             animateMarker(
                 destination = position.value,
                 bearing = bearing - rotation,
                 marker = marker
             )
-        }
-    }
-
-    DisposableEffect(tag) {
-        addMarker(
-            position = position.value,
-            icon = icon(),
-            anchor = Offset(0.5f, 0.5f),
-            zIndex = 1f,
-            rotation = bearing - rotation,
-            tag = tag,
-        )
-
-        onDispose {
-            removeMarker(tag)
         }
     }
 }

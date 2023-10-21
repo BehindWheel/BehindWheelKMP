@@ -2,12 +2,10 @@ package com.egoriku.grodnoroads.maps.compose.impl
 
 import android.graphics.Point
 import androidx.compose.ui.geometry.Offset
-import com.egoriku.grodnoroads.extensions.consume
 import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecoratorImpl
-import com.egoriku.grodnoroads.maps.compose.impl.model.InternalMarker
 import com.egoriku.grodnoroads.maps.core.extension.computeOffset
 import com.egoriku.grodnoroads.maps.core.extension.distanceTo
 import com.egoriku.grodnoroads.maps.core.extension.headingTo
@@ -19,7 +17,15 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.ktx.addMarker
+import com.google.maps.android.ktx.markerClickEvents
 import com.google.maps.android.ktx.model.cameraPosition
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 internal class MapUpdaterImpl(
     private val googleMap: GoogleMap,
@@ -28,7 +34,8 @@ internal class MapUpdaterImpl(
     MapStateUpdater,
     MapPaddingDecorator by paddingDecorator {
 
-    private val markers = mutableListOf<InternalMarker>()
+    private val scope = CoroutineScope(Dispatchers.Main)
+
     private var minZoom = -1f
     private var maxZoom = -1f
 
@@ -43,16 +50,14 @@ internal class MapUpdaterImpl(
     private val currentZoom: Float
         get() = googleMap.cameraPosition.zoom
 
+    private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
+    override val clickedMarker: SharedFlow<Marker?> = _clickedMarker
+
     override fun attach() {
         logD("attach")
-        googleMap.setOnMarkerClickListener { marker ->
-            when (val internalMarker = markers.find { it.marker == marker }) {
-                null -> false
-                else -> consume {
-                    internalMarker.onClick()
-                }
-            }
-        }
+        googleMap.markerClickEvents()
+            .onEach { _clickedMarker.emit(it) }
+            .launchIn(scope)
     }
 
     override fun setMaxZoomPreference(value: Float) {
@@ -63,74 +68,26 @@ internal class MapUpdaterImpl(
         minZoom = value
     }
 
-    override fun detach() {
-        logD("detach")
-        googleMap.setOnMarkerClickListener(null)
-        markers.clear()
-    }
-
     override fun addMarker(
         position: LatLng,
         icon: BitmapDescriptor?,
-        onClick: () -> Unit,
         zIndex: Float,
         anchor: Offset,
         rotation: Float,
-        tag: Any?,
-        title: String?
-    ) {
-        val internalMarker = markers.find { it.marker.position == position }
-        if (internalMarker == null) {
-            val marker = googleMap.addMarker {
-                title(title)
-                position(position)
-                icon(icon)
-                zIndex(zIndex)
-                anchor(anchor.x, anchor.y)
-                rotation(rotation)
-            }
-            if (marker != null) {
-                marker.tag = tag
-                markers.add(InternalMarker(marker, onClick))
-            }
-        } else {
-            logD("update marker")
-            internalMarker.marker.apply {
-                this.position = position
-                this.zIndex = zIndex
-                setTitle(title)
-                setIcon(icon)
-                setAnchor(anchor.x, anchor.y)
-                setRotation(rotation)
-            }
-        }
+        title: String?,
+    ): Marker? = googleMap.addMarker {
+        title(title)
+        position(position)
+        icon(icon)
+        zIndex(zIndex)
+        anchor(anchor.x, anchor.y)
+        rotation(rotation)
     }
 
-    override fun updateMarker(tag: Any?, position: LatLng) {
-        logD("updateMarker: $tag, $position")
-        val internalMarker = markers.find { it.marker.tag == tag }
-
-        internalMarker?.marker?.apply {
-            this.position = position
-        }
-    }
-
-    override fun removeMarker(position: LatLng) {
-        logD("removeMarker")
-        val internalMarker = markers.find { it.marker.position == position } ?: return
-        internalMarker.marker.remove()
-        markers.remove(internalMarker)
-    }
-
-    override fun removeMarker(tag: Any) {
-        logD("removeMarker: tag=$tag")
-        val internalMarker = markers.find { it.marker.tag == tag } ?: return
-        internalMarker.marker.remove()
-        markers.remove(internalMarker)
-    }
-
-    override fun getMarker(tag: Any?): Marker? {
-        return markers.find { it.marker.tag == tag }?.marker
+    override fun detach() {
+        logD("detach")
+        googleMap.setOnMarkerClickListener(null)
+        scope.cancel()
     }
 
     override fun zoomIn() {

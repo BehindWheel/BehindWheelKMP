@@ -57,6 +57,7 @@ import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
+import com.google.maps.android.ui.IconGenerator
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -106,6 +107,7 @@ fun MapScreen(
         }
 
         val coroutineScope = rememberCoroutineScope()
+        val iconGenerator = remember { IconGenerator(context) }
         var cameraUpdatesJob = remember<Job?> { null }
 
         var isMapLoaded by rememberMutableState { false }
@@ -259,6 +261,7 @@ fun MapScreen(
                                 ReportsMarker(
                                     position = mapEvent.position,
                                     message = mapEvent.markerMessage,
+                                    iconGenerator = { iconGenerator },
                                     onClick = { component.showMarkerInfoDialog(mapEvent) }
                                 )
                             }

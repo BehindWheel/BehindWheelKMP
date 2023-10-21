@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import kotlinx.coroutines.flow.SharedFlow
 
 @LayoutScopeMarker
 @Immutable
@@ -14,26 +15,16 @@ interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
     var lastLocation: LatLng?
 
+    val clickedMarker: SharedFlow<Marker?>
+
     fun addMarker(
         position: LatLng,
         icon: BitmapDescriptor? = null,
-        onClick: () -> Unit = { },
         zIndex: Float = 0.0f,
         anchor: Offset = Offset(0.5f, 1.0f),
         rotation: Float = 0.0f,
-        tag: Any? = null,
         title: String? = null
-    )
-
-    fun updateMarker(
-        tag: Any?,
-        position: LatLng
-    )
-
-    fun getMarker(tag: Any?): Marker?
-
-    fun removeMarker(position: LatLng)
-    fun removeMarker(tag: Any)
+    ): Marker?
 
     fun zoomIn()
     fun zoomOut()
