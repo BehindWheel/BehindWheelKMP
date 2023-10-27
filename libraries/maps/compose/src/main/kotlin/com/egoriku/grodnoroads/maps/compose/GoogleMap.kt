@@ -136,7 +136,7 @@ fun GoogleMap(
             updatedCameraMoveState(state)
         }
         googleMap.setOnCameraIdleListener {
-            updatedCameraMoveState(CameraMoveState.Idle)
+            updatedCameraMoveState(CameraMoveState.Idle(zoomLevel = googleMap.cameraPosition.zoom))
             updatedOnProjectionChanged(googleMap.projection)
         }
         googleMap.setOnCameraMoveListener {
@@ -154,7 +154,9 @@ fun GoogleMap(
 sealed interface CameraMoveState {
     data object UserGesture : CameraMoveState
     data object Animating : CameraMoveState
-    data object Idle : CameraMoveState
+
+    @JvmInline
+    value class Idle(val zoomLevel: Float) : CameraMoveState
 }
 
 private fun MapPaddingDecorator.updateContentPadding(
