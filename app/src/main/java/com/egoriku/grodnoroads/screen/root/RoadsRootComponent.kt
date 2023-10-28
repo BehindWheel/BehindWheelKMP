@@ -31,6 +31,7 @@ interface RoadsRootComponent {
     sealed class Child {
         data class Main(val component: MainComponent) : Child()
         data class Appearance(val appearanceComponent: AppearanceComponent) : Child()
+        data object DebugTools : Child()
         data class Map(val mapSettingsComponent: MapSettingsComponent) : Child()
         data class Alerts(val alertsComponent: AlertsComponent) : Child()
         data class WhatsNew(val whatsNewComponent: WhatsNewComponent) : Child()

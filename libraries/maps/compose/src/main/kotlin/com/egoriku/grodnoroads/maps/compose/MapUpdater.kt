@@ -4,10 +4,8 @@ import androidx.compose.foundation.layout.LayoutScopeMarker
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.maps.android.ktx.OnMarkerDragEvent
 import kotlinx.coroutines.flow.SharedFlow
 
 @LayoutScopeMarker
@@ -16,6 +14,7 @@ interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
 
     val clickedMarker: SharedFlow<Marker?>
+    val draggedMarker: SharedFlow<OnMarkerDragEvent?>
 
     fun isInitialCameraAnimation(): Boolean
     fun resetLastLocation()
@@ -30,6 +29,7 @@ interface MapUpdater {
     ): Marker?
 
     fun addMarker(markerOptions: MarkerOptions): Marker?
+    fun addPolygon(polygonOptions: PolygonOptions): Polygon
 
     fun zoomIn()
     fun zoomOut()
