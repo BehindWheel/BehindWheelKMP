@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.SharedFlow
 @Immutable
 interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
+
+    val currentZoomLevel: Float
+
     var lastLocation: LatLng?
 
     val clickedMarker: SharedFlow<Marker?>

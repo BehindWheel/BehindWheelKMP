@@ -55,6 +55,9 @@ internal class MapUpdaterImpl(
     private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
     override val clickedMarker: SharedFlow<Marker?> = _clickedMarker
 
+    override val currentZoomLevel: Float
+        get() = googleMap.cameraPosition.zoom
+
     override fun attach() {
         googleMap.markerClickEvents()
             .onEach { _clickedMarker.emit(it) }

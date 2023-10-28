@@ -117,9 +117,9 @@ fun MapScreen(
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
-        var zoomLevel by rememberMutableState { -1f }
+        var idleZoomLevel by rememberMutableState { -1f }
 
-        var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle(-1f) }
+        var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
         val overlayVisible by remember {
             derivedStateOf { !isCameraUpdatesEnabled || appMode != Drive }
@@ -128,8 +128,8 @@ fun MapScreen(
         val markerSize by remember {
             derivedStateOf {
                 when {
-                    zoomLevel == -1f -> Large
-                    zoomLevel <= 10f -> Small
+                    idleZoomLevel == -1f -> Large
+                    idleZoomLevel <= 10f -> Small
                     else -> Large
                 }
             }
@@ -173,7 +173,10 @@ fun MapScreen(
                     cameraMoveState = state
 
                     if (cameraMoveState is CameraMoveState.Idle) {
-                        zoomLevel = (cameraMoveState as CameraMoveState.Idle).zoomLevel
+                        mapUpdater.onMapScope {
+                            idleZoomLevel = currentZoomLevel
+                        }
+
                     }
                     when (appMode) {
                         ChooseLocation -> {
@@ -238,84 +241,84 @@ fun MapScreen(
                 if (appMode == Drive && location != LastLocation.None) {
                     val isLight = MaterialTheme.colorScheme.isLight
 
-                        NavigationMarker(
-                            tag = if (isLight) "navigation_light" else "navigation_dark",
-                            appMode = appMode,
-                            position = location.latLng,
-                            bearing = location.bearing,
-                            icon = {
-                                markerCache.getVector(
-                                    id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
-                                )
-                            },
-                            rotation = location.bearing
-                        )
-                    }
+                    NavigationMarker(
+                        tag = if (isLight) "navigation_light" else "navigation_dark",
+                        appMode = appMode,
+                        position = location.latLng,
+                        bearing = location.bearing,
+                        icon = {
+                            markerCache.getVector(
+                                id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
+                            )
+                        },
+                        rotation = location.bearing
+                    )
+                }
 
-                    mapEvents.forEach { mapEvent ->
-                        when (mapEvent) {
-                            is MapEvent.Camera -> {
-                                when (mapEvent) {
-                                    is StationaryCamera -> CameraMarker(
+                mapEvents.forEach { mapEvent ->
+                    when (mapEvent) {
+                        is MapEvent.Camera -> {
+                            when (mapEvent) {
+                                is StationaryCamera -> CameraMarker(
+                                    position = mapEvent.position,
+                                    markerSize = markerSize,
+                                    icon = {
+                                        val id = when (markerSize) {
+                                            Large -> R_res.drawable.ic_map_stationary_camera
+                                            Small -> R_res.drawable.ic_map_stationary_camera_small
+                                        }
+                                        markerCache.getVector(id)
+                                    },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+
+                                is MediumSpeedCamera -> {
+                                    CameraMarker(
                                         position = mapEvent.position,
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> R_res.drawable.ic_map_stationary_camera
-                                                Small -> R_res.drawable.ic_map_stationary_camera_small
+                                                Large -> R_res.drawable.ic_map_medium_speed_camera
+                                                Small -> R_res.drawable.ic_map_medium_speed_camera_small
                                             }
                                             markerCache.getVector(id)
                                         },
                                         onClick = { cameraInfo = mapEvent }
                                     )
-
-                                is MediumSpeedCamera -> {
-                                        CameraMarker(
-                                            position = mapEvent.position,
-                                            markerSize = markerSize,
-                                            icon = {
-                                                val id = when (markerSize) {
-                                                    Large -> R_res.drawable.ic_map_medium_speed_camera
-                                                    Small -> R_res.drawable.ic_map_medium_speed_camera_small
-                                                }
-                                                markerCache.getVector(id)
-                                            },
-                                            onClick = { cameraInfo = mapEvent }
-                                        )
-                                    }
+                                }
 
                                 is MobileCamera -> {
-                                        CameraMarker(
-                                            position = mapEvent.position,
-                                            markerSize = markerSize,
-                                            icon = {
-                                                val id = when (markerSize) {
-                                                    Large -> R_res.drawable.ic_map_mobile_camera
-                                                    Small -> R_res.drawable.ic_map_mobile_camera_small
-                                                }
-                                                markerCache.getVector(id)
-                                            },
-                                            onClick = { cameraInfo = mapEvent }
-                                        )
-                                    }
+                                    CameraMarker(
+                                        position = mapEvent.position,
+                                        markerSize = markerSize,
+                                        icon = {
+                                            val id = when (markerSize) {
+                                                Large -> R_res.drawable.ic_map_mobile_camera
+                                                Small -> R_res.drawable.ic_map_mobile_camera_small
+                                            }
+                                            markerCache.getVector(id)
+                                        },
+                                        onClick = { cameraInfo = mapEvent }
+                                    )
                                 }
                             }
+                        }
 
                         is MapEvent.Reports -> {
                             ReportsMarker(
                                 position = mapEvent.position,
                                 markerSize = markerSize,
-                                    message = mapEvent.markerMessage,
-                                    iconProvider = {
-                                        when (mapEvent.mapEventType) {
-                                            TrafficPolice -> markerCache.getVector(R.drawable.ic_map_police)
-                                            RoadIncident -> markerCache.getVector(R.drawable.ic_map_road_incident)
-                                            CarCrash -> markerCache.getVector(R.drawable.ic_map_car_crash)
-                                            TrafficJam -> markerCache.getVector(R.drawable.ic_map_traffic_jam)
-                                            WildAnimals -> markerCache.getVector(R.drawable.ic_map_wild_animals)
-                                            Unsupported -> null
-                                        }
-                                    },
+                                message = mapEvent.markerMessage,
+                                iconProvider = {
+                                    when (mapEvent.mapEventType) {
+                                        TrafficPolice -> markerCache.getVector(R.drawable.ic_map_police)
+                                        RoadIncident -> markerCache.getVector(R.drawable.ic_map_road_incident)
+                                        CarCrash -> markerCache.getVector(R.drawable.ic_map_car_crash)
+                                        TrafficJam -> markerCache.getVector(R.drawable.ic_map_traffic_jam)
+                                        WildAnimals -> markerCache.getVector(R.drawable.ic_map_wild_animals)
+                                        Unsupported -> null
+                                    }
+                                },
                                 iconGenerator = { iconGenerator },
                                 onClick = { component.showMarkerInfoDialog(mapEvent) }
                             )
