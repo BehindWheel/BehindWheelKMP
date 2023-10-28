@@ -46,8 +46,8 @@ internal class MapUpdaterImpl(
     }
     private val center: Point by lazy { Point(bottomRightPoint.x / 2, bottomRightPoint.y / 2) }
     private val offset: Point by lazy { Point(center.x, 2 * bottomRightPoint.y / 3) }
-    override var lastLocation: LatLng? = null
 
+    private var lastLocation: LatLng? = null
     private var lastZoom: Float? = null
 
     private val currentZoom: Float
@@ -68,6 +68,11 @@ internal class MapUpdaterImpl(
 
     override fun setMinZoomPreference(value: Float) {
         minZoom = value
+    }
+
+    override fun isInitialCameraAnimation() = lastLocation == null
+    override fun resetLastLocation() {
+        lastLocation = null
     }
 
     override fun addMarker(

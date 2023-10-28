@@ -212,7 +212,7 @@ fun MapScreen(
                         if (location == LastLocation.None) return@LaunchedEffect
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
-                        if (mapUpdater.lastLocation == null) {
+                        if (mapUpdater.isInitialCameraAnimation()) {
                             mapUpdater.animateCamera(
                                 target = location.latLng.value,
                                 zoom = mapConfig.zoomLevel,
@@ -229,7 +229,7 @@ fun MapScreen(
                         )
                     }
                     Default, ChooseLocation -> {
-                        mapUpdater.lastLocation = null
+                        mapUpdater.resetLastLocation()
                         mapUpdater.animateZoom(mapConfig.zoomLevel)
                     }
                 }
