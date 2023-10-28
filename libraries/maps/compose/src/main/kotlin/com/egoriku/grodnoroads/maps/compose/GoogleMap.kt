@@ -38,16 +38,16 @@ internal val NoPadding = PaddingValues()
 @Composable
 fun GoogleMap(
     modifier: Modifier = Modifier,
-    backgroundColor: Color,
+    backgroundColor: Color = Color.Unspecified,
     contentPadding: PaddingValues = NoPadding,
     mapProperties: MapProperties = DefaultMapProperties,
     mapUiSettings: MapUiSettings = DefaultMapUiSettings,
-    onMapLoaded: (GoogleMap) -> Unit,
+    onMapLoaded: (GoogleMap) -> Unit = {},
     cameraPositionProvider: () -> CameraPosition,
-    onMapUpdaterChanged: (MapUpdater?) -> Unit,
-    onProjectionChanged: (Projection) -> Unit,
-    onZoomChanged: (Float) -> Unit,
-    cameraMoveStateChanged: (CameraMoveState) -> Unit,
+    onMapUpdaterChanged: (MapUpdater?) -> Unit = {},
+    onProjectionChanged: (Projection) -> Unit = {},
+    onZoomChanged: (Float) -> Unit = {},
+    cameraMoveStateChanged: (CameraMoveState) -> Unit = {},
 ) {
     val updatedOnMapLoaded by rememberUpdatedState(onMapLoaded)
     val updatedCameraPositionProvider by rememberUpdatedState(cameraPositionProvider)

@@ -56,6 +56,7 @@ import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.maps.compose.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
@@ -233,11 +234,9 @@ fun MapScreen(
                 }
             }
 
-            val scope = mapUpdater
-            if (scope != null) {
-                with(scope) {
-                    if (appMode == Drive && location != LastLocation.None) {
-                        val isLight = MaterialTheme.colorScheme.isLight
+            mapUpdater.onMapScope {
+                if (appMode == Drive && location != LastLocation.None) {
+                    val isLight = MaterialTheme.colorScheme.isLight
 
                         NavigationMarker(
                             tag = if (isLight) "navigation_light" else "navigation_dark",
@@ -270,7 +269,7 @@ fun MapScreen(
                                         onClick = { cameraInfo = mapEvent }
                                     )
 
-                                    is MediumSpeedCamera -> {
+                                is MediumSpeedCamera -> {
                                         CameraMarker(
                                             position = mapEvent.position,
                                             markerSize = markerSize,
@@ -285,7 +284,7 @@ fun MapScreen(
                                         )
                                     }
 
-                                    is MobileCamera -> {
+                                is MobileCamera -> {
                                         CameraMarker(
                                             position = mapEvent.position,
                                             markerSize = markerSize,
@@ -302,10 +301,10 @@ fun MapScreen(
                                 }
                             }
 
-                            is MapEvent.Reports -> {
-                                ReportsMarker(
-                                    position = mapEvent.position,
-                                    markerSize = markerSize,
+                        is MapEvent.Reports -> {
+                            ReportsMarker(
+                                position = mapEvent.position,
+                                markerSize = markerSize,
                                     message = mapEvent.markerMessage,
                                     iconProvider = {
                                         when (mapEvent.mapEventType) {
@@ -317,10 +316,9 @@ fun MapScreen(
                                             Unsupported -> null
                                         }
                                     },
-                                    iconGenerator = { iconGenerator },
-                                    onClick = { component.showMarkerInfoDialog(mapEvent) }
-                                )
-                            }
+                                iconGenerator = { iconGenerator },
+                                onClick = { component.showMarkerInfoDialog(mapEvent) }
+                            )
                         }
                     }
                 }
