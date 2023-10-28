@@ -252,7 +252,7 @@ fun MapScreen(
                         position = location.latLng,
                         bearing = location.bearing,
                         icon = {
-                            markerCache.getVector(
+                            markerCache.getIcon(
                                 id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
                             )
                         },
@@ -272,7 +272,7 @@ fun MapScreen(
                                             Large -> R_res.drawable.ic_map_stationary_camera
                                             Small -> R_res.drawable.ic_map_stationary_camera_small
                                         }
-                                        markerCache.getVector(id)
+                                        markerCache.getIcon(id)
                                     },
                                     onClick = { cameraInfo = mapEvent }
                                 )
@@ -286,7 +286,7 @@ fun MapScreen(
                                                 Large -> R_res.drawable.ic_map_medium_speed_camera
                                                 Small -> R_res.drawable.ic_map_medium_speed_camera_small
                                             }
-                                            markerCache.getVector(id)
+                                            markerCache.getIcon(id)
                                         },
                                         onClick = { cameraInfo = mapEvent }
                                     )
@@ -301,7 +301,7 @@ fun MapScreen(
                                                 Large -> R_res.drawable.ic_map_mobile_camera
                                                 Small -> R_res.drawable.ic_map_mobile_camera_small
                                             }
-                                            markerCache.getVector(id)
+                                            markerCache.getIcon(id)
                                         },
                                         onClick = { cameraInfo = mapEvent }
                                     )
@@ -316,11 +316,11 @@ fun MapScreen(
                                 message = mapEvent.markerMessage,
                                 iconProvider = {
                                     when (mapEvent.mapEventType) {
-                                        TrafficPolice -> markerCache.getVector(R.drawable.ic_map_police)
-                                        RoadIncident -> markerCache.getVector(R.drawable.ic_map_road_incident)
-                                        CarCrash -> markerCache.getVector(R.drawable.ic_map_car_crash)
-                                        TrafficJam -> markerCache.getVector(R.drawable.ic_map_traffic_jam)
-                                        WildAnimals -> markerCache.getVector(R.drawable.ic_map_wild_animals)
+                                        TrafficPolice -> markerCache.getIcon(R.drawable.ic_map_police)
+                                        RoadIncident -> markerCache.getIcon(R.drawable.ic_map_road_incident)
+                                        CarCrash -> markerCache.getIcon(R.drawable.ic_map_car_crash)
+                                        TrafficJam -> markerCache.getIcon(R.drawable.ic_map_traffic_jam)
+                                        WildAnimals -> markerCache.getIcon(R.drawable.ic_map_wild_animals)
                                         Unsupported -> null
                                     }
                                 },
