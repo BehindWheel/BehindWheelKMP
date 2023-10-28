@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.maps.compose.impl
 
 import android.graphics.Point
 import androidx.compose.ui.geometry.Offset
-import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecoratorImpl
@@ -48,6 +47,8 @@ internal class MapUpdaterImpl(
     private val offset: Point by lazy { Point(center.x, 2 * bottomRightPoint.y / 3) }
     override var lastLocation: LatLng? = null
 
+    private var lastZoom: Float? = null
+
     private val currentZoom: Float
         get() = googleMap.cameraPosition.zoom
 
@@ -55,7 +56,6 @@ internal class MapUpdaterImpl(
     override val clickedMarker: SharedFlow<Marker?> = _clickedMarker
 
     override fun attach() {
-        logD("attach")
         googleMap.markerClickEvents()
             .onEach { _clickedMarker.emit(it) }
             .launchIn(scope)
@@ -92,7 +92,6 @@ internal class MapUpdaterImpl(
     }
 
     override fun detach() {
-        logD("detach")
         googleMap.setOnMarkerClickListener(null)
         scope.cancel()
     }
@@ -108,23 +107,27 @@ internal class MapUpdaterImpl(
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
-        animateCamera(
-            cameraUpdate = CameraUpdateFactory.newCameraPosition(
-                cameraPosition {
-                    target(target)
-                    bearing(bearing)
-                    zoom(zoom)
-                    tilt(35.0f)
-                }
-            ),
-            duration = 1000
-        )
+        if (lastLocation == null || lastZoom != zoom || googleMap.cameraPosition.zoom != lastZoom) {
+            animateCamera(
+                cameraUpdate = CameraUpdateFactory.newCameraPosition(
+                    cameraPosition {
+                        target(target)
+                        bearing(bearing)
+                        zoom(zoom)
+                        tilt(35.0f)
+                    }
+                ),
+                duration = 700
+            )
+        } else {
+            animateWithShadowPoint(target = target, zoom = zoom)
+        }
+        lastZoom = zoom
         lastLocation = target
     }
 
-    override fun animateCamera(target: LatLng, zoom: Float) {
+    private fun animateWithShadowPoint(target: LatLng, zoom: Float) {
         val lastLocation = lastLocation ?: return
-
         val distance = lastLocation roundDistanceTo target
         if (distance < 10) return
 
@@ -148,7 +151,6 @@ internal class MapUpdaterImpl(
             ),
             duration = 400
         )
-        this.lastLocation = target
     }
 
     override fun animateZoom(zoom: Float) {

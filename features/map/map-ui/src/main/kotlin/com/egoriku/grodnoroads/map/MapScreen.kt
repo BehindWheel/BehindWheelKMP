@@ -216,6 +216,7 @@ fun MapScreen(
                         mapUpdater.animateCamera(
                             target = location.latLng.value,
                             zoom = mapConfig.zoomLevel,
+                            bearing = location.bearing
                         )
                     }
                     Default, ChooseLocation -> {
