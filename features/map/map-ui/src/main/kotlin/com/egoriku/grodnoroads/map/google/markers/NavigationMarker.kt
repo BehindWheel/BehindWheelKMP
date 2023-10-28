@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberSimpleMarker
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
@@ -43,21 +44,22 @@ fun NavigationMarker(
     )
 
     LaunchedEffect(appMode) {
-        val marker = marker ?: return@LaunchedEffect
-        marker.position = position.value
+        marker.inScope {
+            this.position = position.value
+        }
     }
 
     LaunchedEffect(position) {
-        val marker = marker ?: return@LaunchedEffect
-
-        if (marker.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
-            marker.position = position.value
-        } else {
-            animateMarker(
-                destination = position.value,
-                bearing = bearing - rotation,
-                marker = marker
-            )
+        marker.inScope {
+            if (this.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
+                this.position = position.value
+            } else {
+                animateMarker(
+                    destination = position.value,
+                    bearing = bearing - rotation,
+                    marker = this
+                )
+            }
         }
     }
 }

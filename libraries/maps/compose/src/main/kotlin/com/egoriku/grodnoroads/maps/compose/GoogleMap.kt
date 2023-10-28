@@ -22,7 +22,10 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
+import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
+import com.egoriku.grodnoroads.maps.compose.extension.zoom
 import com.egoriku.grodnoroads.maps.compose.impl.MapUpdaterImpl
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.*
@@ -46,7 +49,7 @@ fun GoogleMap(
     cameraPositionProvider: () -> CameraPosition,
     onMapUpdaterChanged: (MapUpdater?) -> Unit = {},
     onProjectionChanged: (Projection) -> Unit = {},
-    onZoomChanged: (Float) -> Unit = {},
+    onZoomChanged: (ZoomLevelState) -> Unit = {},
     cameraMoveStateChanged: (CameraMoveState) -> Unit = {},
 ) {
     val updatedOnMapLoaded by rememberUpdatedState(onMapLoaded)
@@ -138,10 +141,10 @@ fun GoogleMap(
         googleMap.setOnCameraIdleListener {
             updatedCameraMoveState(CameraMoveState.Idle)
             updatedOnProjectionChanged(googleMap.projection)
+            updatedOnZoomChanged(ZoomLevelState.Idle(zoom = googleMap.zoom))
         }
         googleMap.setOnCameraMoveListener {
-            val zoomLevel = googleMap.cameraPosition.zoom
-            updatedOnZoomChanged(zoomLevel)
+            updatedOnZoomChanged(ZoomLevelState.Moving(zoom = googleMap.zoom))
         }
 
         updateMapProperties(googleMap, mapProperties)
@@ -149,12 +152,6 @@ fun GoogleMap(
     }
 
     MapLifecycle(mapView)
-}
-
-sealed interface CameraMoveState {
-    data object UserGesture : CameraMoveState
-    data object Animating : CameraMoveState
-    data object Idle : CameraMoveState
 }
 
 private fun MapPaddingDecorator.updateContentPadding(

@@ -14,9 +14,11 @@ import kotlinx.coroutines.flow.SharedFlow
 @Immutable
 interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
-    var lastLocation: LatLng?
 
     val clickedMarker: SharedFlow<Marker?>
+
+    fun isInitialCameraAnimation(): Boolean
+    fun resetLastLocation()
 
     fun addMarker(
         position: LatLng,
@@ -33,6 +35,5 @@ interface MapUpdater {
     fun zoomOut()
 
     fun animateCamera(target: LatLng, zoom: Float, bearing: Float)
-    fun animateCamera(target: LatLng, zoom: Float)
     fun animateZoom(zoom: Float)
 }
