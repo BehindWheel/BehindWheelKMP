@@ -53,6 +53,7 @@ import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.maps.compose.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
@@ -214,57 +215,54 @@ fun MapScreen(
                 }
             }
 
-            val scope = mapUpdater
-            if (scope != null) {
-                with(scope) {
-                    if (appMode == Drive && location != LastLocation.None) {
-                        val isLight = MaterialTheme.colorScheme.isLight
+            mapUpdater.onMapScope {
+                if (appMode == Drive && location != LastLocation.None) {
+                    val isLight = MaterialTheme.colorScheme.isLight
 
-                        NavigationMarker(
-                            tag = if (isLight) "navigation_light" else "navigation_dark",
-                            appMode = appMode,
-                            position = location.latLng,
-                            bearing = location.bearing,
-                            icon = {
-                                markerCache.getVector(
-                                    id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
-                                )
-                            },
-                            rotation = location.bearing
-                        )
-                    }
-                    mapEvents.forEach { mapEvent ->
-                        when (mapEvent) {
-                            is MapEvent.Camera -> {
-                                when (mapEvent) {
-                                    is StationaryCamera -> CameraMarker(
-                                        position = mapEvent.position,
-                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_stationary_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-
-                                    is MediumSpeedCamera -> CameraMarker(
-                                        position = mapEvent.position,
-                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_medium_speed_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-
-                                    is MobileCamera -> CameraMarker(
-                                        position = mapEvent.position,
-                                        icon = { markerCache.getVector(id = R_res.drawable.ic_map_mobile_camera) },
-                                        onClick = { cameraInfo = mapEvent }
-                                    )
-                                }
-                            }
-
-                            is MapEvent.Reports -> {
-                                ReportsMarker(
+                    NavigationMarker(
+                        tag = if (isLight) "navigation_light" else "navigation_dark",
+                        appMode = appMode,
+                        position = location.latLng,
+                        bearing = location.bearing,
+                        icon = {
+                            markerCache.getVector(
+                                id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
+                            )
+                        },
+                        rotation = location.bearing
+                    )
+                }
+                mapEvents.forEach { mapEvent ->
+                    when (mapEvent) {
+                        is MapEvent.Camera -> {
+                            when (mapEvent) {
+                                is StationaryCamera -> CameraMarker(
                                     position = mapEvent.position,
-                                    message = mapEvent.markerMessage,
-                                    iconGenerator = { iconGenerator },
-                                    onClick = { component.showMarkerInfoDialog(mapEvent) }
+                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_stationary_camera) },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+
+                                is MediumSpeedCamera -> CameraMarker(
+                                    position = mapEvent.position,
+                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_medium_speed_camera) },
+                                    onClick = { cameraInfo = mapEvent }
+                                )
+
+                                is MobileCamera -> CameraMarker(
+                                    position = mapEvent.position,
+                                    icon = { markerCache.getVector(id = R_res.drawable.ic_map_mobile_camera) },
+                                    onClick = { cameraInfo = mapEvent }
                                 )
                             }
+                        }
+
+                        is MapEvent.Reports -> {
+                            ReportsMarker(
+                                position = mapEvent.position,
+                                message = mapEvent.markerMessage,
+                                iconGenerator = { iconGenerator },
+                                onClick = { component.showMarkerInfoDialog(mapEvent) }
+                            )
                         }
                     }
                 }
