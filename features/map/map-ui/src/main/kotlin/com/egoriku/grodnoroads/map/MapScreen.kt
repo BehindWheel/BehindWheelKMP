@@ -309,10 +309,10 @@ fun MapScreen(
                                     iconProvider = {
                                         when (mapEvent.mapEventType) {
                                             TrafficPolice -> markerCache.getVector(R.drawable.ic_map_police)
-                                            RoadIncident -> null
-                                            CarCrash -> null
-                                            TrafficJam -> null
-                                            WildAnimals -> null
+                                            RoadIncident -> markerCache.getVector(R.drawable.ic_map_road_incident)
+                                            CarCrash -> markerCache.getVector(R.drawable.ic_map_car_crash)
+                                            TrafficJam -> markerCache.getVector(R.drawable.ic_map_traffic_jam)
+                                            WildAnimals -> markerCache.getVector(R.drawable.ic_map_wild_animals)
                                             Unsupported -> null
                                         }
                                     },
