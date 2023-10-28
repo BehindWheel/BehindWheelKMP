@@ -63,3 +63,11 @@ fun rememberIconMarker(
 
     return marker
 }
+
+
+inline fun Marker?.inScope(action: Marker.() -> Unit) {
+    val scope = this
+    if (scope != null) {
+        action(scope)
+    }
+}

@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.map.google.MarkerSize
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
 import com.egoriku.grodnoroads.map.google.MarkerSize.Small
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -45,7 +46,7 @@ fun ReportsMarker(
     )
 
     LaunchedEffect(markerSize) {
-        marker?.run {
+        marker.inScope {
             setIcon(icon())
         }
     }
