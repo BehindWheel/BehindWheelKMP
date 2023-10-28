@@ -46,6 +46,7 @@
     <string name="settings_section_whats_new">Что нового</string>
     <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
+    <string name="settings_section_debug_tools">Инструменты отладки</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Основные</string>

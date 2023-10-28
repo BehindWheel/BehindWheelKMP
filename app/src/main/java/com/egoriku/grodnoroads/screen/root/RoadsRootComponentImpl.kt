@@ -60,6 +60,7 @@ class RoadsRootComponentImpl(
     override fun open(page: Page) {
         when (page) {
             Page.Appearance -> navigation.push(Config.Appearance)
+            Page.DebugTools -> navigation.push(Config.DebugTools)
             Page.Map -> navigation.push(Config.MapSettings)
             Page.Alerts -> navigation.push(Config.Alerts)
             Page.WhatsNew -> navigation.push(Config.WhatsNew)
@@ -77,21 +78,18 @@ class RoadsRootComponentImpl(
                 onOpen = ::open
             )
         )
-
         is Config.Appearance -> Child.Appearance(
             appearanceComponent = buildAppearanceComponent(componentContext)
         )
-
+        is Config.DebugTools -> Child.DebugTools
         is Config.Alerts -> Child.Alerts(alertsComponent = buildAlertsComponent(componentContext))
         is Config.MapSettings -> Child.Map(
             mapSettingsComponent = buildMapSettingsComponent(componentContext)
         )
-
         is Config.NextFeatures -> TODO()
         is Config.WhatsNew -> Child.WhatsNew(
             whatsNewComponent = buildWhatsNewComponent(componentContext)
         )
-
         is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
     }
 
@@ -101,6 +99,9 @@ class RoadsRootComponentImpl(
 
         @Parcelize
         data object Appearance : Config()
+
+        @Parcelize
+        data object DebugTools : Config()
 
         @Parcelize
         data object MapSettings : Config()

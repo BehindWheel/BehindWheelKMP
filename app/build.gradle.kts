@@ -83,6 +83,7 @@ dependencies {
 
     implementation(projects.features.setting.alerts)
     implementation(projects.features.setting.appearance)
+    implementation(projects.features.setting.debugTools)
     implementation(projects.features.setting.faq)
     implementation(projects.features.setting.map)
     implementation(projects.features.setting.whatsnew)

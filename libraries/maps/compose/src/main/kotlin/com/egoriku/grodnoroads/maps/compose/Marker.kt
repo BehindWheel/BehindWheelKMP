@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -16,6 +17,36 @@ fun rememberSimpleMarker(
     markerOptions: () -> MarkerOptions,
 ): Marker? {
     var marker by remember { mutableStateOf<Marker?>(null) }
+
+    DisposableEffect(tag) {
+        marker = addMarker(markerOptions = markerOptions())
+
+        onDispose {
+            marker?.remove()
+        }
+    }
+
+    return marker
+}
+
+context(MapUpdater)
+@Composable
+fun rememberDraggableMarker(
+    tag: String,
+    markerOptions: () -> MarkerOptions,
+    onPositionChange: (StableLatLng) -> Unit
+): Marker? {
+    var marker by remember { mutableStateOf<Marker?>(null) }
+
+    LaunchedEffect(marker) {
+        draggedMarker
+            .filterNotNull()
+            .filter { it.marker == marker }
+            .onEach {
+                onPositionChange(StableLatLng(it.marker.position))
+            }
+            .launchIn(this)
+    }
 
     DisposableEffect(tag) {
         marker = addMarker(markerOptions = markerOptions())

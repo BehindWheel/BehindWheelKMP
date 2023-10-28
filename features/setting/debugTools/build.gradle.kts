@@ -1,24 +1,16 @@
 plugins {
     id("grodnoroads.library")
     id("grodnoroads.library.compose")
-    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.settings"
-
-    buildFeatures {
-        buildConfig = true
-    }
+    namespace = "com.egoriku.grodnoroads.setting.debugtools"
 }
 
 dependencies {
     implementation(projects.libraries.foundation)
-    implementation(projects.libraries.resources)
-
-    implementation(projects.shared.appComponent)
-
-    implementation(libs.androidx.browser)
+    implementation(projects.libraries.maps.core)
+    implementation(projects.libraries.maps.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
@@ -27,8 +19,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.decompose)
+    implementation(libs.immutable.collections)
+    implementation(libs.google.maps)
+    implementation(libs.google.maps)
 
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.android)
 }

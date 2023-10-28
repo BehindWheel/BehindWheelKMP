@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
 import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
+import com.egoriku.grodnoroads.setting.debugtools.DebugToolsScreen
 import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
 import com.egoriku.grodnoroads.setting.whatsnew.screen.WhatsNewScreen
@@ -44,6 +45,9 @@ fun RootContent(roadsRootComponent: RoadsRootComponent) {
         ) {
             when (val child = it.instance) {
                 is Child.Main -> MainUi(component = child.component)
+                is Child.DebugTools -> DebugToolsScreen(
+                    onBack = roadsRootComponent::onBack
+                )
                 is Child.Appearance -> AppearanceScreen(
                     appearanceComponent = child.appearanceComponent,
                     onBack = roadsRootComponent::onBack

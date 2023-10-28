@@ -13,18 +13,17 @@ import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.maps.android.ktx.OnMarkerDragEvent
 import com.google.maps.android.ktx.markerClickEvents
+import com.google.maps.android.ktx.markerDragEvents
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.model.markerOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -52,12 +51,19 @@ internal class MapUpdaterImpl(
         get() = googleMap.cameraPosition.zoom
 
     private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
-    override val clickedMarker: SharedFlow<Marker?> = _clickedMarker
+    override val clickedMarker = _clickedMarker.asSharedFlow()
+
+    private val _draggedMarker = MutableSharedFlow<OnMarkerDragEvent?>(replay = 0)
+    override val draggedMarker = _draggedMarker.asSharedFlow()
 
     override fun attach() {
         logD("attach")
         googleMap.markerClickEvents()
             .onEach { _clickedMarker.emit(it) }
+            .launchIn(scope)
+
+        googleMap.markerDragEvents()
+            .onEach { _draggedMarker.emit(it) }
             .launchIn(scope)
     }
 
@@ -89,6 +95,10 @@ internal class MapUpdaterImpl(
 
     override fun addMarker(markerOptions: MarkerOptions): Marker? {
         return googleMap.addMarker(markerOptions)
+    }
+
+    override fun addPolygon(polygonOptions: PolygonOptions): Polygon {
+        return googleMap.addPolygon(polygonOptions)
     }
 
     override fun detach() {

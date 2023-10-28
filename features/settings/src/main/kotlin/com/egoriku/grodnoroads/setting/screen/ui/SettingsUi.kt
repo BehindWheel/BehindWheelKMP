@@ -19,6 +19,7 @@ import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.setting.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.setting.screen.ui.section.VersionSection
+import com.egoriku.grodnoroads.settings.BuildConfig
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags.settingsNextFeaturesEnabled
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 
@@ -90,6 +91,15 @@ internal fun SettingsUi(
                     onSettingClick(Page.FAQ)
                 }
             )
+            if (BuildConfig.DEBUG) {
+                SettingsItem(
+                    icon = Icons.Filled.Adb,
+                    text = stringResource(R.string.settings_section_debug_tools),
+                    onClick = {
+                        onSettingClick(Page.DebugTools)
+                    }
+                )
+            }
 
             Spacer(modifier = Modifier.weight(1f))
             SocialNetworkSection()
