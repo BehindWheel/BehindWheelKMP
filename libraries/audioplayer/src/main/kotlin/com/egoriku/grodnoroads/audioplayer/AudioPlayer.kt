@@ -6,6 +6,7 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
+import androidx.core.content.ContextCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import com.egoriku.grodnoroads.audioplayer.broadcast.VOLUME_CHANGE_ACTION
@@ -53,9 +54,11 @@ class AudioPlayer(private val context: Context) {
                 enqueueNextSound()
             }
         }
-        context.applicationContext.registerReceiver(
-            volumeChangeReceiver,
-            IntentFilter(VOLUME_CHANGE_ACTION)
+        ContextCompat.registerReceiver(
+            /* context = */ context.applicationContext,
+            /* receiver = */ volumeChangeReceiver,
+            /* filter = */ IntentFilter(VOLUME_CHANGE_ACTION),
+            /* flags = */ ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
 
