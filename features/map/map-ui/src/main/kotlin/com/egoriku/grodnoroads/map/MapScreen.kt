@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.egoriku.grodnoroads.map
 
 import android.graphics.Point
@@ -53,9 +55,10 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
-import com.egoriku.grodnoroads.maps.compose.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
+import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
@@ -164,20 +167,23 @@ fun MapScreen(
                         projection = it
                     }
                 },
-                onZoomChanged = { zoom ->
-                    if (appMode == ChooseLocation) {
-                        component.setUserMapZoom(zoom)
+                onZoomChanged = { zoomLevel ->
+                    when (zoomLevel) {
+                        is ZoomLevelState.Idle -> {
+                            val zoom = zoomLevel.zoom
+
+                            idleZoomLevel = zoom
+                            if (appMode == ChooseLocation) {
+                                component.setUserMapZoom(zoom)
+                            }
+                        }
+                        is ZoomLevelState.Moving -> Unit
                     }
+
                 },
                 cameraMoveStateChanged = { state ->
                     cameraMoveState = state
 
-                    if (cameraMoveState is CameraMoveState.Idle) {
-                        mapUpdater.onMapScope {
-                            idleZoomLevel = currentZoomLevel
-                        }
-
-                    }
                     when (appMode) {
                         ChooseLocation -> {
                             isCameraMoving = cameraMoveState == CameraMoveState.UserGesture
@@ -199,7 +205,6 @@ fun MapScreen(
             )
 
             LaunchedEffect(location, appMode) {
-                @Suppress("NAME_SHADOWING")
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
 
                 when (appMode) {

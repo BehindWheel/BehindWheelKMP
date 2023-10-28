@@ -4,6 +4,7 @@ import android.graphics.Point
 import androidx.compose.ui.geometry.Offset
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.decorator.MapPaddingDecorator
+import com.egoriku.grodnoroads.maps.compose.extension.zoom
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecoratorImpl
 import com.egoriku.grodnoroads.maps.core.extension.computeOffset
 import com.egoriku.grodnoroads.maps.core.extension.distanceTo
@@ -50,13 +51,10 @@ internal class MapUpdaterImpl(
     private var lastZoom: Float? = null
 
     private val currentZoom: Float
-        get() = googleMap.cameraPosition.zoom
+        get() = googleMap.zoom
 
     private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
     override val clickedMarker: SharedFlow<Marker?> = _clickedMarker
-
-    override val currentZoomLevel: Float
-        get() = googleMap.cameraPosition.zoom
 
     override fun attach() {
         googleMap.markerClickEvents()
@@ -110,7 +108,7 @@ internal class MapUpdaterImpl(
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
-        if (lastLocation == null || lastZoom != zoom || googleMap.cameraPosition.zoom != lastZoom) {
+        if (lastLocation == null || lastZoom != zoom || googleMap.zoom != lastZoom) {
             animateCamera(
                 cameraUpdate = CameraUpdateFactory.newCameraPosition(
                     cameraPosition {
