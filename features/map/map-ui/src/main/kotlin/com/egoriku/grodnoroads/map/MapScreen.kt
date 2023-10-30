@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.camera.CameraInfo
@@ -31,7 +32,6 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog.None
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
@@ -120,7 +120,7 @@ fun MapScreen(
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
-        var idleZoomLevel by rememberMutableState { -1f }
+        var idleZoomLevel by rememberMutableFloatState { -1f }
 
         var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
@@ -220,7 +220,8 @@ fun MapScreen(
                             )
                         }
 
-                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != None) return@LaunchedEffect
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != MapAlertDialog.None)
+                            return@LaunchedEffect
 
                         mapUpdater.animateCamera(
                             target = location.latLng.value,
@@ -482,6 +483,6 @@ private fun AlertDialogs(
             )
         }
 
-        is None -> Unit
+        is MapAlertDialog.None -> Unit
     }
 }
