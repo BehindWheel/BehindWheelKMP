@@ -115,7 +115,7 @@ fun MapScreen(
 
         val coroutineScope = rememberCoroutineScope()
         val iconGenerator = remember { IconGenerator(context) }
-        var cameraUpdatesJob = remember<Job?> { null }
+        var cameraUpdatesJob by rememberMutableState<Job?> { null }
 
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
