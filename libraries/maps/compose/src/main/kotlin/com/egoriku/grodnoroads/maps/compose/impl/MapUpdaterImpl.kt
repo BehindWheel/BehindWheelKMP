@@ -30,7 +30,8 @@ import kotlinx.coroutines.flow.onEach
 
 internal class MapUpdaterImpl(
     private val googleMap: GoogleMap,
-    override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap)
+    override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap),
+    private val onZoomChanged: () -> Unit
 ) : MapUpdater,
     MapStateUpdater,
     MapPaddingDecorator by paddingDecorator {
@@ -103,11 +104,13 @@ internal class MapUpdaterImpl(
     }
 
     override fun zoomIn() {
+        onZoomChanged()
         if (currentZoom >= maxZoom) return
         googleMap.animateCamera(CameraUpdateFactory.zoomIn())
     }
 
     override fun zoomOut() {
+        onZoomChanged()
         if (currentZoom <= minZoom) return
         googleMap.animateCamera(CameraUpdateFactory.zoomOut())
     }

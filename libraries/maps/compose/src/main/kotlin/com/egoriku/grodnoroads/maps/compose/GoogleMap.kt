@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.egoriku.grodnoroads.maps.compose
 
 import android.annotation.SuppressLint
@@ -74,7 +76,14 @@ fun GoogleMap(
     }
     var googleMap by remember { mutableStateOf<GoogleMap?>(null) }
     var mapUpdater by remember(googleMap) {
-        mutableStateOf(googleMap?.let { MapUpdaterImpl(it) })
+        mutableStateOf(googleMap?.let {
+            MapUpdaterImpl(
+                googleMap = it,
+                onZoomChanged = {
+                    updatedCameraMoveState(CameraMoveState.UserGesture)
+                }
+            )
+        })
     }
 
     AndroidView(
@@ -111,7 +120,6 @@ fun GoogleMap(
     }
 
     LaunchedEffect(contentPadding) {
-        @Suppress("NAME_SHADOWING")
         val mapUpdater = mapUpdater ?: return@LaunchedEffect
         mapUpdater.updateContentPadding(
             contentPadding = contentPadding,
@@ -126,7 +134,6 @@ fun GoogleMap(
     }
 
     LaunchedEffect(googleMap) {
-        @Suppress("NAME_SHADOWING")
         val googleMap = googleMap ?: return@LaunchedEffect
 
         googleMap.setOnMapLoadedCallback { updatedOnMapLoaded(googleMap) }
