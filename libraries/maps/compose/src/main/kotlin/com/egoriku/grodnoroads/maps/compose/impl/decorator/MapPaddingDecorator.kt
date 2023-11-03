@@ -8,6 +8,7 @@ internal class MapPaddingDecoratorImpl(
 ) : MapPaddingDecorator {
 
     private var mapPadding = MapPadding()
+    private var additionalPadding = MapPadding()
 
     override fun updateContentPadding(left: Int, top: Int, right: Int, bottom: Int) {
         if (left == mapPadding.paddingLeft &&
@@ -22,7 +23,23 @@ internal class MapPaddingDecoratorImpl(
             paddingRight = right,
             paddingBottom = bottom,
         )
-        setPadding(mapPadding)
+        setPadding(mapPadding + additionalPadding)
+    }
+
+    override fun additionalPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        if (left == additionalPadding.paddingLeft &&
+            top == additionalPadding.paddingTop &&
+            right == additionalPadding.paddingRight &&
+            bottom == additionalPadding.paddingBottom
+        ) return
+
+        additionalPadding = additionalPadding.copy(
+            paddingLeft = left,
+            paddingTop = top,
+            paddingRight = right,
+            paddingBottom = bottom,
+        )
+        setPadding(mapPadding + additionalPadding)
     }
 
     private fun setPadding(mapPadding: MapPadding) {
@@ -40,4 +57,13 @@ internal class MapPaddingDecoratorImpl(
         var paddingRight: Int = 0,
         var paddingBottom: Int = 0,
     )
+
+    internal operator fun MapPadding.plus(mapPadding: MapPadding): MapPadding {
+        return MapPadding(
+            paddingLeft = paddingLeft + mapPadding.paddingLeft,
+            paddingTop = paddingTop + mapPadding.paddingTop,
+            paddingRight = paddingRight + mapPadding.paddingRight,
+            paddingBottom = paddingBottom + mapPadding.paddingBottom
+        )
+    }
 }

@@ -78,6 +78,7 @@ fun GoogleMap(
     var mapUpdater by remember(googleMap) {
         mutableStateOf(googleMap?.let {
             MapUpdaterImpl(
+                mapView = mapView,
                 googleMap = it,
                 onZoomChanged = {
                     updatedCameraMoveState(CameraMoveState.UserGesture)

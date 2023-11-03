@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -29,6 +30,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 internal class MapUpdaterImpl(
+    private val mapView: MapView,
     private val googleMap: GoogleMap,
     override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap),
     private val onZoomChanged: () -> Unit
@@ -117,6 +119,8 @@ internal class MapUpdaterImpl(
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
         if (lastLocation == null || lastZoom != zoom || googleMap.zoom != lastZoom) {
+
+            additionalPadding(top = mapView.height / 3)
             animateCamera(
                 cameraUpdate = CameraUpdateFactory.newCameraPosition(
                     cameraPosition {
@@ -126,7 +130,9 @@ internal class MapUpdaterImpl(
                         tilt(35.0f)
                     }
                 ),
-                duration = 700
+                duration = 700,
+                onFinish = { additionalPadding(top = 0) },
+                onCancel = {additionalPadding(top = 0)}
             )
         } else {
             animateWithShadowPoint(target = target, zoom = zoom)
@@ -176,6 +182,18 @@ internal class MapUpdaterImpl(
         animateCamera(cameraUpdate = cameraUpdate, duration = 1000)
     }
 
-    private fun animateCamera(cameraUpdate: CameraUpdate, duration: Int) =
-        googleMap.animateCamera(cameraUpdate, duration, null)
+    private fun animateCamera(
+        cameraUpdate: CameraUpdate,
+        duration: Int,
+        onFinish: () -> Unit = {},
+        onCancel: () -> Unit = {},
+    ) = googleMap.animateCamera(
+        cameraUpdate,
+        duration,
+        object : GoogleMap.CancelableCallback {
+            override fun onCancel() = onCancel()
+
+            override fun onFinish() = onFinish()
+        }
+    )
 }
