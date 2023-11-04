@@ -144,7 +144,7 @@ internal class MapUpdaterImpl(
     private fun animateWithShadowPoint(target: LatLng, zoom: Float) {
         val lastLocation = lastLocation ?: return
         val distance = lastLocation roundDistanceTo target
-        if (distance < 10) return
+        if (distance < 5) return
 
         val bearing = lastLocation headingTo target
 

@@ -12,10 +12,9 @@ import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberSimpleMarker
 import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
-import com.egoriku.grodnoroads.maps.core.util.LinearFixedInterpolator.Companion.linearFixedInterpolator
+import com.egoriku.grodnoroads.maps.core.util.LatLngInterpolator
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.ktx.model.markerOptions
 
 private const val ANIMATE_DISTANCE_THRESHOLD = 300
@@ -54,10 +53,15 @@ fun NavigationMarker(
             if (this.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
                 this.position = position.value
             } else {
+                val destination = position.value
+                val startPosition = this.position
+
                 animateMarker(
-                    destination = position.value,
-                    bearing = bearing - rotation,
-                    marker = this
+                    start = startPosition,
+                    destination = destination,
+                    onInterpolated = {
+                        this.position = it
+                    }
                 )
             }
         }
@@ -65,49 +69,25 @@ fun NavigationMarker(
 }
 
 /**
- * Method to animate marker to destination location
- * @param destination destination location (must contain bearing attribute, to ensure
- * marker rotation will work correctly)
- * @param marker marker to be animated
+ * Interpolate between start and end location
  */
 private fun animateMarker(
-    marker: Marker,
+    start: LatLng,
     destination: LatLng,
-    bearing: Float
+    onInterpolated: (LatLng) -> Unit
 ) {
-    val startPosition = marker.position
-    val startRotation = marker.rotation
-
     ValueAnimator.ofFloat(0f, 1f).apply {
-        duration = 1000
+        duration = 1400
         interpolator = LinearInterpolator()
         addUpdateListener { animation ->
             try {
-                val v = animation.animatedFraction
-                val newPosition = linearFixedInterpolator.interpolate(v, startPosition, destination)
-                marker.position = newPosition
-                marker.rotation = computeRotation(v, startRotation, bearing)
+                val fraction = animation.animatedFraction
+                val position = LatLngInterpolator.interpolate(fraction, start, destination)
+                onInterpolated(position)
             } catch (ex: Exception) {
                 // I don't care atm..
             }
         }
         start()
     }
-}
-
-private fun computeRotation(fraction: Float, start: Float, end: Float): Float {
-    // rotate start to 0
-    val normalizeEnd = end - start
-
-    val normalizedEndAbs = (normalizeEnd + 360) % 360
-
-    // -1 = anticlockwise, 1 = clockwise
-    val direction = (if (normalizedEndAbs > 180) -1 else 1).toFloat()
-
-    val rotation = when {
-        direction > 0 -> normalizedEndAbs
-        else -> normalizedEndAbs - 360
-    }
-    val result = fraction * rotation + start
-    return (result + 360) % 360
 }
