@@ -24,9 +24,7 @@ import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.maps.core.StableLatLng
-import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
 import java.util.UUID
 
