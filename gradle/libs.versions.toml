@@ -44,7 +44,7 @@ coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-service
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:32.4.0"
+firebase-bom = "com.google.firebase:firebase-bom:32.5.0"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
