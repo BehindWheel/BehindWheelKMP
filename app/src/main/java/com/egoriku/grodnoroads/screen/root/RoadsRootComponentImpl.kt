@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.screen.root
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
@@ -57,14 +58,15 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
+    @OptIn(ExperimentalDecomposeApi::class)
     override fun open(page: Page) {
         when (page) {
-            Page.Appearance -> navigation.push(Config.Appearance)
-            Page.Map -> navigation.push(Config.MapSettings)
-            Page.Alerts -> navigation.push(Config.Alerts)
-            Page.WhatsNew -> navigation.push(Config.WhatsNew)
-            Page.NextFeatures -> navigation.push(Config.NextFeatures)
-            Page.FAQ -> navigation.push(Config.FAQ)
+            Page.Appearance -> navigation.pushNew(Config.Appearance)
+            Page.Map -> navigation.pushNew(Config.MapSettings)
+            Page.Alerts -> navigation.pushNew(Config.Alerts)
+            Page.WhatsNew -> navigation.pushNew(Config.WhatsNew)
+            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
+            Page.FAQ -> navigation.pushNew(Config.FAQ)
         }
     }
 
