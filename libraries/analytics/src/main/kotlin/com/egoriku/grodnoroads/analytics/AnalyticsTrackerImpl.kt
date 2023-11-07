@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_OPEN_ROAD_INCIDENT
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_OPEN_TRAFFIC_POLICE_DIALOG
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.PARAM_SHORT_MESSAGE
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.analytics.logEvent
 
 internal class AnalyticsTrackerImpl(
     private val firebaseAnalytics: FirebaseAnalytics

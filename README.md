@@ -19,10 +19,9 @@
 The application shows on the map the current situation on the roads of Grodno and the region.
 
 Current functionality:
-- display of stationary and temporary cameras
-- the ability to send events about the traffic police and accidents to the map in motion mode
-- synchronization of all events between devices in real time
-- auto-delete old information
+- display of stationary/temporary/mobile cameras
+- the ability to send events about the traffic police and accidents
+- voice alerts
 
 
 # Try without building sources

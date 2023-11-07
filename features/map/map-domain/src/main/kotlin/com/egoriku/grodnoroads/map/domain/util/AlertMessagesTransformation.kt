@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.util
 
-import com.egoriku.grodnoroads.extensions.util.computeOffset
-import com.egoriku.grodnoroads.extensions.util.distanceTo
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.maps.core.extension.computeOffset
+import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -43,13 +43,13 @@ private fun makeAlertMessage(
         LastLocation.None -> null
         else -> {
             val distance = computeDistance(
-                eventLatLng = event.position,
+                eventLatLng = event.position.value,
                 offsetLatLng = computeOffset(
-                    from = lastLocation.latLng,
+                    from = lastLocation.latLng.value,
                     distance = alertDistance.toDouble(),
                     heading = lastLocation.bearing.toDouble()
                 ),
-                currentLatLnt = lastLocation.latLng,
+                currentLatLnt = lastLocation.latLng.value,
                 distanceRadius = alertDistance
             )
 
@@ -111,11 +111,11 @@ private fun computeDistance(
     currentLatLnt: LatLng,
     distanceRadius: Int
 ): Int? {
-    val distanceBetweenOffsetAndEvent = eventLatLng distanceTo offsetLatLng
+    val distanceBetweenOffsetAndEvent = eventLatLng roundDistanceTo offsetLatLng
 
     return when {
         distanceBetweenOffsetAndEvent < distanceRadius -> {
-            when (val distanceToEvent = currentLatLnt distanceTo eventLatLng) {
+            when (val distanceToEvent = currentLatLnt roundDistanceTo eventLatLng) {
                 in MIN_DISTANCE until distanceRadius -> distanceToEvent
                 else -> null
             }

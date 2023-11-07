@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.map.data.dto.MobileCameraDTO
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -28,7 +28,7 @@ internal class MobileCameraRepositoryImpl(
                         // TODO: use from backend
                         id = UUID.randomUUID().toString(),
                         name = data.name,
-                        position = LatLng(data.latitude, data.longitude),
+                        position = StableLatLng(data.latitude, data.longitude),
                         speedCar = data.speed,
                         speedTruck = data.speed,
                     )

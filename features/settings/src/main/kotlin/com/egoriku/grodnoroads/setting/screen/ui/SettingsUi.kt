@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -83,7 +84,7 @@ internal fun SettingsUi(
                 )
             }
             SettingsItem(
-                icon = Icons.Filled.Help,
+                icon = Icons.AutoMirrored.Filled.Help,
                 text = stringResource(R.string.settings_section_faq),
                 onClick = {
                     onSettingClick(Page.FAQ)

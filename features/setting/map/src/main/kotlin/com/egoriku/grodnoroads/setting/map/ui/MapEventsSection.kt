@@ -136,7 +136,7 @@ private fun TrafficPolice(
 
     CheckboxSettings(
         leadingPaddingValues = PaddingValues(start = subGroupPadding),
-        iconRes = R.drawable.ic_setting_traffic_police,
+        iconRes = R.drawable.ic_settings_traffic_police,
         stringResId = R.string.map_markers_traffic_police,
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
