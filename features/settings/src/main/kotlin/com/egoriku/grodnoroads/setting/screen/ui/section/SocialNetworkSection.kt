@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.setting.screen.ui.section
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContactSupport
+import androidx.compose.material.icons.automirrored.filled.ContactSupport
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -36,7 +36,7 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(chatUrl) }
         ) {
             Icon(
-                imageVector = Icons.Default.ContactSupport,
+                imageVector = Icons.AutoMirrored.Default.ContactSupport,
                 contentDescription = null
             )
         }

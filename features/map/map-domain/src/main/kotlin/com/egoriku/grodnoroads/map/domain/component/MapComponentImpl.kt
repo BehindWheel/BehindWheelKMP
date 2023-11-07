@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.maps.core.StableLatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -151,6 +151,9 @@ internal class MapComponentImpl(
     override val lastLocation: Flow<LastLocation>
         get() = locationStore.states.map { it.lastLocation }
 
+    override val initialLocation: Flow<StableLatLng>
+        get() = locationStore.states.map { it.initialLocation }
+
     override val alerts: Flow<ImmutableList<Alert>>
         get() = combine(
             flow = mapEvents,
@@ -181,7 +184,7 @@ internal class MapComponentImpl(
 
     override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
-    override fun setLocation(latLng: LatLng) {
+    override fun setLocation(latLng: StableLatLng) {
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }
 
@@ -204,7 +207,7 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
-    override fun reportChooseLocation(latLng: LatLng) {
+    override fun reportChooseLocation(latLng: StableLatLng) {
         val reportType = mapConfigStore.state.reportType ?: return
 
         when (reportType) {
@@ -235,7 +238,7 @@ internal class MapComponentImpl(
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
-        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
+        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng.value))
         else -> Unit
     }
 

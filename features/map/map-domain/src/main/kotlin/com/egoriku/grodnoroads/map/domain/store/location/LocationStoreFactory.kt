@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.location.LocationHelper
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
+import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
@@ -31,23 +32,13 @@ internal class LocationStoreFactory(
                 onAction<Unit> {
                     launch {
                         locationHelper.getLastKnownLocation()?.run {
-                            dispatch(
-                                Message.OnNewLocation(
-                                    lastLocation = LastLocation(latLng, bearing, speed)
-                                )
-                            )
+                            dispatch(Message.OnInitialLocation(latLng))
                         }
                     }
                     dataStore.data
                         .map { it.defaultCity }
                         .distinctUntilChanged()
-                        .onEach {
-                            dispatch(
-                                Message.OnNewLocation(
-                                    lastLocation = LastLocation(it.latLng, 0f, 0)
-                                )
-                            )
-                        }
+                        .onEach { dispatch(Message.OnInitialLocation(it.latLng)) }
                         .launchIn(this)
                 }
                 onIntent<StartLocationUpdates> {
@@ -58,7 +49,7 @@ internal class LocationStoreFactory(
                     launch {
                         locationHelper.lastLocationFlow
                             .filterNotNull()
-                            .map { LastLocation(it.latLng, it.bearing, it.speed) }
+                            .map { LastLocation(it.latLng.asStable(), it.bearing, it.speed) }
                             .collect {
                                 dispatch(Message.OnNewLocation(lastLocation = it))
 
@@ -92,6 +83,7 @@ internal class LocationStoreFactory(
                 when (message) {
                     is Message.OnNewLocation -> copy(lastLocation = message.lastLocation)
                     is Message.OnUserLocation -> copy(userLocation = message.lastLocation)
+                    is Message.OnInitialLocation -> copy(initialLocation = message.latLng.asStable())
                 }
             }
         ) {}

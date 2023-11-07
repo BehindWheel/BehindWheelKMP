@@ -119,7 +119,7 @@ class SoundUtil(context: Context) {
 
     companion object {
         val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
-        val ONE_MINUTE = 1.minutes.inWholeMilliseconds
+        val ONE_MINUTE = 30.seconds.inWholeMilliseconds
         val FIVE_MINUTE = 5.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }

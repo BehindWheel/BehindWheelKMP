@@ -6,9 +6,9 @@ import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.egoriku.grodnoroads.component.AppBuildConfigImpl
 import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
 import com.egoriku.grodnoroads.shared.appsettings.extension.dataStore
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
+import com.google.firebase.firestore.firestore
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

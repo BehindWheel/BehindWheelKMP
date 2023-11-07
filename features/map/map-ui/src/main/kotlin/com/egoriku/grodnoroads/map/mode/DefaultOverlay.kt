@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.map.domain.model.Alert
@@ -39,6 +40,7 @@ import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
+    isOverlayVisible: Boolean,
     isDriveMode: Boolean,
     currentSpeed: Int,
     speedLimit: Int,
@@ -69,19 +71,21 @@ fun DefaultOverlay(
                 Alerts(alerts = alerts)
             }
         }
-        QuickActionsPopup(
-            modifier = Modifier.statusBarsPadding(),
-            opened = quickActionsVisible,
-            onExpand = { quickActionsVisible = true },
-            onClosed = { quickActionsVisible = false },
-        ) {
-            ActionsContent(
-                quickActionsState = quickActionsState,
-                onChanged = {
-                    quickActionsVisible = false
-                    onPreferenceChange(it)
-                }
-            )
+        FadeInOutAnimatedVisibility(visible = isOverlayVisible) {
+            QuickActionsPopup(
+                modifier = Modifier.statusBarsPadding(),
+                opened = quickActionsVisible,
+                onExpand = { quickActionsVisible = true },
+                onClosed = { quickActionsVisible = false },
+            ) {
+                ActionsContent(
+                    quickActionsState = quickActionsState,
+                    onChanged = {
+                        quickActionsVisible = false
+                        onPreferenceChange(it)
+                    }
+                )
+            }
         }
     }
 }
@@ -170,6 +174,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
+            isOverlayVisible = true,
             quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(

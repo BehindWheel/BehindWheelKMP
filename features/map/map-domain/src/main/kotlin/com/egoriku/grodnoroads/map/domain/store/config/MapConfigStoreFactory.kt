@@ -93,6 +93,7 @@ internal class MapConfigStoreFactory(
                 }
                 onIntent<CheckLocation> {
                     val latLng = it.latLng
+
                     val isCityArea = when {
                         PolyUtil.containsLocation(latLng, CityArea.grodno, false) -> true
                         PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
