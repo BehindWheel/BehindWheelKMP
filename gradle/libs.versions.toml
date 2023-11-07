@@ -6,7 +6,7 @@ targetSdk = "33"
 agp = "8.1.1"
 accompanist = "0.32.0"
 compose-compiler = "1.5.3"
-decompose = "2.2.0-alpha02"
+decompose = "2.2.0-alpha04"
 kotlin = "1.9.10"
 mvikotlin = "3.2.1"
 
