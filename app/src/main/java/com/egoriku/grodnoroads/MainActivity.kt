@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                         CompositionLocalProvider(
                             LocalWindowSizeClass provides calculateWindowSizeClass(this),
                         ) {
-                            RootContent(roadsRootComponent = root)
+                            RootContent(rootComponent = root)
                         }
                     }
                 }
