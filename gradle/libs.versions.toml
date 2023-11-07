@@ -36,7 +36,7 @@ androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 androidx-media = "androidx.media:media:1.6.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.1"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.2"
 
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
