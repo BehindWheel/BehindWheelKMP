@@ -15,6 +15,8 @@ dependencies {
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
+    implementation(projects.libraries.maps.core)
+    implementation(projects.libraries.maps.compose)
     implementation(projects.libraries.resources)
 
     implementation(libs.accompanist.permissions)
@@ -30,10 +32,12 @@ dependencies {
 
     implementation(libs.balloon.compose)
     implementation(libs.google.maps)
-    implementation(libs.google.maps.compose)
     implementation(libs.google.maps.utils)
     implementation(libs.immutable.collections)
+
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+
     implementation(libs.play.services.location)
 }

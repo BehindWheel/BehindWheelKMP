@@ -119,10 +119,12 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
 
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)
+
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
+    implementation(libs.immutable.collections)
     implementation(libs.google.maps)
     implementation(libs.google.material)
     implementation(libs.mvikotlin.extensions)

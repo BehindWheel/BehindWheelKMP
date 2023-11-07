@@ -16,12 +16,13 @@ import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun DriveMode(
+    modifier: Modifier = Modifier,
     stopDrive: () -> Unit,
     reportPolice: () -> Unit,
     reportIncident: () -> Unit
 ) {
     KeepScreenOn()
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier) {
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier

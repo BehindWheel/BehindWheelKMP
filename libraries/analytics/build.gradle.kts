@@ -11,5 +11,7 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.androidx.core)
+
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 }
