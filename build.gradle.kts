@@ -18,6 +18,10 @@ tasks {
         delete(layout.buildDirectory)
     }
     withType<DependencyUpdatesTask> {
+        // https://github.com/ben-manes/gradle-versions-plugin/issues/816
+        filterConfigurations = Spec<Configuration> {
+            !it.name.startsWith("incrementalScalaAnalysis")
+        }
         rejectVersionIf {
             isNonStable(candidate.version)
         }

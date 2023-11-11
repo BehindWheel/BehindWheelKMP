@@ -17,9 +17,9 @@ gradlePlugin {
             id = "grodnoroads.library"
             implementationClass = "AndroidLibraryPlugin"
         }
-        register("grodnoroads.library.compose") {
-            id = "grodnoroads.library.compose"
-            implementationClass = "AndroidLibraryComposePlugin"
+        register("grodnoroads.compose") {
+            id = "grodnoroads.compose"
+            implementationClass = "AndroidComposePlugin"
         }
         register("grodnoroads.application") {
             id = "grodnoroads.application"

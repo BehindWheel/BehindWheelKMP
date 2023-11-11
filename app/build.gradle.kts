@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.extension.release
 
 plugins {
     id("grodnoroads.application")
+    id("grodnoroads.compose")
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.parcelize)
@@ -60,11 +61,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        buildConfig = true
     }
 
     packaging {
@@ -99,7 +96,6 @@ dependencies {
 
     implementation(libs.accompanist.systemuicontroller)
 
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.window)
