@@ -1,6 +1,6 @@
 plugins {
     id("grodnoroads.library")
-    id("grodnoroads.library.compose")
+    id("grodnoroads.compose")
 }
 
 android {
@@ -18,7 +18,7 @@ dependencies {
 
     implementation(projects.shared.appSettings)
 
-    implementation(platform(libs.androidx.compose.bom))
+
     implementation(libs.androidx.compose.runtime)
 
     implementation(libs.coroutines)
