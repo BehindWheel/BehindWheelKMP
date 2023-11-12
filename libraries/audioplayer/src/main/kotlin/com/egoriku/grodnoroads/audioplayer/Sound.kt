@@ -23,7 +23,5 @@ sealed class Sound(val path: String) {
     data object TrafficJam : Sound(path = "incident/traffic_jam.mp3")
     data object RoadIncident : Sound(path = "incident/road_incident.mp3")
 
-    data object TestHighLevel : Sound(path = "test/high.mp3")
-    data object TestMediumLevel : Sound(path = "test/medium.mp3")
-    data object TestLowLevel : Sound(path = "test/low.mp3")
+    data object TestAudioLevel : Sound(path = "test/test_audio_level.mp3")
 }

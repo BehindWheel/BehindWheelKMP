@@ -109,7 +109,8 @@ internal class MapComponentImpl(
         alertInfo
             .distinctUntilChanged()
             .onEach {
-                soundUtil.setVolume(level = it.alertsVolumeLevel.level)
+                soundUtil.setVolume(level = it.alertsVolumeLevel.volumeLevel)
+                soundUtil.setLoudness(loudness = it.alertsVolumeLevel.loudness.value)
             }
             .launchIn(coroutineScope)
     }

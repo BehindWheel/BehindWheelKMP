@@ -28,7 +28,6 @@ import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.A
 import com.egoriku.grodnoroads.setting.alerts.ui.AlertEventsSection
 import com.egoriku.grodnoroads.setting.alerts.ui.AlertRadiusSection
 import com.egoriku.grodnoroads.setting.alerts.ui.VoiceLevelSection
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -114,15 +113,12 @@ fun AlertsScreen(
                         VoiceLevelSection(
                             alertVolumeLevel = settings.volumeInfo.alertVolumeLevel,
                             modify = alertsComponent::modify,
-                            playSound = { volumeLevel ->
-                                audioPlayer.setVolumeLevel(level = volumeLevel.level)
-                                audioPlayer.playSound(
-                                    sound = when (volumeLevel) {
-                                        VolumeLevel.Low -> Sound.TestLowLevel
-                                        VolumeLevel.Medium -> Sound.TestMediumLevel
-                                        VolumeLevel.High -> Sound.TestHighLevel
-                                    }
-                                )
+                            playTestSound = { volumeLevel ->
+                                audioPlayer.run {
+                                    setVolumeLevel(level = volumeLevel.volumeLevel)
+                                    setLoudness(volumeLevel.loudness.value)
+                                    playSound(sound = Sound.TestAudioLevel)
+                                }
                             }
                         )
                         AlertEventsSection(
