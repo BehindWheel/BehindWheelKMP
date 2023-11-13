@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.*
@@ -17,6 +18,7 @@ import com.egoriku.grodnoroads.foundation.theme.*
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
+    rotation: Float = 0f,
     imageVector: ImageVector,
     onClick: () -> Unit
 ) {
@@ -30,6 +32,7 @@ fun ActionButton(
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
             Icon(
+                modifier = Modifier.rotate(rotation),
                 imageVector = imageVector,
                 contentDescription = null
             )

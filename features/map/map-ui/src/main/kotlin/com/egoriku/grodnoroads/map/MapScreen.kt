@@ -407,8 +407,10 @@ fun MapScreen(
                     visible = overlayVisible,
                 ) {
                     MapOverlayActions(
+                        modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
-                        zoomOut = { mapUpdater?.zoomOut() }
+                        zoomOut = { mapUpdater?.zoomOut() },
+                        zoomToCurrentLocation = {}
                     )
                 }
                 DefaultOverlay(
