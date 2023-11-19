@@ -57,7 +57,7 @@ internal data class MapInternalConfig(
             ),
             alertsInfo = AlertsInfo(
                 alertsEnabled = false,
-                alertsVolumeLevel = VolumeLevel.High,
+                alertsVolumeLevel = VolumeLevel.Default,
                 voiceAlertsEnabled = false,
                 notifyStationaryCameras = false,
                 notifyMediumSpeedCameras = false,

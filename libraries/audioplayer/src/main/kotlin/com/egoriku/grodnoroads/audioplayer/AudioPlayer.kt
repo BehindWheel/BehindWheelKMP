@@ -5,12 +5,14 @@ import android.content.IntentFilter
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.audiofx.LoudnessEnhancer
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import com.egoriku.grodnoroads.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.audioplayer.broadcast.VolumeChangeReceiver
+import com.egoriku.grodnoroads.audioplayer.util.AudioEffectUtil.isLoudnessEnhancerAvailable
 import com.egoriku.grodnoroads.extensions.audioManager
 import kotlin.math.roundToInt
 
@@ -24,6 +26,7 @@ class AudioPlayer(private val context: Context) {
             .build()
 
     private val mediaPlayer = MediaPlayer()
+    private val loudnessEnhancer: LoudnessEnhancer
     private val soundQueue = mutableListOf<Sound>()
     private var isPlaying = false
 
@@ -54,6 +57,7 @@ class AudioPlayer(private val context: Context) {
                 enqueueNextSound()
             }
         }
+        loudnessEnhancer = LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
         ContextCompat.registerReceiver(
             /* context = */ context.applicationContext,
             /* receiver = */ volumeChangeReceiver,
@@ -64,6 +68,13 @@ class AudioPlayer(private val context: Context) {
 
     fun setVolumeLevel(level: Float) {
         volumeLevel = level
+    }
+
+    fun setLoudness(loudness: Int) {
+        if (!isLoudnessEnhancerAvailable()) {
+            return
+        }
+        loudnessEnhancer.setTargetGain(loudness * 100)
     }
 
     fun enqueueSound(sound: Sound) {
