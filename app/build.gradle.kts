@@ -91,6 +91,7 @@ dependencies {
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
+    implementation(projects.libraries.foundationCore)
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
@@ -126,7 +127,6 @@ dependencies {
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)
-    implementation(libs.play.services.location)
 }
 
 secrets {

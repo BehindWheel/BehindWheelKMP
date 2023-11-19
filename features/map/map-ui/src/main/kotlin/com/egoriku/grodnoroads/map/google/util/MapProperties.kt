@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.map.google.util
 
-import android.Manifest
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,22 +9,18 @@ import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.foundation.core.rememberMutableIntState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.location.permissions.rememberLocationPermissionsState
 import com.egoriku.grodnoroads.map.R
 import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.maps.compose.MapProperties
 import com.egoriku.grodnoroads.maps.compose.MapType
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.android.gms.maps.model.MapStyleOptions
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun rememberMapProperties(
-    latLng: StableLatLng,
+    locationAvailable: () -> Boolean,
     mapConfig: MapConfig,
     appMode: AppMode
 ): MapProperties {
@@ -40,12 +35,7 @@ fun rememberMapProperties(
         )
     }
 
-    val permissionsState = rememberMultiplePermissionsState(
-        listOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-    )
+    val permissionsState = rememberLocationPermissionsState()
     val mapStyle by rememberMutableIntState(mapConfig.googleMapStyle, isLight) {
         when (mapConfig.googleMapStyle) {
             Style.Minimal -> {
@@ -64,9 +54,11 @@ fun rememberMapProperties(
         }
     }
 
-    LaunchedEffect(latLng, appMode) {
+    LaunchedEffect(appMode) {
         mapProperties = mapProperties.copy(
-            isMyLocationEnabled = permissionsState.allPermissionsGranted && latLng != UNKNOWN_LOCATION && appMode != AppMode.Drive,
+            isMyLocationEnabled = permissionsState.allPermissionsGranted &&
+                    locationAvailable() &&
+                    appMode != AppMode.Drive
         )
     }
 

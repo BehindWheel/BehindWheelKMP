@@ -15,11 +15,11 @@ dependencies {
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
+    implementation(projects.libraries.foundationCore)
+    implementation(projects.libraries.locationPermissions)
     implementation(projects.libraries.maps.core)
     implementation(projects.libraries.maps.compose)
     implementation(projects.libraries.resources)
-
-    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.activity.compose)
 
@@ -37,6 +37,4 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-
-    implementation(libs.play.services.location)
 }

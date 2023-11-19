@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.foundation)
+    implementation(projects.libraries.foundationCore)
     implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)

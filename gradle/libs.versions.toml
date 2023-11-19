@@ -27,7 +27,6 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 
 # TODO: remove systemuicontroller
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"

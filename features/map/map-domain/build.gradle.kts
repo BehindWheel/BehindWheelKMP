@@ -18,7 +18,6 @@ dependencies {
 
     implementation(projects.shared.appSettings)
 
-
     implementation(libs.androidx.compose.runtime)
 
     implementation(libs.coroutines)

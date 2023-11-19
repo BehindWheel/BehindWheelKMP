@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Navigation
+import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.location.permissions.WithLocationRequester
+import com.egoriku.grodnoroads.location.permissions.rememberLocationRequesterState
 
 @Composable
 fun MapOverlayActions(
@@ -32,12 +34,16 @@ fun MapOverlayActions(
             ActionIcon(imageVector = Icons.Default.Add, onClick = zoomIn)
             ActionIcon(imageVector = Icons.Default.Remove, onClick = zoomOut)
         }
-        // TODO: Use icon with rotation
-        ActionButton(
-            imageVector = Icons.Default.Navigation,
-            onClick = zoomToCurrentLocation,
-            rotation = 45f
-        )
+        val locationRequesterState = rememberLocationRequesterState()
+        WithLocationRequester(
+            locationRequesterState = locationRequesterState,
+            onStateChanged = {}
+        ) {
+            ActionButton(
+                imageVector = Icons.Default.MyLocation,
+                onClick = zoomToCurrentLocation,
+            )
+        }
     }
 }
 

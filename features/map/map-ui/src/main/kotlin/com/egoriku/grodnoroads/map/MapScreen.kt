@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
-import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.camera.CameraInfo
@@ -120,7 +119,7 @@ fun MapScreen(
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
-        var idleZoomLevel by rememberMutableFloatState { -1f }
+        var idleZoomLevel by com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState { -1f }
 
         var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
@@ -143,7 +142,9 @@ fun MapScreen(
 
         if (mapConfig != MapConfig.EMPTY) {
             val mapProperties = rememberMapProperties(
-                latLng = location.latLng,
+                locationAvailable = {
+                    location.latLng != UNKNOWN_LOCATION
+                },
                 mapConfig = mapConfig,
                 appMode = appMode
             )
@@ -410,7 +411,8 @@ fun MapScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        zoomToCurrentLocation = {}
+                        zoomToCurrentLocation = {
+                        }
                     )
                 }
                 DefaultOverlay(
