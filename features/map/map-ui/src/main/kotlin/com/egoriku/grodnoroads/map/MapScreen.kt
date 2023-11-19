@@ -254,7 +254,7 @@ fun MapScreen(
                         bearing = location.bearing,
                         icon = {
                             markerCache.getIcon(
-                                id = if (isLight) R.drawable.ic_navigation_arrow_black else R.drawable.ic_navigation_arrow_white,
+                                id = if (isLight) R.drawable.ic_navigation_arrow_dark else R.drawable.ic_navigation_arrow_light,
                             )
                         },
                         rotation = location.bearing
