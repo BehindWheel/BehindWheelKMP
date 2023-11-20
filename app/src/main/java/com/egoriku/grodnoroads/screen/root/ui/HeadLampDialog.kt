@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -15,8 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.foundation.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn
@@ -31,7 +29,7 @@ fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
         else -> error("$headlampType not supported")
     }
 
-    AlertDialog(
+    BasicAlertDialog(
         properties = DialogProperties(
             usePlatformDefaultWidth = true,
             dismissOnClickOutside = false
@@ -53,14 +51,16 @@ fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
 }
 
 
-@GrodnoRoadsPreview
+@com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 @Composable
-private fun PreviewHeadLampDialogSpring() = GrodnoRoadsM3ThemePreview {
-    HeadLampDialog(headlampType = Spring) {}
-}
+private fun PreviewHeadLampDialogSpring() =
+    com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview {
+        HeadLampDialog(headlampType = Spring) {}
+    }
 
-@GrodnoRoadsPreview
+@com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 @Composable
-private fun PreviewHeadLampDialogAutumn() = GrodnoRoadsM3ThemePreview {
-    HeadLampDialog(headlampType = Autumn) {}
-}
+private fun PreviewHeadLampDialogAutumn() =
+    com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview {
+        HeadLampDialog(headlampType = Autumn) {}
+    }

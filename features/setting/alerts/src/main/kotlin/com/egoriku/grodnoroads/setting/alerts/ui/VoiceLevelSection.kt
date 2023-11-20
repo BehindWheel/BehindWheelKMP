@@ -50,7 +50,9 @@ fun VoiceLevelSection(
                     border = FilterChipDefaults.filterChipBorder(
                         selectedBorderWidth = 1.dp,
                         selectedBorderColor = MaterialTheme.colorScheme.outline,
-                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                        selected = selected,
+                        enabled = true
                     ),
                     leadingIcon = if (selected) {
                         {

@@ -87,7 +87,8 @@ dependencies {
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)
 
-    implementation(projects.compose.foundationCore)
+    implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.theme)
 
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)

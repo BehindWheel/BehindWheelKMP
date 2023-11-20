@@ -19,7 +19,6 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsS
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionsContent(
     quickActionsState: QuickActionsState,

@@ -13,7 +13,8 @@ dependencies {
     implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
 
-    implementation(projects.compose.foundationCore)
+    implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.theme)
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)

@@ -8,7 +8,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundationCore)
+    implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.theme)
 
     implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.foundation)

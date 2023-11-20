@@ -1,67 +1,15 @@
 package com.egoriku.grodnoroads.foundation.theme
 
-import android.os.Build
-import androidx.annotation.ChecksSdkIntAtLeast
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
-@Stable
-val ColorScheme.isLight
-    @Composable
-    get() = this.background.luminance() > 0.5f
+internal val colorUnknown = Color(0xFFE100FF)
 
-@Stable
-val MaterialTheme.tonalElevation: Dp
-    @Composable
-    get() = if (colorScheme.isLight) 0.dp else defaultTonalElevation
+internal val primaryLight = Color(0xFF232F34)
+internal val lightWhite = Color(0xFFFFFFFF)
 
-@Stable
-val ColorScheme.surfaceSurfaceVariant: Color
-    @Composable
-    get() = if (isLight) surface else surfaceVariant
-
-val defaultTonalElevation = 3.dp
-val defaultShadowElevation = 3.dp
-
-@Composable
-fun GrodnoRoadsM3ThemePreview(content: @Composable () -> Unit) {
-    GrodnoRoadsM3Theme {
-        Surface(content = content)
-    }
-}
-
-@Composable
-fun GrodnoRoadsM3Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        supportsDynamicTheming() -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        else -> if (darkTheme) darkColorScheme else lightColorScheme
-    }
-    MaterialTheme(colorScheme = colorScheme, content = content)
-}
-
-@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
-fun supportsDynamicTheming() = false// Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-
-val colorUnknown = Color(0xFFE100FF)
-
-val primaryLight = Color(0xFF232F34)
-val lightWhite = Color(0xFFFFFFFF)
-
-private val lightColorScheme = lightColorScheme(
+internal val lightColorScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = lightWhite,
     secondary = colorUnknown,
@@ -89,12 +37,13 @@ private val lightColorScheme = lightColorScheme(
     scrim = Color.Black
 )
 
+
 val bg = Color(0xFF1A1F26)
 val bgVariant = Color(0xFF393E46)
 val primary = Color(0xFF92979F)
 val darkWhite = Color(0xFFDDDDDD)
 
-private val darkColorScheme = darkColorScheme(
+internal val darkColorScheme = darkColorScheme(
     primary = primary,
     onPrimary = darkWhite,
     secondary = colorUnknown,

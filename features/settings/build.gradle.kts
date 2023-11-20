@@ -9,6 +9,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.compose.foundation.theme)
+
     implementation(projects.libraries.foundation)
     implementation(projects.libraries.resources)
 
