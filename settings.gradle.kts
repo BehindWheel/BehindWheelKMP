@@ -33,12 +33,14 @@ include(":features:setting:faq")
 include(":features:setting:map")
 include(":features:setting:whatsnew")
 
+include(":compose:snackbar")
+include(":compose:foundation-core")
+
 include(":libraries:analytics")
 include(":libraries:audioplayer")
 include(":libraries:crashlytics")
 include(":libraries:extensions")
 include(":libraries:foundation")
-include(":libraries:foundation-core")
 include(":libraries:location")
 include(":libraries:location-permissions")
 

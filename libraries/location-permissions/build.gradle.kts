@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.foundationCore)
+    implementation(projects.compose.foundationCore)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

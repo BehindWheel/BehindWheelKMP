@@ -13,9 +13,10 @@ dependencies {
     implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
 
+    implementation(projects.compose.foundationCore)
+
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
-    implementation(projects.libraries.foundationCore)
     implementation(projects.libraries.locationPermissions)
     implementation(projects.libraries.maps.core)
     implementation(projects.libraries.maps.compose)

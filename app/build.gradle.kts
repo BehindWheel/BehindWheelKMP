@@ -87,11 +87,12 @@ dependencies {
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)
 
+    implementation(projects.compose.foundationCore)
+
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
-    implementation(projects.libraries.foundationCore)
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
