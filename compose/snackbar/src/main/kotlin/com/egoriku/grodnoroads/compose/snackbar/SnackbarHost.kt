@@ -10,6 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AccessibilityManager
 import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarData
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarDuration
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import kotlinx.coroutines.delay
 
 @Composable
@@ -24,8 +28,8 @@ fun SnackbarHost(
     val currentSnackbarData = hostState.currentSnackbarData
     LaunchedEffect(currentSnackbarData) {
         if (currentSnackbarData != null) {
-            val duration = currentSnackbarData.visuals.duration.toMillis(
-                hasAction = currentSnackbarData.visuals.actionLabel != null,
+            val duration = currentSnackbarData.message.duration.toMillis(
+                hasAction = currentSnackbarData.message is SnackbarMessage.WithAction,
                 accessibilityManager = accessibilityManager
             )
             delay(duration)
