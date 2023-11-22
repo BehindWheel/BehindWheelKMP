@@ -9,6 +9,9 @@ internal val colorUnknown = Color(0xFFE100FF)
 internal val primaryLight = Color(0xFF232F34)
 internal val lightWhite = Color(0xFFFFFFFF)
 
+internal val yellow = Color(0xFFFAED35)
+internal val bg = Color(0xFF1A1F26)
+
 internal val lightColorScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = lightWhite,
@@ -18,6 +21,10 @@ internal val lightColorScheme = lightColorScheme(
     onPrimaryContainer = Color(0xFF79747E),
     secondaryContainer = lightWhite,
     onSecondaryContainer = Color(0xFF1B1B1B),
+    tertiary = yellow,
+    tertiaryContainer = bg,
+    onTertiary = lightWhite,
+    onTertiaryContainer = lightWhite,
     error = colorUnknown,
     errorContainer = colorUnknown,
     onError = colorUnknown,
@@ -38,10 +45,9 @@ internal val lightColorScheme = lightColorScheme(
 )
 
 
-val bg = Color(0xFF1A1F26)
-val bgVariant = Color(0xFF393E46)
-val primary = Color(0xFF92979F)
-val darkWhite = Color(0xFFDDDDDD)
+internal val bgVariant = Color(0xFF393E46)
+internal val primary = Color(0xFF92979F)
+internal val darkWhite = Color(0xFFDDDDDD)
 
 internal val darkColorScheme = darkColorScheme(
     primary = primary,
@@ -52,7 +58,7 @@ internal val darkColorScheme = darkColorScheme(
     onPrimaryContainer = bg,
     secondaryContainer = primary,
     onSecondaryContainer = darkWhite,
-    tertiary = colorUnknown,
+    tertiary = yellow,
     onTertiary = colorUnknown,
     tertiaryContainer = colorUnknown,
     onTertiaryContainer = colorUnknown,
