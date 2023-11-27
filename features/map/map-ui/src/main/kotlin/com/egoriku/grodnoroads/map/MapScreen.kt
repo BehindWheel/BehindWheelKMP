@@ -131,7 +131,7 @@ fun MapScreen(
             derivedStateOf {
                 when {
                     idleZoomLevel == -1f -> Large
-                    idleZoomLevel <= 10f -> Small
+                    idleZoomLevel <= 9f -> Small
                     else -> Large
                 }
             }
