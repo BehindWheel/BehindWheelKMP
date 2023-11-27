@@ -19,7 +19,6 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckableCard(
     title: Int,

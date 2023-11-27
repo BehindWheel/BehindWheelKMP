@@ -17,7 +17,6 @@ import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.A
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel.Companion.toResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoiceLevelSection(
     alertVolumeLevel: AlertVolumeLevel,
