@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.foundation
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.*
 
@@ -30,6 +32,24 @@ fun ActionButton(
         )
     }
 }
+
+@Composable
+fun ActionButton(
+    modifier: Modifier = Modifier,
+    @DrawableRes icon: Int,
+    onClick: () -> Unit
+) {
+    ActionButton(
+        modifier = modifier,
+        onClick = onClick
+    ) {
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = null
+        )
+    }
+}
+
 
 @Composable
 private fun ActionButton(

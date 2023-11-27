@@ -10,6 +10,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
 import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.GmsSettings
 import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.Permissions
@@ -26,6 +27,12 @@ fun WithLocationRequester(
     onStateChanged: (LocationRequestStatus) -> Unit,
     content: @Composable BoxScope.() -> Unit
 ) {
+    // When in preview, early return a Box with the received modifier preserving layout
+    if (LocalInspectionMode.current) {
+        Box(modifier = modifier, content = content)
+        return
+    }
+
     val activity = LocalActivity.current
 
     val coroutineScope = rememberCoroutineScope()

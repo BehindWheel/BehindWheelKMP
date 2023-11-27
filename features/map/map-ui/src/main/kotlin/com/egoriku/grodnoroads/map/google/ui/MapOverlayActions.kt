@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +16,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.location.permissions.WithLocationRequester
 import com.egoriku.grodnoroads.location.permissions.rememberLocationRequesterState
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun MapOverlayActions(
@@ -40,7 +40,7 @@ fun MapOverlayActions(
             onStateChanged = {}
         ) {
             ActionButton(
-                imageVector = Icons.Default.MyLocation,
+                icon = R.drawable.ic_geo,
                 onClick = zoomToCurrentLocation,
             )
         }
