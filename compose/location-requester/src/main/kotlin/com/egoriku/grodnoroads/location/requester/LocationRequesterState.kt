@@ -1,8 +1,8 @@
-package com.egoriku.grodnoroads.location.permissions
+package com.egoriku.grodnoroads.location.requester
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.location.permissions.internal.LOCATION_PERMISSIONS
-import com.egoriku.grodnoroads.location.permissions.internal.PermissionRequester
+import com.egoriku.grodnoroads.location.requester.internal.LOCATION_PERMISSIONS
+import com.egoriku.grodnoroads.location.requester.internal.PermissionRequester
 
 @Stable
 class LocationRequesterState {

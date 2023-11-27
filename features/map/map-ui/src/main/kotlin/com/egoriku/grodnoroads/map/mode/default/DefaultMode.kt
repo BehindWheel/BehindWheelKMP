@@ -13,10 +13,10 @@ import com.egoriku.grodnoroads.foundation.CircleButton
 import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
-import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.GmsSettings
-import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.Permissions
-import com.egoriku.grodnoroads.location.permissions.WithLocationRequester
-import com.egoriku.grodnoroads.location.permissions.rememberLocationRequesterState
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsSettings
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.Permissions
+import com.egoriku.grodnoroads.location.requester.WithLocationRequester
+import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.resources.R

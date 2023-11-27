@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.location.permissions"
+    namespace = "com.egoriku.grodnoroads.location.requester"
 }
 
 dependencies {

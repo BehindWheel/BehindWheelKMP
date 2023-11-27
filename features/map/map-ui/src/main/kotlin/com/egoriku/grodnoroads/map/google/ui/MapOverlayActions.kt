@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.location.permissions.WithLocationRequester
-import com.egoriku.grodnoroads.location.permissions.rememberLocationRequesterState
+import com.egoriku.grodnoroads.location.requester.WithLocationRequester
+import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
 import com.egoriku.grodnoroads.resources.R
 
 @Composable

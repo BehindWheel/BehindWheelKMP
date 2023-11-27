@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.location.permissions
+package com.egoriku.grodnoroads.location.requester
 
 import android.Manifest
 import android.app.Activity
@@ -12,9 +12,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
-import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.GmsSettings
-import com.egoriku.grodnoroads.location.permissions.LocationRequestStatus.Permissions
-import com.egoriku.grodnoroads.location.permissions.internal.*
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsSettings
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.Permissions
+import com.egoriku.grodnoroads.location.requester.internal.*
 import kotlinx.coroutines.launch
 
 @Composable

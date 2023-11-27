@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.location.permissions
+package com.egoriku.grodnoroads.location.requester
 
 sealed interface LocationRequestStatus {
     sealed interface Permissions : LocationRequestStatus {

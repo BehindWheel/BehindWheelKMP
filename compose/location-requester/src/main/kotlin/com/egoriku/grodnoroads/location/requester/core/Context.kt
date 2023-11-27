@@ -1,9 +1,9 @@
-package com.egoriku.grodnoroads.location.permissions.core
+package com.egoriku.grodnoroads.location.requester.core
 
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
-import com.egoriku.grodnoroads.location.permissions.internal.LOCATION_PERMISSIONS
+import com.egoriku.grodnoroads.location.requester.internal.LOCATION_PERMISSIONS
 
 fun Context.hasLocationPermissions() = hasPermissions(LOCATION_PERMISSIONS)
 

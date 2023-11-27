@@ -15,10 +15,10 @@ dependencies {
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.locationRequester)
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
-    implementation(projects.libraries.locationPermissions)
     implementation(projects.libraries.maps.core)
     implementation(projects.libraries.maps.compose)
     implementation(projects.libraries.resources)

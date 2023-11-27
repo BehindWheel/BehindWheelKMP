@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.foundation.core.rememberMutableIntState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.location.permissions.rememberLocationPermissionsState
+import com.egoriku.grodnoroads.location.requester.rememberLocationPermissionsState
 import com.egoriku.grodnoroads.map.R
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapConfig

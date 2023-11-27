@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.location.permissions.internal
+package com.egoriku.grodnoroads.location.requester.internal
 
 import android.Manifest
 import androidx.activity.compose.ManagedActivityResultLauncher
