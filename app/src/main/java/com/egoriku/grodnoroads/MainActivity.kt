@@ -1,7 +1,9 @@
 package com.egoriku.grodnoroads
 
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -10,9 +12,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
@@ -22,7 +22,6 @@ import com.egoriku.grodnoroads.screen.root.RoadsRootComponentImpl
 import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.util.LocalWindowSizeClass
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,10 +30,8 @@ class MainActivity : AppCompatActivity() {
         val splash = installSplashScreen()
 
         splash.setKeepOnScreenCondition { true }
-
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val root: RoadsRootComponent = RoadsRootComponentImpl(defaultComponentContext())
 
@@ -50,18 +47,21 @@ class MainActivity : AppCompatActivity() {
                         Theme.Light -> false
                     }
 
-                    GrodnoRoadsM3Theme(darkTheme) {
-                        val systemUiController = rememberSystemUiController()
+                    DisposableEffect(darkTheme) {
+                        enableEdgeToEdge(
+                            statusBarStyle = SystemBarStyle.auto(
+                                lightScrim = android.graphics.Color.TRANSPARENT,
+                                darkScrim = android.graphics.Color.TRANSPARENT,
+                            ) { darkTheme },
+                            navigationBarStyle = SystemBarStyle.auto(
+                                lightScrim = android.graphics.Color.TRANSPARENT,
+                                darkScrim = android.graphics.Color.TRANSPARENT,
+                            ) { darkTheme },
+                        )
+                        onDispose {}
+                    }
 
-                        DisposableEffect(systemUiController, darkTheme) {
-                            systemUiController.apply {
-                                setSystemBarsColor(color = Color.Transparent, darkIcons = darkTheme)
-                                isNavigationBarContrastEnforced = false
-                                statusBarDarkContentEnabled = !darkTheme
-                                navigationBarDarkContentEnabled = !darkTheme
-                            }
-                            onDispose {}
-                        }
+                    GrodnoRoadsM3Theme(darkTheme) {
                         CompositionLocalProvider(
                             LocalWindowSizeClass provides calculateWindowSizeClass(this),
                             LocalActivity provides this,

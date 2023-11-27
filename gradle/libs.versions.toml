@@ -4,7 +4,6 @@ minSdk = "23"
 targetSdk = "34"
 
 agp = "8.1.4"
-accompanist = "0.32.0"
 compose-compiler = "1.5.4"
 decompose = "2.1.4"
 kotlin = "1.9.20"
@@ -24,9 +23,6 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-
-# TODO: remove systemuicontroller
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"

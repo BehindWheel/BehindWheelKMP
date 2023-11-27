@@ -97,8 +97,6 @@ dependencies {
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
-    implementation(libs.accompanist.systemuicontroller)
-
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.window)
@@ -109,7 +107,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.coroutines)
