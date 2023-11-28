@@ -10,11 +10,9 @@ android {
 dependencies {
     implementation(projects.features.map.mapDomain)
 
-    implementation(projects.shared.appComponent)
-    implementation(projects.shared.appSettings)
-
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.foundation.uikit)
     implementation(projects.compose.locationRequester)
 
     implementation(projects.libraries.extensions)
@@ -22,6 +20,9 @@ dependencies {
     implementation(projects.libraries.maps.core)
     implementation(projects.libraries.maps.compose)
     implementation(projects.libraries.resources)
+
+    implementation(projects.shared.appComponent)
+    implementation(projects.shared.appSettings)
 
     implementation(libs.androidx.activity.compose)
 

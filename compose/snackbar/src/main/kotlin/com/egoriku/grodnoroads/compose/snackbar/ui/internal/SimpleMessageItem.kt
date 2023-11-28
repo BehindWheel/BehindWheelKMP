@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.compose.snackbar.ui.internal
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,9 +10,10 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.Simple
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @Composable
-internal fun SimpleMessageItem(simple: Simple) {
+internal fun SimpleMessageItem(message: Simple) {
     SnackbarSurface {
         Column(
             modifier = Modifier
@@ -23,15 +23,13 @@ internal fun SimpleMessageItem(simple: Simple) {
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = simple.title,
+                text = message.title,
             )
-            if (!simple.description.isNullOrEmpty()) {
-                // TODO: create foundation-core-ui and use disabled text
-                Text(
+            if (!message.description.isNullOrEmpty()) {
+                DisabledText(
                     modifier = Modifier.fillMaxWidth(),
-                    text = simple.description,
+                    text = message.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = LocalContentColor.current.copy(alpha = 0.38f)
                 )
             }
         }
@@ -43,7 +41,7 @@ internal fun SimpleMessageItem(simple: Simple) {
 private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.padding(16.dp)) {
         SimpleMessageItem(
-            simple = Simple(
+            message = Simple(
                 title = "Доступ к геолокации запрещен.",
                 description = "Используются для доступа к данным карт",
             )

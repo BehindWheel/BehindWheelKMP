@@ -4,13 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.compose.snakbar"
+    namespace = "com.egoriku.grodnoroads.foundation.uikit"
 }
 
 dependencies {
-    implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
-    implementation(projects.compose.foundation.uikit)
 
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling.preview)

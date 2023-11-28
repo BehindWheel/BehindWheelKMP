@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.WithAction
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,11 +48,10 @@ internal fun MessageWithActionItem(message: WithAction, onAction: () -> Unit) {
                 }
             }
             if (!message.description.isNullOrEmpty()) {
-                // TODO: create foundation-core-ui and use disabled text
-                Text(
+                DisabledText(
+                    modifier = Modifier.fillMaxWidth(),
                     text = message.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = LocalContentColor.current.copy(alpha = 0.38f)
                 )
             }
         }
