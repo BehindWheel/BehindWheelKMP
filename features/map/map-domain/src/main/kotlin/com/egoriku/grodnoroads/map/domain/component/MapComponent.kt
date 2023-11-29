@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.map.domain.component
 
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
@@ -22,8 +21,6 @@ interface MapComponent {
     val userCount: Flow<Int>
     val quickActionsState: Flow<QuickActionsState>
 
-    val labels: Flow<LocationStore.Label>
-
     val alerts: Flow<ImmutableList<Alert>>
 
     val speedLimit: Flow<Int>
@@ -40,8 +37,6 @@ interface MapComponent {
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
-
-    fun onLocationDisabled()
 
     fun updatePreferences(pref: QuickActionsPref)
 

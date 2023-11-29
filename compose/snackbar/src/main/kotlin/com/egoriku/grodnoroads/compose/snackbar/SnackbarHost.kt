@@ -29,7 +29,7 @@ fun SnackbarHost(
     LaunchedEffect(currentSnackbarData) {
         if (currentSnackbarData != null) {
             val duration = currentSnackbarData.message.duration.toMillis(
-                hasAction = currentSnackbarData.message is SnackbarMessage.WithAction,
+                hasAction = currentSnackbarData.message is SnackbarMessage.ActionMessage,
                 accessibilityManager = accessibilityManager
             )
             delay(duration)

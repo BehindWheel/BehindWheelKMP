@@ -14,7 +14,6 @@ dependencies {
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
     implementation(projects.libraries.maps.core)
-    implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)
 

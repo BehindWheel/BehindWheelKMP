@@ -16,7 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.toast
+import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -35,8 +36,6 @@ import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.extension.reLaunch
@@ -54,6 +53,7 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.egoriku.grodnoroads.map.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
@@ -67,6 +67,7 @@ import com.google.maps.android.ui.IconGenerator
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.egoriku.grodnoroads.resources.R as R_res
 
@@ -79,6 +80,10 @@ fun MapScreen(
 ) {
     val context = LocalContext.current
 
+    val snackbarMessageBuilder = remember {
+        SnackbarMessageBuilder(context)
+    }
+
     val markerCache = koinInject<MarkerCache>()
 
     Surface {
@@ -86,8 +91,6 @@ fun MapScreen(
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(Default)
-
-        val labels by component.labels.collectAsState(initial = Label.None)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
@@ -104,13 +107,6 @@ fun MapScreen(
             onClose = component::closeDialog,
             reportAction = component::reportAction
         )
-
-        LaunchedEffect(labels) {
-            when (val label = labels) {
-                is ShowToast -> context.toast(label.resId)
-                else -> {}
-            }
-        }
 
         val coroutineScope = rememberCoroutineScope()
         val iconGenerator = remember { IconGenerator(context) }
@@ -338,6 +334,8 @@ fun MapScreen(
         FadeInOutAnimatedVisibility(visible = isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
+                val snackbarState = remember { SnackbarState() }
+
                 AnimatedContent(
                     modifier = Modifier
                         .matchParentSize()
@@ -348,8 +346,17 @@ fun MapScreen(
                     when (state) {
                         Default -> {
                             DefaultMode(
-                                onLocationEnabled = component::startLocationUpdates,
-                                onLocationDisabled = component::onLocationDisabled,
+                                onLocationRequestStateChanged = {
+                                    val message = snackbarMessageBuilder.buildMessage(it)
+
+                                    if (message == null) {
+                                        component.startLocationUpdates()
+                                    } else {
+                                        coroutineScope.launch {
+                                            snackbarState.show(message)
+                                        }
+                                    }
+                                },
                                 report = component::openChooseLocation
                             )
                         }
@@ -411,8 +418,18 @@ fun MapScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        zoomToCurrentLocation = {
-                        }
+                        isLocationButtonEnabled = { appMode == Default || appMode == ChooseLocation },
+                        onLocationRequestStateChanged = {
+                            val message = snackbarMessageBuilder.buildMessage(it)
+
+                            if (message == null) {
+                                component.startLocationUpdates()
+                            } else {
+                                coroutineScope.launch {
+                                    snackbarState.show(message)
+                                }
+                            }
+                        },
                     )
                 }
                 DefaultOverlay(
@@ -423,6 +440,13 @@ fun MapScreen(
                     quickActionsState = quickActionsState,
                     alerts = alerts,
                     onPreferenceChange = component::updatePreferences
+                )
+                SnackbarHost(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(contentPadding),
+                    hostState = snackbarState,
+                    paddingValues = PaddingValues(16.dp)
                 )
             }
         }

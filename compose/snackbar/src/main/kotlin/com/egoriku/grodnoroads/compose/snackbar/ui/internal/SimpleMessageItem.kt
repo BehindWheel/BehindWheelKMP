@@ -1,19 +1,25 @@
 package com.egoriku.grodnoroads.compose.snackbar.ui.internal
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.Simple
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @Composable
-internal fun SimpleMessageItem(message: Simple) {
+internal fun SimpleMessageItem(message: SimpleMessage) {
     SnackbarSurface {
         Column(
             modifier = Modifier
@@ -23,13 +29,21 @@ internal fun SimpleMessageItem(message: Simple) {
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = message.title,
+                text = when (val title = message.title) {
+                    is Raw -> title.text
+                    is Resource -> stringResource(id = title.id)
+                },
             )
-            if (!message.description.isNullOrEmpty()) {
+            val description = message.description
+            if (description != null) {
                 DisabledText(
                     modifier = Modifier.fillMaxWidth(),
-                    text = message.description,
+                    text = when (description) {
+                        is Raw -> description.text
+                        is Resource -> stringResource(id = description.id)
+                    },
                     style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.38f),
                 )
             }
         }
@@ -39,12 +53,16 @@ internal fun SimpleMessageItem(message: Simple) {
 @GrodnoRoadsDarkLightPreview
 @Composable
 private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
-    Box(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         SimpleMessageItem(
-            message = Simple(
-                title = "Доступ к геолокации запрещен.",
-                description = "Используются для доступа к данным карт",
+            message = SimpleMessage(
+                title = Raw("Доступ к геолокации запрещен."),
+                description = Raw("Используется для доступа к данным карт"),
             )
         )
+        SimpleMessageItem(message = SimpleMessage(title = Raw("Доступ к геолокации запрещен.")))
     }
 }

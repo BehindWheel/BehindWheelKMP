@@ -38,7 +38,6 @@ fun buildMapComponent(
     componentContext: ComponentContext
 ): MapComponent = MapComponentImpl(componentContext)
 
-
 @OptIn(FlowPreview::class)
 internal class MapComponentImpl(
     componentContext: ComponentContext
@@ -170,8 +169,6 @@ internal class MapComponentImpl(
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
 
-    override val labels: Flow<Label> = locationStore.labels
-
     override fun startLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
         mapConfigStore.accept(StartDriveMode)
@@ -181,8 +178,6 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
         mapConfigStore.accept(StopDriveMode)
     }
-
-    override fun onLocationDisabled() = locationStore.accept(LocationStore.Intent.DisabledLocation)
 
     override fun setLocation(latLng: StableLatLng) {
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))

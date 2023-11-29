@@ -15,7 +15,6 @@
     <string name="tab_map">Мапа</string>
     <string name="tab_chat">Чат</string>
     <string name="tab_settings">Наладкі</string>
-    <string name="toast_location_disabled">Для навігацыі патрэбен доступ да геолокации</string>
 
     <string name="alerts_stationary_camera">Стацыянарная камера</string>
     <string name="alerts_mobile_camera">Мабільная камера</string>

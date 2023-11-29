@@ -12,7 +12,6 @@ interface LocationStore : Store<Intent, State, Label> {
     sealed interface Intent {
         data object StartLocationUpdates : Intent
         data object StopLocationUpdates : Intent
-        data object DisabledLocation : Intent
         data class SetUserLocation(val latLng: StableLatLng) : Intent
         data object InvalidateLocation : Intent
     }
@@ -26,7 +25,6 @@ interface LocationStore : Store<Intent, State, Label> {
     sealed interface Label {
         data object None : Label
         data class NewLocation(val latLng: StableLatLng) : Label
-        data class ShowToast(val resId: Int) : Label
     }
 
     data class State(

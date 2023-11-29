@@ -1,19 +1,27 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
+sealed interface MessageData {
+    @JvmInline
+    value class Resource(val id: Int) : MessageData
+
+    @JvmInline
+    value class Raw(val text: String) : MessageData
+}
+
 sealed interface SnackbarMessage {
-    val title: String
-    val description: String?
+    val title: MessageData
+    val description: MessageData?
     val duration: SnackbarDuration
 
-    data class Simple(
-        override val title: String,
-        override val description: String?,
+    data class SimpleMessage(
+        override val title: MessageData,
+        override val description: MessageData? = null,
         override val duration: SnackbarDuration = SnackbarDuration.Short
     ) : SnackbarMessage
 
-    data class WithAction(
-        override val title: String,
-        override val description: String?,
+    data class ActionMessage(
+        override val title: MessageData,
+        override val description: MessageData? = null,
         override val duration: SnackbarDuration = SnackbarDuration.Indefinite,
         val onAction: () -> Unit,
     ) : SnackbarMessage

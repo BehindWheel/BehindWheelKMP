@@ -12,7 +12,6 @@ import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
 import com.egoriku.grodnoroads.maps.core.asStable
-import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -59,9 +58,6 @@ internal class LocationStoreFactory(
                 }
                 onIntent<StopLocationUpdates> {
                     locationHelper.stopLocationUpdates()
-                }
-                onIntent<DisabledLocation> {
-                    publish(Label.ShowToast(resId = R.string.toast_location_disabled))
                 }
                 onIntent<SetUserLocation> {
                     dispatch(

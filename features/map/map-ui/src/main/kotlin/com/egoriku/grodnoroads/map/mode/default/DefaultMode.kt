@@ -13,8 +13,7 @@ import com.egoriku.grodnoroads.foundation.CircleButton
 import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
-import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsSettings
-import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.Permissions
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
 import com.egoriku.grodnoroads.map.domain.model.ReportType
@@ -23,8 +22,7 @@ import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun DefaultMode(
-    onLocationEnabled: () -> Unit,
-    onLocationDisabled: () -> Unit,
+    onLocationRequestStateChanged: (LocationRequestStatus) -> Unit,
     report: (ReportType) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -49,22 +47,10 @@ fun DefaultMode(
             val locationRequesterState = rememberLocationRequesterState()
             WithLocationRequester(
                 locationRequesterState = locationRequesterState,
-                onStateChanged = {
-                    when (it) {
-                        GmsSettings.GmsLocationDisabled -> {
-                            onLocationDisabled()
-                        }
-                        GmsSettings.GmsLocationEnabled -> {
-                            onLocationEnabled()
-                        }
-                        Permissions.Denied -> {}
-                        Permissions.DeniedFineLocation -> {}
-                        Permissions.ShowRationale -> {}
-                    }
-                }
+                onStateChanged = onLocationRequestStateChanged
             ) {
                 CircleButton(
-                    onClick = { locationRequesterState.launchRequest() },
+                    onClick = locationRequesterState::launchRequest,
                     colors = CircleButtonDefaults.buttonColors(
                         containerColor = if (MaterialTheme.colorScheme.isLight) {
                             MaterialTheme.colorScheme.primary

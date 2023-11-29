@@ -8,8 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.WithAction
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
@@ -17,7 +20,7 @@ import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun MessageWithActionItem(message: WithAction, onAction: () -> Unit) {
+internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
     SnackbarSurface {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -30,7 +33,10 @@ internal fun MessageWithActionItem(message: WithAction, onAction: () -> Unit) {
             ) {
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = message.title,
+                    text = when (val title = message.title) {
+                        is Raw -> title.text
+                        is Resource -> stringResource(id = title.id)
+                    },
                 )
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                     IconButton(
@@ -47,11 +53,16 @@ internal fun MessageWithActionItem(message: WithAction, onAction: () -> Unit) {
                     }
                 }
             }
-            if (!message.description.isNullOrEmpty()) {
+            val description = message.description
+            if (description != null) {
                 DisabledText(
                     modifier = Modifier.fillMaxWidth(),
-                    text = message.description,
+                    text = when (description) {
+                        is Raw -> description.text
+                        is Resource -> stringResource(id = description.id)
+                    },
                     style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.38f)
                 )
             }
         }
@@ -61,11 +72,21 @@ internal fun MessageWithActionItem(message: WithAction, onAction: () -> Unit) {
 @GrodnoRoadsDarkLightPreview
 @Composable
 private fun MessageWithActionItemPreview() = GrodnoRoadsM3ThemePreview {
-    Box(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         MessageWithActionItem(
-            message = WithAction(
-                title = "Доступ к геолокации запрещен.",
-                description = "Используются для доступа к данным карт",
+            message = ActionMessage(
+                title = Raw("Доступ к геолокации запрещен."),
+                description = Raw("Используется для доступа к данным карт"),
+                onAction = {}
+            ),
+            onAction = {}
+        )
+        MessageWithActionItem(
+            message = ActionMessage(
+                title = Raw("Доступ к геолокации запрещен."),
                 onAction = {}
             ),
             onAction = {}

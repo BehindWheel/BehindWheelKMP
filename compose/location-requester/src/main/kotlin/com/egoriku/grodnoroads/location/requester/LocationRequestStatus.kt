@@ -1,14 +1,10 @@
 package com.egoriku.grodnoroads.location.requester
 
 sealed interface LocationRequestStatus {
-    sealed interface Permissions : LocationRequestStatus {
-        data object ShowRationale : Permissions
-        data object DeniedFineLocation : Permissions
-        data object Denied : Permissions
-    }
+    data object ShowRationale : LocationRequestStatus
+    data object FineLocationDenied : LocationRequestStatus
+    data object PermissionDenied : LocationRequestStatus
 
-    sealed interface GmsSettings : LocationRequestStatus {
-        data object GmsLocationEnabled : GmsSettings
-        data object GmsLocationDisabled : GmsSettings
-    }
+    data object GmsLocationEnabled : LocationRequestStatus
+    data object GmsLocationDisabled : LocationRequestStatus
 }

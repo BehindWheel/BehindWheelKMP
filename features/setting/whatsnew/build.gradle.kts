@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.foundation.uikit)
 
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)

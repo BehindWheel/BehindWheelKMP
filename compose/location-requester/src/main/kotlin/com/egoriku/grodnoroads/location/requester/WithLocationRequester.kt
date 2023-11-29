@@ -12,8 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
-import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsSettings
-import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.Permissions
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.*
 import com.egoriku.grodnoroads.location.requester.internal.*
 import kotlinx.coroutines.launch
 
@@ -39,8 +38,8 @@ fun WithLocationRequester(
 
     val resolutionResolver = rememberResolutionResolver {
         when (it.resultCode) {
-            Activity.RESULT_OK -> onStateChanged(GmsSettings.GmsLocationEnabled)
-            else -> onStateChanged(GmsSettings.GmsLocationDisabled)
+            Activity.RESULT_OK -> onStateChanged(GmsLocationEnabled)
+            else -> onStateChanged(GmsLocationDisabled)
         }
     }
     val settingsClient = rememberSettingsClient()
@@ -56,19 +55,19 @@ fun WithLocationRequester(
                             val request = IntentSenderRequest.Builder(intent).build()
                             resolutionResolver.launch(request)
                         }
-                        SettingsState.Resolved -> onStateChanged(GmsSettings.GmsLocationEnabled)
-                        SettingsState.Unresolvable -> onStateChanged(GmsSettings.GmsLocationDisabled)
+                        SettingsState.Resolved -> onStateChanged(GmsLocationEnabled)
+                        SettingsState.Unresolvable -> onStateChanged(GmsLocationDisabled)
                     }
                 }
             }
             permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                onStateChanged(Permissions.DeniedFineLocation)
+                onStateChanged(FineLocationDenied)
             }
             else -> {
                 if (activity.shouldShowRationale(LOCATION_PERMISSIONS)) {
-                    onStateChanged(Permissions.ShowRationale)
+                    onStateChanged(ShowRationale)
                 } else {
-                    onStateChanged(Permissions.Denied)
+                    onStateChanged(PermissionDenied)
                 }
             }
         }

@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
     implementation(projects.compose.locationRequester)
+    implementation(projects.compose.snackbar)
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)
