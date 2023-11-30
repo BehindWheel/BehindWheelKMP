@@ -43,13 +43,13 @@ private fun makeAlertMessage(
         LastLocation.None -> null
         else -> {
             val distance = computeDistance(
-                eventLatLng = event.position.value,
+                eventLatLng = event.position,
                 offsetLatLng = computeOffset(
-                    from = lastLocation.latLng.value,
+                    from = lastLocation.latLng,
                     distance = alertDistance.toDouble(),
                     heading = lastLocation.bearing.toDouble()
                 ),
-                currentLatLnt = lastLocation.latLng.value,
+                currentLatLnt = lastLocation.latLng,
                 distanceRadius = alertDistance
             )
 

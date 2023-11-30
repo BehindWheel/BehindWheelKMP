@@ -26,9 +26,9 @@ import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun CameraInfo(camera: MapEvent.Camera) {
@@ -151,7 +151,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
             updateTime = 1683234000000,
             speedCar = 100,
             speedTruck = 80,
-            position = StableLatLng(-1.0, -1.0),
+            position = LatLng(-1.0, -1.0),
         )
     )
 }

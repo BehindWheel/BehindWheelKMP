@@ -6,13 +6,13 @@ import com.egoriku.grodnoroads.map.google.MarkerSize
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.LatLng
 
 context(MapUpdater)
 @Composable
 fun CameraMarker(
-    position: StableLatLng,
+    position: LatLng,
     markerSize: MarkerSize,
     icon: () -> BitmapDescriptor,
     onClick: () -> Unit

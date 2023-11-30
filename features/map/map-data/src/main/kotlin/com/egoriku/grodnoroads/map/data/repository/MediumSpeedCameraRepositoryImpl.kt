@@ -7,7 +7,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.map.data.dto.MediumSpeedDTO
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MediumSpeedCamera
 import com.egoriku.grodnoroads.map.domain.repository.MediumSpeedCameraRepository
-import com.egoriku.grodnoroads.maps.core.StableLatLng
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -34,7 +34,7 @@ internal class MediumSpeedCameraRepositoryImpl(
                             updateTime = data.updateTime,
                             speedCar = data.speedCar,
                             speedTruck = data.speedTruck,
-                            position = StableLatLng(data.latitude, data.longitude)
+                            position = LatLng(data.latitude, data.longitude)
                         )
                     })
                 }

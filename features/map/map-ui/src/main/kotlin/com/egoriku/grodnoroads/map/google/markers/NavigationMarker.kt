@@ -10,9 +10,8 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberSimpleMarker
-import com.egoriku.grodnoroads.maps.core.StableLatLng
+import com.egoriku.grodnoroads.maps.compose.util.LatLngInterpolator
 import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
-import com.egoriku.grodnoroads.maps.core.util.LatLngInterpolator
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.ktx.model.markerOptions
@@ -24,7 +23,7 @@ context(MapUpdater)
 fun NavigationMarker(
     appMode: AppMode,
     tag: String,
-    position: StableLatLng,
+    position: LatLng,
     bearing: Float,
     icon: () -> BitmapDescriptor,
     rotation: Float,
@@ -33,7 +32,7 @@ fun NavigationMarker(
         tag = tag,
         markerOptions = {
             markerOptions {
-                position(position.value)
+                position(position)
                 icon(icon())
                 zIndex(0f)
                 anchor(0.5f, 0.5f)
@@ -44,21 +43,18 @@ fun NavigationMarker(
 
     LaunchedEffect(appMode) {
         marker.inScope {
-            this.position = position.value
+            this.position = position
         }
     }
 
     LaunchedEffect(position) {
         marker.inScope {
-            if (this.position roundDistanceTo position.value > ANIMATE_DISTANCE_THRESHOLD) {
-                this.position = position.value
+            if (this.position roundDistanceTo position > ANIMATE_DISTANCE_THRESHOLD) {
+                this.position = position
             } else {
-                val destination = position.value
-                val startPosition = this.position
-
                 animateMarker(
-                    start = startPosition,
-                    destination = destination,
+                    start = this.position,
+                    destination = position,
                     onInterpolated = {
                         this.position = it
                     }

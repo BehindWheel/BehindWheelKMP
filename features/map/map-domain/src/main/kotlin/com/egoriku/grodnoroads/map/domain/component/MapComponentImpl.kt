@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
-import com.egoriku.grodnoroads.maps.core.StableLatLng
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -150,7 +150,7 @@ internal class MapComponentImpl(
     override val lastLocation: Flow<LastLocation>
         get() = locationStore.states.map { it.lastLocation }
 
-    override val initialLocation: Flow<StableLatLng>
+    override val initialLocation: Flow<LatLng>
         get() = locationStore.states.map { it.initialLocation }
 
     override val alerts: Flow<ImmutableList<Alert>>
@@ -179,7 +179,7 @@ internal class MapComponentImpl(
         mapConfigStore.accept(StopDriveMode)
     }
 
-    override fun setLocation(latLng: StableLatLng) {
+    override fun setLocation(latLng: LatLng) {
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }
 
@@ -202,7 +202,7 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
-    override fun reportChooseLocation(latLng: StableLatLng) {
+    override fun reportChooseLocation(latLng: LatLng) {
         val reportType = mapConfigStore.state.reportType ?: return
 
         when (reportType) {
@@ -233,7 +233,7 @@ internal class MapComponentImpl(
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
-        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng.value))
+        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
         else -> Unit
     }
 

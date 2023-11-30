@@ -397,7 +397,7 @@ fun MapScreen(
                                             /* y = */ offset.y.toInt()
                                         )
                                     ) ?: return@ChooseLocation
-                                    component.reportChooseLocation(latLng.asStable())
+                                    component.reportChooseLocation(latLng)
                                 }
                             )
                         }
