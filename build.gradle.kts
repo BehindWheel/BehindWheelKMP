@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Locale
 
@@ -41,19 +42,30 @@ subprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             if (project.findProperty("enableComposeCompilerReports") == "true") {
-                val reportsPath =
-                    project.layout.buildDirectory.dir("compose_metrics").get().asFile.absolutePath
-
-                freeCompilerArgs = freeCompilerArgs +
-                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsPath" +
-                        "-P=plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$reportsPath"
+                val reportsPath = project.layout.buildDirectory
+                    .dir("compose_metrics")
+                    .get()
+                    .asFile
+                    .absolutePath
+                composeMetrics(path = reportsPath)
             }
-
-            // compose stability config
-            freeCompilerArgs += listOf(
-                "-P",
-                "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=$rootDir/config/compose-stability.config"
-            )
+            stabilityConfigurationPath(path = "$rootDir/config/compose-stability.config")
         }
     }
+}
+
+fun KotlinJvmOptions.composeMetrics(path: String) {
+    freeCompilerArgs += listOf(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$path",
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$path"
+    )
+}
+
+fun KotlinJvmOptions.stabilityConfigurationPath(path: String) {
+    freeCompilerArgs += listOf(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=$path"
+    )
 }
