@@ -37,11 +37,10 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
-//assembleRelease -Pgrodnoroads.enableComposeCompilerReports=true
 subprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            if (project.findProperty("grodnoroads.enableComposeCompilerReports") == "true") {
+            if (project.findProperty("enableComposeCompilerReports") == "true") {
                 val reportsPath =
                     project.layout.buildDirectory.dir("compose_metrics").get().asFile.absolutePath
 
@@ -49,6 +48,12 @@ subprojects {
                         "-P=plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportsPath" +
                         "-P=plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$reportsPath"
             }
+
+            // compose stability config
+            freeCompilerArgs += listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=$rootDir/config/compose-stability.config"
+            )
         }
     }
 }
