@@ -143,4 +143,17 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="send">Send</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Permission for access to geolocation denied</string>
+    <string name="snackbar_drive_mode_rationale_description">Used to display a marker in navigation mode</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Navigation requires access to more precise location</string>
+    <string name="snackbar_drive_mode_permission_denied">Location access denied. You can grant permission in settings</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Navigation requires geolocation access</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">You can enable it manually in the notification panel</string>
+
+    <string name="snackbar_current_location_rationale_title">Permission for access to geolocation denied</string>
+    <string name="snackbar_current_location_fine_location_denied">Access to more precise location is needed</string>
+    <string name="snackbar_current_location_permission_denied">Location access denied. You can grant permission in settings</string>
+    <string name="snackbar_current_location_gms_disabled_title">Geolocation access denied</string>
+    <string name="snackbar_current_location_gms_disabled_description">You can enable it manually in the notification panel</string>
 </resources>

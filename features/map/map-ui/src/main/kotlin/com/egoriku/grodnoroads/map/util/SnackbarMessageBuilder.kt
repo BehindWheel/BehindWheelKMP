@@ -1,50 +1,51 @@
 package com.egoriku.grodnoroads.map.util
 
 import android.content.Context
-import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.extensions.openAppSettings
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.*
+import com.egoriku.grodnoroads.resources.R
 
 class SnackbarMessageBuilder(private val context: Context) {
 
     fun handleDriveModeRequest(status: LocationRequestStatus): SnackbarMessage? = when (status) {
         ShowRationale -> SimpleMessage(
-            title = Raw("Разрешение для доступа к геолокации отклонено"),
-            description = Raw("Используется для отображения маркера в режиме навигации")
+            title = Resource(R.string.snackbar_drive_mode_rationale_title),
+            description = Resource(R.string.snackbar_drive_mode_rationale_description)
         )
         FineLocationDenied -> SimpleMessage(
-            title = Raw("Для навигации нужен доступ к более точному местоположению")
+            title = Resource(R.string.snackbar_drive_mode_fine_location_denied)
         )
         PermissionDenied -> ActionMessage(
-            title = Raw("Доступ к геолокации запрещен. Вы можете дать разрешение в настройках"),
+            title = Resource(R.string.snackbar_drive_mode_permission_denied),
             onAction = {
                 context.openAppSettings()
             }
         )
         GmsLocationDisabled -> SimpleMessage(
-            title = Raw("Для навигации нужен доступ к геолокации"),
-            description = Raw("Ее можно включить самостоятельно в панели уведомлений")
+            title = Resource(R.string.snackbar_drive_mode_gms_disabled_title),
+            description = Resource(R.string.snackbar_drive_mode_gms_disabled_description)
         )
         GmsLocationEnabled -> null
     }
 
     fun handleCurrentLocationRequest(status: LocationRequestStatus): SnackbarMessage? =
         when (status) {
-            ShowRationale -> SimpleMessage(title = Raw("Разрешение для доступа к геолокации отклонено"))
-            FineLocationDenied -> SimpleMessage(title = Raw("Нужен доступ к более точному местоположению"))
+            ShowRationale -> SimpleMessage(title = Resource(R.string.snackbar_current_location_rationale_title))
+            FineLocationDenied -> SimpleMessage(title = Resource(R.string.snackbar_current_location_fine_location_denied))
             PermissionDenied -> ActionMessage(
-                title = Raw("Доступ к геолокации запрещен. Вы можете дать разрешение в настройках"),
+                title = Resource(R.string.snackbar_current_location_permission_denied),
                 onAction = {
                     context.openAppSettings()
                 }
             )
             GmsLocationDisabled -> SimpleMessage(
-                title = Raw("Доступ к геолокации отклонен"),
-                description = Raw("Ее можно включить самостоятельно в панели уведомлений")
+                title = Resource(R.string.snackbar_current_location_gms_disabled_title),
+                description = Resource(R.string.snackbar_current_location_gms_disabled_description)
             )
             GmsLocationEnabled -> null
         }
