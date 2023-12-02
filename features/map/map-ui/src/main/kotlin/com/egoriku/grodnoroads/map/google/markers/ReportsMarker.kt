@@ -9,15 +9,15 @@ import com.egoriku.grodnoroads.map.google.MarkerSize.Small
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.ui.IconGenerator
 
 context(MapUpdater)
 @Composable
 fun ReportsMarker(
-    position: StableLatLng,
+    position: LatLng,
     markerSize: MarkerSize,
     iconGenerator: () -> IconGenerator,
     iconProvider: () -> BitmapDescriptor?,

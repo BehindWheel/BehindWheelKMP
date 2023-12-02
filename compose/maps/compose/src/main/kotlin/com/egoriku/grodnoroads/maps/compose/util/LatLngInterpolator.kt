@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.maps.core.util
+package com.egoriku.grodnoroads.maps.compose.util
 
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.abs
