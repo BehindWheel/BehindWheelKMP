@@ -168,18 +168,29 @@ internal class MapUpdaterImpl(
         )
     }
 
-    override fun animateTarget(target: LatLng) {
+    override fun animateTarget(
+        target: LatLng,
+        zoom: Float?,
+        onFinish: () -> Unit,
+        onCancel: () -> Unit
+    ) {
         val bearing = googleMap.cameraPosition.bearing
-        val zoom = googleMap.zoom
+
+        val zoomLevel = zoom ?: googleMap.zoom
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(
             cameraPosition {
                 target(target)
                 bearing(bearing)
-                zoom(zoom)
+                zoom(zoomLevel)
                 tilt(0.0f)
             }
         )
-        animateCamera(cameraUpdate = cameraUpdate, duration = 1000)
+        animateCamera(
+            cameraUpdate = cameraUpdate,
+            duration = 1000,
+            onFinish = onFinish,
+            onCancel = onCancel
+        )
     }
 
     override fun animateZoom(zoom: Float) {

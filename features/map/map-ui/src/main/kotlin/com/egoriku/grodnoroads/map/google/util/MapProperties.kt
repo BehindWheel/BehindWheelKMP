@@ -22,7 +22,8 @@ import com.google.android.gms.maps.model.MapStyleOptions
 fun rememberMapProperties(
     locationAvailable: () -> Boolean,
     mapConfig: MapConfig,
-    appMode: AppMode
+    appMode: AppMode,
+    isRequestCurrentLocation: Boolean
 ): MapProperties {
     val context = LocalContext.current
     val isLight = MaterialTheme.colorScheme.isLight
@@ -54,7 +55,7 @@ fun rememberMapProperties(
         }
     }
 
-    LaunchedEffect(appMode) {
+    LaunchedEffect(appMode, isRequestCurrentLocation) {
         mapProperties = mapProperties.copy(
             isMyLocationEnabled = permissionsState.allPermissionsGranted &&
                     locationAvailable() &&

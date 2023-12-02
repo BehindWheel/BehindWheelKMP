@@ -32,7 +32,6 @@ import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.None
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -144,7 +143,8 @@ fun MapScreen(
                     location.latLng != UNKNOWN_LOCATION
                 },
                 mapConfig = mapConfig,
-                appMode = appMode
+                appMode = appMode,
+                isRequestCurrentLocation = isRequestCurrentLocation
             )
             GoogleMap(
                 backgroundColor = MaterialTheme.colorScheme.surface,
@@ -205,10 +205,10 @@ fun MapScreen(
 
             LaunchedEffect(location, appMode) {
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
+                if (location == LastLocation.None) return@LaunchedEffect
 
                 when (appMode) {
                     Drive -> {
-                        if (location == LastLocation.None) return@LaunchedEffect
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
                         if (mapUpdater.isInitialCameraAnimation()) {
@@ -228,23 +228,33 @@ fun MapScreen(
                             bearing = location.bearing
                         )
                     }
-                    Default, ChooseLocation -> {
-                        if (isRequestCurrentLocation) return@LaunchedEffect
-
-                        mapUpdater.resetLastLocation()
-                        mapUpdater.animateZoom(mapConfig.zoomLevel)
-                    }
+                    else -> {}
                 }
             }
 
-            LaunchedEffect(isRequestCurrentLocation, location) {
-                if (isRequestCurrentLocation && location != None) {
-                    isRequestCurrentLocation = false
-
-                    if (appMode == Default || appMode == ChooseLocation) {
+            LaunchedEffect(appMode) {
+                when (appMode) {
+                    Default, ChooseLocation -> {
                         mapUpdater.onMapScope {
-                            animateTarget(target = location.latLng)
+                            resetLastLocation()
+                            animateZoom(mapConfig.zoomLevel)
                         }
+                    }
+                    else -> {}
+                }
+            }
+
+            LaunchedEffect(location, isRequestCurrentLocation) {
+                if (location == LastLocation.None) return@LaunchedEffect
+
+                if (isRequestCurrentLocation) {
+                    mapUpdater.onMapScope {
+                        animateTarget(
+                            target = location.latLng,
+                            zoom = if (appMode == Default) 14.5f else null,
+                            onFinish = { isRequestCurrentLocation = false },
+                            onCancel = { isRequestCurrentLocation = false }
+                        )
                     }
                 }
             }
