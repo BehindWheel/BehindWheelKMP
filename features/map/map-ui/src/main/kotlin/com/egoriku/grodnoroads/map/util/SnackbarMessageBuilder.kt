@@ -11,23 +11,41 @@ import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.*
 
 class SnackbarMessageBuilder(private val context: Context) {
 
-    fun buildMessage(status: LocationRequestStatus): SnackbarMessage? = when (status) {
-        GmsLocationDisabled -> SimpleMessage(
-            title = Raw("Для навигации нужен доступ к геолокации")
+    fun handleDriveModeRequest(status: LocationRequestStatus): SnackbarMessage? = when (status) {
+        ShowRationale -> SimpleMessage(
+            title = Raw("Разрешение для доступа к геолокации отклонено"),
+            description = Raw("Используется для отображения маркера в режиме навигации")
         )
-        GmsLocationEnabled -> null
+        FineLocationDenied -> SimpleMessage(
+            title = Raw("Для навигации нужен доступ к более точному местоположению")
+        )
         PermissionDenied -> ActionMessage(
             title = Raw("Доступ к геолокации запрещен. Вы можете дать разрешение в настройках"),
             onAction = {
                 context.openAppSettings()
             }
         )
-        FineLocationDenied -> SimpleMessage(
-            title = Raw("Для навигации нужен доступ к более точному местоположению")
+        GmsLocationDisabled -> SimpleMessage(
+            title = Raw("Для навигации нужен доступ к геолокации"),
+            description = Raw("Ее можно включить самостоятельно в панели уведомлений")
         )
-        ShowRationale -> SimpleMessage(
-            title = Raw("Разрешение для доступа к геолокации отклонено"),
-            description = Raw("Используется для отображения маркера в режиме навигации")
-        )
+        GmsLocationEnabled -> null
     }
+
+    fun handleCurrentLocationRequest(status: LocationRequestStatus): SnackbarMessage? =
+        when (status) {
+            ShowRationale -> SimpleMessage(title = Raw("Разрешение для доступа к геолокации отклонено"))
+            FineLocationDenied -> SimpleMessage(title = Raw("Нужен доступ к более точному местоположению"))
+            PermissionDenied -> ActionMessage(
+                title = Raw("Доступ к геолокации запрещен. Вы можете дать разрешение в настройках"),
+                onAction = {
+                    context.openAppSettings()
+                }
+            )
+            GmsLocationDisabled -> SimpleMessage(
+                title = Raw("Доступ к геолокации отклонен"),
+                description = Raw("Ее можно включить самостоятельно в панели уведомлений")
+            )
+            GmsLocationEnabled -> null
+        }
 }

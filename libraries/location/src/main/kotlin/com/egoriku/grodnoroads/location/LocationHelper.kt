@@ -7,6 +7,8 @@ interface LocationHelper {
 
     suspend fun getLastKnownLocation(): LocationInfo?
 
+    suspend fun requestCurrentLocation(): LocationInfo?
+
     fun startLocationUpdates()
     fun stopLocationUpdates()
 }

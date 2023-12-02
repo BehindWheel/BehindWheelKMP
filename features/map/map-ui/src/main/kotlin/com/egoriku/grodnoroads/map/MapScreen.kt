@@ -20,8 +20,10 @@ import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.uikit.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -30,6 +32,7 @@ import com.egoriku.grodnoroads.map.domain.component.MapComponent
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.None
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
@@ -79,9 +82,7 @@ fun MapScreen(
 ) {
     val context = LocalContext.current
 
-    val snackbarMessageBuilder = remember {
-        SnackbarMessageBuilder(context)
-    }
+    val snackbarMessageBuilder = remember { SnackbarMessageBuilder(context) }
 
     val markerCache = koinInject<MarkerCache>()
 
@@ -114,7 +115,9 @@ fun MapScreen(
         var isMapLoaded by rememberMutableState { false }
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
-        var idleZoomLevel by com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState { -1f }
+        var idleZoomLevel by rememberMutableFloatState { -1f }
+
+        var isRequestCurrentLocation by rememberMutableState { false }
 
         var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
@@ -226,8 +229,22 @@ fun MapScreen(
                         )
                     }
                     Default, ChooseLocation -> {
+                        if (isRequestCurrentLocation) return@LaunchedEffect
+
                         mapUpdater.resetLastLocation()
                         mapUpdater.animateZoom(mapConfig.zoomLevel)
+                    }
+                }
+            }
+
+            LaunchedEffect(isRequestCurrentLocation, location) {
+                if (isRequestCurrentLocation && location != None) {
+                    isRequestCurrentLocation = false
+
+                    if (appMode == Default || appMode == ChooseLocation) {
+                        mapUpdater.onMapScope {
+                            animateTarget(target = location.latLng)
+                        }
                     }
                 }
             }
@@ -346,7 +363,7 @@ fun MapScreen(
                         Default -> {
                             DefaultMode(
                                 onLocationRequestStateChanged = {
-                                    val message = snackbarMessageBuilder.buildMessage(it)
+                                    val message = snackbarMessageBuilder.handleDriveModeRequest(it)
 
                                     if (message == null) {
                                         component.startLocationUpdates()
@@ -410,7 +427,7 @@ fun MapScreen(
                     count = userCount
                 )
                 FadeInOutAnimatedVisibility(
-                    modifier = Modifier.align(Alignment.CenterEnd),
+                    modifier = Modifier.align(OffsetAlignment(xOffset = 1f, yOffset = 0.45f)),
                     visible = overlayVisible,
                 ) {
                     MapOverlayActions(
@@ -419,10 +436,11 @@ fun MapScreen(
                         zoomOut = { mapUpdater?.zoomOut() },
                         isLocationButtonEnabled = { appMode == Default || appMode == ChooseLocation },
                         onLocationRequestStateChanged = {
-                            val message = snackbarMessageBuilder.buildMessage(it)
+                            val message = snackbarMessageBuilder.handleCurrentLocationRequest(it)
 
                             if (message == null) {
-                                component.startLocationUpdates()
+                                isRequestCurrentLocation = true
+                                component.requestCurrentLocation()
                             } else {
                                 coroutineScope.launch {
                                     snackbarState.show(message)

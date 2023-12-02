@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.location
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Location
 import android.os.Looper
 import androidx.core.location.LocationRequestCompat.QUALITY_HIGH_ACCURACY
 import com.egoriku.grodnoroads.extensions.logD
@@ -9,6 +10,7 @@ import com.egoriku.grodnoroads.location.MetricUtils.speedToKilometerPerHour
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.tasks.await
 
@@ -52,33 +54,29 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
         fusedLocationProvider.removeLocationUpdates(locationCallback)
     }
 
-    @SuppressLint("MissingPermission")
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
-            val cancellationTokenSource = CancellationTokenSource()
-            val result = runCatching {
-                fusedLocationProvider.getCurrentLocation(
-                    QUALITY_HIGH_ACCURACY,
-                    cancellationTokenSource.token
-                ).await()
-            }.onFailure {
-                logD(it.message.toString())
-            }
-
-            val location = result.getOrNull()
-
-            lastKnownLocation = when {
-                location != null -> LocationInfo(
-                    latLng = LatLng(location.latitude, location.longitude),
-                    bearing = location.bearing,
-                    speed = 0
-                )
-
-                else -> null
-            }
+            lastKnownLocation = requestLocation().toLocationInfo()
         }
 
         return lastKnownLocation
+    }
+
+    override suspend fun requestCurrentLocation(): LocationInfo? = requestLocation().toLocationInfo()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @SuppressLint("MissingPermission")
+    private suspend fun requestLocation(): Location? {
+        val cancellationTokenSource = CancellationTokenSource()
+
+        return runCatching {
+            fusedLocationProvider.getCurrentLocation(
+                QUALITY_HIGH_ACCURACY,
+                cancellationTokenSource.token
+            ).await(cancellationTokenSource)
+        }.onFailure {
+            logD(it.message.toString())
+        }.getOrNull()
     }
 
     companion object {
@@ -88,5 +86,17 @@ internal class LocationHelperImpl(context: Context) : LocationHelper {
                 .setMinUpdateDistanceMeters(0f)
                 .setMinUpdateIntervalMillis(1000)
                 .build()
+
+        private fun Location?.toLocationInfo(): LocationInfo? {
+            val location = this
+            return when {
+                location != null -> LocationInfo(
+                    latLng = LatLng(location.latitude, location.longitude),
+                    bearing = location.bearing,
+                    speed = 0
+                )
+                else -> null
+            }
+        }
     }
 }

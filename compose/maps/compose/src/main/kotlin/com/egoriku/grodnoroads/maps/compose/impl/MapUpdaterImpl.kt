@@ -132,7 +132,7 @@ internal class MapUpdaterImpl(
                 ),
                 duration = 700,
                 onFinish = { additionalPadding(top = 0) },
-                onCancel = {additionalPadding(top = 0)}
+                onCancel = { additionalPadding(top = 0) }
             )
         } else {
             animateWithShadowPoint(target = target, zoom = zoom)
@@ -166,6 +166,20 @@ internal class MapUpdaterImpl(
             ),
             duration = 400
         )
+    }
+
+    override fun animateTarget(target: LatLng) {
+        val bearing = googleMap.cameraPosition.bearing
+        val zoom = googleMap.zoom
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(
+            cameraPosition {
+                target(target)
+                bearing(bearing)
+                zoom(zoom)
+                tilt(0.0f)
+            }
+        )
+        animateCamera(cameraUpdate = cameraUpdate, duration = 1000)
     }
 
     override fun animateZoom(zoom: Float) {

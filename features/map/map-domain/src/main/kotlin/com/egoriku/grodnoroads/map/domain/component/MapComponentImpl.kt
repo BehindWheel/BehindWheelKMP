@@ -179,6 +179,10 @@ internal class MapComponentImpl(
         mapConfigStore.accept(StopDriveMode)
     }
 
+    override fun requestCurrentLocation() {
+        locationStore.accept(LocationStore.Intent.RequestCurrentLocation)
+    }
+
     override fun setLocation(latLng: LatLng) {
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }

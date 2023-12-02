@@ -37,6 +37,7 @@ interface MapComponent {
 
     fun startLocationUpdates()
     fun stopLocationUpdates()
+    fun requestCurrentLocation()
 
     fun updatePreferences(pref: QuickActionsPref)
 

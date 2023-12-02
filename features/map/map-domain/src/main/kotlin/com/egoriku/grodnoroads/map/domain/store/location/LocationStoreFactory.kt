@@ -58,6 +58,23 @@ internal class LocationStoreFactory(
                 onIntent<StopLocationUpdates> {
                     locationHelper.stopLocationUpdates()
                 }
+                onIntent<RequestCurrentLocation> {
+                    launch {
+                        val location = locationHelper.requestCurrentLocation()
+
+                        if (location != null) {
+                            dispatch(
+                                Message.OnNewLocation(
+                                    lastLocation = LastLocation(
+                                        latLng = location.latLng,
+                                        bearing = location.bearing,
+                                        speed = location.speed
+                                    )
+                                )
+                            )
+                        }
+                    }
+                }
                 onIntent<SetUserLocation> {
                     dispatch(
                         Message.OnUserLocation(
