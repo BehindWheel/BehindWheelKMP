@@ -59,7 +59,6 @@ import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
-import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
@@ -154,7 +153,7 @@ fun MapScreen(
                 },
                 cameraPositionProvider = {
                     cameraPosition {
-                        target(initialLocation.value)
+                        target(initialLocation)
                         zoom(mapConfig.zoomLevel)
                     }
                 },
@@ -211,7 +210,7 @@ fun MapScreen(
 
                         if (mapUpdater.isInitialCameraAnimation()) {
                             mapUpdater.animateCamera(
-                                target = location.latLng.value,
+                                target = location.latLng,
                                 zoom = mapConfig.zoomLevel,
                                 bearing = location.bearing
                             )
@@ -221,7 +220,7 @@ fun MapScreen(
                             return@LaunchedEffect
 
                         mapUpdater.animateCamera(
-                            target = location.latLng.value,
+                            target = location.latLng,
                             zoom = mapConfig.zoomLevel,
                             bearing = location.bearing
                         )
@@ -485,7 +484,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng.value,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
@@ -501,7 +500,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng.value,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
