@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "23"
 targetSdk = "34"
 
-agp = "8.1.4"
+agp = "8.2.0"
 compose-compiler = "1.5.5"
 decompose = "2.1.4"
 kotlin = "1.9.20"
