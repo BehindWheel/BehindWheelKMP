@@ -39,7 +39,9 @@ internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit)
                     },
                 )
                 CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                    IconButton(
+                    Button(
+                        contentPadding = PaddingValues(0.dp),
+                        modifier = Modifier.size(48.dp, 48.dp),
                         onClick = {
                             onAction()
                             message.onAction()
@@ -47,7 +49,7 @@ internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit)
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            tint = MaterialTheme.colorScheme.tertiary,
+                            tint = MaterialTheme.colorScheme.inverseOnSurface,
                             contentDescription = null
                         )
                     }
@@ -62,7 +64,7 @@ internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit)
                         is Resource -> stringResource(id = description.id)
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.38f)
+                    color = MaterialTheme.colorScheme.inverseOnSurface.copy(alpha = 0.38f)
                 )
             }
         }
