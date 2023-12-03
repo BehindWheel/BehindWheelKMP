@@ -47,3 +47,4 @@ include(":libraries:resources")
 
 include(":shared:appSettings")
 include(":shared:appComponent")
+include(":test_shared")
