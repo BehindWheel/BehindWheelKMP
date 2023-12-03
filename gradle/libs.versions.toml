@@ -1,6 +1,6 @@
 [versions]
 compileSdk = "34"
-minSdk = "23"
+minSdk = "24" # Android 7.0
 targetSdk = "34"
 
 agp = "8.2.0"

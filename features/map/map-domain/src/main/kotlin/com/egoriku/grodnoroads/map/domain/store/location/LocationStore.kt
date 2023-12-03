@@ -25,11 +25,12 @@ interface LocationStore : Store<Intent, State, Label> {
     sealed interface Label {
         data object None : Label
         data class NewLocation(val latLng: LatLng) : Label
+        data object GpsDisabled: Label
     }
 
     data class State(
         val lastLocation: LastLocation = LastLocation.None,
         val userLocation: LastLocation = LastLocation.None,
-        val initialLocation: LatLng = UNKNOWN_LOCATION
+        val initialLocation: LatLng = UNKNOWN_LOCATION,
     )
 }

@@ -17,7 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarDuration
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
+import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
@@ -38,9 +42,9 @@ import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
+import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
@@ -82,6 +86,7 @@ fun MapScreen(
     val context = LocalContext.current
 
     val snackbarMessageBuilder = remember { SnackbarMessageBuilder(context) }
+    val snackbarState = remember { SnackbarState() }
 
     val markerCache = koinInject<MarkerCache>()
 
@@ -90,6 +95,8 @@ fun MapScreen(
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(Default)
+
+        val labels by component.labels.collectAsState(initial = Label.None)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
@@ -101,6 +108,21 @@ fun MapScreen(
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
         val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
 
+        LaunchedEffect(labels) {
+            when (labels) {
+                is Label.GpsDisabled -> {
+                    if (appMode == Drive) {
+                        snackbarState.show(
+                            SnackbarMessage.SimpleMessage(
+                                title = Resource(R.string.snackbar_location_disabled_message),
+                                duration = SnackbarDuration.Long
+                            )
+                        )
+                    }
+                }
+                else -> {}
+            }
+        }
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
             onClose = component::closeDialog,
@@ -137,7 +159,7 @@ fun MapScreen(
         var projection by rememberMutableState<Projection?> { null }
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
 
-        if (mapConfig != MapConfig.EMPTY) {
+        if (mapConfig != MapConfig.EMPTY && initialLocation != UNKNOWN_LOCATION) {
             val mapProperties = rememberMapProperties(
                 locationAvailable = {
                     location.latLng != UNKNOWN_LOCATION
@@ -360,8 +382,6 @@ fun MapScreen(
         FadeInOutAnimatedVisibility(visible = isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
-                val snackbarState = remember { SnackbarState() }
-
                 AnimatedContent(
                     modifier = Modifier
                         .matchParentSize()

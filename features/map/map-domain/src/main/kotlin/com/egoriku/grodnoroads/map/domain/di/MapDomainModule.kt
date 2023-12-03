@@ -25,7 +25,8 @@ val mapDomainModule = module {
         LocationStoreFactory(
             storeFactory = get(),
             locationHelper = get(),
-            dataStore = get()
+            dataStore = get(),
+            gpsSettings = get()
         ).create()
     }
 
