@@ -6,6 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -28,4 +30,10 @@ fun DemoPrimaryButton() {
             }
         }
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DemoPrimaryButtonPreview() = GrodnoRoadsM3ThemePreview {
+    DemoPrimaryButton()
 }

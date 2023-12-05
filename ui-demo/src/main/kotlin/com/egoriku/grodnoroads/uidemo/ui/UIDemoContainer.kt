@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 fun UIDemoContainer(name: String, content: @Composable ColumnScope.() -> Unit) {
     Column(
         Modifier
-            .padding(top = 16.dp)
             .fillMaxWidth()
             .border(0.5.dp, Color.Gray)
             .padding(16.dp)

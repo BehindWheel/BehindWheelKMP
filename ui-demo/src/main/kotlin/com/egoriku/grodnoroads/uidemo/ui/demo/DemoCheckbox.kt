@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -25,4 +27,10 @@ fun DemoCheckbox() {
             )
         }
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DemoCheckboxPreview() = GrodnoRoadsM3ThemePreview {
+    DemoCheckbox()
 }

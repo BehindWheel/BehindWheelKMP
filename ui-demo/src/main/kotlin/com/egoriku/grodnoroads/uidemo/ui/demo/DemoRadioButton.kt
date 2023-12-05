@@ -7,6 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -30,4 +32,10 @@ fun DemoRadioButton() {
 
 private enum class Option {
     F, S
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DemoRadioButtonPreview() = GrodnoRoadsM3ThemePreview {
+    DemoRadioButton()
 }

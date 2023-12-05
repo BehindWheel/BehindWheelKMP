@@ -2,6 +2,8 @@ package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -11,4 +13,10 @@ fun DemoText() {
         Text(text = "Normal text")
         DisabledText(text = "Disabled text")
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DemoTextPreview() = GrodnoRoadsM3ThemePreview {
+    DemoText()
 }

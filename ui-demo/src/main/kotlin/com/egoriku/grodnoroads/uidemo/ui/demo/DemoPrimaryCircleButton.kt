@@ -7,6 +7,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -28,4 +30,10 @@ fun DemoPrimaryCircleButton() {
             }
         }
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DemoPrimaryCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
+    DemoPrimaryCircleButton()
 }
