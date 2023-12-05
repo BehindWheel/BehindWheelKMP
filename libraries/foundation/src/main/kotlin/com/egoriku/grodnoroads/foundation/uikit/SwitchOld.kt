@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 
 @Composable
-fun Switch(
+fun SwitchOld(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
@@ -41,11 +41,11 @@ fun Switch(
 @Composable
 private fun PreviewSwitch() = GrodnoRoadsM3ThemePreview {
     Column {
-        Switch(
+        SwitchOld(
             isChecked = true,
             onCheckedChange = {}
         )
-        Switch(
+        SwitchOld(
             isChecked = false,
             onCheckedChange = {}
         )

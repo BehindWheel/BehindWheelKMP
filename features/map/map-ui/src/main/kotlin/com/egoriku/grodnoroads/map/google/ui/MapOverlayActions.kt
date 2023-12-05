@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.uikit.Switch
+import com.egoriku.grodnoroads.foundation.uikit.SwitchOld
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
@@ -64,7 +64,7 @@ private fun MapOverlayActionsPreview() = GrodnoRoadsM3ThemePreview {
         modifier = Modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Switch(isChecked = enabled, onCheckedChange = { enabled = it })
+        SwitchOld(isChecked = enabled, onCheckedChange = { enabled = it })
         MapOverlayActions(
             zoomIn = {},
             zoomOut = {},

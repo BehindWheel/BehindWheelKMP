@@ -15,7 +15,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
-fun PrimaryButton(
+fun PrimaryButtonOld(
     @StringRes id: Int,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -30,7 +30,7 @@ fun PrimaryButton(
 }
 
 @Composable
-fun PrimaryButton(
+fun PrimaryButtonOld(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
@@ -48,7 +48,7 @@ fun PrimaryButton(
 @Composable
 private fun PrimaryButtonPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(300.dp, 100.dp)) {
-        PrimaryButton(
+        PrimaryButtonOld(
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(16.dp),

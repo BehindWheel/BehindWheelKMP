@@ -18,7 +18,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.Switch
+import com.egoriku.grodnoroads.foundation.uikit.SwitchOld
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -58,7 +58,7 @@ fun SwitchSettings(
             )
         },
         trailingContent = {
-            Switch(
+            SwitchOld(
                 isChecked = isChecked,
                 onCheckedChange = onCheckedChange,
             )
@@ -103,7 +103,7 @@ fun SwitchSettings(
             )
         },
         trailingContent = {
-            Switch(
+            SwitchOld(
                 isChecked = isChecked,
                 onCheckedChange = onCheckedChange,
             )
@@ -142,7 +142,7 @@ fun SwitchSettings(
             )
         },
         trailingContent = {
-            Switch(
+            SwitchOld(
                 isChecked = isChecked,
                 onCheckedChange = onCheckedChange,
             )
@@ -182,7 +182,7 @@ private fun BasicSwitchSettings(
             )
         },
         trailingContent = {
-            Switch(
+            SwitchOld(
                 isChecked = isChecked,
                 onCheckedChange = onCheckedChange,
             )

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButtonOld
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.resources.R
 
@@ -21,7 +21,7 @@ fun ConfirmationFooter(onDismiss: () -> Unit, onAccept: () -> Unit) {
         TextButton(modifier = Modifier.weight(1f), onClick = onDismiss) {
             Text(stringResource(id = R.string.cancel))
         }
-        PrimaryButton(modifier = Modifier.weight(1f), onClick = onAccept) {
+        PrimaryButtonOld(modifier = Modifier.weight(1f), onClick = onAccept) {
             Text(stringResource(id = R.string.ok))
         }
     }
