@@ -20,9 +20,7 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.uidemo.ui.Header
-import com.egoriku.grodnoroads.uidemo.ui.demo.DemoPrimaryButton
-import com.egoriku.grodnoroads.uidemo.ui.demo.DemoPrimaryCircleButton
-import com.egoriku.grodnoroads.uidemo.ui.demo.DemoText
+import com.egoriku.grodnoroads.uidemo.ui.demo.*
 
 class UIDemoActivity : ComponentActivity() {
 
@@ -55,6 +53,8 @@ fun Components(onThemeChange: () -> Unit) {
         item { DemoText() }
         item { DemoPrimaryButton() }
         item { DemoPrimaryCircleButton() }
+        item { DemoSecondaryButton() }
+        item { DemoSecondaryCircleButton() }
     }
 }
 

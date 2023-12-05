@@ -15,6 +15,10 @@ internal val lightColorScheme = lightColorScheme(
     primary = Color(0xFF232F34),
     onPrimary = Color(0xFFFFFFFF),
 
+    outline = Color(0xFFABB5BA),
+
+
+
 
     primaryContainer = Color(0xFF29373D),
     onPrimaryContainer = Color(0xFFFFFFFF),
@@ -36,7 +40,6 @@ internal val lightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     surfaceVariant = Color(0xFFF4F4F5),
     onSurfaceVariant = Color(0xFF1C1B1F),
-    outline = Color(0xFF79747E),
 
     inverseSurface = Color(0xFF29373D),
     inverseOnSurface = Color(0xFFF4F4F5),
@@ -54,6 +57,8 @@ internal val darkWhite = Color(0xFFDDDDDD)
 internal val darkColorScheme = darkColorScheme(
     primary = Color(0xFFFFFFFF),
     onPrimary = Color(0xFF232F34),
+
+    outline = Color(0xFF454F54),
 
 
     primaryContainer = Color(0xFF29373D),
@@ -82,7 +87,6 @@ internal val darkColorScheme = darkColorScheme(
     onSurfaceVariant = darkWhite,
     inversePrimary = colorUnknown,
     surfaceTint = primary,
-    outline = primary,
     outlineVariant = bgVariant,
     scrim = Color.Black
 )
