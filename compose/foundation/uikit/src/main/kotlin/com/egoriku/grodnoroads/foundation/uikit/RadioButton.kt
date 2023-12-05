@@ -11,11 +11,18 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 
 @Composable
-fun RadioButton(selected: Boolean, onClick: () -> Unit) {
+fun RadioButton(
+    modifier: Modifier = Modifier,
+    selected: Boolean,
+    enabled: Boolean = true,
+    onClick: () -> Unit
+) {
     androidx.compose.material3.RadioButton(
+        modifier = modifier,
         colors = RadioButtonDefaults.colors(
             selectedColor = MaterialTheme.colorScheme.secondary
         ),
+        enabled = enabled,
         selected = selected,
         onClick = onClick,
     )

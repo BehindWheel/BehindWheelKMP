@@ -26,6 +26,11 @@ fun DemoRadioButton() {
                 selected = selectedOption == Option.S,
                 onClick = { selectedOption = Option.S }
             )
+            RadioButton(
+                selected = true,
+                onClick = {},
+                enabled = false
+            )
         }
     }
 }
