@@ -55,6 +55,7 @@ fun Components(onThemeChange: () -> Unit) {
         item { DemoPrimaryCircleButton() }
         item { DemoSecondaryButton() }
         item { DemoSecondaryCircleButton() }
+        item { DemoRadioButton() }
     }
 }
 
