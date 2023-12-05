@@ -25,6 +25,11 @@ fun DemoCheckbox() {
                 checked = checkbox2,
                 onCheckedChange = onChange2
             )
+            Checkbox(
+                checked = true,
+                onCheckedChange = {},
+                enabled = false
+            )
         }
     }
 }

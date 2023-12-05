@@ -12,11 +12,13 @@ import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
 fun Checkbox(
     checked: Boolean,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onCheckedChange: (Boolean) -> Unit
 ) {
     androidx.compose.material3.Checkbox(
         modifier = modifier,
         checked = checked,
+        enabled = enabled,
         onCheckedChange = onCheckedChange,
     )
 }

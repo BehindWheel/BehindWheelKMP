@@ -28,12 +28,14 @@ fun DemoTriStateCheckbox() {
         }
 
         Row(modifier = Modifier.fillMaxWidth()) {
+            TriStateCheckbox(state = state, onClick = ::onClick)
+
+            Spacer(modifier = Modifier.weight(1f))
+
             TriStateCheckbox(state = ToggleableState.Off, onClick = {})
             TriStateCheckbox(state = ToggleableState.Indeterminate, onClick = {})
             TriStateCheckbox(state = ToggleableState.On, onClick = {})
             TriStateCheckbox(state = ToggleableState.On, enabled = false, onClick = {})
-            Spacer(modifier = Modifier.weight(1f))
-            TriStateCheckbox(state = state, onClick = ::onClick)
         }
     }
 }
