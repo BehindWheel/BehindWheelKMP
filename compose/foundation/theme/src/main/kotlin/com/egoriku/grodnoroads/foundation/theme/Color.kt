@@ -14,6 +14,11 @@ internal val bg = Color(0xFF1A1F26)
 internal val lightColorScheme = lightColorScheme(
     primary = Color(0xFF232F34),
     onPrimary = Color(0xFFFFFFFF),
+    // in figma
+    // primaryContainer = Color(0xFF29373D),
+    // onPrimaryContainer = Color(0xFFFFFFFF),
+    onPrimaryContainer = Color(0xFF29373D),
+    primaryContainer = Color(0xFFFFFFFF),
 
     secondary = Color(0xFFCC9600),
     onSecondary = Color(0xFFFFFFFF),
@@ -23,8 +28,6 @@ internal val lightColorScheme = lightColorScheme(
     outline = Color(0xFFABB5BA),
 
 
-    primaryContainer = Color(0xFF29373D),
-    onPrimaryContainer = Color(0xFFFFFFFF),
     tertiary = colorUnknown,
     tertiaryContainer = colorUnknown,
     onTertiary = colorUnknown,
@@ -56,6 +59,11 @@ internal val darkWhite = Color(0xFFDDDDDD)
 internal val darkColorScheme = darkColorScheme(
     primary = Color(0xFFFFFFFF),
     onPrimary = Color(0xFF232F34),
+    // in figma
+    // primaryContainer = Color(0xFFF0F3F5),
+    //onPrimaryContainer = Color(0xFF29373D),
+    onPrimaryContainer = Color(0xFFF0F3F5),
+    primaryContainer = Color(0xFF29373D),
 
     secondary = Color(0xFFFFC727),
     onSecondary = Color(0xFF664B00),
@@ -65,8 +73,6 @@ internal val darkColorScheme = darkColorScheme(
     outline = Color(0xFF454F54),
 
 
-    primaryContainer = Color(0xFF29373D),
-    onPrimaryContainer = Color(0xFFFFFFFF),
     tertiary = colorUnknown,
     onTertiary = colorUnknown,
     tertiaryContainer = colorUnknown,
