@@ -59,10 +59,11 @@ private fun DemoComponents() {
         item { DemoCheckbox() }
         item { DemoTriStateCheckbox() }
         item { DemoSwitch() }
+        item { DemoNavigationRail() }
     }
 }
 
-@Preview(device = "spec:width=1080px,height=3340px,dpi=440")
+@Preview(device = "spec:width=1080px,height=4000px,dpi=440")
 @Composable
 private fun ComponentsPreview() = GrodnoRoadsM3ThemePreview {
     DemoComponents()
