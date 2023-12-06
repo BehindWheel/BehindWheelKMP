@@ -23,11 +23,11 @@ fun DemoNavigationRail() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             val elements by rememberMutableState {
                 listOf(
-                    Element.Map to Icons.Default.Map,
-                    Element.Settings to Icons.Default.Settings
+                    RailElement.Map to Icons.Default.Map,
+                    RailElement.Settings to Icons.Default.Settings
                 )
             }
-            var selected by rememberMutableState { Element.Map }
+            var selected by rememberMutableState { RailElement.Map }
 
             NavigationRail(modifier = Modifier.height(150.dp)) {
                 elements.forEach {
@@ -79,7 +79,7 @@ fun DemoNavigationRail() {
     }
 }
 
-private enum class Element {
+private enum class RailElement {
     Map,
     Settings
 }

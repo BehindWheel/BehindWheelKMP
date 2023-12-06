@@ -10,9 +10,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun UIDemoContainer(name: String, content: @Composable ColumnScope.() -> Unit) {
+fun UIDemoContainer(
+    name: String,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
     Column(
-        Modifier
+        modifier = modifier
             .fillMaxWidth()
             .border(0.5.dp, Color.Gray)
             .padding(16.dp)
