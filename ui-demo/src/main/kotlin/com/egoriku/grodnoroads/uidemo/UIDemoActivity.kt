@@ -30,7 +30,10 @@ class UIDemoActivity : ComponentActivity() {
 
             GrodnoRoadsM3Theme(isDark) {
                 Surface {
-                    Components(onThemeChange = { isDark = !isDark })
+                    Column {
+                        Header(modifier = Modifier.padding(horizontal = 16.dp)) { isDark = !isDark }
+                        DemoComponents()
+                    }
                 }
             }
         }
@@ -38,7 +41,7 @@ class UIDemoActivity : ComponentActivity() {
 }
 
 @Composable
-fun Components(onThemeChange: () -> Unit) {
+private fun DemoComponents() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -47,7 +50,6 @@ fun Components(onThemeChange: () -> Unit) {
         contentPadding = PaddingValues(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item { Header(onThemeChange) }
         item { DemoText() }
         item { DemoPrimaryButton() }
         item { DemoPrimaryCircleButton() }
@@ -63,5 +65,5 @@ fun Components(onThemeChange: () -> Unit) {
 @Preview(device = "spec:width=1080px,height=3340px,dpi=440")
 @Composable
 private fun ComponentsPreview() = GrodnoRoadsM3ThemePreview {
-    Components {}
+    DemoComponents()
 }
