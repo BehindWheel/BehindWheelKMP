@@ -31,7 +31,12 @@ class UIDemoActivity : ComponentActivity() {
             GrodnoRoadsM3Theme(isDark) {
                 Surface {
                     Column {
-                        Header(modifier = Modifier.padding(horizontal = 16.dp)) { isDark = !isDark }
+                        Header(
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp)
+                                .statusBarsPadding(),
+                            onThemeChange = { isDark = !isDark }
+                        )
                         DemoComponents()
                     }
                 }
@@ -43,11 +48,11 @@ class UIDemoActivity : ComponentActivity() {
 @Composable
 private fun DemoComponents() {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding()
-            .statusBarsPadding(),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = WindowInsets
+            .navigationBars
+            .add(WindowInsets(left = 16.dp, right = 16.dp))
+            .asPaddingValues(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item { DemoText() }

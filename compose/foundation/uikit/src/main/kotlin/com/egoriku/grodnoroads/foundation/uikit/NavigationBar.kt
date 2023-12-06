@@ -5,10 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +36,7 @@ fun RowScope.NavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
+    label: @Composable () -> Unit,
     enabled: Boolean = true
 ) {
     val tonalElevation = MaterialTheme.tonalElevation
@@ -52,6 +50,7 @@ fun RowScope.NavigationBarItem(
         selected = selected,
         onClick = onClick,
         icon = icon,
+        label = label,
         enabled = enabled
     )
 }
@@ -68,6 +67,9 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = null
                 )
+            },
+            label = {
+                Text("Account")
             }
         )
         NavigationBarItem(
@@ -78,6 +80,9 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
                     imageVector = Icons.Default.Build,
                     contentDescription = null
                 )
+            },
+            label = {
+                Text("Build")
             }
         )
     }

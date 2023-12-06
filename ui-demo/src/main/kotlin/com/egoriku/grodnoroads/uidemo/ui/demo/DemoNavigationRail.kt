@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 @Composable
 fun DemoNavigationRail() {
     UIDemoContainer(name = "NavigationRail") {
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row {
             val elements by rememberMutableState {
                 listOf(
                     RailElement.Map to Icons.Default.Map,
@@ -29,7 +29,7 @@ fun DemoNavigationRail() {
             }
             var selected by rememberMutableState { RailElement.Map }
 
-            NavigationRail(modifier = Modifier.height(150.dp)) {
+            NavigationRail(modifier = Modifier.height(IntrinsicSize.Min)) {
                 elements.forEach {
                     NavigationRailItem(
                         selected = selected == it.first,
@@ -44,7 +44,7 @@ fun DemoNavigationRail() {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 NavigationRailItem(
                     selected = true,
-                    onClick = { /*TODO*/ },
+                    onClick = { },
                     icon = {
                         Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                     }
@@ -52,7 +52,7 @@ fun DemoNavigationRail() {
                 NavigationRailItem(
                     selected = true,
                     enabled = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { },
                     icon = {
                         Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                     }
@@ -61,7 +61,7 @@ fun DemoNavigationRail() {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 NavigationRailItem(
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { },
                     icon = {
                         Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                     }
@@ -69,7 +69,7 @@ fun DemoNavigationRail() {
                 NavigationRailItem(
                     selected = false,
                     enabled = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { },
                     icon = {
                         Icon(imageVector = Icons.Default.Settings, contentDescription = null)
                     }
