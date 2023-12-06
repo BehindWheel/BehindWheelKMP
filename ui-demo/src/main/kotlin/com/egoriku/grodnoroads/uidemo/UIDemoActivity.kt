@@ -64,6 +64,7 @@ private fun DemoComponents() {
         item { DemoCheckbox() }
         item { DemoTriStateCheckbox() }
         item { DemoSwitch() }
+        item { DemoFilterChip() }
         item { DemoNavigationRail() }
         item { DemoNavigationBar() }
     }
