@@ -11,6 +11,7 @@ dependencies {
     implementation(projects.features.map.mapDomain)
 
     implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
     implementation(projects.compose.locationRequester)
@@ -30,8 +31,6 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.balloon.compose)
     implementation(libs.google.maps)

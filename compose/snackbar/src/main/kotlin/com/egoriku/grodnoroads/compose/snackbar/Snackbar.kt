@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.DismissableRow
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.MessageWithActionItem
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.SimpleMessageItem
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import kotlinx.coroutines.launch
 
 @Composable

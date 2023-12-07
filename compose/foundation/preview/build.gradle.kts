@@ -4,13 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.foundation.uikit"
+    namespace = "com.egoriku.grodnoroads.foundation.preview"
 }
 
 dependencies {
-    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
 
     implementation(libs.androidx.compose.material3)
 
+    api(libs.androidx.compose.ui.tooling.preview)
+    debugApi(libs.androidx.compose.ui.tooling)
 }

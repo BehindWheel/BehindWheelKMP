@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.foundation.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn
@@ -52,13 +53,13 @@ fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
 }
 
 
-@com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+@GrodnoRoadsPreview
 @Composable
 private fun PreviewHeadLampDialogSpring() = GrodnoRoadsM3ThemePreview {
     HeadLampDialog(headlampType = Spring) {}
 }
 
-@com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+@GrodnoRoadsPreview
 @Composable
 private fun PreviewHeadLampDialogAutumn() = GrodnoRoadsM3ThemePreview {
     HeadLampDialog(headlampType = Autumn) {}

@@ -88,6 +88,7 @@ dependencies {
     implementation(projects.shared.appComponent)
 
     implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
 
     implementation(projects.libraries.analytics)
@@ -103,8 +104,6 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
