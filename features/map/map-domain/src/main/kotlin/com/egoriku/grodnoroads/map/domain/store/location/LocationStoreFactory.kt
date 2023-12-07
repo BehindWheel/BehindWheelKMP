@@ -54,6 +54,7 @@ internal class LocationStoreFactory(
                             .map { LastLocation(it.latLng, it.bearing, it.speed) }
                             .collect {
                                 dispatch(Message.OnNewLocation(lastLocation = it))
+                                dispatch(Message.OnInitialLocation(it.latLng))
 
                                 publish(Label.NewLocation(it.latLng))
                             }
