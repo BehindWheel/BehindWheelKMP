@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.Animatable
@@ -19,11 +19,12 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
+import com.egoriku.grodnoroads.foundation.core.unboundClickable
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import kotlinx.coroutines.launch
 
 @Composable
@@ -105,7 +106,9 @@ fun ClickableIntRange(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
-                    .offset(offsetX.value.dp, 0.dp)
+                    .offset {
+                        IntOffset(offsetX.value.toInt(), 0)
+                    }
                     .pointerInput(Unit) {
                         detectTapGestures(onLongPress = { onLongClick() })
                     },
@@ -130,7 +133,7 @@ fun ClickableIntRange(
     }
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun ClickableIntRangePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(200.dp, 50.dp)) {

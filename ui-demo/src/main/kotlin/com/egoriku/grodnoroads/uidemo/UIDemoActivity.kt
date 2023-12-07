@@ -60,6 +60,7 @@ private fun DemoComponents() {
         item { DemoPrimaryCircleButton() }
         item { DemoSecondaryButton() }
         item { DemoSecondaryCircleButton() }
+        item { DemoClickableRange() }
         item { DemoRadioButton() }
         item { DemoCheckbox() }
         item { DemoTriStateCheckbox() }

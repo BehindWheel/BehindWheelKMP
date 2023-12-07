@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.Animatable
@@ -19,11 +19,12 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.modifier.unboundClickable
+import com.egoriku.grodnoroads.foundation.core.unboundClickable
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -106,7 +107,9 @@ fun ClickableFloatRange(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
-                    .offset(offsetX.value.dp, 0.dp)
+                    .offset {
+                        IntOffset(offsetX.value.toInt(), 0)
+                    }
                     .pointerInput(Unit) {
                         detectTapGestures(onLongPress = { onLongClick() })
                     },
@@ -142,7 +145,7 @@ private fun decrement(value: Float, step: Float): Float {
     return (result * 10.0f).roundToInt() / 10.0f
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun ClickableFloatRangePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(200.dp, 50.dp)) {
