@@ -34,3 +34,5 @@ In case bug and suggestions, please create issue.
 
 Check dependency updates: `./gradlew dependencyUpdates`
 Run compose metrics: `./gradlew assembleRelease -PenableComposeCompilerReports=true` 
+
+Build release version: `./gradlew app:assembleRelease`
