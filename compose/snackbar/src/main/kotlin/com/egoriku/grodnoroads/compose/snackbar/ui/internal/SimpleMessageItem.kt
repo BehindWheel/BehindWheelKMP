@@ -14,8 +14,8 @@ import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @Composable

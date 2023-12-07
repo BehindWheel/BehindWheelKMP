@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.VerticalSpacer
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent

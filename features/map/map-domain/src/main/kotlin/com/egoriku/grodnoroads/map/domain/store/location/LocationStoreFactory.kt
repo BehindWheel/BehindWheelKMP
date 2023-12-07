@@ -9,7 +9,6 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.location.LocationHelper
-import com.egoriku.grodnoroads.location.gps.GpsSettings
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
@@ -22,7 +21,6 @@ import kotlinx.coroutines.launch
 internal class LocationStoreFactory(
     private val storeFactory: StoreFactory,
     private val locationHelper: LocationHelper,
-    private val gpsSettings: GpsSettings,
     private val dataStore: DataStore<Preferences>
 ) {
 
@@ -31,7 +29,6 @@ internal class LocationStoreFactory(
         object : LocationStore, Store<Intent, State, Label> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                var gpsSettingsJob: Job? = null
                 var locationJob: Job? = null
 
                 onAction<Unit> {
@@ -60,12 +57,6 @@ internal class LocationStoreFactory(
                                 dispatch(Message.OnInitialLocation(it.latLng))
 
                                 publish(Label.NewLocation(it.latLng))
-                            }
-                    }
-                    gpsSettingsJob = reLaunch(gpsSettingsJob) {
-                        gpsSettings.fetchGpsSettingsUpdates()
-                            .collect {
-                                publish(Label.GpsDisabled)
                             }
                     }
                 }

@@ -1,12 +1,12 @@
 [versions]
 compileSdk = "34"
-minSdk = "24" # Android 7.0
+minSdk = "23" # Android 6.0
 targetSdk = "34"
 
 agp = "8.2.0"
-compose-compiler = "1.5.5"
+compose-compiler = "1.5.6"
 decompose = "2.1.4"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 mvikotlin = "3.3.0"
 
 [libraries]

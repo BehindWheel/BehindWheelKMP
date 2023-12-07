@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.theme
+package com.egoriku.grodnoroads.foundation.preview
 
 import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview

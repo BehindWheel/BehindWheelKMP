@@ -155,6 +155,4 @@
     <string name="snackbar_current_location_gms_disabled_title">Доступ к геолокации отклонен</string>
     <string name="snackbar_current_location_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
 
-    <string name="snackbar_location_disabled_message">Геолокация отключена. Режим навигации будет показывать последнюю геолокацию</string>
-
 </resources>

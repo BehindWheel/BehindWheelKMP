@@ -35,6 +35,7 @@ include(":features:setting:map")
 include(":features:setting:whatsnew")
 
 include(":compose:foundation:core")
+include(":compose:foundation:preview")
 include(":compose:foundation:theme")
 include(":compose:foundation:uikit")
 include(":compose:location-requester")

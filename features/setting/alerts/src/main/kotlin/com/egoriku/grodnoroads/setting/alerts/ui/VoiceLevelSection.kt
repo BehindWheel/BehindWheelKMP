@@ -1,6 +1,8 @@
 package com.egoriku.grodnoroads.setting.alerts.ui
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.*
@@ -9,19 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel.Companion.toResource
 
 @Composable
 fun VoiceLevelSection(
     alertVolumeLevel: AlertVolumeLevel,
     modify: (AlertsPref) -> Unit,
-    playSound: (VolumeLevel) -> Unit
+    playTestSound: (VolumeLevel) -> Unit
 ) {
     Column {
         SettingsHeader(
@@ -31,8 +32,9 @@ fun VoiceLevelSection(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             alertVolumeLevel.values.forEach { volumeLevel ->
                 val selected = alertVolumeLevel.current == volumeLevel
@@ -41,10 +43,10 @@ fun VoiceLevelSection(
                     selected = selected,
                     onClick = {
                         modify(alertVolumeLevel.copy(current = volumeLevel))
-                        playSound(volumeLevel)
+                        playTestSound(volumeLevel)
                     },
                     label = {
-                        Text(text = stringResource(id = volumeLevel.toResource()))
+                        Text(text = volumeLevel.levelName)
                     },
                     border = FilterChipDefaults.filterChipBorder(
                         selectedBorderWidth = 1.dp,
@@ -76,6 +78,6 @@ private fun VoiceLevelSectionPreview() = GrodnoRoadsM3ThemePreview {
     VoiceLevelSection(
         alertVolumeLevel = AlertVolumeLevel(),
         modify = {},
-        playSound = {}
+        playTestSound = {}
     )
 }

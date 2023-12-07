@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.uikit.alignment
+package com.egoriku.grodnoroads.foundation.core.alignment
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.IntOffset
