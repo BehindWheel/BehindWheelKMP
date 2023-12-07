@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @Composable
-internal fun SimpleMessageItem(message: SimpleMessage) {
+fun SimpleMessageItem(message: SimpleMessage) {
     SnackbarSurface {
         Column(
             modifier = Modifier

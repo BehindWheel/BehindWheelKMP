@@ -3,9 +3,10 @@ package com.egoriku.grodnoroads.compose.snackbar.ui.internal
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,10 +18,10 @@ import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
+fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
     SnackbarSurface {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -38,21 +39,16 @@ internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit)
                         is Resource -> stringResource(id = title.id)
                     },
                 )
-                CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                    Button(
-                        contentPadding = PaddingValues(0.dp),
-                        modifier = Modifier.size(48.dp, 48.dp),
-                        onClick = {
-                            onAction()
-                            message.onAction()
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            tint = MaterialTheme.colorScheme.inverseOnSurface,
-                            contentDescription = null
-                        )
+                PrimaryCircleButton(
+                    onClick = {
+                        onAction()
+                        message.onAction()
                     }
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = null
+                    )
                 }
             }
             val description = message.description
@@ -64,7 +60,7 @@ internal fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit)
                         is Resource -> stringResource(id = description.id)
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.inverseOnSurface.copy(alpha = 0.38f)
+                    color = MaterialTheme.colorScheme.inverseOnSurface
                 )
             }
         }

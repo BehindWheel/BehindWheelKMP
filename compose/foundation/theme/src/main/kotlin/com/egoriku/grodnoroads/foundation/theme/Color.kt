@@ -30,7 +30,8 @@ internal val lightColorScheme = lightColorScheme(
     surface = Color.White,
     onSurface = Color(0xFF232F34),
     onSurfaceVariant = Color(0xFF5C6A70),
-    inverseSurface = Color(0xFF2E3538),
+    // inverseSurface = Color(0xFF2E3538),
+    inverseSurface = Color(0xFF1A1F26),
     inverseOnSurface = Color(0xFFE3E6E8),
 
     background = Color(0xFFF1F3F3),
