@@ -55,31 +55,19 @@ android {
             isShrinkResources = true
         }
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
     implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.window)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

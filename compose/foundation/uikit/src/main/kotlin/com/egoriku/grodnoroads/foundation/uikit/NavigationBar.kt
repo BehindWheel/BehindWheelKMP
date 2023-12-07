@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsDarkLightPreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import androidx.compose.material3.NavigationBarItem as Material3NavigationBarItem
 
@@ -23,7 +23,7 @@ fun NavigationBar(
     val tonalElevation = MaterialTheme.tonalElevation
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
-    androidx.compose.material3.NavigationBar(
+    NavigationBar(
         modifier = modifier.clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
         containerColor = containerColor,
         tonalElevation = tonalElevation,
