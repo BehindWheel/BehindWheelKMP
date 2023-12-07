@@ -1,24 +1,26 @@
 package com.egoriku.grodnoroads.compose.snackbar
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarData
-import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.DismissableRow
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.MessageWithActionItem
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.SimpleMessageItem
+import com.egoriku.grodnoroads.extensions.toast
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import kotlinx.coroutines.launch
 
@@ -39,12 +41,18 @@ fun Snackbar(snackbarData: SnackbarData) {
     }
 }
 
-@Preview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarState = remember { SnackbarState() }
+
+    fun showSnack(message: SnackbarMessage) {
+        scope.launch {
+            snackbarState.show(message)
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         SnackbarHost(
@@ -58,39 +66,31 @@ private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
         ) {
             Button(
                 onClick = {
-                    scope.launch {
-                        snackbarState.show(
-                            message = ActionMessage(
-                                title = Raw("Службы определения геолокации выключены. Вы можете включить их в разделе настройки"),
-                                description = Raw("Используются для доступа к данным карт и работы функций навигации"),
-                                onAction = {
-                                    Toast.makeText(
-                                        /* context = */ context,
-                                        /* text = */ "action performed",
-                                        /* duration = */Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            )
+                    showSnack(
+                        message = ActionMessage(
+                            title = Raw("Службы определения геолокации выключены. Вы можете включить их в разделе настройки"),
+                            description = Raw("Используются для доступа к данным карт и работы функций навигации"),
+                            onAction = { context.toast("action performed") }
                         )
-                    }
+                    )
+                },
+                content = {
+                    Text(text = "with action")
                 }
-            ) {
-                Raw(text = "with action")
-            }
+            )
             Button(
                 onClick = {
-                    scope.launch {
-                        snackbarState.show(
-                            message = SimpleMessage(
-                                title = Raw("Службы определения геолокации выключены."),
-                                description = Raw("Используются для доступа к данным карт и работы функций навигации")
-                            )
+                    showSnack(
+                        message = SimpleMessage(
+                            title = Raw("Службы определения геолокации выключены."),
+                            description = Raw("Используются для доступа к данным карт и работы функций навигации")
                         )
-                    }
+                    )
+                },
+                content = {
+                    Text(text = "only message")
                 }
-            ) {
-                Raw(text = "only message")
-            }
+            )
         }
     }
 }

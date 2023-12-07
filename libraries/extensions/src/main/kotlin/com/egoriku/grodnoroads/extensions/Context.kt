@@ -7,6 +7,7 @@ import android.content.Intent
 import android.media.AudioManager
 import android.net.Uri
 import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 
 val Context.audioManager: AudioManager
@@ -17,6 +18,10 @@ fun Context.openAppSettings() {
         data = Uri.fromParts("package", packageName, null)
     }
     startActivity(intent)
+}
+
+fun Context.toast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
 inline fun Context.drawableCompat(id: Int) = AppCompatResources.getDrawable(this, id)

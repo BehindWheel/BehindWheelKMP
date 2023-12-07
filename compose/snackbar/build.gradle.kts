@@ -13,5 +13,7 @@ dependencies {
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
 
+    implementation(projects.libraries.extensions)
+
     implementation(libs.androidx.compose.material3)
 }
