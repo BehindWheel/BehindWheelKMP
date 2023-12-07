@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.extensions
+package com.egoriku.grodnoroads.map.extension
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

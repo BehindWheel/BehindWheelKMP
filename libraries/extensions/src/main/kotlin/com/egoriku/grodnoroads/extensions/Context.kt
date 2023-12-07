@@ -2,19 +2,29 @@
 
 package com.egoriku.grodnoroads.extensions
 
+import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
-import android.location.LocationManager
 import android.media.AudioManager
 import android.net.Uri
 import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 
-inline val Context.audioManager: AudioManager
+val Context.audioManager: AudioManager
     get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-inline val Context.locationManager: LocationManager
-    get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+val Context.uiModeManager: UiModeManager
+    get() = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+
+
+fun Context.toast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.toast(resId: Int) {
+    Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+}
 
 fun Context.openAppSettings() {
     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {

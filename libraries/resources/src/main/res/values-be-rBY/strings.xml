@@ -146,6 +146,4 @@
     <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
     <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
     <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
-
-    <string name="snackbar_location_disabled_message">Геалакацыя адключана. Рэжым навігацыі будзе паказваць апошнюю геалакацыю</string>
 </resources>

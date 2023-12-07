@@ -150,8 +150,6 @@ internal class MapComponentImpl(
     override val lastLocation: Flow<LastLocation>
         get() = locationStore.states.map { it.lastLocation }
 
-    override val labels: Flow<Label> = locationStore.labels
-
     override val initialLocation: Flow<LatLng>
         get() = locationStore.states.map { it.initialLocation }
 
