@@ -16,12 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.extensions.toast
+import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
+import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.foundation.KeepScreenOn
 import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -36,11 +39,8 @@ import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label.ShowToast
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.map.extension.reLaunch
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
@@ -55,12 +55,12 @@ import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
 import com.egoriku.grodnoroads.map.util.MarkerCache
+import com.egoriku.grodnoroads.map.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
-import com.egoriku.grodnoroads.maps.core.asStable
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
@@ -68,6 +68,7 @@ import com.google.maps.android.ui.IconGenerator
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.egoriku.grodnoroads.resources.R as R_res
 
@@ -80,6 +81,8 @@ fun MapScreen(
 ) {
     val context = LocalContext.current
 
+    val snackbarMessageBuilder = remember { SnackbarMessageBuilder(context) }
+
     val markerCache = koinInject<MarkerCache>()
 
     Surface {
@@ -87,8 +90,6 @@ fun MapScreen(
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
         val appMode by component.appMode.collectAsState(Default)
-
-        val labels by component.labels.collectAsState(initial = Label.None)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
@@ -106,13 +107,6 @@ fun MapScreen(
             reportAction = component::reportAction
         )
 
-        LaunchedEffect(labels) {
-            when (val label = labels) {
-                is ShowToast -> context.toast(label.resId)
-                else -> {}
-            }
-        }
-
         val coroutineScope = rememberCoroutineScope()
         val iconGenerator = remember { IconGenerator(context) }
         var cameraUpdatesJob by rememberMutableState<Job?> { null }
@@ -121,6 +115,8 @@ fun MapScreen(
         var isCameraMoving by rememberMutableState { false }
         var isCameraUpdatesEnabled by rememberMutableState { true }
         var idleZoomLevel by rememberMutableFloatState { -1f }
+
+        var isRequestCurrentLocation by rememberMutableState { false }
 
         var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
@@ -132,7 +128,7 @@ fun MapScreen(
             derivedStateOf {
                 when {
                     idleZoomLevel == -1f -> Large
-                    idleZoomLevel <= 10f -> Small
+                    idleZoomLevel <= 9f -> Small
                     else -> Large
                 }
             }
@@ -141,11 +137,14 @@ fun MapScreen(
         var projection by rememberMutableState<Projection?> { null }
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
 
-        if (mapConfig != MapConfig.EMPTY) {
+        if (mapConfig != MapConfig.EMPTY && initialLocation != UNKNOWN_LOCATION) {
             val mapProperties = rememberMapProperties(
-                latLng = location.latLng,
+                locationAvailable = {
+                    location.latLng != UNKNOWN_LOCATION
+                },
                 mapConfig = mapConfig,
-                appMode = appMode
+                appMode = appMode,
+                isRequestCurrentLocation = isRequestCurrentLocation
             )
             GoogleMap(
                 backgroundColor = MaterialTheme.colorScheme.surface,
@@ -157,7 +156,7 @@ fun MapScreen(
                 },
                 cameraPositionProvider = {
                     cameraPosition {
-                        target(initialLocation.value)
+                        target(initialLocation)
                         zoom(mapConfig.zoomLevel)
                     }
                 },
@@ -206,15 +205,15 @@ fun MapScreen(
 
             LaunchedEffect(location, appMode) {
                 val mapUpdater = mapUpdater ?: return@LaunchedEffect
+                if (location == LastLocation.None) return@LaunchedEffect
 
                 when (appMode) {
                     Drive -> {
-                        if (location == LastLocation.None) return@LaunchedEffect
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
                         if (mapUpdater.isInitialCameraAnimation()) {
                             mapUpdater.animateCamera(
-                                target = location.latLng.value,
+                                target = location.latLng,
                                 zoom = mapConfig.zoomLevel,
                                 bearing = location.bearing
                             )
@@ -224,14 +223,38 @@ fun MapScreen(
                             return@LaunchedEffect
 
                         mapUpdater.animateCamera(
-                            target = location.latLng.value,
+                            target = location.latLng,
                             zoom = mapConfig.zoomLevel,
                             bearing = location.bearing
                         )
                     }
+                    else -> {}
+                }
+            }
+
+            LaunchedEffect(appMode) {
+                when (appMode) {
                     Default, ChooseLocation -> {
-                        mapUpdater.resetLastLocation()
-                        mapUpdater.animateZoom(mapConfig.zoomLevel)
+                        mapUpdater.onMapScope {
+                            resetLastLocation()
+                            animateZoom(mapConfig.zoomLevel)
+                        }
+                    }
+                    else -> {}
+                }
+            }
+
+            LaunchedEffect(location, isRequestCurrentLocation) {
+                if (location == LastLocation.None) return@LaunchedEffect
+
+                if (isRequestCurrentLocation) {
+                    mapUpdater.onMapScope {
+                        animateTarget(
+                            target = location.latLng,
+                            zoom = if (appMode == Default) 14.5f else null,
+                            onFinish = { isRequestCurrentLocation = false },
+                            onCancel = { isRequestCurrentLocation = false }
+                        )
                     }
                 }
             }
@@ -337,6 +360,8 @@ fun MapScreen(
         FadeInOutAnimatedVisibility(visible = isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
+                val snackbarState = remember { SnackbarState() }
+
                 AnimatedContent(
                     modifier = Modifier
                         .matchParentSize()
@@ -347,8 +372,17 @@ fun MapScreen(
                     when (state) {
                         Default -> {
                             DefaultMode(
-                                onLocationEnabled = component::startLocationUpdates,
-                                onLocationDisabled = component::onLocationDisabled,
+                                onLocationRequestStateChanged = {
+                                    val message = snackbarMessageBuilder.handleDriveModeRequest(it)
+
+                                    if (message == null) {
+                                        component.startLocationUpdates()
+                                    } else {
+                                        coroutineScope.launch {
+                                            snackbarState.show(message)
+                                        }
+                                    }
+                                },
                                 report = component::openChooseLocation
                             )
                         }
@@ -389,7 +423,7 @@ fun MapScreen(
                                             /* y = */ offset.y.toInt()
                                         )
                                     ) ?: return@ChooseLocation
-                                    component.reportChooseLocation(latLng.asStable())
+                                    component.reportChooseLocation(latLng)
                                 }
                             )
                         }
@@ -403,12 +437,26 @@ fun MapScreen(
                     count = userCount
                 )
                 FadeInOutAnimatedVisibility(
-                    modifier = Modifier.align(Alignment.CenterEnd),
+                    modifier = Modifier.align(OffsetAlignment(xOffset = 1f, yOffset = 0.45f)),
                     visible = overlayVisible,
                 ) {
                     MapOverlayActions(
+                        modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
-                        zoomOut = { mapUpdater?.zoomOut() }
+                        zoomOut = { mapUpdater?.zoomOut() },
+                        isLocationButtonEnabled = { appMode == Default || appMode == ChooseLocation },
+                        onLocationRequestStateChanged = {
+                            val message = snackbarMessageBuilder.handleCurrentLocationRequest(it)
+
+                            if (message == null) {
+                                isRequestCurrentLocation = true
+                                component.requestCurrentLocation()
+                            } else {
+                                coroutineScope.launch {
+                                    snackbarState.show(message)
+                                }
+                            }
+                        },
                     )
                 }
                 DefaultOverlay(
@@ -419,6 +467,13 @@ fun MapScreen(
                     quickActionsState = quickActionsState,
                     alerts = alerts,
                     onPreferenceChange = component::updatePreferences
+                )
+                SnackbarHost(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(contentPadding),
+                    hostState = snackbarState,
+                    paddingValues = PaddingValues(16.dp)
                 )
             }
         }
@@ -457,7 +512,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng.value,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message
@@ -473,7 +528,7 @@ private fun AlertDialogs(
                 onSend = { mapEvent, shortMessage, message ->
                     reportAction(
                         ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng.value,
+                            latLng = mapAlertDialog.currentLatLng,
                             mapEventType = mapEvent,
                             shortMessage = shortMessage,
                             message = message

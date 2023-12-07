@@ -11,14 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.VolumeLevel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoiceLevelSection(
     alertVolumeLevel: AlertVolumeLevel,
@@ -52,7 +51,9 @@ fun VoiceLevelSection(
                     border = FilterChipDefaults.filterChipBorder(
                         selectedBorderWidth = 1.dp,
                         selectedBorderColor = MaterialTheme.colorScheme.outline,
-                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                        selected = selected,
+                        enabled = true
                     ),
                     leadingIcon = if (selected) {
                         {

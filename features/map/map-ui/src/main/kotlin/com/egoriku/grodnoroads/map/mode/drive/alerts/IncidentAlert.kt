@@ -9,8 +9,8 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.map.domain.model.MessageItem

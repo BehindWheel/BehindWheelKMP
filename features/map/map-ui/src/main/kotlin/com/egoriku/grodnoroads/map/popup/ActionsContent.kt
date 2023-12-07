@@ -11,15 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionsContent(
     quickActionsState: QuickActionsState,
@@ -56,7 +55,9 @@ fun ActionsContent(
                     border = FilterChipDefaults.filterChipBorder(
                         selectedBorderWidth = 1.dp,
                         selectedBorderColor = MaterialTheme.colorScheme.outline,
-                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                        enabled = true,
+                        selected = selected
                     ),
                     onClick = {
                         onChanged(appTheme.copy(current = theme))

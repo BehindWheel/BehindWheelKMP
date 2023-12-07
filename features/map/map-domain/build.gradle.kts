@@ -8,16 +8,14 @@ android {
 }
 
 dependencies {
+    implementation(projects.compose.maps.core)
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
-    implementation(projects.libraries.maps.core)
-    implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)
-
 
     implementation(libs.androidx.compose.runtime)
 

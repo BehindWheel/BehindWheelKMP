@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
@@ -23,8 +23,8 @@ import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
 import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.resources.R
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.persistentListOf
 import java.util.UUID
 
@@ -93,7 +93,7 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
-            position = StableLatLng(0.0, 0.0),
+            position = LatLng(0.0, 0.0),
             mapEventType = RoadIncident
         )
     ) {
