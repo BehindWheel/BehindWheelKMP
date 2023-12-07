@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.uidemo.ui.Header
 import com.egoriku.grodnoroads.uidemo.ui.demo.*
 
@@ -68,10 +68,12 @@ private fun DemoComponents() {
         item { DemoFilterChip() }
         item { DemoNavigationRail() }
         item { DemoNavigationBar() }
+        item { DemoSnackbarSimple() }
+        item { DemoSnackbarWithAction() }
     }
 }
 
-@Preview(device = "spec:width=1080px,height=5000px,dpi=440")
+@Preview(device = "spec:width=1080px,height=6000px,dpi=440")
 @Composable
 private fun ComponentsPreview() = GrodnoRoadsM3ThemePreview {
     DemoComponents()

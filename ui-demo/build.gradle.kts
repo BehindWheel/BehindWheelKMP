@@ -62,6 +62,9 @@ dependencies {
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
+    implementation(projects.compose.snackbar)
+
+    implementation(projects.libraries.extensions)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
