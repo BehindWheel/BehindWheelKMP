@@ -81,7 +81,8 @@ fun SwitchSettings(
                 value = isChecked,
                 role = Role.Checkbox,
                 onValueChange = onCheckedChange
-            ),
+            )
+            .padding(start = 8.dp),
         leadingContent = {
             Icon(
                 imageVector = imageVector,
