@@ -5,8 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -18,15 +22,18 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.uidemo.ui.Header
 import com.egoriku.grodnoroads.uidemo.ui.demo.*
+import com.egoriku.grodnoroads.uidemo.ui.palette.Material3Palette
 
 class UIDemoActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
             var isDark by rememberMutableState { false }
+            var isOpenPalette by rememberMutableState { false }
 
             GrodnoRoadsM3Theme(isDark) {
                 Surface {
@@ -35,9 +42,22 @@ class UIDemoActivity : ComponentActivity() {
                             modifier = Modifier
                                 .padding(horizontal = 16.dp)
                                 .statusBarsPadding(),
-                            onThemeChange = { isDark = !isDark }
+                            onPalette = { isOpenPalette = true },
+                            onThemeChange = { isDark = !isDark },
                         )
                         DemoComponents()
+                    }
+                }
+                if (isOpenPalette) {
+                    val bottomPadding =
+                        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+
+                    ModalBottomSheet(
+                        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+                        onDismissRequest = { isOpenPalette = false },
+                        windowInsets = WindowInsets(0, 0, 0, 0)
+                    ) {
+                        Material3Palette(modifier = Modifier.padding(bottom = bottomPadding))
                     }
                 }
             }
@@ -47,29 +67,29 @@ class UIDemoActivity : ComponentActivity() {
 
 @Composable
 private fun DemoComponents() {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = WindowInsets
-            .navigationBars
-            .add(WindowInsets(left = 16.dp, right = 16.dp))
-            .asPaddingValues(),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 16.dp, end = 16.dp)
+            .verticalScroll(rememberScrollState())
+            .navigationBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item { DemoText() }
-        item { DemoPrimaryButton() }
-        item { DemoPrimaryCircleButton() }
-        item { DemoSecondaryButton() }
-        item { DemoSecondaryCircleButton() }
-        item { DemoClickableRange() }
-        item { DemoRadioButton() }
-        item { DemoCheckbox() }
-        item { DemoTriStateCheckbox() }
-        item { DemoSwitch() }
-        item { DemoFilterChip() }
-        item { DemoNavigationRail() }
-        item { DemoNavigationBar() }
-        item { DemoSnackbarSimple() }
-        item { DemoSnackbarWithAction() }
+        DemoText()
+        DemoPrimaryButton()
+        DemoPrimaryCircleButton()
+        DemoSecondaryButton()
+        DemoSecondaryCircleButton()
+        DemoClickableRange()
+        DemoRadioButton()
+        DemoCheckbox()
+        DemoTriStateCheckbox()
+        DemoSwitch()
+        DemoFilterChip()
+        DemoNavigationRail()
+        DemoNavigationBar()
+        DemoSnackbarSimple()
+        DemoSnackbarWithAction()
     }
 }
 
