@@ -37,3 +37,4 @@ secrets.properties
 *.xcsmblueprint
 xcuserdata/
 xcshareddata/
+contents.xcworkspacedata
