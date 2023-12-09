@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.extension.release
 
 plugins {
     id("grodnoroads.application")
+    id("grodnoroads.compose")
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.parcelize)
@@ -60,11 +61,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        buildConfig = true
     }
 
     packaging {
@@ -90,6 +87,10 @@ dependencies {
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)
 
+    implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.preview)
+    implementation(projects.compose.foundation.theme)
+
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
@@ -97,20 +98,14 @@ dependencies {
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
-    implementation(libs.accompanist.systemuicontroller)
-
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.window)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.coroutines)
@@ -130,7 +125,6 @@ dependencies {
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)
-    implementation(libs.play.services.location)
 }
 
 secrets {

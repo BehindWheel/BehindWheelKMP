@@ -1,6 +1,6 @@
 plugins {
     id("grodnoroads.library")
-    id("grodnoroads.library.compose")
+    id("grodnoroads.compose")
 }
 
 android {
@@ -8,6 +8,10 @@ android {
 }
 
 dependencies {
+    implementation(projects.compose.foundation.core)
+    implementation(projects.compose.foundation.preview)
+    implementation(projects.compose.foundation.theme)
+
     implementation(projects.libraries.foundation)
     implementation(projects.libraries.resources)
 
@@ -15,12 +19,9 @@ dependencies {
 
     implementation(libs.androidx.appcompat)
 
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
     implementation(libs.immutable.collections)

@@ -34,16 +34,21 @@ include(":features:setting:faq")
 include(":features:setting:map")
 include(":features:setting:whatsnew")
 
+include(":compose:foundation:core")
+include(":compose:foundation:preview")
+include(":compose:foundation:theme")
+include(":compose:foundation:uikit")
+include(":compose:location-requester")
+include(":compose:maps:compose")
+include(":compose:maps:core")
+include(":compose:snackbar")
+
 include(":libraries:analytics")
 include(":libraries:audioplayer")
 include(":libraries:crashlytics")
 include(":libraries:extensions")
 include(":libraries:foundation")
 include(":libraries:location")
-
-include(":libraries:maps:compose")
-include(":libraries:maps:core")
-
 include(":libraries:resources")
 
 include(":shared:appSettings")

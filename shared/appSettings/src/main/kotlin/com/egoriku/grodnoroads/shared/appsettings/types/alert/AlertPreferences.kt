@@ -30,7 +30,7 @@ val Preferences.alertsVoiceAlertEnabled: Boolean
 val Preferences.alertsVolumeLevel: VolumeLevel
     get() = VolumeLevel.entries
         .firstOrNull { it.levelName == this[ALERTS_VOLUME_LEVEL] }
-        ?: VolumeLevel.High
+        ?: VolumeLevel.Default
 
 val Preferences.alertsDistanceInCity: Int
     get() = this[ALERTS_DISTANCE_IN_CITY] ?: DEFAULT_ALERT_DISTANCE_IN_CITY

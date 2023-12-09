@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.iconpack.GrodnoRoadsIcons
 import com.egoriku.grodnoroads.foundation.iconpack.icons.icPinMarker
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
 fun PinMarker(

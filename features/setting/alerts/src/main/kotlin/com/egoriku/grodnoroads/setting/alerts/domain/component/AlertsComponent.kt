@@ -28,7 +28,7 @@ interface AlertsComponent {
         ) : AlertsPref
 
         data class AlertVolumeLevel(
-            val current: VolumeLevel = VolumeLevel.High,
+            val current: VolumeLevel = VolumeLevel.Default,
             val values: ImmutableList<VolumeLevel> = VolumeLevel.entries.toImmutableList()
         ) : AlertsPref
 
