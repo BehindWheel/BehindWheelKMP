@@ -3,7 +3,6 @@
 package com.egoriku.grodnoroads
 
 import android.app.Application
-import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
 import com.egoriku.grodnoroads.extensions.logD
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
@@ -14,8 +13,6 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
     override fun onCreate() {
         super.onCreate()
         MapsInitializer.initialize(applicationContext, Renderer.LATEST, this)
-
-        CrashlyticsConfig.isCollectionEnabled(!BuildConfig.DEBUG)
     }
 
     override fun onMapsSdkInitialized(renderer: Renderer) {

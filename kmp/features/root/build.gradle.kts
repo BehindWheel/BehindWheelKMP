@@ -1,5 +1,7 @@
 plugins {
     id("grodnoroads.kmplibrary")
+    id("grodnoroads.compose")
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -7,6 +9,7 @@ android {
 }
 
 kotlin {
+    androidTarget()
     listOf(
         iosX64(),
         iosArm64(),
@@ -21,7 +24,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(libs.decompose)
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.androidx.compose.material3)
 
+                implementation(libs.decompose.compose.jetpack)
             }
         }
     }

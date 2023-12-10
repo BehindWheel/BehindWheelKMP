@@ -63,39 +63,16 @@ android {
     buildFeatures {
         buildConfig = true
     }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-    implementation(projects.features.map.mapData)
-    implementation(projects.features.map.mapDomain)
-    implementation(projects.features.map.mapUi)
-
-    implementation(projects.features.settings)
-
-    implementation(projects.features.setting.alerts)
-    implementation(projects.features.setting.appearance)
-    implementation(projects.features.setting.faq)
-    implementation(projects.features.setting.map)
-    implementation(projects.features.setting.whatsnew)
-
-    implementation(projects.shared.appSettings)
-    implementation(projects.shared.appComponent)
+    implementation(projects.kmp.features.root)
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
-
-    implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
-    implementation(projects.libraries.foundation)
-    implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
     implementation(libs.androidx.compose.foundation)

@@ -1,6 +1,9 @@
 @file:Suppress("unused")
 
-import com.egoriku.grodnoroads.internal.*
+import com.egoriku.grodnoroads.internal.kotlinMultiplatformPluginId
+import com.egoriku.grodnoroads.internal.libraryExtension
+import com.egoriku.grodnoroads.internal.libraryPluginId
+import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -35,15 +38,6 @@ class AndroidKmpLibraryPlugin : Plugin<Project> {
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
-            }
-        }
-        kmmExtension {
-            androidTarget {
-                compilations.all {
-                    kotlinOptions {
-                        jvmTarget = "1.8"
-                    }
-                }
             }
         }
     }
