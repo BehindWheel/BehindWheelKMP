@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 rootProject.name = "Grodno-Roads"
 
 include(":app")
+include(":app-kmm")
 
 include(":features:map:map-data")
 include(":features:map:map-domain")
