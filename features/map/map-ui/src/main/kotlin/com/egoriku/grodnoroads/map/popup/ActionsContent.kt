@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.FilterChip
+import com.egoriku.grodnoroads.foundation.uikit.AssistChip
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
@@ -39,7 +39,7 @@ fun ActionsContent(
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             appTheme.values.forEach { theme ->
                 val selected = appTheme.current == theme
-                FilterChip(
+                AssistChip(
                     label = {
                         Text(text = stringResource(theme.toStringResource()))
                     },

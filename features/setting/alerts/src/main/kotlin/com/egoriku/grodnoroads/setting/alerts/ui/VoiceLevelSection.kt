@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.FilterChip
+import com.egoriku.grodnoroads.foundation.uikit.AssistChip
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
@@ -38,7 +38,7 @@ fun VoiceLevelSection(
             alertVolumeLevel.values.forEach { volumeLevel ->
                 val selected = alertVolumeLevel.current == volumeLevel
 
-                FilterChip(
+                AssistChip(
                     selected = selected,
                     onClick = {
                         modify(alertVolumeLevel.copy(current = volumeLevel))

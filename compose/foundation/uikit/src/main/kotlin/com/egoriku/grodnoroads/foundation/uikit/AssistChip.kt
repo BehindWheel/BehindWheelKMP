@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,25 +14,22 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
-fun FilterChip(
+fun AssistChip(
     selected: Boolean,
     onClick: () -> Unit,
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    androidx.compose.material3.FilterChip(
+    AssistChip(
         modifier = modifier,
         enabled = enabled,
-        selected = selected,
         onClick = onClick,
         label = label,
-        border = FilterChipDefaults.filterChipBorder(
-            selectedBorderWidth = 1.dp,
-            selectedBorderColor = MaterialTheme.colorScheme.outline,
-            borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-            selected = selected,
-            enabled = true
+        border = AssistChipDefaults.assistChipBorder(
+            enabled = selected,
+            borderColor = MaterialTheme.colorScheme.primary.copy(0.7f),
+            disabledBorderColor = MaterialTheme.colorScheme.outline.copy(0.3f)
         ),
         leadingIcon = if (selected) {
             {
@@ -53,14 +47,14 @@ fun FilterChip(
 
 @GrodnoRoadsDarkLightPreview
 @Composable
-private fun FilterChipPreview() = GrodnoRoadsM3ThemePreview {
+private fun AssistChipPreview() = GrodnoRoadsM3ThemePreview {
     Row(modifier = Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        FilterChip(
+        AssistChip(
             selected = true,
             onClick = {},
             label = { Text("Option 1") }
         )
-        FilterChip(
+        AssistChip(
             selected = false,
             onClick = {},
             label = { Text("Option 1") }

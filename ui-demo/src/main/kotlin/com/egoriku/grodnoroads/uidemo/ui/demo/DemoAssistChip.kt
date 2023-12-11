@@ -11,33 +11,33 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.uikit.FilterChip
+import com.egoriku.grodnoroads.foundation.uikit.AssistChip
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoFilterChip() {
-    UIDemoContainer(name = "FilterChip") {
+fun DemoAssistChip() {
+    UIDemoContainer(name = "AssistChip") {
         Column {
             Row {
                 var isSelected by rememberMutableState { true }
 
-                FilterChip(
+                AssistChip(
                     selected = isSelected,
                     onClick = { isSelected = !isSelected },
                     label = {
-                        Text("Filter Chip")
+                        Text("Assist Chip")
                     }
                 )
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                FilterChip(
+                AssistChip(
                     selected = true,
                     onClick = {},
                     label = {
                         Text("Chip")
                     }
                 )
-                FilterChip(
+                AssistChip(
                     selected = true,
                     enabled = false,
                     onClick = {},
@@ -45,14 +45,14 @@ fun DemoFilterChip() {
                         Text("Chip")
                     }
                 )
-                FilterChip(
+                AssistChip(
                     selected = false,
                     onClick = {},
                     label = {
                         Text("Chip")
                     }
                 )
-                FilterChip(
+                AssistChip(
                     selected = false,
                     enabled = false,
                     onClick = {},
@@ -67,6 +67,6 @@ fun DemoFilterChip() {
 
 @GrodnoRoadsDarkLightPreview
 @Composable
-private fun DemoFilterChipPreview() = GrodnoRoadsM3ThemePreview {
-    DemoFilterChip()
+private fun DemoAssistChipPreview() = GrodnoRoadsM3ThemePreview {
+    DemoAssistChip()
 }
