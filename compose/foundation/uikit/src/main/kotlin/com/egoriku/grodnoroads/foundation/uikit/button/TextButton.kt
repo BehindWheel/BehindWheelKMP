@@ -1,28 +1,29 @@
 package com.egoriku.grodnoroads.foundation.uikit.button
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun TextButton(
     @StringRes id: Int,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     TextButton(
-        modifier = modifier.height(48.dp),
-        shape = RoundedCornerShape(8.dp),
+        modifier = modifier,
+        enabled = enabled,
         onClick = onClick
     ) {
         Text(text = stringResource(id))
@@ -31,27 +32,43 @@ fun TextButton(
 
 @Composable
 fun TextButton(
+    text: String,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-    content: @Composable RowScope.() -> Unit
+    enabled: Boolean = true,
+    onClick: () -> Unit
 ) {
     TextButton(
-        modifier = modifier.height(48.dp),
+        modifier = modifier,
+        enabled = enabled,
+        onClick = onClick
+    ) {
+        Text(text = text)
+    }
+}
+
+@Composable
+fun TextButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    content: @Composable RowScope.() -> Unit
+) {
+    androidx.compose.material3.TextButton(
+        modifier = modifier,
         shape = RoundedCornerShape(8.dp),
+        enabled = enabled,
         onClick = onClick,
         content = content
     )
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun TextButtonPreview() = GrodnoRoadsM3ThemePreview {
-    Box(modifier = Modifier.size(300.dp, 100.dp)) {
+    Box(modifier = Modifier.padding(16.dp)) {
         TextButton(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(16.dp),
-            id = R.string.app_name,
+            modifier = Modifier.align(Alignment.Center),
+            text = "Test text button",
             onClick = {}
         )
     }

@@ -96,6 +96,7 @@ private fun DemoComponents() {
         DemoPrimaryCircleButton()
         DemoSecondaryButton()
         DemoSecondaryCircleButton()
+        DemoTextButton()
         DemoClickableRange()
         DemoRadioButton()
         DemoCheckbox()

@@ -14,3 +14,11 @@ fun Modifier.unboundClickable(onClick: () -> Unit) = composed {
         onClick = onClick
     )
 }
+
+fun Modifier.noIndicationClick(onClick: () -> Unit = {}): Modifier = composed {
+    clickable(
+        interactionSource = remember { MutableInteractionSource() },
+        indication = null,
+        onClick = onClick
+    )
+}
