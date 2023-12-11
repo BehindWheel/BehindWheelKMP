@@ -43,7 +43,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                         is Resource -> stringResource(id = description.id)
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.38f),
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         }
