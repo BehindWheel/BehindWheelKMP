@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.animation
+package com.egoriku.grodnoroads.foundation.core.animation
 
 import androidx.compose.animation.*
 import androidx.compose.runtime.Composable

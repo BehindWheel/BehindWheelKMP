@@ -32,7 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.CircleButton
 import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
-import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.modifier.noIndicationClick
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview

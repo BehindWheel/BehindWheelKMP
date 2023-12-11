@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.egoriku.grodnoroads.foundation.animation.HorizontalSlideAnimatedVisibility
-import com.egoriku.grodnoroads.foundation.animation.VerticalSlideAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.MapScreen
