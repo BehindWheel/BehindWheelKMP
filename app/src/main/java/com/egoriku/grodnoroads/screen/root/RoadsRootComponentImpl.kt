@@ -88,7 +88,7 @@ class RoadsRootComponentImpl(
         )
 
         is Config.NextFeatures -> TODO()
-        is Config.Changelog -> Child.WhatsNew(
+        is Config.Changelog -> Child.Changelog(
             changelogComponent = buildChangelogComponent(componentContext)
         )
 

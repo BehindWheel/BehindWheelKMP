@@ -55,7 +55,7 @@ internal fun ChangelogItem(
 
 @GrodnoRoadsPreview
 @Composable
-private fun WhatsNewItemPreview(@PreviewParameter(LoremIpsum::class) lorem: String) {
+private fun ChangelogPreview(@PreviewParameter(LoremIpsum::class) lorem: String) {
     GrodnoRoadsM3ThemePreview {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             ChangelogItem(

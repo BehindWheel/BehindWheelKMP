@@ -59,7 +59,7 @@ fun RootContent(roadsRootComponent: RoadsRootComponent) {
                     onBack = roadsRootComponent::onBack
                 )
 
-                is Child.WhatsNew -> ChangelogScreen(
+                is Child.Changelog -> ChangelogScreen(
                     changelogComponent = child.changelogComponent,
                     onBack = roadsRootComponent::onBack,
                 )

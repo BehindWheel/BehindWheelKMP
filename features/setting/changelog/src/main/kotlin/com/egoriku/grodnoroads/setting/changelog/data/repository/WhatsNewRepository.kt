@@ -17,14 +17,14 @@ internal class ChangelogRepositoryImpl(
 ) : ChangelogRepository {
 
     override suspend fun load() = withContext(Dispatchers.IO) {
-        val whatsNewResponse = firestore
+        val changelog = firestore
             .collection("whats_new")
             .orderBy("code", Query.Direction.DESCENDING)
             .await<ChangelogDTO>()
 
-        return@withContext when (whatsNewResponse) {
-            is Failure -> Failure(whatsNewResponse.exception)
-            is Success -> Success(whatsNewResponse.value.map {
+        return@withContext when (changelog) {
+            is Failure -> Failure(changelog.exception)
+            is Success -> Success(changelog.value.map {
                 ReleaseNotes(
                     versionCode = it.code,
                     versionName = it.name,
