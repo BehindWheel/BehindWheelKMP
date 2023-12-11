@@ -2,8 +2,8 @@ package com.egoriku.grodnoroads.screen.main
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass.Companion.Expanded
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
@@ -22,7 +21,10 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
+import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
+import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
+import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
+import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.screen.SettingsScreen
@@ -96,24 +98,13 @@ private fun VerticalOrientationLayout(
             }
         }
 
-        val tonalElevation = MaterialTheme.tonalElevation
         VerticalSlideAnimatedVisibility(
             visible = isShowBottomBar,
             modifier = Modifier.align(Alignment.BottomStart)
         ) {
-            NavigationBar(
-                modifier = Modifier.clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
-                tonalElevation = tonalElevation
-            ) {
+            NavigationBar {
                 bottomNavItems.forEach { screen ->
                     NavigationBarItem(
-                        colors = NavigationBarItemDefaults.colors(
-                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
-                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
-                            indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
-                                tonalElevation
-                            )
-                        ),
                         selected = screen.index == activeIndex(),
                         onClick = { onSelectTab(screen.index) },
                         icon = {
@@ -165,22 +156,11 @@ private fun HorizontalOrientationLayout(
                 )
             }
         }
-        val tonalElevation = MaterialTheme.tonalElevation
-        val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
         HorizontalSlideAnimatedVisibility(isHideBottomBar) {
-            NavigationRail(containerColor = containerColor) {
+            NavigationRail {
                 bottomNavItems.forEach { screen ->
                     NavigationRailItem(
-                        colors = NavigationRailItemDefaults.colors(
-                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                alpha = 0.45f
-                            ),
-                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                alpha = 0.45f
-                            ),
-                            indicatorColor = containerColor
-                        ),
                         selected = screen.index == activeIndex(),
                         onClick = { onSelectTab(screen.index) },
                         icon = {
