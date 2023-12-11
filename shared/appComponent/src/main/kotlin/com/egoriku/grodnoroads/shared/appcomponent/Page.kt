@@ -6,5 +6,5 @@ enum class Page {
     FAQ,
     Map,
     NextFeatures,
-    WhatsNew,
+    Changelog,
 }

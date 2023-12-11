@@ -38,13 +38,13 @@
     <string name="settings_section_appearance">Знешні выгляд</string>
     <string name="settings_section_map">Мапа</string>
     <string name="settings_section_alerts">Абвесткі</string>
-    <string name="settings_section_whats_new">Што новага</string>
+    <string name="settings_section_changelog">Гісторыя зменаў</string>
     <string name="settings_section_next_features">Будучыя фічы</string>
     <string name="settings_section_faq">Часта задаюць пытанні</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Асноўныя</string>
-    <string name="settings_category_other">Іншыя</string>
+    <string name="settings_category_other">Іншае</string>
 
     <string name="appearance_app_theme">Тэма</string>
     <string name="appearance_app_theme_system">Сістэмная</string>

@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsCompon
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
-import com.egoriku.grodnoroads.setting.whatsnew.domain.component.buildWhatsNewComponent
+import com.egoriku.grodnoroads.setting.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
@@ -62,7 +62,7 @@ class RoadsRootComponentImpl(
             Page.Appearance -> navigation.push(Config.Appearance)
             Page.Map -> navigation.push(Config.MapSettings)
             Page.Alerts -> navigation.push(Config.Alerts)
-            Page.WhatsNew -> navigation.push(Config.WhatsNew)
+            Page.Changelog -> navigation.push(Config.Changelog)
             Page.NextFeatures -> navigation.push(Config.NextFeatures)
             Page.FAQ -> navigation.push(Config.FAQ)
         }
@@ -88,8 +88,8 @@ class RoadsRootComponentImpl(
         )
 
         is Config.NextFeatures -> TODO()
-        is Config.WhatsNew -> Child.WhatsNew(
-            whatsNewComponent = buildWhatsNewComponent(componentContext)
+        is Config.Changelog -> Child.WhatsNew(
+            changelogComponent = buildChangelogComponent(componentContext)
         )
 
         is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
@@ -109,7 +109,7 @@ class RoadsRootComponentImpl(
         data object Alerts : Config()
 
         @Parcelize
-        data object WhatsNew : Config()
+        data object Changelog : Config()
 
         @Parcelize
         data object NextFeatures : Config()

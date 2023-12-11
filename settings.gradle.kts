@@ -32,7 +32,7 @@ include(":features:setting:alerts")
 include(":features:setting:appearance")
 include(":features:setting:faq")
 include(":features:setting:map")
-include(":features:setting:whatsnew")
+include(":features:setting:changelog")
 
 include(":compose:foundation:core")
 include(":compose:foundation:preview")

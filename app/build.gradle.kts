@@ -80,9 +80,9 @@ dependencies {
 
     implementation(projects.features.setting.alerts)
     implementation(projects.features.setting.appearance)
+    implementation(projects.features.setting.changelog)
     implementation(projects.features.setting.faq)
     implementation(projects.features.setting.map)
-    implementation(projects.features.setting.whatsnew)
 
     implementation(projects.shared.appSettings)
     implementation(projects.shared.appComponent)

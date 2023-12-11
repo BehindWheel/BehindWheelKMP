@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
 import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.setting.faq.di.faqModule
 import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
-import com.egoriku.grodnoroads.setting.whatsnew.di.whatsNewModule
+import com.egoriku.grodnoroads.setting.changelog.di.changelogModule
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback
@@ -59,7 +59,7 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
                 appearanceModule,
                 faqModule,
                 mapSettingsModule,
-                whatsNewModule,
+                changelogModule,
 
                 rootModule,
             )

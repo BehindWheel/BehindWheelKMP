@@ -69,9 +69,9 @@ internal fun SettingsUi(
             SettingsHeader(title = stringResource(R.string.settings_category_other))
             SettingsItem(
                 icon = Icons.Filled.NewReleases,
-                text = stringResource(R.string.settings_section_whats_new),
+                text = stringResource(R.string.settings_section_changelog),
                 onClick = {
-                    onSettingClick(Page.WhatsNew)
+                    onSettingClick(Page.Changelog)
                 }
             )
 
