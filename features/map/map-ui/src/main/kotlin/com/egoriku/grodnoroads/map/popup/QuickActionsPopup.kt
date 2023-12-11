@@ -33,9 +33,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.noIndicationClick
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.resources.R
@@ -85,7 +84,7 @@ fun QuickActionsPopup(
                     .padding(1.dp)
                     .clip(shape = RoundedCornerShape(percent))
                     .noIndicationClick()
-                    .background(MaterialTheme.colorScheme.surfaceSurfaceVariant)
+                    .background(MaterialTheme.colorScheme.inversePrimary)
                     .animateContentSize(animationSpec = spring(Spring.DampingRatioLowBouncy))
             ) {
                 AnimatedVisibility(
@@ -165,7 +164,7 @@ private fun CloseButton(onClick: () -> Unit) {
     }
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun QuickActionsPopupPreview() = GrodnoRoadsM3ThemePreview {
     var opened by rememberMutableState { true }

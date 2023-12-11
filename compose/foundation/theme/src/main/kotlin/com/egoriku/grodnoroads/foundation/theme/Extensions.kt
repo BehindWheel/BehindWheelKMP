@@ -4,7 +4,6 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -21,8 +20,3 @@ val ColorScheme.isLight
 val MaterialTheme.tonalElevation: Dp
     @Composable
     get() = if (colorScheme.isLight) 0.dp else defaultTonalElevation
-
-@Stable
-val ColorScheme.surfaceSurfaceVariant: Color
-    @Composable
-    get() = if (isLight) surface else surfaceVariant
