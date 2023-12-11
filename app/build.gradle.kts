@@ -92,10 +92,11 @@ dependencies {
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
 
+    implementation(projects.compose.commonUi)
+
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
-    implementation(projects.libraries.foundation)
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 

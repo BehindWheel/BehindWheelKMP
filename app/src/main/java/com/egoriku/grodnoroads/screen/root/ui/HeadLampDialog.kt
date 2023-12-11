@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.egoriku.grodnoroads.foundation.dialog.DialogContent
-import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn

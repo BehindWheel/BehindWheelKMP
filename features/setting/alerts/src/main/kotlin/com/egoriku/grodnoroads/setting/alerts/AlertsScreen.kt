@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
-import com.egoriku.grodnoroads.foundation.list.SwitchSettings
+import com.egoriku.grodnoroads.foundation.common.ui.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent

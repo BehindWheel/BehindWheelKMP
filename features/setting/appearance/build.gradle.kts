@@ -8,12 +8,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.commonUi)
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
 
-    implementation(projects.libraries.foundation)
+    implementation(projects.compose.commonUi)
+
     implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)
