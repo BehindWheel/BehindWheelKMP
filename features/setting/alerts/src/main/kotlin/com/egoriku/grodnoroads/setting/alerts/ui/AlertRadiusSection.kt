@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.ActionSettings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview

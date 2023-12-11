@@ -19,7 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
 import com.egoriku.grodnoroads.foundation.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar

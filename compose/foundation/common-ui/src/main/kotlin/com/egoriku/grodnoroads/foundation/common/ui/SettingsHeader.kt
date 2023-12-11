@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.foundation.common.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding

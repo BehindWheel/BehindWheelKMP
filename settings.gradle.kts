@@ -34,6 +34,7 @@ include(":features:setting:faq")
 include(":features:setting:map")
 include(":features:setting:whatsnew")
 
+include(":compose:foundation:common-ui")
 include(":compose:foundation:core")
 include(":compose:foundation:preview")
 include(":compose:foundation:theme")

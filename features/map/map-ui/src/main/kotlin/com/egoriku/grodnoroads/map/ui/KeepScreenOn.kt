@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.map.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

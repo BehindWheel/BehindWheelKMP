@@ -5,14 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.CheckableCard
-import com.egoriku.grodnoroads.foundation.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
+import com.egoriku.grodnoroads.setting.map.ui.component.CheckableCard
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
 
 @Composable

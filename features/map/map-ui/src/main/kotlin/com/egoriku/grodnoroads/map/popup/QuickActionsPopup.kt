@@ -30,14 +30,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.CircleButton
-import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.noIndicationClick
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -136,13 +136,7 @@ fun QuickActionsPopup(
                 enter = fadeIn(animationSpec = spring(stiffness = Spring.StiffnessVeryLow)),
                 exit = fadeOut(),
             ) {
-                CircleButton(
-                    modifier = Modifier.size(48.dp),
-                    colors = CircleButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
-                    ),
-                    onClick = onExpand
-                ) {
+                PrimaryInverseCircleButton(onClick = onExpand, size = Small) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
                         contentDescription = null
