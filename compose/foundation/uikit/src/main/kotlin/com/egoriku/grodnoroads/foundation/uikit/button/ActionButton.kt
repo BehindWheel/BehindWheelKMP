@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation
+package com.egoriku.grodnoroads.foundation.uikit.button
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
-import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
@@ -66,7 +65,7 @@ private fun ActionButton(
         shape = RoundedCornerShape(10.dp),
         onClick = onClick,
         shadowElevation = defaultShadowElevation,
-        color = MaterialTheme.colorScheme.surfaceSurfaceVariant,
+        color = MaterialTheme.colorScheme.inversePrimary,
         tonalElevation = MaterialTheme.tonalElevation
     ) {
         Box(modifier = Modifier.padding(8.dp)) {

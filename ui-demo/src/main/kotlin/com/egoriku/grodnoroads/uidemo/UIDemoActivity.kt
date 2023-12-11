@@ -98,6 +98,8 @@ private fun DemoComponents() {
         DemoSecondaryButton()
         DemoSecondaryCircleButton()
         DemoTextButton()
+        DemoActionButton()
+        DemoActionButtonGroup()
         DemoClickableRange()
         DemoRadioButton()
         DemoCheckbox()

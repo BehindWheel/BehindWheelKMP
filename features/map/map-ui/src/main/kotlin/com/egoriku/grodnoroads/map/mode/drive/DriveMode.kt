@@ -9,9 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.ActionButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.button.ActionButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.map.ui.KeepScreenOn
@@ -39,7 +39,7 @@ fun DriveMode(
                     contentDescription = ""
                 )
             }
-            PrimaryInverseCircleButton(onClick = reportPolice, size = Large) {
+            PrimaryInverseCircleButton(onClick = reportIncident, size = Large) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_warning),
                     contentDescription = ""
