@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText

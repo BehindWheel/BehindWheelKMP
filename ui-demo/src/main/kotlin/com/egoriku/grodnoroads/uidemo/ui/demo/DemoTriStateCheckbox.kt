@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,6 +10,7 @@ import androidx.compose.ui.state.ToggleableState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.TriStateCheckbox
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -29,9 +29,7 @@ fun DemoTriStateCheckbox() {
 
         Row(modifier = Modifier.fillMaxWidth()) {
             TriStateCheckbox(state = state, onClick = ::onClick)
-
-            Spacer(modifier = Modifier.weight(1f))
-
+            WeightSpacer()
             TriStateCheckbox(state = ToggleableState.Off, onClick = {})
             TriStateCheckbox(state = ToggleableState.Indeterminate, onClick = {})
             TriStateCheckbox(state = ToggleableState.On, onClick = {})

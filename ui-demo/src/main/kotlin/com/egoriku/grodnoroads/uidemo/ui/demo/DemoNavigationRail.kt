@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
@@ -40,7 +41,7 @@ fun DemoNavigationRail() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.weight(1f))
+            WeightSpacer()
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 NavigationRailItem(
                     selected = true,

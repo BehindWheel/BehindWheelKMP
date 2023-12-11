@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.foundation.SettingsHeader
 import com.egoriku.grodnoroads.foundation.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.setting.screen.ui.section.SocialNetworkSection
@@ -90,8 +91,7 @@ internal fun SettingsUi(
                     onSettingClick(Page.FAQ)
                 }
             )
-
-            Spacer(modifier = Modifier.weight(1f))
+            WeightSpacer()
             SocialNetworkSection()
             VersionSection(appVersion = appVersion)
             PrivacyPolicySection()

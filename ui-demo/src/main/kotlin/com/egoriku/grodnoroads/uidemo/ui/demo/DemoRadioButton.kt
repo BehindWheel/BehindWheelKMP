@@ -2,16 +2,15 @@ package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
@@ -28,7 +27,7 @@ fun DemoRadioButton() {
                 selected = selectedOption == Option.S,
                 onClick = { selectedOption = Option.S }
             )
-            Spacer(modifier = Modifier.weight(1f))
+            WeightSpacer()
             RadioButton(
                 selected = true,
                 onClick = {},

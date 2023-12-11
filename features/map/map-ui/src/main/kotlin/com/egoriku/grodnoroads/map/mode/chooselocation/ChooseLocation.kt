@@ -56,7 +56,6 @@ fun ChooseLocation(
                     contentDescription = null
                 )
             }
-            Spacer(modifier = Modifier)
             CircleButton(
                 onClick = { onLocationSelected(markerOffset) },
                 enabled = !isCameraMoving,

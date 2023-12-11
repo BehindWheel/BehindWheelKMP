@@ -22,7 +22,7 @@ fun UIDemoContainer(
             .padding(16.dp)
     ) {
         Text(text = name, style = MaterialTheme.typography.titleMedium)
-        Spacer(Modifier.height(8.dp))
+        Verti(Modifier.height(8.dp))
         content()
     }
 }

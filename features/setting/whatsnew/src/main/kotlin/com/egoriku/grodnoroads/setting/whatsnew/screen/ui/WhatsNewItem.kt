@@ -1,6 +1,9 @@
 package com.egoriku.grodnoroads.setting.whatsnew.screen.ui
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -11,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
@@ -40,7 +44,7 @@ internal fun WhatsNewItem(
                 text = release.releaseDate,
                 style = MaterialTheme.typography.labelSmall
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            VerticalSpacer(4.dp)
             Text(
                 text = release.notes,
                 style = MaterialTheme.typography.bodyMedium
