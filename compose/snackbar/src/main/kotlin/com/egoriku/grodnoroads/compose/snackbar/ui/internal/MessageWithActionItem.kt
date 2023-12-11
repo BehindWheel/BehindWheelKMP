@@ -18,7 +18,8 @@ import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 
 @Composable
 fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
@@ -39,7 +40,8 @@ fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
                         is Resource -> stringResource(id = title.id)
                     },
                 )
-                PrimaryCircleButton(
+                PrimaryInverseCircleButton(
+                    size = Small,
                     onClick = {
                         onAction()
                         message.onAction()

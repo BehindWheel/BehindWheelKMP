@@ -93,6 +93,7 @@ private fun DemoComponents() {
     ) {
         DemoText()
         DemoPrimaryButton()
+        DemoPrimaryInverseCircleButton()
         DemoPrimaryCircleButton()
         DemoSecondaryButton()
         DemoSecondaryCircleButton()

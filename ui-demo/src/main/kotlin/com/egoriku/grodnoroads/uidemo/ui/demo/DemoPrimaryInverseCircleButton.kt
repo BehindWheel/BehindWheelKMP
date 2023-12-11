@@ -12,34 +12,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
-import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoPrimaryCircleButton() {
-    UIDemoContainer(name = "PrimaryCircleButton") {
+fun DemoPrimaryInverseCircleButton() {
+    UIDemoContainer(name = "PrimaryInverseCircleButton") {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(32.dp),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(32.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "large", style = MaterialTheme.typography.titleSmall)
-                PrimaryCircleButton(size = Large, onClick = { }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null
-                    )
-                }
-                PrimaryCircleButton(size = Large, onClick = { }, enabled = false) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null
-                    )
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PrimaryInverseCircleButton(onClick = { }, size = Large) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
             Row(
@@ -47,17 +43,13 @@ fun DemoPrimaryCircleButton() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "small", style = MaterialTheme.typography.titleSmall)
-                PrimaryCircleButton(size = Small, onClick = { }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null
-                    )
-                }
-                PrimaryCircleButton(size = Small, onClick = { }, enabled = false) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null
-                    )
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PrimaryInverseCircleButton(onClick = { }, size = Size.Small) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }
@@ -66,6 +58,6 @@ fun DemoPrimaryCircleButton() {
 
 @GrodnoRoadsDarkLightPreview
 @Composable
-private fun DemoPrimaryCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
-    DemoPrimaryCircleButton()
+private fun DemoPrimaryInverseCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
+    DemoPrimaryInverseCircleButton()
 }

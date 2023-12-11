@@ -50,7 +50,7 @@ internal val darkColorScheme = darkColorScheme(
     onPrimary = Color(0xFF232F34),
     primaryContainer = Color(0xFF29373D),
     onPrimaryContainer = Color.White,
-    inversePrimary = Color(0xFF232F34),
+    inversePrimary = Color(0xFF393E46),
 
     secondary = Color(0xFFFFC727),
     onSecondary = Color(0xFF664B00),
