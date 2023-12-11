@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.compose.foundation.commonUi)
+
     implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.foundation)

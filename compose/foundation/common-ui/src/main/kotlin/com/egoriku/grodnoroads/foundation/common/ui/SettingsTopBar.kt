@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.topbar
+package com.egoriku.grodnoroads.foundation.common.ui
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
