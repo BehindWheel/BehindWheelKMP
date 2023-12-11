@@ -1,9 +1,11 @@
 package com.egoriku.grodnoroads.map.popup
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -13,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
@@ -41,24 +44,6 @@ fun ActionsContent(
                         Text(text = stringResource(theme.toStringResource()))
                     },
                     selected = selected,
-                    leadingIcon = if (selected) {
-                        {
-                            Icon(
-                                imageVector = Icons.Filled.Done,
-                                contentDescription = "Localized Description",
-                                modifier = Modifier.size(FilterChipDefaults.IconSize)
-                            )
-                        }
-                    } else {
-                        null
-                    },
-                    border = FilterChipDefaults.filterChipBorder(
-                        selectedBorderWidth = 1.dp,
-                        selectedBorderColor = MaterialTheme.colorScheme.outline,
-                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                        enabled = true,
-                        selected = selected
-                    ),
                     onClick = {
                         onChanged(appTheme.copy(current = theme))
                     }
