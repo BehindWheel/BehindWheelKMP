@@ -17,12 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
+import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
@@ -96,7 +96,7 @@ private fun Info(
 
         if (FeatureFlags.screenReportCameraProblemEnabled) {
             VerticalSpacer(24.dp)
-            OutlinedButton(
+            SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 id = R.string.camera_info_report,
                 onClick = {}
