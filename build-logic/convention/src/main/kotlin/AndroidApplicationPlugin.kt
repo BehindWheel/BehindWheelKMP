@@ -27,6 +27,17 @@ class AndroidApplicationPlugin : Plugin<Project> {
                 freeCompilerArgs = listOf("-Xcontext-receivers")
                 languageVersion = KotlinVersion.KOTLIN_1_9.version
             }
+
+            buildTypes {
+                release {
+                    isMinifyEnabled = true
+                    isShrinkResources = true
+                    proguardFiles(
+                        "proguard-rules.pro",
+                        getDefaultProguardFile("proguard-android-optimize.txt")
+                    )
+                }
+            }
         }
         configureKotlinAndroidToolchain()
     }

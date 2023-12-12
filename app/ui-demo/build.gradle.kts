@@ -1,4 +1,5 @@
 import com.egoriku.grodnoroads.extension.debug
+import com.egoriku.grodnoroads.extension.loadKeystore
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
@@ -22,14 +23,14 @@ android {
 
     signingConfigs {
         debug {
-            storeFile = keyStoreFile("$rootDir/app/debug.keystore")
+            storeFile = loadKeystore("$rootDir/config/debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
 
         release {
-            storeFile = keyStoreFile("$rootDir/app/debug.keystore")
+            storeFile = loadKeystore("$rootDir/config/debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
@@ -39,12 +40,6 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = true
-            proguardFiles(
-                "proguard-rules.pro",
-                getDefaultProguardFile("proguard-android-optimize.txt")
-            )
-            isShrinkResources = true
         }
     }
 }
@@ -67,16 +62,4 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-}
-
-fun keyStoreFile(vararg fileNames: String): File? {
-    for (path in fileNames) {
-        val file = project.file(path)
-
-        if (file.exists()) {
-            return file
-        }
-    }
-
-    return null
 }
