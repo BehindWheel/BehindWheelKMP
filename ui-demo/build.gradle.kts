@@ -1,12 +1,9 @@
 import com.egoriku.grodnoroads.extension.debug
-import com.egoriku.grodnoroads.extension.provideVersionCode
-import com.egoriku.grodnoroads.extension.provideVersionName
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
     id("grodnoroads.application")
     id("grodnoroads.compose")
-    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -19,32 +16,27 @@ android {
         compileSdk = libs.versions.compileSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
 
-        versionCode = provideVersionCode("app/version.properties")
-        versionName = provideVersionName("app/version.properties")
+        versionCode = 1
+        versionName = "1.0.0"
     }
 
     signingConfigs {
         debug {
-            storeFile = keyStoreFile("debug.keystore")
+            storeFile = keyStoreFile("$rootDir/app/debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
 
         release {
-            storeFile = keyStoreFile("keystore.jks", "debug.keystore")
-            storePassword = System.getenv("KEY_STORE_PASSWORD") ?: "android"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "androiddebugkey"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
+            storeFile = keyStoreFile("$rootDir/app/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
     }
 
     buildTypes {
-        debug {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
-        }
-
         release {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true

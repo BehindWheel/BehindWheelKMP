@@ -33,13 +33,13 @@ fun CommonReportDialog(
     }
 
     Dialog(onDismissRequest = onClose) {
-        com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent {
-            com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogTitle(
+        DialogContent {
+            DialogTitle(
                 titleRes = titleRes,
                 center = true
             )
 
-            com.egoriku.grodnoroads.foundation.common.ui.dialog.ListItems(
+            ListItems(
                 modifier = Modifier.weight(weight = 1f, fill = false),
                 list = actions,
                 onClick = { index, _ -> selectedItem = index },
@@ -57,7 +57,7 @@ fun CommonReportDialog(
             ) { index, item ->
                 val selected = remember(selectedItem) { index == selectedItem }
 
-                com.egoriku.grodnoroads.foundation.common.ui.dialog.content.RadioButtonItem(
+                RadioButtonItem(
                     item = item,
                     index = index,
                     selected = selected,
@@ -68,12 +68,12 @@ fun CommonReportDialog(
             }
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton(
+                DialogButton(
                     modifier = Modifier.weight(1f),
                     textResId = R.string.cancel,
                     onClick = onClose
                 )
-                com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton(
+                DialogButton(
                     enabled = sendButtonEnable,
                     modifier = Modifier.weight(1f),
                     textResId = R.string.send,
