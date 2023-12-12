@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Grodno-Roads"
 
-include(":app")
+include(":app:android")
 include(":app:ui-demo")
 
 include(":features:map:map-data")

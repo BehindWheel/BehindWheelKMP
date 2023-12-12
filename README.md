@@ -33,9 +33,9 @@ In case bug and suggestions, please create issue.
 ### Useful gradle commands
 
 Check dependency updates: `./gradlew dependencyUpdates`
-Run compose metrics: `./gradlew assembleRelease -PenableComposeCompilerReports=true` 
+Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true` 
 
 Build ui-demo: `./gradlew app:ui-demo:assembleRelease`
 
-Build app debug: `./gradlew app:assembleDebug`
-Build app release: `./gradlew app:assembleRelease`
+Build app debug: `./gradlew app:android:assembleDebug`
+Build app release: `./gradlew app:android:assembleRelease`
