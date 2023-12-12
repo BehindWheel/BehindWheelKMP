@@ -61,6 +61,7 @@ fun DriveMode(
 @Composable
 private fun DriveModePReview() = GrodnoRoadsM3ThemePreview {
     DriveMode(
+        modifier = Modifier.padding(top = 24.dp),
         stopDrive = {},
         reportPolice = {},
         reportIncident = {}
