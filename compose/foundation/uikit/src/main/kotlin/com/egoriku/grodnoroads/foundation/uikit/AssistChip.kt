@@ -28,8 +28,8 @@ fun AssistChip(
         label = label,
         border = AssistChipDefaults.assistChipBorder(
             enabled = selected,
-            borderColor = MaterialTheme.colorScheme.primary.copy(0.7f),
-            disabledBorderColor = MaterialTheme.colorScheme.outline.copy(0.3f)
+            borderColor = MaterialTheme.colorScheme.outline,
+            disabledBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
         ),
         leadingIcon = if (selected) {
             {
