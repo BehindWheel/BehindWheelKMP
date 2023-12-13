@@ -21,8 +21,8 @@ dependencyResolutionManagement {
 rootProject.name = "Grodno-Roads"
 
 include(":app:android")
+include(":app:android-kmp-demo")
 include(":app:ui-demo")
-include(":app-kmm")
 
 include(":features:map:map-data")
 include(":features:map:map-domain")
@@ -56,6 +56,8 @@ include(":libraries:resources")
 
 include(":shared:appSettings")
 include(":shared:appComponent")
+
+// deprecated, to remove
 include(":test_shared")
 
 include(":kmp:features:root")
