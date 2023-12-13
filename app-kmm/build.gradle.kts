@@ -1,6 +1,5 @@
+
 import com.egoriku.grodnoroads.extension.debug
-import com.egoriku.grodnoroads.extension.provideVersionCode
-import com.egoriku.grodnoroads.extension.provideVersionName
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
@@ -8,7 +7,7 @@ plugins {
     id("grodnoroads.compose")
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.secrets)
 }
 
@@ -22,8 +21,8 @@ android {
         compileSdk = libs.versions.compileSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
 
-        versionCode = provideVersionCode("app/version.properties")
-        versionName = provideVersionName("app/version.properties")
+        versionCode = 1
+        versionName = "1.0.0"
         resourceConfigurations += listOf("en", "ru", "be-rBY")
     }
 
