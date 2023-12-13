@@ -5,8 +5,6 @@ import com.egoriku.grodnoroads.extension.release
 plugins {
     id("grodnoroads.application")
     id("grodnoroads.compose")
-    alias(libs.plugins.firebase.crashlytics)
-    alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.serialization)
 }
 
