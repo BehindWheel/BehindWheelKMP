@@ -1,5 +1,5 @@
-
 import com.egoriku.grodnoroads.extension.debug
+import com.egoriku.grodnoroads.extension.loadKeystore
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
@@ -8,14 +8,13 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.secrets)
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads"
+    namespace = "com.egoriku.grodnoroads.kmp"
 
     defaultConfig {
-        applicationId = "com.egoriku.grodnoroads"
+        applicationId = "com.egoriku.grodnoroads.kmp"
 
         minSdk = libs.versions.minSdk.get().toInt()
         compileSdk = libs.versions.compileSdk.get().toInt()
@@ -28,93 +27,35 @@ android {
 
     signingConfigs {
         debug {
-            storeFile = keyStoreFile("debug.keystore")
+            storeFile = loadKeystore("$rootDir/config/debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
 
         release {
-            storeFile = keyStoreFile("keystore.jks", "debug.keystore")
-            storePassword = System.getenv("KEY_STORE_PASSWORD") ?: "android"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "androiddebugkey"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
+            storeFile = loadKeystore("$rootDir/config/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
     }
 
     buildTypes {
-        debug {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
-        }
-
         release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = true
-            proguardFiles(
-                "proguard-rules.pro",
-                getDefaultProguardFile("proguard-android-optimize.txt")
-            )
-            isShrinkResources = true
         }
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 }
 
 dependencies {
     implementation(projects.kmp.features.root)
 
-    implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
-    implementation(projects.libraries.crashlytics)
-    implementation(projects.libraries.extensions)
     implementation(projects.libraries.resources)
-
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.window)
-    implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
 
-    implementation(libs.coroutines)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
-
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.android)
-
     implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
-    implementation(libs.immutable.collections)
-    implementation(libs.google.maps)
-    implementation(libs.google.material)
-    implementation(libs.mvikotlin.extensions)
-    implementation(libs.mvikotlin.main)
-    implementation(libs.mvikotlin)
-}
-
-secrets {
-    propertiesFileName = "secrets.properties"
-}
-
-fun keyStoreFile(vararg fileNames: String): File? {
-    for (path in fileNames) {
-        val file = project.file(path)
-
-        if (file.exists()) {
-            return file
-        }
-    }
-
-    return null
 }

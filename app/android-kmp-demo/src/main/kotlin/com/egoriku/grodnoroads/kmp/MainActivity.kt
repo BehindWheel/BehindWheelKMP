@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads
+package com.egoriku.grodnoroads.kmp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
