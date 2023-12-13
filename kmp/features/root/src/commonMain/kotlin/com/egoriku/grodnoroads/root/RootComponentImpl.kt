@@ -5,9 +5,8 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
 import com.egoriku.grodnoroads.root.RootComponent.Child
+import kotlinx.serialization.Serializable
 
 class RootComponentImpl(
     componentContext: ComponentContext
@@ -16,6 +15,7 @@ class RootComponentImpl(
     private val navigation = StackNavigation<Config>()
     private val stack = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.MainFlow,
         handleBackButton = true,
         key = "RootStack",
@@ -29,11 +29,12 @@ class RootComponentImpl(
         is Config.MainFlow -> Child.MainFlow
     }
 
-    private sealed class Config : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed class Config {
+        @Serializable
         data object MainFlow : Config()
 
-        @Parcelize
+        @Serializable
         data object Onboarding : Config()
     }
 }
