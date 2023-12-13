@@ -61,3 +61,4 @@ include(":shared:appComponent")
 include(":test_shared")
 
 include(":kmp:features:root")
+include(":kmp:features:onboarding")

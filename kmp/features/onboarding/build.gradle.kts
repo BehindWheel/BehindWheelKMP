@@ -1,11 +1,10 @@
 plugins {
     id("grodnoroads.kmplibrary")
     id("grodnoroads.compose")
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.root"
+    namespace = "com.egoriku.grodnoroads.onboarding"
 }
 
 kotlin {
@@ -16,7 +15,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "root"
+            baseName = "onboarding"
             isStatic = true
         }
     }
@@ -24,8 +23,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.kmp.features.onboarding)
-                
                 implementation(libs.decompose)
             }
         }
