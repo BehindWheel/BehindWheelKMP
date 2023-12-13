@@ -56,4 +56,5 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.decompose)
+    implementation(libs.google.material)
 }
