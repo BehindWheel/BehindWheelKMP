@@ -3,17 +3,14 @@ package com.egoriku.grodnoroads.compose.snackbar.ui.core
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
+import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun SnackbarSurface(content: @Composable () -> Unit) {
     Surface(
-        color = when {
-            MaterialTheme.colorScheme.isLight -> MaterialTheme.colorScheme.tertiaryContainer
-            else -> MaterialTheme.colorScheme.surface
-        },
-        tonalElevation = MaterialTheme.tonalElevation,
+        color = MaterialTheme.colorScheme.inverseSurface,
+        shadowElevation = 0.dp,
+        tonalElevation = 0.dp,
         shape = MaterialTheme.shapes.medium,
         content = content
     )

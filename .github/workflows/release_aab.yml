@@ -30,16 +30,16 @@ jobs:
         run: chmod +x build.gradle.kts
 
       - name: Copy google-services.json
-        run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/google-services.json
+        run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/android/google-services.json
 
       - name: Copy key
         uses: RollyPeres/base64-to-path@v1
         with:
-          filePath: ${{ github.workspace }}/app/keystore.jks
+          filePath: ${{ github.workspace }}/app/android/keystore.jks
           encodedString: ${{ secrets.KEY_STORE }}
 
       - name: Console
-        run: echo ${{ github.workspace }}/app/keystore.jks
+        run: echo ${{ github.workspace }}/app/android/keystore.jks
 
       - name: Make secrets.properties
         run: echo ${{ secrets.SECRETS_PROPERTIES }} | base64 --decode > secrets.properties
@@ -47,7 +47,7 @@ jobs:
       - name: "Check keystore existence"
         uses: andstor/file-existence-action@v1
         with:
-          files: "app/keystore.jks"
+          files: "app/android/keystore.jks"
 
       - name: Make sh executable
         run: chmod +x ./increment.sh
@@ -58,14 +58,14 @@ jobs:
 
       - name: Build Release AAB
         id: buildRelease
-        run: ./gradlew clean bundleRelease
+        run: ./gradlew clean app:android:bundleRelease
 
       - name: Upload *.aab artifact
         id: uploadArtifact
         uses: actions/upload-artifact@v1
         with:
-          name: app
-          path: app/build/outputs/bundle/release/app-release.aab
+          name: android
+          path: app/android/build/outputs/bundle/release/android-release.aab
 
       - name: Create service_account.json
         id: createServiceAccount
@@ -77,9 +77,9 @@ jobs:
         with:
           serviceAccountJson: service_account.json
           packageName: com.egoriku.grodnoroads
-          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          releaseFiles: app/android/build/outputs/bundle/release/android-release.aab
           track: beta
-          mappingFile: app/build/outputs/mapping/release/mapping.txt
+          mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
       
       - name: Commit files

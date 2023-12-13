@@ -3,16 +3,15 @@ package com.egoriku.grodnoroads.setting.alerts.ui
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.AssistChip
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
@@ -39,7 +38,7 @@ fun VoiceLevelSection(
             alertVolumeLevel.values.forEach { volumeLevel ->
                 val selected = alertVolumeLevel.current == volumeLevel
 
-                FilterChip(
+                AssistChip(
                     selected = selected,
                     onClick = {
                         modify(alertVolumeLevel.copy(current = volumeLevel))
@@ -47,24 +46,6 @@ fun VoiceLevelSection(
                     },
                     label = {
                         Text(text = volumeLevel.levelName)
-                    },
-                    border = FilterChipDefaults.filterChipBorder(
-                        selectedBorderWidth = 1.dp,
-                        selectedBorderColor = MaterialTheme.colorScheme.outline,
-                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                        selected = selected,
-                        enabled = true
-                    ),
-                    leadingIcon = if (selected) {
-                        {
-                            Icon(
-                                imageVector = Icons.Filled.Done,
-                                contentDescription = null,
-                                modifier = Modifier.size(FilterChipDefaults.IconSize)
-                            )
-                        }
-                    } else {
-                        null
                     }
                 )
             }

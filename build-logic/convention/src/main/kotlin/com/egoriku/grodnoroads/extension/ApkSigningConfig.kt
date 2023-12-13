@@ -1,6 +1,8 @@
 package com.egoriku.grodnoroads.extension
 
 import com.android.build.api.dsl.ApkSigningConfig
+import org.gradle.api.Project
+import java.io.File
 import org.gradle.api.NamedDomainObjectContainer as Container
 
 @JvmName("debugSigningConfig")
@@ -20,4 +22,16 @@ private fun Container<out ApkSigningConfig>.get(
         null -> create(name)
         else -> task
     }.block()
+}
+
+fun Project.loadKeystore(vararg fileNames: String): File? {
+    for (path in fileNames) {
+        val file = project.file(path)
+
+        if (file.exists()) {
+            return file
+        }
+    }
+
+    return null
 }

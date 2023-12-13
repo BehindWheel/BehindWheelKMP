@@ -12,12 +12,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.ActionButton
-import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.Switch
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.button.ActionButton
+import com.egoriku.grodnoroads.foundation.uikit.button.ActionButtonGroup
+import com.egoriku.grodnoroads.foundation.uikit.button.ActionIcon
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
@@ -36,7 +39,7 @@ fun MapOverlayActions(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        GroupedActionsColumn {
+        ActionButtonGroup {
             ActionIcon(imageVector = Icons.Default.Add, onClick = zoomIn)
             ActionIcon(imageVector = Icons.Default.Remove, onClick = zoomOut)
         }
@@ -64,7 +67,8 @@ private fun MapOverlayActionsPreview() = GrodnoRoadsM3ThemePreview {
         modifier = Modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Switch(isChecked = enabled, onCheckedChange = { enabled = it })
+        Switch(checked = enabled, onCheckedChange = { enabled = it })
+        VerticalSpacer(dp = 64.dp)
         MapOverlayActions(
             zoomIn = {},
             zoomOut = {},

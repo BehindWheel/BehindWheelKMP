@@ -17,14 +17,14 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 fun DisabledText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = LocalContentColor.current.copy(alpha = 0.38f),
+    color: Color = LocalContentColor.current,
     style: TextStyle = LocalTextStyle.current
 ) {
     Text(
         modifier = modifier,
         text = text,
         style = style,
-        color = color
+        color = color.copy(alpha = 0.38f)
     )
 }
 

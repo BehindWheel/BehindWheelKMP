@@ -9,5 +9,6 @@ dependencyResolutionManagement {
         }
     }
 }
+rootProject.name = "convention"
 
 include(":convention")

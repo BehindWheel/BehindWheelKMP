@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Brightness7
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -18,10 +19,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.list.MoreActionSettings
-import com.egoriku.grodnoroads.foundation.list.SwitchSettings
-import com.egoriku.grodnoroads.foundation.topbar.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.list.MoreActionSettings
+import com.egoriku.grodnoroads.foundation.common.ui.list.SwitchSettings
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearanceDialogState
@@ -51,6 +52,7 @@ fun AppearanceScreen(
     )
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             SettingsTopBar(
                 title = stringResource(id = R.string.settings_section_appearance),

@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.SettingsHeader
-import com.egoriku.grodnoroads.foundation.list.SettingsItem
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.setting.screen.ui.section.SocialNetworkSection
@@ -68,9 +69,9 @@ internal fun SettingsUi(
             SettingsHeader(title = stringResource(R.string.settings_category_other))
             SettingsItem(
                 icon = Icons.Filled.NewReleases,
-                text = stringResource(R.string.settings_section_whats_new),
+                text = stringResource(R.string.settings_section_changelog),
                 onClick = {
-                    onSettingClick(Page.WhatsNew)
+                    onSettingClick(Page.Changelog)
                 }
             )
 
@@ -90,8 +91,7 @@ internal fun SettingsUi(
                     onSettingClick(Page.FAQ)
                 }
             )
-
-            Spacer(modifier = Modifier.weight(1f))
+            WeightSpacer()
             SocialNetworkSection()
             VersionSection(appVersion = appVersion)
             PrivacyPolicySection()
