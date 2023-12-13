@@ -1,17 +1,19 @@
 package com.egoriku.grodnoroads.shared.appsettings.types.alert
 
-import com.egoriku.grodnoroads.resources.R
+enum class Loudness(val value: Int) {
+    LOUDER(20),
+    NORMAL(10),
+    DEFAULT(0);
+}
 
-enum class VolumeLevel(val levelName: String, val level: Float) {
-    Low(levelName = "low", level = 0.3f),
-    Medium(levelName = "medium", level = 0.6f),
-    High(levelName = "high", level = 1f);
-
-    companion object {
-        fun VolumeLevel.toResource(): Int = when (this) {
-            Low -> R.string.alerts_volume_level_low
-            Medium -> R.string.alerts_volume_level_medium
-            High -> R.string.alerts_volume_level_high
-        }
-    }
+enum class VolumeLevel(
+    val levelName: String,
+    val volumeLevel: Float,
+    val loudness: Loudness,
+) {
+    x03(levelName = "0.3x", volumeLevel = 0.3f, loudness = Loudness.DEFAULT),
+    x06(levelName = "0.6x", volumeLevel = 0.6f, loudness = Loudness.DEFAULT),
+    Default(levelName = "1.0x", volumeLevel = 1f, loudness = Loudness.DEFAULT),
+    x12(levelName = "1.2x", volumeLevel = 1f, loudness = Loudness.NORMAL),
+    x15(levelName = "1.5x", volumeLevel = 1f, loudness = Loudness.LOUDER);
 }

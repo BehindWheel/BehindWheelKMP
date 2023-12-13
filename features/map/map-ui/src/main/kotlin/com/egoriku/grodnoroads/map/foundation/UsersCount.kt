@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.R
 import com.skydoves.balloon.ArrowPositionRules
@@ -33,7 +32,7 @@ import com.egoriku.grodnoroads.resources.R as R_resources
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
-    val bgColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
+    val bgColor = MaterialTheme.colorScheme.inversePrimary
     val textColor = MaterialTheme.colorScheme.onSurface
     val isLight = MaterialTheme.colorScheme.isLight
 

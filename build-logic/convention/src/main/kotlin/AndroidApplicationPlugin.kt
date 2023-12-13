@@ -1,23 +1,23 @@
 @file:Suppress("unused")
 
-import com.android.build.api.dsl.ApplicationExtension
 import com.egoriku.grodnoroads.extension.kotlinOptions
+import com.egoriku.grodnoroads.internal.applicationExtension
+import com.egoriku.grodnoroads.internal.applicationPluginId
 import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
-import com.egoriku.grodnoroads.internal.libs
+import com.egoriku.grodnoroads.internal.kotlinPluginId
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 class AndroidApplicationPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        apply(plugin = libs.plugins.kotlin.android.get().pluginId)
-        apply(plugin = libs.plugins.android.application.get().pluginId)
+        apply(plugin = applicationPluginId)
+        apply(plugin = kotlinPluginId)
 
-        extensions.configure<ApplicationExtension> {
+        applicationExtension {
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
@@ -26,6 +26,17 @@ class AndroidApplicationPlugin : Plugin<Project> {
             kotlinOptions {
                 freeCompilerArgs = listOf("-Xcontext-receivers")
                 languageVersion = KotlinVersion.KOTLIN_1_9.version
+            }
+
+            buildTypes {
+                release {
+                    isMinifyEnabled = true
+                    isShrinkResources = true
+                    proguardFiles(
+                        "proguard-rules.pro",
+                        getDefaultProguardFile("proguard-android-optimize.txt")
+                    )
+                }
             }
         }
         configureKotlinAndroidToolchain()

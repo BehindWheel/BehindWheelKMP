@@ -7,14 +7,14 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.location.LocationHelper
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
-import com.egoriku.grodnoroads.maps.core.asStable
-import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -29,6 +29,8 @@ internal class LocationStoreFactory(
         object : LocationStore, Store<Intent, State, Label> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                var locationJob: Job? = null
+
                 onAction<Unit> {
                     launch {
                         locationHelper.getLastKnownLocation()?.run {
@@ -46,12 +48,13 @@ internal class LocationStoreFactory(
 
                     dispatch(Message.OnNewLocation(LastLocation.None))
 
-                    launch {
+                    locationJob = reLaunch(locationJob) {
                         locationHelper.lastLocationFlow
                             .filterNotNull()
-                            .map { LastLocation(it.latLng.asStable(), it.bearing, it.speed) }
+                            .map { LastLocation(it.latLng, it.bearing, it.speed) }
                             .collect {
                                 dispatch(Message.OnNewLocation(lastLocation = it))
+                                dispatch(Message.OnInitialLocation(it.latLng))
 
                                 publish(Label.NewLocation(it.latLng))
                             }
@@ -60,8 +63,22 @@ internal class LocationStoreFactory(
                 onIntent<StopLocationUpdates> {
                     locationHelper.stopLocationUpdates()
                 }
-                onIntent<DisabledLocation> {
-                    publish(Label.ShowToast(resId = R.string.toast_location_disabled))
+                onIntent<RequestCurrentLocation> {
+                    launch {
+                        val location = locationHelper.requestCurrentLocation()
+
+                        if (location != null) {
+                            dispatch(
+                                Message.OnNewLocation(
+                                    lastLocation = LastLocation(
+                                        latLng = location.latLng,
+                                        bearing = location.bearing,
+                                        speed = location.speed
+                                    )
+                                )
+                            )
+                        }
+                    }
                 }
                 onIntent<SetUserLocation> {
                     dispatch(
@@ -83,7 +100,7 @@ internal class LocationStoreFactory(
                 when (message) {
                     is Message.OnNewLocation -> copy(lastLocation = message.lastLocation)
                     is Message.OnUserLocation -> copy(userLocation = message.lastLocation)
-                    is Message.OnInitialLocation -> copy(initialLocation = message.latLng.asStable())
+                    is Message.OnInitialLocation -> copy(initialLocation = message.latLng)
                 }
             }
         ) {}
