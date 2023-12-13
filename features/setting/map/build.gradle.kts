@@ -11,8 +11,10 @@ dependencies {
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.foundation.uikit)
 
-    implementation(projects.libraries.foundation)
+    implementation(projects.compose.commonUi)
+
     implementation(projects.libraries.resources)
 
     implementation(projects.shared.appSettings)

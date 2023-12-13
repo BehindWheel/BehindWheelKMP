@@ -1,18 +1,17 @@
 package com.egoriku.grodnoroads.map.mode.default
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.CircleButton
-import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
-import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
@@ -32,11 +31,10 @@ fun DefaultMode(
                 .padding(start = 16.dp, bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            CircleButton(
-                colors = CircleButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
-                ),
-                onClick = { report(TrafficPolice) }) {
+            PrimaryInverseCircleButton(
+                size = Large,
+                onClick = { report(TrafficPolice) }
+            ) {
                 Icon(
                     modifier = Modifier.size(24.dp),
                     painter = painterResource(R.drawable.ic_pin_location),
@@ -49,17 +47,11 @@ fun DefaultMode(
                 locationRequesterState = locationRequesterState,
                 onStateChanged = onLocationRequestStateChanged
             ) {
-                CircleButton(
+                PrimaryCircleButton(
+                    size = Large,
                     onClick = locationRequesterState::launchRequest,
-                    colors = CircleButtonDefaults.buttonColors(
-                        containerColor = if (MaterialTheme.colorScheme.isLight) {
-                            MaterialTheme.colorScheme.primary
-                        } else {
-                            MaterialTheme.colorScheme.surfaceVariant
-                        }
-                    ),
                 ) {
-                    Image(
+                    Icon(
                         modifier = Modifier.size(24.dp),
                         painter = painterResource(R.drawable.ic_arrow),
                         contentDescription = null
@@ -68,4 +60,10 @@ fun DefaultMode(
             }
         }
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun DefaultModePreview() = GrodnoRoadsM3ThemePreview {
+    DefaultMode({}, {})
 }

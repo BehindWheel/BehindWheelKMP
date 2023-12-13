@@ -41,13 +41,13 @@
     <string name="settings_section_appearance">Внешний вид</string>
     <string name="settings_section_map">Карта</string>
     <string name="settings_section_alerts">Оповещения</string>
-    <string name="settings_section_whats_new">Что нового</string>
+    <string name="settings_section_changelog">История изменений</string>
     <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Основные</string>
-    <string name="settings_category_other">Другие</string>
+    <string name="settings_category_other">Другое</string>
 
     <!-- Appearance -->
     <string name="appearance_app_theme">Тема</string>

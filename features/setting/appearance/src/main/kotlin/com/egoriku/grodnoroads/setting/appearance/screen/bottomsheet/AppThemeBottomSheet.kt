@@ -9,12 +9,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.lazycolumn.SingleChoiceLazyColumn
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.BasicModalBottomSheet
-import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.common.ConfirmationFooter
-import com.egoriku.grodnoroads.foundation.uikit.bottomsheet.rememberSheetCloseBehaviour
+import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
+import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
+import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme

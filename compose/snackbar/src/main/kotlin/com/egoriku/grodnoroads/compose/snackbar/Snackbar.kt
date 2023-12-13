@@ -9,6 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarData
@@ -54,7 +55,13 @@ private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    val isInPreview = LocalInspectionMode.current
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
         SnackbarHost(
             hostState = snackbarState,
             modifier = Modifier.align(Alignment.BottomCenter),
@@ -70,7 +77,11 @@ private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
                         message = ActionMessage(
                             title = Raw("Службы определения геолокации выключены. Вы можете включить их в разделе настройки"),
                             description = Raw("Используются для доступа к данным карт и работы функций навигации"),
-                            onAction = { context.toast("action performed") }
+                            onAction = {
+                                if (!isInPreview) {
+                                    context.toast("action performed")
+                                }
+                            }
                         )
                     )
                 },

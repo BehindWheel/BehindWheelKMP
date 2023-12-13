@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.egoriku.grodnoroads.foundation.dialog.DialogContent
-import com.egoriku.grodnoroads.foundation.dialog.DialogTitle
-import com.egoriku.grodnoroads.foundation.dialog.ListItems
-import com.egoriku.grodnoroads.foundation.dialog.content.DialogButton
-import com.egoriku.grodnoroads.foundation.dialog.content.RadioButtonItem
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogTitle
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.ListItems
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
+import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.RadioButtonItem
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.ImmutableList
 
@@ -34,7 +34,10 @@ fun CommonReportDialog(
 
     Dialog(onDismissRequest = onClose) {
         DialogContent {
-            DialogTitle(titleRes = titleRes, center = true)
+            DialogTitle(
+                titleRes = titleRes,
+                center = true
+            )
 
             ListItems(
                 modifier = Modifier.weight(weight = 1f, fill = false),

@@ -20,7 +20,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Grodno-Roads"
 
-include(":app")
+include(":app:android")
+include(":app:ui-demo")
 include(":app-kmm")
 
 include(":features:map:map-data")
@@ -33,12 +34,14 @@ include(":features:setting:alerts")
 include(":features:setting:appearance")
 include(":features:setting:faq")
 include(":features:setting:map")
-include(":features:setting:whatsnew")
+include(":features:setting:changelog")
 
 include(":compose:foundation:core")
 include(":compose:foundation:preview")
 include(":compose:foundation:theme")
 include(":compose:foundation:uikit")
+
+include(":compose:common-ui")
 include(":compose:location-requester")
 include(":compose:maps:compose")
 include(":compose:maps:core")
@@ -48,7 +51,6 @@ include(":libraries:analytics")
 include(":libraries:audioplayer")
 include(":libraries:crashlytics")
 include(":libraries:extensions")
-include(":libraries:foundation")
 include(":libraries:location")
 include(":libraries:resources")
 

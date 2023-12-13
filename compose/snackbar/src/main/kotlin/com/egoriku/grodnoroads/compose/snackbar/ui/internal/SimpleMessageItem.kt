@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 
 @Composable
-internal fun SimpleMessageItem(message: SimpleMessage) {
+fun SimpleMessageItem(message: SimpleMessage) {
     SnackbarSurface {
         Column(
             modifier = Modifier
@@ -43,7 +43,7 @@ internal fun SimpleMessageItem(message: SimpleMessage) {
                         is Resource -> stringResource(id = description.id)
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onTertiary.copy(alpha = 0.38f),
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
                 )
             }
         }
