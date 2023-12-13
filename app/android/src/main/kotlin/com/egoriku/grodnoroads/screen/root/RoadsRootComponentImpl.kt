@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.screen.root
 
-import android.os.Parcelable
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
@@ -21,7 +21,7 @@ import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -35,6 +35,7 @@ class RoadsRootComponentImpl(
 
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.Main,
         handleBackButton = true,
         key = "Root",
@@ -57,14 +58,15 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
+    @OptIn(ExperimentalDecomposeApi::class)
     override fun open(page: Page) {
         when (page) {
-            Page.Appearance -> navigation.push(Config.Appearance)
-            Page.Map -> navigation.push(Config.MapSettings)
-            Page.Alerts -> navigation.push(Config.Alerts)
-            Page.Changelog -> navigation.push(Config.Changelog)
-            Page.NextFeatures -> navigation.push(Config.NextFeatures)
-            Page.FAQ -> navigation.push(Config.FAQ)
+            Page.Appearance -> navigation.pushNew(Config.Appearance)
+            Page.Map -> navigation.pushNew(Config.MapSettings)
+            Page.Alerts -> navigation.pushNew(Config.Alerts)
+            Page.Changelog -> navigation.pushNew(Config.Changelog)
+            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
+            Page.FAQ -> navigation.pushNew(Config.FAQ)
         }
     }
 
@@ -95,26 +97,27 @@ class RoadsRootComponentImpl(
         is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
     }
 
-    private sealed class Config : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed class Config {
+        @Serializable
         data object Main : Config()
 
-        @Parcelize
+        @Serializable
         data object Appearance : Config()
 
-        @Parcelize
+        @Serializable
         data object MapSettings : Config()
 
-        @Parcelize
+        @Serializable
         data object Alerts : Config()
 
-        @Parcelize
+        @Serializable
         data object Changelog : Config()
 
-        @Parcelize
+        @Serializable
         data object NextFeatures : Config()
 
-        @Parcelize
+        @Serializable
         data object FAQ : Config()
     }
 }

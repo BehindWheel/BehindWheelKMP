@@ -5,7 +5,7 @@ targetSdk = "34"
 
 agp = "8.2.0"
 compose-compiler = "1.5.6"
-decompose = "2.1.4"
+decompose = "2.2.1"
 kotlin = "1.9.21"
 mvikotlin = "3.3.0"
 
@@ -40,7 +40,7 @@ coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-service
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-firebase-bom = "com.google.firebase:firebase-bom:32.6.0"
+firebase-bom = "com.google.firebase:firebase-bom:32.7.0"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
@@ -73,5 +73,5 @@ google-services = { id = "com.google.gms.google-services", version = "4.4.0" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.50.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }

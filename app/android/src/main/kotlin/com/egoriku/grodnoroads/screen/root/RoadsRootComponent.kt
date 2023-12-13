@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.screen.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.backhandler.BackHandlerOwner
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
@@ -15,7 +16,7 @@ import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 
-interface RoadsRootComponent {
+interface RoadsRootComponent : BackHandlerOwner {
 
     val childStack: Value<ChildStack<*, Child>>
 

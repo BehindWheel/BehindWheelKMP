@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
                             LocalWindowSizeClass provides calculateWindowSizeClass(this),
                             LocalActivity provides this,
                         ) {
-                            RootContent(roadsRootComponent = root)
+                            RootContent(rootComponent = root)
                         }
                     }
                 }
