@@ -1,11 +1,12 @@
-package com.egoriku.grodnoroads.root
+package com.egoriku.grodnoroads.root.domain
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
-import com.egoriku.grodnoroads.root.RootComponent.Child
+import com.egoriku.grodnoroads.root.domain.RootComponent.Child
 import kotlinx.serialization.Serializable
 
 class RootComponentImpl(
@@ -16,7 +17,7 @@ class RootComponentImpl(
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.MainFlow,
+        initialConfiguration = Config.Onboarding,
         handleBackButton = true,
         key = "RootStack",
         childFactory = ::processChild
@@ -27,6 +28,10 @@ class RootComponentImpl(
     private fun processChild(config: Config, componentContext: ComponentContext) = when (config) {
         is Config.Onboarding -> Child.Onboarding
         is Config.MainFlow -> Child.MainFlow
+    }
+
+    override fun openMainFlow() {
+        navigation.replaceAll(Config.MainFlow)
     }
 
     @Serializable

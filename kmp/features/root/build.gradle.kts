@@ -29,8 +29,9 @@ kotlin {
         }
         androidMain {
             dependencies {
-                implementation(libs.androidx.compose.material3)
+                implementation(projects.compose.foundation.uikit)
 
+                implementation(libs.androidx.compose.material3)
                 implementation(libs.decompose.compose.jetpack)
             }
         }

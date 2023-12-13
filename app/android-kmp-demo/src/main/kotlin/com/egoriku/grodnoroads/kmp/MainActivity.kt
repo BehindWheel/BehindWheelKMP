@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
-import com.egoriku.grodnoroads.root.RootComponentImpl
 import com.egoriku.grodnoroads.root.RootContent
+import com.egoriku.grodnoroads.root.domain.RootComponentImpl
 
 class MainActivity : ComponentActivity() {
 
