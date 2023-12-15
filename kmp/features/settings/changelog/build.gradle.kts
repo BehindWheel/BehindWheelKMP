@@ -33,7 +33,6 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(libs.kotlin.coroutines.core)
-                implementation(libs.kotlin.datetime)
                 implementation(libs.mvikotlin)
                 implementation(libs.mvikotlin.extensions)
                 implementation(libs.mvikotlin.main)
