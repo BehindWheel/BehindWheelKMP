@@ -7,7 +7,6 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.extensions.common.StateData
-import com.egoriku.grodnoroads.screen.main.buildMainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
@@ -17,8 +16,9 @@ import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearan
 import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.setting.changelog.domain.component.buildChangelogComponent
-import com.egoriku.grodnoroads.shared.appcomponent.Page
+import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
+import com.egoriku.grodnoroads.tabs.buildTabComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable
@@ -74,9 +74,9 @@ class RoadsRootComponentImpl(
 
     private fun child(config: Config, componentContext: ComponentContext) = when (config) {
         is Config.Main -> Child.Main(
-            component = buildMainComponent(
+            component = buildTabComponent(
                 componentContext = componentContext,
-                onOpen = ::open
+                onOpenPage = ::open
             )
         )
 

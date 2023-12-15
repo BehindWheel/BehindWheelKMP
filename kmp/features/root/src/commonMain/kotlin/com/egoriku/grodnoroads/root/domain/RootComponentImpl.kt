@@ -8,6 +8,7 @@ import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.onboarding.domain.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
+import com.egoriku.grodnoroads.tabs.buildMainFlowComponent
 import kotlinx.serialization.Serializable
 
 class RootComponentImpl(
@@ -18,7 +19,7 @@ class RootComponentImpl(
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.Onboarding,
+        initialConfiguration = Config.MainFlow,
         handleBackButton = true,
         key = "RootStack",
         childFactory = ::processChild
@@ -38,7 +39,9 @@ class RootComponentImpl(
                 }
             )
         )
-        is Config.MainFlow -> Child.MainFlow
+        is Config.MainFlow -> Child.MainFlow(
+            buildMainFlowComponent(componentContext = componentContext)
+        )
     }
 
     @Serializable

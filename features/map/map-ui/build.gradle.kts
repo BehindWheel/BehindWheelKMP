@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.shared.components)
+
     implementation(projects.features.map.mapDomain)
 
     implementation(projects.compose.foundation.core)
@@ -24,7 +26,6 @@ dependencies {
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.resources)
 
-    implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
 
     implementation(libs.androidx.activity.compose)

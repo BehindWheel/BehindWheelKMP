@@ -44,17 +44,23 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
-    implementation(projects.kmp.features.root)
-
+    implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
+    implementation(projects.kmp.features.root)
+    implementation(projects.kmp.shared.components)
     implementation(projects.libraries.resources)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3.window)
     implementation(libs.androidx.core.splashscreen)
-
     implementation(libs.decompose)
     implementation(libs.google.material)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
 }

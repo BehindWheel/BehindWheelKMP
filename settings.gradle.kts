@@ -28,8 +28,6 @@ include(":features:map:map-data")
 include(":features:map:map-domain")
 include(":features:map:map-ui")
 
-include(":features:settings")
-
 include(":features:setting:alerts")
 include(":features:setting:appearance")
 include(":features:setting:faq")
@@ -55,10 +53,17 @@ include(":libraries:location")
 include(":libraries:resources")
 
 include(":shared:appSettings")
-include(":shared:appComponent")
 
 // deprecated, to remove
 include(":test_shared")
 
 include(":kmp:features:root")
 include(":kmp:features:onboarding")
+include(":kmp:features:mainflow")
+include(":kmp:features:tabs")
+include(":kmp:features:appSettings")
+
+include(":kmp:libraries:datastore")
+
+include(":kmp:shared:components")
+include(":kmp:shared:models")

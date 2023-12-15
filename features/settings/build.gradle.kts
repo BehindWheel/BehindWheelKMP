@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.shared.components)
+    implementation(projects.kmp.shared.models)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
@@ -15,7 +17,6 @@ dependencies {
 
     implementation(projects.libraries.resources)
 
-    implementation(projects.shared.appComponent)
 
     implementation(libs.androidx.browser)
 

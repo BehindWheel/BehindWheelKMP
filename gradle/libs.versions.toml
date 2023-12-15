@@ -24,12 +24,14 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.8.1"
+androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-browser = "androidx.browser:browser:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.12.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
+androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.0-alpha07"
+
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.3"
@@ -50,11 +52,13 @@ google-maps = "com.google.maps.android:maps-ktx:5.0.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.0"
 google-material = "com.google.android.material:material:1.10.0"
 
+# todo: rename dependency
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6"
 
 koin-bom = "io.insert-koin:koin-bom:3.5.1"
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-core = { module = "io.insert-koin:koin-core" }
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 

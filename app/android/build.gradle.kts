@@ -63,11 +63,14 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.features.tabs)
+    implementation(projects.kmp.libraries.datastore)
+    implementation(projects.kmp.shared.components)
+    implementation(projects.kmp.shared.models)
+
     implementation(projects.features.map.mapData)
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
-
-    implementation(projects.features.settings)
 
     implementation(projects.features.setting.alerts)
     implementation(projects.features.setting.appearance)
@@ -76,7 +79,6 @@ dependencies {
     implementation(projects.features.setting.map)
 
     implementation(projects.shared.appSettings)
-    implementation(projects.shared.appComponent)
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)

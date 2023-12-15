@@ -11,15 +11,15 @@ import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.*
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predictiveback.predictiveBackAnimation
-import com.egoriku.grodnoroads.screen.main.MainUi
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
 import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
+import com.egoriku.grodnoroads.setting.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
-import com.egoriku.grodnoroads.setting.changelog.screen.ChangelogScreen
+import com.egoriku.grodnoroads.tabs.ui.TabsScreen
 
 @OptIn(FaultyDecomposeApi::class, ExperimentalDecomposeApi::class)
 @Composable
@@ -50,7 +50,7 @@ fun RootContent(rootComponent: RoadsRootComponent) {
 
             ) {
             when (val child = it.instance) {
-                is Child.Main -> MainUi(component = child.component)
+                is Child.Main -> TabsScreen(tabsComponent = child.component)
                 is Child.Appearance -> AppearanceScreen(
                     appearanceComponent = child.appearanceComponent,
                     onBack = rootComponent::onBack

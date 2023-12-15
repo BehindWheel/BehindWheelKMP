@@ -25,8 +25,12 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.kmp.features.onboarding)
-                
+                implementation(projects.kmp.features.mainflow)
+                implementation(projects.kmp.libraries.datastore)
+
                 implementation(libs.decompose)
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
             }
         }
         androidMain {
@@ -35,6 +39,7 @@ kotlin {
 
                 implementation(libs.androidx.compose.material3)
                 implementation(libs.decompose.compose.jetpack)
+                implementation(libs.koin.android)
             }
         }
     }
