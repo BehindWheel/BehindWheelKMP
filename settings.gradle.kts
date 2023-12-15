@@ -21,7 +21,6 @@ dependencyResolutionManagement {
 rootProject.name = "Grodno-Roads"
 
 include(":app:android")
-include(":app:android-kmp-demo")
 include(":app:ui-demo")
 
 include(":features:map:map-data")
@@ -32,7 +31,6 @@ include(":features:setting:alerts")
 include(":features:setting:appearance")
 include(":features:setting:faq")
 include(":features:setting:map")
-include(":features:setting:changelog")
 
 include(":compose:foundation:core")
 include(":compose:foundation:preview")
@@ -62,8 +60,10 @@ include(":kmp:features:onboarding")
 include(":kmp:features:mainflow")
 include(":kmp:features:tabs")
 include(":kmp:features:appSettings")
+include(":kmp:features:settings:changelog")
 
 include(":kmp:libraries:datastore")
+include(":kmp:libraries:extensions")
 
 include(":kmp:shared:components")
 include(":kmp:shared:models")

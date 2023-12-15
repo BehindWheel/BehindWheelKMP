@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.extensions)
+
     implementation(projects.compose.maps.core)
     implementation(projects.features.map.mapDomain)
     implementation(projects.libraries.extensions)

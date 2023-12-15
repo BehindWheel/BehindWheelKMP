@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.A
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertSettings.*
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertsPref.*
 import com.egoriku.grodnoroads.setting.alerts.domain.store.AlertsStore.*
-import com.egoriku.grodnoroads.shared.appsettings.extension.edit
+import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.*
 import kotlinx.coroutines.Dispatchers

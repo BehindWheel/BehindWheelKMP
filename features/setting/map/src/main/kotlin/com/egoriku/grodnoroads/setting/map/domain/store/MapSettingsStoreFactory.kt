@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.*
 import com.egoriku.grodnoroads.setting.map.domain.store.MapSettingsStore.*
-import com.egoriku.grodnoroads.shared.appsettings.extension.edit
+import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity

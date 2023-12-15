@@ -1,7 +1,6 @@
 plugins {
     id("grodnoroads.kmplibrary")
     id("grodnoroads.compose")
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {

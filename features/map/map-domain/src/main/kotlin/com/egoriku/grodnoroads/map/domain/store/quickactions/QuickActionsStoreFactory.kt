@@ -7,13 +7,13 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent.Update
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage.NewSettings
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
 import kotlinx.coroutines.Dispatchers

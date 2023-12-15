@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.extensions)
+
     implementation(libs.androidx.appcompat)
     implementation(libs.coroutines)
 

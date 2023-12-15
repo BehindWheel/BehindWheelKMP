@@ -6,9 +6,9 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
+import com.egoriku.grodnoroads.mainflow.buildMainFlowComponent
 import com.egoriku.grodnoroads.onboarding.domain.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
-import com.egoriku.grodnoroads.tabs.buildMainFlowComponent
 import kotlinx.serialization.Serializable
 
 class RootComponentImpl(

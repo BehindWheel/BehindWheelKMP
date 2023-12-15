@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.component
 
 import com.egoriku.grodnoroads.BuildConfig
-import com.egoriku.grodnoroads.shared.appcomponent.AppBuildConfig
+import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 
 class AppBuildConfigImpl : AppBuildConfig {
 

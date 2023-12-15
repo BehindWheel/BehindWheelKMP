@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearanceDialogState.*
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearancePref.*
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent.AppearanceState
@@ -16,7 +17,6 @@ import com.egoriku.grodnoroads.setting.appearance.domain.store.AppearanceStore.I
 import com.egoriku.grodnoroads.setting.appearance.domain.util.currentAppLanguage
 import com.egoriku.grodnoroads.setting.appearance.domain.util.resetAppLanguage
 import com.egoriku.grodnoroads.setting.appearance.domain.util.setAppLanguage
-import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged

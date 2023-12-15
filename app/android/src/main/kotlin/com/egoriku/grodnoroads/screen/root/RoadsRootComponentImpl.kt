@@ -15,10 +15,10 @@ import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsCompon
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
-import com.egoriku.grodnoroads.setting.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
-import com.egoriku.grodnoroads.tabs.buildTabComponent
+import com.egoriku.grodnoroads.mainflow.buildTabComponent
+import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable

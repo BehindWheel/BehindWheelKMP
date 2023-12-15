@@ -5,15 +5,15 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
 import com.egoriku.grodnoroads.extensions.common.StateData
+import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent
-import com.egoriku.grodnoroads.setting.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.setting.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
+import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.shared.models.Page
-import com.egoriku.grodnoroads.tabs.TabsComponent
 import kotlinx.coroutines.flow.Flow
 
 interface RoadsRootComponent : BackHandlerOwner {

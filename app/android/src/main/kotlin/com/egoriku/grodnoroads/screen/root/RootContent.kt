@@ -11,15 +11,14 @@ import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.*
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predictiveback.predictiveBackAnimation
+import com.egoriku.grodnoroads.mainflow.ui.TabsScreen
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
 import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
-import com.egoriku.grodnoroads.setting.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
-import com.egoriku.grodnoroads.tabs.ui.TabsScreen
 
 @OptIn(FaultyDecomposeApi::class, ExperimentalDecomposeApi::class)
 @Composable
@@ -66,7 +65,7 @@ fun RootContent(rootComponent: RoadsRootComponent) {
                     onBack = rootComponent::onBack
                 )
 
-                is Child.Changelog -> ChangelogScreen(
+                is Child.Changelog -> com.egoriku.grodnoroads.changelog.ui.ChangelogScreen(
                     changelogComponent = child.changelogComponent,
                     onBack = rootComponent::onBack,
                 )

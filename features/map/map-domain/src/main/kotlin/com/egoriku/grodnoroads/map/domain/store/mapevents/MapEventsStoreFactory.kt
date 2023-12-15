@@ -101,7 +101,7 @@ internal class MapEventsStoreFactory(
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -110,7 +110,7 @@ internal class MapEventsStoreFactory(
         mediumSpeedCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -119,7 +119,7 @@ internal class MapEventsStoreFactory(
         reportsRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -128,8 +128,8 @@ internal class MapEventsStoreFactory(
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception).also {
-                    logD("Error loading stationary: ${result.exception.message}")
+                is Failure -> crashlyticsTracker.recordException(result.throwable).also {
+                    logD("Error loading stationary: ${result.throwable.message}")
                 }
             }
         }
@@ -139,7 +139,7 @@ internal class MapEventsStoreFactory(
         userCountRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.exception)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }

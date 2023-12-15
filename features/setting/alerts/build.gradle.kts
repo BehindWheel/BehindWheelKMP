@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.datastore)
+    
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)

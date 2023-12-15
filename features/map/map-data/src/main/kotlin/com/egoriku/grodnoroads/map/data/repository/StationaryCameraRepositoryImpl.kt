@@ -24,7 +24,7 @@ internal class StationaryCameraRepositoryImpl(
             .awaitSingleValueEventListener<StationaryDTO>()
             .map { resultOf ->
                 when (resultOf) {
-                    is Failure -> Failure(resultOf.exception)
+                    is Failure -> Failure(resultOf.throwable)
                     is Success -> Success(resultOf.value.map { data ->
                         StationaryCamera(
                             id = data.id,

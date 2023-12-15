@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.root.domain
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.onboarding.domain.OnboardingComponent
-import com.egoriku.grodnoroads.tabs.MainFlowComponent
+import com.egoriku.grodnoroads.mainflow.MainFlowComponent
 
 interface RootComponent {
     val childStack: Value<ChildStack<*, Child>>

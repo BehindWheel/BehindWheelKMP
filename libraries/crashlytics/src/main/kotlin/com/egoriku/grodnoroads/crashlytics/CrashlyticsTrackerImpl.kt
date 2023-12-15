@@ -7,7 +7,7 @@ internal class CrashlyticsTrackerImpl(
     private val firebaseCrashlytics: FirebaseCrashlytics
 ) : CrashlyticsTracker {
 
-    override fun recordException(exception: Exception) {
+    override fun recordException(exception: Throwable) {
         firebaseCrashlytics.recordException(exception).also {
             logD(exception.message.toString())
         }

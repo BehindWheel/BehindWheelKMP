@@ -22,7 +22,7 @@ internal class MobileCameraRepositoryImpl(
         .awaitValueEventListener<MobileCameraDTO>()
         .map { resultOf ->
             when (resultOf) {
-                is Failure -> Failure(resultOf.exception)
+                is Failure -> Failure(resultOf.throwable)
                 is Success -> Success(resultOf.value.map { data ->
                     MobileCamera(
                         // TODO: use from backend

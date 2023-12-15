@@ -30,7 +30,7 @@ internal class FaqStoreFactory(
 
                         when (val result = faqRepository.load()) {
                             is ResultOf.Success -> dispatch(Message.Success(result.value))
-                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.exception)
+                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
                         }
                         dispatch(Message.Loading(false))
 

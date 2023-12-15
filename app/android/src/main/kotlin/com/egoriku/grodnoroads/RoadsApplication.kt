@@ -4,6 +4,7 @@ package com.egoriku.grodnoroads
 
 import android.app.Application
 import com.egoriku.grodnoroads.analytics.di.analyticsModule
+import com.egoriku.grodnoroads.component.AppBuildConfigImpl
 import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
 import com.egoriku.grodnoroads.crashlytics.di.crashlyticsModule
 import com.egoriku.grodnoroads.extensions.logD
@@ -12,17 +13,21 @@ import com.egoriku.grodnoroads.location.di.locationModule
 import com.egoriku.grodnoroads.map.data.di.mapDataModule
 import com.egoriku.grodnoroads.map.di.mapUiModule
 import com.egoriku.grodnoroads.map.domain.di.mapDomainModule
+import com.egoriku.grodnoroads.root.di.initKoin
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
 import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.setting.faq.di.faqModule
 import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
-import com.egoriku.grodnoroads.setting.changelog.di.changelogModule
+import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
 class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
 
@@ -31,7 +36,12 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
         MapsInitializer.initialize(applicationContext, Renderer.LATEST, this)
 
         CrashlyticsConfig.isCollectionEnabled(!BuildConfig.DEBUG)
-        initKoin()
+        initKoin(
+            context = this,
+            additionalModule = module {
+                singleOf(::AppBuildConfigImpl) { bind<AppBuildConfig>() }
+            }
+        )
     }
 
     override fun onMapsSdkInitialized(renderer: Renderer) {
@@ -41,7 +51,8 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
         }
     }
 
-    private fun initKoin() {
+    // TODO: remove
+    private fun initKoinOld() {
         startKoin {
             androidContext(this@RoadsApplication)
             modules(
@@ -59,7 +70,6 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
                 appearanceModule,
                 faqModule,
                 mapSettingsModule,
-                changelogModule,
 
                 rootModule,
             )

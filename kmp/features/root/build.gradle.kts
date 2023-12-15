@@ -29,8 +29,13 @@ kotlin {
                 implementation(projects.kmp.libraries.datastore)
 
                 implementation(libs.decompose)
+                implementation(libs.dev.gitlive.firebase.firestore)
+
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
+
+                implementation(libs.mvikotlin)
+                implementation(libs.mvikotlin.main)
             }
         }
         androidMain {

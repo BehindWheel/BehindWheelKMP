@@ -8,6 +8,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.datastore)
+    implementation(projects.kmp.libraries.extensions)
+
     implementation(projects.compose.maps.core)
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.audioplayer)

@@ -21,7 +21,7 @@ internal class FaqRepositoryImpl(
             .await<FaqDTO>()
 
         return@withContext when (faqResponse) {
-            is Failure -> Failure(faqResponse.exception)
+            is Failure -> Failure(faqResponse.throwable)
             is Success -> Success(faqResponse.value.map {
                 FAQ(
                     question = it.question,

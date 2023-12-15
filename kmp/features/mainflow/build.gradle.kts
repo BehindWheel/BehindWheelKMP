@@ -25,9 +25,13 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.kmp.features.tabs)
+                implementation(projects.kmp.features.settings.changelog)
                 implementation(projects.kmp.shared.models)
 
                 implementation(libs.decompose)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
             }
         }
         androidMain {

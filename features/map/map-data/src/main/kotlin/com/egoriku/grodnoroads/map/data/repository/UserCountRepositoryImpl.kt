@@ -17,7 +17,7 @@ internal class UserCountRepositoryImpl(
         .awaitValueEventListener<Int>()
         .map { resultOf ->
             when (resultOf) {
-                is ResultOf.Failure -> ResultOf.Failure(resultOf.exception)
+                is ResultOf.Failure -> ResultOf.Failure(resultOf.throwable)
                 is ResultOf.Success -> ResultOf.Success(resultOf.value.firstOrNull() ?: 0)
             }
         }
