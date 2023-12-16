@@ -31,8 +31,8 @@ kotlin {
                 implementation(projects.kmp.features.mainflow)
                 implementation(projects.kmp.libraries.datastore)
 
-                implementation(libs.decompose)
-                implementation(libs.dev.gitlive.firebase.firestore)
+                api(libs.decompose)
+                api(libs.dev.gitlive.firebase.firestore)
 
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
