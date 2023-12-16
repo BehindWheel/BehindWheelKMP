@@ -22,7 +22,6 @@ dependencies {
 
     implementation(libs.androidx.compose.runtime)
 
-    implementation(libs.coroutines)
     implementation(libs.decompose)
     implementation(libs.google.maps.utils)
 
@@ -30,6 +29,7 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.kotlin.collections)
+    implementation(libs.kotlin.coroutines.core)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

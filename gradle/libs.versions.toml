@@ -31,13 +31,9 @@ androidx-core = "androidx.core:core-ktx:1.12.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.0-alpha07"
-
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.3"
-
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
@@ -63,6 +59,7 @@ koin-core = { module = "io.insert-koin:koin-core" }
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6"
 kotlin-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }

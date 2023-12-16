@@ -106,8 +106,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
 
-    implementation(libs.coroutines)
-
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
@@ -120,6 +118,7 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.material)
     implementation(libs.kotlin.collections)
+    implementation(libs.kotlin.coroutines.core)
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)

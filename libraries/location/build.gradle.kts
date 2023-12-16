@@ -9,12 +9,13 @@ android {
 dependencies {
     implementation(projects.libraries.extensions)
 
-    implementation(libs.coroutines)
-    implementation(libs.coroutines.playservices)
-
+    implementation(libs.google.maps)
+    
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
-    implementation(libs.google.maps)
+    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.kotlin.coroutines.playservices)
+
     implementation(libs.play.services.location)
 }

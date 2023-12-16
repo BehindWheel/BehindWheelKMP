@@ -10,9 +10,10 @@ dependencies {
     implementation(projects.kmp.libraries.extensions)
 
     implementation(libs.androidx.appcompat)
-    implementation(libs.coroutines)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
+
+    implementation(libs.kotlin.coroutines.core)
 }
