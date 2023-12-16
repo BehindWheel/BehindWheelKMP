@@ -18,6 +18,9 @@ kotlin {
         it.binaries.framework {
             baseName = "root"
             isStatic = true
+
+            export(libs.decompose)
+            export(libs.essenty.lifecycle)
         }
     }
 
