@@ -52,9 +52,6 @@ include(":libraries:resources")
 
 include(":shared:appSettings")
 
-// deprecated, to remove
-include(":test_shared")
-
 include(":kmp:features:root")
 include(":kmp:features:onboarding")
 include(":kmp:features:mainflow")
