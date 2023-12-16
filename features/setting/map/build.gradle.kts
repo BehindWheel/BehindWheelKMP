@@ -26,10 +26,11 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
 
     implementation(libs.decompose)
-    implementation(libs.immutable.collections)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+
+    implementation(libs.kotlin.collections)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

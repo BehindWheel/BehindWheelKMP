@@ -25,10 +25,11 @@ dependencies {
     implementation(libs.coroutines)
     implementation(libs.decompose)
     implementation(libs.google.maps.utils)
-    implementation(libs.immutable.collections)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+
+    implementation(libs.kotlin.collections)
 
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.extensions)

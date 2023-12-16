@@ -18,10 +18,10 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database)
 
-    implementation(libs.immutable.collections)
-
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+    
+    implementation(libs.kotlin.collections)
 
     implementation(libs.play.services.maps)
 

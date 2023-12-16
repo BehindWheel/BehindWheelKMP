@@ -56,14 +56,12 @@ google-maps = "com.google.maps.android:maps-ktx:5.0.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.0"
 google-material = "com.google.android.material:material:1.10.0"
 
-# todo: rename dependency
-immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6"
-
 koin-bom = "io.insert-koin:koin-bom:3.5.1"
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-core = { module = "io.insert-koin:koin-core" }
 
+kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6"
 kotlin-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 

@@ -117,9 +117,9 @@ dependencies {
 
     implementation(libs.decompose)
     implementation(libs.decompose.compose.jetpack)
-    implementation(libs.immutable.collections)
     implementation(libs.google.maps)
     implementation(libs.google.material)
+    implementation(libs.kotlin.collections)
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)

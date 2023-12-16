@@ -39,7 +39,7 @@ kotlin {
                 implementation(libs.androidx.compose.material3)
                 implementation(libs.androidx.compose.material3.window)
                 implementation(libs.decompose.compose.jetpack)
-                implementation(libs.immutable.collections)
+                implementation(libs.kotlin.collections)
             }
         }
     }
