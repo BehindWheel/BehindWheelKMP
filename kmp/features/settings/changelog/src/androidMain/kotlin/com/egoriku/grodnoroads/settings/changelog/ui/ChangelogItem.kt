@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.changelog.ui
+package com.egoriku.grodnoroads.settings.changelog.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

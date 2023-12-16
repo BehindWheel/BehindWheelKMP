@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.egoriku.grodnoroads.changelog.ui.ChangelogScreen
 import com.egoriku.grodnoroads.mainflow.MainFlowComponent.Child
 import com.egoriku.grodnoroads.mainflow.ui.TabsScreen
+import com.egoriku.grodnoroads.settings.changelog.ui.ChangelogScreen
 
 @Composable
 fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {

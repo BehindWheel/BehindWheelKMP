@@ -4,6 +4,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.settings.changelog.data.dto.ChangelogDTO
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
+import com.egoriku.grodnoroads.settings.changelog.domain.util.DateFormatter
 import dev.gitlive.firebase.firestore.Direction
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import dev.gitlive.firebase.firestore.orderBy
@@ -14,6 +15,8 @@ import kotlinx.coroutines.withContext
 internal class ChangelogRepositoryImpl(
     private val firestore: FirebaseFirestore
 ) : ChangelogRepository {
+
+    private val formatter = DateFormatter()
 
     override suspend fun load() = withContext(Dispatchers.IO) {
         runCatching {
@@ -31,8 +34,7 @@ internal class ChangelogRepositoryImpl(
                         versionCode = it.code,
                         versionName = it.name,
                         notes = it.notes.replace("\\n", "\n"),
-                        // TODO: add formatting
-                        releaseDate = it.releaseDate.toString()
+                        releaseDate = formatter.formatTime(it.releaseDate.seconds)
                     )
                 }
             )

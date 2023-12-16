@@ -38,6 +38,11 @@ kotlin {
                 implementation(libs.mvikotlin.main)
             }
         }
+        commonTest {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
+        }
         androidMain {
             dependencies {
                 implementation(projects.compose.foundation.preview)

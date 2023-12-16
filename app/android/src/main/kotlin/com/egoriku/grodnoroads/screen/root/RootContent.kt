@@ -19,6 +19,7 @@ import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
+import com.egoriku.grodnoroads.settings.changelog.ui.ChangelogScreen
 
 @OptIn(FaultyDecomposeApi::class, ExperimentalDecomposeApi::class)
 @Composable
@@ -65,7 +66,7 @@ fun RootContent(rootComponent: RoadsRootComponent) {
                     onBack = rootComponent::onBack
                 )
 
-                is Child.Changelog -> com.egoriku.grodnoroads.changelog.ui.ChangelogScreen(
+                is Child.Changelog -> ChangelogScreen(
                     changelogComponent = child.changelogComponent,
                     onBack = rootComponent::onBack,
                 )
