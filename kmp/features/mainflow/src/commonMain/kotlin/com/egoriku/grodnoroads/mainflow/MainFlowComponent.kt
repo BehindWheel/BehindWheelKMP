@@ -3,7 +3,11 @@ package com.egoriku.grodnoroads.mainflow
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("MainFlowComponent", exact = true)
 interface MainFlowComponent {
 
     val childStack: Value<ChildStack<*, Child>>
