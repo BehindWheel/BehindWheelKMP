@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
-import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +36,7 @@ fun ChangelogScreen(
             )
         }
     ) { paddingValues ->
-        val state by changelogComponent.state.collectAsState(initial = ChangelogStore.State())
+        val state by changelogComponent.state.collectAsState()
 
         if (state.isLoading) {
             Box(

@@ -12,7 +12,7 @@ interface ChangelogStore : Store<Nothing, State, Nothing> {
     }
 
     data class State(
-        val isLoading: Boolean = false,
+        val isLoading: Boolean = true,
         val releaseNotes: List<ReleaseNotes> = emptyList()
     )
 }

@@ -2,9 +2,11 @@ package com.egoriku.grodnoroads.settings.changelog.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
-import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.egoriku.grodnoroads.extensions.common.CStateFlow
+import com.egoriku.grodnoroads.extensions.common.asCFlow
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -18,6 +20,7 @@ internal class ChangelogComponentImpl(
 
     private val changelogStore: ChangelogStore = instanceKeeper.getStore(::get)
 
-    override val state: Flow<ChangelogStore.State>
-        get() = changelogStore.states
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override val state: CStateFlow<ChangelogStore.State>
+        get() = changelogStore.stateFlow.asCFlow()
 }
