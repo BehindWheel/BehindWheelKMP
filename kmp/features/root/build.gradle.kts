@@ -1,3 +1,7 @@
+import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.setupIosTarget
+
 plugins {
     id("grodnoroads.kmplibrary")
     id("grodnoroads.compose")
@@ -10,45 +14,32 @@ android {
 
 kotlin {
     androidTarget()
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "root"
-            isStatic = true
-
-            export(libs.decompose)
-            export(libs.essenty.lifecycle)
-        }
+    setupIosTarget(baseName = "root") {
+        export(libs.decompose)
+        export(libs.essenty.lifecycle)
     }
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(projects.kmp.features.onboarding)
-                implementation(projects.kmp.features.mainflow)
-                implementation(projects.kmp.libraries.datastore)
+        commonDependencies {
+            implementation(projects.kmp.features.onboarding)
+            implementation(projects.kmp.features.mainflow)
+            implementation(projects.kmp.libraries.datastore)
 
-                api(libs.decompose)
-                api(libs.dev.gitlive.firebase.firestore)
+            api(libs.decompose)
+            api(libs.dev.gitlive.firebase.firestore)
 
-                implementation(project.dependencies.platform(libs.koin.bom))
-                implementation(libs.koin.core)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
 
-                implementation(libs.mvikotlin)
-                implementation(libs.mvikotlin.main)
-            }
+            implementation(libs.mvikotlin)
+            implementation(libs.mvikotlin.main)
         }
-        androidMain {
-            dependencies {
-                implementation(projects.compose.foundation.uikit)
+        androidDependencies {
+            implementation(projects.compose.foundation.uikit)
 
-                implementation(libs.androidx.compose.material3)
-                implementation(libs.decompose.compose.jetpack)
-                implementation(libs.koin.android)
-            }
+            implementation(libs.androidx.compose.material3)
+            implementation(libs.decompose.compose.jetpack)
+            implementation(libs.koin.android)
         }
     }
 }

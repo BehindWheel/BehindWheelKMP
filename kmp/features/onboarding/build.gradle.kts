@@ -1,3 +1,7 @@
+import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.setupIosTarget
+
 plugins {
     id("grodnoroads.kmplibrary")
     id("grodnoroads.compose")
@@ -9,30 +13,17 @@ android {
 
 kotlin {
     androidTarget()
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "onboarding"
-            isStatic = true
-        }
-    }
+    setupIosTarget(baseName = "onboarding")
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.decompose)
-            }
+        commonDependencies {
+            implementation(libs.decompose)
         }
-        androidMain {
-            dependencies {
-                implementation(projects.compose.foundation.uikit)
+        androidDependencies {
+            implementation(projects.compose.foundation.uikit)
 
-                implementation(libs.androidx.compose.material3)
-                implementation(libs.decompose.compose.jetpack)
-            }
+            implementation(libs.androidx.compose.material3)
+            implementation(libs.decompose.compose.jetpack)
         }
     }
 }

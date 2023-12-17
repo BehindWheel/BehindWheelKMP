@@ -1,3 +1,5 @@
+import com.egoriku.grodnoroads.extension.setupIosTarget
+
 plugins {
     id("grodnoroads.kmplibrary")
 }
@@ -8,14 +10,5 @@ android {
 
 kotlin {
     androidTarget()
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "components"
-            isStatic = true
-        }
-    }
+    setupIosTarget(baseName = "components")
 }

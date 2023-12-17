@@ -1,3 +1,7 @@
+import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.setupIosTarget
+
 plugins {
     id("grodnoroads.kmplibrary")
 }
@@ -8,27 +12,14 @@ android {
 
 kotlin {
     androidTarget()
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "datastore"
-            isStatic = true
-        }
-    }
+    setupIosTarget(baseName = "datastore")
 
     sourceSets {
-        commonMain {
-            dependencies {
-                api(libs.androidx.datastore.core)
-            }
+        commonDependencies {
+            api(libs.androidx.datastore.core)
         }
-        androidMain {
-            dependencies {
-                api(libs.androidx.datastore)
-            }
+        androidDependencies {
+            api(libs.androidx.datastore)
         }
     }
 }
