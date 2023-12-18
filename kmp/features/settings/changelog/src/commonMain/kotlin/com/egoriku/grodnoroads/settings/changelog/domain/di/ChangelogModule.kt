@@ -14,7 +14,7 @@ val changelogModule = module {
         ChangelogStoreFactory(
             storeFactory = get(),
             changelogRepository = get(),
-            //crashlyticsTracker = get()
+            crashlyticsTracker = get()
         ).create()
     }
 }

@@ -8,11 +8,11 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.extensions)
 
     implementation(projects.compose.commonUi)
 
-    implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.resources)
 

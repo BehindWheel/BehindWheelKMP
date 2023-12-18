@@ -64,9 +64,9 @@ android {
 
 dependencies {
     implementation(projects.kmp.features.root)
-
     implementation(projects.kmp.features.tabs)
     implementation(projects.kmp.features.settings.changelog)
+    implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.shared.components)
@@ -91,7 +91,6 @@ dependencies {
     implementation(projects.compose.commonUi)
 
     implementation(projects.libraries.analytics)
-    implementation(projects.libraries.crashlytics)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
     implementation(projects.libraries.resources)

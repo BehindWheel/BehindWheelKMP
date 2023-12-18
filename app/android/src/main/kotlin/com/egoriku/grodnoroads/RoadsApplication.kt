@@ -6,7 +6,6 @@ import android.app.Application
 import com.egoriku.grodnoroads.analytics.di.analyticsModule
 import com.egoriku.grodnoroads.component.AppBuildConfigImpl
 import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
-import com.egoriku.grodnoroads.crashlytics.di.crashlyticsModule
 import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.location.di.locationModule
@@ -57,7 +56,6 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
             androidContext(this@RoadsApplication)
             modules(
                 analyticsModule,
-                crashlyticsModule,
                 locationModule,
 
                 appScopeModule,

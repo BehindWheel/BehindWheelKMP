@@ -45,7 +45,6 @@ include(":compose:snackbar")
 
 include(":libraries:analytics")
 include(":libraries:audioplayer")
-include(":libraries:crashlytics")
 include(":libraries:extensions")
 include(":libraries:location")
 include(":libraries:resources")
@@ -59,6 +58,7 @@ include(":kmp:features:tabs")
 include(":kmp:features:appSettings")
 include(":kmp:features:settings:changelog")
 
+include(":kmp:libraries:crashlytics")
 include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")
 

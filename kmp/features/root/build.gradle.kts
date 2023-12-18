@@ -33,10 +33,12 @@ kotlin {
             api(projects.kmp.features.onboarding)
             api(projects.kmp.features.settings.changelog)
             api(projects.kmp.features.tabs)
+            implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.datastore)
 
             api(libs.decompose)
-            api(libs.dev.gitlive.firebase.firestore)
+            implementation(libs.dev.gitlive.firebase.crashlytics)
+            implementation(libs.dev.gitlive.firebase.firestore)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)

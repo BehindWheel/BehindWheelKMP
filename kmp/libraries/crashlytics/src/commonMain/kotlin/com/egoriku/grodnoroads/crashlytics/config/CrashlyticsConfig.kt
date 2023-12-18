@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.crashlytics.config
 
-import com.google.firebase.Firebase
-import com.google.firebase.crashlytics.crashlytics
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.crashlytics.crashlytics
 
 object CrashlyticsConfig {
 

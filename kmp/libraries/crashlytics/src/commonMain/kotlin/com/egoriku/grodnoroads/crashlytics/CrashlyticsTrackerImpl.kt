@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.crashlytics
 
-import com.egoriku.grodnoroads.extensions.logD
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import dev.gitlive.firebase.crashlytics.FirebaseCrashlytics
 
 internal class CrashlyticsTrackerImpl(
     private val firebaseCrashlytics: FirebaseCrashlytics
@@ -9,7 +8,8 @@ internal class CrashlyticsTrackerImpl(
 
     override fun recordException(exception: Throwable) {
         firebaseCrashlytics.recordException(exception).also {
-            logD(exception.message.toString())
+            // TODO: use logger
+            // logD(exception.message.toString())
         }
     }
 }

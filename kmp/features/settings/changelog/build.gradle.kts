@@ -19,6 +19,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose)

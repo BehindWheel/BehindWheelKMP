@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AFE155C2B30CA2D003016DC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE155B2B30CA2D003016DC /* FirebaseCrashlytics */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
 		CE52F3072B1CF3B200D81762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3062B1CF3B200D81762 /* ContentView.swift */; };
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
@@ -30,17 +31,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */,
+				6AFE155C2B30CA2D003016DC /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AFE155A2B30CA2D003016DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE52F2F82B1CF3B200D81762 = {
 			isa = PBXGroup;
 			children = (
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
+				6AFE155A2B30CA2D003016DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +101,7 @@
 			name = "grodno-roads-ios";
 			packageProductDependencies = (
 				CE80C6122B2E1FE100302023 /* FirebaseFirestore */,
+				6AFE155B2B30CA2D003016DC /* FirebaseCrashlytics */,
 			);
 			productName = "grodno-roads-ios";
 			productReference = CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */;
@@ -310,7 +321,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-				    "$(inherited)",
+					"$(inherited)",
 					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
@@ -352,7 +363,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-				    "$(inherited)",
+					"$(inherited)",
 					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
@@ -417,6 +428,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6AFE155B2B30CA2D003016DC /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE80C6112B2E1FE100302023 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		CE80C6122B2E1FE100302023 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE80C6112B2E1FE100302023 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

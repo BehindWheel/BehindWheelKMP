@@ -5,6 +5,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.Message
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 internal class ChangelogStoreFactory(
     private val storeFactory: StoreFactory,
     private val changelogRepository: ChangelogRepository,
-    //private val crashlyticsTracker: CrashlyticsTracker
+    private val crashlyticsTracker: CrashlyticsTracker
 ) {
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -29,7 +30,7 @@ internal class ChangelogStoreFactory(
 
                         when (val result = changelogRepository.load()) {
                             is ResultOf.Success -> dispatch(Message.Success(releaseNotes = result.value))
-                            is ResultOf.Failure -> {} //crashlyticsTracker.recordException(result.throwable)
+                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
                         }
                         dispatch(Message.Loading(false))
 
