@@ -310,11 +310,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+				    "$(inherited)",
 					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/settings/changelog/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/tabs/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/appSettings/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/mainflow/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -331,14 +328,6 @@
 					"$(inherited)",
 					"-framework",
 					Root,
-					"-framework",
-					SettingsChangelog,
-					"-framework",
-					Tabs,
-					"-framework",
-					Appsettings,
-					"-framework",
-					Mainflow,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.egoriku.grodnoroads;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -363,11 +352,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+				    "$(inherited)",
 					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/settings/changelog/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/tabs/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/appSettings/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../../kmp/features/mainflow/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -384,14 +370,6 @@
 					"$(inherited)",
 					"-framework",
 					Root,
-					"-framework",
-					SettingsChangelog,
-					"-framework",
-					Tabs,
-					"-framework",
-					Appsettings,
-					"-framework",
-					Mainflow,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.egoriku.grodnoroads;
 				PRODUCT_NAME = "$(TARGET_NAME)";
