@@ -1,5 +1,6 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.iosDependencies
 import com.egoriku.grodnoroads.extension.setupIosTarget
 
 plugins {
@@ -17,12 +18,16 @@ kotlin {
     setupIosTarget(baseName = "root") {
         export(libs.decompose)
         export(libs.essenty.lifecycle)
+
+        export(projects.kmp.features.appSettings)
+        export(projects.kmp.features.mainflow)
+        export(projects.kmp.features.onboarding)
+        export(projects.kmp.features.settings.changelog)
+        export(projects.kmp.features.tabs)
     }
 
     sourceSets {
         commonDependencies {
-            implementation(projects.kmp.features.onboarding)
-            implementation(projects.kmp.features.mainflow)
             implementation(projects.kmp.libraries.datastore)
 
             api(libs.decompose)
@@ -40,6 +45,13 @@ kotlin {
             implementation(libs.androidx.compose.material3)
             implementation(libs.decompose.compose.jetpack)
             implementation(libs.koin.android)
+        }
+        iosDependencies {
+            api(projects.kmp.features.appSettings)
+            api(projects.kmp.features.mainflow)
+            api(projects.kmp.features.onboarding)
+            api(projects.kmp.features.settings.changelog)
+            api(projects.kmp.features.tabs)
         }
     }
 }

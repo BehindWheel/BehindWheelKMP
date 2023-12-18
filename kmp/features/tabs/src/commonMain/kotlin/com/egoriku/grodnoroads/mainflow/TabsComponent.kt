@@ -3,11 +3,7 @@ package com.egoriku.grodnoroads.mainflow
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@OptIn(ExperimentalObjCName::class)
-@ObjCName("TabsComponent", exact = true)
 interface TabsComponent {
 
     val childStack: Value<ChildStack<*, Child>>
