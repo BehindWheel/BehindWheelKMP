@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import Root
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -15,6 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         FirebaseApp.configure()
+        KoinHelper_iosKt.doInitKoin()
         return true
     }
     
