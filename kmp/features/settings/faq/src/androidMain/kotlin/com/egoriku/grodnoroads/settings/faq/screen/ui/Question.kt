@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.faq.ui.ui
+package com.egoriku.grodnoroads.settings.faq.screen.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

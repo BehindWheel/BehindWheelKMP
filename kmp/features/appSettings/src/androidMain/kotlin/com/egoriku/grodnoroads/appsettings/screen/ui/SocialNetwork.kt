@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.appsettings.ui.foundation
+package com.egoriku.grodnoroads.appsettings.screen.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon

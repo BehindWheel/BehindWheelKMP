@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.appsettings.ui
+package com.egoriku.grodnoroads.appsettings.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
-import com.egoriku.grodnoroads.appsettings.ui.section.PrivacyPolicySection
-import com.egoriku.grodnoroads.appsettings.ui.section.SocialNetworkSection
-import com.egoriku.grodnoroads.appsettings.ui.section.VersionSection
+import com.egoriku.grodnoroads.appsettings.screen.ui.section.PrivacyPolicySection
+import com.egoriku.grodnoroads.appsettings.screen.ui.section.SocialNetworkSection
+import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.common.ui.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview

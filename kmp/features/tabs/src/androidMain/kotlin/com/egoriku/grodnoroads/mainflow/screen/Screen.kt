@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow.ui
+package com.egoriku.grodnoroads.mainflow.screen
 
 import com.egoriku.grodnoroads.resources.R
 

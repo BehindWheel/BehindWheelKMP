@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.onboarding.ui
+package com.egoriku.grodnoroads.onboarding.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

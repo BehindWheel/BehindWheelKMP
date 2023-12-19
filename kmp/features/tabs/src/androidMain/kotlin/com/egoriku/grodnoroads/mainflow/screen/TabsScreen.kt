@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow.ui
+package com.egoriku.grodnoroads.mainflow.screen
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.egoriku.grodnoroads.appsettings.ui.AppSettingsScreen
+import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility

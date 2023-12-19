@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.foundation.core.LocalActivity
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.root.domain.RootComponentImpl
-import com.egoriku.grodnoroads.root.ui.RootContent
+import com.egoriku.grodnoroads.root.screen.RootContent
 
 class MainActivity : ComponentActivity() {
 

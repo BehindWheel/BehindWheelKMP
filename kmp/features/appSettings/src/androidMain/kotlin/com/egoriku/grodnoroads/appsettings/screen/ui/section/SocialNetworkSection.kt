@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.appsettings.ui.section
+package com.egoriku.grodnoroads.appsettings.screen.ui.section
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.appsettings.ui.foundation.SocialNetwork
-import com.egoriku.grodnoroads.appsettings.ui.util.rememberCustomTabIntent
-import com.egoriku.grodnoroads.appsettings.ui.util.rememberShareIntent
+import com.egoriku.grodnoroads.appsettings.screen.ui.SocialNetwork
+import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
+import com.egoriku.grodnoroads.appsettings.screen.util.rememberShareIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R

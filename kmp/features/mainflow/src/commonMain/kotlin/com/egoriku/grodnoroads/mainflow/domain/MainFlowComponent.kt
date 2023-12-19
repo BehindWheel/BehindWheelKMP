@@ -1,8 +1,9 @@
-package com.egoriku.grodnoroads.mainflow
+package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
+import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 

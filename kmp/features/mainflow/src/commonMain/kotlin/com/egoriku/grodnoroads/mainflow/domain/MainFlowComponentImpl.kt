@@ -1,10 +1,11 @@
-package com.egoriku.grodnoroads.mainflow
+package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
-import com.egoriku.grodnoroads.mainflow.MainFlowComponent.Child
+import com.egoriku.grodnoroads.mainflow.buildTabComponent
+import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.shared.models.Page

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.appsettings.ui.section
+package com.egoriku.grodnoroads.appsettings.screen.ui.section
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

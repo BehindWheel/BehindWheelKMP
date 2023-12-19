@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.faq.ui
+package com.egoriku.grodnoroads.settings.faq.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
-import com.egoriku.grodnoroads.settings.faq.ui.ui.Answer
-import com.egoriku.grodnoroads.settings.faq.ui.ui.Question
+import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
+import com.egoriku.grodnoroads.settings.faq.screen.ui.Question
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

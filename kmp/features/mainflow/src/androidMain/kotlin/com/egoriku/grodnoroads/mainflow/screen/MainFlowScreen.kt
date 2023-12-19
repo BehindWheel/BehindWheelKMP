@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow
+package com.egoriku.grodnoroads.mainflow.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +11,10 @@ import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.*
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predictiveback.predictiveBackAnimation
-import com.egoriku.grodnoroads.mainflow.MainFlowComponent.Child
-import com.egoriku.grodnoroads.mainflow.ui.TabsScreen
-import com.egoriku.grodnoroads.settings.changelog.ui.ChangelogScreen
-import com.egoriku.grodnoroads.settings.faq.ui.FaqScreen
+import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
+import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
+import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
+import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 
 @OptIn(ExperimentalDecomposeApi::class, FaultyDecomposeApi::class)
 @Composable

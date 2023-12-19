@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.changelog.ui
+package com.egoriku.grodnoroads.settings.changelog.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
