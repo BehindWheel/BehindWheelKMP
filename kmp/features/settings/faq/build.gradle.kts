@@ -9,30 +9,36 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.mainflow"
+    namespace = "com.egoriku.grodnoroads.settings.faq"
 }
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "mainflow")
+    setupIosTarget(baseName = "settings_faq")
 
     sourceSets {
         commonDependencies {
-            implementation(projects.kmp.features.tabs)
-            implementation(projects.kmp.features.settings.changelog)
-            implementation(projects.kmp.features.settings.faq)
-            implementation(projects.kmp.shared.models)
+            implementation(projects.kmp.libraries.crashlytics)
+            implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose)
+            implementation(libs.dev.gitlive.firebase.firestore)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+
+            implementation(libs.kotlin.coroutines.core)
+            implementation(libs.mvikotlin)
+            implementation(libs.mvikotlin.extensions)
+            implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.uikit)
+            implementation(projects.compose.commonUi)
 
+            implementation(projects.libraries.resources)
+
+            implementation(libs.androidx.compose.foundation)
             implementation(libs.androidx.compose.material3)
-            implementation(libs.decompose.compose.jetpack)
         }
     }
 }

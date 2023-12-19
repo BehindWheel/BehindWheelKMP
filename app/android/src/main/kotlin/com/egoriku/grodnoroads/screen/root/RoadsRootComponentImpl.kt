@@ -13,12 +13,10 @@ import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
-import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
-import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable
@@ -64,9 +62,7 @@ class RoadsRootComponentImpl(
             Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Map -> navigation.pushNew(Config.MapSettings)
             Page.Alerts -> navigation.pushNew(Config.Alerts)
-            Page.Changelog -> navigation.pushNew(Config.Changelog)
-            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
-            Page.FAQ -> navigation.pushNew(Config.FAQ)
+            else -> {}
         }
     }
 
@@ -88,13 +84,6 @@ class RoadsRootComponentImpl(
         is Config.MapSettings -> Child.Map(
             mapSettingsComponent = buildMapSettingsComponent(componentContext)
         )
-
-        is Config.NextFeatures -> TODO()
-        is Config.Changelog -> Child.Changelog(
-            changelogComponent = buildChangelogComponent(componentContext)
-        )
-
-        is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
     }
 
     @Serializable
@@ -110,14 +99,5 @@ class RoadsRootComponentImpl(
 
         @Serializable
         data object Alerts : Config()
-
-        @Serializable
-        data object Changelog : Config()
-
-        @Serializable
-        data object NextFeatures : Config()
-
-        @Serializable
-        data object FAQ : Config()
     }
 }

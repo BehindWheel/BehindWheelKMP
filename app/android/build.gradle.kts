@@ -65,7 +65,6 @@ android {
 dependencies {
     implementation(projects.kmp.features.root)
     implementation(projects.kmp.features.tabs)
-    implementation(projects.kmp.features.settings.changelog)
     implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
@@ -79,7 +78,6 @@ dependencies {
 
     implementation(projects.features.setting.alerts)
     implementation(projects.features.setting.appearance)
-    implementation(projects.features.setting.faq)
     implementation(projects.features.setting.map)
 
     implementation(projects.shared.appSettings)

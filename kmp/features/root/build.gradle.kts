@@ -23,6 +23,7 @@ kotlin {
         export(projects.kmp.features.mainflow)
         export(projects.kmp.features.onboarding)
         export(projects.kmp.features.settings.changelog)
+        export(projects.kmp.features.settings.faq)
         export(projects.kmp.features.tabs)
     }
 
@@ -32,6 +33,7 @@ kotlin {
             api(projects.kmp.features.mainflow)
             api(projects.kmp.features.onboarding)
             api(projects.kmp.features.settings.changelog)
+            api(projects.kmp.features.settings.faq)
             api(projects.kmp.features.tabs)
             implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.datastore)

@@ -6,6 +6,7 @@ import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.mainflow.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
+import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.shared.models.Page
 import kotlinx.serialization.Serializable
 
@@ -41,7 +42,7 @@ internal class MainFlowComponentImpl(
         is Config.Appearance -> Child.Appearance
         Config.Alerts -> TODO()
         Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
-        Config.FAQ -> TODO()
+        Config.FAQ -> Child.Faq(buildFaqComponent(componentContext))
         Config.MapSettings -> TODO()
         Config.NextFeatures -> TODO()
     }

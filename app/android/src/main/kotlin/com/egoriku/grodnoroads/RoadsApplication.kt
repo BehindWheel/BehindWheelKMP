@@ -16,7 +16,6 @@ import com.egoriku.grodnoroads.root.di.initKoin
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
 import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
-import com.egoriku.grodnoroads.setting.faq.di.faqModule
 import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
 import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.google.android.gms.maps.MapsInitializer
@@ -66,7 +65,6 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
 
                 alertsModule,
                 appearanceModule,
-                faqModule,
                 mapSettingsModule,
 
                 rootModule,

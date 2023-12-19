@@ -17,9 +17,7 @@ import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
 import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
-import com.egoriku.grodnoroads.setting.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
-import com.egoriku.grodnoroads.settings.changelog.ui.ChangelogScreen
 
 @OptIn(FaultyDecomposeApi::class, ExperimentalDecomposeApi::class)
 @Composable
@@ -47,8 +45,7 @@ fun RootContent(rootComponent: RoadsRootComponent) {
                 },
                 onBack = rootComponent::onBack,
             ),
-
-            ) {
+        ) {
             when (val child = it.instance) {
                 is Child.Main -> TabsScreen(tabsComponent = child.component)
                 is Child.Appearance -> AppearanceScreen(
@@ -63,18 +60,6 @@ fun RootContent(rootComponent: RoadsRootComponent) {
 
                 is Child.Alerts -> AlertsScreen(
                     alertsComponent = child.alertsComponent,
-                    onBack = rootComponent::onBack
-                )
-
-                is Child.Changelog -> ChangelogScreen(
-                    changelogComponent = child.changelogComponent,
-                    onBack = rootComponent::onBack,
-                )
-
-                is Child.NextFeatures -> TODO()
-                is Child.BetaFeatures -> TODO()
-                is Child.FAQ -> FaqScreen(
-                    faqComponent = child.faqComponent,
                     onBack = rootComponent::onBack
                 )
             }
