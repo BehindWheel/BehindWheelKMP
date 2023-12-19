@@ -61,6 +61,7 @@ include(":kmp:features:settings:changelog")
 include(":kmp:libraries:crashlytics")
 include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")
+include(":kmp:libraries:logger")
 
 include(":kmp:shared:components")
 include(":kmp:shared:models")

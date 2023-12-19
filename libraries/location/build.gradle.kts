@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.logger)
+
     implementation(projects.libraries.extensions)
 
     implementation(libs.google.maps)

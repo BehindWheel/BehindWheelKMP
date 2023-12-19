@@ -9,7 +9,7 @@ import com.egoriku.grodnoroads.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.extensions.logD
+import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.model.Source.App

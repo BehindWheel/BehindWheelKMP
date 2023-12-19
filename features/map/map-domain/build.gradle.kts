@@ -11,6 +11,7 @@ dependencies {
     implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
+    implementation(projects.kmp.libraries.logger)
 
     implementation(projects.compose.maps.core)
     implementation(projects.libraries.analytics)
