@@ -26,12 +26,13 @@ struct MainFlowView: View {
                 default: "Default"
                 }
             },
-            onBack: { _ in },
+            onBack: { _ in component.onBack() },
             childContent: { child in
                 switch child {
                 case _ as MainFlowComponentChild.Appearance: AppearanceView()
                 case let child as MainFlowComponentChild.Changelog: ChangelogView(child.component)
                 case let child as MainFlowComponentChild.Tabs: TabsView(child.component)
+                case let child as MainFlowComponentChild.Faq: FaqView(child.component)
                 default: EmptyView()
                 }
             }
