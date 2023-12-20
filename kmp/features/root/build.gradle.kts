@@ -24,6 +24,7 @@ kotlin {
         export(projects.kmp.features.settings.changelog)
         export(projects.kmp.features.settings.faq)
         export(projects.kmp.features.tabs)
+        export(projects.kmp.libraries.extensions)
     }
 
     sourceSets {
@@ -36,6 +37,7 @@ kotlin {
             api(projects.kmp.features.tabs)
             implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.datastore)
+            api(projects.kmp.libraries.extensions)
 
             api(libs.decompose)
             implementation(libs.dev.gitlive.firebase.crashlytics)
