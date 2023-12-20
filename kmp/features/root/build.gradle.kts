@@ -1,4 +1,3 @@
-
 import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosTarget

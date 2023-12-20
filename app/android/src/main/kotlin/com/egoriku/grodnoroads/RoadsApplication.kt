@@ -4,7 +4,6 @@ package com.egoriku.grodnoroads
 
 import android.app.Application
 import com.egoriku.grodnoroads.analytics.di.analyticsModule
-import com.egoriku.grodnoroads.component.AppBuildConfigImpl
 import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
 import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.location.di.locationModule
@@ -17,15 +16,11 @@ import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
 import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
-import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
 
 class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
 
@@ -34,12 +29,7 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
         MapsInitializer.initialize(applicationContext, Renderer.LATEST, this)
 
         CrashlyticsConfig.isCollectionEnabled(!BuildConfig.DEBUG)
-        initKoin(
-            context = this,
-            additionalModule = module {
-                singleOf(::AppBuildConfigImpl) { bind<AppBuildConfig>() }
-            }
-        )
+        initKoin(context = this)
     }
 
     override fun onMapsSdkInitialized(renderer: Renderer) {

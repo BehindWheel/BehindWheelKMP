@@ -72,6 +72,7 @@ play-services-maps = "com.google.android.gms:play-services-maps:18.2.0"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.1" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.0" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.50.0" }

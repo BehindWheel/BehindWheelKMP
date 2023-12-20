@@ -20,8 +20,6 @@ kotlin {
             implementation(projects.kmp.shared.components)
             implementation(projects.kmp.shared.models)
 
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
             implementation(libs.decompose)
         }
         androidDependencies {
