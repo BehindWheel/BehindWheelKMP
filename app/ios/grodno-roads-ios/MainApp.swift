@@ -11,6 +11,10 @@ import Root
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
+    private(set) lazy var root: RootComponent = RootComponentImpl(
+        componentContext: DefaultComponentContext(lifecycle: ApplicationLifecycle())
+    )
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
@@ -24,11 +28,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct MainApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self)
+    var delegate
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView(root: delegate.root)
         }
     }
 }

@@ -8,21 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		6AFE155C2B30CA2D003016DC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE155B2B30CA2D003016DC /* FirebaseCrashlytics */; };
+		CE46B71C2B325EBE00493502 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71B2B325EBE00493502 /* MapView.swift */; };
+		CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71D2B325ED600493502 /* AppSettings.swift */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
-		CE52F3072B1CF3B200D81762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3062B1CF3B200D81762 /* ContentView.swift */; };
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
 		CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */; };
 		CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */; };
 		CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE80C6122B2E1FE100302023 /* FirebaseFirestore */; };
+		CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C22B2FA95B0086E744 /* StateValue.swift */; };
+		CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C32B2FA95B0086E744 /* MutableValue.swift */; };
+		CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C42B2FA95B0086E744 /* StackView.swift */; };
+		CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C52B2FA95B0086E744 /* ObservableValue.swift */; };
+		CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */; };
+		CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924CC2B2FB5D00086E744 /* RootView.swift */; };
+		CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */; };
+		CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D02B2FB7A20086E744 /* OnboardingView.swift */; };
+		CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D32B30CCC50086E744 /* AppearanceView.swift */; };
+		CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D52B30CD310086E744 /* ChangelogView.swift */; };
+		CEA924D82B30CD520086E744 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D72B30CD520086E744 /* TabsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE46B71B2B325EBE00493502 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		CE46B71D2B325ED600493502 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "grodno-roads-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE52F3042B1CF3B200D81762 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
-		CE52F3062B1CF3B200D81762 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE52F3082B1CF3B400D81762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
+		CEA924C32B2FA95B0086E744 /* MutableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableValue.swift; sourceTree = "<group>"; };
+		CEA924C42B2FA95B0086E744 /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		CEA924C52B2FA95B0086E744 /* ObservableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
+		CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleChildStack.swift; sourceTree = "<group>"; };
+		CEA924CC2B2FB5D00086E744 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowView.swift; sourceTree = "<group>"; };
+		CEA924D02B2FB7A20086E744 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CEA924D32B30CCC50086E744 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
+		CEA924D52B30CD310086E744 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
+		CEA924D72B30CD520086E744 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +69,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE46B71A2B325EAB00493502 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				CE46B71F2B325EDC00493502 /* Settings */,
+				CE46B71B2B325EBE00493502 /* MapView.swift */,
+				CEA924D72B30CD520086E744 /* TabsView.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		CE46B71F2B325EDC00493502 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CE46B71D2B325ED600493502 /* AppSettings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CE46B7202B325F4A00493502 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */,
+				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE46B7212B325FB000493502 /* OnboardingFlow */ = {
+			isa = PBXGroup;
+			children = (
+				CEA924D02B2FB7A20086E744 /* OnboardingView.swift */,
+			);
+			path = OnboardingFlow;
+			sourceTree = "<group>";
+		};
 		CE52F2F82B1CF3B200D81762 = {
 			isa = PBXGroup;
 			children = (
@@ -65,10 +124,12 @@
 		CE52F3032B1CF3B200D81762 /* grodno-roads-ios */ = {
 			isa = PBXGroup;
 			children = (
+				CEA924C12B2FA95B0086E744 /* DecomposeHelpers */,
+				CEA924D22B30CCB80086E744 /* MainFlow */,
+				CE46B7212B325FB000493502 /* OnboardingFlow */,
 				CE52F3042B1CF3B200D81762 /* MainApp.swift */,
-				CE52F3062B1CF3B200D81762 /* ContentView.swift */,
-				CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */,
-				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
+				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
+				CE46B7202B325F4A00493502 /* Resources */,
 				CE52F30A2B1CF3B400D81762 /* Preview Content */,
 			);
 			path = "grodno-roads-ios";
@@ -80,6 +141,29 @@
 				CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA924C22B2FA95B0086E744 /* StateValue.swift */,
+				CEA924C32B2FA95B0086E744 /* MutableValue.swift */,
+				CEA924C42B2FA95B0086E744 /* StackView.swift */,
+				CEA924C52B2FA95B0086E744 /* ObservableValue.swift */,
+				CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */,
+			);
+			path = DecomposeHelpers;
+			sourceTree = "<group>";
+		};
+		CEA924D22B30CCB80086E744 /* MainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				CE46B71A2B325EAB00493502 /* Tabs */,
+				CEA924D32B30CCC50086E744 /* AppearanceView.swift */,
+				CEA924D52B30CD310086E744 /* ChangelogView.swift */,
+				CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */,
+			);
+			path = MainFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,8 +266,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE52F3072B1CF3B200D81762 /* ContentView.swift in Sources */,
+				CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */,
+				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
+				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
+				CEA924D82B30CD520086E744 /* TabsView.swift in Sources */,
+				CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */,
+				CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */,
+				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
+				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
+				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
+				CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */,
+				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
+				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
+				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
