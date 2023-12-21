@@ -14,8 +14,11 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
+import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponentPreview
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Question
 
@@ -76,4 +79,13 @@ fun FaqScreen(
             }
         }
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun FaqScreenPreview() = GrodnoRoadsM3ThemePreview {
+    FaqScreen(
+        faqComponent = FaqComponentPreview(),
+        onBack = {}
+    )
 }

@@ -38,7 +38,6 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.compose.foundation.preview)
-            implementation(projects.compose.foundation.theme)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
 

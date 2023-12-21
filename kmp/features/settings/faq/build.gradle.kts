@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
+            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.commonUi)
 
             implementation(projects.libraries.resources)
