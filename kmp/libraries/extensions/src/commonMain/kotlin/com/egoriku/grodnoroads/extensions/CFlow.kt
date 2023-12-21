@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.extensions.common
+package com.egoriku.grodnoroads.extensions
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,3 +18,6 @@ class CMutableStateFlow<T : Any>(
 ) : CStateFlow<T>(mutableStateFlow), MutableStateFlow<T> by mutableStateFlow {
     constructor(initialValue: T) : this(MutableStateFlow(initialValue))
 }
+
+fun <T : Any> stateFlowOf(valueProvider: () -> T): CStateFlow<T> =
+    MutableStateFlow(value = valueProvider()).asCFlow()
