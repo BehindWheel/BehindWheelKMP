@@ -11,7 +11,6 @@ import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
@@ -61,7 +60,6 @@ class RoadsRootComponentImpl(
         when (page) {
             Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Map -> navigation.pushNew(Config.MapSettings)
-            Page.Alerts -> navigation.pushNew(Config.Alerts)
             else -> {}
         }
     }
@@ -80,7 +78,6 @@ class RoadsRootComponentImpl(
             appearanceComponent = buildAppearanceComponent(componentContext)
         )
 
-        is Config.Alerts -> Child.Alerts(alertsComponent = buildAlertsComponent(componentContext))
         is Config.MapSettings -> Child.Map(
             mapSettingsComponent = buildMapSettingsComponent(componentContext)
         )
@@ -96,8 +93,5 @@ class RoadsRootComponentImpl(
 
         @Serializable
         data object MapSettings : Config()
-
-        @Serializable
-        data object Alerts : Config()
     }
 }

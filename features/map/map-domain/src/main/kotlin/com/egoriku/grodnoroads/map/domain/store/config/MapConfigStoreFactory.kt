@@ -16,7 +16,6 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.*
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
@@ -24,6 +23,7 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
+import com.egoriku.grodnoroads.shared.persistent.alert.*
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged

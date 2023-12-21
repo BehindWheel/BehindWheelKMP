@@ -76,7 +76,6 @@ dependencies {
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
-    implementation(projects.features.setting.alerts)
     implementation(projects.features.setting.appearance)
     implementation(projects.features.setting.map)
 

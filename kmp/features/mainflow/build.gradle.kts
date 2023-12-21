@@ -19,6 +19,7 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(projects.kmp.features.tabs)
+            implementation(projects.kmp.features.settings.alerts)
             implementation(projects.kmp.features.settings.changelog)
             implementation(projects.kmp.features.settings.faq)
             implementation(projects.kmp.shared.models)

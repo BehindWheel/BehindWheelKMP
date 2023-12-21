@@ -6,6 +6,7 @@ import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
+import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.shared.models.Page
@@ -38,25 +39,28 @@ internal class MainFlowComponentImpl(
         componentContext: ComponentContext
     ) = when (config) {
         is Config.Tabs -> Child.Tabs(
-            buildTabComponent(componentContext = componentContext, onOpenPage = ::open)
+            buildTabComponent(
+                componentContext = componentContext,
+                onOpenPage = ::open
+            )
         )
         is Config.Appearance -> Child.Appearance
-        Config.Alerts -> TODO()
-        Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
-        Config.FAQ -> Child.Faq(buildFaqComponent(componentContext))
-        Config.MapSettings -> TODO()
-        Config.NextFeatures -> TODO()
+        is Config.Alerts -> Child.Alerts(buildAlertsComponent(componentContext))
+        is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
+        is Config.FAQ -> Child.Faq(buildFaqComponent(componentContext))
+        is Config.MapSettings -> TODO()
+        is Config.NextFeatures -> TODO()
     }
 
     @OptIn(ExperimentalDecomposeApi::class)
     private fun open(page: Page) {
         when (page) {
-            Page.Appearance -> navigation.pushNew(Config.Appearance)
-            Page.Map -> navigation.pushNew(Config.MapSettings)
             Page.Alerts -> navigation.pushNew(Config.Alerts)
+            Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Changelog -> navigation.pushNew(Config.Changelog)
-            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
             Page.FAQ -> navigation.pushNew(Config.FAQ)
+            Page.Map -> navigation.pushNew(Config.MapSettings)
+            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
         }
     }
 

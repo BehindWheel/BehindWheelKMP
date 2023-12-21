@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)

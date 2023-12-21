@@ -7,14 +7,13 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.*
 import com.egoriku.grodnoroads.setting.map.domain.store.MapSettingsStore.*
-import com.egoriku.grodnoroads.datastore.edit
-import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.*
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.updateDefaultCity
@@ -23,6 +22,7 @@ import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapSt
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateGoogleMapStyle
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.updateTrafficJamAppearance
+import com.egoriku.grodnoroads.shared.persistent.Selectable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn

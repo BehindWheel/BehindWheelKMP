@@ -13,6 +13,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.*
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predictiveback.predictiveBackAnimation
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
+import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
 import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 
@@ -37,6 +38,10 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
             is Child.Tabs -> {
                 TabsScreen(tabsComponent = child.component)
             }
+            is Child.Alerts -> AlertsScreen(
+                alertsComponent = child.component,
+                onBack = mainFlowComponent::onBack
+            )
             is Child.Appearance -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text("appearance")

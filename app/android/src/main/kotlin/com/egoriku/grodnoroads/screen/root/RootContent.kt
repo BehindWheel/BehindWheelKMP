@@ -15,7 +15,6 @@ import com.egoriku.grodnoroads.mainflow.screen.TabsScreen
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
-import com.egoriku.grodnoroads.setting.alerts.AlertsScreen
 import com.egoriku.grodnoroads.setting.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
 
@@ -55,11 +54,6 @@ fun RootContent(rootComponent: RoadsRootComponent) {
 
                 is Child.Map -> MapSettingsScreen(
                     mapSettingsComponent = child.mapSettingsComponent,
-                    onBack = rootComponent::onBack
-                )
-
-                is Child.Alerts -> AlertsScreen(
-                    alertsComponent = child.alertsComponent,
                     onBack = rootComponent::onBack
                 )
             }

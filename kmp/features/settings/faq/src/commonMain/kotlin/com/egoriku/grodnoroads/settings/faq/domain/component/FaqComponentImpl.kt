@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.egoriku.grodnoroads.extensions.CStateFlow
-import com.egoriku.grodnoroads.extensions.asCFlow
+import com.egoriku.grodnoroads.extensions.asCStateFlow
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.core.component.KoinComponent
@@ -22,5 +22,5 @@ internal class FaqComponentImpl(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val state: CStateFlow<FaqStore.State>
-        get() = faqStore.stateFlow.asCFlow()
+        get() = faqStore.stateFlow.asCStateFlow()
 }
