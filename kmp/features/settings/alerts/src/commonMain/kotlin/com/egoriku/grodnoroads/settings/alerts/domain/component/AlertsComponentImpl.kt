@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.alerts.domain.component
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.extensions.CFlow
-import com.egoriku.grodnoroads.extensions.asCFlow
+import com.egoriku.grodnoroads.coroutines.CFlow
+import com.egoriku.grodnoroads.coroutines.asCFlow
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
 import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore
 import com.egoriku.grodnoroads.settings.alerts.domain.store.AlertsStore.AlertsIntent

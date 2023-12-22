@@ -18,8 +18,8 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(projects.kmp.shared.persistent)
+            implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.datastore)
-            implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.firestore)

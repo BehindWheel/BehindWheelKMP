@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.faq.domain.component
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.egoriku.grodnoroads.extensions.CStateFlow
-import com.egoriku.grodnoroads.extensions.asCStateFlow
+import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.asCStateFlow
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.core.component.KoinComponent

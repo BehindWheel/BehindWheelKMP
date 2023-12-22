@@ -58,6 +58,7 @@ include(":kmp:features:settings:alerts")
 include(":kmp:features:settings:changelog")
 include(":kmp:features:settings:faq")
 
+include(":kmp:libraries:coroutines")
 include(":kmp:libraries:crashlytics")
 include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")

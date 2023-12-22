@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosTarget
 
 plugins {
@@ -12,10 +11,4 @@ android {
 kotlin {
     androidTarget()
     setupIosTarget(baseName = "extensions")
-
-    sourceSets {
-        commonDependencies {
-            implementation(libs.kotlin.coroutines.core)
-        }
-    }
 }

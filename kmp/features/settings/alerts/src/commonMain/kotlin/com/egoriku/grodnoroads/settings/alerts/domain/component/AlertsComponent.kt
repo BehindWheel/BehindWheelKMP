@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.settings.alerts.domain.component
 
-import com.egoriku.grodnoroads.extensions.CFlow
+import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.*
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import com.egoriku.grodnoroads.shared.persistent.alert.DEFAULT_ALERT_DISTANCE_IN_CITY
