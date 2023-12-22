@@ -15,6 +15,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(libs.decompose)
             implementation(libs.kotlin.coroutines.core)
         }
     }
