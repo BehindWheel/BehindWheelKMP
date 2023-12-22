@@ -115,20 +115,3 @@ private struct StackInteropView<T: AnyObject, Content: View>: UIViewControllerRe
         }
     }
 }
-
-// stubs for XCode < 14:
-#if compiler(<5.7)
-private struct NavigationStack<Path, Root>: View {
-    var path: Path
-    @ViewBuilder var root: () -> Root
-    var body: some View {
-        EmptyView()
-    }
-}
-
-private extension View {
-    public func navigationDestination<D, C>(for data: D.Type, @ViewBuilder destination: @escaping (D) -> C) -> some View where D: Hashable, C: View {
-        EmptyView()
-    }
-}
-#endif

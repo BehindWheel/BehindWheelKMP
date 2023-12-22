@@ -11,3 +11,14 @@ import Root
         obj = ObservableValue(value)
     }
 }
+
+@propertyWrapper struct StateFlow<T : AnyObject>: DynamicProperty {
+    @ObservedObject
+    private var obj: ObservableFlow<T>
+
+    var wrappedValue: T { obj.value }
+
+    init(_ value: CStateFlow<T>) {
+        obj = ObservableFlow(value)
+    }
+}

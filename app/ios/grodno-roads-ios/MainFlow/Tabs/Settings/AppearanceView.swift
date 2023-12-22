@@ -9,6 +9,12 @@ import SwiftUI
 import Root
 
 struct AppearanceView: View {
+    private let component: AppearanceComponent
+    
+    init(_ component: AppearanceComponent) {
+        self.component = component
+    }
+    
     var body: some View {
         VStack {
             Text("AppearanceView")

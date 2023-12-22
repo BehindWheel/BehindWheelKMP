@@ -20,8 +20,10 @@ struct MainFlowView: View {
             stackValue: StateValue(component.childStack),
             getTitle: { child in
                 switch child {
+                case is MainFlowComponentChild.Alerts: "Alerts"
                 case is MainFlowComponentChild.Appearance: "Appearance"
                 case is MainFlowComponentChild.Changelog: "Changelog"
+                case is MainFlowComponentChild.Faq: "FAQ"
                 case is MainFlowComponentChild.Tabs: "Tabs"
                 default: "Default"
                 }
@@ -29,10 +31,11 @@ struct MainFlowView: View {
             onBack: { _ in component.onBack() },
             childContent: { child in
                 switch child {
-                case _ as MainFlowComponentChild.Appearance: AppearanceView()
+                case let child as MainFlowComponentChild.Alerts: AlertsView(child.component)
+                case let child as MainFlowComponentChild.Appearance: AppearanceView(child.component)
                 case let child as MainFlowComponentChild.Changelog: ChangelogView(child.component)
-                case let child as MainFlowComponentChild.Tabs: TabsView(child.component)
                 case let child as MainFlowComponentChild.Faq: FaqView(child.component)
+                case let child as MainFlowComponentChild.Tabs: TabsView(child.component)
                 default: EmptyView()
                 }
             }

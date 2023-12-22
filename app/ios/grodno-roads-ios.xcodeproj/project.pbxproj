@@ -13,6 +13,7 @@
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
 		CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */; };
+		CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627462B362C0E00799BC2 /* AlertsView.swift */; };
 		CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */; };
 		CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE80C6122B2E1FE100302023 /* FirebaseFirestore */; };
 		CEA322392B33A1B90039329B /* FaqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA322382B33A1B90039329B /* FaqView.swift */; };
@@ -36,6 +37,7 @@
 		CE52F3042B1CF3B200D81762 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		CE52F3082B1CF3B400D81762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CE6627462B362C0E00799BC2 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
 		CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
@@ -84,7 +86,11 @@
 		CE46B71F2B325EDC00493502 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				CE6627462B362C0E00799BC2 /* AlertsView.swift */,
+				CEA924D32B30CCC50086E744 /* AppearanceView.swift */,
 				CE46B71D2B325ED600493502 /* AppSettings.swift */,
+				CEA924D52B30CD310086E744 /* ChangelogView.swift */,
+				CEA322382B33A1B90039329B /* FaqView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -129,10 +135,10 @@
 				CEA924C12B2FA95B0086E744 /* DecomposeHelpers */,
 				CEA924D22B30CCB80086E744 /* MainFlow */,
 				CE46B7212B325FB000493502 /* OnboardingFlow */,
+				CE52F30A2B1CF3B400D81762 /* Preview Content */,
+				CE46B7202B325F4A00493502 /* Resources */,
 				CE52F3042B1CF3B200D81762 /* MainApp.swift */,
 				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
-				CE46B7202B325F4A00493502 /* Resources */,
-				CE52F30A2B1CF3B400D81762 /* Preview Content */,
 			);
 			path = "grodno-roads-ios";
 			sourceTree = "<group>";
@@ -148,11 +154,11 @@
 		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				CEA924C22B2FA95B0086E744 /* StateValue.swift */,
 				CEA924C32B2FA95B0086E744 /* MutableValue.swift */,
-				CEA924C42B2FA95B0086E744 /* StackView.swift */,
 				CEA924C52B2FA95B0086E744 /* ObservableValue.swift */,
 				CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */,
+				CEA924C42B2FA95B0086E744 /* StackView.swift */,
+				CEA924C22B2FA95B0086E744 /* StateValue.swift */,
 			);
 			path = DecomposeHelpers;
 			sourceTree = "<group>";
@@ -161,10 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				CE46B71A2B325EAB00493502 /* Tabs */,
-				CEA924D32B30CCC50086E744 /* AppearanceView.swift */,
-				CEA924D52B30CD310086E744 /* ChangelogView.swift */,
 				CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */,
-				CEA322382B33A1B90039329B /* FaqView.swift */,
 			);
 			path = MainFlow;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */,
+				CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */,
 				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
 				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
 				CEA924D82B30CD520086E744 /* TabsView.swift in Sources */,

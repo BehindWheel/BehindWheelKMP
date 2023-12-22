@@ -9,7 +9,7 @@ import SwiftUI
 import Root
 
 struct AppSettings: View {
-    let component: AppSettingsComponent
+    private let component: AppSettingsComponent
     
     init(_ component: AppSettingsComponent) {
         self.component = component
@@ -17,28 +17,44 @@ struct AppSettings: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Main").bold().frame(maxWidth: .infinity, alignment: .leading)
+            Text("Main")
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
             Button("Appearance") {
                 component.open(page: .appearance)
-            }.padding()
+            }
+            .padding([.leading], 12)
+            .padding([.top], 6)
             Button("Map") {
                 component.open(page: .map)
             }
-            .padding()
             .foregroundStyle(.red)
+            .disabled(true)
+            .padding([.leading], 12)
+            .padding([.top], 6)
             Button("Alerts") {
                 component.open(page: .alerts)
             }
-            .padding()
-            .foregroundStyle(.red)
-            Text("Other").bold().frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.leading], 12)
+            .padding([.top, .bottom], 6)
+            Text("Other")
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
             Button("Changelog") {
                 component.open(page: .changelog)
-            }.padding()
+            }
+            .padding([.leading], 12)
+            .padding([.top], 6)
             Button("FAQ") {
                 component.open(page: .faq)
-            }.padding()
-            Text("Version: \(component.appVersion)").bold().frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding([.leading], 12)
+            .padding([.top], 6)
+            Spacer()
+            Text("Version: \(component.appVersion)")
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding()
         }
         .padding()
         .frame(maxHeight: .infinity)
