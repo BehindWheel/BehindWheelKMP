@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
+import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea

@@ -7,15 +7,14 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.extensions.common.StateData
+import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
-import com.egoriku.grodnoroads.mainflow.buildTabComponent
+import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable
@@ -58,7 +57,6 @@ class RoadsRootComponentImpl(
     @OptIn(ExperimentalDecomposeApi::class)
     override fun open(page: Page) {
         when (page) {
-            Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Map -> navigation.pushNew(Config.MapSettings)
             else -> {}
         }
@@ -74,10 +72,6 @@ class RoadsRootComponentImpl(
             )
         )
 
-        is Config.Appearance -> Child.Appearance(
-            appearanceComponent = buildAppearanceComponent(componentContext)
-        )
-
         is Config.MapSettings -> Child.Map(
             mapSettingsComponent = buildMapSettingsComponent(componentContext)
         )
@@ -87,9 +81,6 @@ class RoadsRootComponentImpl(
     private sealed class Config {
         @Serializable
         data object Main : Config()
-
-        @Serializable
-        data object Appearance : Config()
 
         @Serializable
         data object MapSettings : Config()

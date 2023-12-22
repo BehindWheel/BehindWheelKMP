@@ -7,6 +7,7 @@ import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
+import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.shared.models.Page
@@ -44,7 +45,7 @@ internal class MainFlowComponentImpl(
                 onOpenPage = ::open
             )
         )
-        is Config.Appearance -> Child.Appearance
+        is Config.Appearance -> Child.Appearance(buildAppearanceComponent(componentContext))
         is Config.Alerts -> Child.Alerts(buildAlertsComponent(componentContext))
         is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
         is Config.FAQ -> Child.Faq(buildFaqComponent(componentContext))

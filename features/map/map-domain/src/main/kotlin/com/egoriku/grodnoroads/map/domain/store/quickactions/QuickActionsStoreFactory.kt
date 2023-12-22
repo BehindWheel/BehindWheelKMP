@@ -14,8 +14,8 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage.NewSettings
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.updateAppTheme
+import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
+import com.egoriku.grodnoroads.shared.persistent.appearance.updateAppTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn

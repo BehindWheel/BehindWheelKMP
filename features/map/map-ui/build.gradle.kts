@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.kmp.shared.components)
+    implementation(projects.kmp.shared.persistent)
 
     implementation(projects.features.map.mapDomain)
 

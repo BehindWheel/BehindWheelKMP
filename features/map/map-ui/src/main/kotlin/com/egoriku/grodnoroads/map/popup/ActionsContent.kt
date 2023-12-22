@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsP
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.AppTheme
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme.Companion.toStringResource
+import com.egoriku.grodnoroads.shared.persistent.toStringResource
 
 @Composable
 fun ActionsContent(

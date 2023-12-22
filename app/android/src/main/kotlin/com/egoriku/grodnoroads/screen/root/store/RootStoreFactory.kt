@@ -13,8 +13,8 @@ import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.Update
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampDispatcher
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.appTheme
+import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
+import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn

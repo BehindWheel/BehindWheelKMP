@@ -65,18 +65,18 @@ android {
 dependencies {
     implementation(projects.kmp.features.root)
     implementation(projects.kmp.features.tabs)
+    implementation(projects.kmp.shared.components)
+    implementation(projects.kmp.shared.models)
+    implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
-    implementation(projects.kmp.shared.components)
-    implementation(projects.kmp.shared.models)
 
     implementation(projects.features.map.mapData)
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
-    implementation(projects.features.setting.appearance)
     implementation(projects.features.setting.map)
 
     implementation(projects.shared.appSettings)

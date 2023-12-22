@@ -1,11 +1,6 @@
 package com.egoriku.grodnoroads.mainflow.screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
@@ -14,6 +9,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.predic
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
+import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 
@@ -42,11 +38,10 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
                 alertsComponent = child.component,
                 onBack = mainFlowComponent::onBack
             )
-            is Child.Appearance -> {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("appearance")
-                }
-            }
+            is Child.Appearance -> AppearanceScreen(
+                appearanceComponent = child.component,
+                onBack = mainFlowComponent::onBack
+            )
             is Child.Changelog -> ChangelogScreen(
                 changelogComponent = child.component,
                 onBack = mainFlowComponent::onBack
