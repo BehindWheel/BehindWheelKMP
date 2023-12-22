@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.extensions.stateFlowOf
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 
-internal class FaqComponentPreview : FaqComponent {
+class FaqComponentPreview : FaqComponent {
 
     override val state: CStateFlow<FaqStore.State>
         get() = stateFlowOf {

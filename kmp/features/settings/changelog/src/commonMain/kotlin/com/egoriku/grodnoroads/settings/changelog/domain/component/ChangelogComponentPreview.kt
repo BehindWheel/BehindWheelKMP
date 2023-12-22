@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.extensions.stateFlowOf
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
 
-internal class ChangelogComponentPreview : ChangelogComponent {
+class ChangelogComponentPreview : ChangelogComponent {
 
     override val state: CStateFlow<ChangelogStore.State>
         get() = stateFlowOf {
