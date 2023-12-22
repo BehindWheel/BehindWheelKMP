@@ -14,6 +14,8 @@
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
 		CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */; };
 		CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627462B362C0E00799BC2 /* AlertsView.swift */; };
+		CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627482B3648D300799BC2 /* AppDelegate.swift */; };
+		CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274A2B36491100799BC2 /* ComponentContext.swift */; };
 		CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */; };
 		CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE80C6122B2E1FE100302023 /* FirebaseFirestore */; };
 		CEA322392B33A1B90039329B /* FaqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA322382B33A1B90039329B /* FaqView.swift */; };
@@ -38,6 +40,8 @@
 		CE52F3082B1CF3B400D81762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE6627462B362C0E00799BC2 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE66274A2B36491100799BC2 /* ComponentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentContext.swift; sourceTree = "<group>"; };
 		CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				CE46B7212B325FB000493502 /* OnboardingFlow */,
 				CE52F30A2B1CF3B400D81762 /* Preview Content */,
 				CE46B7202B325F4A00493502 /* Resources */,
+				CE6627482B3648D300799BC2 /* AppDelegate.swift */,
 				CE52F3042B1CF3B200D81762 /* MainApp.swift */,
 				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
 			);
@@ -154,6 +159,7 @@
 		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE66274A2B36491100799BC2 /* ComponentContext.swift */,
 				CEA924C32B2FA95B0086E744 /* MutableValue.swift */,
 				CEA924C52B2FA95B0086E744 /* ObservableValue.swift */,
 				CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */,
@@ -281,12 +287,14 @@
 				CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */,
 				CEA322392B33A1B90039329B /* FaqView.swift in Sources */,
 				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
+				CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */,
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
+				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

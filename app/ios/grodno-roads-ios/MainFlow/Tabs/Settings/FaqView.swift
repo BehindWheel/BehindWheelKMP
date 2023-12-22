@@ -25,8 +25,12 @@ struct FaqView: View {
                 Text("FAQ").padding()
                 Divider()
                 ForEach(state.faq) { faq in
-                    Text(faq.question).bold().padding()
+                    Text(faq.question)
+                        .bold()
+                        .padding([.vertical], 4)
+                        .frame(alignment: .center)
                     Text(faq.answer)
+                        .padding([.horizontal], 8)
                     Divider()
                 }
             }
@@ -35,3 +39,11 @@ struct FaqView: View {
 }
 
 extension FAQ: Identifiable {}
+
+#Preview {
+    FaqView(
+        FaqComponentImplKt.buildFaqComponent(
+            componentContext: .context()
+        )
+    )
+}

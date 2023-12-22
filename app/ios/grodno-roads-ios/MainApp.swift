@@ -6,25 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
-import Root
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    
-    private(set) lazy var root: RootComponent = RootComponentImpl(
-        componentContext: DefaultComponentContext(lifecycle: ApplicationLifecycle())
-    )
-    
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    ) -> Bool {
-        FirebaseApp.configure()
-        KoinHelper_iosKt.doInitKoin()
-        return true
-    }
-    
-}
 
 @main
 struct MainApp: App {

@@ -12,3 +12,7 @@ struct MapView: View {
         Text("Map")
     }
 }
+
+#Preview {
+    MapView()
+}

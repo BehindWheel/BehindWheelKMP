@@ -60,3 +60,12 @@ struct AppSettings: View {
         .frame(maxHeight: .infinity)
     }
 }
+
+#Preview {
+    AppSettings(
+        AppSettingsComponentImplKt.buildAppSettingsComponent(
+            componentContext: .context(),
+            onOpen: { _ in }
+        )
+    )
+}

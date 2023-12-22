@@ -21,3 +21,7 @@ struct AppearanceView: View {
         }
     }
 }
+
+#Preview {
+    AppearanceView(AppearanceComponentPreview())
+}

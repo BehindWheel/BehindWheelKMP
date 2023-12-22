@@ -21,3 +21,12 @@ struct OnboardingView: View {
         }
     }
 }
+
+#Preview {
+    OnboardingView(
+        OnboardingComponentImplKt.buildOnboardingComponent(
+            componentContext: .context(),
+            onFinishOnboarding: {}
+        )
+    )
+}

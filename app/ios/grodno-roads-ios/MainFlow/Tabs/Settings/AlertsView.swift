@@ -21,3 +21,7 @@ struct AlertsView: View {
         }
     }
 }
+
+#Preview {
+    AlertsView(AlertsComponentPreview())
+}

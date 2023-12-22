@@ -34,3 +34,11 @@ struct ChangelogView: View {
 }
 
 extension ReleaseNotes: Identifiable {}
+
+#Preview {
+    ChangelogView(
+        ChangelogComponentImplKt.buildChangelogComponent(
+            componentContext: .context()
+        )
+    )
+}
