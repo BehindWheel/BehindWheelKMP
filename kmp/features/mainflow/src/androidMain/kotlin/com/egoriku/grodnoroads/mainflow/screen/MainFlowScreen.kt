@@ -12,6 +12,7 @@ import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
 import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
 import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
+import com.egoriku.grodnoroads.settings.map.screen.MapSettingsScreen
 
 @OptIn(ExperimentalDecomposeApi::class, FaultyDecomposeApi::class)
 @Composable
@@ -31,9 +32,7 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
         )
     ) {
         when (val child = it.instance) {
-            is Child.Tabs -> {
-                TabsScreen(tabsComponent = child.component)
-            }
+            is Child.Tabs -> TabsScreen(tabsComponent = child.component)
             is Child.Alerts -> AlertsScreen(
                 alertsComponent = child.component,
                 onBack = mainFlowComponent::onBack
@@ -46,8 +45,12 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
                 changelogComponent = child.component,
                 onBack = mainFlowComponent::onBack
             )
-            is Child.Faq -> FaqScreen(
+            is Child.FAQ -> FaqScreen(
                 faqComponent = child.component,
+                onBack = mainFlowComponent::onBack
+            )
+            is Child.MapSettings -> MapSettingsScreen(
+                mapSettingsComponent = child.component,
                 onBack = mainFlowComponent::onBack
             )
         }

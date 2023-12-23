@@ -68,7 +68,7 @@ private fun SettingsUi(
                 icon = Icons.Filled.Map,
                 text = stringResource(R.string.settings_section_map),
                 onClick = {
-                    onSettingClick(Page.Map)
+                    onSettingClick(Page.MapSettings)
                 }
             )
             SettingsItem(

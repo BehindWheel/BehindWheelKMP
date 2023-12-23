@@ -27,8 +27,6 @@ include(":features:map:map-data")
 include(":features:map:map-domain")
 include(":features:map:map-ui")
 
-include(":features:setting:map")
-
 include(":compose:foundation:core")
 include(":compose:foundation:preview")
 include(":compose:foundation:theme")
@@ -55,6 +53,7 @@ include(":kmp:features:settings:alerts")
 include(":kmp:features:settings:appearance")
 include(":kmp:features:settings:changelog")
 include(":kmp:features:settings:faq")
+include(":kmp:features:settings:map")
 
 include(":kmp:libraries:coroutines")
 include(":kmp:libraries:crashlytics")

@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 
 interface MainFlowComponent : BackHandlerOwner {
 
@@ -20,6 +21,7 @@ interface MainFlowComponent : BackHandlerOwner {
         data class Appearance(val component: AppearanceComponent) : Child()
         data class Alerts(val component: AlertsComponent) : Child()
         data class Changelog(val component: ChangelogComponent) : Child()
-        data class Faq(val component: FaqComponent) : Child()
+        data class FAQ(val component: FaqComponent) : Child()
+        data class MapSettings(val component: MapSettingsComponent) : Child()
     }
 }

@@ -25,7 +25,6 @@ kotlin {
             implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose)
-            implementation(libs.dev.gitlive.firebase.firestore)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)

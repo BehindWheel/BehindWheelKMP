@@ -4,7 +4,7 @@ enum class Page {
     Alerts,
     Appearance,
     FAQ,
-    Map,
+    MapSettings,
     NextFeatures,
     Changelog,
 }

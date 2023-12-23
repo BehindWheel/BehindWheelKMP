@@ -77,8 +77,6 @@ dependencies {
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
-    implementation(projects.features.setting.map)
-
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.uikit)

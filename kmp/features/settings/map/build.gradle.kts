@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.settings.alerts"
+    namespace = "com.egoriku.grodnoroads.settings.map"
 }
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "settings_alerts")
+    setupIosTarget(baseName = "settings_map")
 
     sourceSets {
         commonDependencies {
@@ -34,11 +34,9 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.compose.foundation.core)
-            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.foundation.uikit)
+            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.commonUi)
-
-            implementation(projects.libraries.audioplayer)
             implementation(projects.libraries.resources)
 
             implementation(libs.androidx.compose.foundation)

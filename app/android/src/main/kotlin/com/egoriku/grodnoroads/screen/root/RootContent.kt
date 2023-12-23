@@ -15,7 +15,6 @@ import com.egoriku.grodnoroads.mainflow.screen.TabsScreen
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.screen.root.ui.HeadLampDialog
-import com.egoriku.grodnoroads.setting.map.MapSettingsScreen
 
 @OptIn(FaultyDecomposeApi::class, ExperimentalDecomposeApi::class)
 @Composable
@@ -46,10 +45,6 @@ fun RootContent(rootComponent: RoadsRootComponent) {
         ) {
             when (val child = it.instance) {
                 is Child.Main -> TabsScreen(tabsComponent = child.component)
-                is Child.Map -> MapSettingsScreen(
-                    mapSettingsComponent = child.mapSettingsComponent,
-                    onBack = rootComponent::onBack
-                )
             }
         }
     }

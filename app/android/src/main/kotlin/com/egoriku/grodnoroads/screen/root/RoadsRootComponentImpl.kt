@@ -1,8 +1,10 @@
 package com.egoriku.grodnoroads.screen.root
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.router.stack.*
+import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
@@ -12,8 +14,6 @@ import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
-import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -54,35 +54,21 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
-    @OptIn(ExperimentalDecomposeApi::class)
-    override fun open(page: Page) {
-        when (page) {
-            Page.Map -> navigation.pushNew(Config.MapSettings)
-            else -> {}
-        }
-    }
-
     override fun onBack() = navigation.pop()
 
     private fun child(config: Config, componentContext: ComponentContext) = when (config) {
         is Config.Main -> Child.Main(
             component = buildTabComponent(
                 componentContext = componentContext,
-                onOpenPage = ::open
+                onOpenPage = {}
             )
         )
 
-        is Config.MapSettings -> Child.Map(
-            mapSettingsComponent = buildMapSettingsComponent(componentContext)
-        )
     }
 
     @Serializable
     private sealed class Config {
         @Serializable
         data object Main : Config()
-
-        @Serializable
-        data object MapSettings : Config()
     }
 }

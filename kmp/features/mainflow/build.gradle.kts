@@ -23,6 +23,7 @@ kotlin {
             implementation(projects.kmp.features.settings.appearance)
             implementation(projects.kmp.features.settings.changelog)
             implementation(projects.kmp.features.settings.faq)
+            implementation(projects.kmp.features.settings.map)
             implementation(projects.kmp.shared.models)
 
             implementation(libs.decompose)

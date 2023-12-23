@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsCompo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
+import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
 import kotlinx.serialization.Serializable
 
@@ -48,8 +49,8 @@ internal class MainFlowComponentImpl(
         is Config.Appearance -> Child.Appearance(buildAppearanceComponent(componentContext))
         is Config.Alerts -> Child.Alerts(buildAlertsComponent(componentContext))
         is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
-        is Config.FAQ -> Child.Faq(buildFaqComponent(componentContext))
-        is Config.MapSettings -> TODO()
+        is Config.FAQ -> Child.FAQ(buildFaqComponent(componentContext))
+        is Config.MapSettings -> Child.MapSettings(buildMapSettingsComponent(componentContext))
         is Config.NextFeatures -> TODO()
     }
 
@@ -60,7 +61,7 @@ internal class MainFlowComponentImpl(
             Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Changelog -> navigation.pushNew(Config.Changelog)
             Page.FAQ -> navigation.pushNew(Config.FAQ)
-            Page.Map -> navigation.pushNew(Config.MapSettings)
+            Page.MapSettings -> navigation.pushNew(Config.MapSettings)
             Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
         }
     }
