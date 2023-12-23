@@ -8,17 +8,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Companion.toResource
+import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import kotlinx.collections.immutable.toImmutableList
 import java.text.Collator
 import java.util.Locale
@@ -43,7 +43,7 @@ internal fun DefaultLocationBottomSheet(
         content = {
             val sortedCityValues = defaultCity.values
                 .mapIndexed { index, value ->
-                    CityValue(index, stringResource(id = value.toResource()))
+                    CityValue(index, stringResource(id = value.toStringResource()))
                 }.sortedWith(compareBy(Collator.getInstance(Locale.getDefault())) { it.value })
 
             SingleChoiceLazyColumn(

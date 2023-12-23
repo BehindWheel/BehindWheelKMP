@@ -46,8 +46,6 @@ include(":libraries:extensions")
 include(":libraries:location")
 include(":libraries:resources")
 
-include(":shared:appSettings")
-
 include(":kmp:features:root")
 include(":kmp:features:onboarding")
 include(":kmp:features:mainflow")
@@ -62,6 +60,7 @@ include(":kmp:libraries:coroutines")
 include(":kmp:libraries:crashlytics")
 include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")
+include(":kmp:libraries:location")
 include(":kmp:libraries:logger")
 
 include(":kmp:shared:components")

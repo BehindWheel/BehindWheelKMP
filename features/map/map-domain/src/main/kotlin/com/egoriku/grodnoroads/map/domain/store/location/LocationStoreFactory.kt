@@ -12,7 +12,7 @@ import com.egoriku.grodnoroads.location.LocationHelper
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Intent.*
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
+import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*

@@ -27,6 +27,7 @@ kotlin {
         export(projects.kmp.features.settings.faq)
         export(projects.kmp.features.tabs)
         export(projects.kmp.libraries.coroutines)
+        export(projects.kmp.libraries.location)
     }
 
     sourceSets {
@@ -40,6 +41,7 @@ kotlin {
             api(projects.kmp.features.settings.faq)
             api(projects.kmp.features.tabs)
             api(projects.kmp.libraries.coroutines)
+            api(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.datastore)
 

@@ -19,12 +19,13 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.reLaunch
-import com.egoriku.grodnoroads.map.ui.KeepScreenOn
+import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
+import com.egoriku.grodnoroads.location.toGmsLatLng
+import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -54,6 +55,7 @@ import com.egoriku.grodnoroads.map.mode.DefaultOverlay
 import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.map.mode.default.DefaultMode
 import com.egoriku.grodnoroads.map.mode.drive.DriveMode
+import com.egoriku.grodnoroads.map.ui.KeepScreenOn
 import com.egoriku.grodnoroads.map.util.MarkerCache
 import com.egoriku.grodnoroads.map.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
@@ -156,7 +158,7 @@ fun MapScreen(
                 },
                 cameraPositionProvider = {
                     cameraPosition {
-                        target(initialLocation)
+                        target(initialLocation.toGmsLatLng())
                         zoom(mapConfig.zoomLevel)
                     }
                 },
@@ -213,7 +215,7 @@ fun MapScreen(
 
                         if (mapUpdater.isInitialCameraAnimation()) {
                             mapUpdater.animateCamera(
-                                target = location.latLng,
+                                target = location.latLng.toGmsLatLng(),
                                 zoom = mapConfig.zoomLevel,
                                 bearing = location.bearing
                             )
@@ -223,7 +225,7 @@ fun MapScreen(
                             return@LaunchedEffect
 
                         mapUpdater.animateCamera(
-                            target = location.latLng,
+                            target = location.latLng.toGmsLatLng(),
                             zoom = mapConfig.zoomLevel,
                             bearing = location.bearing
                         )
@@ -250,7 +252,7 @@ fun MapScreen(
                 if (isRequestCurrentLocation) {
                     mapUpdater.onMapScope {
                         animateTarget(
-                            target = location.latLng,
+                            target = location.latLng.toGmsLatLng(),
                             zoom = if (appMode == Default) 14.5f else null,
                             onFinish = { isRequestCurrentLocation = false },
                             onCancel = { isRequestCurrentLocation = false }
@@ -273,7 +275,7 @@ fun MapScreen(
                     NavigationMarker(
                         tag = if (isLight) "navigation_light" else "navigation_dark",
                         appMode = appMode,
-                        position = location.latLng,
+                        position = location.latLng.toGmsLatLng(),
                         bearing = location.bearing,
                         icon = {
                             markerCache.getIcon(
@@ -423,7 +425,7 @@ fun MapScreen(
                                             /* y = */ offset.y.toInt()
                                         )
                                     ) ?: return@ChooseLocation
-                                    component.reportChooseLocation(latLng)
+                                    component.reportChooseLocation(latLng.toLatLng())
                                 }
                             )
                         }

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle
+package com.egoriku.grodnoroads.shared.persistent.map.mapstyle
 
 enum class Style(val type: String) {
     Minimal(type = "minimalistic"),

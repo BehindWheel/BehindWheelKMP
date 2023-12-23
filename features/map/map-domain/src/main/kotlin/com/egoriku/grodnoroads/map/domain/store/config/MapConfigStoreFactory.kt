@@ -16,21 +16,20 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
+import com.egoriku.grodnoroads.map.domain.util.CityArea
 import com.egoriku.grodnoroads.shared.persistent.alert.*
+import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.*
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.googleMapStyle
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-
 
 internal class MapConfigStoreFactory(
     private val storeFactory: StoreFactory,
@@ -95,12 +94,42 @@ internal class MapConfigStoreFactory(
                     val latLng = it.latLng
 
                     val isCityArea = when {
-                        PolyUtil.containsLocation(latLng, CityArea.grodno, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.porechye, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.volkovysk, false) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.grodno,
+                            false
+                        ) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.berestovitca,
+                            false
+                        ) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.skidel,
+                            false
+                        ) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.ozery,
+                            false
+                        ) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.porechye,
+                            false
+                        ) -> true
+                        PolyUtil.containsLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            CityArea.volkovysk,
+                            false
+                        ) -> true
                         else -> false
                     }
 
@@ -141,7 +170,6 @@ internal class MapConfigStoreFactory(
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
-                // TODO: Try https://github.com/kopykat-kt/kopykat
                 when (message) {
                     is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.shared.appsettings.types.map.location
+package com.egoriku.grodnoroads.map.domain.util
 
 import com.google.android.gms.maps.model.LatLng
 

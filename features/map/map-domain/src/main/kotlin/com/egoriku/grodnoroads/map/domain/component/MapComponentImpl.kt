@@ -6,6 +6,7 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
 import com.egoriku.grodnoroads.map.domain.model.*
@@ -25,7 +26,6 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.Q
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview

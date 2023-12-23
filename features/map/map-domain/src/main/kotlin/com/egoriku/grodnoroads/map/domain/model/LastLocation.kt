@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.map.domain.model
 
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.location.LatLng
 
 data class LastLocation(
     val latLng: LatLng,

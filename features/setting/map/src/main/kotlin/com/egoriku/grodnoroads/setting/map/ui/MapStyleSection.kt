@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.setting.map.ui.component.CheckableCard
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 
 @Composable
 internal fun MapStyleSection(

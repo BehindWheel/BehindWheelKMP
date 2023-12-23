@@ -1,11 +1,11 @@
 package com.egoriku.grodnoroads.map.domain.component
 
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 

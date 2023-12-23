@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(projects.kmp.shared.components)
     implementation(projects.kmp.shared.persistent)
+    implementation(projects.kmp.libraries.location)
 
     implementation(projects.features.map.mapDomain)
 
@@ -25,8 +26,6 @@ dependencies {
 
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.resources)
-
-    implementation(projects.shared.appSettings)
 
     implementation(libs.androidx.activity.compose)
 

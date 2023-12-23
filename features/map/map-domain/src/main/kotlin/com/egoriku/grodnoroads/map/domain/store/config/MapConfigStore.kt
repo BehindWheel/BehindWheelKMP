@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.store.config
 
 import com.arkivanov.mvikotlin.core.store.Store
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
-import com.google.android.gms.maps.model.LatLng
 
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 

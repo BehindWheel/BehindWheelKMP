@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.map.domain.store.dialog
 
 import com.arkivanov.mvikotlin.core.store.Store
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.*
-import com.google.android.gms.maps.model.LatLng
 
 interface DialogStore : Store<Intent, State, Message> {
 

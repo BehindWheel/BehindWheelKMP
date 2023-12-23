@@ -79,8 +79,6 @@ dependencies {
 
     implementation(projects.features.setting.map)
 
-    implementation(projects.shared.appSettings)
-
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.uikit)

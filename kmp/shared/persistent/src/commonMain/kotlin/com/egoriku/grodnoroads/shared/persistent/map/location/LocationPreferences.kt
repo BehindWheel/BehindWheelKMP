@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.shared.appsettings.types.map.location
+package com.egoriku.grodnoroads.shared.persistent.map.location
 
 import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences

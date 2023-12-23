@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.map.domain.store.location
 
 import com.arkivanov.mvikotlin.core.store.Store
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.*
-import com.google.android.gms.maps.model.LatLng
 
 interface LocationStore : Store<Intent, State, Label> {
 

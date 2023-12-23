@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.domain.model
 
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.google.android.gms.maps.model.LatLng
 
 sealed interface MapAlertDialog {
 

@@ -12,6 +12,7 @@ dependencies {
     implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
+    implementation(projects.kmp.libraries.location)
     implementation(projects.kmp.libraries.logger)
 
     implementation(projects.compose.maps.core)
@@ -19,8 +20,6 @@ dependencies {
     implementation(projects.libraries.audioplayer)
     implementation(projects.libraries.extensions)
     implementation(projects.libraries.location)
-
-    implementation(projects.shared.appSettings)
 
     implementation(libs.androidx.compose.runtime)
 

@@ -2,11 +2,11 @@ package com.egoriku.grodnoroads.setting.map.domain.component
 
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.*
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Grodno
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.shared.persistent.map.location.City
+import com.egoriku.grodnoroads.shared.persistent.map.location.City.Grodno
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import kotlinx.coroutines.flow.Flow
 

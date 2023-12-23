@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.location)
     implementation(projects.kmp.libraries.logger)
 
     implementation(projects.libraries.extensions)

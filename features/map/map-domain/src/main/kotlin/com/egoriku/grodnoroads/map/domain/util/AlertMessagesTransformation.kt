@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.map.domain.util
 
+import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
@@ -45,11 +46,11 @@ private fun makeAlertMessage(
             val distance = computeDistance(
                 eventLatLng = event.position,
                 offsetLatLng = computeOffset(
-                    from = lastLocation.latLng,
+                    from = lastLocation.latLng.toGmsLatLng(),
                     distance = alertDistance.toDouble(),
                     heading = lastLocation.bearing.toDouble()
                 ),
-                currentLatLnt = lastLocation.latLng,
+                currentLatLnt = lastLocation.latLng.toGmsLatLng(),
                 distanceRadius = alertDistance
             )
 

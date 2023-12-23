@@ -15,7 +15,7 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.maps.compose.MapProperties
 import com.egoriku.grodnoroads.maps.compose.MapType
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 import com.google.android.gms.maps.model.MapStyleOptions
 
 @Composable
