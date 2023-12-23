@@ -25,11 +25,9 @@ struct AppSettings: View {
             }
             .padding([.leading], 12)
             .padding([.top], 6)
-            Button("Map") {
-                component.open(page: .map)
+            Button("Map settings") {
+                component.open(page: .mapsettings)
             }
-            .foregroundStyle(.red)
-            .disabled(true)
             .padding([.leading], 12)
             .padding([.top], 6)
             Button("Alerts") {

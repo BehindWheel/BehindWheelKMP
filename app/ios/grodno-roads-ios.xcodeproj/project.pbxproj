@@ -16,6 +16,7 @@
 		CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627462B362C0E00799BC2 /* AlertsView.swift */; };
 		CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627482B3648D300799BC2 /* AppDelegate.swift */; };
 		CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274A2B36491100799BC2 /* ComponentContext.swift */; };
+		CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */; };
 		CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */; };
 		CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE80C6122B2E1FE100302023 /* FirebaseFirestore */; };
 		CEA322392B33A1B90039329B /* FaqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA322382B33A1B90039329B /* FaqView.swift */; };
@@ -42,6 +43,7 @@
 		CE6627462B362C0E00799BC2 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE66274A2B36491100799BC2 /* ComponentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentContext.swift; sourceTree = "<group>"; };
+		CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsView.swift; sourceTree = "<group>"; };
 		CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				CE46B71D2B325ED600493502 /* AppSettings.swift */,
 				CEA924D52B30CD310086E744 /* ChangelogView.swift */,
 				CEA322382B33A1B90039329B /* FaqView.swift */,
+				CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				CEA322392B33A1B90039329B /* FaqView.swift in Sources */,
 				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
 				CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */,
+				CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */,
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */,

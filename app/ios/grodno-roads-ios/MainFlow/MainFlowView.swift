@@ -23,7 +23,7 @@ struct MainFlowView: View {
                 case is MainFlowComponentChild.Alerts: "Alerts"
                 case is MainFlowComponentChild.Appearance: "Appearance"
                 case is MainFlowComponentChild.Changelog: "Changelog"
-                case is MainFlowComponentChild.Faq: "FAQ"
+                case is MainFlowComponentChild.FAQ: "FAQ"
                 case is MainFlowComponentChild.Tabs: "Tabs"
                 default: "Default"
                 }
@@ -34,7 +34,8 @@ struct MainFlowView: View {
                 case let child as MainFlowComponentChild.Alerts: AlertsView(child.component)
                 case let child as MainFlowComponentChild.Appearance: AppearanceView(child.component)
                 case let child as MainFlowComponentChild.Changelog: ChangelogView(child.component)
-                case let child as MainFlowComponentChild.Faq: FaqView(child.component)
+                case let child as MainFlowComponentChild.FAQ: FaqView(child.component)
+                case let child as MainFlowComponentChild.MapSettings: MapSettingsView(child.component)
                 case let child as MainFlowComponentChild.Tabs: TabsView(child.component)
                 default: EmptyView()
                 }
