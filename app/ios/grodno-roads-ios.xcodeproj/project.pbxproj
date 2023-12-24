@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
+		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6AFE155C2B30CA2D003016DC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFE155B2B30CA2D003016DC /* FirebaseCrashlytics */; };
 		CE46B71C2B325EBE00493502 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71B2B325EBE00493502 /* MapView.swift */; };
 		CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71D2B325ED600493502 /* AppSettings.swift */; };
@@ -17,7 +19,6 @@
 		CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627482B3648D300799BC2 /* AppDelegate.swift */; };
 		CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274A2B36491100799BC2 /* ComponentContext.swift */; };
 		CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */; };
-		CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */; };
 		CE80C6132B2E1FE100302023 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE80C6122B2E1FE100302023 /* FirebaseFirestore */; };
 		CEA322392B33A1B90039329B /* FaqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA322382B33A1B90039329B /* FaqView.swift */; };
 		CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C22B2FA95B0086E744 /* StateValue.swift */; };
@@ -34,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "grodno-roads-ios/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CE46B71B2B325EBE00493502 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CE46B71D2B325ED600493502 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "grodno-roads-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +47,6 @@
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE66274A2B36491100799BC2 /* ComponentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentContext.swift; sourceTree = "<group>"; };
 		CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsView.swift; sourceTree = "<group>"; };
-		CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
 		CEA924C32B2FA95B0086E744 /* MutableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableValue.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A9CD2172B38B7DF0010592F /* UiKit */ = {
+			isa = PBXGroup;
+			children = (
+				6A9CD2182B38B7F60010592F /* LoadingView.swift */,
+			);
+			path = UiKit;
+			sourceTree = "<group>";
+		};
 		6AFE155A2B30CA2D003016DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +115,6 @@
 		CE46B7202B325F4A00493502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C5DBF2B2E16B9007644C3 /* GoogleService-Info.plist */,
 				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -122,6 +131,7 @@
 		CE52F2F82B1CF3B200D81762 = {
 			isa = PBXGroup;
 			children = (
+				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
 				6AFE155A2B30CA2D003016DC /* Frameworks */,
@@ -139,6 +149,7 @@
 		CE52F3032B1CF3B200D81762 /* grodno-roads-ios */ = {
 			isa = PBXGroup;
 			children = (
+				6A9CD2172B38B7DF0010592F /* UiKit */,
 				CEA924C12B2FA95B0086E744 /* DecomposeHelpers */,
 				CEA924D22B30CCB80086E744 /* MainFlow */,
 				CE46B7212B325FB000493502 /* OnboardingFlow */,
@@ -248,8 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */,
+				6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */,
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
-				CE6C5DC02B2E16B9007644C3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +305,7 @@
 				CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */,
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
+				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,

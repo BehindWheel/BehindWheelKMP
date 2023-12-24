@@ -8,7 +8,7 @@
 import SwiftUI
 import Root
 
-struct FaqView: View {
+struct FaqScreenView: View {
     private let component: FaqComponent
     
     @StateFlow
@@ -20,30 +20,53 @@ struct FaqView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("FAQ").padding()
-                Divider()
-                ForEach(state.faq) { faq in
-                    Text(faq.question)
-                        .bold()
-                        .padding([.vertical], 4)
-                        .frame(alignment: .center)
-                    Text(faq.answer)
-                        .padding([.horizontal], 8)
-                    Divider()
+        NavigationView {
+            ZStack {
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(state.faq) { faq in
+                            FaqView(question: faq.question, answer: faq.answer)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
+                if state.isLoading {
+                    LoadingView()
                 }
             }
         }
+        .navigationBarTitle("FAQ")
+    }
+}
+
+private struct FaqView: View {
+    var question: String
+    var answer: String
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.white)
+                .shadow(radius: 2)
+            
+            VStack(alignment: .leading) {
+                Text(question)
+                    .font(.headline)
+                    .bold()
+                    .padding([.bottom], 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text(answer)
+                    .font(.body)
+            }
+            .padding()
+        }
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
 extension FAQ: Identifiable {}
 
 #Preview {
-    FaqView(
-        FaqComponentImplKt.buildFaqComponent(
-            componentContext: .context()
-        )
-    )
+    FaqScreenView(FaqComponentPreview())
 }
