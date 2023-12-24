@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "grodno-roads-ios/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CE46B71B2B325EBE00493502 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CE46B71D2B325ED600493502 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -115,6 +115,7 @@
 		CE46B7202B325F4A00493502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
 				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -131,7 +132,6 @@
 		CE52F2F82B1CF3B200D81762 = {
 			isa = PBXGroup;
 			children = (
-				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
 				6AFE155A2B30CA2D003016DC /* Frameworks */,
