@@ -16,38 +16,47 @@ struct AppSettings: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Main")
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Button("Appearance") {
+        VStack(alignment: .leading, spacing: 0) {
+            SettingsHeaderView(title: "Main")
+            
+            Button {
                 component.open(page: .appearance)
+            } label: {
+                SettingsItemView(leadingIcon: "swatchpalette.fill", headlineText: "Appearance")
             }
-            .padding([.leading], 12)
-            .padding([.top], 6)
-            Button("Map settings") {
+            .buttonStyle(.plain)
+            
+            Button {
                 component.open(page: .mapsettings)
+            } label: {
+                SettingsItemView(leadingIcon: "map.fill", headlineText: "Map")
             }
-            .padding([.leading], 12)
-            .padding([.top], 6)
-            Button("Alerts") {
+            .buttonStyle(.plain)
+            
+            Button {
                 component.open(page: .alerts)
+            } label: {
+                SettingsItemView(leadingIcon: "speaker.wave.2.bubble.fill", headlineText: "Alerts")
             }
-            .padding([.leading], 12)
-            .padding([.top, .bottom], 6)
-            Text("Other")
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Button("Changelog") {
+            .buttonStyle(.plain)
+            
+            SettingsHeaderView(title: "Other")
+                .padding(.top, 16)
+            
+            Button {
                 component.open(page: .changelog)
+            } label: {
+                SettingsItemView(leadingIcon: "newspaper.fill", headlineText: "Changelog")
             }
-            .padding([.leading], 12)
-            .padding([.top], 6)
-            Button("FAQ") {
+            .buttonStyle(.plain)
+            
+            Button {
                 component.open(page: .faq)
+            } label: {
+                SettingsItemView(leadingIcon: "quote.bubble.fill", headlineText: "FAQ")
             }
-            .padding([.leading], 12)
-            .padding([.top], 6)
+            .buttonStyle(.plain)
+            
             Spacer()
             Text("Version: \(component.appVersion)")
                 .bold()
@@ -55,7 +64,6 @@ struct AppSettings: View {
                 .padding()
         }
         .padding()
-        .frame(maxHeight: .infinity)
     }
 }
 
