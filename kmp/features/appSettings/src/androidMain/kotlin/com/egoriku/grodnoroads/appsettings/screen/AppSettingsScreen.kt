@@ -12,11 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
+import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponentPreview
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.common.ui.list.SettingsItem
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
@@ -112,12 +114,11 @@ private fun SettingsUi(
     }
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
-private fun SettingUiPreview() = GrodnoRoadsM3ThemePreview {
-    SettingsUi(
-        contentPadding = PaddingValues(),
-        onSettingClick = {},
-        appVersion = "1.0.0"
+private fun AppSettingsScreenPreview() = GrodnoRoadsM3ThemePreview {
+    AppSettingsScreen(
+        settingsComponent = AppSettingsComponentPreview(),
+        contentPadding = PaddingValues()
     )
 }

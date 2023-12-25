@@ -68,10 +68,5 @@ struct AppSettings: View {
 }
 
 #Preview {
-    AppSettings(
-        AppSettingsComponentImplKt.buildAppSettingsComponent(
-            componentContext: .context(),
-            onOpen: { _ in }
-        )
-    )
+    AppSettings(AppSettingsComponentPreview())
 }

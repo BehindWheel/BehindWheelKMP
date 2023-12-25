@@ -14,11 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.*
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponentPreview
 import com.egoriku.grodnoroads.settings.map.screen.ui.DefaultLocationSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.DrivingModeSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.MapEventsSection
@@ -119,4 +122,13 @@ private fun DialogHandler(
 
         is None -> {}
     }
+}
+
+@GrodnoRoadsDarkLightPreview
+@Composable
+private fun MapSettingsScreenPreview() = GrodnoRoadsM3ThemePreview {
+    MapSettingsScreen(
+        mapSettingsComponent = MapSettingsComponentPreview(),
+        onBack = {}
+    )
 }

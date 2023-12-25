@@ -23,9 +23,5 @@ struct MapSettingsView: View {
 }
 
 #Preview {
-    MapSettingsView(
-        MapSettingsComponentImplKt.buildMapSettingsComponent(
-            componentContext: .context()
-        )
-    )
+    MapSettingsView(MapSettingsComponentPreview())
 }
