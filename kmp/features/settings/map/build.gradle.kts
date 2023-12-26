@@ -20,6 +20,7 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.datastore)
+            implementation(projects.kmp.libraries.location)
 
             implementation(libs.decompose)
 

@@ -2,21 +2,18 @@ package com.egoriku.grodnoroads.settings.map.domain.component
 
 import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.coroutines.stateFlowOf
-import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
 
 class MapSettingsComponentPreview : MapSettingsComponent {
-    override val mapSettingsState: CFlow<MapSettingsComponent.MapSettingState>
+
+    override val mapSettingsState: CFlow<MapSettingState>
         get() = stateFlowOf {
-            MapSettingsComponent.MapSettingState(
-                isLoading = false
-            )
+            MapSettingState(isLoading = false)
         }
 
-    override fun modify(preference: MapSettingsComponent.MapPref) {}
-
-    override fun reset(preference: MapSettingsComponent.MapPref) {}
-
-    override fun openDialog(preference: MapSettingsComponent.MapPref) {}
-
-    override fun closeDialog() {}
+    override fun modify(preference: MapPref) = Unit
+    override fun reset(preference: MapPref) = Unit
+    override fun openDialog(preference: MapPref) = Unit
+    override fun closeDialog() = Unit
 }

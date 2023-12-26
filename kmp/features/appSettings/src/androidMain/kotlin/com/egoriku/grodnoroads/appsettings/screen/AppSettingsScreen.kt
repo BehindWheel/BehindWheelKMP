@@ -20,11 +20,10 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
 import com.egoriku.grodnoroads.foundation.common.ui.list.SettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
+import com.egoriku.grodnoroads.shared.models.Page
 
 @Composable
 fun AppSettingsScreen(
