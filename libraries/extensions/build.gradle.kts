@@ -11,9 +11,5 @@ dependencies {
 
     implementation(libs.androidx.appcompat)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
-
     implementation(libs.kotlin.coroutines)
 }

@@ -47,8 +47,6 @@ essenty-lifecycle = "com.arkivanov.essenty:lifecycle:1.3.0"
 
 firebase-bom = "com.google.firebase:firebase-bom:32.7.0"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-database = { module = "com.google.firebase:firebase-database" }
-firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 
 google-maps = "com.google.maps.android:maps-ktx:5.0.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
