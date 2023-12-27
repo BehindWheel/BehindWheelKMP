@@ -69,12 +69,9 @@ dependencies {
     implementation(projects.kmp.shared.models)
     implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.crashlytics)
-    implementation(projects.kmp.libraries.datastore)
     implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
 
-    implementation(projects.features.map.mapData)
-    implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
 
     implementation(projects.compose.foundation.core)
@@ -85,7 +82,6 @@ dependencies {
 
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.extensions)
-    implementation(projects.libraries.location)
     implementation(projects.libraries.resources)
 
     implementation(libs.androidx.compose.foundation)
@@ -110,7 +106,7 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.material)
     implementation(libs.kotlin.collections)
-    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.kotlin.coroutines)
     implementation(libs.mvikotlin.extensions)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin)

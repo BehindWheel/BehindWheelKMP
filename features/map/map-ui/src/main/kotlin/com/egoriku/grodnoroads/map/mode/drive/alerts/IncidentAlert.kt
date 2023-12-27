@@ -11,10 +11,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
+import com.egoriku.grodnoroads.guidance.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.ImmutableList
@@ -70,7 +70,7 @@ fun IncidentAlert(
 private fun PreviewIncidentAlert() = GrodnoRoadsM3ThemePreview {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         IncidentAlert(
-            emoji = MapEventType.RoadIncident.emoji,
+            emoji = RoadIncident.emoji,
             title = stringResource(R.string.alerts_incident),
             distance = 200,
             messages = persistentListOf(

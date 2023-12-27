@@ -29,6 +29,7 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
+import com.egoriku.grodnoroads.map.MapScreen
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -82,21 +83,14 @@ private fun VerticalOrientationLayout(
             stack = childStack(),
         ) { created ->
             when (val child = created.instance) {
-                is Child.Map -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("map screen")
-                    }
-                    /*MapScreen(
+                is Child.Guidance -> {
+                    MapScreen(
                         contentPadding = contentPaddingValues,
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isShowBottomBar = it }
-                    )*/
+                    )
                 }
-
-                is Child.AppSettings ->{
+                is Child.AppSettings -> {
                     AppSettingsScreen(
                         contentPadding = contentPaddingValues,
                         settingsComponent = child.component
@@ -151,20 +145,12 @@ private fun HorizontalOrientationLayout(
             stack = childStack(),
         ) { created ->
             when (val child = created.instance) {
-                is Child.Map -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("map screen")
-                    }
-                    /*MapScreen(
-                                    contentPadding = contentPaddingValues,
-                                    component = child.component,
-                                    onBottomNavigationVisibilityChange = { isHideBottomBar = it }
-                                )*/
-                }
-
+                is Child.Guidance ->
+                    MapScreen(
+                        contentPadding = contentPaddingValues,
+                        component = child.component,
+                        onBottomNavigationVisibilityChange = { isHideBottomBar = it }
+                    )
                 is Child.AppSettings -> {
                     AppSettingsScreen(
                         contentPadding = contentPaddingValues,

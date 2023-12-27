@@ -18,30 +18,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
-import com.egoriku.grodnoroads.extensions.reLaunch
+import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
+import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.guidance.domain.model.*
+import com.egoriku.grodnoroads.guidance.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.*
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Intent.ReportAction
+import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.map.dialog.ReportDialog
-import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
-import com.egoriku.grodnoroads.map.domain.model.AppMode.*
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
@@ -78,7 +74,7 @@ import com.egoriku.grodnoroads.resources.R as R_res
 @Composable
 fun MapScreen(
     contentPadding: PaddingValues,
-    component: MapComponent,
+    component: GuidanceComponent,
     onBottomNavigationVisibilityChange: (Boolean) -> Unit
 ) {
     val context = LocalContext.current
@@ -91,7 +87,7 @@ fun MapScreen(
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
-        val appMode by component.appMode.collectAsState(Default)
+        val appMode by component.appMode.collectAsState(AppMode.Default)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
@@ -123,7 +119,7 @@ fun MapScreen(
         var cameraMoveState = remember<CameraMoveState> { CameraMoveState.Idle }
 
         val overlayVisible by remember {
-            derivedStateOf { !isCameraUpdatesEnabled || appMode != Drive }
+            derivedStateOf { !isCameraUpdatesEnabled || appMode != AppMode.Drive }
         }
 
         val markerSize by remember {
@@ -164,7 +160,7 @@ fun MapScreen(
                 },
                 onMapUpdaterChanged = { mapUpdater = it },
                 onProjectionChanged = {
-                    if (appMode == ChooseLocation) {
+                    if (appMode == AppMode.ChooseLocation) {
                         projection = it
                     }
                 },
@@ -174,7 +170,7 @@ fun MapScreen(
                             val zoom = zoomLevel.zoom
 
                             idleZoomLevel = zoom
-                            if (appMode == ChooseLocation) {
+                            if (appMode == AppMode.ChooseLocation) {
                                 component.setUserMapZoom(zoom)
                             }
                         }
@@ -186,10 +182,10 @@ fun MapScreen(
                     cameraMoveState = state
 
                     when (appMode) {
-                        ChooseLocation -> {
+                        AppMode.ChooseLocation -> {
                             isCameraMoving = cameraMoveState == CameraMoveState.UserGesture
                         }
-                        Drive -> {
+                        AppMode.Drive -> {
                             if (cameraMoveState == CameraMoveState.UserGesture) {
                                 cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
                                     isCameraUpdatesEnabled = false
@@ -210,7 +206,7 @@ fun MapScreen(
                 if (location == LastLocation.None) return@LaunchedEffect
 
                 when (appMode) {
-                    Drive -> {
+                    AppMode.Drive -> {
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
                         if (mapUpdater.isInitialCameraAnimation()) {
@@ -236,7 +232,7 @@ fun MapScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default, ChooseLocation -> {
+                    AppMode.Default, AppMode.ChooseLocation -> {
                         mapUpdater.onMapScope {
                             resetLastLocation()
                             animateZoom(mapConfig.zoomLevel)
@@ -253,7 +249,7 @@ fun MapScreen(
                     mapUpdater.onMapScope {
                         animateTarget(
                             target = location.latLng.toGmsLatLng(),
-                            zoom = if (appMode == Default) 14.5f else null,
+                            zoom = if (appMode == AppMode.Default) 14.5f else null,
                             onFinish = { isRequestCurrentLocation = false },
                             onCancel = { isRequestCurrentLocation = false }
                         )
@@ -263,19 +259,21 @@ fun MapScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default, ChooseLocation -> onBottomNavigationVisibilityChange(true)
-                    Drive -> onBottomNavigationVisibilityChange(false)
+                    AppMode.Default, AppMode.ChooseLocation -> onBottomNavigationVisibilityChange(
+                        true
+                    )
+                    AppMode.Drive -> onBottomNavigationVisibilityChange(false)
                 }
             }
 
             mapUpdater.onMapScope {
-                if (appMode == Drive && location != LastLocation.None) {
+                if (appMode == AppMode.Drive && location != LastLocation.None) {
                     val isLight = MaterialTheme.colorScheme.isLight
 
                     NavigationMarker(
                         tag = if (isLight) "navigation_light" else "navigation_dark",
                         appMode = appMode,
-                        position = location.latLng.toGmsLatLng(),
+                        position = location.latLng,
                         bearing = location.bearing,
                         icon = {
                             markerCache.getIcon(
@@ -372,7 +370,7 @@ fun MapScreen(
                     label = "app_mode"
                 ) { state ->
                     when (state) {
-                        Default -> {
+                        AppMode.Default -> {
                             DefaultMode(
                                 onLocationRequestStateChanged = {
                                     val message = snackbarMessageBuilder.handleDriveModeRequest(it)
@@ -389,7 +387,7 @@ fun MapScreen(
                             )
                         }
 
-                        Drive -> {
+                        AppMode.Drive -> {
                             DriveMode(
                                 modifier = Modifier.align(Alignment.BottomCenter),
                                 stopDrive = component::stopLocationUpdates,
@@ -414,7 +412,7 @@ fun MapScreen(
                             )
                         }
 
-                        ChooseLocation -> {
+                        AppMode.ChooseLocation -> {
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
                                 onCancel = component::cancelChooseLocationFlow,
@@ -446,7 +444,7 @@ fun MapScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        isLocationButtonEnabled = { appMode == Default || appMode == ChooseLocation },
+                        isLocationButtonEnabled = { appMode == AppMode.Default || appMode == AppMode.ChooseLocation },
                         onLocationRequestStateChanged = {
                             val message = snackbarMessageBuilder.handleCurrentLocationRequest(it)
 
@@ -463,7 +461,7 @@ fun MapScreen(
                 }
                 DefaultOverlay(
                     isOverlayVisible = overlayVisible,
-                    isDriveMode = appMode == Drive,
+                    isDriveMode = appMode == AppMode.Drive,
                     currentSpeed = location.speed,
                     speedLimit = speedLimit,
                     quickActionsState = quickActionsState,

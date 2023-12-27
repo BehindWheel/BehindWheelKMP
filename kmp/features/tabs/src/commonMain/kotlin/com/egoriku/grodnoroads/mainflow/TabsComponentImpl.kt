@@ -4,8 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.appsettings.domain.buildAppSettingsComponent
-import com.egoriku.grodnoroads.shared.models.Page
+import com.egoriku.grodnoroads.guidance.domain.component.buildGuidanceComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
+import com.egoriku.grodnoroads.shared.models.Page
 import kotlinx.serialization.Serializable
 
 fun buildTabComponent(
@@ -25,7 +26,7 @@ internal class TabsComponentImpl(
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.Map,
+        initialConfiguration = Config.Guidance,
         handleBackButton = true,
         key = "TabStack",
         childFactory = ::processChild
@@ -37,7 +38,7 @@ internal class TabsComponentImpl(
         config: Config,
         componentContext: ComponentContext
     ) = when (config) {
-        is Config.Map -> Child.Map
+        is Config.Guidance -> Child.Guidance(buildGuidanceComponent(componentContext))
         is Config.AppSettings -> Child.AppSettings(
             buildAppSettingsComponent(
                 componentContext = componentContext,
@@ -46,19 +47,9 @@ internal class TabsComponentImpl(
         )
     }
 
-    /*
-     is Config.Map -> Child.Map(component = buildMapComponent(componentContext))
-        is Config.Settings -> Child.Settings(
-            component = buildSettingsComponent(
-                componentContext = componentContext,
-                onOpen = onOpen
-            )
-        )
-     */
-
     override fun onSelectTab(index: Int) {
         if (index == 0) {
-            navigation.replaceAll(Config.Map)
+            navigation.replaceAll(Config.Guidance)
         } else {
             navigation.bringToFront(Config.AppSettings)
         }
@@ -67,7 +58,7 @@ internal class TabsComponentImpl(
     @Serializable
     private sealed class Config {
         @Serializable
-        data object Map : Config()
+        data object Guidance : Config()
 
         @Serializable
         data object AppSettings : Config()

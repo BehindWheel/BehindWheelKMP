@@ -16,7 +16,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            implementation(projects.kmp.libraries.datastore)
+            api(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.location)
         }
         androidDependencies {

@@ -2,8 +2,13 @@ package com.egoriku.grodnoroads.root.di
 
 import android.content.Context
 import com.egoriku.grodnoroads.datastore.dataStore
+import com.egoriku.grodnoroads.map.di.mapUiModule
+import com.egoriku.grodnoroads.shared.geolocation.AndroidLocationService
+import com.egoriku.grodnoroads.shared.geolocation.LocationService
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun initKoin(context: Context) {
@@ -14,5 +19,7 @@ fun initKoin(context: Context) {
 }
 
 internal actual val platformDataStoreModule = module {
+    includes(mapUiModule)
     single { get<Context>().dataStore() }
+    singleOf(::AndroidLocationService) { bind<LocationService>() }
 }

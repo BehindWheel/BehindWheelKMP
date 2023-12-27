@@ -23,20 +23,20 @@ import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibi
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.map.domain.model.Alert
-import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.guidance.domain.model.Alert
+import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType
+import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
+import com.egoriku.grodnoroads.guidance.domain.model.Source
+import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsPref
+import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.map.popup.ActionsContent
 import com.egoriku.grodnoroads.map.popup.QuickActionsPopup
+import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
-import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
@@ -178,7 +178,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(
-                    id = UUID.randomUUID().toString(),
+                    id = Uuid.randomUUID(),
                     mapEventType = MapEventType.TrafficPolice,
                     distance = 1,
                     messages = persistentListOf(
@@ -189,7 +189,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     )
                 ),
                 IncidentAlert(
-                    id = UUID.randomUUID().toString(),
+                    id = Uuid.randomUUID(),
                     mapEventType = MapEventType.CarCrash,
                     distance = 120,
                     messages = persistentListOf(

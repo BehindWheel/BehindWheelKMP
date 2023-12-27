@@ -15,5 +15,5 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
 
-    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.kotlin.coroutines)
 }

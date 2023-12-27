@@ -14,17 +14,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.map.domain.model.Alert
-import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
-import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
-import com.egoriku.grodnoroads.map.domain.model.CameraType.*
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.guidance.domain.model.Alert
+import com.egoriku.grodnoroads.guidance.domain.model.Alert.CameraAlert
+import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.guidance.domain.model.CameraType.*
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.*
+import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
+import com.egoriku.grodnoroads.guidance.domain.model.Source
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import java.util.UUID
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -103,7 +103,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
             IncidentAlert(
                 mapEventType = TrafficPolice,
                 distance = 1,
-                id = UUID.randomUUID().toString(),
+                id = Uuid.randomUUID(),
                 messages = persistentListOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
@@ -112,13 +112,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 )
             ),
             CameraAlert(
-                id = UUID.randomUUID().toString(),
+                id = Uuid.randomUUID(),
                 distance = 2,
                 speedLimit = 60,
                 cameraType = StationaryCamera
             ),
             IncidentAlert(
-                id = UUID.randomUUID().toString(),
+                id = Uuid.randomUUID(),
                 distance = 5,
                 messages = persistentListOf(
                     MessageItem(
@@ -133,13 +133,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 mapEventType = RoadIncident
             ),
             CameraAlert(
-                id = UUID.randomUUID().toString(),
+                id = Uuid.randomUUID(),
                 distance = 220,
                 speedLimit = -1,
                 cameraType = MobileCamera
             ),
             CameraAlert(
-                id = UUID.randomUUID().toString(),
+                id = Uuid.randomUUID(),
                 distance = 220,
                 speedLimit = 60,
                 cameraType = MobileCamera

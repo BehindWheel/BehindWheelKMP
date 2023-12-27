@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.coroutines
 
 import kotlinx.coroutines.flow.Flow
 
-open class CFlow<T : Any>(private val flow: Flow<T>) : Flow<T> by flow
+open class CFlow<T>(private val flow: Flow<T>) : Flow<T> by flow
 
 fun <T : Any> Flow<T>.asCFlow() = CFlow(this)
 

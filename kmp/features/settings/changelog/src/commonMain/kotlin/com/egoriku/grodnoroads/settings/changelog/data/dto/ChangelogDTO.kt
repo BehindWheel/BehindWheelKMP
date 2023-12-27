@@ -9,6 +9,7 @@ import kotlin.jvm.JvmField
 internal class ChangelogDTO(
     @SerialName("name")
     @JvmField
+    // TODO: remove JvmField
     val name: String,
 
     @SerialName("code")

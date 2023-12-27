@@ -18,15 +18,14 @@ import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetClo
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
+import com.egoriku.grodnoroads.guidance.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.resources.R
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.persistentListOf
-import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,7 +71,7 @@ private
 fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
     MarkerInfoBottomSheet(
         reports = Reports(
-            id = UUID.randomUUID().toString(),
+            id = Uuid.randomUUID(),
             messages = persistentListOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",
@@ -93,7 +92,7 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
-            position = LatLng(0.0, 0.0),
+            position = com.egoriku.grodnoroads.location.LatLng(latitude = 0.0, longitude = 0.0),
             mapEventType = RoadIncident
         )
     ) {

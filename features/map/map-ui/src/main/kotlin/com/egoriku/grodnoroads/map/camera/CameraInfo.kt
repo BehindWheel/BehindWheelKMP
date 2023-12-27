@@ -23,12 +23,12 @@ import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
-import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun CameraInfo(camera: MapEvent.Camera) {

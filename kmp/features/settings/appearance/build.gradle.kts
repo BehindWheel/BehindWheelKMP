@@ -20,7 +20,6 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
-            implementation(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.extensions)
 
@@ -30,7 +29,6 @@ kotlin {
             implementation(libs.koin.core)
 
             implementation(libs.kotlin.collections)
-            implementation(libs.kotlin.coroutines.core)
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)

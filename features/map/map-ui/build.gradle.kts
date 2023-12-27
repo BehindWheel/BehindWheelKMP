@@ -8,11 +8,12 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.features.guidance)
     implementation(projects.kmp.shared.components)
     implementation(projects.kmp.shared.persistent)
+    implementation(projects.kmp.libraries.coroutines)
     implementation(projects.kmp.libraries.location)
-
-    implementation(projects.features.map.mapDomain)
+    implementation(projects.kmp.libraries.uuid)
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
@@ -20,7 +21,6 @@ dependencies {
 
     implementation(projects.compose.commonUi)
     implementation(projects.compose.locationRequester)
-    implementation(projects.compose.maps.core)
     implementation(projects.compose.maps.compose)
     implementation(projects.compose.snackbar)
 

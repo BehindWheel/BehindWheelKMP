@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType
+import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.map.dialog.common.CommonReportDialog
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.toImmutableList
 

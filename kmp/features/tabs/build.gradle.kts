@@ -19,11 +19,14 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(projects.kmp.features.appSettings)
+            implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.shared.models)
 
             implementation(libs.decompose)
         }
         androidDependencies {
+            implementation(projects.features.map.mapUi)
+
             implementation(projects.compose.foundation.core)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.libraries.resources)

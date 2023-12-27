@@ -2,12 +2,13 @@ package com.egoriku.grodnoroads.map.google.markers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.map.google.MarkerSize
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker
 import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.LatLng
 
 context(MapUpdater)
 @Composable
@@ -18,7 +19,7 @@ fun CameraMarker(
     onClick: () -> Unit
 ) {
     val marker = rememberIconMarker(
-        position = position,
+        position = position.toGmsLatLng(),
         icon = icon,
         onMarkerClick = onClick,
         zIndex = 1f

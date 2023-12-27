@@ -19,6 +19,7 @@ kotlin {
         export(libs.essenty.lifecycle)
 
         export(projects.kmp.features.appSettings)
+        export(projects.kmp.features.guidance)
         export(projects.kmp.features.mainflow)
         export(projects.kmp.features.onboarding)
         export(projects.kmp.features.settings.alerts)
@@ -34,6 +35,7 @@ kotlin {
     sourceSets {
         commonDependencies {
             api(projects.kmp.features.appSettings)
+            api(projects.kmp.features.guidance)
             api(projects.kmp.features.mainflow)
             api(projects.kmp.features.onboarding)
             api(projects.kmp.features.settings.alerts)
@@ -42,6 +44,7 @@ kotlin {
             api(projects.kmp.features.settings.faq)
             api(projects.kmp.features.settings.map)
             api(projects.kmp.features.tabs)
+            implementation(projects.kmp.shared.geolocation)
             api(projects.kmp.libraries.coroutines)
             api(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.crashlytics)
@@ -49,6 +52,7 @@ kotlin {
 
             api(libs.decompose)
             implementation(libs.dev.gitlive.firebase.crashlytics)
+            implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.dev.gitlive.firebase.firestore)
 
             implementation(project.dependencies.platform(libs.koin.bom))
@@ -58,6 +62,7 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
+            implementation(projects.features.map.mapUi)
             implementation(projects.compose.foundation.uikit)
 
             implementation(libs.androidx.compose.material3)

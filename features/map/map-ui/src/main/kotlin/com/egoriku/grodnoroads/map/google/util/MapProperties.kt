@@ -9,10 +9,10 @@ import androidx.compose.ui.platform.LocalContext
 import com.egoriku.grodnoroads.foundation.core.rememberMutableIntState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.guidance.domain.model.AppMode
+import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
 import com.egoriku.grodnoroads.location.requester.rememberLocationPermissionsState
 import com.egoriku.grodnoroads.map.R
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
 import com.egoriku.grodnoroads.maps.compose.MapProperties
 import com.egoriku.grodnoroads.maps.compose.MapType
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style

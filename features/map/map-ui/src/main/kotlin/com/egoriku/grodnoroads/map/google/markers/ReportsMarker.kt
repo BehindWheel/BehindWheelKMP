@@ -3,6 +3,8 @@ package com.egoriku.grodnoroads.map.google.markers
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.map.google.MarkerSize
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
 import com.egoriku.grodnoroads.map.google.MarkerSize.Small
@@ -11,7 +13,6 @@ import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.ui.IconGenerator
 
 context(MapUpdater)
@@ -38,7 +39,7 @@ fun ReportsMarker(
     }
 
     val marker = rememberIconMarker(
-        position = position,
+        position = position.toGmsLatLng(),
         icon = icon,
         zIndex = 2f,
         title = message,

@@ -25,6 +25,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
+androidx-annotation = "androidx.annotation:annotation:1.7.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-browser = "androidx.browser:browser:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.12.0"
@@ -39,6 +40,7 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
 dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.10.4"
+dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.10.4"
 dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.10.4"
 
 essenty-lifecycle = "com.arkivanov.essenty:lifecycle:1.3.0"
@@ -58,8 +60,9 @@ koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-core = { module = "io.insert-koin:koin-core" }
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
-kotlin-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
+kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.5.0"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
@@ -78,5 +81,6 @@ google-services = { id = "com.google.gms.google-services", version = "4.4.0" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.50.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+# kotlin-native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
