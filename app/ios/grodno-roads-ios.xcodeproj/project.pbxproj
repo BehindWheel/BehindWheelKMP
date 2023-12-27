@@ -11,6 +11,7 @@
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
 		6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21E2B38C2F60010592F /* SettingsItem.swift */; };
+		CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */ = {isa = PBXBuildFile; productRef = CE14848E2B3CB4A4009B048A /* FirebaseBinaries */; };
 		CE46B71C2B325EBE00493502 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71B2B325EBE00493502 /* MapView.swift */; };
 		CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71D2B325ED600493502 /* AppSettings.swift */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
@@ -51,7 +52,6 @@
 		CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D32B30CCC50086E744 /* AppearanceView.swift */; };
 		CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D52B30CD310086E744 /* ChangelogView.swift */; };
 		CEA924D82B30CD520086E744 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D72B30CD520086E744 /* TabsView.swift */; };
-		CEC83F302B3BA052009ACA8B /* FirebaseBinaries in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F2F2B3BA052009ACA8B /* FirebaseBinaries */; };
 		CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F392B3BA599009ACA8B /* GoogleMaps */; };
 		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
 		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
@@ -89,7 +89,6 @@
 		CE6627AD2B38CBE300799BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE6627AF2B38CBEC00799BC2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE6627B12B38CF4500799BC2 /* secrets.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = secrets.properties; path = ../../../../secrets.properties; sourceTree = "<group>"; };
-		CE6627CD2B3A097600799BC2 /* FirebaseBinaries */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FirebaseBinaries; sourceTree = "<group>"; };
 		CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerBridge.swift; sourceTree = "<group>"; };
 		CE6627D22B3A127E00799BC2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
@@ -113,7 +112,6 @@
 			files = (
 				CE6627B02B38CBEC00799BC2 /* UIKit.framework in Frameworks */,
 				CE6627AE2B38CBE300799BC2 /* SystemConfiguration.framework in Frameworks */,
-				CEC83F302B3BA052009ACA8B /* FirebaseBinaries in Frameworks */,
 				CE6627AC2B38CBDC00799BC2 /* QuartzCore.framework in Frameworks */,
 				CE6627AA2B38CBCF00799BC2 /* OpenGLES.framework in Frameworks */,
 				CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */,
@@ -122,6 +120,7 @@
 				CE6627A42B38CBB900799BC2 /* libc++.tbd in Frameworks */,
 				CE6627A22B38CBAC00799BC2 /* ImageIO.framework in Frameworks */,
 				CE6627A02B38CBA400799BC2 /* GLKit.framework in Frameworks */,
+				CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */,
 				CE66279E2B38CB9E00799BC2 /* CoreText.framework in Frameworks */,
 				CE66279C2B38CB9600799BC2 /* CoreTelephony.framework in Frameworks */,
 				CE66279A2B38CB9100799BC2 /* CoreLocation.framework in Frameworks */,
@@ -219,7 +218,6 @@
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
 				6AFE155A2B30CA2D003016DC /* Frameworks */,
-				CE6627CD2B3A097600799BC2 /* FirebaseBinaries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -295,10 +293,10 @@
 			);
 			name = "grodno-roads-ios";
 			packageProductDependencies = (
-				CEC83F2F2B3BA052009ACA8B /* FirebaseBinaries */,
 				CEC83F392B3BA599009ACA8B /* GoogleMaps */,
 				CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */,
 				CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */,
+				CE14848E2B3CB4A4009B048A /* FirebaseBinaries */,
 			);
 			productName = "grodno-roads-ios";
 			productReference = CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */;
@@ -330,6 +328,7 @@
 			mainGroup = CE52F2F82B1CF3B200D81762;
 			packageReferences = (
 				CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */,
 			);
 			productRefGroup = CE52F3022B1CF3B200D81762 /* Products */;
 			projectDirPath = "";
@@ -639,6 +638,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grodnoroads/GRFirebaseBinaries.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
@@ -650,8 +657,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CEC83F2F2B3BA052009ACA8B /* FirebaseBinaries */ = {
+		CE14848E2B3CB4A4009B048A /* FirebaseBinaries */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */;
 			productName = FirebaseBinaries;
 		};
 		CEC83F392B3BA599009ACA8B /* GoogleMaps */ = {
