@@ -66,9 +66,9 @@ dependencies {
     implementation(projects.kmp.features.root)
     implementation(projects.kmp.features.tabs)
     implementation(projects.kmp.shared.components)
+    implementation(projects.kmp.shared.crashlytics)
     implementation(projects.kmp.shared.models)
     implementation(projects.kmp.shared.persistent)
-    implementation(projects.kmp.libraries.crashlytics)
     implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
 

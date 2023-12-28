@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.crashlytics"
+    namespace = "com.egoriku.grodnoroads.shared.crashlytics"
 }
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "crashlytics")
+    setupIosTarget(baseName = "shared_crashlytics")
 
     sourceSets {
         commonDependencies {

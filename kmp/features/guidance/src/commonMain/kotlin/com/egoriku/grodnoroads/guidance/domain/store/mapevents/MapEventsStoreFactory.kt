@@ -5,7 +5,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
+import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.crashlytics.config
+package com.egoriku.grodnoroads.crashlytics.shared.config
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.crashlytics.crashlytics

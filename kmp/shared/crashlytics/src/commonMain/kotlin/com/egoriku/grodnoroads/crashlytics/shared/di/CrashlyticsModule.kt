@@ -1,7 +1,7 @@
-package com.egoriku.grodnoroads.crashlytics.di
+package com.egoriku.grodnoroads.crashlytics.shared.di
 
-import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
-import com.egoriku.grodnoroads.crashlytics.CrashlyticsTrackerImpl
+import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
+import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTrackerImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

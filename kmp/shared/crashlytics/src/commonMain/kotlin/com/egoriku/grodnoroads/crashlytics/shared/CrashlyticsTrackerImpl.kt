@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.crashlytics
+package com.egoriku.grodnoroads.crashlytics.shared
 
 import com.egoriku.grodnoroads.logger.logD
 import dev.gitlive.firebase.crashlytics.FirebaseCrashlytics

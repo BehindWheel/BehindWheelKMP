@@ -44,10 +44,10 @@ kotlin {
             api(projects.kmp.features.settings.faq)
             api(projects.kmp.features.settings.map)
             api(projects.kmp.features.tabs)
+            implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             api(projects.kmp.libraries.coroutines)
             api(projects.kmp.libraries.location)
-            implementation(projects.kmp.libraries.crashlytics)
             implementation(projects.kmp.libraries.datastore)
 
             api(libs.decompose)

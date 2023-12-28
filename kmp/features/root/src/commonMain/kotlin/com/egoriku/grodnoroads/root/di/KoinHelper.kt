@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.root.di
 
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.egoriku.grodnoroads.crashlytics.di.crashlyticsModule
+import com.egoriku.grodnoroads.crashlytics.shared.di.crashlyticsModule
 import com.egoriku.grodnoroads.guidance.di.guidanceModule
 import com.egoriku.grodnoroads.settings.alerts.di.alertsModule
 import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
@@ -19,18 +19,16 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun appModule() = listOf(
-    platformDataStoreModule,
-    appScopeModule,
-
     guidanceModule,
-
     alertsModule,
     appearanceModule,
     changelogModule,
     faqModule,
     mapSettingsModule,
 
-    crashlyticsModule
+    appScopeModule,
+    crashlyticsModule,
+    platformDataStoreModule,
 )
 
 val appScopeModule = module {

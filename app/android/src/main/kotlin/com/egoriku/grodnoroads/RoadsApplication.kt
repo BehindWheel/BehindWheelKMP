@@ -3,7 +3,7 @@
 package com.egoriku.grodnoroads
 
 import android.app.Application
-import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
+import com.egoriku.grodnoroads.crashlytics.shared.config.CrashlyticsConfig
 import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.root.di.initKoin
 import com.google.android.gms.maps.MapsInitializer

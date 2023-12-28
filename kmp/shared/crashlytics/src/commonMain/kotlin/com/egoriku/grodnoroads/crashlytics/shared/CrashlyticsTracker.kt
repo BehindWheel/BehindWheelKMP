@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.crashlytics
+package com.egoriku.grodnoroads.crashlytics.shared
 
 interface CrashlyticsTracker {
 
