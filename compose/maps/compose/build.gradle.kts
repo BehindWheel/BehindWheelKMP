@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.extensions)
-
     implementation(libs.androidx.compose.foundation)
 
     implementation(libs.google.maps)

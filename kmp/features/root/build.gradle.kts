@@ -62,7 +62,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.features.map.mapUi)
             implementation(projects.compose.foundation.uikit)
 
             implementation(libs.androidx.compose.material3)

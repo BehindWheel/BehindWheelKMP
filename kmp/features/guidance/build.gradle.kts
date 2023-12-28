@@ -5,7 +5,7 @@ import com.egoriku.grodnoroads.extension.setupIosTarget
 
 plugins {
     id("grodnoroads.kmplibrary")
-  //  id("grodnoroads.compose")
+    id("grodnoroads.compose")
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -37,7 +37,28 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
+            implementation(projects.kmp.shared.components)
+            implementation(projects.compose.commonUi)
+            implementation(projects.compose.foundation.core)
+            implementation(projects.compose.foundation.preview)
+            implementation(projects.compose.foundation.uikit)
+            implementation(projects.compose.maps.compose)
+            implementation(projects.compose.locationRequester)
+            implementation(projects.compose.snackbar)
             implementation(projects.libraries.audioplayer)
+            implementation(projects.libraries.resources)
+
+            implementation(libs.androidx.activity.compose)
+
+            implementation(libs.androidx.compose.foundation)
+            implementation(libs.androidx.compose.material3)
+            implementation(libs.androidx.compose.material.icons)
+
+            implementation(libs.balloon.compose)
+            implementation(libs.google.maps)
+            implementation(libs.google.maps.utils)
+
+            implementation(libs.koin.compose)
         }
         commonTestDependencies {
             implementation(libs.kotlin.datetime)

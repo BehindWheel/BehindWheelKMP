@@ -25,8 +25,6 @@ kotlin {
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.features.map.mapUi)
-
             implementation(projects.compose.foundation.core)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.libraries.resources)

@@ -7,9 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
-
-    implementation(projects.libraries.extensions)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.media)

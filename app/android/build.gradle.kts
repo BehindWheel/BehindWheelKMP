@@ -72,8 +72,6 @@ dependencies {
     implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
 
-    implementation(projects.features.map.mapUi)
-
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.uikit)
@@ -81,7 +79,6 @@ dependencies {
     implementation(projects.compose.commonUi)
 
     implementation(projects.libraries.analytics)
-    implementation(projects.libraries.extensions)
     implementation(projects.libraries.resources)
 
     implementation(libs.androidx.compose.foundation)

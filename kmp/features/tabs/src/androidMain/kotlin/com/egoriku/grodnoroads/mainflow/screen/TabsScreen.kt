@@ -29,7 +29,7 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
-import com.egoriku.grodnoroads.map.MapScreen
+import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -84,7 +84,7 @@ private fun VerticalOrientationLayout(
         ) { created ->
             when (val child = created.instance) {
                 is Child.Guidance -> {
-                    MapScreen(
+                    GuidanceScreen(
                         contentPadding = contentPaddingValues,
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isShowBottomBar = it }
@@ -146,7 +146,7 @@ private fun HorizontalOrientationLayout(
         ) { created ->
             when (val child = created.instance) {
                 is Child.Guidance ->
-                    MapScreen(
+                    GuidanceScreen(
                         contentPadding = contentPaddingValues,
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isHideBottomBar = it }

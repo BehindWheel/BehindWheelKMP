@@ -1,3 +1,4 @@
+import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosTarget
 
@@ -17,6 +18,9 @@ kotlin {
         commonDependencies {
             implementation(libs.androidx.annotation)
             implementation(libs.kotlin.datetime)
+        }
+        androidDependencies {
+            implementation(libs.androidx.appcompat)
         }
     }
 }

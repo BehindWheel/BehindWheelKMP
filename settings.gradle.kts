@@ -23,8 +23,6 @@ rootProject.name = "Grodno-Roads"
 include(":app:android")
 include(":app:ui-demo")
 
-include(":features:map:map-ui")
-
 include(":compose:foundation:core")
 include(":compose:foundation:preview")
 include(":compose:foundation:theme")
@@ -37,7 +35,6 @@ include(":compose:snackbar")
 
 include(":libraries:analytics")
 include(":libraries:audioplayer")
-include(":libraries:extensions")
 include(":libraries:resources")
 
 include(":kmp:features:root")
