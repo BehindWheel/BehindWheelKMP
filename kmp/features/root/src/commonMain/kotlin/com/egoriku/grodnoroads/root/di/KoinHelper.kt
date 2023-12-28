@@ -2,9 +2,13 @@ package com.egoriku.grodnoroads.root.di
 
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.egoriku.grodnoroads.crashlytics.di.crashlytics
+import com.egoriku.grodnoroads.crashlytics.di.crashlyticsModule
 import com.egoriku.grodnoroads.guidance.di.guidanceModule
-import com.egoriku.grodnoroads.mainflow.di.mainFlowModule
+import com.egoriku.grodnoroads.settings.alerts.di.alertsModule
+import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
+import com.egoriku.grodnoroads.settings.changelog.domain.di.changelogModule
+import com.egoriku.grodnoroads.settings.faq.di.faqModule
+import com.egoriku.grodnoroads.settings.map.di.mapSettingsModule
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.crashlytics.crashlytics
 import dev.gitlive.firebase.database.database
@@ -17,12 +21,16 @@ import org.koin.dsl.module
 fun appModule() = listOf(
     platformDataStoreModule,
     appScopeModule,
-    mainFlowModule,
 
-    // TODO: register all modules
     guidanceModule,
 
-    crashlytics
+    alertsModule,
+    appearanceModule,
+    changelogModule,
+    faqModule,
+    mapSettingsModule,
+
+    crashlyticsModule
 )
 
 val appScopeModule = module {

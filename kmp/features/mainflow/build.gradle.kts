@@ -27,9 +27,6 @@ kotlin {
             implementation(projects.kmp.shared.models)
 
             implementation(libs.decompose)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
         }
         androidDependencies {
             implementation(projects.compose.foundation.uikit)

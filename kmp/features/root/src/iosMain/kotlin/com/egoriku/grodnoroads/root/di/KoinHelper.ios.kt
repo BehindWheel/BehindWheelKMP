@@ -17,5 +17,4 @@ fun initKoin() {
 internal actual val platformDataStoreModule = module {
     single { dataStore() }
     singleOf(::IosLocationService) { bind<LocationService>() }
-
 }
