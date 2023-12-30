@@ -1,4 +1,5 @@
 @file:Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
+
 package com.egoriku.grodnoroads.coroutines
 
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,7 @@ class CMutableStateFlow<T>(
     constructor(initialValue: T) : this(MutableStateFlow(initialValue))
 }
 
-fun <T : Any> StateFlow<T>.asCStateFlow() = CStateFlow(this)
+fun <T> StateFlow<T>.asCStateFlow() = CStateFlow(this)
 
-fun <T : Any> stateFlowOf(valueProvider: () -> T): CStateFlow<T> =
+fun <T> stateFlowOf(valueProvider: () -> T): CStateFlow<T> =
     MutableStateFlow(value = valueProvider()).asCStateFlow()

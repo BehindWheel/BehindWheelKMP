@@ -30,7 +30,7 @@ kotlin {
             implementation(projects.libraries.resources)
 
             implementation(libs.androidx.compose.material3)
-            implementation(libs.androidx.compose.material3.window)
+            implementation(libs.androidx.compose.material3.windowsize)
             implementation(libs.decompose.compose.jetpack)
             implementation(libs.kotlin.collections)
         }

@@ -48,6 +48,7 @@ kotlin {
             api(projects.kmp.features.tabs)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
+            implementation(projects.kmp.shared.persistent)
             api(projects.kmp.libraries.coroutines)
             api(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.datastore)

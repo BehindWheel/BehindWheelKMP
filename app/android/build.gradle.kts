@@ -5,7 +5,6 @@ plugins {
     id("grodnoroads.compose")
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.secrets)
 }
 
@@ -64,45 +63,22 @@ android {
 
 dependencies {
     implementation(projects.kmp.features.root)
-    implementation(projects.kmp.features.tabs)
-    implementation(projects.kmp.shared.components)
     implementation(projects.kmp.shared.crashlytics)
-    implementation(projects.kmp.shared.models)
     implementation(projects.kmp.shared.persistent)
-    implementation(projects.kmp.libraries.extensions)
     implementation(projects.kmp.libraries.logger)
 
     implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.preview)
-    implementation(projects.compose.foundation.uikit)
-
-    implementation(projects.compose.commonUi)
-
+    implementation(projects.compose.foundation.theme)
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.resources)
 
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.window)
-    implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
-
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3.windowsize)
     implementation(libs.androidx.core.splashscreen)
-
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.android)
-
-    implementation(libs.decompose)
-    implementation(libs.decompose.compose.jetpack)
     implementation(libs.google.maps)
     implementation(libs.google.material)
-    implementation(libs.kotlin.collections)
-    implementation(libs.kotlin.coroutines)
-    implementation(libs.mvikotlin.extensions)
-    implementation(libs.mvikotlin.main)
-    implementation(libs.mvikotlin)
 }
 
 secrets {
