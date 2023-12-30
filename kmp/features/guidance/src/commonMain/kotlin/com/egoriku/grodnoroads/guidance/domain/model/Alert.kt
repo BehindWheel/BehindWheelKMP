@@ -1,7 +1,9 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
+import androidx.compose.runtime.Stable
 import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 sealed interface Alert {
     val id: String
 

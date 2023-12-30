@@ -28,7 +28,6 @@ fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     val dialogContent = when (eventType) {
         Spring -> stringResource(id = R.string.headlamp_body_spring)
         Autumn -> stringResource(id = R.string.headlamp_body_autumn)
-        else -> error("$eventType not supported")
     }
 
     BasicAlertDialog(

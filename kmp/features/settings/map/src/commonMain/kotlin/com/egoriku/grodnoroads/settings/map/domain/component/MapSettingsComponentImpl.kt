@@ -23,7 +23,7 @@ internal class MapSettingsComponentImpl(
 
     private val mapSettingsStore: MapSettingsStore = instanceKeeper.getStore(::get)
 
-    override val mapSettingsState: CFlow<MapSettingState>
+    override val state: CFlow<MapSettingState>
         get() = mapSettingsStore.states.map { storeState ->
             MapSettingState(
                 isLoading = storeState.isLoading,

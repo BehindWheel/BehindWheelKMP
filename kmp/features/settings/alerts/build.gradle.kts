@@ -20,6 +20,7 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
 
+            compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
 
             implementation(project.dependencies.platform(libs.koin.bom))

@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.settings.map.domain.component
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.*
@@ -10,26 +11,30 @@ import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.map.location.City.Grodno
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 
+@Stable
 interface MapSettingsComponent {
 
-    val mapSettingsState: CFlow<MapSettingState>
+    val state: CFlow<MapSettingState>
 
     fun modify(preference: MapPref)
     fun reset(preference: MapPref)
     fun openDialog(preference: MapPref)
     fun closeDialog()
 
+    @Stable
     data class MapSettingState(
         val isLoading: Boolean = true,
         val mapSettings: MapSettings = MapSettings(),
         val mapDialogState: MapDialogState = None
     )
 
+    @Stable
     sealed interface MapDialogState {
         data class DefaultLocationDialogState(val defaultCity: DefaultCity) : MapDialogState
         data object None : MapDialogState
     }
 
+    @Stable
     sealed interface MapPref {
         data class StationaryCameras(val isShow: Boolean = true) : MapPref
         data class MediumSpeedCameras(val isShow: Boolean = true) : MapPref
@@ -64,21 +69,25 @@ interface MapSettingsComponent {
         ) : MapPref
     }
 
+    @Stable
     data class MapSettings(
         val locationInfo: LocationInfo = LocationInfo(),
         val driveModeZoom: DriveModeZoom = DriveModeZoom(),
         val mapStyle: MapStyle = MapStyle(),
         val mapInfo: MapInfo = MapInfo(),
     ) {
+        @Stable
         data class LocationInfo(
             val defaultCity: DefaultCity = DefaultCity()
         )
 
+        @Stable
         data class DriveModeZoom(
             val mapZoomInCity: MapZoomInCity = MapZoomInCity(),
             val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity(),
         )
 
+        @Stable
         data class MapInfo(
             val stationaryCameras: StationaryCameras = StationaryCameras(),
             val mediumSpeedCameras: MediumSpeedCameras = MediumSpeedCameras(),
@@ -91,6 +100,7 @@ interface MapSettingsComponent {
             val selectable: Selectable = Selectable.AllEnabled
         )
 
+        @Stable
         data class MapStyle(
             val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),
             val googleMapStyle: GoogleMapStyle = GoogleMapStyle(),

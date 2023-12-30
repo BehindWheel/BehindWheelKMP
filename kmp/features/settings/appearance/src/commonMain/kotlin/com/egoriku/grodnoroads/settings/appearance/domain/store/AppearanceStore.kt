@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.settings.appearance.domain.store
 
+import androidx.compose.runtime.Stable
 import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.*
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.None
@@ -15,6 +16,7 @@ interface AppearanceStore : Store<Intent, State, Nothing> {
         data object CloseDialog : Intent
     }
 
+    @Stable
     data class State(
         val dialogState: AppearanceDialogState = None,
         val appearanceState: AppearanceState = AppearanceState()

@@ -69,13 +69,11 @@ fun Alerts(
                         StationaryCamera -> stringResource(R.string.alerts_stationary_camera)
                         MobileCamera -> stringResource(R.string.alerts_mobile_camera)
                         MediumSpeedCamera -> stringResource(R.string.alerts_medium_speed_camera)
-                        else -> error("title not applicable")
                     }
                     val icon = when (alert.cameraType) {
                         StationaryCamera -> R.drawable.ic_stationary_camera
                         MobileCamera -> R.drawable.ic_mobile_camera
                         MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
-                        else -> error("title not applicable")
                     }
                     CameraAlert(
                         modifier = Modifier.animateItemPlacement(

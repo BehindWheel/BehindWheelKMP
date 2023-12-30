@@ -7,7 +7,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 
 class MapSettingsComponentPreview : MapSettingsComponent {
 
-    override val mapSettingsState: CFlow<MapSettingState>
+    override val state: CFlow<MapSettingState>
         get() = stateFlowOf {
             MapSettingState(isLoading = false)
         }

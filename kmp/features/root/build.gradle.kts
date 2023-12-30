@@ -53,6 +53,7 @@ kotlin {
             api(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.datastore)
 
+            compileOnly(libs.compose.stable.marker)
             api(libs.decompose)
             implementation(libs.dev.gitlive.firebase.crashlytics)
             implementation(libs.dev.gitlive.firebase.database)

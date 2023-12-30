@@ -20,6 +20,7 @@ kotlin {
             implementation(projects.kmp.shared.components)
             implementation(projects.kmp.shared.models)
 
+            compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
         }
         androidDependencies {

@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.mainflow.domain
 
+import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
 import com.egoriku.grodnoroads.coroutines.CStateFlow
@@ -10,6 +11,7 @@ import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComp
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 
+@Stable
 interface MainFlowComponent : BackHandlerOwner {
 
     val childStack: CStateFlow<ChildStack<*, Child>>

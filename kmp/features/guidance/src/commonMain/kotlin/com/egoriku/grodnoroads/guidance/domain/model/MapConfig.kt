@@ -1,7 +1,9 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 
+@Stable
 data class MapConfig(
     val zoomLevel: Float,
     val googleMapStyle: Style,

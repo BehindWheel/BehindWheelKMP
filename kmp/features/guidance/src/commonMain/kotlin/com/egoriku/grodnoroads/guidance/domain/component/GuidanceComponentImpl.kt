@@ -77,6 +77,7 @@ internal class GuidanceComponentImpl(
             locationStore.labels bindTo ::bindLocationLabel
         }
 
+        // TODO: use SharedFlow to remove dependency SoundUtil
         combine(
             flow = alerts,
             flow2 = alertInfo,

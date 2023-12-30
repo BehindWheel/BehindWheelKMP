@@ -21,6 +21,7 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.location)
 
+            compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
 
             implementation(project.dependencies.platform(libs.koin.bom))

@@ -34,7 +34,7 @@ fun MapSettingsScreen(
     mapSettingsComponent: MapSettingsComponent,
     onBack: () -> Unit
 ) {
-    val state by mapSettingsComponent.mapSettingsState.collectAsState(initial = MapSettingState())
+    val state by mapSettingsComponent.state.collectAsState(initial = MapSettingState())
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(

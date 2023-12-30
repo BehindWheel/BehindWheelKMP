@@ -1,9 +1,11 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.location.LatLng
 import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 sealed interface MapEvent {
     val position: LatLng
 

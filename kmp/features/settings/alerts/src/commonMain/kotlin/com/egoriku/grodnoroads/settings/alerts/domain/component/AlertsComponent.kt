@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.settings.alerts.domain.component
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.*
 import com.egoriku.grodnoroads.shared.persistent.Selectable
@@ -9,6 +10,7 @@ import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
+@Stable
 interface AlertsComponent {
 
     val state: CFlow<AlertState>
@@ -16,11 +18,13 @@ interface AlertsComponent {
     fun modify(pref: AlertsPref)
     fun reset(pref: AlertsPref)
 
+    @Stable
     data class AlertState(
         val isLoading: Boolean = true,
         val alertSettings: AlertSettings = AlertSettings()
     )
 
+    @Stable
     sealed interface AlertsPref {
         data class AlertAvailability(
             val alertFeatureEnabled: Boolean = false,
@@ -57,19 +61,23 @@ interface AlertsComponent {
         data class SelectAll(val selectAll: Boolean = true) : AlertsPref
     }
 
+    @Stable
     data class AlertSettings(
         val alertAvailability: AlertAvailability = AlertAvailability(),
         val volumeInfo: VolumeInfo = VolumeInfo(),
         val alertRadius: AlertRadius = AlertRadius(),
         val alertEvents: AlertEvents = AlertEvents()
     ) {
+        @Stable
         data class VolumeInfo(val alertVolumeLevel: AlertVolumeLevel = AlertVolumeLevel())
 
+        @Stable
         data class AlertRadius(
             val alertRadiusInCity: AlertRadiusInCity = AlertRadiusInCity(),
             val alertRadiusOutCity: AlertRadiusOutCity = AlertRadiusOutCity(),
         )
 
+        @Stable
         data class AlertEvents(
             val stationaryCameras: StationaryCameras = StationaryCameras(),
             val mediumSpeedCameras: MediumSpeedCameras = MediumSpeedCameras(),

@@ -17,6 +17,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
         }
         androidDependencies {

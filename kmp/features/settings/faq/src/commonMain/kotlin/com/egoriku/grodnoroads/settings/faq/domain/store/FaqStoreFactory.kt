@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.settings.faq.domain.repository.FaqRepository
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore.Message
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore.State
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,7 @@ internal class FaqStoreFactory(
             reducer = { message: Message ->
                 when (message) {
                     is Message.Loading -> copy(isLoading = message.isLoading)
-                    is Message.Success -> copy(faq = message.faq)
+                    is Message.Success -> copy(faq = message.faq.toImmutableList())
                 }
             }
         ) {}

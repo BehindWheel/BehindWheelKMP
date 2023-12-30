@@ -1,4 +1,5 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosTarget
 
 plugins {
@@ -14,6 +15,9 @@ kotlin {
     setupIosTarget(baseName = "location")
 
     sourceSets {
+        commonDependencies {
+            compileOnly(libs.compose.stable.marker)
+        }
         androidDependencies {
             implementation(libs.play.services.maps)
         }

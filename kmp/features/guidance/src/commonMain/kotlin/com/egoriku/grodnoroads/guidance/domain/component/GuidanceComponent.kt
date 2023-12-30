@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.guidance.domain.component
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.guidance.domain.model.*
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
@@ -10,6 +11,7 @@ import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 interface GuidanceComponent {
 
     val specialEventComponent: SpecialEventComponent
