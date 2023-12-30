@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.guidance.domain.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
@@ -8,8 +9,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.coroutines.CFlow
 import com.egoriku.grodnoroads.coroutines.asCFlow
+import com.egoriku.grodnoroads.coroutines.coroutineScope
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
-import com.egoriku.grodnoroads.guidance.domain.extension.coroutineScope
 import com.egoriku.grodnoroads.guidance.domain.model.*
 import com.egoriku.grodnoroads.guidance.domain.model.ReportType.RoadIncident
 import com.egoriku.grodnoroads.guidance.domain.model.ReportType.TrafficPolice
@@ -31,6 +32,8 @@ import com.egoriku.grodnoroads.guidance.domain.util.alertSoundTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.filterMapEvents
 import com.egoriku.grodnoroads.guidance.domain.util.overSpeedTransformation
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
+import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -63,6 +66,9 @@ internal class GuidanceComponentImpl(
     private val alertInfo = mapConfigStore.states.map { it.mapInternalConfig.alertsInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)
+
+    override val specialEventComponent: SpecialEventComponent =
+        buildSpecialEventComponent(childContext(key = "special_event"))
 
     // private val soundUtil by inject<SoundUtil>()
 

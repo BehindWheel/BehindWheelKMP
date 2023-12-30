@@ -9,6 +9,7 @@ import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.settings.changelog.domain.di.changelogModule
 import com.egoriku.grodnoroads.settings.faq.di.faqModule
 import com.egoriku.grodnoroads.settings.map.di.mapSettingsModule
+import com.egoriku.grodnoroads.specialevent.domain.di.specialEventModule
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.crashlytics.crashlytics
 import dev.gitlive.firebase.database.database
@@ -20,6 +21,8 @@ import org.koin.dsl.module
 
 fun appModule() = listOf(
     guidanceModule,
+    specialEventModule,
+
     alertsModule,
     appearanceModule,
     changelogModule,

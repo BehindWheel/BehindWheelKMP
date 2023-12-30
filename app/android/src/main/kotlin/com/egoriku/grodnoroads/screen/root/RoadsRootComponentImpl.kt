@@ -4,7 +4,6 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
@@ -12,8 +11,6 @@ import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -48,13 +45,6 @@ class RoadsRootComponentImpl(
             }
         }
 
-    override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
-
-    override fun closeHeadlampDialog() {
-        rootStore.accept(Intent.CloseDialog)
-    }
-
-    override fun onBack() = navigation.pop()
 
     private fun child(config: Config, componentContext: ComponentContext) = when (config) {
         is Config.Main -> Child.Main(

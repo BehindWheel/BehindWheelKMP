@@ -7,12 +7,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent.CloseDialog
-import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.UpdateHeadLampDialog
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.State
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampDispatcher
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
 import kotlinx.coroutines.Dispatchers
@@ -20,32 +15,23 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
-interface RootStore : Store<Intent, State, Nothing>
+interface RootStore : Store<Nothing, State, Nothing>
 
 class RootStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {
 
-    sealed interface Intent {
-        data object CloseDialog : Intent
-    }
-
     sealed interface Message {
         data class NewState(val state: State) : Message
-        data class UpdateHeadLampDialog(val headLampType: HeadLampType) : Message
     }
 
-    data class State(
-        val theme: Theme? = null,
-        val headLampType: HeadLampType = HeadLampType.None
-    )
+    data class State(val theme: Theme? = null)
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): RootStore =
-        object : RootStore, Store<Intent, State, Nothing> by storeFactory.create(
+        object : RootStore, Store<Nothing, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
@@ -57,21 +43,12 @@ class RootStoreFactory(
                         .onEach { dispatch(Message.NewState(state = it)) }
                         .launchIn(this)
 
-                    launch {
-                        dispatch(UpdateHeadLampDialog(headLampType = HeadLampDispatcher.calculateType()))
-                    }
-                }
-                onIntent<CloseDialog> {
-                    launch {
-                        dispatch(UpdateHeadLampDialog(headLampType = HeadLampType.None))
-                    }
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
                     is Message.NewState -> copy(theme = message.state.theme)
-                    is UpdateHeadLampDialog -> copy(headLampType = message.headLampType)
                 }
             }
         ) {}

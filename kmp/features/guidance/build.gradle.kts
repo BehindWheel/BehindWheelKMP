@@ -19,6 +19,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.features.specialEventReminder)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
@@ -55,6 +56,7 @@ kotlin {
             implementation(libs.androidx.compose.material.icons)
 
             implementation(libs.balloon.compose)
+            implementation(libs.decompose.compose.jetpack)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
 

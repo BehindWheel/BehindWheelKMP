@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.coroutines.reLaunch
@@ -33,8 +34,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.*
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.guidance.screen.ui.CameraInfo
-import com.egoriku.grodnoroads.location.toGmsLatLng
-import com.egoriku.grodnoroads.location.toLatLng
+import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.IncidentDialog
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.ReportDialog
@@ -51,15 +51,17 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.DefaultOverlay
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.default.DefaultMode
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
-import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 import com.egoriku.grodnoroads.guidance.screen.util.MarkerCache
 import com.egoriku.grodnoroads.guidance.screen.util.SnackbarMessageBuilder
+import com.egoriku.grodnoroads.location.toGmsLatLng
+import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ui.IconGenerator
@@ -82,6 +84,14 @@ fun GuidanceScreen(
     val snackbarMessageBuilder = remember { SnackbarMessageBuilder(context) }
 
     val markerCache = koinInject<MarkerCache>()
+
+    val specialEvent = component.specialEventComponent.specialEvents.subscribeAsState()
+    specialEvent.value.child?.instance?.also { dialogComponent ->
+        SpecialEventDialog(
+            eventType = dialogComponent.eventType,
+            onClose = dialogComponent::dismiss
+        )
+    }
 
     Surface {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }

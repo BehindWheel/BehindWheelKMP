@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.screen.root.ui
+package com.egoriku.grodnoroads.specialevent.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,17 +18,17 @@ import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Autumn
-import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType.Spring
+import com.egoriku.grodnoroads.specialevent.domain.model.EventType
+import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
+import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
-    val dialogContent = when (headlampType) {
+fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
+    val dialogContent = when (eventType) {
         Spring -> stringResource(id = R.string.headlamp_body_spring)
         Autumn -> stringResource(id = R.string.headlamp_body_autumn)
-        else -> error("$headlampType not supported")
+        else -> error("$eventType not supported")
     }
 
     BasicAlertDialog(
@@ -52,15 +52,14 @@ fun HeadLampDialog(headlampType: HeadLampType, onClose: () -> Unit) {
     }
 }
 
-
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewHeadLampDialogSpring() = GrodnoRoadsM3ThemePreview {
-    HeadLampDialog(headlampType = Spring) {}
+private fun PreviewSpecialEventDialogSpring() = GrodnoRoadsM3ThemePreview {
+    SpecialEventDialog(eventType = Spring) {}
 }
 
 @GrodnoRoadsPreview
 @Composable
-private fun PreviewHeadLampDialogAutumn() = GrodnoRoadsM3ThemePreview {
-    HeadLampDialog(headlampType = Autumn) {}
+private fun PreviewSpecialEventDialogAutumn() = GrodnoRoadsM3ThemePreview {
+    SpecialEventDialog(eventType = Autumn) {}
 }

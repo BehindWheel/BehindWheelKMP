@@ -20,6 +20,7 @@ kotlin {
 
         export(projects.kmp.features.appSettings)
         export(projects.kmp.features.guidance)
+        export(projects.kmp.features.specialEventReminder)
         export(projects.kmp.features.mainflow)
         export(projects.kmp.features.onboarding)
         export(projects.kmp.features.settings.alerts)
@@ -36,6 +37,7 @@ kotlin {
         commonDependencies {
             api(projects.kmp.features.appSettings)
             api(projects.kmp.features.guidance)
+            api(projects.kmp.features.specialEventReminder)
             api(projects.kmp.features.mainflow)
             api(projects.kmp.features.onboarding)
             api(projects.kmp.features.settings.alerts)

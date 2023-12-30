@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.guidance.domain.extension
+package com.egoriku.grodnoroads.coroutines
 
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy

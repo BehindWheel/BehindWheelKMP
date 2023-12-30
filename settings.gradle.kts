@@ -40,8 +40,12 @@ include(":libraries:resources")
 include(":kmp:features:root")
 include(":kmp:features:onboarding")
 include(":kmp:features:mainflow")
+
 include(":kmp:features:guidance")
+include(":kmp:features:specialEventReminder")
+
 include(":kmp:features:tabs")
+
 include(":kmp:features:appSettings")
 include(":kmp:features:settings:alerts")
 include(":kmp:features:settings:appearance")

@@ -7,9 +7,12 @@ import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.In
 import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList
 
 interface GuidanceComponent {
+
+    val specialEventComponent: SpecialEventComponent
 
     val lastLocation: CFlow<LastLocation>
     val initialLocation: CFlow<LatLng>
