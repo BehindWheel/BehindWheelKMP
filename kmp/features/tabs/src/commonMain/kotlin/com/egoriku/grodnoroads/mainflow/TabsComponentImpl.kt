@@ -56,12 +56,11 @@ internal class TabsComponentImpl(
     }
 
     @Serializable
-    // TODO: use sealed interface in all places
-    private sealed class Config {
+    private sealed interface Config {
         @Serializable
-        data object Guidance : Config()
+        data object Guidance : Config
 
         @Serializable
-        data object AppSettings : Config()
+        data object AppSettings : Config
     }
 }

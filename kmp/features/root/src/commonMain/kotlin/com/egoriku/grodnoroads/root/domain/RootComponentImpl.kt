@@ -45,11 +45,11 @@ class RootComponentImpl(
     }
 
     @Serializable
-    private sealed class Config {
+    private sealed interface Config {
         @Serializable
-        data object MainFlow : Config()
+        data object MainFlow : Config
 
         @Serializable
-        data object Onboarding : Config()
+        data object Onboarding : Config
     }
 }

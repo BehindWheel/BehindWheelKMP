@@ -67,26 +67,26 @@ internal class MainFlowComponentImpl(
     }
 
     @Serializable
-    private sealed class Config {
+    private sealed interface Config {
         @Serializable
-        data object Tabs : Config()
+        data object Tabs : Config
 
         @Serializable
-        data object Appearance : Config()
+        data object Appearance : Config
 
         @Serializable
-        data object MapSettings : Config()
+        data object MapSettings : Config
 
         @Serializable
-        data object Alerts : Config()
+        data object Alerts : Config
 
         @Serializable
-        data object Changelog : Config()
+        data object Changelog : Config
 
         @Serializable
-        data object NextFeatures : Config()
+        data object NextFeatures : Config
 
         @Serializable
-        data object FAQ : Config()
+        data object FAQ : Config
     }
 }

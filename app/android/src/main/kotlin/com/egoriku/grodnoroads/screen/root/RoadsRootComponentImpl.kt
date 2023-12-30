@@ -57,8 +57,8 @@ class RoadsRootComponentImpl(
     }
 
     @Serializable
-    private sealed class Config {
+    private sealed interface Config {
         @Serializable
-        data object Main : Config()
+        data object Main : Config
     }
 }
