@@ -7,10 +7,10 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
-import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.coroutines.CStateFlow
 import com.egoriku.grodnoroads.coroutines.asCStateFlow
 import com.egoriku.grodnoroads.coroutines.coroutineScope
+import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
 import com.egoriku.grodnoroads.onboarding.domain.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
@@ -45,7 +45,7 @@ internal class RootComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: Value<ChildStack<*, Child>> = stack
+    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().asCStateFlow()
 
     override val theme: CStateFlow<Theme?>
         get() = dataStore.data

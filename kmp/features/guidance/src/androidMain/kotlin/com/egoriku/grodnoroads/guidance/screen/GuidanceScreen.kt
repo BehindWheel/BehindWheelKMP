@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
+import com.egoriku.grodnoroads.coroutines.onChild
 import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
@@ -85,8 +85,8 @@ fun GuidanceScreen(
 
     val markerCache = koinInject<MarkerCache>()
 
-    val specialEvent = component.specialEventComponent.specialEvents.subscribeAsState()
-    specialEvent.value.child?.instance?.also { dialogComponent ->
+    val specialEventSlot by component.specialEventComponent.specialEvents.collectAsState()
+    specialEventSlot.onChild { dialogComponent ->
         SpecialEventDialog(
             eventType = dialogComponent.eventType,
             onClose = dialogComponent::dismiss

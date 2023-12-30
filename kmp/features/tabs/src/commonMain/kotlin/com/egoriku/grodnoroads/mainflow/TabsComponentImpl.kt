@@ -2,8 +2,10 @@ package com.egoriku.grodnoroads.mainflow
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
-import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.appsettings.domain.buildAppSettingsComponent
+import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.asCStateFlow
+import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.buildGuidanceComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
 import com.egoriku.grodnoroads.shared.models.Page
@@ -32,7 +34,7 @@ internal class TabsComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: Value<ChildStack<*, Child>> = stack
+    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().asCStateFlow()
 
     private fun processChild(
         config: Config,

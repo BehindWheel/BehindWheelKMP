@@ -25,6 +25,7 @@ kotlin {
             implementation(projects.kmp.features.settings.faq)
             implementation(projects.kmp.features.settings.map)
             implementation(projects.kmp.shared.models)
+            implementation(projects.kmp.libraries.coroutines)
 
             implementation(libs.decompose)
         }

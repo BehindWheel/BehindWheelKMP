@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
+import com.egoriku.grodnoroads.coroutines.CStateFlow
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
@@ -12,7 +12,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 
 interface MainFlowComponent : BackHandlerOwner {
 
-    val childStack: Value<ChildStack<*, Child>>
+    val childStack: CStateFlow<ChildStack<*, Child>>
     fun onBack()
 
     sealed class Child {

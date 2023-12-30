@@ -5,10 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,7 +13,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
@@ -27,9 +23,9 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
+import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
-import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -38,7 +34,7 @@ private val NavigationBarHeight: Dp = 80.dp
 fun TabsScreen(tabsComponent: TabsComponent) {
     val windowSizeClass = LocalWindowSizeClass.current
 
-    val childStack by tabsComponent.childStack.subscribeAsState()
+    val childStack by tabsComponent.childStack.collectAsState()
 
     when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Expanded -> {

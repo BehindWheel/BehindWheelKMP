@@ -3,7 +3,9 @@ package com.egoriku.grodnoroads.mainflow.domain
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
-import com.arkivanov.decompose.value.Value
+import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.asCStateFlow
+import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
@@ -32,7 +34,7 @@ internal class MainFlowComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: Value<ChildStack<*, Child>> = stack
+    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().asCStateFlow()
 
     override fun onBack() = navigation.pop()
 

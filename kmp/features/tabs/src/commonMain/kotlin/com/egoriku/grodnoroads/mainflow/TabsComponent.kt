@@ -1,13 +1,13 @@
 package com.egoriku.grodnoroads.mainflow
 
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.value.Value
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
+import com.egoriku.grodnoroads.coroutines.CStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
 
 interface TabsComponent {
 
-    val childStack: Value<ChildStack<*, Child>>
+    val childStack: CStateFlow<ChildStack<*, Child>>
 
     fun onSelectTab(index: Int)
 

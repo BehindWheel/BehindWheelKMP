@@ -1,6 +1,8 @@
 package com.egoriku.grodnoroads.mainflow.screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
@@ -17,8 +19,10 @@ import com.egoriku.grodnoroads.settings.map.screen.MapSettingsScreen
 @OptIn(ExperimentalDecomposeApi::class, FaultyDecomposeApi::class)
 @Composable
 fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
+    val stack by mainFlowComponent.childStack.collectAsState()
+
     Children(
-        stack = mainFlowComponent.childStack,
+        stack = stack,
         animation = predictiveBackAnimation(
             backHandler = mainFlowComponent.backHandler,
             animation = stackAnimation { _, _, direction ->
