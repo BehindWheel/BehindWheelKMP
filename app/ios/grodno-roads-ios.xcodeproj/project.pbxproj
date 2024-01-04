@@ -169,14 +169,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE243F5D2B474E8D00B3845C /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				CE46B71B2B325EBE00493502 /* MapView.swift */,
+				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
+				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		CE46B71A2B325EAB00493502 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				CE243F5D2B474E8D00B3845C /* Map */,
 				CE46B71F2B325EDC00493502 /* Settings */,
-				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CEA924D72B30CD520086E744 /* TabsView.swift */,
-				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
-				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
