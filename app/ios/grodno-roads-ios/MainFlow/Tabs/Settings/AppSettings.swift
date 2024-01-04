@@ -19,51 +19,100 @@ struct AppSettings: View {
         VStack(alignment: .leading, spacing: 0) {
             SettingsHeaderView(title: "Main")
             
-            Button {
-                component.open(page: .appearance)
-            } label: {
-                SettingsItemView(leadingIcon: "swatchpalette.fill", headlineText: "Appearance")
-            }
-            .buttonStyle(.plain)
+            SettingsItemView(
+                leadingIcon: "swatchpalette.fill",
+                headlineText: "Appearance",
+                action: { component.open(page: .appearance) }
+            ).padding(.leading, 12)
             
-            Button {
-                component.open(page: .mapsettings)
-            } label: {
-                SettingsItemView(leadingIcon: "map.fill", headlineText: "Map")
-            }
-            .buttonStyle(.plain)
+            SettingsItemView(
+                leadingIcon: "map.fill",
+                headlineText: "Map",
+                action: { component.open(page: .mapsettings) }
+            ).padding(.leading, 12)
             
-            Button {
-                component.open(page: .alerts)
-            } label: {
-                SettingsItemView(leadingIcon: "speaker.wave.2.bubble.fill", headlineText: "Alerts")
-            }
-            .buttonStyle(.plain)
+            SettingsItemView(
+                leadingIcon: "speaker.wave.2.bubble.fill",
+                headlineText: "Alerts",
+                action: { component.open(page: .alerts) }
+            ).padding(.leading, 12)
             
             SettingsHeaderView(title: "Other")
                 .padding(.top, 16)
             
-            Button {
-                component.open(page: .changelog)
-            } label: {
-                SettingsItemView(leadingIcon: "newspaper.fill", headlineText: "Changelog")
-            }
-            .buttonStyle(.plain)
+            SettingsItemView(
+                leadingIcon: "newspaper.fill",
+                headlineText: "Changelog",
+                action: { component.open(page: .changelog) }
+            ).padding(.leading, 12)
             
-            Button {
-                component.open(page: .faq)
-            } label: {
-                SettingsItemView(leadingIcon: "quote.bubble.fill", headlineText: "FAQ")
-            }
-            .buttonStyle(.plain)
+            SettingsItemView(
+                leadingIcon: "quote.bubble.fill",
+                headlineText: "FAQ",
+                action: { component.open(page: .faq) }
+            ).padding(.leading, 12)
+            
+            SettingsItemView(
+                leadingIcon: "doc.fill",
+                headlineText: "Privacy Policy",
+                action: { 
+                    openUrl("https://github.com/grodnoroads/GrodnoRoads/blob/release/PrivacyPolicy.md")
+                }
+            ).padding(.leading, 12)
+            
+            SettingsItemView(
+                leadingIcon: "info.circle.fill",
+                headlineText: "Terms of Service",
+                action: {
+                    openUrl("https://github.com/grodnoroads/GrodnoRoads/blob/release/TermsConditions.md")
+                }
+            ).padding(.leading, 12)
             
             Spacer()
+            
+            HStack {
+                Spacer()
+                SettingsRoundItem("Chat", image: "questionmark.circle.fill") {
+                    openUrl("https://t.me/grodnoroads_chat")
+                }
+                Spacer()
+                SettingsRoundItem("Channel", image: "paperplane.fill") {
+                    openUrl("https://t.me/grodno_roads")
+                }
+                Spacer()
+                SettingsRoundItem("Share", image: "square.and.arrow.up.fill", action: { shareAppLink() })
+                Spacer()
+            }
+            
             Text("Version: \(component.appVersion)")
                 .bold()
+                .font(.system(size: 12))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
         }
         .padding()
+    }
+    
+    private func shareAppLink() {
+        guard
+            let vc = UIApplication.shared.connectedScenes
+                .compactMap({$0 as? UIWindowScene}).first?
+                .windows.first?.rootViewController,
+            let url = URL(string: "https://t.me/grodno_roads")
+        else {
+            return
+        }
+        
+        let shareActivity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        shareActivity.popoverPresentationController?.sourceView = vc.view
+        shareActivity.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height, width: 0, height: 0)
+        shareActivity.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        vc.present(shareActivity, animated: true, completion: nil)
+    }
+    
+    private func openUrl(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        UIApplication.shared.open(url)
     }
 }
 
