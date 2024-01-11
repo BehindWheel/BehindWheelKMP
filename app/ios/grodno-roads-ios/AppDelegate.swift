@@ -23,11 +23,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         KoinHelper_iosKt.doInitKoin()
         return true
     }
-    
+}
+
+extension AppDelegate {
     private func setupGoogleMaps() {
         guard
             let location = Bundle.main.url(forResource: "secrets", withExtension: "properties"),
-            let value = try? String(contentsOf: location).components(separatedBy: "=").last
+            let lines = try? String(contentsOf: location).components(separatedBy: .newlines),
+            let ios = lines.first(where: { $0.contains("MAPS_API_KEY_IOS") }),
+            let value = ios.components(separatedBy: "=").last
         else {
             return
         }

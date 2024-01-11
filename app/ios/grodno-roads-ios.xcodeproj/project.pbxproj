@@ -11,6 +11,7 @@
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
 		6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21E2B38C2F60010592F /* SettingsItem.swift */; };
+		CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */ = {isa = PBXBuildFile; productRef = CE14848E2B3CB4A4009B048A /* FirebaseBinaries */; };
 		CE46B71C2B325EBE00493502 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71B2B325EBE00493502 /* MapView.swift */; };
 		CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71D2B325ED600493502 /* AppSettings.swift */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
@@ -20,31 +21,6 @@
 		CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627482B3648D300799BC2 /* AppDelegate.swift */; };
 		CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274A2B36491100799BC2 /* ComponentContext.swift */; };
 		CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */; };
-		CE66275E2B38C39600799BC2 /* FirebaseFirestore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627522B38C39500799BC2 /* FirebaseFirestore.xcframework */; };
-		CE66275F2B38C39600799BC2 /* gRPC-Core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627532B38C39500799BC2 /* gRPC-Core.xcframework */; };
-		CE6627602B38C39600799BC2 /* gRPCCertificates-Cpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE6627552B38C39500799BC2 /* gRPCCertificates-Cpp.bundle */; };
-		CE6627612B38C39600799BC2 /* leveldb-library.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627562B38C39500799BC2 /* leveldb-library.xcframework */; };
-		CE6627622B38C39600799BC2 /* FirebaseCoreExtension.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627572B38C39500799BC2 /* FirebaseCoreExtension.xcframework */; };
-		CE6627632B38C39600799BC2 /* gRPC-C++.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627582B38C39500799BC2 /* gRPC-C++.xcframework */; };
-		CE6627642B38C39600799BC2 /* FirebaseFirestoreInternal.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627592B38C39500799BC2 /* FirebaseFirestoreInternal.xcframework */; };
-		CE6627652B38C39600799BC2 /* BoringSSL-GRPC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66275A2B38C39500799BC2 /* BoringSSL-GRPC.xcframework */; };
-		CE6627662B38C39600799BC2 /* FirebaseAppCheckInterop.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66275B2B38C39600799BC2 /* FirebaseAppCheckInterop.xcframework */; };
-		CE6627672B38C39600799BC2 /* FirebaseSharedSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66275C2B38C39600799BC2 /* FirebaseSharedSwift.xcframework */; };
-		CE6627682B38C39600799BC2 /* abseil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66275D2B38C39600799BC2 /* abseil.xcframework */; };
-		CE6627762B38C76600799BC2 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66276D2B38C76600799BC2 /* nanopb.xcframework */; };
-		CE6627782B38C76600799BC2 /* FirebaseAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66276F2B38C76600799BC2 /* FirebaseAnalytics.xcframework */; };
-		CE6627792B38C76600799BC2 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627702B38C76600799BC2 /* FirebaseInstallations.xcframework */; };
-		CE66277B2B38C76600799BC2 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627722B38C76600799BC2 /* FirebaseCore.xcframework */; };
-		CE66277C2B38C76600799BC2 /* FirebaseCoreInternal.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627732B38C76600799BC2 /* FirebaseCoreInternal.xcframework */; };
-		CE66277D2B38C76600799BC2 /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627742B38C76600799BC2 /* GoogleAppMeasurement.xcframework */; };
-		CE66277E2B38C76600799BC2 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627752B38C76600799BC2 /* GoogleUtilities.xcframework */; };
-		CE6627842B38C90400799BC2 /* FirebaseSessions.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627802B38C90300799BC2 /* FirebaseSessions.xcframework */; };
-		CE6627862B38C90400799BC2 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627822B38C90400799BC2 /* GoogleDataTransport.xcframework */; };
-		CE6627872B38C90400799BC2 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627832B38C90400799BC2 /* FirebaseCrashlytics.xcframework */; };
-		CE66278C2B38CB1F00799BC2 /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627892B38CB1E00799BC2 /* GoogleMapsBase.xcframework */; };
-		CE66278D2B38CB1F00799BC2 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66278A2B38CB1F00799BC2 /* GoogleMapsCore.xcframework */; };
-		CE66278E2B38CB1F00799BC2 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE66278B2B38CB1F00799BC2 /* GoogleMaps.xcframework */; };
-		CE6627902B38CB2600799BC2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE66278F2B38CB2600799BC2 /* GoogleMaps.bundle */; };
 		CE6627922B38CB6700799BC2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627912B38CB6700799BC2 /* Accelerate.framework */; };
 		CE6627942B38CB6E00799BC2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627932B38CB6E00799BC2 /* CoreData.framework */; };
 		CE6627962B38CB7600799BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627952B38CB7600799BC2 /* CoreGraphics.framework */; };
@@ -62,8 +38,8 @@
 		CE6627AE2B38CBE300799BC2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627AD2B38CBE300799BC2 /* SystemConfiguration.framework */; };
 		CE6627B02B38CBEC00799BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6627AF2B38CBEC00799BC2 /* UIKit.framework */; };
 		CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */ = {isa = PBXBuildFile; fileRef = CE6627B12B38CF4500799BC2 /* secrets.properties */; };
-		CE6627BA2B38DD2C00799BC2 /* FBLPromises in Frameworks */ = {isa = PBXBuildFile; productRef = CE6627B92B38DD2C00799BC2 /* FBLPromises */; };
-		CE6627BE2B38DD2C00799BC2 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = CE6627BD2B38DD2C00799BC2 /* Promises */; };
+		CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */; };
+		CE6627D42B3A127E00799BC2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627D22B3A127E00799BC2 /* MapViewController.swift */; };
 		CEA322392B33A1B90039329B /* FaqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA322382B33A1B90039329B /* FaqView.swift */; };
 		CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C22B2FA95B0086E744 /* StateValue.swift */; };
 		CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C32B2FA95B0086E744 /* MutableValue.swift */; };
@@ -76,6 +52,9 @@
 		CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D32B30CCC50086E744 /* AppearanceView.swift */; };
 		CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D52B30CD310086E744 /* ChangelogView.swift */; };
 		CEA924D82B30CD520086E744 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924D72B30CD520086E744 /* TabsView.swift */; };
+		CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F392B3BA599009ACA8B /* GoogleMaps */; };
+		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
+		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,33 +72,6 @@
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE66274A2B36491100799BC2 /* ComponentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentContext.swift; sourceTree = "<group>"; };
 		CE66274C2B371BCB00799BC2 /* MapSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsView.swift; sourceTree = "<group>"; };
-		CE6627522B38C39500799BC2 /* FirebaseFirestore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestore.xcframework; sourceTree = "<group>"; };
-		CE6627532B38C39500799BC2 /* gRPC-Core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "gRPC-Core.xcframework"; sourceTree = "<group>"; };
-		CE6627552B38C39500799BC2 /* gRPCCertificates-Cpp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "gRPCCertificates-Cpp.bundle"; sourceTree = "<group>"; };
-		CE6627562B38C39500799BC2 /* leveldb-library.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "leveldb-library.xcframework"; sourceTree = "<group>"; };
-		CE6627572B38C39500799BC2 /* FirebaseCoreExtension.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCoreExtension.xcframework; sourceTree = "<group>"; };
-		CE6627582B38C39500799BC2 /* gRPC-C++.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "gRPC-C++.xcframework"; sourceTree = "<group>"; };
-		CE6627592B38C39500799BC2 /* FirebaseFirestoreInternal.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseFirestoreInternal.xcframework; sourceTree = "<group>"; };
-		CE66275A2B38C39500799BC2 /* BoringSSL-GRPC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "BoringSSL-GRPC.xcframework"; sourceTree = "<group>"; };
-		CE66275B2B38C39600799BC2 /* FirebaseAppCheckInterop.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseAppCheckInterop.xcframework; sourceTree = "<group>"; };
-		CE66275C2B38C39600799BC2 /* FirebaseSharedSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseSharedSwift.xcframework; sourceTree = "<group>"; };
-		CE66275D2B38C39600799BC2 /* abseil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = abseil.xcframework; sourceTree = "<group>"; };
-		CE66276A2B38C4AB00799BC2 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
-		CE66276B2B38C4DC00799BC2 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		CE66276D2B38C76600799BC2 /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
-		CE66276F2B38C76600799BC2 /* FirebaseAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseAnalytics.xcframework; sourceTree = "<group>"; };
-		CE6627702B38C76600799BC2 /* FirebaseInstallations.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseInstallations.xcframework; sourceTree = "<group>"; };
-		CE6627722B38C76600799BC2 /* FirebaseCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCore.xcframework; sourceTree = "<group>"; };
-		CE6627732B38C76600799BC2 /* FirebaseCoreInternal.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCoreInternal.xcframework; sourceTree = "<group>"; };
-		CE6627742B38C76600799BC2 /* GoogleAppMeasurement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleAppMeasurement.xcframework; sourceTree = "<group>"; };
-		CE6627752B38C76600799BC2 /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
-		CE6627802B38C90300799BC2 /* FirebaseSessions.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseSessions.xcframework; sourceTree = "<group>"; };
-		CE6627822B38C90400799BC2 /* GoogleDataTransport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransport.xcframework; sourceTree = "<group>"; };
-		CE6627832B38C90400799BC2 /* FirebaseCrashlytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCrashlytics.xcframework; sourceTree = "<group>"; };
-		CE6627892B38CB1E00799BC2 /* GoogleMapsBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsBase.xcframework; sourceTree = "<group>"; };
-		CE66278A2B38CB1F00799BC2 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
-		CE66278B2B38CB1F00799BC2 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
-		CE66278F2B38CB2600799BC2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		CE6627912B38CB6700799BC2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CE6627932B38CB6E00799BC2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE6627952B38CB7600799BC2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +89,8 @@
 		CE6627AD2B38CBE300799BC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE6627AF2B38CBEC00799BC2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE6627B12B38CF4500799BC2 /* secrets.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = secrets.properties; path = ../../../../secrets.properties; sourceTree = "<group>"; };
+		CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerBridge.swift; sourceTree = "<group>"; };
+		CE6627D22B3A127E00799BC2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CEA322382B33A1B90039329B /* FaqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqView.swift; sourceTree = "<group>"; };
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
 		CEA924C32B2FA95B0086E744 /* MutableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableValue.swift; sourceTree = "<group>"; };
@@ -158,45 +112,24 @@
 			files = (
 				CE6627B02B38CBEC00799BC2 /* UIKit.framework in Frameworks */,
 				CE6627AE2B38CBE300799BC2 /* SystemConfiguration.framework in Frameworks */,
-				CE6627BE2B38DD2C00799BC2 /* Promises in Frameworks */,
 				CE6627AC2B38CBDC00799BC2 /* QuartzCore.framework in Frameworks */,
 				CE6627AA2B38CBCF00799BC2 /* OpenGLES.framework in Frameworks */,
+				CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */,
 				CE6627A82B38CBC800799BC2 /* Metal.framework in Frameworks */,
 				CE6627A62B38CBC200799BC2 /* libz.tbd in Frameworks */,
 				CE6627A42B38CBB900799BC2 /* libc++.tbd in Frameworks */,
 				CE6627A22B38CBAC00799BC2 /* ImageIO.framework in Frameworks */,
 				CE6627A02B38CBA400799BC2 /* GLKit.framework in Frameworks */,
+				CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */,
 				CE66279E2B38CB9E00799BC2 /* CoreText.framework in Frameworks */,
 				CE66279C2B38CB9600799BC2 /* CoreTelephony.framework in Frameworks */,
 				CE66279A2B38CB9100799BC2 /* CoreLocation.framework in Frameworks */,
 				CE6627982B38CB8A00799BC2 /* CoreImage.framework in Frameworks */,
+				CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */,
+				CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */,
 				CE6627962B38CB7600799BC2 /* CoreGraphics.framework in Frameworks */,
 				CE6627942B38CB6E00799BC2 /* CoreData.framework in Frameworks */,
 				CE6627922B38CB6700799BC2 /* Accelerate.framework in Frameworks */,
-				CE66278D2B38CB1F00799BC2 /* GoogleMapsCore.xcframework in Frameworks */,
-				CE6627BA2B38DD2C00799BC2 /* FBLPromises in Frameworks */,
-				CE66275F2B38C39600799BC2 /* gRPC-Core.xcframework in Frameworks */,
-				CE6627622B38C39600799BC2 /* FirebaseCoreExtension.xcframework in Frameworks */,
-				CE66278C2B38CB1F00799BC2 /* GoogleMapsBase.xcframework in Frameworks */,
-				CE66277C2B38C76600799BC2 /* FirebaseCoreInternal.xcframework in Frameworks */,
-				CE6627612B38C39600799BC2 /* leveldb-library.xcframework in Frameworks */,
-				CE66278E2B38CB1F00799BC2 /* GoogleMaps.xcframework in Frameworks */,
-				CE6627792B38C76600799BC2 /* FirebaseInstallations.xcframework in Frameworks */,
-				CE6627672B38C39600799BC2 /* FirebaseSharedSwift.xcframework in Frameworks */,
-				CE6627842B38C90400799BC2 /* FirebaseSessions.xcframework in Frameworks */,
-				CE66277E2B38C76600799BC2 /* GoogleUtilities.xcframework in Frameworks */,
-				CE6627762B38C76600799BC2 /* nanopb.xcframework in Frameworks */,
-				CE6627872B38C90400799BC2 /* FirebaseCrashlytics.xcframework in Frameworks */,
-				CE6627662B38C39600799BC2 /* FirebaseAppCheckInterop.xcframework in Frameworks */,
-				CE66277D2B38C76600799BC2 /* GoogleAppMeasurement.xcframework in Frameworks */,
-				CE66277B2B38C76600799BC2 /* FirebaseCore.xcframework in Frameworks */,
-				CE6627782B38C76600799BC2 /* FirebaseAnalytics.xcframework in Frameworks */,
-				CE6627642B38C39600799BC2 /* FirebaseFirestoreInternal.xcframework in Frameworks */,
-				CE6627652B38C39600799BC2 /* BoringSSL-GRPC.xcframework in Frameworks */,
-				CE66275E2B38C39600799BC2 /* FirebaseFirestore.xcframework in Frameworks */,
-				CE6627862B38C90400799BC2 /* GoogleDataTransport.xcframework in Frameworks */,
-				CE6627632B38C39600799BC2 /* gRPC-C++.xcframework in Frameworks */,
-				CE6627682B38C39600799BC2 /* abseil.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +175,8 @@
 				CE46B71F2B325EDC00493502 /* Settings */,
 				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CEA924D72B30CD520086E744 /* TabsView.swift */,
+				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
+				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -262,7 +197,6 @@
 		CE46B7202B325F4A00493502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE6627502B38C36A00799BC2 /* Frameworks */,
 				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
 				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
 				CE6627B12B38CF4500799BC2 /* secrets.properties */,
@@ -319,80 +253,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		CE6627502B38C36A00799BC2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CE66276C2B38C76600799BC2 /* FirebaseAnalytics */,
-				CE66277F2B38C8ED00799BC2 /* FirebaseCrashlytics */,
-				CE6627512B38C39500799BC2 /* FirebaseFirestore */,
-				CE6627882B38CB0100799BC2 /* GoogleMaps */,
-				CE66276A2B38C4AB00799BC2 /* Firebase.h */,
-				CE66276B2B38C4DC00799BC2 /* module.modulemap */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		CE6627512B38C39500799BC2 /* FirebaseFirestore */ = {
-			isa = PBXGroup;
-			children = (
-				CE6627542B38C39500799BC2 /* Resources */,
-				CE66275D2B38C39600799BC2 /* abseil.xcframework */,
-				CE66275A2B38C39500799BC2 /* BoringSSL-GRPC.xcframework */,
-				CE66275B2B38C39600799BC2 /* FirebaseAppCheckInterop.xcframework */,
-				CE6627572B38C39500799BC2 /* FirebaseCoreExtension.xcframework */,
-				CE6627522B38C39500799BC2 /* FirebaseFirestore.xcframework */,
-				CE6627592B38C39500799BC2 /* FirebaseFirestoreInternal.xcframework */,
-				CE66275C2B38C39600799BC2 /* FirebaseSharedSwift.xcframework */,
-				CE6627582B38C39500799BC2 /* gRPC-C++.xcframework */,
-				CE6627532B38C39500799BC2 /* gRPC-Core.xcframework */,
-				CE6627562B38C39500799BC2 /* leveldb-library.xcframework */,
-			);
-			path = FirebaseFirestore;
-			sourceTree = "<group>";
-		};
-		CE6627542B38C39500799BC2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				CE6627552B38C39500799BC2 /* gRPCCertificates-Cpp.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		CE66276C2B38C76600799BC2 /* FirebaseAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				CE66276F2B38C76600799BC2 /* FirebaseAnalytics.xcframework */,
-				CE6627722B38C76600799BC2 /* FirebaseCore.xcframework */,
-				CE6627732B38C76600799BC2 /* FirebaseCoreInternal.xcframework */,
-				CE6627702B38C76600799BC2 /* FirebaseInstallations.xcframework */,
-				CE6627742B38C76600799BC2 /* GoogleAppMeasurement.xcframework */,
-				CE6627752B38C76600799BC2 /* GoogleUtilities.xcframework */,
-				CE66276D2B38C76600799BC2 /* nanopb.xcframework */,
-			);
-			path = FirebaseAnalytics;
-			sourceTree = "<group>";
-		};
-		CE66277F2B38C8ED00799BC2 /* FirebaseCrashlytics */ = {
-			isa = PBXGroup;
-			children = (
-				CE6627832B38C90400799BC2 /* FirebaseCrashlytics.xcframework */,
-				CE6627802B38C90300799BC2 /* FirebaseSessions.xcframework */,
-				CE6627822B38C90400799BC2 /* GoogleDataTransport.xcframework */,
-			);
-			path = FirebaseCrashlytics;
-			sourceTree = "<group>";
-		};
-		CE6627882B38CB0100799BC2 /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-				CE66278F2B38CB2600799BC2 /* GoogleMaps.bundle */,
-				CE66278B2B38CB1F00799BC2 /* GoogleMaps.xcframework */,
-				CE6627892B38CB1E00799BC2 /* GoogleMapsBase.xcframework */,
-				CE66278A2B38CB1F00799BC2 /* GoogleMapsCore.xcframework */,
-			);
-			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
 		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,8 +293,10 @@
 			);
 			name = "grodno-roads-ios";
 			packageProductDependencies = (
-				CE6627B92B38DD2C00799BC2 /* FBLPromises */,
-				CE6627BD2B38DD2C00799BC2 /* Promises */,
+				CEC83F392B3BA599009ACA8B /* GoogleMaps */,
+				CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */,
+				CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */,
+				CE14848E2B3CB4A4009B048A /* FirebaseBinaries */,
 			);
 			productName = "grodno-roads-ios";
 			productReference = CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */;
@@ -465,7 +327,8 @@
 			);
 			mainGroup = CE52F2F82B1CF3B200D81762;
 			packageReferences = (
-				CE6627B82B38DD2C00799BC2 /* XCRemoteSwiftPackageReference "promises" */,
+				CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */,
 			);
 			productRefGroup = CE52F3022B1CF3B200D81762 /* Products */;
 			projectDirPath = "";
@@ -482,11 +345,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */,
-				CE6627602B38C39600799BC2 /* gRPCCertificates-Cpp.bundle in Resources */,
 				6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */,
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
 				CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */,
-				CE6627902B38CB2600799BC2 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +386,7 @@
 				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
 				CEA924D82B30CD520086E744 /* TabsView.swift in Sources */,
 				CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */,
+				CE6627D42B3A127E00799BC2 /* MapViewController.swift in Sources */,
 				CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */,
 				CEA322392B33A1B90039329B /* FaqView.swift in Sources */,
 				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
@@ -538,6 +400,7 @@
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
+				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
 			);
@@ -598,7 +461,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -656,7 +519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -706,7 +569,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resources/Frameworks";
 			};
 			name = Debug;
 		};
@@ -749,7 +611,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resources/Frameworks";
 			};
 			name = Release;
 		};
@@ -777,26 +638,44 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE6627B82B38DD2C00799BC2 /* XCRemoteSwiftPackageReference "promises" */ = {
+		CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/promises.git";
+			repositoryURL = "https://github.com/grodnoroads/GRFirebaseBinaries.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
+				minimumVersion = 8.3.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE6627B92B38DD2C00799BC2 /* FBLPromises */ = {
+		CE14848E2B3CB4A4009B048A /* FirebaseBinaries */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE6627B82B38DD2C00799BC2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = FBLPromises;
+			package = CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */;
+			productName = FirebaseBinaries;
 		};
-		CE6627BD2B38DD2C00799BC2 /* Promises */ = {
+		CEC83F392B3BA599009ACA8B /* GoogleMaps */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE6627B82B38DD2C00799BC2 /* XCRemoteSwiftPackageReference "promises" */;
-			productName = Promises;
+			package = CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+		CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMapsBase;
+		};
+		CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMapsCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
