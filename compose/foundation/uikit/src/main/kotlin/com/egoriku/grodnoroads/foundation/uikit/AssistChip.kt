@@ -26,11 +26,7 @@ fun AssistChip(
         enabled = enabled,
         onClick = onClick,
         label = label,
-        border = AssistChipDefaults.assistChipBorder(
-            enabled = selected,
-            borderColor = MaterialTheme.colorScheme.outline,
-            disabledBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
-        ),
+        border = AssistChipDefaults.assistChipBorder(enabled = selected),
         leadingIcon = if (selected) {
             {
                 Icon(

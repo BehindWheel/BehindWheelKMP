@@ -65,7 +65,6 @@ private fun ActionButton(
         shape = RoundedCornerShape(10.dp),
         onClick = onClick,
         shadowElevation = defaultShadowElevation,
-        color = MaterialTheme.colorScheme.inversePrimary,
         tonalElevation = MaterialTheme.tonalElevation
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
