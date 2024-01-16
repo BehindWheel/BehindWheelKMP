@@ -42,9 +42,9 @@ compose-stable-marker = "com.github.skydoves:compose-stable-marker:1.0.3"
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 
-dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.11.0"
-dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.11.0"
-dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.11.0"
+dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.11.1"
+dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.11.1"
+dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.11.1"
 
 essenty-lifecycle = "com.arkivanov.essenty:lifecycle:1.3.0"
 
