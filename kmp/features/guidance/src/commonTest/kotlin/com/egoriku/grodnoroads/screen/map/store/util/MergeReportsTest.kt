@@ -31,6 +31,37 @@ class MergeReportsTest {
     }
 
     @Test
+    fun single() {
+        val reports = ReportsMapper(
+            reportsDTO = listOf(
+                ReportsDTO(
+                    timestamp = (8.hours + 6.minutes).inWholeMilliseconds,
+                    message = "Long message (policecar)",
+                    source = App.source,
+                    shortMessage = "Short message",
+                    latitude = 53.666199,
+                    longitude = 23.784990,
+                    type = TrafficPolice.type
+                )
+            )
+        )
+
+        assertEquals(1, reports.size)
+
+        with(reports.first()) {
+            assertEquals("(8:06) ${TrafficPolice.emoji} (Short message)", markerMessage)
+            assertEquals(TrafficPolice, mapEventType)
+            assertEquals("${TrafficPolice.emoji} Short message", dialogTitle)
+
+            with(messages) {
+                assertEquals(1, size)
+                assertEquals("(8:06) Long message \uD83D\uDE93", first().message)
+                assertEquals(App, first().source)
+            }
+        }
+    }
+
+    @Test
     fun `single report`() {
         val reports = ReportsMapper(
             reportsDTO = listOf(
