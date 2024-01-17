@@ -105,7 +105,7 @@ private fun DemoComponents() {
         DemoCheckbox()
         DemoTriStateCheckbox()
         DemoSwitch()
-        DemoAssistChip()
+        DemoFilterChip()
         DemoNavigationRail()
         DemoNavigationBar()
         DemoSnackbarSimple()
