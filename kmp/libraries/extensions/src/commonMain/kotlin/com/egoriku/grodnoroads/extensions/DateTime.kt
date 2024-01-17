@@ -15,7 +15,9 @@ object DateTime {
         val instant = Instant.fromEpochMilliseconds(date)
         val localDateTime = instant.toLocalDateTime(defaultTimeZone)
 
-        return localDateTime.time.toString().trimStart('0')
+        val hour = localDateTime.hour
+        val minute = localDateTime.minute.toString().padStart(2, '0')
+        return "$hour:$minute"
     }
 
     fun currentTimeMillis(): Long = Clock.System.now().toEpochMilliseconds()
