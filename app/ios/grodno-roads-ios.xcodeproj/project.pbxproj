@@ -12,6 +12,8 @@
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
 		6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21E2B38C2F60010592F /* SettingsItem.swift */; };
 		CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */ = {isa = PBXBuildFile; productRef = CE14848E2B3CB4A4009B048A /* FirebaseBinaries */; };
+		CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE243F5E2B4754E400B3845C /* RoundButtonView.swift */; };
+		CE243F612B475A4200B3845C /* SettingsRoundItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE243F602B475A4200B3845C /* SettingsRoundItem.swift */; };
 		CE46B71C2B325EBE00493502 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71B2B325EBE00493502 /* MapView.swift */; };
 		CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46B71D2B325ED600493502 /* AppSettings.swift */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
@@ -62,6 +64,8 @@
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		6A9CD21E2B38C2F60010592F /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		CE243F5E2B4754E400B3845C /* RoundButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonView.swift; sourceTree = "<group>"; };
+		CE243F602B475A4200B3845C /* SettingsRoundItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRoundItem.swift; sourceTree = "<group>"; };
 		CE46B71B2B325EBE00493502 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CE46B71D2B325ED600493502 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "grodno-roads-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,14 +140,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6A9CD2172B38B7DF0010592F /* UiKit */ = {
+		6A9CD2172B38B7DF0010592F /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				6A9CD2182B38B7F60010592F /* LoadingView.swift */,
+				CE243F5E2B4754E400B3845C /* RoundButtonView.swift */,
 				6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */,
 				6A9CD21E2B38C2F60010592F /* SettingsItem.swift */,
+				CE243F602B475A4200B3845C /* SettingsRoundItem.swift */,
 			);
-			path = UiKit;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		6AFE155A2B30CA2D003016DC /* Frameworks */ = {
@@ -169,14 +175,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE243F5D2B474E8D00B3845C /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				CE46B71B2B325EBE00493502 /* MapView.swift */,
+				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
+				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		CE46B71A2B325EAB00493502 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				CE243F5D2B474E8D00B3845C /* Map */,
 				CE46B71F2B325EDC00493502 /* Settings */,
-				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CEA924D72B30CD520086E744 /* TabsView.swift */,
-				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
-				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -237,7 +251,7 @@
 				CE46B7212B325FB000493502 /* OnboardingFlow */,
 				CE52F30A2B1CF3B400D81762 /* Preview Content */,
 				CE46B7202B325F4A00493502 /* Resources */,
-				6A9CD2172B38B7DF0010592F /* UiKit */,
+				6A9CD2172B38B7DF0010592F /* UIKit */,
 				CE6627482B3648D300799BC2 /* AppDelegate.swift */,
 				CE52F3042B1CF3B200D81762 /* MainApp.swift */,
 				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
@@ -379,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE243F612B475A4200B3845C /* SettingsRoundItem.swift in Sources */,
 				CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */,
 				CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */,
 				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
@@ -403,6 +418,7 @@
 				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
+				CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
