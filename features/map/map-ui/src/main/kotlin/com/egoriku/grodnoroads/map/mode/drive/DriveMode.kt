@@ -35,12 +35,14 @@ fun DriveMode(
         ) {
             PrimaryInverseCircleButton(onClick = reportPolice, size = Large) {
                 Image(
+                    modifier = Modifier.size(28.dp),
                     painter = painterResource(id = R.drawable.ic_traffic_police),
                     contentDescription = ""
                 )
             }
             PrimaryInverseCircleButton(onClick = reportIncident, size = Large) {
                 Image(
+                    modifier = Modifier.size(28.dp),
                     painter = painterResource(id = R.drawable.ic_warning),
                     contentDescription = ""
                 )
