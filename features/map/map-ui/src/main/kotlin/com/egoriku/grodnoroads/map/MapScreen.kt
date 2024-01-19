@@ -443,16 +443,26 @@ fun MapScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        isLocationButtonEnabled = { appMode == Default || appMode == ChooseLocation },
                         onLocationRequestStateChanged = {
-                            val message = snackbarMessageBuilder.handleCurrentLocationRequest(it)
-
-                            if (message == null) {
-                                isRequestCurrentLocation = true
-                                component.requestCurrentLocation()
+                            if (appMode == Drive) {
+                                mapUpdater.onMapScope {
+                                    animateCamera(
+                                        target = location.latLng,
+                                        zoom = mapConfig.zoomLevel,
+                                        bearing = location.bearing
+                                    )
+                                }
                             } else {
-                                coroutineScope.launch {
-                                    snackbarState.show(message)
+                                val message =
+                                    snackbarMessageBuilder.handleCurrentLocationRequest(it)
+
+                                if (message == null) {
+                                    isRequestCurrentLocation = true
+                                    component.requestCurrentLocation()
+                                } else {
+                                    coroutineScope.launch {
+                                        snackbarState.show(message)
+                                    }
                                 }
                             }
                         },
