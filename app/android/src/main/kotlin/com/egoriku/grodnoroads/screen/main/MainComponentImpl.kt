@@ -3,12 +3,11 @@ package com.egoriku.grodnoroads.screen.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.parcelable.Parcelable
 import com.egoriku.grodnoroads.map.domain.component.buildMapComponent
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.domain.component.buildSettingsComponent
 import com.egoriku.grodnoroads.shared.appcomponent.Page
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
 
 fun buildMainComponent(
@@ -28,6 +27,7 @@ internal class MainComponentImpl(
 
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.Map,
         handleBackButton = true,
         key = "Main",
@@ -57,11 +57,12 @@ internal class MainComponentImpl(
         )
     }
 
-    private sealed class Config : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed class Config {
+        @Serializable
         data object Map : Config()
 
-        @Parcelize
+        @Serializable
         data object Settings : Config()
     }
 }

@@ -23,6 +23,7 @@ import com.egoriku.grodnoroads.screen.root.RootContent
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import com.egoriku.grodnoroads.util.LocalWindowSizeClass
 
+// Don't use ComponentActivity, due to it breaks language change
 class MainActivity : AppCompatActivity() {
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                             LocalWindowSizeClass provides calculateWindowSizeClass(this),
                             LocalActivity provides this,
                         ) {
-                            RootContent(roadsRootComponent = root)
+                            RootContent(rootComponent = root)
                         }
                     }
                 }

@@ -1,7 +1,6 @@
 plugins {
     id("grodnoroads.library")
     id("grodnoroads.compose")
-    id("kotlin-parcelize")
 }
 
 android {

@@ -43,6 +43,9 @@ fun RowScope.NavigationBarItem(
 
     Material3NavigationBarItem(
         colors = NavigationBarItemDefaults.colors(
+            // https://developer.android.com/jetpack/androidx/releases/compose-material3#1.2.0-beta02:~:text=contains%20these%20commits.-,Known%20Bug,-A%20bug%20in
+            selectedIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            selectedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
             indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
