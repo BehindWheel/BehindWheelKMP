@@ -178,7 +178,6 @@ fun MapScreen(
                         }
                         is ZoomLevelState.Moving -> Unit
                     }
-
                 },
                 cameraMoveStateChanged = { state ->
                     cameraMoveState = state
