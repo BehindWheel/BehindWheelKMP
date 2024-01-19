@@ -3,12 +3,15 @@ package com.egoriku.grodnoroads.setting.alerts.ui
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.list.ClickableSettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
@@ -42,7 +45,6 @@ fun VoiceLevelSection(
                     selected = selected,
                     onClick = {
                         modify(alertVolumeLevel.copy(current = volumeLevel))
-                        playTestSound(volumeLevel)
                     },
                     label = {
                         Text(text = volumeLevel.levelName)
@@ -50,6 +52,11 @@ fun VoiceLevelSection(
                 )
             }
         }
+        ClickableSettingsItem(
+            imageVector = Icons.Default.PlayCircle,
+            text = stringResource(R.string.alerts_play_test_audio),
+            onClick = { playTestSound(alertVolumeLevel.current) }
+        )
     }
 }
 

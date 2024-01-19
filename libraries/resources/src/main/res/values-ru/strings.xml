@@ -75,6 +75,7 @@
     <string name="alerts_volume_level_low">Низкий</string>
     <string name="alerts_volume_level_medium">Средний</string>
     <string name="alerts_volume_level_high">Высокий</string>
+    <string name="alerts_play_test_audio">Прослушать тестовое сообщение</string>
 
     <string name="alerts_header_notification_radius">Радиус оповещения</string>
     <string name="alerts_notification_radius_in_city">В городе</string>
