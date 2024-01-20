@@ -18,6 +18,8 @@ kotlin {
         commonDependencies {
             api(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.location)
+
+            compileOnly(libs.compose.stable.marker)
         }
         androidDependencies {
             implementation(projects.libraries.resources)
