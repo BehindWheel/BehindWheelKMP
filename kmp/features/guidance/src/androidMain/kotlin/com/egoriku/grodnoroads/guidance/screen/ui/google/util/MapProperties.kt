@@ -20,7 +20,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 
 @Composable
 fun rememberMapProperties(
-    locationAvailable: () -> Boolean,
     mapConfig: MapConfig,
     appMode: AppMode,
     isRequestCurrentLocation: Boolean
@@ -58,7 +57,6 @@ fun rememberMapProperties(
     LaunchedEffect(appMode, isRequestCurrentLocation) {
         mapProperties = mapProperties.copy(
             isMyLocationEnabled = permissionsState.allPermissionsGranted &&
-                    locationAvailable() &&
                     appMode != AppMode.Drive
         )
     }

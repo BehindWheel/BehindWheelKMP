@@ -147,9 +147,6 @@ fun GuidanceScreen(
 
         if (mapConfig != MapConfig.EMPTY && initialLocation != UNKNOWN_LOCATION) {
             val mapProperties = rememberMapProperties(
-                locationAvailable = {
-                    location.latLng != UNKNOWN_LOCATION
-                },
                 mapConfig = mapConfig,
                 appMode = appMode,
                 isRequestCurrentLocation = isRequestCurrentLocation
