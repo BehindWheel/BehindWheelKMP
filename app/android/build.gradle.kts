@@ -54,6 +54,10 @@ android {
         buildConfig = true
     }
 
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -79,6 +83,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.google.maps)
     implementation(libs.google.material)
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
 
 secrets {
