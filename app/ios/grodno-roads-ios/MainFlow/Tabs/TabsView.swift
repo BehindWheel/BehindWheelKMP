@@ -30,7 +30,7 @@ struct TabsView: View {
                 Button(action: { component.onSelectTab(index: 0) }) {
                     Label("Map", systemImage: "map.fill")
                         .labelStyle(VerticalLabelStyle())
-                        .opacity(activeChild is TabsComponentChild.Map ? 1 : 0.5)
+                        .opacity(activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
                 }
                 .tint(.black)
                 .frame(maxWidth: .infinity)
@@ -52,7 +52,7 @@ private struct ChildView: View {
     
     var body: some View {
         switch child {
-        case let child as TabsComponentChild.Map: MapView()
+        case let child as TabsComponentChild.Guidance: MapView(child.component)
         case let child as TabsComponentChild.AppSettings: AppSettings(child.component)
         default: EmptyView()
         }

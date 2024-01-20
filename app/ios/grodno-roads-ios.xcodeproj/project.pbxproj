@@ -46,7 +46,7 @@
 		CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C22B2FA95B0086E744 /* StateValue.swift */; };
 		CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C32B2FA95B0086E744 /* MutableValue.swift */; };
 		CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C42B2FA95B0086E744 /* StackView.swift */; };
-		CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C52B2FA95B0086E744 /* ObservableValue.swift */; };
+		CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C52B2FA95B0086E744 /* ObservableState.swift */; };
 		CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */; };
 		CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924CC2B2FB5D00086E744 /* RootView.swift */; };
 		CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */; };
@@ -57,6 +57,7 @@
 		CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F392B3BA599009ACA8B /* GoogleMaps */; };
 		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
 		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
+		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +100,7 @@
 		CEA924C22B2FA95B0086E744 /* StateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateValue.swift; sourceTree = "<group>"; };
 		CEA924C32B2FA95B0086E744 /* MutableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableValue.swift; sourceTree = "<group>"; };
 		CEA924C42B2FA95B0086E744 /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
-		CEA924C52B2FA95B0086E744 /* ObservableValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
+		CEA924C52B2FA95B0086E744 /* ObservableState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableState.swift; sourceTree = "<group>"; };
 		CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleChildStack.swift; sourceTree = "<group>"; };
 		CEA924CC2B2FB5D00086E744 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowView.swift; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		CEA924D32B30CCC50086E744 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		CEA924D52B30CD310086E744 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		CEA924D72B30CD520086E744 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
+		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				6A9CD2182B38B7F60010592F /* LoadingView.swift */,
+				CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */,
 				CE243F5E2B4754E400B3845C /* RoundButtonView.swift */,
 				6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */,
 				6A9CD21E2B38C2F60010592F /* SettingsItem.swift */,
@@ -272,7 +275,7 @@
 			children = (
 				CE66274A2B36491100799BC2 /* ComponentContext.swift */,
 				CEA924C32B2FA95B0086E744 /* MutableValue.swift */,
-				CEA924C52B2FA95B0086E744 /* ObservableValue.swift */,
+				CEA924C52B2FA95B0086E744 /* ObservableState.swift */,
 				CEA924C62B2FA95B0086E744 /* SimpleChildStack.swift */,
 				CEA924C42B2FA95B0086E744 /* StackView.swift */,
 				CEA924C22B2FA95B0086E744 /* StateValue.swift */,
@@ -411,12 +414,13 @@
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
-				CEA924CA2B2FA95B0086E744 /* ObservableValue.swift in Sources */,
+				CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
 				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
+				CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
 				CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */,
 			);
@@ -565,6 +569,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -607,6 +612,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

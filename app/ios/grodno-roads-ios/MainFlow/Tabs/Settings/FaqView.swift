@@ -11,31 +11,32 @@ import Root
 struct FaqScreenView: View {
     private let component: FaqComponent
     
-    @StateFlow
+    @StateValue
     private var state: FaqStoreState
     
-    init(_ component: FaqComponent) {
+    private let onBack: (() -> Void)
+    
+    init(_ component: FaqComponent, onBack: @escaping (() -> Void)) {
         self.component = component
-        _state = StateFlow(component.state)
+        _state = StateValue(component.state)
+        self.onBack = onBack
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(state.faq) { faq in
-                            FaqView(question: faq.question, answer: faq.answer)
-                        }
+        ZStack {
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    ForEach(state.faq) { faq in
+                        FaqView(question: faq.question, answer: faq.answer)
                     }
-                    .padding(.horizontal, 16)
                 }
-                if state.isLoading {
-                    LoadingView()
-                }
+                .padding(.horizontal, 16)
+            }
+            if state.isLoading {
+                LoadingView()
             }
         }
-        .navigationBarTitle("FAQ")
+        .navigation(title: "FAQ", onBack: onBack)
     }
 }
 
@@ -68,5 +69,5 @@ private struct FaqView: View {
 extension FAQ: Identifiable {}
 
 #Preview {
-    FaqScreenView(FaqComponentPreview())
+    FaqScreenView(FaqComponentPreview(), onBack: {})
 }

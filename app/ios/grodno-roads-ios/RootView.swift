@@ -17,22 +17,15 @@ struct RootView: View {
 
     var body: some View {
         StackView(
-            stackValue: StateValue(root.childStack),
-            getTitle: { child in
-                switch child {
-                case is RootComponentChild.MainFlow: "MainFlow"
-                case is RootComponentChild.Onboarding: "Onboarding"
-                default: "Default"
-                }
-            },
-            onBack: { _ in },
+            stackValue: ObservableState(root.childStack),
             childContent: { child in
                 switch child {
                 case let child as RootComponentChild.MainFlow: MainFlowView(child.component)
                 case let child as RootComponentChild.Onboarding: OnboardingView(child.component)
                 default: EmptyView()
                 }
-            }
+            },
+            onBack: {}
         )
     }
 }

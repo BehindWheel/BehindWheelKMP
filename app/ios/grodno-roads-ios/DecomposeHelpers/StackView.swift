@@ -2,47 +2,44 @@ import SwiftUI
 import UIKit
 import Root
 
-struct StackView<T: AnyObject, Content: View>: View {
-    @StateValue
-    var stackValue: ChildStack<AnyObject, T>
+/*
+ Source: https://gist.github.com/AJIEKCX/e1c50fb3b1c0496138bcdbb2779e3898
+ */
 
-    var getTitle: (T) -> String
-    var onBack: (_ toIndex: Int32) -> Void
-    
+/*
+ A custom implementation of the stack view wrapper with:
+ - no indices for `onBack` action
+ - no `getTitle`
+ - no `NavigationStack`
+ - custom UINavigationController
+ 
+  https://github.com/arkivanov/Decompose/blob/11a66f0ec46e42259af5510fc5bb28250e027924/sample/app-ios/app-ios/DecomposeHelpers/StackView.swift
+*/
+
+struct StackView<T: AnyObject, Content: View>: View {
+    @ObservedObject
+    var stackValue: ObservableState<ChildStack<AnyObject, T>>
+        
     @ViewBuilder
     var childContent: (T) -> Content
     
-    private var stack: [Child<AnyObject, T>] { stackValue.items }
-
+    var onBack: () -> Void
+    
+    var stack: [Child<AnyObject, T>] { stackValue.value.items }
+    
     var body: some View {
-        // iOS 16.0 has an issue with swipe back see https://stackoverflow.com/questions/73978107/incomplete-swipe-back-gesture-causes-navigationpath-mismanagement
-        if #available(iOS 16.1, *) {
-            NavigationStack(
-                path: Binding(
-                    get: { stack.dropFirst() },
-                    set: { updatedPath in onBack(Int32(updatedPath.count)) }
-                )
-            ) {
-                childContent(stack.first!.instance!)
-                    .navigationDestination(for: Child<AnyObject, T>.self) {
-                        childContent($0.instance!)
-                    }
-            }
-        } else {
-            StackInteropView(
-                components: stack.map { $0.instance! },
-                getTitle: getTitle,
-                onBack: onBack,
-                childContent: childContent
-            )
-        }
+        StackInteropView(
+            components: stack.map { $0.instance! },
+            onBack: onBack,
+            childContent: childContent
+        )
+        .ignoresSafeArea(.container)
     }
 }
 
 private struct StackInteropView<T: AnyObject, Content: View>: UIViewControllerRepresentable {
     var components: [T]
-    var getTitle: (T) -> String
-    var onBack: (_ toIndex: Int32) -> Void
+    var onBack: () -> Void
     var childContent: (T) -> Content
     
     func makeCoordinator() -> Coordinator {
@@ -51,27 +48,52 @@ private struct StackInteropView<T: AnyObject, Content: View>: UIViewControllerRe
     
     func makeUIViewController(context: Context) -> UINavigationController {
         context.coordinator.syncChanges(self)
-        let navigationController = UINavigationController(
-            rootViewController: context.coordinator.viewControllers.first!)
+        let navigationController = CustomNavigationController(
+            rootViewController: context.coordinator.viewControllers.first!
+        )
         
         return navigationController
     }
     
-    func updateUIViewController(_ navigationController: UINavigationController, context: Context) {
+    func updateUIViewController(
+        _ navigationController: UINavigationController,
+        context: Context
+    ) {
         context.coordinator.syncChanges(self)
-        navigationController.setViewControllers(context.coordinator.viewControllers, animated: true)
+        navigationController.setViewControllers(
+            context.coordinator.viewControllers,
+            animated: true
+        )
     }
     
-    private func createViewController(_ component: T, _ coordinator: Coordinator) -> NavigationItemHostingController {
-        let controller = NavigationItemHostingController(rootView: childContent(component))
+    private func createViewController(
+        _ component: T,
+        _ coordinator: Coordinator
+    ) -> NavigationItemHostingController {
+        let controller = NavigationItemHostingController(
+            rootView: childContent(component)
+        )
         controller.coordinator = coordinator
         controller.component = component
         controller.onBack = onBack
-        controller.navigationItem.title = getTitle(component)
+        
         return controller
     }
     
-    class Coordinator: NSObject {
+    private final class CustomNavigationController: UINavigationController, UIGestureRecognizerDelegate {
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            navigationBar.isHidden = true
+            interactivePopGestureRecognizer?.delegate = self
+        }
+        
+        // fixes swipes back, when parent stack view intercepts child's gestures
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            viewControllers.count > 1
+        }
+    }
+    
+    fileprivate final class Coordinator: NSObject {
         var parent: StackInteropView<T, Content>
         var viewControllers = [NavigationItemHostingController]()
         var preservedComponents = [T]()
@@ -98,19 +120,16 @@ private struct StackInteropView<T: AnyObject, Content: View>: UIViewControllerRe
         }
     }
     
-    class NavigationItemHostingController: UIHostingController<Content> {
+    fileprivate final class NavigationItemHostingController: UIHostingController<Content> {
         fileprivate(set) weak var coordinator: Coordinator?
         fileprivate(set) var component: T?
-        fileprivate(set) var onBack: ((_ toIndex: Int32) -> Void)?
+        fileprivate(set) var onBack: (() -> Void)?
         
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
+        override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
             
-            guard let components = coordinator?.preservedComponents else { return }
-            guard let index = components.firstIndex(where: { $0 === component }) else { return }
-            
-            if (index < components.count - 1) {
-                onBack?(Int32(index))
+            if isMovingFromParent && coordinator?.preservedComponents.last === component {
+                onBack?()
             }
         }
     }

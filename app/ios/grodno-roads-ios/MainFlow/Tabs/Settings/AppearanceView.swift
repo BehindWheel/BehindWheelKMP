@@ -10,18 +10,21 @@ import Root
 
 struct AppearanceView: View {
     private let component: AppearanceComponent
+    private let onBack: (() -> Void)
     
-    init(_ component: AppearanceComponent) {
+    init(_ component: AppearanceComponent, onBack: @escaping (() -> Void)) {
         self.component = component
+        self.onBack = onBack
     }
     
     var body: some View {
         VStack {
             Text("AppearanceView")
         }
+        .navigation(title: "Appearance", onBack: onBack)
     }
 }
 
 #Preview {
-    AppearanceView(AppearanceComponentPreview())
+    AppearanceView(AppearanceComponentPreview()) {}
 }
