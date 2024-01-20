@@ -136,7 +136,9 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets(left = leftPadding).asPaddingValues()
+    val contentPaddingValues = WindowInsets(left = leftPadding)
+        .add(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+        .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
