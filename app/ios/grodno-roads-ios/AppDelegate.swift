@@ -12,7 +12,7 @@ import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    private(set) lazy var root: RootComponent = RootComponentImpl(componentContext: .context())
+    private(set) lazy var root: RootComponent = RootComponentKt.buildRootComponent(componentContext: .context())
     
     func application(
         _ application: UIApplication,

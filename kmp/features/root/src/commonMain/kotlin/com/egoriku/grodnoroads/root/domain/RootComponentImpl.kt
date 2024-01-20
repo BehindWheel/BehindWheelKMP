@@ -26,10 +26,6 @@ import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-fun buildRootComponent(
-    componentContext: ComponentContext
-): RootComponent = RootComponentImpl(componentContext)
-
 internal class RootComponentImpl(
     componentContext: ComponentContext
 ) : RootComponent, ComponentContext by componentContext, KoinComponent {
