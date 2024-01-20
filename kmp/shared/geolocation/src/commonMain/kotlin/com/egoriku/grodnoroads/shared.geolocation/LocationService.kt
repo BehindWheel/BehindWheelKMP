@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.shared.geolocation
 
-import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
 
 interface LocationService {
 
-    val lastLocationFlow: CStateFlow<LocationInfo?>
+    val lastLocationFlow: CNullableStateFlow<LocationInfo>
 
     suspend fun getLastKnownLocation(): LocationInfo?
 

@@ -7,9 +7,11 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.asCStateFlow
 import com.egoriku.grodnoroads.coroutines.coroutineScope
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.nullable.toCNullableStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
 import com.egoriku.grodnoroads.onboarding.domain.buildOnboardingComponent
@@ -45,14 +47,14 @@ internal class RootComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().asCStateFlow()
+    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
 
-    override val theme: CStateFlow<Theme?>
+    override val theme: CNullableStateFlow<Theme>
         get() = dataStore.data
             .map { Theme.fromOrdinal(it.appTheme.theme) }
             .distinctUntilChanged()
             .stateIn(scope = coroutineScope, started = SharingStarted.Eagerly, initialValue = null)
-            .asCStateFlow()
+            .toCNullableStateFlow()
 
     private fun processChild(
         config: Config,

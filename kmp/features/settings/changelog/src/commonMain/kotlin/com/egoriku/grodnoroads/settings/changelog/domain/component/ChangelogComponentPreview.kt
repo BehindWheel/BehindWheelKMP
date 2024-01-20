@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.changelog.domain.component
 
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.stateFlowOf
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.extensions.LoremIpsum
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore

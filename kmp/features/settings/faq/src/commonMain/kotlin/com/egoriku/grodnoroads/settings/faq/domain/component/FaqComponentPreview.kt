@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.faq.domain.component
 
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.stateFlowOf
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.extensions.LoremIpsum
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore

@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.alerts.domain.component
 
-import com.egoriku.grodnoroads.coroutines.CFlow
-import com.egoriku.grodnoroads.coroutines.flowOf
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.flowOf
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
 
 class AlertsComponentPreview : AlertsComponent {

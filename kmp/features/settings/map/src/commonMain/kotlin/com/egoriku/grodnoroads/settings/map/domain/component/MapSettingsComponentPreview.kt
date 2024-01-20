@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.map.domain.component
 
-import com.egoriku.grodnoroads.coroutines.CFlow
-import com.egoriku.grodnoroads.coroutines.stateFlowOf
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
 

@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.mainflow
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
-import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
 
 @Stable

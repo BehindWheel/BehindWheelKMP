@@ -5,7 +5,7 @@ import android.content.Context
 import android.location.Location
 import android.os.Looper
 import androidx.core.location.LocationRequestCompat.QUALITY_HIGH_ACCURACY
-import com.egoriku.grodnoroads.coroutines.CMutableStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.geolocation.util.MetricUtils.speedToKilometerPerHour
@@ -19,7 +19,7 @@ class AndroidLocationService(context: Context) : LocationService {
 
     private var lastKnownLocation: LocationInfo? = null
 
-    override val lastLocationFlow = CMutableStateFlow<LocationInfo?>(null)
+    override val lastLocationFlow = CNullableMutableStateFlow<LocationInfo>(null)
 
     private val locationCallback = object : LocationCallback() {
 

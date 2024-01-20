@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.map.domain.component
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.coroutines.CFlow
-import com.egoriku.grodnoroads.coroutines.asCFlow
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.toCFlow
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore
@@ -30,7 +30,7 @@ internal class MapSettingsComponentImpl(
                 mapSettings = storeState.mapSettings,
                 mapDialogState = storeState.mapDialogState,
             )
-        }.asCFlow()
+        }.toCFlow()
 
     override fun modify(preference: MapPref) {
         mapSettingsStore.accept(Intent.Modify(preference))

@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.mainflow.domain
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
-import com.egoriku.grodnoroads.coroutines.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent

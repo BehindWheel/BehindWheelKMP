@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.appearance.domain.component
 
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.stateFlowOf
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 
 class AppearanceComponentPreview : AppearanceComponent {

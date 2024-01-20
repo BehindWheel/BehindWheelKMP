@@ -4,9 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.*
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.asCStateFlow
 import com.egoriku.grodnoroads.coroutines.coroutineScope
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.DialogComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.buildDialogComponent
@@ -49,7 +49,7 @@ internal class SpecialEventComponentImpl(
             eventType = config.eventType,
             onDismissed = eventsNavigation::dismiss
         )
-    }.toStateFlow().asCStateFlow()
+    }.toStateFlow().toCStateFlow()
 
     private fun showEvent(eventType: EventType) {
         eventsNavigation.activate(EventConfig(eventType))

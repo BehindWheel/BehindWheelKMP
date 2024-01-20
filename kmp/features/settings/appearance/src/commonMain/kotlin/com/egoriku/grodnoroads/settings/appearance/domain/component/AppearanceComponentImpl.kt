@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.appearance.domain.component
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.egoriku.grodnoroads.coroutines.CStateFlow
-import com.egoriku.grodnoroads.coroutines.asCStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
+import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent
@@ -26,7 +26,7 @@ internal class AppearanceComponentImpl(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val state: CStateFlow<State>
-        get() = appearanceStore.stateFlow.asCStateFlow()
+        get() = appearanceStore.stateFlow.toCStateFlow()
 
     override fun modify(preference: AppearancePref) {
         appearanceStore.accept(Intent.Modify(preference))

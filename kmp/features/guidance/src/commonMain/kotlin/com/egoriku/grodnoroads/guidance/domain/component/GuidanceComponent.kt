@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.guidance.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.coroutines.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.guidance.domain.model.*
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Intent.ReportAction

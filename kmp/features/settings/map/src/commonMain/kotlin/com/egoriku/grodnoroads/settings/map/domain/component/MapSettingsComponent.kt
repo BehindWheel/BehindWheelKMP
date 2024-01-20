@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.settings.map.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.coroutines.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.*
 import com.egoriku.grodnoroads.shared.persistent.Selectable

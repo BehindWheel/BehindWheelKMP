@@ -7,8 +7,8 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.coroutines.CFlow
-import com.egoriku.grodnoroads.coroutines.asCFlow
+import com.egoriku.grodnoroads.coroutines.flow.CFlow
+import com.egoriku.grodnoroads.coroutines.flow.toCFlow
 import com.egoriku.grodnoroads.coroutines.coroutineScope
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.guidance.domain.model.*
@@ -127,16 +127,16 @@ internal class GuidanceComponentImpl(
     }
 
     override val appMode: CFlow<AppMode>
-        get() = mapConfigStore.states.map { it.appMode }.asCFlow()
+        get() = mapConfigStore.states.map { it.appMode }.toCFlow()
 
     override val mapAlertDialog: CFlow<MapAlertDialog>
-        get() = dialogStore.states.map { it.mapAlertDialog }.asCFlow()
+        get() = dialogStore.states.map { it.mapAlertDialog }.toCFlow()
 
     override val userCount: CFlow<Int>
-        get() = mapEventsStore.states.map { it.userCount }.asCFlow()
+        get() = mapEventsStore.states.map { it.userCount }.toCFlow()
 
     override val quickActionsState: CFlow<QuickActionsState>
-        get() = quickActionsStore.states.asCFlow()
+        get() = quickActionsStore.states.toCFlow()
 
     override val mapConfig: CFlow<MapConfig>
         get() = mapConfigStore.states.map {
@@ -148,7 +148,7 @@ internal class GuidanceComponentImpl(
                 alertRadius = it.alertRadius,
                 alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled
             )
-        }.asCFlow()
+        }.toCFlow()
 
     override val mapEvents: CFlow<ImmutableList<MapEvent>>
         get() = combine(
@@ -159,13 +159,13 @@ internal class GuidanceComponentImpl(
             flow5 = mapInfo,
             transform = filterMapEvents()
         ).flowOn(Dispatchers.Default)
-            .asCFlow()
+            .toCFlow()
 
     override val lastLocation: CFlow<LastLocation>
-        get() = locationStore.states.map { it.lastLocation }.asCFlow()
+        get() = locationStore.states.map { it.lastLocation }.toCFlow()
 
     override val initialLocation: CFlow<LatLng>
-        get() = locationStore.states.map { it.initialLocation }.asCFlow()
+        get() = locationStore.states.map { it.initialLocation }.toCFlow()
 
     override val alerts: CFlow<ImmutableList<Alert>>
         get() = combine(
@@ -175,7 +175,7 @@ internal class GuidanceComponentImpl(
             flow4 = appMode,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
-            .asCFlow()
+            .toCFlow()
 
     override val speedLimit: CFlow<Int>
         get() = combine(
@@ -183,7 +183,7 @@ internal class GuidanceComponentImpl(
             flow2 = lastLocation,
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
-            .asCFlow()
+            .toCFlow()
 
     override fun startLocationUpdates() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
