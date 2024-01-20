@@ -130,7 +130,7 @@ private fun HorizontalOrientationLayout(
     onSelectTab: (Int) -> Unit,
 ) {
     val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.Settings) }
-    var isHideBottomBar by rememberMutableState { false }
+    var isHideBottomBar by rememberMutableState { true }
 
     val leftPadding by animateDpAsState(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
