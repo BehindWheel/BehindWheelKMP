@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -18,7 +18,8 @@ import com.egoriku.grodnoroads.root.domain.buildRootComponent
 import com.egoriku.grodnoroads.root.screen.RootContent
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 
-class MainActivity : ComponentActivity() {
+// Don't use ComponentActivity, due to it breaks language change
+class MainActivity : AppCompatActivity() {
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {

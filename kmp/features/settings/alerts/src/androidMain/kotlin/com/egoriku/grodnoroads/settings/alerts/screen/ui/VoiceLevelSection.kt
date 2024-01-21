@@ -3,15 +3,18 @@ package com.egoriku.grodnoroads.settings.alerts.screen.ui
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.list.ClickableSettingsItem
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.AssistChip
+import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
@@ -38,11 +41,10 @@ fun VoiceLevelSection(
             alertVolumeLevel.values.forEach { volumeLevel ->
                 val selected = alertVolumeLevel.current == volumeLevel
 
-                AssistChip(
+                FilterChip(
                     selected = selected,
                     onClick = {
                         modify(alertVolumeLevel.copy(current = volumeLevel))
-                        playTestSound(volumeLevel)
                     },
                     label = {
                         Text(text = volumeLevel.levelName)
@@ -50,6 +52,11 @@ fun VoiceLevelSection(
                 )
             }
         }
+        ClickableSettingsItem(
+            imageVector = Icons.Default.PlayCircle,
+            text = stringResource(R.string.alerts_play_test_audio),
+            onClick = { playTestSound(alertVolumeLevel.current) }
+        )
     }
 }
 

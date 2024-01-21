@@ -183,7 +183,6 @@ fun GuidanceScreen(
                         }
                         is ZoomLevelState.Moving -> Unit
                     }
-
                 },
                 cameraMoveStateChanged = { state ->
                     cameraMoveState = state
@@ -451,16 +450,26 @@ fun GuidanceScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        isLocationButtonEnabled = { appMode == AppMode.Default || appMode == AppMode.ChooseLocation },
                         onLocationRequestStateChanged = {
-                            val message = snackbarMessageBuilder.handleCurrentLocationRequest(it)
-
-                            if (message == null) {
-                                isRequestCurrentLocation = true
-                                component.requestCurrentLocation()
+                            if (appMode == AppMode.Drive) {
+                                mapUpdater.onMapScope {
+                                    animateCamera(
+                                        target = location.latLng.toGmsLatLng(),
+                                        zoom = mapConfig.zoomLevel,
+                                        bearing = location.bearing
+                                    )
+                                }
                             } else {
-                                coroutineScope.launch {
-                                    snackbarState.show(message)
+                                val message =
+                                    snackbarMessageBuilder.handleCurrentLocationRequest(it)
+
+                                if (message == null) {
+                                    isRequestCurrentLocation = true
+                                    component.requestCurrentLocation()
+                                } else {
+                                    coroutineScope.launch {
+                                        snackbarState.show(message)
+                                    }
                                 }
                             }
                         },

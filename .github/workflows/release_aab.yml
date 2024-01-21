@@ -84,7 +84,7 @@ jobs:
       
       - name: Commit files
         run: |
-          git config --local user.email "egorikftp@gmail.com"
+          git config --local user.email "egorikftp@users.noreply.github.com"
           git config --local user.name "egorikftp"
           git commit -m "Increment build version" -a
       

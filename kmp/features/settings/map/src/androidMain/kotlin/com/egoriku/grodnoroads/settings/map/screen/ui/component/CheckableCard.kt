@@ -62,12 +62,12 @@ private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
         CheckableCard(
             title = R.string.map_google_map_style_minimal,
             selected = false,
-            iconId = R.drawable.ic_map_style_minimal
+            iconId = R.drawable.ic_map_style_minimal_night
         ) {}
         CheckableCard(
             title = R.string.map_google_map_style_detailed,
             selected = true,
-            iconId = R.drawable.ic_map_style_detailed
+            iconId = R.drawable.ic_map_style_detailed_night
         ) {}
     }
 }
