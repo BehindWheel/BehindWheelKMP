@@ -58,6 +58,8 @@
 		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
 		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
 		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
+		CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2232B5D5A680009840E /* Scrollable.swift */; };
+		CEF5D2262B5D5F110009840E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2252B5D5F110009840E /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +111,8 @@
 		CEA924D52B30CD310086E744 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		CEA924D72B30CD520086E744 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
+		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +152,11 @@
 				6A9CD2182B38B7F60010592F /* LoadingView.swift */,
 				CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */,
 				CE243F5E2B4754E400B3845C /* RoundButtonView.swift */,
+				CEF5D2232B5D5A680009840E /* Scrollable.swift */,
 				6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */,
 				6A9CD21E2B38C2F60010592F /* SettingsItem.swift */,
 				CE243F602B475A4200B3845C /* SettingsRoundItem.swift */,
+				CEF5D2252B5D5F110009840E /* View.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -419,9 +425,11 @@
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
 				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
+				CEF5D2262B5D5F110009840E /* View.swift in Sources */,
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
+				CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */,
 				CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

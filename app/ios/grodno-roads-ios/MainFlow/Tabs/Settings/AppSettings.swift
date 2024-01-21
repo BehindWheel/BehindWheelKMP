@@ -91,6 +91,7 @@ struct AppSettings: View {
                 .padding()
         }
         .padding()
+        .scrollable()
     }
     
     private func shareAppLink() {

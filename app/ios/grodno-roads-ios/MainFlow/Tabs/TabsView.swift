@@ -43,6 +43,7 @@ struct TabsView: View {
                 .frame(maxWidth: .infinity)
             }
             .padding(.top, 12)
+            .padding(.bottom, 12)
         }
     }
 }
