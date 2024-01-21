@@ -44,7 +44,7 @@ class IosLocationService : LocationService {
 
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
-            lastKnownLocation = requestLocation()
+            lastKnownLocation = runCatching { requestLocation() }.getOrNull()
         }
 
         return lastKnownLocation
