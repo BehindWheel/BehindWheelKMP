@@ -39,3 +39,16 @@ extension AppDelegate {
         GMSServices.provideAPIKey(value)
     }
 }
+
+/// For debug purposes. Example: show onboarding on each launch.
+fileprivate func resetSettings() {
+    guard
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+        let settings = try? FileManager.default.contentsOfDirectory(
+            at: docs, includingPropertiesForKeys: nil
+        ).first(where: { $0.lastPathComponent.contains("settings") })
+    else {
+        return
+    }
+    try? FileManager.default.removeItem(at: settings)
+}

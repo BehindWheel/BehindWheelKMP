@@ -17,7 +17,11 @@ struct OnboardingView: View {
     
     var body: some View {
         VStack {
-            Text("Onboarding")
+            Button {
+                component.finishOnboarding()
+            } label: {
+                Text("Complete onboarding")
+            }.buttonStyle(.borderedProminent)
         }
     }
 }
