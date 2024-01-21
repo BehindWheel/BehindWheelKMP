@@ -451,10 +451,10 @@ fun GuidanceScreen(
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
                         onLocationRequestStateChanged = {
-                            if (appMode == Drive) {
+                            if (appMode == AppMode.Drive) {
                                 mapUpdater.onMapScope {
                                     animateCamera(
-                                        target = location.latLng,
+                                        target = location.latLng.toGmsLatLng(),
                                         zoom = mapConfig.zoomLevel,
                                         bearing = location.bearing
                                     )
