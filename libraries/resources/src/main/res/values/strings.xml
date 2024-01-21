@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Driving Grodno</string>
+    <string name="app_name">Grodno roads</string>
 
     <string name="tab_map">Map</string>
     <string name="tab_chat">Chat</string>
     <string name="tab_settings">Settings</string>
-
-    <string name="toast_location_disabled">Location required for Drive mode</string>
 
     <string name="headlamp_body_spring">From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
     <string name="headlamp_body_autumn">From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
@@ -45,7 +43,7 @@
     <string name="settings_section_appearance">Appearance</string>
     <string name="settings_section_map">Map</string>
     <string name="settings_section_alerts">Alerts</string>
-    <string name="settings_section_whats_new">What\'s new</string>
+    <string name="settings_section_changelog">Changelog</string>
     <string name="settings_section_next_features">Next features</string>
     <string name="settings_section_faq">FAQ</string>
 
@@ -78,6 +76,7 @@
     <string name="alerts_volume_level_low">Low</string>
     <string name="alerts_volume_level_medium">Medium</string>
     <string name="alerts_volume_level_high">High</string>
+    <string name="alerts_play_test_audio">Listen test message</string>
 
     <string name="alerts_header_notification_radius">Notification radius</string>
     <string name="alerts_notification_radius_in_city">In city</string>
@@ -145,4 +144,17 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="send">Send</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Permission for access to geolocation denied</string>
+    <string name="snackbar_drive_mode_rationale_description">Used to display a marker in navigation mode</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Navigation requires access to more precise location</string>
+    <string name="snackbar_drive_mode_permission_denied">Location access denied. You can grant permission in settings</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Navigation requires geolocation access</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">You can enable it manually in the notification panel</string>
+
+    <string name="snackbar_current_location_rationale_title">Permission for access to geolocation denied</string>
+    <string name="snackbar_current_location_fine_location_denied">Access to more precise location is needed</string>
+    <string name="snackbar_current_location_permission_denied">Location access denied. You can grant permission in settings</string>
+    <string name="snackbar_current_location_gms_disabled_title">Geolocation access denied</string>
+    <string name="snackbar_current_location_gms_disabled_description">You can enable it manually in the notification panel</string>
 </resources>

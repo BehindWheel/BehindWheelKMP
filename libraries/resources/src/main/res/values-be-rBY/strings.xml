@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">За рулём (Гродна)</string>
+    <string name="app_name">За рулём | Гродна</string>
 
     <plurals name="camera_alerts_plurals_distance">
         <item quantity="one">%1$d метр</item>
@@ -15,7 +15,6 @@
     <string name="tab_map">Мапа</string>
     <string name="tab_chat">Чат</string>
     <string name="tab_settings">Наладкі</string>
-    <string name="toast_location_disabled">Для навігацыі патрэбен доступ да геолокации</string>
 
     <string name="alerts_stationary_camera">Стацыянарная камера</string>
     <string name="alerts_mobile_camera">Мабільная камера</string>
@@ -39,13 +38,13 @@
     <string name="settings_section_appearance">Знешні выгляд</string>
     <string name="settings_section_map">Мапа</string>
     <string name="settings_section_alerts">Абвесткі</string>
-    <string name="settings_section_whats_new">Што новага</string>
+    <string name="settings_section_changelog">Гісторыя зменаў</string>
     <string name="settings_section_next_features">Будучыя фічы</string>
     <string name="settings_section_faq">Часта задаюць пытанні</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Асноўныя</string>
-    <string name="settings_category_other">Іншыя</string>
+    <string name="settings_category_other">Іншае</string>
 
     <string name="appearance_app_theme">Тэма</string>
     <string name="appearance_app_theme_system">Сістэмная</string>
@@ -70,6 +69,7 @@
     <string name="alerts_volume_level_low">Нізкі</string>
     <string name="alerts_volume_level_medium">Сярэдні</string>
     <string name="alerts_volume_level_high">Высокі</string>
+    <string name="alerts_play_test_audio">Паслухаць тэставае паведамленне</string>
 
     <string name="alerts_header_notification_radius">Радыус абвесткі</string>
     <string name="alerts_notification_radius_in_city">У горадзе</string>
@@ -134,4 +134,17 @@
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
 
     <string name="map_quick_actions_header">Хуткія налады</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
+    <string name="snackbar_drive_mode_rationale_description">Выкарыстоўваецца для адлюстравання маркера ў рэжыме навігацыі</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш пунктавага месцазнаходжання</string>
+    <string name="snackbar_drive_mode_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Навігацыя патрабуе доступу да геалакацыі</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+
+    <string name="snackbar_current_location_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
+    <string name="snackbar_current_location_fine_location_denied">Патрабуецца доступ да болей дакладнага месцазнаходжання</string>
+    <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
+    <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
+    <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
 </resources>

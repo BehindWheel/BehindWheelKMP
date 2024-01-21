@@ -1,7 +1,6 @@
 plugins {
     id("grodnoroads.library")
-    id("grodnoroads.library.compose")
-    id("kotlin-parcelize")
+    id("grodnoroads.compose")
 }
 
 android {
@@ -9,19 +8,20 @@ android {
 }
 
 dependencies {
-    implementation(projects.libraries.foundation)
+    implementation(projects.compose.foundation.preview)
+    implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.foundation.uikit)
+    implementation(projects.compose.commonUi)
+
     implementation(projects.libraries.resources)
 
     implementation(projects.shared.appComponent)
 
     implementation(libs.androidx.browser)
 
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.decompose)
 

@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.model
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.maps.core.StableLatLng
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 
 @Stable
 sealed interface MapEvent {
-    val position: StableLatLng
+    val position: LatLng
 
     sealed interface Camera : MapEvent {
         val cameraType: CameraType
@@ -21,7 +21,7 @@ sealed interface MapEvent {
             val bidirectional: Boolean,
             override val cameraType: CameraType = CameraType.StationaryCamera,
             override val name: String,
-            override val position: StableLatLng,
+            override val position: LatLng,
             override val speedCar: Int,
             override val speedTruck: Int,
             override val updateTime: Long,
@@ -31,7 +31,7 @@ sealed interface MapEvent {
             val id: String,
             override val cameraType: CameraType = CameraType.MobileCamera,
             override val name: String,
-            override val position: StableLatLng,
+            override val position: LatLng,
             override val updateTime: Long = System.currentTimeMillis(),
             // TODO: Implement in backend
             override val speedCar: Int = -1,
@@ -44,7 +44,7 @@ sealed interface MapEvent {
             val bidirectional: Boolean,
             override val cameraType: CameraType = CameraType.MediumSpeedCamera,
             override val name: String,
-            override val position: StableLatLng,
+            override val position: LatLng,
             override val speedCar: Int,
             override val speedTruck: Int,
             override val updateTime: Long,
@@ -57,6 +57,6 @@ sealed interface MapEvent {
         val dialogTitle: String,
         val messages: ImmutableList<MessageItem>,
         val mapEventType: MapEventType,
-        override val position: StableLatLng,
+        override val position: LatLng,
     ) : MapEvent
 }

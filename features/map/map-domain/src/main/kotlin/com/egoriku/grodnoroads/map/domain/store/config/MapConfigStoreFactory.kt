@@ -128,6 +128,7 @@ internal class MapConfigStoreFactory(
                 onIntent<ChooseLocation.OpenChooseLocation> {
                     dispatch(ChangeAppMode(appMode = AppMode.ChooseLocation))
                     dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
                     dispatch(UpdateReportType(reportType = it.reportType))
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {

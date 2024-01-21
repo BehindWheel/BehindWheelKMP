@@ -30,14 +30,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.CircleButton
-import com.egoriku.grodnoroads.foundation.CircleButtonDefaults
-import com.egoriku.grodnoroads.foundation.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.noIndicationClick
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.modifier.noIndicationClick
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.surfaceSurfaceVariant
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -85,7 +84,7 @@ fun QuickActionsPopup(
                     .padding(1.dp)
                     .clip(shape = RoundedCornerShape(percent))
                     .noIndicationClick()
-                    .background(MaterialTheme.colorScheme.surfaceSurfaceVariant)
+                    .background(MaterialTheme.colorScheme.surface)
                     .animateContentSize(animationSpec = spring(Spring.DampingRatioLowBouncy))
             ) {
                 AnimatedVisibility(
@@ -136,13 +135,7 @@ fun QuickActionsPopup(
                 enter = fadeIn(animationSpec = spring(stiffness = Spring.StiffnessVeryLow)),
                 exit = fadeOut(),
             ) {
-                CircleButton(
-                    modifier = Modifier.size(48.dp),
-                    colors = CircleButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceSurfaceVariant
-                    ),
-                    onClick = onExpand
-                ) {
+                PrimaryInverseCircleButton(onClick = onExpand, size = Small) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
                         contentDescription = null
@@ -171,7 +164,7 @@ private fun CloseButton(onClick: () -> Unit) {
     }
 }
 
-@GrodnoRoadsPreview
+@GrodnoRoadsDarkLightPreview
 @Composable
 private fun QuickActionsPopupPreview() = GrodnoRoadsM3ThemePreview {
     var opened by rememberMutableState { true }

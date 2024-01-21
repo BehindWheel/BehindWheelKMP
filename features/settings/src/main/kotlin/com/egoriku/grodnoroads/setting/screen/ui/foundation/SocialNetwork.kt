@@ -3,34 +3,27 @@ package com.egoriku.grodnoroads.setting.screen.ui.foundation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun SocialNetwork(
     title: String,
     onClick: () -> Unit,
-    icon: @Composable () -> Unit
+    content: @Composable RowScope.() -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        OutlinedButton(
-            onClick = onClick,
-            modifier = Modifier.size(50.dp),
-            contentPadding = PaddingValues(0.dp),
-        ) {
-            icon()
-        }
+        SecondaryCircleButton(onClick = onClick, content = content)
         Text(
-            modifier = Modifier
-                .padding(top = 8.dp),
+            modifier = Modifier.padding(top = 8.dp),
             style = MaterialTheme.typography.bodySmall,
             text = title
         )

@@ -83,6 +83,7 @@ class SoundUtil(context: Context) {
     }
 
     fun setVolume(level: Float) = audioPlayer.setVolumeLevel(level)
+    fun setLoudness(loudness: Int) = audioPlayer.setLoudness(loudness)
 
     private fun playSound(
         sound: Sound,

@@ -17,18 +17,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.VerticalSpacer
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.button.OutlinedButton
+import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.util.DateTimeFormatter
-import com.egoriku.grodnoroads.maps.core.StableLatLng
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.appcomponent.FeatureFlags
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun CameraInfo(camera: MapEvent.Camera) {
@@ -96,7 +96,7 @@ private fun Info(
 
         if (FeatureFlags.screenReportCameraProblemEnabled) {
             VerticalSpacer(24.dp)
-            OutlinedButton(
+            SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 id = R.string.camera_info_report,
                 onClick = {}
@@ -151,7 +151,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
             updateTime = 1683234000000,
             speedCar = 100,
             speedTruck = 80,
-            position = StableLatLng(-1.0, -1.0),
+            position = LatLng(-1.0, -1.0),
         )
     )
 }

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">За рулем (Гродно)</string>
+    <string name="app_name">За рулем | Гродно</string>
 
     <string name="tab_map">Карта</string>
     <string name="tab_chat">Чат</string>
     <string name="tab_settings">Настройки</string>
-
-    <string name="toast_location_disabled">Для навигации нужен доступ к геолокации</string>
 
     <string name="headlamp_body_spring">С 25 мая по 5 июня проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет!💡</string>
     <string name="headlamp_body_autumn">С 25 августа по 5 сентября проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет!💡</string>
@@ -43,13 +41,13 @@
     <string name="settings_section_appearance">Внешний вид</string>
     <string name="settings_section_map">Карта</string>
     <string name="settings_section_alerts">Оповещения</string>
-    <string name="settings_section_whats_new">Что нового</string>
+    <string name="settings_section_changelog">История изменений</string>
     <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Основные</string>
-    <string name="settings_category_other">Другие</string>
+    <string name="settings_category_other">Другое</string>
 
     <!-- Appearance -->
     <string name="appearance_app_theme">Тема</string>
@@ -77,6 +75,7 @@
     <string name="alerts_volume_level_low">Низкий</string>
     <string name="alerts_volume_level_medium">Средний</string>
     <string name="alerts_volume_level_high">Высокий</string>
+    <string name="alerts_play_test_audio">Прослушать тестовое сообщение</string>
 
     <string name="alerts_header_notification_radius">Радиус оповещения</string>
     <string name="alerts_notification_radius_in_city">В городе</string>
@@ -143,4 +142,18 @@
     <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
 
     <string name="map_quick_actions_header">Быстрые настройки</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Разрешение для доступа к геолокации отклонено</string>
+    <string name="snackbar_drive_mode_rationale_description">Используется для отображения маркера в режиме навигации</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Для навигации нужен доступ к более точному местоположению</string>
+    <string name="snackbar_drive_mode_permission_denied">Доступ к геолокации запрещен. Вы можете дать разрешение в настройках</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Для навигации нужен доступ к геолокации</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
+
+    <string name="snackbar_current_location_rationale_title">Разрешение для доступа к геолокации отклонено</string>
+    <string name="snackbar_current_location_fine_location_denied">Нужен доступ к более точному местоположению</string>
+    <string name="snackbar_current_location_permission_denied">Доступ к геолокации запрещен. Вы можете дать разрешение в настройках</string>
+    <string name="snackbar_current_location_gms_disabled_title">Доступ к геолокации отклонен</string>
+    <string name="snackbar_current_location_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
+
 </resources>
