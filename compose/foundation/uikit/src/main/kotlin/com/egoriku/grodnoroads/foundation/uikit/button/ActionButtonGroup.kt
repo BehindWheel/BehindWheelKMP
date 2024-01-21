@@ -26,7 +26,6 @@ fun ActionButtonGroup(
     Surface(
         shape = shape,
         shadowElevation = defaultShadowElevation,
-        color = MaterialTheme.colorScheme.inversePrimary,
         tonalElevation = MaterialTheme.tonalElevation
     ) {
         Column(content = content)

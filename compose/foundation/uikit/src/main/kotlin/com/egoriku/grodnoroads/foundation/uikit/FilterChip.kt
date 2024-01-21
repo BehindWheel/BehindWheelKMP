@@ -14,22 +14,29 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
-fun AssistChip(
+fun FilterChip(
     selected: Boolean,
     onClick: () -> Unit,
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    AssistChip(
+    FilterChip(
         modifier = modifier,
         enabled = enabled,
+        selected = selected,
         onClick = onClick,
         label = label,
-        border = AssistChipDefaults.assistChipBorder(
-            enabled = selected,
+        colors = FilterChipDefaults.filterChipColors(
+            selectedContainerColor = MaterialTheme.colorScheme.inverseSurface,
+            selectedLabelColor = MaterialTheme.colorScheme.inversePrimary,
+            selectedLeadingIconColor = MaterialTheme.colorScheme.inversePrimary
+        ),
+        border = FilterChipDefaults.filterChipBorder(
+            selectedBorderColor = MaterialTheme.colorScheme.outline,
             borderColor = MaterialTheme.colorScheme.outline,
-            disabledBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+            selected = selected,
+            enabled = enabled
         ),
         leadingIcon = if (selected) {
             {
@@ -47,14 +54,14 @@ fun AssistChip(
 
 @GrodnoRoadsDarkLightPreview
 @Composable
-private fun AssistChipPreview() = GrodnoRoadsM3ThemePreview {
+private fun FilterChipPreview() = GrodnoRoadsM3ThemePreview {
     Row(modifier = Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        AssistChip(
+        FilterChip(
             selected = true,
             onClick = {},
             label = { Text("Option 1") }
         )
-        AssistChip(
+        FilterChip(
             selected = false,
             onClick = {},
             label = { Text("Option 1") }

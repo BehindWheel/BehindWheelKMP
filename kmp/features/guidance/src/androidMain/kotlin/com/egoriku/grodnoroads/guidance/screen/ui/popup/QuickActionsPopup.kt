@@ -84,7 +84,7 @@ fun QuickActionsPopup(
                     .padding(1.dp)
                     .clip(shape = RoundedCornerShape(percent))
                     .noIndicationClick()
-                    .background(MaterialTheme.colorScheme.inversePrimary)
+                    .background(MaterialTheme.colorScheme.surface)
                     .animateContentSize(animationSpec = spring(Spring.DampingRatioLowBouncy))
             ) {
                 AnimatedVisibility(

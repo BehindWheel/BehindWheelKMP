@@ -127,13 +127,15 @@ private fun HorizontalOrientationLayout(
     onSelectTab: (Int) -> Unit,
 ) {
     val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.AppSettings) }
-    var isHideBottomBar by rememberMutableState { false }
+    var isHideBottomBar by rememberMutableState { true }
 
     val leftPadding by animateDpAsState(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets(left = leftPadding).asPaddingValues()
+    val contentPaddingValues = WindowInsets(left = leftPadding)
+        .add(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+        .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Children(

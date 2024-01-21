@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.compose.snackbar
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -54,9 +55,10 @@ fun SnackbarHost(
             )
         },
         label = "snackbar slide animation"
-    ) {
-        it?.run {
-            snackbar(this)
+    ) { snackbarData ->
+        when (snackbarData) {
+            null -> Spacer(modifier = Modifier.fillMaxWidth())
+            else -> snackbar(snackbarData)
         }
     }
 }
