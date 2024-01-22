@@ -16,6 +16,6 @@ struct MapView: View {
     }
     
     var body: some View {
-        MapViewControllerBridge()
+        MapViewControllerBridge(component)
     }
 }

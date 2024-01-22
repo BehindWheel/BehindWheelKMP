@@ -60,6 +60,7 @@
 		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
 		CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2232B5D5A680009840E /* Scrollable.swift */; };
 		CEF5D2262B5D5F110009840E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2252B5D5F110009840E /* View.swift */; };
+		CEF5D2282B5DD1980009840E /* CFlowWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFlowWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +281,7 @@
 		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */,
 				CE66274A2B36491100799BC2 /* ComponentContext.swift */,
 				CEA924C32B2FA95B0086E744 /* MutableValue.swift */,
 				CEA924C52B2FA95B0086E744 /* ObservableState.swift */,
@@ -429,6 +432,7 @@
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
+				CEF5D2282B5DD1980009840E /* CFlowWrapper.swift in Sources */,
 				CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */,
 				CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */,
 			);
