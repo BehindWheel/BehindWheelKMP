@@ -4,10 +4,15 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 
-fun KotlinMultiplatformExtension.setupIosTarget(
-    baseName: String,
-    isStatic: Boolean = true,
-    configure: Framework.() -> Unit = {}
+fun KotlinMultiplatformExtension.iosTarget() {
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+}
+
+fun KotlinMultiplatformExtension.setupIosStaticFramework(
+    name: String,
+    configure: Framework.() -> Unit
 ) {
     listOf(
         iosX64(),
@@ -15,14 +20,14 @@ fun KotlinMultiplatformExtension.setupIosTarget(
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            this.baseName = baseName.toModuleName()
-            this.isStatic = isStatic
+            baseName = name.toFrameworkName()
+            isStatic = true
             configure()
         }
     }
 }
 
-private fun String.toModuleName() = split("_")
+private fun String.toFrameworkName() = split("_")
     .joinToString(
         separator = "",
         transform = {
