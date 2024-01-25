@@ -1,5 +1,5 @@
 plugins {
-    id("grodnoroads.library")
+    alias(libs.plugins.grodnoroads.library)
 }
 
 android {

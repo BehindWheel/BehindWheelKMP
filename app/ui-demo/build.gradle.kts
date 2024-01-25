@@ -3,8 +3,8 @@ import com.egoriku.grodnoroads.extension.loadKeystore
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
-    id("grodnoroads.application")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.application)
+    alias(libs.plugins.grodnoroads.compose)
 }
 
 android {
