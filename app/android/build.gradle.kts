@@ -1,8 +1,8 @@
 import com.egoriku.grodnoroads.extension.*
 
 plugins {
-    id("grodnoroads.application")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.application)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.serialization)

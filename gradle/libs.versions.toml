@@ -74,3 +74,8 @@ gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.5
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
+
+# project conventional plugins
+grodnoroads_library = { id = "grodnoroads.library", version = "unspecified" }
+grodnoroads_compose = { id = "grodnoroads.compose", version = "unspecified" }
+grodnoroads_application = { id = "grodnoroads.application", version = "unspecified" }
