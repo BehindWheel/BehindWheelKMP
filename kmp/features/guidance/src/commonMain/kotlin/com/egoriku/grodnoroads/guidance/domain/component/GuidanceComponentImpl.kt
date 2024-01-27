@@ -7,9 +7,9 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.coroutines.coroutineScope
 import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCFlow
-import com.egoriku.grodnoroads.coroutines.coroutineScope
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.guidance.domain.model.*
 import com.egoriku.grodnoroads.guidance.domain.model.ReportType.RoadIncident
@@ -150,7 +150,7 @@ internal class GuidanceComponentImpl(
             )
         }.toCFlow()
 
-    override val mapEvents: CFlow<ImmutableList<MapEvent>>
+    override val mapEvents: CFlow<MapEvents>
         get() = combine(
             flow = reports,
             flow2 = stationary,

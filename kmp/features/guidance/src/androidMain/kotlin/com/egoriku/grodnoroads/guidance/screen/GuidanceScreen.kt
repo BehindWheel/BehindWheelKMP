@@ -103,7 +103,7 @@ fun GuidanceScreen(
         val initialLocation by component.initialLocation.collectAsState(UNKNOWN_LOCATION)
 
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
-        val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
+        val mapEvents by component.mapEvents.collectAsState(initial = MapEvents())
         val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = MapAlertDialog.None)
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
@@ -290,7 +290,7 @@ fun GuidanceScreen(
                     )
                 }
 
-                mapEvents.forEach { mapEvent ->
+                mapEvents.data.forEach { mapEvent ->
                     when (mapEvent) {
                         is MapEvent.Camera -> {
                             when (mapEvent) {

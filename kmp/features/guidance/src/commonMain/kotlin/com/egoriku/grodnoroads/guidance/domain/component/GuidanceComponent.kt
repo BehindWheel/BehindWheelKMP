@@ -22,7 +22,7 @@ interface GuidanceComponent {
     val appMode: CFlow<AppMode>
     val mapAlertDialog: CFlow<MapAlertDialog>
     val mapConfig: CFlow<MapConfig>
-    val mapEvents: CFlow<ImmutableList<MapEvent>>
+    val mapEvents: CFlow<MapEvents>
     val userCount: CFlow<Int>
     val quickActionsState: CFlow<QuickActionsState>
 

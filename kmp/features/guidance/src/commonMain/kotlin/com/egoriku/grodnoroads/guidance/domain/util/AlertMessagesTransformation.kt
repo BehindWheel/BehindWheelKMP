@@ -17,14 +17,14 @@ private const val MIN_SPEED = 10
 
 private val emptyList = persistentListOf<Alert>()
 
-fun alertMessagesTransformation(): suspend (List<MapEvent>, LastLocation, MapConfig, AppMode) -> ImmutableList<Alert> =
+fun alertMessagesTransformation(): suspend (MapEvents, LastLocation, MapConfig, AppMode) -> ImmutableList<Alert> =
     { mapEvents, lastLocation, config, appMode ->
         when (lastLocation) {
             LastLocation.None -> emptyList
             else -> when {
                 !config.alertsEnabled && appMode != AppMode.Drive -> emptyList
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
-                    mapEvents = mapEvents,
+                    mapEvents = mapEvents.data,
                     lastLocation = lastLocation,
                     alertDistance = config.alertRadius
                 )
