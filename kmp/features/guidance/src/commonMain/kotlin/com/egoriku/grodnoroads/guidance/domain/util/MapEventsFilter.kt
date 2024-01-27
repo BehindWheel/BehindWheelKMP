@@ -6,8 +6,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MapEventType
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig.MapInfo
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 internal fun filterMapEvents(): suspend (
@@ -16,69 +16,70 @@ internal fun filterMapEvents(): suspend (
     List<MobileCamera>,
     List<MediumSpeedCamera>,
     MapInfo
-) -> ImmutableList<MapEvent> = { reports, stationary, mobile, mediumSpeed, mapInfo ->
-    (reports + stationary + mediumSpeed + mobile).mapNotNull { mapEvent ->
+) -> MapEvents = { reports, stationary, mobile, mediumSpeed, mapInfo ->
+    MapEvents(
+        data = mapEvents(
+            events = reports + stationary + mediumSpeed + mobile,
+            mapInfo = mapInfo
+        ).toImmutableList()
+    )
+}
 
-        when (mapEvent) {
-            is Camera -> {
-                when (mapEvent.cameraType) {
-                    CameraType.MobileCamera -> when {
-                        mapInfo.showMobileCameras -> mapEvent
-                        else -> null
-                    }
-
-                    CameraType.StationaryCamera -> when {
-                        mapInfo.showStationaryCameras -> mapEvent
-                        else -> null
-                    }
-
-                    CameraType.MediumSpeedCamera -> when {
-                        mapInfo.showMediumSpeedCameras -> mapEvent
-                        else -> null
-                    }
+private fun mapEvents(
+    events: List<MapEvent>,
+    mapInfo: MapInfo
+) = events.mapNotNull { event ->
+    when (event) {
+        is Camera -> {
+            when (event.cameraType) {
+                CameraType.MobileCamera -> when {
+                    mapInfo.showMobileCameras -> event
+                    else -> null
                 }
-            }
-
-            is Reports -> {
-                when (mapEvent.mapEventType) {
-                    MapEventType.RoadIncident -> {
-                        when {
-                            mapInfo.showRoadIncident -> mapEvent
-                            else -> null
-                        }
-                    }
-
-                    MapEventType.TrafficPolice -> {
-                        when {
-                            mapInfo.showTrafficPolice -> mapEvent
-                            else -> null
-                        }
-                    }
-
-                    MapEventType.CarCrash -> {
-                        when {
-                            mapInfo.showCarCrash -> mapEvent
-                            else -> null
-                        }
-                    }
-
-                    MapEventType.TrafficJam -> {
-                        when {
-                            mapInfo.showTrafficJam -> mapEvent
-                            else -> null
-                        }
-                    }
-
-                    MapEventType.WildAnimals -> {
-                        when {
-                            mapInfo.showWildAnimals -> mapEvent
-                            else -> null
-                        }
-                    }
-
-                    else -> mapEvent
+                CameraType.StationaryCamera -> when {
+                    mapInfo.showStationaryCameras -> event
+                    else -> null
+                }
+                CameraType.MediumSpeedCamera -> when {
+                    mapInfo.showMediumSpeedCameras -> event
+                    else -> null
                 }
             }
         }
-    }.toImmutableList()
+        is Reports -> {
+            when (event.mapEventType) {
+                MapEventType.RoadIncident -> {
+                    when {
+                        mapInfo.showRoadIncident -> event
+                        else -> null
+                    }
+                }
+                MapEventType.TrafficPolice -> {
+                    when {
+                        mapInfo.showTrafficPolice -> event
+                        else -> null
+                    }
+                }
+                MapEventType.CarCrash -> {
+                    when {
+                        mapInfo.showCarCrash -> event
+                        else -> null
+                    }
+                }
+                MapEventType.TrafficJam -> {
+                    when {
+                        mapInfo.showTrafficJam -> event
+                        else -> null
+                    }
+                }
+                MapEventType.WildAnimals -> {
+                    when {
+                        mapInfo.showWildAnimals -> event
+                        else -> null
+                    }
+                }
+                else -> event
+            }
+        }
+    }
 }
