@@ -28,7 +28,7 @@ fun GrodnoRoadsM3Theme(
     MaterialTheme(
         colorScheme = colorScheme,
         shapes = Shapes(
-            medium = RoundedCornerShape(18.0.dp)
+            medium = RoundedCornerShape(18.dp)
         ),
         content = content
     )
