@@ -3,11 +3,14 @@ package com.egoriku.grodnoroads.foundation.theme
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun GrodnoRoadsM3Theme(
@@ -22,7 +25,13 @@ fun GrodnoRoadsM3Theme(
 
         else -> if (darkTheme) darkColorScheme else lightColorScheme
     }
-    MaterialTheme(colorScheme = colorScheme, content = content)
+    MaterialTheme(
+        colorScheme = colorScheme,
+        shapes = Shapes(
+            medium = RoundedCornerShape(18.0.dp)
+        ),
+        content = content
+    )
 }
 
 @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
