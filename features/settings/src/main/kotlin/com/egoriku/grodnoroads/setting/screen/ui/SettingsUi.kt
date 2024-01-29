@@ -33,12 +33,11 @@ internal fun SettingsUi(
     appVersion: String,
     onSettingClick: (Page) -> Unit
 ) {
-    Scaffold(contentWindowInsets = WindowInsets(0, 0, 0, 0)) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(it)
                 .padding(contentPadding),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
