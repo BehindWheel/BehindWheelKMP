@@ -137,7 +137,7 @@ private fun HorizontalOrientationLayout(
         label = "leftPadding"
     )
     val contentPaddingValues = WindowInsets(left = leftPadding)
-        .add(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+        .add(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
         .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {

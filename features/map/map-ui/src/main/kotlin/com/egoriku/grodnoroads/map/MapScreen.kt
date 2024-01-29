@@ -436,7 +436,9 @@ fun MapScreen(
                     count = userCount
                 )
                 FadeInOutAnimatedVisibility(
-                    modifier = Modifier.align(OffsetAlignment(xOffset = 1f, yOffset = 0.45f)),
+                    modifier = Modifier
+                        .padding(contentPadding)
+                        .align(OffsetAlignment(xOffset = 1f, yOffset = 0.45f)),
                     visible = overlayVisible,
                 ) {
                     MapOverlayActions(
@@ -469,6 +471,7 @@ fun MapScreen(
                     )
                 }
                 DefaultOverlay(
+                    contentPadding = contentPadding,
                     isOverlayVisible = overlayVisible,
                     isDriveMode = appMode == Drive,
                     currentSpeed = location.speed,
