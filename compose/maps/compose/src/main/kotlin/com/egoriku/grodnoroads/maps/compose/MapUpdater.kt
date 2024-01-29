@@ -34,6 +34,7 @@ interface MapUpdater {
     fun zoomIn()
     fun zoomOut()
 
+    fun animateCurrentLocation(target: LatLng, zoom: Float, bearing: Float)
     fun animateCamera(target: LatLng, zoom: Float, bearing: Float)
     fun animateTarget(
         target: LatLng,

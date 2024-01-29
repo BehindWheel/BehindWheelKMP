@@ -446,7 +446,7 @@ fun MapScreen(
                         onLocationRequestStateChanged = {
                             if (appMode == Drive) {
                                 mapUpdater.onMapScope {
-                                    animateCamera(
+                                    animateCurrentLocation(
                                         target = location.latLng,
                                         zoom = mapConfig.zoomLevel,
                                         bearing = location.bearing
