@@ -78,9 +78,6 @@ jobs:
           mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
 
-      - name: Download link
-        run: echo [Download from Play Store](${{ steps.deploy.outputs.internalSharingDownloadUrl }})
-
       - name: Commit files
         run: |
           git config --local user.email "egorikftp@users.noreply.github.com"
