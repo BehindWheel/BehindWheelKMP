@@ -157,4 +157,6 @@
     <string name="snackbar_current_location_permission_denied">Location access denied. You can grant permission in settings</string>
     <string name="snackbar_current_location_gms_disabled_title">Geolocation access denied</string>
     <string name="snackbar_current_location_gms_disabled_description">You can enable it manually in the notification panel</string>
+
+    <string name="snackbar_in_app_update_install">Update is ready to install</string>
 </resources>

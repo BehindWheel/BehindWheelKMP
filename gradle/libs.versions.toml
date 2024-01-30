@@ -46,6 +46,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 
+google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.0.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
 google-material = "com.google.android.material:material:1.11.0"

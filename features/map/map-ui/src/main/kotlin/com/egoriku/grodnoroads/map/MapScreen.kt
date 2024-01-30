@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
@@ -24,6 +26,7 @@ import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibi
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.map.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -82,6 +85,7 @@ fun MapScreen(
     val context = LocalContext.current
 
     val snackbarMessageBuilder = remember { SnackbarMessageBuilder(context) }
+    val snackbarState = remember { SnackbarState() }
 
     val markerCache = koinInject<MarkerCache>()
 
@@ -359,8 +363,6 @@ fun MapScreen(
         FadeInOutAnimatedVisibility(visible = isMapLoaded) {
             AlwaysKeepScreenOn(mapConfig.keepScreenOn)
             Box(modifier = Modifier.fillMaxSize()) {
-                val snackbarState = remember { SnackbarState() }
-
                 AnimatedContent(
                     modifier = Modifier
                         .matchParentSize()
@@ -490,9 +492,20 @@ fun MapScreen(
         ModalBottomSheet(
             data = cameraInfo,
             onDismissRequest = { cameraInfo = null },
-        ) {
-            CameraInfo(it)
-        }
+            content = { CameraInfo(it) },
+        )
+        InAppUpdateHandle(
+            onDownloaded = {
+                coroutineScope.launch {
+                    snackbarState.show(
+                        ActionMessage(
+                            title = MessageData.Resource(R.string.snackbar_in_app_update_install),
+                            onAction = it
+                        )
+                    )
+                }
+            }
+        )
     }
 }
 

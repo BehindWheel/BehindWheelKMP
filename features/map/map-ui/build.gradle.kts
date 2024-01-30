@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
 
     implementation(libs.balloon.compose)
+    implementation(libs.google.app.update)
     implementation(libs.google.maps)
     implementation(libs.google.maps.utils)
     implementation(libs.immutable.collections)
