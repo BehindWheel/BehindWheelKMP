@@ -3,8 +3,7 @@ name: Build App Bundle to Internal testing
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
+permissions: write-all
   
 jobs:
   build_aab:
