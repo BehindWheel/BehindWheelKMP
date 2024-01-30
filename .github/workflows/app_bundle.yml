@@ -3,6 +3,9 @@ name: Build App Bundle to Internal testing
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  
 jobs:
   build_aab:
     runs-on: ubuntu-latest
