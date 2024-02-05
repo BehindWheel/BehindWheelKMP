@@ -1,23 +1,7 @@
 import SwiftUI
 import Root
 
-public class ObservableValue<T: AnyObject>: ObservableObject {
-    @Published
-    private(set) var value: T
-
-    private var cancellation: Cancellation?
-    
-    init(_ value: Value<T>) {
-        self.value = value.value
-        self.cancellation = value.observe { [weak self] value in self?.value = value }
-    }
-
-    deinit {
-        cancellation?.cancel()
-    }
-}
-
-public class ObservableFlow<T: AnyObject>: ObservableObject {
+public class ObservableState<T: AnyObject>: ObservableObject {
     @Published
     private(set) var value: T
     
@@ -39,9 +23,8 @@ public class ObservableFlow<T: AnyObject>: ObservableObject {
         
         cancelable = FlowWrapper<T>(flow: state).collect(
             consumer: { [weak self] value in
-                if let value {
-                    self?.value = value
-                }
+                guard let value else { return }
+                self?.value = value
             }
         )
     }

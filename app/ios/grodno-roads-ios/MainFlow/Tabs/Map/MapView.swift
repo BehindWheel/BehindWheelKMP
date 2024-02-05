@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Root
 
 struct MapView: View {
-    var body: some View {
-        MapViewControllerBridge()
+    private let component: GuidanceComponent
+    
+    init(_ component: GuidanceComponent) {
+        self.component = component
     }
-}
-
-#Preview {
-    MapView()
+    
+    var body: some View {
+        MapViewControllerBridge(component)
+    }
 }

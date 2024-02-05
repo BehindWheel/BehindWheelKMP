@@ -1,5 +1,5 @@
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.setupIosTarget
+import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
     id("grodnoroads.kmplibrary")
@@ -11,7 +11,7 @@ android {
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "coroutines")
+    iosTarget()
 
     sourceSets {
         commonDependencies {

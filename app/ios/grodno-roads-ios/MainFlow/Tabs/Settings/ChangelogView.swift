@@ -10,13 +10,15 @@ import Root
 
 struct ChangelogView: View {
     private let component: ChangelogComponent
+    private let onBack: (() -> Void)
     
-    @StateFlow
+    @StateValue
     private var state: ChangelogStoreState
     
-    init(_ component: ChangelogComponent) {
+    init(_ component: ChangelogComponent, onBack: @escaping (() -> Void)) {
         self.component = component
-        _state = StateFlow(component.state)
+        _state = StateValue(component.state)
+        self.onBack = onBack
     }
     
     var body: some View {
@@ -30,11 +32,12 @@ struct ChangelogView: View {
                 }
             }
         }
+        .navigation(title: "Changelog", onBack: onBack)
     }
 }
 
 extension ReleaseNotes: Identifiable {}
 
 #Preview {
-    ChangelogView(ChangelogComponentPreview())
+    ChangelogView(ChangelogComponentPreview()) {}
 }

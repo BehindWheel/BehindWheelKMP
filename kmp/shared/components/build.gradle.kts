@@ -1,6 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import com.egoriku.grodnoroads.extension.iosTarget
 import com.egoriku.grodnoroads.extension.provideVersionName
-import com.egoriku.grodnoroads.extension.setupIosTarget
 
 plugins {
     id("grodnoroads.kmplibrary")
@@ -13,7 +13,7 @@ android {
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "components")
+    iosTarget()
 }
 
 buildkonfig {

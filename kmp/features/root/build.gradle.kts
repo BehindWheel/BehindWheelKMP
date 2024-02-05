@@ -1,6 +1,6 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.setupIosTarget
+import com.egoriku.grodnoroads.extension.setupIosStaticFramework
 
 plugins {
     id("grodnoroads.kmplibrary")
@@ -14,7 +14,7 @@ android {
 
 kotlin {
     androidTarget()
-    setupIosTarget(baseName = "root") {
+    setupIosStaticFramework(name = "root") {
         export(libs.decompose)
         export(libs.essenty.lifecycle)
 
