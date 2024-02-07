@@ -23,6 +23,7 @@ import com.egoriku.grodnoroads.shared.persistent.onboarding.completeOnboarding
 import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -45,14 +46,11 @@ internal class RootComponentImpl(
     )
 
     init {
-        dataStore.data
-            .map { it.showOnboarding }
-            .distinctUntilChanged()
-            .filter { it }
-            .onEach {
+        runBlocking {
+            if (dataStore.data.first().showOnboarding) {
                 navigation.replaceAll(Config.Onboarding)
             }
-            .launchIn(coroutineScope)
+        }
     }
 
     override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
