@@ -57,6 +57,12 @@
 		CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F392B3BA599009ACA8B /* GoogleMaps */; };
 		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
 		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
+		CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450DC2B77EF0700497E10 /* MapItem.swift */; };
+		CEE450DF2B77F06400497E10 /* MapReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450DE2B77F06400497E10 /* MapReportView.swift */; };
+		CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */; };
+		CEE450E32B7963AA00497E10 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E22B7963AA00497E10 /* UIView.swift */; };
+		CEE450E82B79694400497E10 /* MapReportMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E72B79694400497E10 /* MapReportMarker.swift */; };
+		CEE450EA2B79696100497E10 /* MapMarkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */; };
 		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
 		CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2232B5D5A680009840E /* Scrollable.swift */; };
 		CEF5D2262B5D5F110009840E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2252B5D5F110009840E /* View.swift */; };
@@ -111,6 +117,12 @@
 		CEA924D32B30CCC50086E744 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		CEA924D52B30CD310086E744 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		CEA924D72B30CD520086E744 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
+		CEE450DC2B77EF0700497E10 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
+		CEE450DE2B77F06400497E10 /* MapReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapReportView.swift; sourceTree = "<group>"; };
+		CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCameraMarker.swift; sourceTree = "<group>"; };
+		CEE450E22B7963AA00497E10 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		CEE450E72B79694400497E10 /* MapReportMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapReportMarker.swift; sourceTree = "<group>"; };
+		CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerProtocol.swift; sourceTree = "<group>"; };
 		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -158,6 +170,7 @@
 				6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */,
 				6A9CD21E2B38C2F60010592F /* SettingsItem.swift */,
 				CE243F602B475A4200B3845C /* SettingsRoundItem.swift */,
+				CEE450E22B7963AA00497E10 /* UIView.swift */,
 				CEF5D2252B5D5F110009840E /* View.swift */,
 			);
 			path = UIKit;
@@ -189,6 +202,8 @@
 		CE243F5D2B474E8D00B3845C /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				CEE450E62B79692300497E10 /* Markers */,
+				CEE450DE2B77F06400497E10 /* MapReportView.swift */,
 				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
 				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
@@ -301,6 +316,17 @@
 			path = MainFlow;
 			sourceTree = "<group>";
 		};
+		CEE450E62B79692300497E10 /* Markers */ = {
+			isa = PBXGroup;
+			children = (
+				CEE450DC2B77EF0700497E10 /* MapItem.swift */,
+				CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */,
+				CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */,
+				CEE450E72B79694400497E10 /* MapReportMarker.swift */,
+			);
+			path = Markers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -409,11 +435,15 @@
 				CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */,
 				CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */,
 				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
+				CEE450DF2B77F06400497E10 /* MapReportView.swift in Sources */,
 				6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */,
 				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
 				CEA924D82B30CD520086E744 /* TabsView.swift in Sources */,
+				CEE450E82B79694400497E10 /* MapReportMarker.swift in Sources */,
 				CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */,
+				CEE450E32B7963AA00497E10 /* UIView.swift in Sources */,
 				CE6627D42B3A127E00799BC2 /* MapViewController.swift in Sources */,
+				CEE450EA2B79696100497E10 /* MapMarkerProtocol.swift in Sources */,
 				CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */,
 				CEA322392B33A1B90039329B /* FaqView.swift in Sources */,
 				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
@@ -422,9 +452,11 @@
 				CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */,
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
+				CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */,
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
+				CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
 				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
