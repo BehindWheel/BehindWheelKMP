@@ -147,4 +147,6 @@
     <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
     <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
     <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+
+    <string name="snackbar_in_app_update_install">Абнаўленне гатовае да ўстаноўкі</string>
 </resources>

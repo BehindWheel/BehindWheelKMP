@@ -1,12 +1,6 @@
-name: Deploy App Bundle
+name: Build App Bundle to Internal testing
 
 on:
-  push:
-    branches: [ release ]
-    paths-ignore:
-      - '**/README.md'
-      - '.github/**'
-
   workflow_dispatch:
 
 permissions: write-all
@@ -73,14 +67,14 @@ jobs:
         id: createServiceAccount
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
-      - name: Deploy to Play Store (BETA)
+      - name: Deploy to Play Store (Internal App Sharing)
         id: deploy
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service_account.json
           packageName: com.egoriku.grodnoroads
           releaseFiles: app/android/build/outputs/bundle/release/android-release.aab
-          track: beta
+          track: internalsharing
           mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
 

@@ -156,4 +156,5 @@
     <string name="snackbar_current_location_gms_disabled_title">Доступ к геолокации отклонен</string>
     <string name="snackbar_current_location_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
 
+    <string name="snackbar_in_app_update_install">Обновление готово к установке</string>
 </resources>
