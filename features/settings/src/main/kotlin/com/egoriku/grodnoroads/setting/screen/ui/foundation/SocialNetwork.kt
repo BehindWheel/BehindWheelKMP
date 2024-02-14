@@ -39,7 +39,7 @@ private fun SocialNetworkPreview() = GrodnoRoadsM3ThemePreview {
                 modifier = Modifier
                     .size(32.dp)
                     .padding(end = 2.dp),
-                painter = painterResource(id = R.drawable.ic_telegram_logo_minimal),
+                painter = painterResource(id = R.drawable.ic_telegram),
                 contentDescription = null
             )
         }

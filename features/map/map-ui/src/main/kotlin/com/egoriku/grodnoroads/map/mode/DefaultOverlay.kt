@@ -40,6 +40,7 @@ import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
+    contentPadding: PaddingValues,
     isOverlayVisible: Boolean,
     isDriveMode: Boolean,
     currentSpeed: Int,
@@ -73,7 +74,9 @@ fun DefaultOverlay(
         }
         FadeInOutAnimatedVisibility(visible = isOverlayVisible) {
             QuickActionsPopup(
-                modifier = Modifier.statusBarsPadding(),
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .statusBarsPadding(),
                 opened = quickActionsVisible,
                 onExpand = { quickActionsVisible = true },
                 onClosed = { quickActionsVisible = false },
@@ -171,10 +174,11 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
 
     Box {
         DefaultOverlay(
+            contentPadding = PaddingValues(),
+            isOverlayVisible = true,
             isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
-            isOverlayVisible = true,
             quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(
