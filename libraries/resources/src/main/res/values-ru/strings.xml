@@ -148,8 +148,6 @@
     <string name="map_user_count">Онлайн: %1$s</string>
     <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
 
-    <string name="map_quick_actions_header">Быстрые настройки</string>
-
     <string name="snackbar_drive_mode_rationale_title">Разрешение для доступа к геолокации отклонено</string>
     <string name="snackbar_drive_mode_rationale_description">Используется для отображения маркера в режиме навигации</string>
     <string name="snackbar_drive_mode_fine_location_denied">Для навигации нужен доступ к более точному местоположению</string>

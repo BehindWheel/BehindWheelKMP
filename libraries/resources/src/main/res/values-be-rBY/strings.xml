@@ -140,8 +140,6 @@
     <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
 
-    <string name="map_quick_actions_header">Хуткія налады</string>
-
     <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
     <string name="snackbar_drive_mode_rationale_description">Выкарыстоўваецца для адлюстравання маркера ў рэжыме навігацыі</string>
     <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш пунктавага месцазнаходжання</string>

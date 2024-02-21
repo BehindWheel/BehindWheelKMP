@@ -142,8 +142,6 @@
     <string name="map_user_count">Online: %1$s</string>
     <string name="map_user_count_hint">Based on user activity in the last 10 minutes</string>
 
-    <string name="map_quick_actions_header">Quick settings</string>
-
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>
     <string name="dialog_input_hint">Optional message</string>
