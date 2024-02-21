@@ -34,8 +34,8 @@ androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
 
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
@@ -77,6 +77,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
 
 # project conventional plugins
-grodnoroads_library = { id = "grodnoroads.library", version = "unspecified" }
-grodnoroads_compose = { id = "grodnoroads.compose", version = "unspecified" }
-grodnoroads_application = { id = "grodnoroads.application", version = "unspecified" }
+grodnoroads-library = { id = "grodnoroads.library", version = "unspecified" }
+grodnoroads-compose = { id = "grodnoroads.compose", version = "unspecified" }
+grodnoroads-application = { id = "grodnoroads.application", version = "unspecified" }
