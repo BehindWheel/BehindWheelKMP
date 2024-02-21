@@ -99,6 +99,13 @@
     <string name="map_google_map_style_minimal">Минимализм</string>
     <string name="map_google_map_style_detailed">Подробная</string>
 
+    <string name="map_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="map_markers_filtering_description">Применяется только к маркерам с тектовым сообщением (ГАИ, Пробки и т.д.)</string>
+    <string name="map_markers_filtering_15_minutes">15 мин</string>
+    <string name="map_markers_filtering_30_minutes">30 мин</string>
+    <string name="map_markers_filtering_45_minutes">45 мин</string>
+    <string name="map_markers_filtering_1_hour">1 час</string>
+
     <string name="map_header_markers">Маркеры</string>
     <string name="map_markers_select_all">Выбрать все</string>
     <string name="map_markers_stationary_cameras">Стационарные камеры</string>

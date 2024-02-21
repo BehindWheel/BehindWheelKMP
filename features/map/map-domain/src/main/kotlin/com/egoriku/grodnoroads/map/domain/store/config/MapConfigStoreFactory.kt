@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
-
 internal class MapConfigStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>

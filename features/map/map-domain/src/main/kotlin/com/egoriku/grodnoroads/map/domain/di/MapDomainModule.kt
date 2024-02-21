@@ -17,7 +17,8 @@ val mapDomainModule = module {
             userCountRepository = get(),
             reportsRepository = get(),
             analyticsTracker = get(),
-            crashlyticsTracker = get()
+            crashlyticsTracker = get(),
+            dataStore = get()
         ).create()
     }
 

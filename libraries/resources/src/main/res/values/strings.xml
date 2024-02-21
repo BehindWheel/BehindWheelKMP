@@ -121,6 +121,13 @@
     <string name="map_google_map_style_minimal">Minimal</string>
     <string name="map_google_map_style_detailed">Detailed</string>
 
+    <string name="map_markers_filtering">Filtering markers by time</string>
+    <string name="map_markers_filtering_description">It applies only to markers with a text message (traffic police, congestion, etc.).</string>
+    <string name="map_markers_filtering_15_minutes">15 min</string>
+    <string name="map_markers_filtering_30_minutes">30 min</string>
+    <string name="map_markers_filtering_45_minutes">45 min</string>
+    <string name="map_markers_filtering_1_hour">1 hour</string>
+
     <string name="map_header_markers">Markers</string>
     <string name="map_markers_select_all">Select All</string>
     <string name="map_markers_stationary_cameras">Stationary cameras</string>

@@ -18,8 +18,9 @@ internal class ReportsRepositoryImpl(databaseReference: DatabaseReference) : Rep
 
     private val reportsReference = databaseReference.child("reports")
 
-    override fun loadAsFlow() = reportsReference
+    override fun loadAsFlow(startAt: Long) = reportsReference
         .orderByChild("timestamp")
+        .startAt(startAt.toDouble())
         .awaitValueEventListener<ReportsDTO>()
         .map { resultOf ->
             when (resultOf) {

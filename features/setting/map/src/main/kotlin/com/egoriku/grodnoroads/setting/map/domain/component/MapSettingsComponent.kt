@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.City.Grodno
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.Style
@@ -62,12 +63,18 @@ interface MapSettingsComponent {
             val current: City = Grodno,
             val values: List<City> = City.entries
         ) : MapPref
+
+        data class MarkerFiltering(
+            val current: Filtering = Filtering.Hours1,
+            val values: List<Filtering> = Filtering.entries
+        ) : MapPref
     }
 
     data class MapSettings(
         val locationInfo: LocationInfo = LocationInfo(),
         val driveModeZoom: DriveModeZoom = DriveModeZoom(),
         val mapStyle: MapStyle = MapStyle(),
+        val markerFiltering: MarkerFiltering = MarkerFiltering(),
         val mapInfo: MapInfo = MapInfo(),
     ) {
         data class LocationInfo(
