@@ -94,7 +94,8 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
             position = LatLng(0.0, 0.0),
-            mapEventType = RoadIncident
+            mapEventType = RoadIncident,
+            timestamp = 0L
         )
     ) {
     }

@@ -53,6 +53,7 @@ sealed interface MapEvent {
 
     data class Reports(
         val id: String,
+        val timestamp: Long,
         val markerMessage: String,
         val dialogTitle: String,
         val messages: ImmutableList<MessageItem>,

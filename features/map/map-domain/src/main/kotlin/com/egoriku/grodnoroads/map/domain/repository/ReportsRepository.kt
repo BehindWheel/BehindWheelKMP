@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ReportsRepository {
 
-    fun loadAsFlow(): Flow<ResultOf<List<Reports>>>
+    fun loadAsFlow(startAt: Long): Flow<ResultOf<List<Reports>>>
 
     suspend fun report(actionModel: ReportActionModel)
 }

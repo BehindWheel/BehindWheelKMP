@@ -48,7 +48,8 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                         },
                     position = LatLng(data.latitude, data.longitude),
                     dialogTitle = buildDialogTitle(data),
-                    markerMessage = buildMarkerShortMessage(data)
+                    markerMessage = buildMarkerShortMessage(data),
+                    timestamp = data.timestamp
                 )
             } else {
                 val action = Reports(
@@ -62,7 +63,8 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     markerMessage = buildMarkerShortMessage(data),
                     dialogTitle = buildDialogTitle(data),
                     position = LatLng(data.latitude, data.longitude),
-                    mapEventType = MapEventType.eventFromString(data.type)
+                    mapEventType = MapEventType.eventFromString(data.type),
+                    timestamp = data.timestamp
                 )
 
                 mergedReports.add(action)

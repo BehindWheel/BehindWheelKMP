@@ -82,7 +82,7 @@ fun DefaultOverlay(
                 onClosed = { quickActionsVisible = false },
             ) {
                 ActionsContent(
-                    quickActionsState = quickActionsState,
+                    actionsState = quickActionsState,
                     onChanged = {
                         quickActionsVisible = false
                         onPreferenceChange(it)
