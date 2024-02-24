@@ -110,10 +110,11 @@ private fun DemoComponents() {
         DemoNavigationBar()
         DemoSnackbarSimple()
         DemoSnackbarWithAction()
+        DemoListItem()
     }
 }
 
-@Preview(device = "spec:width=1080px,height=6000px,dpi=440")
+@Preview(device = "spec:width=1080px,height=7000px,dpi=440")
 @Composable
 private fun ComponentsPreview() = GrodnoRoadsM3ThemePreview {
     DemoComponents()

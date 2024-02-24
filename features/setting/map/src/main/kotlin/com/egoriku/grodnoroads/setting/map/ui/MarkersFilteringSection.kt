@@ -3,14 +3,13 @@ package com.egoriku.grodnoroads.setting.map.ui
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
@@ -24,20 +23,17 @@ internal fun MarkersFilteringSection(
     markersFiltering: MarkerFiltering,
     modify: (MapPref) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsHeader(title = stringResource(id = R.string.map_markers_filtering))
-        Text(
-            modifier = Modifier.padding(horizontal = 24.dp),
-            text = stringResource(id = R.string.map_markers_filtering_description),
-            color = LocalContentColor.current.copy(alpha = 0.64f),
-            style = MaterialTheme.typography.bodyMedium
+    Column {
+        SettingsSectionHeader(
+            title = stringResource(id = R.string.map_markers_filtering),
+            description = stringResource(id = R.string.map_markers_filtering_description)
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             markersFiltering.values.forEach { filtering ->
                 val selected = markersFiltering.current == filtering
@@ -48,7 +44,10 @@ internal fun MarkersFilteringSection(
                         modify(markersFiltering.copy(current = filtering))
                     },
                     label = {
-                        Text(text = stringResource(id = filtering.toResource()))
+                        Text(
+                            text = stringResource(id = filtering.toResource()),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 )
             }

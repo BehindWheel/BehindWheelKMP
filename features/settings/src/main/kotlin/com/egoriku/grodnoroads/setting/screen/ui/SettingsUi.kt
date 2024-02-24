@@ -57,10 +57,10 @@ internal fun SettingsUi(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp)
+                        .padding(vertical = 8.dp)
                 ) {
                     Text(
-                        modifier = Modifier.padding(start = 24.dp),
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         text = stringResource(R.string.settings_category_main)
@@ -68,19 +68,19 @@ internal fun SettingsUi(
                     SettingsListItem(
                         icon = R.drawable.ic_appearance,
                         name = stringResource(R.string.settings_section_appearance),
-                        paddingValues = PaddingValues(horizontal = 24.dp),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_map,
                         name = stringResource(R.string.settings_section_map),
-                        paddingValues = PaddingValues(horizontal = 24.dp),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Map) }
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_notification,
                         name = stringResource(R.string.settings_section_alerts),
-                        paddingValues = PaddingValues(horizontal = 24.dp),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
                     )
                 }
@@ -89,10 +89,10 @@ internal fun SettingsUi(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp)
+                        .padding(vertical = 8.dp)
                 ) {
                     Text(
-                        modifier = Modifier.padding(start = 24.dp),
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         text = stringResource(R.string.settings_category_other)
@@ -100,21 +100,21 @@ internal fun SettingsUi(
                     SettingsListItem(
                         icon = R.drawable.ic_changelog,
                         name = stringResource(R.string.settings_section_changelog),
-                        paddingValues = PaddingValues(horizontal = 24.dp),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     if (settingsNextFeaturesEnabled) {
                         SettingsListItem(
                             icon = Icons.Filled.Build,
                             name = stringResource(R.string.settings_section_next_features),
-                            paddingValues = PaddingValues(horizontal = 24.dp),
+                            paddingValues = PaddingValues(horizontal = 20.dp),
                             onClick = { onSettingClick(Page.NextFeatures) }
                         )
                     }
                     SettingsListItem(
                         icon = R.drawable.ic_faq,
                         name = stringResource(R.string.settings_section_faq),
-                        paddingValues = PaddingValues(horizontal = 24.dp),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
                     )
                 }
@@ -161,7 +161,7 @@ private fun SettingsListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .sizeIn(minHeight = 44.dp)
+            .heightIn(min = 44.dp)
             .clickable(onClick = onClick)
             .padding(paddingValues),
         horizontalArrangement = Arrangement.spacedBy(16.dp),

@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.*
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
@@ -38,13 +39,13 @@ fun ActionsContent(
             .padding(vertical = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        AppearanceSection(
-            appTheme = actionsState.appTheme,
+        FilteringSection(
+            markerFiltering = actionsState.markerFiltering,
             onChanged = onChanged
         )
         VerticalSpacer(12.dp)
-        FilteringSection(
-            markerFiltering = actionsState.markerFiltering,
+        AppearanceSection(
+            appTheme = actionsState.appTheme,
             onChanged = onChanged
         )
         VerticalSpacer(12.dp)
@@ -83,7 +84,10 @@ private fun AppearanceSection(
 
                 FilterChip(
                     label = {
-                        Text(text = stringResource(theme.toStringResource()))
+                        Text(
+                            text = stringResource(theme.toStringResource()),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     },
                     selected = selected,
                     onClick = {
@@ -122,7 +126,10 @@ private fun FilteringSection(
                         onChanged(markerFiltering.copy(current = filtering))
                     },
                     label = {
-                        Text(text = stringResource(id = filtering.toResource()))
+                        Text(
+                            text = stringResource(id = filtering.toResource()),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 )
             }
@@ -140,7 +147,6 @@ private fun SwitchSetting(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .sizeIn(minHeight = 44.dp)
             .toggleable(
                 value = checked,
                 role = Role.Switch,
@@ -150,8 +156,12 @@ private fun SwitchSetting(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = name, style = MaterialTheme.typography.titleMedium)
-        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            modifier = Modifier.padding(vertical = 8.dp),
+            text = name,
+            style = MaterialTheme.typography.titleMedium
+        )
+        WeightSpacer()
         Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }

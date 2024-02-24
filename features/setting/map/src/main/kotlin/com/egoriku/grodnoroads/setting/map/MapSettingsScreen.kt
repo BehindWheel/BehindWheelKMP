@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
@@ -77,7 +78,8 @@ private fun LoadedState(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .navigationBarsPadding()
+            .navigationBarsPadding(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         DefaultLocationSection(
             locationInfo = mapSettingState.mapSettings.locationInfo,
