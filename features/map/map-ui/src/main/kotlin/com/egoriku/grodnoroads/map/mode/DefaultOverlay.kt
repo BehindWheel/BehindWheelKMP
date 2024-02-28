@@ -49,7 +49,7 @@ fun DefaultOverlay(
     alerts: ImmutableList<Alert>,
     onPreferenceChange: (QuickActionsPref) -> Unit,
 ) {
-    var quickActionsVisible by rememberMutableState { false }
+    var quickActionsVisible by rememberMutableState(isOverlayVisible) { false }
     Box {
         Column(
             modifier = Modifier.fillMaxSize(),

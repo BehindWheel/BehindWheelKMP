@@ -6,11 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
-import com.egoriku.grodnoroads.foundation.common.ui.list.SwitchSettings
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
@@ -23,9 +24,10 @@ internal fun MapStyleSection(
     onCheckedChange: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsHeader(title = stringResource(id = R.string.map_header_appearance))
+        SettingsSectionHeader(title = stringResource(id = R.string.map_header_appearance))
 
         GoogleMapStyle(mapStyle, onCheckedChange)
+        VerticalSpacer(16.dp)
         TrafficConditions(mapStyle, onCheckedChange)
     }
 }
@@ -78,9 +80,8 @@ private fun TrafficConditions(
 ) {
     val trafficJamOnMap = mapStyle.trafficJamOnMap
 
-    SwitchSettings(
-        modifier = Modifier.padding(start = 8.dp),
-        stringResId = R.string.map_traffic_conditions_appearance,
+    SwitchListItem(
+        text = stringResource(R.string.map_traffic_conditions_appearance),
         isChecked = trafficJamOnMap.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJamOnMap.copy(isShow = it))

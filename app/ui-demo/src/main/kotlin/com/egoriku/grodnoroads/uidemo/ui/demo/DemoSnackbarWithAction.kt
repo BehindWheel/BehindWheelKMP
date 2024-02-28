@@ -34,6 +34,6 @@ fun DemoSnackbarWithAction() {
 
 @GrodnoRoadsDarkLightPreview
 @Composable
-private fun DemoCheckboxPreview() = GrodnoRoadsM3ThemePreview {
+private fun DemoSnackbarWithActionPreview() = GrodnoRoadsM3ThemePreview {
     DemoSnackbarWithAction()
 }

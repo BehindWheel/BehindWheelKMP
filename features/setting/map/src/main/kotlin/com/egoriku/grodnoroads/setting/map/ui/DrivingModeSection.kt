@@ -1,15 +1,18 @@
 package com.egoriku.grodnoroads.setting.map.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
-import com.egoriku.grodnoroads.foundation.common.ui.list.ActionSettings
+import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
+import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
@@ -20,8 +23,8 @@ internal fun DrivingModeSection(
     modify: (MapPref) -> Unit,
     reset: (MapPref) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsHeader(title = stringResource(id = R.string.map_header_drive_mode))
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        SettingsSectionHeader(title = stringResource(id = R.string.map_header_drive_mode))
 
         MapZoomInCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
         MapZoomOutCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
@@ -36,22 +39,22 @@ private fun MapZoomInCity(
 ) {
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
-    ActionSettings(
-        iconResId = R.drawable.ic_inside_city,
+    BasicListItem(
+        iconRes = R.drawable.ic_inside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
-        trailing = {
-            ClickableFloatRange(
-                value = mapZoomInCity.current,
-                min = mapZoomInCity.min,
-                max = mapZoomInCity.max,
-                step = mapZoomInCity.stepSize,
-                onLongClick = { reset(driveModeZoom.mapZoomInCity) },
-                onValueChange = {
-                    modify(mapZoomInCity.copy(current = it))
-                },
-            )
-        }
-    )
+        textStyle = MaterialTheme.typography.bodyMedium
+    ) {
+        ClickableFloatRange(
+            value = mapZoomInCity.current,
+            min = mapZoomInCity.min,
+            max = mapZoomInCity.max,
+            step = mapZoomInCity.stepSize,
+            onLongClick = { reset(driveModeZoom.mapZoomInCity) },
+            onValueChange = {
+                modify(mapZoomInCity.copy(current = it))
+            },
+        )
+    }
 }
 
 @Composable
@@ -62,22 +65,22 @@ private fun MapZoomOutCity(
 ) {
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
-    ActionSettings(
-        iconResId = R.drawable.ic_outside_city,
+    BasicListItem(
+        iconRes = R.drawable.ic_outside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
-        trailing = {
-            ClickableFloatRange(
-                value = mapZoomOutCity.current,
-                min = mapZoomOutCity.min,
-                max = mapZoomOutCity.max,
-                step = mapZoomOutCity.stepSize,
-                onLongClick = { reset(mapZoomOutCity) },
-                onValueChange = {
-                    modify(mapZoomOutCity.copy(current = it))
-                },
-            )
-        }
-    )
+        textStyle = MaterialTheme.typography.bodyMedium
+    ) {
+        ClickableFloatRange(
+            value = mapZoomOutCity.current,
+            min = mapZoomOutCity.min,
+            max = mapZoomOutCity.max,
+            step = mapZoomOutCity.stepSize,
+            onLongClick = { reset(mapZoomOutCity) },
+            onValueChange = {
+                modify(mapZoomOutCity.copy(current = it))
+            },
+        )
+    }
 }
 
 @GrodnoRoadsPreview
