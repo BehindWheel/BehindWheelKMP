@@ -162,4 +162,30 @@
     <string name="snackbar_current_location_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
 
     <string name="snackbar_in_app_update_install">Обновление готово к установке</string>
+
+    <string name="reporting_header">Выберите событие</string>
+    <string name="reporting_category_road_incidents">Проблемы на дороге</string>
+    <string name="reporting_category_traffic_police">ГАИ</string>
+    <string name="reporting_category_other">Другое</string>
+
+    <string name="reporting_item_road_repair">Дорожные работы</string>
+    <string name="reporting_item_broken_car">Сломалась машина</string>
+    <string name="reporting_item_tow_truck_working">Работает эвакуатор</string>
+    <string name="reporting_item_pedestrian_on_road">Пешеход на дороге</string>
+    <string name="reporting_item_traffic_controller">Регулировщик</string>
+    <string name="reporting_item_non_working_traffic_lights">Не работают светофоры</string>
+    <string name="reporting_item_open_hatch">Открытый люк</string>
+    <string name="reporting_item_other_road_incident">Другое</string>
+    <string name="reporting_item_traffic_jam">Пробка</string>
+    <string name="reporting_item_wild_animals">Дикие животные</string>
+    <string name="reporting_item_car_accident">ДТП</string>
+    <string name="reporting_item_traffic_police">ГАИ</string>
+    <string name="reporting_item_working_with_radar">Работают с радаром</string>
+    <string name="reporting_item_document_check">Проверка документов</string>
+    <string name="reporting_item_stopped_on_the_move">Остановили на ходу</string>
+    <string name="reporting_item_sitting_in_the_car">Сидят в машине</string>
+    <string name="reporting_item_working_from_car">Работают на ходу</string>
+    <string name="reporting_item_transport_inspection">Транспортная инспекция</string>
+    <string name="reporting_item_filter">Фильтр</string>
+    <string name="reporting_item_other_traffic_police">Другое</string>
 </resources>

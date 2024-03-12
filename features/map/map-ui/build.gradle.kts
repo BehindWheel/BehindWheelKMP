@@ -26,6 +26,7 @@ dependencies {
 
     implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
+    implementation(projects.shared.coreModels)
 
     implementation(libs.androidx.activity.compose)
 

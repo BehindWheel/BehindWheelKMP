@@ -11,7 +11,6 @@ import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
-import com.egoriku.grodnoroads.map.domain.model.ReportType
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
@@ -42,7 +41,6 @@ internal class MapConfigStoreFactory(
         data class OnAlertRadius(val radius: Int) : Message
         data class OnUserZoomLevel(val userZoomLevel: Float) : Message
         data class ChangeAppMode(val appMode: AppMode) : Message
-        data class UpdateReportType(val reportType: ReportType?) : Message
     }
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -128,12 +126,10 @@ internal class MapConfigStoreFactory(
                     dispatch(ChangeAppMode(appMode = AppMode.ChooseLocation))
                     dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                     dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
-                    dispatch(UpdateReportType(reportType = it.reportType))
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {
                     dispatch(ChangeAppMode(appMode = AppMode.Default))
                     dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
-                    dispatch(UpdateReportType(reportType = null))
                 }
                 onIntent<ChooseLocation.UserMapZoom> {
                     dispatch(OnUserZoomLevel(it.zoom))
@@ -141,12 +137,10 @@ internal class MapConfigStoreFactory(
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
-                // TODO: Try https://github.com/kopykat-kt/kopykat
                 when (message) {
                     is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
                     is ChangeAppMode -> copy(appMode = message.appMode)
-                    is UpdateReportType -> copy(reportType = message.reportType)
                     is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
                     is OnAlertRadius -> copy(alertRadius = message.radius)
                 }

@@ -11,6 +11,8 @@ dependencies {
     implementation(projects.features.map.mapDomain)
     implementation(projects.libraries.extensions)
 
+    implementation(projects.shared.coreModels)
+
     implementation(libs.coroutines)
 
     implementation(platform(libs.firebase.bom))

@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.screen.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 import com.egoriku.grodnoroads.map.domain.component.buildMapComponent
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.domain.component.buildSettingsComponent
@@ -12,14 +13,17 @@ import org.koin.core.component.KoinComponent
 
 fun buildMainComponent(
     componentContext: ComponentContext,
+    onOpenReporting: () -> Unit,
     onOpen: (Page) -> Unit
 ): MainComponent = MainComponentImpl(
     componentContext = componentContext,
+    onOpenReporting = onOpenReporting,
     onOpen = onOpen
 )
 
 internal class MainComponentImpl(
     componentContext: ComponentContext,
+    private val onOpenReporting: () -> Unit,
     private val onOpen: (Page) -> Unit
 ) : MainComponent, ComponentContext by componentContext, KoinComponent {
 
@@ -44,11 +48,20 @@ internal class MainComponentImpl(
         }
     }
 
+    override fun processReporting(result: ReportingResult) {
+        (stack.active.instance as? Child.Map)?.component?.processReporting(result)
+    }
+
     private fun child(
         configuration: Config,
         componentContext: ComponentContext,
     ) = when (configuration) {
-        is Config.Map -> Child.Map(component = buildMapComponent(componentContext))
+        is Config.Map -> Child.Map(
+            component = buildMapComponent(
+                componentContext = componentContext,
+                onOpenReporting = onOpenReporting
+            )
+        )
         is Config.Settings -> Child.Settings(
             component = buildSettingsComponent(
                 componentContext = componentContext,

@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.foundation.uikit.button
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -21,7 +22,7 @@ fun SecondaryButton(
     content: @Composable RowScope.() -> Unit
 ) {
     OutlinedButton(
-        modifier = modifier,
+        modifier = modifier.heightIn(min = 48.dp),
         enabled = enabled,
         onClick = onClick,
         content = content

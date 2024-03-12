@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.map.domain.store.mapevents
 import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.Filtering

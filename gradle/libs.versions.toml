@@ -26,6 +26,7 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-annotation = "androidx.annotation:annotation:1.7.1"
 androidx-browser = "androidx.browser:browser:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.12.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
@@ -33,6 +34,8 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
+
+compose-stable-marker = "com.github.skydoves:compose-stable-marker:1.0.3"
 
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0"

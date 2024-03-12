@@ -1,10 +1,10 @@
-package com.egoriku.grodnoroads.map.data.dto
+package com.egoriku.grodnoroads.shared.core.models.dto
 
 import androidx.annotation.Keep
 import com.google.firebase.database.PropertyName
 
 @Keep
-internal class ReportsDTO(
+class ReportsDTO(
     @PropertyName("type")
     @JvmField
     val type: String = "",

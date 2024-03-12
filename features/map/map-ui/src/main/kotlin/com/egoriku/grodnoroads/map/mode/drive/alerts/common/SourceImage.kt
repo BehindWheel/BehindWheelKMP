@@ -9,7 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.shared.core.models.Source
 import com.egoriku.grodnoroads.resources.R
 
 @Composable

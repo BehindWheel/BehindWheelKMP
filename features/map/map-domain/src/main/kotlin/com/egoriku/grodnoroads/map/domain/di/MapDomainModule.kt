@@ -16,7 +16,6 @@ val mapDomainModule = module {
             mediumSpeedCameraRepository = get(),
             userCountRepository = get(),
             reportsRepository = get(),
-            analyticsTracker = get(),
             crashlyticsTracker = get(),
             dataStore = get()
         ).create()
