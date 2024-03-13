@@ -14,7 +14,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -90,13 +90,11 @@ fun GoogleMap(
     AndroidView(
         modifier = modifier
             .fillMaxSize()
-            .pointerInteropFilter {
+            .motionEventSpy {
                 when (it.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        updatedCameraMoveState(CameraMoveState.UserGesture)
-                    }
+                    MotionEvent.ACTION_DOWN -> updatedCameraMoveState(CameraMoveState.UserGesture)
+                    MotionEvent.ACTION_UP -> updatedCameraMoveState(CameraMoveState.Idle)
                 }
-                false
             },
         factory = { mapView }
     )
