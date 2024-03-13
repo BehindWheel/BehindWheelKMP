@@ -26,6 +26,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
         val zoomLevel: Float = 12.5f,
         val userZoomLevel: Float = 0f,
         val alertRadius: Int = 0,
-        val appMode: AppMode = AppMode.Default
+        val currentAppMode: AppMode = AppMode.Default,
+        val isChooseInDriveMode: Boolean = false
     )
 }

@@ -8,8 +8,11 @@ import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsS
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
 
 interface MapComponent {
+
+    val notificationEvents: SharedFlow<Notification>
 
     val lastLocation: Flow<LastLocation>
     val initialLocation: Flow<LatLng>
@@ -34,8 +37,8 @@ interface MapComponent {
     fun setUserMapZoom(zoom: Float)
     fun cancelChooseLocationFlow()
 
-    fun startLocationUpdates()
-    fun stopLocationUpdates()
+    fun startDriveMode()
+    fun stopDriveMode()
     fun requestCurrentLocation()
 
     fun updatePreferences(pref: QuickActionsPref)

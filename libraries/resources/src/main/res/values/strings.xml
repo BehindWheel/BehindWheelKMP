@@ -190,4 +190,6 @@
     <string name="reporting_item_transport_inspection">Transport inspection</string>
     <string name="reporting_item_filter">Filter</string>
     <string name="reporting_item_other_traffic_police">Other</string>
+
+    <string name="reporting_notification_sent">Your message has been sent!</string>
 </resources>

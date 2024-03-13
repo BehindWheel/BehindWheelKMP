@@ -188,4 +188,6 @@
     <string name="reporting_item_transport_inspection">Транспортная инспекция</string>
     <string name="reporting_item_filter">Фильтр</string>
     <string name="reporting_item_other_traffic_police">Другое</string>
+
+    <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
 </resources>

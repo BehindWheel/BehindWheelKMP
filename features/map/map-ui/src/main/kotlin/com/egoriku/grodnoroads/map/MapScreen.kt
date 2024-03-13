@@ -17,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.reLaunch
@@ -30,12 +32,9 @@ import com.egoriku.grodnoroads.map.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
+import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
@@ -67,6 +66,8 @@ import com.google.maps.android.ui.IconGenerator
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.egoriku.grodnoroads.resources.R as R_res
@@ -84,6 +85,23 @@ fun MapScreen(
     val snackbarState = remember { SnackbarState() }
 
     val markerCache = koinInject<MarkerCache>()
+
+    LaunchedEffect(Unit) {
+        component
+            .notificationEvents
+            .onEach {
+                when (it) {
+                    Notification.RepostingSuccess ->
+                        snackbarState.show(
+                            SnackbarMessage.SimpleMessage(
+                                title = MessageData.Resource(R.string.reporting_notification_sent),
+                                icon = Icon.Res(id = R.drawable.ic_check_circle)
+                            )
+                        )
+                }
+            }
+            .launchIn(this)
+    }
 
     Surface {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
@@ -372,7 +390,7 @@ fun MapScreen(
                                     val message = snackbarMessageBuilder.handleDriveModeRequest(it)
 
                                     if (message == null) {
-                                        component.startLocationUpdates()
+                                        component.startDriveMode()
                                     } else {
                                         coroutineScope.launch {
                                             snackbarState.show(message)
@@ -385,18 +403,8 @@ fun MapScreen(
 
                         Drive -> {
                             DriveMode(
-                                modifier = Modifier.align(Alignment.BottomCenter),
-                                stopDrive = component::stopLocationUpdates,
-                                reportPolice = {
-                                    if (location != LastLocation.None) {
-                                        component.startReporting(location.latLng)
-                                    }
-                                },
-                                reportIncident = {
-                                    if (location != LastLocation.None) {
-                                        component.startReporting(location.latLng)
-                                    }
-                                }
+                                back = component::stopDriveMode,
+                                openChooseLocation = component::switchToChooseLocationFlow
                             )
                         }
 

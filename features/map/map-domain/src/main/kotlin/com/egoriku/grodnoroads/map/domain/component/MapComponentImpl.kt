@@ -117,8 +117,11 @@ internal class MapComponentImpl(
             .launchIn(coroutineScope)
     }
 
+    override val notificationEvents: MutableSharedFlow<Notification> =
+        MutableSharedFlow(extraBufferCapacity = 1)
+
     override val appMode: Flow<AppMode>
-        get() = mapConfigStore.states.map { it.appMode }
+        get() = mapConfigStore.states.map { it.currentAppMode }
 
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }
@@ -173,12 +176,12 @@ internal class MapComponentImpl(
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
 
-    override fun startLocationUpdates() {
+    override fun startDriveMode() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
         mapConfigStore.accept(StartDriveMode)
     }
 
-    override fun stopLocationUpdates() {
+    override fun stopDriveMode() {
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
         mapConfigStore.accept(StopDriveMode)
     }
@@ -194,8 +197,12 @@ internal class MapComponentImpl(
     override fun processReporting(result: ReportingResult) {
         eventReportingComponent.report(result.copy(latLng = locationStore.state.userLocation.latLng))
 
-        locationStore.accept(LocationStore.Intent.InvalidateLocation)
+        if (!mapConfigStore.state.isChooseInDriveMode) {
+            locationStore.accept(LocationStore.Intent.InvalidateLocation)
+        }
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+
+        notificationEvents.tryEmit(Notification.RepostingSuccess)
     }
 
     override fun switchToChooseLocationFlow() {
@@ -203,8 +210,10 @@ internal class MapComponentImpl(
     }
 
     override fun cancelChooseLocationFlow() {
+        if (!mapConfigStore.state.isChooseInDriveMode) {
+            locationStore.accept(LocationStore.Intent.InvalidateLocation)
+        }
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
-        locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
     override fun startReporting(latLng: LatLng) {
