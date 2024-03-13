@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.compose.snakbar"
+    namespace = "com.egoriku.grodnoroads.compose.snackbar"
 }
 
 dependencies {
