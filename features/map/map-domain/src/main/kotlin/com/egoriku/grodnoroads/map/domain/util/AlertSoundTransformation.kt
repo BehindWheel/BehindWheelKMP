@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.AppMode
 import com.egoriku.grodnoroads.map.domain.model.CameraType.*
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.*
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

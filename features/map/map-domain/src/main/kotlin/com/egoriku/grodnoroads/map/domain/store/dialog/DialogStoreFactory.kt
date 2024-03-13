@@ -25,30 +25,8 @@ internal class DialogStoreFactory(
                     )
                     analyticsTracker.trackOpenMarkerInfoDialog()
                 }
-                onIntent<Intent.OpenReportTrafficPoliceDialog> { data ->
-                    dispatch(
-                        Message.OpenDialog(
-                            dialog = MapAlertDialog.PoliceDialog(
-                                currentLatLng = data.latLng
-                            )
-                        )
-                    )
-                    analyticsTracker.trackOpenTrafficPoliceDialog()
-                }
-                onIntent<Intent.OpenRoadIncidentDialog> { data ->
-                    dispatch(
-                        Message.OpenDialog(
-                            dialog = MapAlertDialog.RoadIncidentDialog(
-                                currentLatLng = data.latLng
-                            )
-                        )
-                    )
-                    analyticsTracker.trackOpenRoadIncidentDialog()
-                }
                 onIntent<Intent.CloseDialog> {
-                    dispatch(
-                        Message.CloseDialog(dialog = MapAlertDialog.None)
-                    )
+                    dispatch(Message.CloseDialog(dialog = MapAlertDialog.None))
                 }
             },
             reducer = { message: Message ->

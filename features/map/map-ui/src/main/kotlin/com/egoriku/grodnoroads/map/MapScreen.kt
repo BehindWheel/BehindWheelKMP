@@ -17,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.reLaunch
@@ -28,20 +30,12 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.map.camera.CameraInfo
-import com.egoriku.grodnoroads.map.dialog.IncidentDialog
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
-import com.egoriku.grodnoroads.map.dialog.ReportDialog
 import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
-import com.egoriku.grodnoroads.map.domain.model.MapAlertDialog
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
@@ -65,12 +59,15 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.*
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ui.IconGenerator
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.egoriku.grodnoroads.resources.R as R_res
@@ -88,6 +85,23 @@ fun MapScreen(
     val snackbarState = remember { SnackbarState() }
 
     val markerCache = koinInject<MarkerCache>()
+
+    LaunchedEffect(Unit) {
+        component
+            .notificationEvents
+            .onEach {
+                when (it) {
+                    Notification.RepostingSuccess ->
+                        snackbarState.show(
+                            SnackbarMessage.SimpleMessage(
+                                title = MessageData.Resource(R.string.reporting_notification_sent),
+                                icon = Icon.Res(id = R.drawable.ic_check_circle)
+                            )
+                        )
+                }
+            }
+            .launchIn(this)
+    }
 
     Surface {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
@@ -107,8 +121,7 @@ fun MapScreen(
 
         AlertDialogs(
             mapAlertDialog = mapAlertDialog,
-            onClose = component::closeDialog,
-            reportAction = component::reportAction
+            onClose = component::closeDialog
         )
 
         val coroutineScope = rememberCoroutineScope()
@@ -377,39 +390,21 @@ fun MapScreen(
                                     val message = snackbarMessageBuilder.handleDriveModeRequest(it)
 
                                     if (message == null) {
-                                        component.startLocationUpdates()
+                                        component.startDriveMode()
                                     } else {
                                         coroutineScope.launch {
                                             snackbarState.show(message)
                                         }
                                     }
                                 },
-                                report = component::openChooseLocation
+                                openReportFlow = component::switchToChooseLocationFlow
                             )
                         }
 
                         Drive -> {
                             DriveMode(
-                                modifier = Modifier.align(Alignment.BottomCenter),
-                                stopDrive = component::stopLocationUpdates,
-                                reportPolice = {
-                                    if (location != LastLocation.None) {
-                                        component.openReportFlow(
-                                            reportDialogFlow = ReportDialogFlow.TrafficPolice(
-                                                location.latLng
-                                            )
-                                        )
-                                    }
-                                },
-                                reportIncident = {
-                                    if (location != LastLocation.None) {
-                                        component.openReportFlow(
-                                            reportDialogFlow = ReportDialogFlow.RoadIncident(
-                                                location.latLng
-                                            )
-                                        )
-                                    }
-                                }
+                                back = component::stopDriveMode,
+                                openChooseLocation = component::switchToChooseLocationFlow
                             )
                         }
 
@@ -424,7 +419,7 @@ fun MapScreen(
                                             /* y = */ offset.y.toInt()
                                         )
                                     ) ?: return@ChooseLocation
-                                    component.reportChooseLocation(latLng)
+                                    component.startReporting(latLng)
                                 }
                             )
                         }
@@ -520,8 +515,7 @@ private fun AlwaysKeepScreenOn(enabled: Boolean) {
 @Composable
 private fun AlertDialogs(
     mapAlertDialog: MapAlertDialog,
-    onClose: () -> Unit,
-    reportAction: (ReportAction.Params) -> Unit
+    onClose: () -> Unit
 ) {
     when (mapAlertDialog) {
         is MapAlertDialog.MarkerInfoDialog -> {
@@ -530,39 +524,6 @@ private fun AlertDialogs(
                 onClose = onClose
             )
         }
-
-        is MapAlertDialog.PoliceDialog -> {
-            ReportDialog(
-                onClose = onClose,
-                onSend = { mapEvent, shortMessage, message ->
-                    reportAction(
-                        ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng,
-                            mapEventType = mapEvent,
-                            shortMessage = shortMessage,
-                            message = message
-                        )
-                    )
-                }
-            )
-        }
-
-        is MapAlertDialog.RoadIncidentDialog -> {
-            IncidentDialog(
-                onClose = onClose,
-                onSend = { mapEvent, shortMessage, message ->
-                    reportAction(
-                        ReportAction.Params(
-                            latLng = mapAlertDialog.currentLatLng,
-                            mapEventType = mapEvent,
-                            shortMessage = shortMessage,
-                            message = message
-                        )
-                    )
-                }
-            )
-        }
-
         is MapAlertDialog.None -> Unit
     }
 }

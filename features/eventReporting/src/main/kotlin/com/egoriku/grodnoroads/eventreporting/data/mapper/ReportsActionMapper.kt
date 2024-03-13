@@ -1,8 +1,8 @@
-package com.egoriku.grodnoroads.map.data.mapper
+package com.egoriku.grodnoroads.eventreporting.data.mapper
 
-import com.egoriku.grodnoroads.map.data.dto.ReportsDTO
-import com.egoriku.grodnoroads.map.domain.model.Source
-import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
+import com.egoriku.grodnoroads.eventreporting.domain.ReportActionModel
+import com.egoriku.grodnoroads.shared.core.models.Source
+import com.egoriku.grodnoroads.shared.core.models.dto.ReportsDTO
 
 internal object ReportsActionMapper : (ReportActionModel) -> ReportsDTO {
 

@@ -1,5 +1,8 @@
-package com.egoriku.grodnoroads.map.domain.model
+package com.egoriku.grodnoroads.shared.core.models
 
+import androidx.compose.runtime.Stable
+
+@Stable
 enum class Source(val source: String) {
     App("app"),
     Viber("viber"),

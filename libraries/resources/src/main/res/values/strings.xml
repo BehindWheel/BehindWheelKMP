@@ -164,4 +164,32 @@
     <string name="snackbar_current_location_gms_disabled_description">You can enable it manually in the notification panel</string>
 
     <string name="snackbar_in_app_update_install">Update is ready to install</string>
+
+    <string name="reporting_header">Choose an item</string>
+    <string name="reporting_category_road_incidents">Problems on the road</string>
+    <string name="reporting_category_traffic_police">Traffic police</string>
+    <string name="reporting_category_other">Other</string>
+
+    <string name="reporting_item_road_repair">Road repair</string>
+    <string name="reporting_item_broken_car">Broken car</string>
+    <string name="reporting_item_tow_truck_working">Tow truck working</string>
+    <string name="reporting_item_pedestrian_on_road">Pedestrian on road</string>
+    <string name="reporting_item_traffic_controller">Traffic controller</string>
+    <string name="reporting_item_non_working_traffic_lights">Non-working traffic lights</string>
+    <string name="reporting_item_open_hatch">Open hatch</string>
+    <string name="reporting_item_other_road_incident">Other</string>
+    <string name="reporting_item_traffic_jam">Traffic jam</string>
+    <string name="reporting_item_wild_animals">Wild animals</string>
+    <string name="reporting_item_car_accident">Car accident</string>
+    <string name="reporting_item_traffic_police">Traffic police</string>
+    <string name="reporting_item_working_with_radar">Working with radar</string>
+    <string name="reporting_item_document_check">Document check</string>
+    <string name="reporting_item_stopped_on_the_move">Stopped on the move</string>
+    <string name="reporting_item_sitting_in_the_car">Sitting in the car</string>
+    <string name="reporting_item_working_from_car">Working from car</string>
+    <string name="reporting_item_transport_inspection">Transport inspection</string>
+    <string name="reporting_item_filter">Filter</string>
+    <string name="reporting_item_other_traffic_police">Other</string>
+
+    <string name="reporting_notification_sent">Your message has been sent!</string>
 </resources>

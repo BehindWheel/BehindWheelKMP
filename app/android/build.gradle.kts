@@ -66,6 +66,7 @@ dependencies {
     implementation(projects.features.map.mapData)
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
+    implementation(projects.features.eventReporting)
 
     implementation(projects.features.settings)
 

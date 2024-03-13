@@ -1,25 +1,23 @@
 package com.egoriku.grodnoroads.map.domain.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.map.domain.component.MapComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
+import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
 import com.egoriku.grodnoroads.map.domain.model.*
-import com.egoriku.grodnoroads.map.domain.model.ReportType.RoadIncident
-import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
-import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.Intent.OpenReportTrafficPoliceDialog
-import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.Intent.OpenRoadIncidentDialog
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Intent.ReportAction
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
 import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
 import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
@@ -35,13 +33,18 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 
 fun buildMapComponent(
-    componentContext: ComponentContext
-): MapComponent = MapComponentImpl(componentContext)
+    componentContext: ComponentContext,
+    onOpenReporting: () -> Unit
+): MapComponent = MapComponentImpl(componentContext, onOpenReporting)
 
 @OptIn(FlowPreview::class)
 internal class MapComponentImpl(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val onOpenReporting: () -> Unit
 ) : MapComponent, ComponentContext by componentContext, KoinComponent {
+
+    private val eventReportingComponent: EventReportingComponent =
+        buildEventReportingComponent(childContext("event_reporting"))
 
     private val dialogStore: DialogStore = instanceKeeper.getStore(::get)
     private val locationStore: LocationStore = instanceKeeper.getStore(::get)
@@ -114,8 +117,11 @@ internal class MapComponentImpl(
             .launchIn(coroutineScope)
     }
 
+    override val notificationEvents: MutableSharedFlow<Notification> =
+        MutableSharedFlow(extraBufferCapacity = 1)
+
     override val appMode: Flow<AppMode>
-        get() = mapConfigStore.states.map { it.appMode }
+        get() = mapConfigStore.states.map { it.currentAppMode }
 
     override val mapAlertDialog: Flow<MapAlertDialog>
         get() = dialogStore.states.map { it.mapAlertDialog }
@@ -170,12 +176,12 @@ internal class MapComponentImpl(
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
 
-    override fun startLocationUpdates() {
+    override fun startDriveMode() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
         mapConfigStore.accept(StartDriveMode)
     }
 
-    override fun stopLocationUpdates() {
+    override fun stopDriveMode() {
         locationStore.accept(LocationStore.Intent.StopLocationUpdates)
         mapConfigStore.accept(StopDriveMode)
     }
@@ -188,32 +194,31 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }
 
-    override fun reportAction(params: ReportAction.Params) {
-        mapEventsStore.accept(ReportAction(params = params))
-        dialogStore.accept(DialogStore.Intent.CloseDialog)
+    override fun processReporting(result: ReportingResult) {
+        eventReportingComponent.report(result.copy(latLng = locationStore.state.userLocation.latLng))
 
-        if (mapConfigStore.state.reportType != null) {
+        if (!mapConfigStore.state.isChooseInDriveMode) {
             locationStore.accept(LocationStore.Intent.InvalidateLocation)
-            mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
         }
+        mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+
+        notificationEvents.tryEmit(Notification.RepostingSuccess)
     }
 
-    override fun openChooseLocation(reportType: ReportType) {
-        mapConfigStore.accept(ChooseLocation.OpenChooseLocation(reportType))
+    override fun switchToChooseLocationFlow() {
+        mapConfigStore.accept(ChooseLocation.OpenChooseLocation)
     }
 
     override fun cancelChooseLocationFlow() {
+        if (!mapConfigStore.state.isChooseInDriveMode) {
+            locationStore.accept(LocationStore.Intent.InvalidateLocation)
+        }
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
-        locationStore.accept(LocationStore.Intent.InvalidateLocation)
     }
 
-    override fun reportChooseLocation(latLng: LatLng) {
-        val reportType = mapConfigStore.state.reportType ?: return
-
-        when (reportType) {
-            TrafficPolice -> dialogStore.accept(intent = OpenReportTrafficPoliceDialog(latLng))
-            RoadIncident -> dialogStore.accept(intent = OpenRoadIncidentDialog(latLng))
-        }
+    override fun startReporting(latLng: LatLng) {
+        onOpenReporting()
+        setLocation(latLng)
     }
 
     override fun setUserMapZoom(zoom: Float) {
@@ -222,18 +227,6 @@ internal class MapComponentImpl(
 
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
         dialogStore.accept(DialogStore.Intent.OpenMarkerInfoDialog(reports = reports))
-
-    override fun openReportFlow(reportDialogFlow: ReportDialogFlow) {
-        when (reportDialogFlow) {
-            is ReportDialogFlow.TrafficPolice -> dialogStore.accept(
-                intent = OpenReportTrafficPoliceDialog(reportDialogFlow.latLng)
-            )
-
-            is ReportDialogFlow.RoadIncident -> dialogStore.accept(
-                intent = OpenRoadIncidentDialog(reportDialogFlow.latLng)
-            )
-        }
-    }
 
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 

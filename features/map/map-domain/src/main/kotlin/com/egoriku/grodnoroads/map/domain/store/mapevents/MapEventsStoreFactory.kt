@@ -7,7 +7,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.crashlytics.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
@@ -15,8 +14,6 @@ import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.reLaunch
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.model.Source.App
-import com.egoriku.grodnoroads.map.domain.model.report.ReportActionModel
 import com.egoriku.grodnoroads.map.domain.repository.*
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.*
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.*
@@ -38,7 +35,6 @@ internal class MapEventsStoreFactory(
     private val stationaryCameraRepository: StationaryCameraRepository,
     private val userCountRepository: UserCountRepository,
     private val reportsRepository: ReportsRepository,
-    private val analyticsTracker: AnalyticsTracker,
     private val crashlyticsTracker: CrashlyticsTracker,
     private val dataStore: DataStore<Preferences>
 ) {
@@ -101,27 +97,7 @@ internal class MapEventsStoreFactory(
                         }
                     }
                 }
-                onIntent<Intent.ReportAction> { data ->
-                    launch {
-                        val params = data.params
 
-                        reportsRepository.report(
-                            ReportActionModel(
-                                timestamp = currentTime,
-                                type = params.mapEventType.type,
-                                message = params.message,
-                                shortMessage = params.shortMessage,
-                                latitude = params.latLng.latitude,
-                                longitude = params.latLng.longitude,
-                                source = App.source
-                            )
-                        )
-                        analyticsTracker.eventReportAction(
-                            eventType = params.mapEventType.type,
-                            shortMessage = params.shortMessage
-                        )
-                    }
-                }
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->

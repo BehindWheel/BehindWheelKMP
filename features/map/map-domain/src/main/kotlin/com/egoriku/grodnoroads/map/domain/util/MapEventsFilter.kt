@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList

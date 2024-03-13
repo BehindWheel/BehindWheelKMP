@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.map.domain.model.report
+package com.egoriku.grodnoroads.eventreporting.domain
 
 data class ReportActionModel(
     val type: String,

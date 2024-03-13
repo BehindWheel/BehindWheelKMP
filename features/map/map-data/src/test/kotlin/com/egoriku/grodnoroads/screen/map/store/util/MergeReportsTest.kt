@@ -3,11 +3,11 @@ package com.egoriku.grodnoroads.screen.map.store.util
 import com.egoriku.grodnoroads.extensions.second
 import com.egoriku.grodnoroads.extensions.third
 import com.egoriku.grodnoroads.extensions.util.DateUtil
-import com.egoriku.grodnoroads.map.data.dto.ReportsDTO
 import com.egoriku.grodnoroads.map.data.mapper.ReportsMapper
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.map.domain.model.Source.*
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.shared.core.models.Source.*
+import com.egoriku.grodnoroads.shared.core.models.dto.ReportsDTO
 import com.google.android.gms.maps.model.LatLng
 import org.junit.Before
 import org.junit.Test
