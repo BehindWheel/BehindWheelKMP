@@ -56,7 +56,7 @@ fun EventReportingScreen(
                 ReportingResult(
                     mapEventType = selectedOption.mapEventType,
                     shortMessage = selectedOption.toSend,
-                    message = inputText
+                    message = inputText.ifEmpty { selectedOption.toSend }
                 )
             )
         }
@@ -79,7 +79,7 @@ fun EventReportingScreen(
 }
 
 @Composable
-fun ReportingUi(
+private fun ReportingUi(
     currentType: ReportType,
     selectedOption: ReportingOptions,
     inputText: String,
@@ -220,7 +220,7 @@ private fun CategoryCell(
 }
 
 @Composable
-fun RadioButtonListItem(
+private fun RadioButtonListItem(
     text: String,
     selected: Boolean,
     onSelect: () -> Unit

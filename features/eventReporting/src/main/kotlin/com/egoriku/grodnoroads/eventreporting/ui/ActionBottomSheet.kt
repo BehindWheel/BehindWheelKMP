@@ -245,7 +245,7 @@ private fun DragHandle() {
 }
 
 @Composable
-internal fun Scrim(
+private fun Scrim(
     color: Color,
     onDismissRequest: () -> Unit,
 ) {
