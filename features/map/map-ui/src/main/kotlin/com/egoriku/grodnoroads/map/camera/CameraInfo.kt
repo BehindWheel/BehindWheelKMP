@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.Red
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
@@ -126,7 +127,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
         modifier = Modifier
             .size(size)
             .background(Color.White, shape = CircleShape)
-            .border(3.dp, Color(0xFFB3261E), CircleShape)
+            .border(width = 3.dp, color = Red, shape = CircleShape)
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center),

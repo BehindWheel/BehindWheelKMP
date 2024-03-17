@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Color
 
 internal val colorUnknown = Color(0xFFE100FF)
 
+val Red = Color(0xFFB3261E)
+
 internal val lightColorScheme = lightColorScheme(
     primary = Color(0xFF232F34),
     onPrimary = Color.White,
@@ -39,7 +41,7 @@ internal val lightColorScheme = lightColorScheme(
 
     scrim = Color.Black,
 
-    error = Color(0xFFB3261E),
+    error = Red,
     onError = Color.White,
     errorContainer = Color(0xFFFBEAE9),
     onErrorContainer = Color.Black
