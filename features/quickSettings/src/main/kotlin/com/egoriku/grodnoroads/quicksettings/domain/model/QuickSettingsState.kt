@@ -1,8 +1,8 @@
-package com.egoriku.grodnoroads.map.domain.store.quickactions.model
+package com.egoriku.grodnoroads.quicksettings.domain.model
 
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.*
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.*
 
-data class QuickActionsState(
+data class QuickSettingsState(
     val appTheme: AppTheme = AppTheme(),
     val markerFiltering: MarkerFiltering = MarkerFiltering(),
     val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),

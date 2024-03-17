@@ -3,8 +3,7 @@ package com.egoriku.grodnoroads.map.domain.component
 import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
@@ -12,17 +11,17 @@ import kotlinx.coroutines.flow.SharedFlow
 
 interface MapComponent {
 
+    val quickSettingsComponent: QuickSettingsComponent
     val notificationEvents: SharedFlow<Notification>
 
     val lastLocation: Flow<LastLocation>
     val initialLocation: Flow<LatLng>
 
     val appMode: Flow<AppMode>
-    val mapAlertDialog: Flow<MapAlertDialog>
+    val mapBottomSheet: Flow<MapBottomSheet>
     val mapConfig: Flow<MapConfig>
     val mapEvents: Flow<ImmutableList<MapEvent>>
     val userCount: Flow<Int>
-    val quickActionsState: Flow<QuickActionsState>
 
     val alerts: Flow<ImmutableList<Alert>>
 
@@ -40,9 +39,7 @@ interface MapComponent {
     fun startDriveMode()
     fun stopDriveMode()
     fun requestCurrentLocation()
-
-    fun updatePreferences(pref: QuickActionsPref)
-
     fun showMarkerInfoDialog(reports: Reports)
+    fun openQuickSettings()
     fun closeDialog()
 }

@@ -18,11 +18,9 @@ import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.domain.util.*
+import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
+import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettingsComponent
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
@@ -46,11 +44,13 @@ internal class MapComponentImpl(
     private val eventReportingComponent: EventReportingComponent =
         buildEventReportingComponent(childContext("event_reporting"))
 
+    override val quickSettingsComponent: QuickSettingsComponent =
+        buildQuickSettingsComponent(childContext("quick_settings"))
+
     private val dialogStore: DialogStore = instanceKeeper.getStore(::get)
     private val locationStore: LocationStore = instanceKeeper.getStore(::get)
     private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
     private val mapEventsStore: MapEventsStore = instanceKeeper.getStore(::get)
-    private val quickActionsStore: QuickActionsStore = instanceKeeper.getStore(::get)
 
     private val stationary = mapEventsStore.states.map { it.stationaryCameras }
     private val mediumSpeed = mapEventsStore.states.map { it.mediumSpeedCameras }
@@ -123,14 +123,11 @@ internal class MapComponentImpl(
     override val appMode: Flow<AppMode>
         get() = mapConfigStore.states.map { it.currentAppMode }
 
-    override val mapAlertDialog: Flow<MapAlertDialog>
-        get() = dialogStore.states.map { it.mapAlertDialog }
+    override val mapBottomSheet: Flow<MapBottomSheet>
+        get() = dialogStore.states.map { it.mapBottomSheet }
 
     override val userCount: Flow<Int>
         get() = mapEventsStore.states.map { it.userCount }
-
-    override val quickActionsState: Flow<QuickActionsState>
-        get() = quickActionsStore.states
 
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
@@ -228,14 +225,14 @@ internal class MapComponentImpl(
     override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
         dialogStore.accept(DialogStore.Intent.OpenMarkerInfoDialog(reports = reports))
 
+    override fun openQuickSettings() {
+        dialogStore.accept(DialogStore.Intent.OpenQuickSettings)
+    }
+
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
         is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
         else -> Unit
-    }
-
-    override fun updatePreferences(pref: QuickActionsPref) {
-        quickActionsStore.accept(QuickActionsIntent.Update(pref))
     }
 }

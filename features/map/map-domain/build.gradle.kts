@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.features.eventReporting)
+    implementation(projects.features.quickSettings)
 
     implementation(projects.compose.maps.core)
     implementation(projects.libraries.analytics)

@@ -182,4 +182,10 @@
     <string name="reporting_item_other_traffic_police">Іншае</string>
 
     <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
+
+    <string name="quick_settings_header">Хуткія налады</string>
+    <string name="quick_settings_app_theme">Змена тэмы</string>
+    <string name="quick_settings_markers_filtering">Фільтрацыя маркераў па часе</string>
+    <string name="quick_settings_voice_alerts">Галасавыя абвесткі</string>
+    <string name="quick_settings_traffic_conditions">Загружанасць дарог</string>
 </resources>
