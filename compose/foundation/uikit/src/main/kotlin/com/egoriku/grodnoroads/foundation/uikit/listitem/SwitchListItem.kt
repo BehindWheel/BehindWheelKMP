@@ -46,6 +46,7 @@ fun SwitchListItem(
                 modifier = Modifier
                     .align(Alignment.Top)
                     .padding(top = 8.dp),
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 imageVector = imageVector,
                 contentDescription = null
             )

@@ -36,9 +36,9 @@ fun CameraInfo(camera: MapEvent.Camera) {
         Info(
             camera = camera,
             iconId = when (camera) {
-                is StationaryCamera -> R.drawable.ic_stationary_camera
-                is MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
-                is MobileCamera -> R.drawable.ic_mobile_camera
+                is StationaryCamera -> R.drawable.ic_camera_info_stationary
+                is MediumSpeedCamera -> R.drawable.ic_camera_info_medium_speed
+                is MobileCamera -> R.drawable.ic_camera_info_mobile
             },
             cameraTypeId = when (camera) {
                 is StationaryCamera -> R.string.alerts_stationary_camera
@@ -59,13 +59,12 @@ private fun Info(
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         Row {
             Image(
-                modifier = Modifier.size(64.dp),
                 painter = painterResource(iconId),
                 contentDescription = null
             )
             HorizontalSpacer(16.dp)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(text = camera.name, style = MaterialTheme.typography.titleLarge)
+                Text(text = camera.name, style = MaterialTheme.typography.titleMedium)
                 Text(
                     text = stringResource(cameraTypeId),
                     style = MaterialTheme.typography.bodyMedium
@@ -127,7 +126,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
         modifier = Modifier
             .size(size)
             .background(Color.White, shape = CircleShape)
-            .border(3.dp, Color.Red, CircleShape)
+            .border(3.dp, Color(0xFFB3261E), CircleShape)
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center),
