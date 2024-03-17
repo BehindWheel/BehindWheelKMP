@@ -33,12 +33,14 @@ fun BasicListItem(
         if (imageVector != null) {
             Icon(
                 imageVector = imageVector,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
         }
         if (iconRes != null) {
             Icon(
                 painter = painterResource(iconRes),
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
         }

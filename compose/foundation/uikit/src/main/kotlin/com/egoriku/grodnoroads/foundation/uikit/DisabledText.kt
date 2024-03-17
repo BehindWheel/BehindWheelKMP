@@ -24,7 +24,7 @@ fun DisabledText(
         modifier = modifier,
         text = text,
         style = style,
-        color = color.copy(alpha = 0.38f)
+        color = color.copy(alpha = 0.6f)
     )
 }
 
