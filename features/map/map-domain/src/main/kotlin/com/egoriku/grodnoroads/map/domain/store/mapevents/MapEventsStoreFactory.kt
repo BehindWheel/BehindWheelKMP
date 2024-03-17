@@ -90,14 +90,13 @@ internal class MapEventsStoreFactory(
                     }
                     launch {
                         while (true) {
-                            delay(5.minutes)
+                            delay(2.minutes)
 
                             val filterTime = currentTime - state.filterEventsTime
                             dispatch(OnNewReports(state.reports.filter { it.timestamp >= filterTime }))
                         }
                     }
                 }
-
             },
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
