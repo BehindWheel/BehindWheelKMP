@@ -169,6 +169,7 @@ private fun SettingsListItem(
     ) {
         Icon(
             painter = painterResource(id = icon),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             contentDescription = null
         )
         Text(text = name, style = MaterialTheme.typography.titleMedium)
