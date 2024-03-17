@@ -27,6 +27,7 @@ include(":features:map:map-domain")
 include(":features:map:map-ui")
 
 include(":features:eventReporting")
+include(":features:quickSettings")
 
 include(":features:settings")
 

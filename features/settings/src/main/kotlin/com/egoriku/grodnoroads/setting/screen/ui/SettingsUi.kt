@@ -78,7 +78,7 @@ internal fun SettingsUi(
                         onClick = { onSettingClick(Page.Map) }
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_notification,
+                        icon = R.drawable.ic_notification_badge,
                         name = stringResource(R.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }

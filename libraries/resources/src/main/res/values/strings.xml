@@ -192,4 +192,10 @@
     <string name="reporting_item_other_traffic_police">Other</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
+
+    <string name="quick_settings_header">Quick settings</string>
+    <string name="quick_settings_app_theme">Changing theme</string>
+    <string name="quick_settings_markers_filtering">Filtering markers by time</string>
+    <string name="quick_settings_voice_alerts">Voice alerts</string>
+    <string name="quick_settings_traffic_conditions">Traffic conditions</string>
 </resources>

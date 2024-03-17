@@ -36,7 +36,6 @@ import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.AppMode.*
 import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.map.foundation.UsersCount
 import com.egoriku.grodnoroads.map.google.MarkerSize.Large
@@ -58,6 +57,7 @@ import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
+import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.core.models.MapEventType.*
 import com.google.android.gms.maps.Projection
@@ -114,15 +114,25 @@ fun MapScreen(
 
         val mapConfig by component.mapConfig.collectAsState(initial = MapConfig.EMPTY)
         val mapEvents by component.mapEvents.collectAsState(initial = persistentListOf())
-        val mapAlertDialog by component.mapAlertDialog.collectAsState(initial = MapAlertDialog.None)
+        val mapBottomSheet by component.mapBottomSheet.collectAsState(initial = MapBottomSheet.None)
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
-        val quickActionsState by component.quickActionsState.collectAsState(initial = QuickActionsState())
 
-        AlertDialogs(
-            mapAlertDialog = mapAlertDialog,
-            onClose = component::closeDialog
-        )
+        when (val state = mapBottomSheet) {
+            is MapBottomSheet.MarkerInfo -> {
+                MarkerInfoBottomSheet(
+                    reports = state.reports,
+                    onClose = component::closeDialog
+                )
+            }
+            is MapBottomSheet.QuickSettings -> {
+                QuickSettingsBottomSheet(
+                    component = component.quickSettingsComponent,
+                    onClose = component::closeDialog
+                )
+            }
+            is MapBottomSheet.None -> Unit
+        }
 
         val coroutineScope = rememberCoroutineScope()
         val iconGenerator = remember { IconGenerator(context) }
@@ -235,7 +245,7 @@ fun MapScreen(
                             )
                         }
 
-                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapAlertDialog != MapAlertDialog.None)
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None)
                             return@LaunchedEffect
 
                         mapUpdater.animateCamera(
@@ -473,9 +483,8 @@ fun MapScreen(
                     isDriveMode = appMode == Drive,
                     currentSpeed = location.speed,
                     speedLimit = speedLimit,
-                    quickActionsState = quickActionsState,
                     alerts = alerts,
-                    onPreferenceChange = component::updatePreferences
+                    onOpenQuickSettings = component::openQuickSettings
                 )
                 SnackbarHost(
                     modifier = Modifier
@@ -510,20 +519,4 @@ fun MapScreen(
 @Composable
 private fun AlwaysKeepScreenOn(enabled: Boolean) {
     KeepScreenOn(enabled)
-}
-
-@Composable
-private fun AlertDialogs(
-    mapAlertDialog: MapAlertDialog,
-    onClose: () -> Unit
-) {
-    when (mapAlertDialog) {
-        is MapAlertDialog.MarkerInfoDialog -> {
-            MarkerInfoBottomSheet(
-                reports = mapAlertDialog.reports,
-                onClose = onClose
-            )
-        }
-        is MapAlertDialog.None -> Unit
-    }
 }

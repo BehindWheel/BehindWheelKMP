@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.map.domain.store.quickactions
+package com.egoriku.grodnoroads.quicksettings.domain.store
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,12 +7,12 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsIntent.Update
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStore.QuickActionsMessage.NewSettings
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref.*
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.*
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore.Intent
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore.Intent.Update
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore.Message
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore.Message.NewSettings
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.alertsVoiceAlertEnabled
 import com.egoriku.grodnoroads.shared.appsettings.types.alert.updateAlertsVoiceAlertAvailability
@@ -29,21 +29,21 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-internal class QuickActionsStoreFactory(
+internal class QuickSettingsStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {
 
     @OptIn(ExperimentalMviKotlinApi::class)
-    fun create(): QuickActionsStore =
-        object : QuickActionsStore,
-            Store<QuickActionsIntent, QuickActionsState, Nothing> by storeFactory.create(
-                initialState = QuickActionsState(),
+    fun create(): QuickSettingsStore =
+        object : QuickSettingsStore,
+            Store<Intent, QuickSettingsState, Nothing> by storeFactory.create(
+                initialState = QuickSettingsState(),
                 executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                     onAction<Unit> {
                         dataStore.data
                             .map { preferences ->
-                                QuickActionsState(
+                                QuickSettingsState(
                                     appTheme = AppTheme(current = preferences.appTheme),
                                     markerFiltering = MarkerFiltering(current = preferences.filteringMarkers),
                                     trafficJamOnMap = TrafficJamOnMap(isShow = preferences.trafficJamOnMap),
@@ -68,7 +68,7 @@ internal class QuickActionsStoreFactory(
                     }
                 },
                 bootstrapper = SimpleBootstrapper(Unit),
-                reducer = { message: QuickActionsMessage ->
+                reducer = { message: Message ->
                     when (message) {
                         is NewSettings -> message.appearanceState
                     }

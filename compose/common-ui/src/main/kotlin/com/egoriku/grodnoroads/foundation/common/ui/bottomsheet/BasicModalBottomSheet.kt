@@ -66,7 +66,7 @@ fun BasicModalBottomSheet(
     sheetState: SheetState,
     onCancel: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
-    footer: @Composable ColumnScope.() -> Unit,
+    footer: @Composable ColumnScope.() -> Unit = {},
     footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
@@ -86,6 +86,28 @@ fun BasicModalBottomSheet(
                     .padding(footerPadding)
                     .padding(bottom = navBarPadding.calculateBottomPadding()),
                 content = footer
+            )
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BasicModalBottomSheet(
+    sheetState: SheetState,
+    onCancel: () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
+
+    ModalBottomSheet(
+        onDismissRequest = onCancel,
+        dragHandle = { BottomSheetDefaults.DragHandle() },
+        sheetState = sheetState,
+        content = {
+            Column(
+                modifier = Modifier.padding(bottom = navBarPadding.calculateBottomPadding()),
+                content = content
             )
         }
     )

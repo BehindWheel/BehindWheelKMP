@@ -190,4 +190,10 @@
     <string name="reporting_item_other_traffic_police">Другое</string>
 
     <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
+
+    <string name="quick_settings_header">Быстрые настройки</string>
+    <string name="quick_settings_app_theme">Смена темы</string>
+    <string name="quick_settings_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="quick_settings_voice_alerts">Голосовые оповещения</string>
+    <string name="quick_settings_traffic_conditions">Загруженность дорог</string>
 </resources>
