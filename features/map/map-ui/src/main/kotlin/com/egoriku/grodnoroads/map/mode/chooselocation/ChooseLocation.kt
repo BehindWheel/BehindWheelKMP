@@ -1,15 +1,13 @@
 package com.egoriku.grodnoroads.map.mode.chooselocation
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
@@ -18,6 +16,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.map.mode.chooselocation.component.PinMarker
+import com.egoriku.grodnoroads.resources.R as R_res
 
 @Composable
 fun ChooseLocation(
@@ -54,17 +53,20 @@ fun ChooseLocation(
         ) {
             PrimaryInverseCircleButton(size = Large, onClick = onCancel) {
                 Icon(
-                    imageVector = Icons.Default.Close,
+                    painter = painterResource(R_res.drawable.ic_close),
                     contentDescription = null
                 )
             }
             PrimaryCircleButton(
                 size = Large,
-                onClick = { onLocationSelected(markerOffset) },
-                enabled = !isCameraMoving,
+                onClick = {
+                    if (!isCameraMoving) {
+                        onLocationSelected(markerOffset)
+                    }
+                }
             ) {
                 Icon(
-                    imageVector = Icons.Default.Check,
+                    painter = painterResource(R_res.drawable.ic_ok),
                     contentDescription = null
                 )
             }

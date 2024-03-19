@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.map.domain.component
 
+import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
@@ -9,6 +10,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 
+@Stable
 interface MapComponent {
 
     val quickSettingsComponent: QuickSettingsComponent
