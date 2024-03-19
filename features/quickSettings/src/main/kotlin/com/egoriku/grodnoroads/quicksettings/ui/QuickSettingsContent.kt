@@ -152,7 +152,7 @@ private fun BasicSection(
     name: String,
     content: @Composable () -> Unit
 ) {
-    Column {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         CenterVerticallyRow(
             modifier = Modifier.padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
