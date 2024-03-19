@@ -287,8 +287,8 @@ fun MapScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default, ChooseLocation -> onBottomNavigationVisibilityChange(true)
-                    Drive -> onBottomNavigationVisibilityChange(false)
+                    Default -> onBottomNavigationVisibilityChange(true)
+                    Drive, ChooseLocation -> onBottomNavigationVisibilityChange(false)
                 }
             }
 
@@ -421,6 +421,7 @@ fun MapScreen(
                         ChooseLocation -> {
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
+                                isChooseInDriveMode = mapConfig.isChooseInDriveMode,
                                 onCancel = component::cancelChooseLocationFlow,
                                 onLocationSelected = { offset ->
                                     val latLng = projection?.fromScreenLocation(

@@ -137,7 +137,8 @@ internal class MapComponentImpl(
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
                 alertRadius = it.alertRadius,
-                alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled
+                alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled,
+                isChooseInDriveMode = it.isChooseInDriveMode
             )
         }
 

@@ -9,6 +9,7 @@ data class MapConfig(
     val keepScreenOn: Boolean,
     val alertsEnabled: Boolean,
     val alertRadius: Int,
+    val isChooseInDriveMode: Boolean,
 ) {
     companion object {
         val EMPTY = MapConfig(
@@ -17,7 +18,8 @@ data class MapConfig(
             trafficJanOnMap = false,
             keepScreenOn = false,
             alertsEnabled = false,
-            alertRadius = -1
+            alertRadius = -1,
+            isChooseInDriveMode = false
         )
     }
 }
