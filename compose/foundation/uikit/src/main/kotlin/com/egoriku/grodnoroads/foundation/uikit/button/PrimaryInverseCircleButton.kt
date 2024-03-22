@@ -12,13 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 
@@ -34,14 +36,25 @@ fun PrimaryInverseCircleButton(
         Size.Large -> 56.dp
     }
     val contentColor = MaterialTheme.colorScheme.primary
+    val shadowColor = when {
+        MaterialTheme.colorScheme.isLight -> MaterialTheme.colorScheme.outline
+        else -> Color.Black
+    }
     Surface(
-        modifier = modifier.semantics { role = Role.Button },
+        modifier = modifier
+            .semantics { role = Role.Button }
+            .shadow(
+                elevation = 6.dp,
+                shape = CircleShape,
+                ambientColor = shadowColor,
+                spotColor = shadowColor
+            ),
         onClick = onClick,
         color = MaterialTheme.colorScheme.inversePrimary,
         contentColor = contentColor,
         shape = CircleShape,
         tonalElevation = MaterialTheme.tonalElevation,
-        shadowElevation = defaultShadowElevation,
+        shadowElevation = 0.dp,
         content = {
             CompositionLocalProvider(LocalContentColor provides contentColor) {
                 Row(

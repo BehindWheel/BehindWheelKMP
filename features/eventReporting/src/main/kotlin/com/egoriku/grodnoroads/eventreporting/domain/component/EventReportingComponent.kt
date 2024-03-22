@@ -4,5 +4,5 @@ import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 
 interface EventReportingComponent {
 
-    fun report(reportingResult: ReportingResult)
+    fun report(result: ReportingResult)
 }

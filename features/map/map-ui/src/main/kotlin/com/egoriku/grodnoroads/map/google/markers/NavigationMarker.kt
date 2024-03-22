@@ -22,14 +22,12 @@ context(MapUpdater)
 @Composable
 fun NavigationMarker(
     appMode: AppMode,
-    tag: String,
     position: LatLng,
     bearing: Float,
     icon: () -> BitmapDescriptor,
     rotation: Float,
 ) {
     val marker = rememberSimpleMarker(
-        tag = tag,
         markerOptions = {
             markerOptions {
                 position(position)

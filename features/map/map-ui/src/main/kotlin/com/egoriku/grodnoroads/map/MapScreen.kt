@@ -27,7 +27,6 @@ import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.map.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.map.camera.CameraInfo
 import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
@@ -287,25 +286,18 @@ fun MapScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default, ChooseLocation -> onBottomNavigationVisibilityChange(true)
-                    Drive -> onBottomNavigationVisibilityChange(false)
+                    Default -> onBottomNavigationVisibilityChange(true)
+                    Drive, ChooseLocation -> onBottomNavigationVisibilityChange(false)
                 }
             }
 
             mapUpdater.onMapScope {
                 if (appMode == Drive && location != LastLocation.None) {
-                    val isLight = MaterialTheme.colorScheme.isLight
-
                     NavigationMarker(
-                        tag = if (isLight) "navigation_light" else "navigation_dark",
                         appMode = appMode,
                         position = location.latLng,
                         bearing = location.bearing,
-                        icon = {
-                            markerCache.getIcon(
-                                id = if (isLight) R.drawable.ic_navigation_arrow_dark else R.drawable.ic_navigation_arrow_light,
-                            )
-                        },
+                        icon = { markerCache.getIcon(id = R.drawable.ic_navigation_arrow) },
                         rotation = location.bearing
                     )
                 }
@@ -421,6 +413,7 @@ fun MapScreen(
                         ChooseLocation -> {
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
+                                isChooseInDriveMode = mapConfig.isChooseInDriveMode,
                                 onCancel = component::cancelChooseLocationFlow,
                                 onLocationSelected = { offset ->
                                     val latLng = projection?.fromScreenLocation(
