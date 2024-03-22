@@ -36,7 +36,7 @@ internal val lightColorScheme = lightColorScheme(
     background = Color(0xFFF1F3F3),
     onBackground = Color(0xFF1C1B1F),
 
-    outline = Color(0xFFA3ACB1),
+    outline = Color(0xFFABB5BA),
     outlineVariant = Color(0xFFE3E6E8),
 
     scrim = Color.Black,

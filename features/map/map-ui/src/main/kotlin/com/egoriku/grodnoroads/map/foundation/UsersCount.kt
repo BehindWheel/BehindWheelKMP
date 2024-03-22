@@ -2,10 +2,7 @@ package com.egoriku.grodnoroads.map.foundation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,12 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.map.R
@@ -73,10 +73,20 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
 
 @Composable
 private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
+    val shadowColor = when {
+        MaterialTheme.colorScheme.isLight -> MaterialTheme.colorScheme.outline
+        else -> Color.Black
+    }
     Surface(
         tonalElevation = MaterialTheme.tonalElevation,
-        shadowElevation = defaultShadowElevation,
+        shadowElevation = 0.dp,
         modifier = Modifier
+            .shadow(
+                elevation = 12.dp,
+                shape = RoundedCornerShape(10.dp),
+                ambientColor = shadowColor,
+                spotColor = shadowColor
+            )
             .clip(RoundedCornerShape(10.dp))
             .clickable { onClick() }
     ) {
@@ -95,5 +105,13 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
                 style = MaterialTheme.typography.labelSmall
             )
         }
+    }
+}
+
+@GrodnoRoadsPreview
+@Composable
+private fun UsersCountBadgePreview() = GrodnoRoadsM3ThemePreview {
+    Box(modifier = Modifier.padding(16.dp)) {
+        UsersCountBadge(count = 10, onClick = {})
     }
 }

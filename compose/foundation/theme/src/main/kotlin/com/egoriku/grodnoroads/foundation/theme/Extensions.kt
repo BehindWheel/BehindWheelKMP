@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 val defaultTonalElevation = 0.dp
-val defaultShadowElevation = 3.dp
 
 @Stable
 val ColorScheme.isLight
