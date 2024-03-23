@@ -167,12 +167,14 @@
     <string name="reporting_item_traffic_controller">Рэгуляроўшчык</string>
     <string name="reporting_item_non_working_traffic_lights">Не працуюць светафоры</string>
     <string name="reporting_item_open_hatch">Адкрыты люк</string>
+    <string name="reporting_item_road_blocked">Дарога перакрытая</string>
     <string name="reporting_item_other_road_incident">Іншае</string>
     <string name="reporting_item_traffic_jam">Затор</string>
     <string name="reporting_item_wild_animals">Дзікіе жывёлы</string>
     <string name="reporting_item_car_accident">ДТЗ</string>
     <string name="reporting_item_traffic_police">ДАІ</string>
     <string name="reporting_item_working_with_radar">Працуюць з радарам</string>
+    <string name="reporting_item_stay_on_beacons">Стаяць на маячках</string>
     <string name="reporting_item_document_check">Праверка дакументаў</string>
     <string name="reporting_item_stopped_on_the_move">Спынілі на хаду</string>
     <string name="reporting_item_sitting_in_the_car">Сядзяць у машыне</string>

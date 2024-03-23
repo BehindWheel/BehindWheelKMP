@@ -177,12 +177,14 @@
     <string name="reporting_item_traffic_controller">Traffic controller</string>
     <string name="reporting_item_non_working_traffic_lights">Non-working traffic lights</string>
     <string name="reporting_item_open_hatch">Open hatch</string>
+    <string name="reporting_item_road_blocked">Road blocked</string>
     <string name="reporting_item_other_road_incident">Other</string>
     <string name="reporting_item_traffic_jam">Traffic jam</string>
     <string name="reporting_item_wild_animals">Wild animals</string>
     <string name="reporting_item_car_accident">Car accident</string>
     <string name="reporting_item_traffic_police">Traffic police</string>
     <string name="reporting_item_working_with_radar">Working with radar</string>
+    <string name="reporting_item_stay_on_beacons">Stay on beacons</string>
     <string name="reporting_item_document_check">Document check</string>
     <string name="reporting_item_stopped_on_the_move">Stopped on the move</string>
     <string name="reporting_item_sitting_in_the_car">Sitting in the car</string>

@@ -11,6 +11,7 @@ object Reporting {
         items = persistentListOf(
             CAR_ACCIDENT,
             ROAD_REPAIR,
+            ROAD_BLOCKED,
             TRAFFIC_JAM,
             OPEN_HATCH,
             BROKEN_CAR,
@@ -21,6 +22,7 @@ object Reporting {
         items = persistentListOf(
             TRAFFIC_POLICE,
             WORKING_WITH_RADAR,
+            STAY_ON_BEACONS,
             DOCUMENT_CHECK,
             STOPPED_ON_THE_MOVE,
             SITTING_IN_THE_CAR,
