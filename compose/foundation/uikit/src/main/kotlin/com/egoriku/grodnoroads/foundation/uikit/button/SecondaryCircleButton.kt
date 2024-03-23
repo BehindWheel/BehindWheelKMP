@@ -3,7 +3,9 @@ package com.egoriku.grodnoroads.foundation.uikit.button
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,6 +23,9 @@ fun SecondaryCircleButton(
     OutlinedButton(
         contentPadding = PaddingValues(0.dp),
         modifier = modifier.size(48.dp, 48.dp),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
         enabled = enabled,
         onClick = onClick,
         content = content

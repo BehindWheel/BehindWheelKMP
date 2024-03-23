@@ -2,10 +2,12 @@ package com.egoriku.grodnoroads.screen.root
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
+import com.arkivanov.decompose.router.slot.*
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.buildMainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
@@ -14,9 +16,9 @@ import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
+import com.egoriku.grodnoroads.setting.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.setting.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.buildMapSettingsComponent
-import com.egoriku.grodnoroads.setting.changelog.domain.component.buildChangelogComponent
 import com.egoriku.grodnoroads.shared.appcomponent.Page
 import com.egoriku.grodnoroads.shared.appsettings.types.appearance.Theme
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +34,15 @@ class RoadsRootComponentImpl(
     private val rootStore: RootStore = instanceKeeper.getStore(::get)
 
     private val navigation = StackNavigation<Config>()
+    private val reportingNavigation = SlotNavigation<ReportingConfig>()
+
+    override val childSlot: Value<ChildSlot<*, Any>> =
+        childSlot(
+            source = reportingNavigation,
+            serializer = ReportingConfig.serializer()
+        ) { _, _ ->
+            Any()
+        }
 
     private val stack: Value<ChildStack<Config, Child>> = childStack(
         source = navigation,
@@ -58,6 +69,12 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
+    override fun processReporting(result: ReportingResult) {
+        (stack.active.instance as? Child.Main)?.component?.processReporting(result)
+    }
+
+    override fun closeReporting() = reportingNavigation.dismiss()
+
     @OptIn(ExperimentalDecomposeApi::class)
     override fun open(page: Page) {
         when (page) {
@@ -76,7 +93,10 @@ class RoadsRootComponentImpl(
         is Config.Main -> Child.Main(
             component = buildMainComponent(
                 componentContext = componentContext,
-                onOpen = ::open
+                onOpen = ::open,
+                onOpenReporting = {
+                    reportingNavigation.activate(ReportingConfig)
+                }
             )
         )
 
@@ -96,6 +116,9 @@ class RoadsRootComponentImpl(
 
         is Config.FAQ -> Child.FAQ(faqComponent = buildFaqComponent(componentContext))
     }
+
+    @Serializable
+    object ReportingConfig
 
     @Serializable
     private sealed class Config {

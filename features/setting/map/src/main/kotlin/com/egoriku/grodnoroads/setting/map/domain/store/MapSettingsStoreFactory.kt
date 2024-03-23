@@ -16,6 +16,8 @@ import com.egoriku.grodnoroads.setting.map.domain.store.MapSettingsStore.*
 import com.egoriku.grodnoroads.shared.appsettings.extension.edit
 import com.egoriku.grodnoroads.shared.appsettings.types.Selectable
 import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.filteringMarkers
+import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.updateFiltering
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.location.updateDefaultCity
 import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
@@ -68,6 +70,7 @@ internal class MapSettingsStoreFactory(
                             }
 
                             MapSettings(
+                                markerFiltering = MarkerFiltering(current = pref.filteringMarkers),
                                 mapInfo = MapInfo(
                                     stationaryCameras = StationaryCameras(isShow = showStationaryCameras),
                                     mediumSpeedCameras = MediumSpeedCameras(isShow = showMediumSpeedCameras),
@@ -131,6 +134,7 @@ internal class MapSettingsStoreFactory(
 
                                 is MapZoomInCity -> updateMapZoomInCity(preference.current)
                                 is MapZoomOutCity -> updateMapZoomOutsideCity(preference.current)
+                                is MarkerFiltering -> updateFiltering(preference.current)
                             }
                         }
                     }

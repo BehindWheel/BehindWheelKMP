@@ -13,16 +13,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.*
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.setting.map.ui.DefaultLocationSection
-import com.egoriku.grodnoroads.setting.map.ui.DrivingModeSection
-import com.egoriku.grodnoroads.setting.map.ui.MapEventsSection
-import com.egoriku.grodnoroads.setting.map.ui.MapStyleSection
+import com.egoriku.grodnoroads.setting.map.ui.*
 import com.egoriku.grodnoroads.setting.map.ui.bottomsheet.DefaultLocationBottomSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,7 +78,8 @@ private fun LoadedState(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .navigationBarsPadding()
+            .navigationBarsPadding(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         DefaultLocationSection(
             locationInfo = mapSettingState.mapSettings.locationInfo,
@@ -94,6 +93,10 @@ private fun LoadedState(
         MapStyleSection(
             mapStyle = mapSettingState.mapSettings.mapStyle,
             onCheckedChange = modify
+        )
+        MarkersFilteringSection(
+            markersFiltering = mapSettingState.mapSettings.markerFiltering,
+            modify = modify
         )
         MapEventsSection(
             mapInfo = mapSettingState.mapSettings.mapInfo,

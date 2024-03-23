@@ -15,10 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
-import com.egoriku.grodnoroads.foundation.common.ui.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent.AlertState
@@ -79,13 +80,14 @@ fun AlertsScreen(
                         .fillMaxSize()
                         .padding(paddingValues)
                         .verticalScroll(rememberScrollState())
-                        .navigationBarsPadding()
+                        .navigationBarsPadding(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     val settings = state.alertSettings
                     val alertAvailability = settings.alertAvailability
-                    SwitchSettings(
-                        stringResId = R.string.alerts_availability,
-                        supportingResId = R.string.alerts_availability_description,
+                    SwitchListItem(
+                        text = stringResource(R.string.alerts_availability),
+                        description = stringResource(R.string.alerts_availability_description),
                         isChecked = alertAvailability.alertFeatureEnabled,
                         onCheckedChange = { value ->
                             alertsComponent.modify(alertAvailability.copy(alertFeatureEnabled = value))
@@ -98,9 +100,9 @@ fun AlertsScreen(
                             modify = alertsComponent::modify,
                             reset = alertsComponent::reset
                         )
-                        SwitchSettings(
-                            stringResId = R.string.alerts_voice_alerts,
-                            supportingResId = R.string.alerts_voice_alerts_description,
+                        SwitchListItem(
+                            text = stringResource(R.string.alerts_voice_alerts),
+                            description = stringResource(R.string.alerts_voice_alerts_description),
                             isChecked = settings.alertAvailability.voiceAlertEnabled,
                             onCheckedChange = { value ->
                                 alertsComponent.modify(alertAvailability.copy(voiceAlertEnabled = value))

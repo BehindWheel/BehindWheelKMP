@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
+import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -28,7 +29,6 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.map.MapScreen
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.screen.SettingsScreen
-import com.egoriku.grodnoroads.util.LocalWindowSizeClass
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -137,7 +137,7 @@ private fun HorizontalOrientationLayout(
         label = "leftPadding"
     )
     val contentPaddingValues = WindowInsets(left = leftPadding)
-        .add(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+        .add(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
         .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {

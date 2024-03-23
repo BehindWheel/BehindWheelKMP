@@ -4,10 +4,12 @@ import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStoreFactory
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStoreFactory
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStoreFactory
-import com.egoriku.grodnoroads.map.domain.store.quickactions.QuickActionsStoreFactory
+import com.egoriku.grodnoroads.quicksettings.di.quickSettingsModule
 import org.koin.dsl.module
 
 val mapDomainModule = module {
+    includes(quickSettingsModule)
+
     factory {
         MapEventsStoreFactory(
             storeFactory = get(),
@@ -16,8 +18,8 @@ val mapDomainModule = module {
             mediumSpeedCameraRepository = get(),
             userCountRepository = get(),
             reportsRepository = get(),
-            analyticsTracker = get(),
-            crashlyticsTracker = get()
+            crashlyticsTracker = get(),
+            dataStore = get()
         ).create()
     }
 
@@ -40,13 +42,6 @@ val mapDomainModule = module {
         DialogStoreFactory(
             storeFactory = get(),
             analyticsTracker = get()
-        ).create()
-    }
-
-    factory {
-        QuickActionsStoreFactory(
-            storeFactory = get(),
-            dataStore = get()
         ).create()
     }
 }

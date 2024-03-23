@@ -11,12 +11,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.shared.core.models.Source
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

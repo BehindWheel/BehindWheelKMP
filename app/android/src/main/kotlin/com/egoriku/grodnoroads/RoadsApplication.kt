@@ -6,6 +6,7 @@ import android.app.Application
 import com.egoriku.grodnoroads.analytics.di.analyticsModule
 import com.egoriku.grodnoroads.crashlytics.config.CrashlyticsConfig
 import com.egoriku.grodnoroads.crashlytics.di.crashlyticsModule
+import com.egoriku.grodnoroads.eventreporting.di.reportingModule
 import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.koin.appScopeModule
 import com.egoriku.grodnoroads.location.di.locationModule
@@ -15,9 +16,9 @@ import com.egoriku.grodnoroads.map.domain.di.mapDomainModule
 import com.egoriku.grodnoroads.screen.root.koin.rootModule
 import com.egoriku.grodnoroads.setting.alerts.di.alertsModule
 import com.egoriku.grodnoroads.setting.appearance.di.appearanceModule
+import com.egoriku.grodnoroads.setting.changelog.di.changelogModule
 import com.egoriku.grodnoroads.setting.faq.di.faqModule
 import com.egoriku.grodnoroads.setting.map.di.mapSettingsModule
-import com.egoriku.grodnoroads.setting.changelog.di.changelogModule
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback
@@ -54,6 +55,8 @@ class RoadsApplication : Application(), OnMapsSdkInitializedCallback {
                 mapDataModule,
                 mapDomainModule,
                 mapUiModule,
+
+                reportingModule,
 
                 alertsModule,
                 appearanceModule,

@@ -1,5 +1,5 @@
 plugins {
-    id("grodnoroads.library")
+    alias(libs.plugins.grodnoroads.library)
 }
 
 android {
@@ -10,6 +10,8 @@ dependencies {
     implementation(projects.compose.maps.core)
     implementation(projects.features.map.mapDomain)
     implementation(projects.libraries.extensions)
+
+    implementation(projects.shared.coreModels)
 
     implementation(libs.coroutines)
 

@@ -31,7 +31,7 @@ fun CheckableCard(
             onClick = onClick,
             shape = RoundedCornerShape(10.dp),
             border = when {
-                selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.primary)
+                selected -> BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.onSurface)
                 else -> null
             }
         ) {
@@ -50,7 +50,7 @@ fun CheckableCard(
                 .padding(top = 4.dp),
             text = stringResource(id = title),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }
@@ -58,7 +58,12 @@ fun CheckableCard(
 @GrodnoRoadsPreview
 @Composable
 private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
-    Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
         CheckableCard(
             title = R.string.map_google_map_style_minimal,
             selected = false,

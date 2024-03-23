@@ -26,6 +26,9 @@ include(":features:map:map-data")
 include(":features:map:map-domain")
 include(":features:map:map-ui")
 
+include(":features:eventReporting")
+include(":features:quickSettings")
+
 include(":features:settings")
 
 include(":features:setting:alerts")
@@ -52,5 +55,6 @@ include(":libraries:extensions")
 include(":libraries:location")
 include(":libraries:resources")
 
-include(":shared:appSettings")
 include(":shared:appComponent")
+include(":shared:appSettings")
+include(":shared:coreModels")

@@ -1,6 +1,6 @@
 plugins {
-    id("grodnoroads.library")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.library)
+    alias(libs.plugins.grodnoroads.compose)
 }
 
 android {
@@ -12,4 +12,5 @@ dependencies {
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.windowsize)
 }

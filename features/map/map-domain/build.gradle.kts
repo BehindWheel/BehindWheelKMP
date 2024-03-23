@@ -1,6 +1,6 @@
 plugins {
-    id("grodnoroads.library")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.library)
+    alias(libs.plugins.grodnoroads.compose)
 }
 
 android {
@@ -8,6 +8,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.eventReporting)
+    implementation(projects.features.quickSettings)
+
     implementation(projects.compose.maps.core)
     implementation(projects.libraries.analytics)
     implementation(projects.libraries.audioplayer)
@@ -16,6 +19,7 @@ dependencies {
     implementation(projects.libraries.location)
 
     implementation(projects.shared.appSettings)
+    implementation(projects.shared.coreModels)
 
     implementation(libs.androidx.compose.runtime)
 

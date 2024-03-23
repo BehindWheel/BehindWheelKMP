@@ -90,3 +90,25 @@ fun BasicModalBottomSheet(
         }
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BasicModalBottomSheet(
+    sheetState: SheetState,
+    onCancel: () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
+
+    ModalBottomSheet(
+        onDismissRequest = onCancel,
+        dragHandle = { BottomSheetDefaults.DragHandle() },
+        sheetState = sheetState,
+        content = {
+            Column(
+                modifier = Modifier.padding(bottom = navBarPadding.calculateBottomPadding()),
+                content = content
+            )
+        }
+    )
+}

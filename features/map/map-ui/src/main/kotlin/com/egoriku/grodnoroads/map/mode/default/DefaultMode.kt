@@ -15,14 +15,12 @@ import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
-import com.egoriku.grodnoroads.map.domain.model.ReportType
-import com.egoriku.grodnoroads.map.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun DefaultMode(
     onLocationRequestStateChanged: (LocationRequestStatus) -> Unit,
-    report: (ReportType) -> Unit
+    openReportFlow: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -33,7 +31,7 @@ fun DefaultMode(
         ) {
             PrimaryInverseCircleButton(
                 size = Large,
-                onClick = { report(TrafficPolice) }
+                onClick = openReportFlow
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),

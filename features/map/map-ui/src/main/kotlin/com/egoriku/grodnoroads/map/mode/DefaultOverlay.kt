@@ -6,10 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,16 +22,14 @@ import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibi
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
+import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
-import com.egoriku.grodnoroads.map.domain.model.MapEventType
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.map.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.map.mode.drive.alerts.Alerts
-import com.egoriku.grodnoroads.map.popup.ActionsContent
-import com.egoriku.grodnoroads.map.popup.QuickActionsPopup
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
+import com.egoriku.grodnoroads.shared.core.models.Source
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
@@ -40,15 +37,14 @@ import java.util.UUID
 
 @Composable
 fun DefaultOverlay(
+    contentPadding: PaddingValues,
     isOverlayVisible: Boolean,
     isDriveMode: Boolean,
     currentSpeed: Int,
     speedLimit: Int,
-    quickActionsState: QuickActionsState,
     alerts: ImmutableList<Alert>,
-    onPreferenceChange: (QuickActionsPref) -> Unit,
+    onOpenQuickSettings: () -> Unit
 ) {
-    var quickActionsVisible by rememberMutableState { false }
     Box {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -71,19 +67,21 @@ fun DefaultOverlay(
                 Alerts(alerts = alerts)
             }
         }
-        FadeInOutAnimatedVisibility(visible = isOverlayVisible) {
-            QuickActionsPopup(
-                modifier = Modifier.statusBarsPadding(),
-                opened = quickActionsVisible,
-                onExpand = { quickActionsVisible = true },
-                onClosed = { quickActionsVisible = false },
+        FadeInOutAnimatedVisibility(
+            visible = isOverlayVisible,
+            modifier = Modifier.align(Alignment.TopEnd)
+        ) {
+            PrimaryInverseCircleButton(
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .padding(horizontal = 16.dp)
+                    .statusBarsPadding(),
+                onClick = onOpenQuickSettings,
+                size = Size.Small
             ) {
-                ActionsContent(
-                    quickActionsState = quickActionsState,
-                    onChanged = {
-                        quickActionsVisible = false
-                        onPreferenceChange(it)
-                    }
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = null
                 )
             }
         }
@@ -171,11 +169,11 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
 
     Box {
         DefaultOverlay(
+            contentPadding = PaddingValues(),
+            isOverlayVisible = true,
             isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
-            isOverlayVisible = true,
-            quickActionsState = QuickActionsState(),
             alerts = persistentListOf(
                 IncidentAlert(
                     id = UUID.randomUUID().toString(),
@@ -199,8 +197,9 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                         )
                     )
                 )
-            )
-        ) {}
+            ),
+            onOpenQuickSettings = {}
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()

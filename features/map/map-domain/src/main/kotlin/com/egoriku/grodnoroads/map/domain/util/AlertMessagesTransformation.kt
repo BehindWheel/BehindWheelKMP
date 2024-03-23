@@ -56,7 +56,7 @@ private fun makeAlertMessage(
             when (distance) {
                 null -> null
                 else -> when (event) {
-                    is Camera.StationaryCamera -> {
+                    is Camera -> {
                         val inRange = isAngleInRange(
                             cameraAngle = event.angle,
                             bidirectional = event.bidirectional,
@@ -73,7 +73,6 @@ private fun makeAlertMessage(
                             )
                         } else null
                     }
-
                     is Reports -> {
                         IncidentAlert(
                             // TODO: in future use id from Group
@@ -83,22 +82,6 @@ private fun makeAlertMessage(
                             mapEventType = event.mapEventType
                         )
                     }
-
-                    is Camera.MobileCamera -> {
-                        CameraAlert(
-                            id = event.id,
-                            distance = distance,
-                            speedLimit = event.speedCar,
-                            cameraType = event.cameraType
-                        )
-                    }
-
-                    is Camera.MediumSpeedCamera -> CameraAlert(
-                        id = event.id,
-                        distance = distance,
-                        speedLimit = event.speedCar,
-                        cameraType = event.cameraType
-                    )
                 }
             }
         }

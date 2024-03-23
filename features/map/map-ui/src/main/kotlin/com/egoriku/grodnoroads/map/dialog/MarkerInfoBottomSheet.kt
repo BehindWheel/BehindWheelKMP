@@ -19,9 +19,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.model.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.map.domain.model.Source
+import com.egoriku.grodnoroads.shared.core.models.Source
 import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.resources.R
 import com.google.android.gms.maps.model.LatLng
@@ -94,7 +94,8 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
             position = LatLng(0.0, 0.0),
-            mapEventType = RoadIncident
+            mapEventType = RoadIncident,
+            timestamp = 0L
         )
     ) {
     }

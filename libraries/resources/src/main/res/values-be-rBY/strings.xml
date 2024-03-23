@@ -92,6 +92,13 @@
     <string name="map_google_map_style_minimal">Мінімалізм</string>
     <string name="map_google_map_style_detailed">Падрабязная</string>
 
+    <string name="map_markers_filtering">Фільтрацыя маркераў па часе</string>
+    <string name="map_markers_filtering_description">Выкарыстоўваецца толькі да маркераў з тэкставым паведамленнем (ДАІ, Заторы і г.д.)</string>
+    <string name="map_markers_filtering_15_minutes">15 хв</string>
+    <string name="map_markers_filtering_30_minutes">30 хв</string>
+    <string name="map_markers_filtering_45_minutes">45 хв</string>
+    <string name="map_markers_filtering_1_hour">1 гадзіна</string>
+
     <string name="map_header_markers">Маркеры</string>
     <string name="map_markers_select_all">Выбраць усе</string>
     <string name="map_markers_stationary_cameras">Стацыянарныя камеры</string>
@@ -133,8 +140,6 @@
     <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
 
-    <string name="map_quick_actions_header">Хуткія налады</string>
-
     <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
     <string name="snackbar_drive_mode_rationale_description">Выкарыстоўваецца для адлюстравання маркера ў рэжыме навігацыі</string>
     <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш пунктавага месцазнаходжання</string>
@@ -147,4 +152,42 @@
     <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
     <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
     <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+
+    <string name="snackbar_in_app_update_install">Абнаўленне гатовае да ўстаноўкі</string>
+
+    <string name="reporting_header">Выберыце падзею</string>
+    <string name="reporting_category_road_incidents">Праблемы на дарозе</string>
+    <string name="reporting_category_traffic_police">ДАІ</string>
+    <string name="reporting_category_other">Іншае</string>
+
+    <string name="reporting_item_road_repair">Дарожныя работы</string>
+    <string name="reporting_item_broken_car">Сламалася машина</string>
+    <string name="reporting_item_tow_truck_working">Працуе эвакуатар</string>
+    <string name="reporting_item_pedestrian_on_road">Пешаход на дарозе</string>
+    <string name="reporting_item_traffic_controller">Рэгуляроўшчык</string>
+    <string name="reporting_item_non_working_traffic_lights">Не працуюць светафоры</string>
+    <string name="reporting_item_open_hatch">Адкрыты люк</string>
+    <string name="reporting_item_road_blocked">Дарога перакрытая</string>
+    <string name="reporting_item_other_road_incident">Іншае</string>
+    <string name="reporting_item_traffic_jam">Затор</string>
+    <string name="reporting_item_wild_animals">Дзікіе жывёлы</string>
+    <string name="reporting_item_car_accident">ДТЗ</string>
+    <string name="reporting_item_traffic_police">ДАІ</string>
+    <string name="reporting_item_working_with_radar">Працуюць з радарам</string>
+    <string name="reporting_item_stay_on_beacons">Стаяць на маячках</string>
+    <string name="reporting_item_document_check">Праверка дакументаў</string>
+    <string name="reporting_item_stopped_on_the_move">Спынілі на хаду</string>
+    <string name="reporting_item_sitting_in_the_car">Сядзяць у машыне</string>
+    <string name="reporting_item_working_from_car">Працуюць з машыны</string>
+    <string name="reporting_item_transport_inspection">Транспартная інспэкцыя</string>
+    <string name="reporting_item_filter">Фільтр</string>
+    <string name="reporting_item_other_traffic_police">Іншае</string>
+
+    <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
+
+    <string name="quick_settings_header">Хуткія налады</string>
+    <string name="quick_settings_app_theme">Змена тэмы</string>
+    <string name="quick_settings_markers_filtering">Фільтрацыя маркераў па часе</string>
+    <string name="quick_settings_voice_alerts">Галасавыя абвесткі</string>
+    <string name="quick_settings_traffic_conditions">Загружанасць дарог</string>
 </resources>

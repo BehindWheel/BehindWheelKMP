@@ -1,8 +1,8 @@
 import com.egoriku.grodnoroads.extension.*
 
 plugins {
-    id("grodnoroads.application")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.application)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.serialization)
@@ -66,6 +66,7 @@ dependencies {
     implementation(projects.features.map.mapData)
     implementation(projects.features.map.mapDomain)
     implementation(projects.features.map.mapUi)
+    implementation(projects.features.eventReporting)
 
     implementation(projects.features.settings)
 
@@ -93,7 +94,7 @@ dependencies {
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.window)
+    implementation(libs.androidx.compose.material3.windowsize)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)

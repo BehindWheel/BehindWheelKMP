@@ -115,7 +115,7 @@ fun ClickableFloatRange(
                     },
                 text = targetCount.toString(),
                 color = color,
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.titleSmall
             )
         }
 

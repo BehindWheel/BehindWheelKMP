@@ -1,6 +1,6 @@
 plugins {
-    id("grodnoroads.library")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.library)
+    alias(libs.plugins.grodnoroads.compose)
 }
 
 android {
@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.quickSettings)
     implementation(projects.features.map.mapDomain)
 
     implementation(projects.compose.foundation.core)
@@ -26,6 +27,7 @@ dependencies {
 
     implementation(projects.shared.appComponent)
     implementation(projects.shared.appSettings)
+    implementation(projects.shared.coreModels)
 
     implementation(libs.androidx.activity.compose)
 
@@ -34,6 +36,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
 
     implementation(libs.balloon.compose)
+    implementation(libs.google.app.update)
     implementation(libs.google.maps)
     implementation(libs.google.maps.utils)
     implementation(libs.immutable.collections)

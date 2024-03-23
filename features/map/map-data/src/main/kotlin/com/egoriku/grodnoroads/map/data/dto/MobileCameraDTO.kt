@@ -5,6 +5,10 @@ import com.google.firebase.database.PropertyName
 
 @Keep
 internal class MobileCameraDTO(
+    @PropertyName("id")
+    @JvmField
+    val id: String = "",
+
     @PropertyName("name")
     @JvmField
     val name: String = "",
@@ -19,5 +23,13 @@ internal class MobileCameraDTO(
 
     @PropertyName("speed")
     @JvmField
-    val speed: Int = 0
+    val speed: Int = 0,
+
+    @PropertyName("angle")
+    @JvmField
+    val angle: Float = 0.0f,
+
+    @PropertyName("bidirectional")
+    @JvmField
+    val bidirectional: Boolean = false,
 )

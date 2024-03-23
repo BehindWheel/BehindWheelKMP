@@ -1,6 +1,6 @@
 plugins {
-    id("grodnoroads.library")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.library)
+    alias(libs.plugins.grodnoroads.compose)
 }
 
 android {
@@ -11,6 +11,7 @@ dependencies {
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.theme)
+    implementation(projects.compose.foundation.uikit)
 
     implementation(projects.compose.commonUi)
 
