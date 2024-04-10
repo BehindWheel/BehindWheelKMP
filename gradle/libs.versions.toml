@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.3.1"
+agp = "8.3.2"
 compose-compiler = "1.5.11"
 decompose = "2.2.2"
 kotlin = "1.9.23"
@@ -14,7 +14,7 @@ mvikotlin = "3.3.0"
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-androidx-compose-bom = "androidx.compose:compose-bom:2024.03.00"
+androidx-compose-bom = "androidx.compose:compose-bom:2024.04.00"
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material3-windowsize = { module = "androidx.compose.material3:material3-window-size-class" }
@@ -56,7 +56,7 @@ google-material = "com.google.android.material:material:1.11.0"
 
 immutable-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
 
-koin-bom = "io.insert-koin:koin-bom:3.5.3"
+koin-bom = "io.insert-koin:koin-bom:3.5.4"
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 
