@@ -169,6 +169,7 @@
     <string name="reporting_category_road_incidents">Problems on the road</string>
     <string name="reporting_category_traffic_police">Traffic police</string>
     <string name="reporting_category_other">Other</string>
+    <string name="reporting_category_mobile_camera">Mobile camera</string>
 
     <string name="reporting_item_road_repair">Road repair</string>
     <string name="reporting_item_broken_car">Broken car</string>
@@ -191,7 +192,11 @@
     <string name="reporting_item_working_from_car">Working from car</string>
     <string name="reporting_item_transport_inspection">Transport inspection</string>
     <string name="reporting_item_filter">Filter</string>
-    <string name="reporting_item_other_traffic_police">Other</string>
+
+    <string name="reporting_mobile_camera_header">Speed limit</string>
+    <string name="reporting_mobile_camera_speed">%1$s km/h</string>
+    <string name="reporting_mobile_camera_input_hint">Camera description*</string>
+    <string name="reporting_mobile_camera_input_error">Enter information about the camera</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
 

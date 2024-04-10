@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
+import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
@@ -132,18 +133,6 @@ private fun FilteringSection(
             }
         }
     }
-}
-
-@Composable
-private fun HorizontalScrollableRow(content: @Composable RowScope.() -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        content = content
-    )
 }
 
 @Composable

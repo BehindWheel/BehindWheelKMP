@@ -44,7 +44,7 @@ internal class MapEventsStoreFactory(
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapEventsStore =
-        object : MapEventsStore, Store<Intent, State, Nothing> by storeFactory.create(
+        object : MapEventsStore, Store<Nothing, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 var reports: Job? = null

@@ -9,23 +9,44 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
 import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
-import com.egoriku.grodnoroads.map.domain.model.*
+import com.egoriku.grodnoroads.map.domain.model.Alert
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapBottomSheet
+import com.egoriku.grodnoroads.map.domain.model.MapConfig
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.Notification
 import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.CheckLocation
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.ChooseLocation
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.StartDriveMode
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.StopDriveMode
 import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
-import com.egoriku.grodnoroads.map.domain.util.*
+import com.egoriku.grodnoroads.map.domain.util.SoundUtil
+import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
+import com.egoriku.grodnoroads.map.domain.util.alertSoundTransformation
+import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
+import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettingsComponent
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -192,8 +213,11 @@ internal class MapComponentImpl(
         locationStore.accept(LocationStore.Intent.SetUserLocation(latLng))
     }
 
-    override fun processReporting(result: ReportingResult) {
-        eventReportingComponent.report(result.copy(latLng = locationStore.state.userLocation.latLng))
+    override fun processReporting(params: ReportParams) {
+        eventReportingComponent.report(
+            params = params,
+            latLng = locationStore.state.userLocation.latLng
+        )
 
         if (!mapConfigStore.state.isChooseInDriveMode) {
             locationStore.accept(LocationStore.Intent.InvalidateLocation)

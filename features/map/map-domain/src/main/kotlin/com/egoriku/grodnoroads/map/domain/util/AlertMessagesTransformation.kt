@@ -1,8 +1,12 @@
 package com.egoriku.grodnoroads.map.domain.util
 
-import com.egoriku.grodnoroads.map.domain.model.*
+import com.egoriku.grodnoroads.map.domain.model.Alert
 import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapConfig
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.maps.core.extension.computeOffset
@@ -57,6 +61,16 @@ private fun makeAlertMessage(
                 null -> null
                 else -> when (event) {
                     is Camera -> {
+                        if (event.angle == -1f) {
+                            return@mapNotNull CameraAlert(
+                                id = event.id,
+                                distance = distance,
+                                // TODO: handle car type
+                                speedLimit = event.speedCar,
+                                cameraType = event.cameraType
+                            )
+                        }
+
                         val inRange = isAngleInRange(
                             cameraAngle = event.angle,
                             bidirectional = event.bidirectional,
