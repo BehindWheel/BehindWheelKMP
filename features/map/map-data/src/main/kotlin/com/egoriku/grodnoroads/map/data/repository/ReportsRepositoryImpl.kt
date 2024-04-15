@@ -10,15 +10,18 @@ import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlin.time.Duration.Companion.hours
 
 internal class ReportsRepositoryImpl(
     private val databaseReference: DatabaseReference
 ) : ReportsRepository {
 
-    override fun loadAsFlow(startAt: Long) = databaseReference
+    private val oneHourAgo = System.currentTimeMillis() - 1.hours.inWholeMilliseconds
+
+    override fun loadAsFlow() = databaseReference
         .child("reports")
         .orderByChild("timestamp")
-        .startAt(startAt.toDouble())
+        .startAt(oneHourAgo.toDouble())
         .awaitValueEventListener<ReportsDTO>()
         .map { resultOf ->
             when (resultOf) {

@@ -12,11 +12,23 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.extensions.logD
 import com.egoriku.grodnoroads.extensions.reLaunch
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MediumSpeedCamera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.MobileCamera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.map.domain.repository.*
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.*
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.*
+import com.egoriku.grodnoroads.map.domain.repository.MediumSpeedCameraRepository
+import com.egoriku.grodnoroads.map.domain.repository.MobileCameraRepository
+import com.egoriku.grodnoroads.map.domain.repository.ReportsRepository
+import com.egoriku.grodnoroads.map.domain.repository.StationaryCameraRepository
+import com.egoriku.grodnoroads.map.domain.repository.UserCountRepository
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnMediumSpeed
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnMobileCamera
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnNewReports
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnStationary
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnUpdateFilterTime
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.Message.OnUserCount
+import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore.State
 import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.filteringMarkers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -58,7 +70,6 @@ internal class MapEventsStoreFactory(
 
                             reports = reLaunch(reports) {
                                 subscribeForReports(
-                                    startAt = time,
                                     onLoaded = { list ->
                                         val filterTime = currentTime - time
                                         dispatch(OnNewReports(data = list.filter { it.timestamp >= filterTime }))
@@ -129,9 +140,9 @@ internal class MapEventsStoreFactory(
         }
     }
 
-    private suspend fun subscribeForReports(startAt: Long, onLoaded: (List<Reports>) -> Unit) {
+    private suspend fun subscribeForReports(onLoaded: (List<Reports>) -> Unit) {
         reportsRepository
-            .loadAsFlow(startAt = startAt)
+            .loadAsFlow()
             .collect { result ->
                 when (result) {
                     is Success -> onLoaded(result.value)

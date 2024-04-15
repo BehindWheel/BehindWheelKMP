@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ReportsRepository {
 
-    fun loadAsFlow(startAt: Long): Flow<ResultOf<List<Reports>>>
+    fun loadAsFlow(): Flow<ResultOf<List<Reports>>>
 }
