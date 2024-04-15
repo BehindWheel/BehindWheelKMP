@@ -185,7 +185,7 @@
 
     <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
     <string name="reporting_mobile_camera_speed">%1$s км/г</string>
-    <string name="reporting_mobile_camera_input_hint">Апісанне камеры*</string>
+    <string name="reporting_mobile_camera_input_hint">Месцазнаходжанне камеры*</string>
     <string name="reporting_mobile_camera_input_error">Увядзіце інфармацыю аб камеры</string>
 
     <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
