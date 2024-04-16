@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.map.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
+import com.arkivanov.essenty.backhandler.BackCallback
 import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
@@ -85,7 +86,21 @@ internal class MapComponentImpl(
 
     private val soundUtil by inject<SoundUtil>()
 
+    private val backCallback = BackCallback {
+        when (mapConfigStore.state.currentAppMode) {
+            AppMode.Drive -> stopDriveMode()
+            AppMode.ChooseLocation -> cancelChooseLocationFlow()
+            else -> {}
+        }
+    }
+
     init {
+        backHandler.register(backCallback)
+
+        mapConfigStore.states.map { it.currentAppMode }
+            .onEach { backCallback.isEnabled = it != AppMode.Default }
+            .launchIn(coroutineScope)
+
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
             locationStore.labels bindTo ::bindLocationLabel
         }
