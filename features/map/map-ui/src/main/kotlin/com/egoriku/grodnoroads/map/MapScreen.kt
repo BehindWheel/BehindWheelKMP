@@ -336,6 +336,7 @@ fun MapScreen(
 
                                 is MobileCamera -> {
                                     CameraMarker(
+                                        zIndex = 2f,
                                         position = mapEvent.position,
                                         markerSize = markerSize,
                                         icon = {
