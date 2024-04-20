@@ -8,17 +8,9 @@
 import GoogleMaps
 import Root
 
-public typealias LocationCoordinate = CLLocationCoordinate2D
-
 enum MapEventType {
     case camera(MapCameraMarker)
     case report(MapReportMarker)
-}
-
-enum MapEventCameraType {
-    case stationary(Int32)
-    case mobile(Int32)
-    case medium(Int32)
 }
 
 class MapItem: Equatable {
@@ -35,7 +27,7 @@ class MapItem: Equatable {
         }
     }
     
-    private let event: MapEvent
+    let event: MapEvent
     
     init?(event: MapEvent) {
         self.event = event
@@ -44,7 +36,7 @@ class MapItem: Equatable {
         case let event as MapEventCameraMediumSpeedCamera:
             self.id = event.id
             let marker = MapCameraMarker(
-                cameraType: .medium(event.speedCar),
+                cameraType: .medium,
                 position: event.locationCoordinate
             )
             self.eventType = .camera(marker)
@@ -52,7 +44,7 @@ class MapItem: Equatable {
         case let event as MapEventCameraMobileCamera:
             self.id = event.id
             let marker = MapCameraMarker(
-                cameraType: .mobile(event.speedCar),
+                cameraType: .mobile,
                 position: event.locationCoordinate
             )
             self.eventType = .camera(marker)
@@ -60,7 +52,7 @@ class MapItem: Equatable {
         case let event as MapEventCameraStationaryCamera:
             self.id = event.id
             let marker = MapCameraMarker(
-                cameraType: .stationary(event.speedCar),
+                cameraType: .stationary,
                 position: event.locationCoordinate
             )
             self.eventType = .camera(marker)
@@ -80,17 +72,5 @@ class MapItem: Equatable {
     
     static func == (lhs: MapItem, rhs: MapItem) -> Bool {
         return lhs.id == rhs.id
-    }
-}
-
-extension MapEvent {
-    var locationCoordinate: LocationCoordinate {
-        position.asLocationCoordinate
-    }
-}
-
-extension LatLng {
-    var asLocationCoordinate: LocationCoordinate {
-        LocationCoordinate(latitude: self.latitude, longitude: self.longitude)
     }
 }

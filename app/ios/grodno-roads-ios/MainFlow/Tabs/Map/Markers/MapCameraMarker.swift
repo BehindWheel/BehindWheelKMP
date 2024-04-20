@@ -16,15 +16,14 @@ class MapCameraMarker: GMSMarker, MapMarkerProtocol {
         self.position = position
         
         switch cameraType {
-        case .stationary(let speed):
+        case .stationary:
             self.icon = UIImage(systemName: "camera.fill")
-            self.title = "Стационарная камера: \(speed)"
-        case .medium(let speed):
-            self.icon =  UIImage(systemName: "camera.on.rectangle.fill")
-            self.title = "Камера средней скорости: \(speed)"
-        case .mobile(let speed):
+        case .medium:
+            self.icon = UIImage(systemName: "camera.on.rectangle.fill")
+        case .mobile:
             self.icon = UIImage(systemName: "camera.rotate.fill")
-            self.title = "Мобильная камера: \(speed)"
+        case .unknown:
+            self.icon = nil
         }
     }
 }

@@ -9,6 +9,7 @@ import Combine
 import GoogleMaps
 import UIKit
 import Root
+import BottomSheet
 
 class MapViewController: UIViewController {
     
@@ -31,10 +32,21 @@ class MapViewController: UIViewController {
         super.loadView()
         
         self.view = mapView
+        self.mapView.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapView.moveCamera(
+            GMSCameraUpdate.setCamera(
+                GMSCameraPosition(
+                    latitude: 53.6813060334033,
+                    longitude: 23.82895337660837,
+                    zoom: 12
+                )
+            )
+        )
         
         asPublisher(viewModel.mapEvents)
             .map { $0.data.compactMap { MapItem(event: $0) } }
@@ -61,5 +73,31 @@ private extension MapViewController {
     
     func clearMap() {
         mapView.clear()
+    }
+}
+
+// MARK: - GMSMapViewDelegate
+
+extension MapViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let mapItem = (marker as? MapMarkerProtocol)?.mapItem else {
+            return false
+        }
+        
+        let isReport = mapItem.event is MapEventReports
+        let controller = isReport
+                ? ReportDetailsViewController(mapItem: mapItem)
+                : CameraDetailsViewController(mapItem: mapItem)
+        
+        presentBottomSheet(
+            viewController: controller,
+            configuration: BottomSheetConfiguration(
+                cornerRadius: 28,
+                pullBarConfiguration: .hidden,
+                shadowConfiguration: .default
+            )
+        )
+        
+        return true
     }
 }
