@@ -9,6 +9,13 @@ import SwiftUI
 import Root
 
 struct TabsView: View {
+    
+    private enum Constants {
+        static let cornerRadius: CGFloat = 28
+        static let verticalInset: CGFloat = 12
+        static let buttonsHeight: CGFloat = 48
+    }
+    
     private let component: TabsComponent
     
     @StateValue
@@ -22,28 +29,46 @@ struct TabsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ChildView(child: activeChild)
-                .frame(maxHeight: .infinity)
-            Divider()
-            HStack(alignment: .bottom, spacing: 16) {
-                Button(action: { component.onSelectTab(index: 0) }) {
-                    Label("Map", systemImage: "map.fill")
-                        .labelStyle(VerticalLabelStyle())
-                        .opacity(activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
+        GeometryReader { geometry in
+            ZStack(alignment: .bottom) {
+                ChildView(child: activeChild)
+                    .frame(maxHeight: .infinity)
+                VStack(spacing: 0) {
+                    ZStack(alignment: .top) {
+                        Image(.roundedTopView)
+                            .resizable()
+                            .frame(maxWidth: .infinity, maxHeight: Constants.cornerRadius)
+                            .shadow(radius: 2)
+                        Color(.white)
+                            .offset(y: Constants.cornerRadius)
+                            .frame(height: Constants.buttonsHeight)
+                        HStack(spacing: 16) {
+                            Button(action: { component.onSelectTab(index: 0) }) {
+                                Label("Map", systemImage: "map.fill")
+                                    .labelStyle(VerticalLabelStyle())
+                                    .opacity(activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
+                            }
+                            .tint(.black)
+                            .frame(maxWidth: .infinity)
+                            Button(action: { component.onSelectTab(index: 1) }) {
+                                Label("Settings", systemImage: "gearshape.fill")
+                                    .labelStyle(VerticalLabelStyle())
+                                    .opacity(activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
+                            }
+                            .tint(.black)
+                            .frame(maxWidth: .infinity)
+                        }
+                        .offset(y: Constants.verticalInset)
+                    }
+                    .frame(height: Constants.cornerRadius + Constants.buttonsHeight)
+                    Color(.white).frame(height: {
+                        let bottomSafeArea = geometry.safeAreaInsets.bottom
+                        let height = bottomSafeArea == 0 ? Constants.verticalInset : bottomSafeArea
+                        return height
+                    }())
                 }
-                .tint(.black)
-                .frame(maxWidth: .infinity)
-                Button(action: { component.onSelectTab(index: 1) }) {
-                    Label("Settings", systemImage: "gearshape.fill")
-                        .labelStyle(VerticalLabelStyle())
-                        .opacity(activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
-                }
-                .tint(.black)
-                .frame(maxWidth: .infinity)
+                .padding(.bottom, -geometry.safeAreaInsets.bottom)
             }
-            .padding(.top, 12)
-            .padding(.bottom, 12)
         }
     }
 }

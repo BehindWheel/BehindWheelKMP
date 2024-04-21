@@ -21,8 +21,9 @@ class MapReportView: UIView {
         super.init(frame: .zero)
         
         self.backgroundColor = .white
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderWidth = 0.5
+        self.layer.cornerRadius = 4
         
         titleLabel.text = text
         titleLabel.sizeToFit()

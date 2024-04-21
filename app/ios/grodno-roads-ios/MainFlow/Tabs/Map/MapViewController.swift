@@ -13,6 +13,13 @@ import BottomSheet
 
 class MapViewController: UIViewController {
     
+    private enum Constants {
+        static let verticalInset: CGFloat = 12
+        static let tabBarControlsHeight: CGFloat = 48
+        static let tabBarHeaderHeight: CGFloat = 28
+        static let bottomSheetCornerRadius: CGFloat = 28
+    }
+    
     private lazy var mapView = GMSMapView()
     
     private let viewModel: GuidanceComponent
@@ -33,6 +40,12 @@ class MapViewController: UIViewController {
         
         self.view = mapView
         self.mapView.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        calculateMapInsets()
     }
     
     override func viewDidLoad() {
@@ -76,6 +89,15 @@ private extension MapViewController {
     }
 }
 
+private extension MapViewController {
+    func calculateMapInsets() {
+        let safeArea = view.safeAreaInsets
+        let safeAreaBottom = safeArea.bottom == 0 ? Constants.verticalInset : 0
+        let bottomPadding = safeAreaBottom + Constants.tabBarControlsHeight + Constants.tabBarHeaderHeight - Constants.verticalInset
+        mapView.padding.bottom = bottomPadding
+    }
+}
+
 // MARK: - GMSMapViewDelegate
 
 extension MapViewController: GMSMapViewDelegate {
@@ -92,7 +114,7 @@ extension MapViewController: GMSMapViewDelegate {
         presentBottomSheet(
             viewController: controller,
             configuration: BottomSheetConfiguration(
-                cornerRadius: 28,
+                cornerRadius: Constants.bottomSheetCornerRadius,
                 pullBarConfiguration: .hidden,
                 shadowConfiguration: .default
             )
