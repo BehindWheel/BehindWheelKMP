@@ -12,8 +12,8 @@ struct SettingsHeaderView : View {
     
     var body: some View {
        Text(title)
-            .font(.headline)
-            .foregroundColor(Color.black.opacity(0.6))
+            .font(.system(size: 16, weight: .medium))
+            .foregroundColor(.black)
     }
 }
 

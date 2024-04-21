@@ -38,7 +38,7 @@ struct TabsView: View {
                         Image(.roundedTopView)
                             .resizable()
                             .frame(maxWidth: .infinity, maxHeight: Constants.cornerRadius)
-                            .shadow(radius: 2)
+                            .shadow(radius: 1)
                         Color(.white)
                             .offset(y: Constants.cornerRadius)
                             .frame(height: Constants.buttonsHeight)

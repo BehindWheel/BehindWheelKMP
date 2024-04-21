@@ -27,11 +27,13 @@ struct SettingsRoundItem: View {
                 Image(systemName: image)
                     .padding(.all, 8)
                     .frame(width: 48, height: 48)
-                    .overlay(
+                    .background(.white)
+                    .clipShape(.rect(cornerRadius: 24))
+                    .overlay(alignment: .center, content: {
                         RoundedRectangle(cornerRadius: 24)
                             .stroke(.gray, lineWidth: 1)
-                    )
-                Text(title).font(.system(size: 11))
+                    })
+                Text(title).font(.system(size: 11, weight: .medium))
             }
             .contentShape(Rectangle())
         }

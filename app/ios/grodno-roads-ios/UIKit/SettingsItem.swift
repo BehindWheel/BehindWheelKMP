@@ -22,17 +22,16 @@ struct SettingsItemView : View {
         Button {
             action()
         } label: {
-            HStack {
+            HStack(spacing: 16) {
                 Image(systemName: leadingIcon)
-                Text(headlineText)
+                    .foregroundColor(Color.black.opacity(0.6))
+                Text(headlineText).font(.system(size: 16, weight: .medium))
                 Spacer()
-                Image(systemName: "chevron.forward")
-                    .padding()
             }
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .frame(maxWidth: .infinity, maxHeight: 48)
+        .frame(maxWidth: .infinity, minHeight: 48)
     }
 }
 
