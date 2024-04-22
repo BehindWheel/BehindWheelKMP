@@ -96,7 +96,8 @@ internal fun ActionBottomSheet(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .imePadding()
+                .imePadding(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(modifier = Modifier.weight(1f)) {
                 Column(modifier = Modifier
@@ -131,7 +132,8 @@ internal fun ActionBottomSheet(
                         detectTapGestures(onTap = {
                             focusManager.clearFocus()
                         })
-                    }
+                    },
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Surface(
                         modifier = Modifier
@@ -179,6 +181,7 @@ internal fun ActionBottomSheet(
 
                 BottomActions(
                     modifier = Modifier
+                        .widthIn(max = 600.dp)
                         .onSizeChanged {
                             if (measuredHeight < it.height) {
                                 measuredHeight = it.height
