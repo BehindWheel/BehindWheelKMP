@@ -73,7 +73,7 @@ private fun VerticalOrientationLayout(
     )
 
     val contentPaddingValues = WindowInsets
-        .navigationBars
+        .systemBars
         .add(WindowInsets(bottom = bottomPadding))
         .asPaddingValues()
 
@@ -92,7 +92,7 @@ private fun VerticalOrientationLayout(
                 }
 
                 is Child.Settings -> SettingsScreen(
-                    contentPadding = contentPaddingValues,
+                    contentPadding = PaddingValues(0.dp),
                     settingsComponent = child.component
                 )
             }
@@ -136,8 +136,8 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets(left = leftPadding)
-        .add(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+    val contentPaddingValues = WindowInsets.systemBars
+        .add(WindowInsets(left = leftPadding))
         .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -153,7 +153,7 @@ private fun HorizontalOrientationLayout(
                 )
 
                 is Child.Settings -> SettingsScreen(
-                    contentPadding = contentPaddingValues,
+                    contentPadding = PaddingValues(start = leftPadding),
                     settingsComponent = child.component
                 )
             }
