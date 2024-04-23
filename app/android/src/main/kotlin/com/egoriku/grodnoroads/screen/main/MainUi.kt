@@ -72,11 +72,6 @@ private fun VerticalOrientationLayout(
         label = "bottomPadding"
     )
 
-    val contentPaddingValues = WindowInsets
-        .systemBars
-        .add(WindowInsets(bottom = bottomPadding))
-        .asPaddingValues()
-
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
@@ -85,14 +80,20 @@ private fun VerticalOrientationLayout(
             when (val child = created.instance) {
                 is Child.Map -> {
                     MapScreen(
-                        contentPadding = contentPaddingValues,
+                        contentPadding = WindowInsets
+                            .systemBars
+                            .add(WindowInsets(bottom = bottomPadding))
+                            .asPaddingValues(),
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isShowBottomBar = it }
                     )
                 }
 
                 is Child.Settings -> SettingsScreen(
-                    contentPadding = PaddingValues(0.dp),
+                    contentPadding = WindowInsets
+                        .navigationBars
+                        .add(WindowInsets(bottom = bottomPadding))
+                        .asPaddingValues(),
                     settingsComponent = child.component
                 )
             }
@@ -136,9 +137,6 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets.systemBars
-        .add(WindowInsets(left = leftPadding))
-        .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
@@ -147,13 +145,17 @@ private fun HorizontalOrientationLayout(
         ) { created ->
             when (val child = created.instance) {
                 is Child.Map -> MapScreen(
-                    contentPadding = contentPaddingValues,
+                    contentPadding = WindowInsets.systemBars
+                        .add(WindowInsets(left = leftPadding))
+                        .asPaddingValues(),
                     component = child.component,
                     onBottomNavigationVisibilityChange = { isHideBottomBar = it }
                 )
 
                 is Child.Settings -> SettingsScreen(
-                    contentPadding = PaddingValues(start = leftPadding),
+                    contentPadding = WindowInsets.navigationBars
+                        .add(WindowInsets(left = leftPadding))
+                        .asPaddingValues(),
                     settingsComponent = child.component
                 )
             }
