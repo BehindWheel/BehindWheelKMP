@@ -17,5 +17,6 @@ struct MapView: View {
     
     var body: some View {
         MapViewControllerBridge(component)
+            .ignoresSafeArea()
     }
 }

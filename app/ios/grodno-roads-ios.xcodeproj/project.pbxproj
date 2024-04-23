@@ -11,6 +11,13 @@
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
 		6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21E2B38C2F60010592F /* SettingsItem.swift */; };
+		CE0718372BD3F9AD00AA1705 /* CameraDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0718362BD3F9AD00AA1705 /* CameraDetailsViewController.swift */; };
+		CE0718392BD4080800AA1705 /* SpeedLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0718382BD4080800AA1705 /* SpeedLimitView.swift */; };
+		CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1BC2B8297E900667D9F /* Shared.swift */; };
+		CE11B1BF2B8298C000667D9F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1BE2B8298C000667D9F /* Common.swift */; };
+		CE11B1C22B82996A00667D9F /* ReportSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1C12B82996A00667D9F /* ReportSource.swift */; };
+		CE11B1C42B82998200667D9F /* MapEventCameraType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1C32B82998200667D9F /* MapEventCameraType.swift */; };
+		CE11B1C62B8299F700667D9F /* DetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1C52B8299F700667D9F /* DetailsItemView.swift */; };
 		CE14848F2B3CB4A4009B048A /* FirebaseBinaries in Frameworks */ = {isa = PBXBuildFile; productRef = CE14848E2B3CB4A4009B048A /* FirebaseBinaries */; };
 		CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE243F5E2B4754E400B3845C /* RoundButtonView.swift */; };
 		CE243F612B475A4200B3845C /* SettingsRoundItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE243F602B475A4200B3845C /* SettingsRoundItem.swift */; };
@@ -57,6 +64,14 @@
 		CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F392B3BA599009ACA8B /* GoogleMaps */; };
 		CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */; };
 		CEC83F3E2B3BA599009ACA8B /* GoogleMapsCore in Frameworks */ = {isa = PBXBuildFile; productRef = CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */; };
+		CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450DC2B77EF0700497E10 /* MapItem.swift */; };
+		CEE450DF2B77F06400497E10 /* MapReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450DE2B77F06400497E10 /* MapReportView.swift */; };
+		CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */; };
+		CEE450E32B7963AA00497E10 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E22B7963AA00497E10 /* UIView.swift */; };
+		CEE450E82B79694400497E10 /* MapReportMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E72B79694400497E10 /* MapReportMarker.swift */; };
+		CEE450EA2B79696100497E10 /* MapMarkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */; };
+		CEE450ED2B79857600497E10 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = CEE450EC2B79857600497E10 /* BottomSheet */; };
+		CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450EE2B7AD78400497E10 /* ReportDetailsViewController.swift */; };
 		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
 		CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2232B5D5A680009840E /* Scrollable.swift */; };
 		CEF5D2262B5D5F110009840E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2252B5D5F110009840E /* View.swift */; };
@@ -68,6 +83,13 @@
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		6A9CD21E2B38C2F60010592F /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		CE0718362BD3F9AD00AA1705 /* CameraDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDetailsViewController.swift; sourceTree = "<group>"; };
+		CE0718382BD4080800AA1705 /* SpeedLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedLimitView.swift; sourceTree = "<group>"; };
+		CE11B1BC2B8297E900667D9F /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		CE11B1BE2B8298C000667D9F /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		CE11B1C12B82996A00667D9F /* ReportSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSource.swift; sourceTree = "<group>"; };
+		CE11B1C32B82998200667D9F /* MapEventCameraType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventCameraType.swift; sourceTree = "<group>"; };
+		CE11B1C52B8299F700667D9F /* DetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsItemView.swift; sourceTree = "<group>"; };
 		CE243F5E2B4754E400B3845C /* RoundButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonView.swift; sourceTree = "<group>"; };
 		CE243F602B475A4200B3845C /* SettingsRoundItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRoundItem.swift; sourceTree = "<group>"; };
 		CE46B71B2B325EBE00493502 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -111,6 +133,13 @@
 		CEA924D32B30CCC50086E744 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		CEA924D52B30CD310086E744 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		CEA924D72B30CD520086E744 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
+		CEE450DC2B77EF0700497E10 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
+		CEE450DE2B77F06400497E10 /* MapReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapReportView.swift; sourceTree = "<group>"; };
+		CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCameraMarker.swift; sourceTree = "<group>"; };
+		CEE450E22B7963AA00497E10 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		CEE450E72B79694400497E10 /* MapReportMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapReportMarker.swift; sourceTree = "<group>"; };
+		CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerProtocol.swift; sourceTree = "<group>"; };
+		CEE450EE2B7AD78400497E10 /* ReportDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailsViewController.swift; sourceTree = "<group>"; };
 		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -138,6 +167,7 @@
 				CE66279A2B38CB9100799BC2 /* CoreLocation.framework in Frameworks */,
 				CE6627982B38CB8A00799BC2 /* CoreImage.framework in Frameworks */,
 				CEC83F3A2B3BA599009ACA8B /* GoogleMaps in Frameworks */,
+				CEE450ED2B79857600497E10 /* BottomSheet in Frameworks */,
 				CEC83F3C2B3BA599009ACA8B /* GoogleMapsBase in Frameworks */,
 				CE6627962B38CB7600799BC2 /* CoreGraphics.framework in Frameworks */,
 				CE6627942B38CB6E00799BC2 /* CoreData.framework in Frameworks */,
@@ -152,12 +182,14 @@
 			isa = PBXGroup;
 			children = (
 				6A9CD2182B38B7F60010592F /* LoadingView.swift */,
+				CE11B1C52B8299F700667D9F /* DetailsItemView.swift */,
 				CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */,
 				CE243F5E2B4754E400B3845C /* RoundButtonView.swift */,
 				CEF5D2232B5D5A680009840E /* Scrollable.swift */,
 				6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */,
 				6A9CD21E2B38C2F60010592F /* SettingsItem.swift */,
 				CE243F602B475A4200B3845C /* SettingsRoundItem.swift */,
+				CEE450E22B7963AA00497E10 /* UIView.swift */,
 				CEF5D2252B5D5F110009840E /* View.swift */,
 			);
 			path = UIKit;
@@ -186,9 +218,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE0718352BD3F98A00AA1705 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CEE450EE2B7AD78400497E10 /* ReportDetailsViewController.swift */,
+				CE0718362BD3F9AD00AA1705 /* CameraDetailsViewController.swift */,
+				CE0718382BD4080800AA1705 /* SpeedLimitView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CE11B1BB2B8297CA00667D9F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA924C12B2FA95B0086E744 /* Decompose */,
+				CE11B1BC2B8297E900667D9F /* Shared.swift */,
+				CE11B1BE2B8298C000667D9F /* Common.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CE11B1C02B82996000667D9F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE11B1C12B82996A00667D9F /* ReportSource.swift */,
+				CE11B1C32B82998200667D9F /* MapEventCameraType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CE243F5D2B474E8D00B3845C /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				CEE450E62B79692300497E10 /* Markers */,
+				CEE450DE2B77F06400497E10 /* MapReportView.swift */,
 				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
 				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
@@ -257,7 +320,8 @@
 		CE52F3032B1CF3B200D81762 /* grodno-roads-ios */ = {
 			isa = PBXGroup;
 			children = (
-				CEA924C12B2FA95B0086E744 /* DecomposeHelpers */,
+				CE11B1C02B82996000667D9F /* Models */,
+				CE11B1BB2B8297CA00667D9F /* Helpers */,
 				CEA924D22B30CCB80086E744 /* MainFlow */,
 				CE46B7212B325FB000493502 /* OnboardingFlow */,
 				CE52F30A2B1CF3B400D81762 /* Preview Content */,
@@ -278,7 +342,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		CEA924C12B2FA95B0086E744 /* DecomposeHelpers */ = {
+		CEA924C12B2FA95B0086E744 /* Decompose */ = {
 			isa = PBXGroup;
 			children = (
 				CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */,
@@ -289,7 +353,7 @@
 				CEA924C42B2FA95B0086E744 /* StackView.swift */,
 				CEA924C22B2FA95B0086E744 /* StateValue.swift */,
 			);
-			path = DecomposeHelpers;
+			path = Decompose;
 			sourceTree = "<group>";
 		};
 		CEA924D22B30CCB80086E744 /* MainFlow */ = {
@@ -299,6 +363,18 @@
 				CEA924CE2B2FB61A0086E744 /* MainFlowView.swift */,
 			);
 			path = MainFlow;
+			sourceTree = "<group>";
+		};
+		CEE450E62B79692300497E10 /* Markers */ = {
+			isa = PBXGroup;
+			children = (
+				CE0718352BD3F98A00AA1705 /* Details */,
+				CEE450DC2B77EF0700497E10 /* MapItem.swift */,
+				CEE450E02B77F76E00497E10 /* MapCameraMarker.swift */,
+				CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */,
+				CEE450E72B79694400497E10 /* MapReportMarker.swift */,
+			);
+			path = Markers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +399,7 @@
 				CEC83F3B2B3BA599009ACA8B /* GoogleMapsBase */,
 				CEC83F3D2B3BA599009ACA8B /* GoogleMapsCore */,
 				CE14848E2B3CB4A4009B048A /* FirebaseBinaries */,
+				CEE450EC2B79857600497E10 /* BottomSheet */,
 			);
 			productName = "grodno-roads-ios";
 			productReference = CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */;
@@ -355,6 +432,7 @@
 			packageReferences = (
 				CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				CE14848D2B3CB4A4009B048A /* XCRemoteSwiftPackageReference "GRFirebaseBinaries" */,
+				CEE450EB2B79857600497E10 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = CE52F3022B1CF3B200D81762 /* Products */;
 			projectDirPath = "";
@@ -407,13 +485,19 @@
 			files = (
 				CE243F612B475A4200B3845C /* SettingsRoundItem.swift in Sources */,
 				CEA924D42B30CCC50086E744 /* AppearanceView.swift in Sources */,
+				CE0718372BD3F9AD00AA1705 /* CameraDetailsViewController.swift in Sources */,
 				CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */,
 				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
+				CEE450DF2B77F06400497E10 /* MapReportView.swift in Sources */,
 				6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */,
 				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
 				CEA924D82B30CD520086E744 /* TabsView.swift in Sources */,
+				CEE450E82B79694400497E10 /* MapReportMarker.swift in Sources */,
 				CEA924CF2B2FB61A0086E744 /* MainFlowView.swift in Sources */,
+				CE11B1C22B82996A00667D9F /* ReportSource.swift in Sources */,
+				CEE450E32B7963AA00497E10 /* UIView.swift in Sources */,
 				CE6627D42B3A127E00799BC2 /* MapViewController.swift in Sources */,
+				CEE450EA2B79696100497E10 /* MapMarkerProtocol.swift in Sources */,
 				CEA924C82B2FA95B0086E744 /* MutableValue.swift in Sources */,
 				CEA322392B33A1B90039329B /* FaqView.swift in Sources */,
 				CEA924D12B2FB7A20086E744 /* OnboardingView.swift in Sources */,
@@ -421,17 +505,25 @@
 				CE66274B2B36491100799BC2 /* ComponentContext.swift in Sources */,
 				CE66274D2B371BCB00799BC2 /* MapSettingsView.swift in Sources */,
 				CE46B71C2B325EBE00493502 /* MapView.swift in Sources */,
+				CE0718392BD4080800AA1705 /* SpeedLimitView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
+				CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */,
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
+				CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */,
+				CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
+				CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */,
+				CE11B1BF2B8298C000667D9F /* Common.swift in Sources */,
 				CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */,
 				CEA924CB2B2FA95B0086E744 /* SimpleChildStack.swift in Sources */,
 				CE6627D32B3A127E00799BC2 /* MapViewControllerBridge.swift in Sources */,
 				CEF5D2262B5D5F110009840E /* View.swift in Sources */,
+				CE11B1C62B8299F700667D9F /* DetailsItemView.swift in Sources */,
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
+				CE11B1C42B82998200667D9F /* MapEventCameraType.swift in Sources */,
 				CEF5D2282B5DD1980009840E /* CFlowWrapper.swift in Sources */,
 				CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */,
 				CE243F5F2B4754E400B3845C /* RoundButtonView.swift in Sources */,
@@ -583,6 +675,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -626,6 +719,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,6 +782,14 @@
 				minimumVersion = 8.3.1;
 			};
 		};
+		CEE450EB2B79857600497E10 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joomcode/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -710,6 +812,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEC83F382B3BA599009ACA8B /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMapsCore;
+		};
+		CEE450EC2B79857600497E10 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE450EB2B79857600497E10 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
