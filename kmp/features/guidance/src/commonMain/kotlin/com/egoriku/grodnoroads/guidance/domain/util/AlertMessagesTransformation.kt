@@ -8,6 +8,18 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.computeOffset
 import com.egoriku.grodnoroads.location.roundDistanceTo
+import com.egoriku.grodnoroads.map.domain.model.Alert
+import com.egoriku.grodnoroads.map.domain.model.Alert.CameraAlert
+import com.egoriku.grodnoroads.map.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.LastLocation
+import com.egoriku.grodnoroads.map.domain.model.MapConfig
+import com.egoriku.grodnoroads.map.domain.model.MapEvent
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.maps.core.extension.computeOffset
+import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -56,7 +68,17 @@ private fun makeAlertMessage(
             when (distance) {
                 null -> null
                 else -> when (event) {
-                    is Camera.StationaryCamera -> {
+                    is Camera -> {
+                        if (event.angle == -1f) {
+                            return@mapNotNull CameraAlert(
+                                id = event.id,
+                                distance = distance,
+                                // TODO: handle car type
+                                speedLimit = event.speedCar,
+                                cameraType = event.cameraType
+                            )
+                        }
+
                         val inRange = isAngleInRange(
                             cameraAngle = event.angle,
                             bidirectional = event.bidirectional,
@@ -73,7 +95,6 @@ private fun makeAlertMessage(
                             )
                         } else null
                     }
-
                     is Reports -> {
                         IncidentAlert(
                             // TODO: in future use id from Group
@@ -83,22 +104,6 @@ private fun makeAlertMessage(
                             mapEventType = event.mapEventType
                         )
                     }
-
-                    is Camera.MobileCamera -> {
-                        CameraAlert(
-                            id = event.id,
-                            distance = distance,
-                            speedLimit = event.speedCar,
-                            cameraType = event.cameraType
-                        )
-                    }
-
-                    is Camera.MediumSpeedCamera -> CameraAlert(
-                        id = event.id,
-                        distance = distance,
-                        speedLimit = event.speedCar,
-                        cameraType = event.cameraType
-                    )
                 }
             }
         }

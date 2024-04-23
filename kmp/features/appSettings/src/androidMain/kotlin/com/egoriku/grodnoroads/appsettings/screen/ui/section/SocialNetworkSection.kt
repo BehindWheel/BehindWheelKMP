@@ -1,9 +1,9 @@
 package com.egoriku.grodnoroads.appsettings.screen.ui.section
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ContactSupport
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,8 +36,8 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(chatUrl) }
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Default.ContactSupport,
-                contentDescription = null
+                painter = painterResource(R.drawable.ic_chat),
+                contentDescription = stringResource(R.string.social_telegram_chat)
             )
         }
         SocialNetwork(
@@ -45,11 +45,8 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(channelUrl) }
         ) {
             Icon(
-                modifier = Modifier
-                    .size(24.dp)
-                    .padding(end = 2.dp),
-                painter = painterResource(id = R.drawable.ic_telegram_logo_minimal),
-                contentDescription = null
+                painter = painterResource(R.drawable.ic_telegram),
+                contentDescription = stringResource(R.string.social_telegram_channel)
             )
         }
 
@@ -60,9 +57,8 @@ fun SocialNetworkSection() {
             onClick = { shareIntent(playStoreUrl) }
         ) {
             Icon(
-                modifier = Modifier.padding(end = 2.dp),
-                imageVector = Icons.Default.Share,
-                contentDescription = null
+                painter = painterResource(R.drawable.ic_share),
+                contentDescription = stringResource(R.string.social_share_app)
             )
         }
     }

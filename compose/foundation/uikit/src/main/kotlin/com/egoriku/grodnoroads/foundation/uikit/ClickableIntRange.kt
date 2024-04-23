@@ -114,7 +114,7 @@ fun ClickableIntRange(
                     },
                 text = formatter(targetCount),
                 color = color,
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.titleSmall
             )
         }
 

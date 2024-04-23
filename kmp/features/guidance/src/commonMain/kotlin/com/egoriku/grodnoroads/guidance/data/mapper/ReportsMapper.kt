@@ -10,6 +10,14 @@ import com.egoriku.grodnoroads.guidance.domain.model.Source
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.roundDistanceTo
 import com.egoriku.grodnoroads.uuid.Uuid
+import com.egoriku.grodnoroads.extensions.util.DateUtil
+import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.map.domain.model.MessageItem
+import com.egoriku.grodnoroads.maps.core.extension.roundDistanceTo
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
+import com.egoriku.grodnoroads.shared.core.models.Source
+import com.egoriku.grodnoroads.shared.core.models.dto.ReportsDTO
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
@@ -49,7 +57,8 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                         },
                     position = LatLng(data.latitude, data.longitude),
                     dialogTitle = buildDialogTitle(data),
-                    markerMessage = buildMarkerShortMessage(data)
+                    markerMessage = buildMarkerShortMessage(data),
+                    timestamp = data.timestamp
                 )
             } else {
                 val action = Reports(
@@ -67,7 +76,8 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     position = LatLng(data.latitude, data.longitude),
                     mapEventType = MapEventType.eventFromString(
                         data.type
-                    )
+                    ),
+                    timestamp = data.timestamp
                 )
 
                 mergedReports.add(action)

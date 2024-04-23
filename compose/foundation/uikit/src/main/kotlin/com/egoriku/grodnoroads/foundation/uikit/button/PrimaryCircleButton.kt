@@ -29,7 +29,7 @@ fun PrimaryCircleButton(
     }
     Button(
         contentPadding = PaddingValues(0.dp),
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 3.dp),
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp),
         modifier = modifier.size(buttonSize),
         enabled = enabled,
         onClick = onClick,

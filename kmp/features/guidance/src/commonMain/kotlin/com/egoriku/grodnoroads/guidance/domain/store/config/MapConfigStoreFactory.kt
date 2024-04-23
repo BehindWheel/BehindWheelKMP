@@ -23,6 +23,25 @@ import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.*
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
+import com.egoriku.grodnoroads.map.domain.model.AppMode
+import com.egoriku.grodnoroads.map.domain.model.AppMode.Default
+import com.egoriku.grodnoroads.map.domain.model.AppMode.Drive
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
+import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
+import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
+import com.egoriku.grodnoroads.shared.appsettings.types.alert.*
+import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
+import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
+import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -39,8 +58,10 @@ internal class MapConfigStoreFactory(
         data class OnZoomLevel(val zoomLevel: Float) : Message
         data class OnAlertRadius(val radius: Int) : Message
         data class OnUserZoomLevel(val userZoomLevel: Float) : Message
-        data class ChangeAppMode(val appMode: AppMode) : Message
-        data class UpdateReportType(val reportType: ReportType?) : Message
+        data class ChangeAppMode(
+            val appMode: AppMode,
+            val isChooseInDriveMode: Boolean = false
+        ) : Message
     }
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -115,23 +136,42 @@ internal class MapConfigStoreFactory(
                     dispatch(OnAlertRadius(radius = alertRadius))
                 }
                 onIntent<StartDriveMode> {
-                    dispatch(ChangeAppMode(appMode = AppMode.Drive))
+                    dispatch(ChangeAppMode(appMode = Drive))
                     dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                 }
                 onIntent<StopDriveMode> {
-                    dispatch(ChangeAppMode(appMode = AppMode.Default))
+                    dispatch(ChangeAppMode(appMode = Default))
                     dispatch(OnZoomLevel(zoomLevel = 12.5f))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
-                    dispatch(ChangeAppMode(appMode = AppMode.ChooseLocation))
-                    dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
-                    dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
-                    dispatch(UpdateReportType(reportType = it.reportType))
+                    when (state.currentAppMode) {
+                        Default -> {
+                            dispatch(
+                                ChangeAppMode(
+                                    appMode = AppMode.ChooseLocation,
+                                    isChooseInDriveMode = false
+                                )
+                            )
+                            dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                            dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                        }
+                        Drive -> dispatch(
+                            ChangeAppMode(
+                                appMode = AppMode.ChooseLocation,
+                                isChooseInDriveMode = true
+                            )
+                        )
+                        else -> {}
+                    }
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {
-                    dispatch(ChangeAppMode(appMode = AppMode.Default))
-                    dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
-                    dispatch(UpdateReportType(reportType = null))
+                    if (state.isChooseInDriveMode) {
+                        dispatch(ChangeAppMode(appMode = Drive))
+                        dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    } else {
+                        dispatch(ChangeAppMode(appMode = Default))
+                        dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
+                    }
                 }
                 onIntent<ChooseLocation.UserMapZoom> {
                     dispatch(OnUserZoomLevel(it.zoom))
@@ -142,8 +182,10 @@ internal class MapConfigStoreFactory(
                 when (message) {
                     is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
                     is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
-                    is ChangeAppMode -> copy(appMode = message.appMode)
-                    is UpdateReportType -> copy(reportType = message.reportType)
+                    is ChangeAppMode -> copy(
+                        currentAppMode = message.appMode,
+                        isChooseInDriveMode = message.isChooseInDriveMode
+                    )
                     is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
                     is OnAlertRadius -> copy(alertRadius = message.radius)
                 }

@@ -12,6 +12,16 @@ import com.egoriku.grodnoroads.location.LatLng
 import kotlinx.datetime.TimeZone
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import com.egoriku.grodnoroads.extensions.util.DateUtil
+import com.egoriku.grodnoroads.map.data.mapper.ReportsMapper
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.shared.core.models.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.shared.core.models.Source.*
+import com.egoriku.grodnoroads.shared.core.models.dto.ReportsDTO
+import com.google.android.gms.maps.model.LatLng
+import org.junit.Before
+import org.junit.Test
+import java.util.TimeZone
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes

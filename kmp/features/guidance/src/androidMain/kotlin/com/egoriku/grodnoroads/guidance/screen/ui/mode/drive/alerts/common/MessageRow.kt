@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.map.domain.model.MessageItem
+import com.egoriku.grodnoroads.shared.core.models.Source
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.domain.model.Source
 

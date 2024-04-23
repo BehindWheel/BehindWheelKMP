@@ -11,12 +11,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.theme.defaultShadowElevation
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
@@ -60,11 +62,21 @@ private fun ActionButton(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
 ) {
+    val shadowColor = when {
+        MaterialTheme.colorScheme.isLight -> MaterialTheme.colorScheme.outline
+        else -> Color.Black
+    }
     Surface(
-        modifier = modifier,
+        modifier = modifier
+            .shadow(
+                elevation = 12.dp,
+                shape = RoundedCornerShape(10.dp),
+                ambientColor = shadowColor,
+                spotColor = shadowColor
+            ),
         shape = RoundedCornerShape(10.dp),
         onClick = onClick,
-        shadowElevation = defaultShadowElevation,
+        shadowElevation = 0.dp,
         tonalElevation = MaterialTheme.tonalElevation
     ) {
         Box(modifier = Modifier.padding(8.dp)) {

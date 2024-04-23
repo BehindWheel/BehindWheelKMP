@@ -12,12 +12,11 @@ import kotlinx.coroutines.flow.onEach
 context(MapUpdater)
 @Composable
 fun rememberSimpleMarker(
-    tag: String,
     markerOptions: () -> MarkerOptions,
 ): Marker? {
     var marker by remember { mutableStateOf<Marker?>(null) }
 
-    DisposableEffect(tag) {
+    DisposableEffect(Unit) {
         marker = addMarker(markerOptions = markerOptions())
 
         onDispose {

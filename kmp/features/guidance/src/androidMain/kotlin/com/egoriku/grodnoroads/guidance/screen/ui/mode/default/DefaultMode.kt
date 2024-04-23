@@ -22,7 +22,7 @@ import com.egoriku.grodnoroads.resources.R
 @Composable
 fun DefaultMode(
     onLocationRequestStateChanged: (LocationRequestStatus) -> Unit,
-    report: (ReportType) -> Unit
+    openReportFlow: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -33,7 +33,7 @@ fun DefaultMode(
         ) {
             PrimaryInverseCircleButton(
                 size = Large,
-                onClick = { report(TrafficPolice) }
+                onClick = openReportFlow
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),

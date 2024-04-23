@@ -16,6 +16,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
+import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -26,6 +27,9 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
+import com.egoriku.grodnoroads.map.MapScreen
+import com.egoriku.grodnoroads.screen.main.MainComponent.Child
+import com.egoriku.grodnoroads.setting.screen.SettingsScreen
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -69,7 +73,7 @@ private fun VerticalOrientationLayout(
     )
 
     val contentPaddingValues = WindowInsets
-        .navigationBars
+        .systemBars
         .add(WindowInsets(bottom = bottomPadding))
         .asPaddingValues()
 
@@ -88,7 +92,7 @@ private fun VerticalOrientationLayout(
                 }
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = contentPaddingValues,
+                        contentPadding = PaddingValues(0.dp),
                         settingsComponent = child.component
                     )
                 }
@@ -133,8 +137,8 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets(left = leftPadding)
-        .add(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+    val contentPaddingValues = WindowInsets.systemBars
+        .add(WindowInsets(left = leftPadding))
         .asPaddingValues()
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -151,7 +155,7 @@ private fun HorizontalOrientationLayout(
                     )
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = contentPaddingValues,
+                        contentPadding = PaddingValues(start = leftPadding),
                         settingsComponent = child.component
                     )
                 }

@@ -121,6 +121,13 @@
     <string name="map_google_map_style_minimal">Minimal</string>
     <string name="map_google_map_style_detailed">Detailed</string>
 
+    <string name="map_markers_filtering">Filtering markers by time</string>
+    <string name="map_markers_filtering_description">It applies only to markers with a text message (traffic police, congestion, etc.).</string>
+    <string name="map_markers_filtering_15_minutes">15 min</string>
+    <string name="map_markers_filtering_30_minutes">30 min</string>
+    <string name="map_markers_filtering_45_minutes">45 min</string>
+    <string name="map_markers_filtering_1_hour">1 hour</string>
+
     <string name="map_header_markers">Markers</string>
     <string name="map_markers_select_all">Select All</string>
     <string name="map_markers_stationary_cameras">Stationary cameras</string>
@@ -134,8 +141,6 @@
 
     <string name="map_user_count">Online: %1$s</string>
     <string name="map_user_count_hint">Based on user activity in the last 10 minutes</string>
-
-    <string name="map_quick_actions_header">Quick settings</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>
     <string name="dialog_incident">Report Road Incident</string>
@@ -157,4 +162,47 @@
     <string name="snackbar_current_location_permission_denied">Location access denied. You can grant permission in settings</string>
     <string name="snackbar_current_location_gms_disabled_title">Geolocation access denied</string>
     <string name="snackbar_current_location_gms_disabled_description">You can enable it manually in the notification panel</string>
+
+    <string name="snackbar_in_app_update_install">Update is ready to install</string>
+
+    <string name="reporting_header">Choose an item</string>
+    <string name="reporting_category_road_incidents">Problems on the road</string>
+    <string name="reporting_category_traffic_police">Traffic police</string>
+    <string name="reporting_category_other">Other</string>
+    <string name="reporting_category_mobile_camera">Mobile camera</string>
+
+    <string name="reporting_item_road_repair">Road repair</string>
+    <string name="reporting_item_broken_car">Broken car</string>
+    <string name="reporting_item_tow_truck_working">Tow truck working</string>
+    <string name="reporting_item_pedestrian_on_road">Pedestrian on road</string>
+    <string name="reporting_item_traffic_controller">Traffic controller</string>
+    <string name="reporting_item_non_working_traffic_lights">Non-working traffic lights</string>
+    <string name="reporting_item_open_hatch">Open hatch</string>
+    <string name="reporting_item_road_blocked">Road blocked</string>
+    <string name="reporting_item_other_road_incident">Other</string>
+    <string name="reporting_item_traffic_jam">Traffic jam</string>
+    <string name="reporting_item_wild_animals">Wild animals</string>
+    <string name="reporting_item_car_accident">Car accident</string>
+    <string name="reporting_item_traffic_police">Traffic police</string>
+    <string name="reporting_item_working_with_radar">Working with radar</string>
+    <string name="reporting_item_stay_on_beacons">Stay on beacons</string>
+    <string name="reporting_item_document_check">Document check</string>
+    <string name="reporting_item_stopped_on_the_move">Stopped on the move</string>
+    <string name="reporting_item_sitting_in_the_car">Sitting in the car</string>
+    <string name="reporting_item_working_from_car">Working from car</string>
+    <string name="reporting_item_transport_inspection">Transport inspection</string>
+    <string name="reporting_item_filter">Filter</string>
+
+    <string name="reporting_mobile_camera_header">Speed limit</string>
+    <string name="reporting_mobile_camera_speed">%1$s km/h</string>
+    <string name="reporting_mobile_camera_input_hint">Camera location*</string>
+    <string name="reporting_mobile_camera_input_error">Enter information about the camera</string>
+
+    <string name="reporting_notification_sent">Your message has been sent!</string>
+
+    <string name="quick_settings_header">Quick settings</string>
+    <string name="quick_settings_app_theme">Changing theme</string>
+    <string name="quick_settings_markers_filtering">Filtering markers by time</string>
+    <string name="quick_settings_voice_alerts">Voice alerts</string>
+    <string name="quick_settings_traffic_conditions">Traffic conditions</string>
 </resources>

@@ -16,13 +16,14 @@ fun CameraMarker(
     position: LatLng,
     markerSize: MarkerSize,
     icon: () -> BitmapDescriptor,
+    zIndex: Float = 1f,
     onClick: () -> Unit
 ) {
     val marker = rememberIconMarker(
         position = position.toGmsLatLng(),
         icon = icon,
         onMarkerClick = onClick,
-        zIndex = 1f
+        zIndex = zIndex
     )
 
     LaunchedEffect(markerSize) {

@@ -116,6 +116,23 @@ internal class MapUpdaterImpl(
         googleMap.animateCamera(CameraUpdateFactory.zoomOut())
     }
 
+    override fun animateCurrentLocation(target: LatLng, zoom: Float, bearing: Float) {
+        additionalPadding(top = mapView.height / 3)
+        animateCamera(
+            cameraUpdate = CameraUpdateFactory.newCameraPosition(
+                cameraPosition {
+                    target(target)
+                    bearing(bearing)
+                    zoom(zoom)
+                    tilt(35.0f)
+                }
+            ),
+            duration = 700,
+            onFinish = { additionalPadding(top = 0) },
+            onCancel = { additionalPadding(top = 0) }
+        )
+    }
+
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
         if (lastLocation == null || lastZoom != zoom || googleMap.zoom != lastZoom) {
 

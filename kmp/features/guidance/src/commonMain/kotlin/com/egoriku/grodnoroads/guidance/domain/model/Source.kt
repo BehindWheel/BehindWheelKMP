@@ -1,5 +1,8 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
+import androidx.compose.runtime.Stable
+
+@Stable
 enum class Source(val source: String) {
     App("app"),
     Viber("viber"),

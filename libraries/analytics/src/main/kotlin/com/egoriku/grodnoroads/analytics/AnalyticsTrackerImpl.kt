@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_OPEN_MARKER_INFO_DIALOG
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_OPEN_ROAD_INCIDENT_DIALOG
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_OPEN_TRAFFIC_POLICE_DIALOG
+import com.egoriku.grodnoroads.analytics.AnalyticsEvent.EVENT_REPORT_MOBILE_CAMERA
 import com.egoriku.grodnoroads.analytics.AnalyticsEvent.PARAM_SHORT_MESSAGE
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.logEvent
@@ -27,4 +28,7 @@ internal class AnalyticsTrackerImpl(
             param(PARAM_SHORT_MESSAGE, shortMessage)
         }
     }
+
+    override fun mobileCameraReport() =
+        firebaseAnalytics.logEvent(EVENT_REPORT_MOBILE_CAMERA, bundleOf())
 }

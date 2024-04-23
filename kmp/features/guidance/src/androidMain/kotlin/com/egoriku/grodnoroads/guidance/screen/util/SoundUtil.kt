@@ -7,6 +7,9 @@ import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType
 import com.egoriku.grodnoroads.guidance.domain.model.MapEventType
 import com.egoriku.grodnoroads.uuid.Uuid
+import com.egoriku.grodnoroads.map.domain.model.CameraType
+import com.egoriku.grodnoroads.shared.core.models.MapEventType
+import java.util.UUID
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
