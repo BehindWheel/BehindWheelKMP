@@ -2,16 +2,14 @@ package com.egoriku.grodnoroads.shared.models
 
 import androidx.compose.runtime.Stable
 
-// TODO: rename to MessageSource
 @Stable
-enum class Source(val source: String) {
+enum class MessageSource(val source: String) {
     App("app"),
     Viber("viber"),
-    Telegram("telegram"),
-    Zello("zello");
+    Telegram("telegram");
 
     companion object {
-        fun sourceFromString(value: String): Source {
+        fun sourceFromString(value: String): MessageSource {
             return requireNotNull(entries.find { it.source == value })
         }
     }

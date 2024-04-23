@@ -10,18 +10,19 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
 
 @Composable
-fun SourceImage(modifier: Modifier = Modifier, source: Source) {
+fun SourceImage(
+    modifier: Modifier = Modifier,
+    messageSource: MessageSource
+) {
     Image(
         modifier = modifier.size(24.dp),
-        painter = when (source) {
-            Source.Viber -> painterResource(R.drawable.ic_viber)
-            Source.Telegram -> painterResource(R.drawable.ic_telegram_logo)
-            Source.App -> painterResource(R.drawable.ic_app_logo)
-            // TODO: Add Zello icon
-            Source.Zello -> painterResource(R.drawable.ic_app_logo)
+        painter = when (messageSource) {
+            MessageSource.Viber -> painterResource(R.drawable.ic_viber)
+            MessageSource.Telegram -> painterResource(R.drawable.ic_telegram_logo)
+            MessageSource.App -> painterResource(R.drawable.ic_app_logo)
         },
         contentDescription = "Source App"
     )
@@ -31,8 +32,8 @@ fun SourceImage(modifier: Modifier = Modifier, source: Source) {
 @Composable
 private fun PreviewSourceImage() = GrodnoRoadsM3ThemePreview {
     Column {
-        SourceImage(source = Source.App)
-        SourceImage(source = Source.Viber)
-        SourceImage(source = Source.Telegram)
+        SourceImage(messageSource = MessageSource.App)
+        SourceImage(messageSource = MessageSource.Viber)
+        SourceImage(messageSource = MessageSource.Telegram)
     }
 }

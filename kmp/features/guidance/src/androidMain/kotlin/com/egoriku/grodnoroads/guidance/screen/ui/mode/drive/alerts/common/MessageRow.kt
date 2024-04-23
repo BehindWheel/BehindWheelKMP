@@ -10,7 +10,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
+import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 
 @Composable
 fun MessageRow(messageItem: MessageItem) {
@@ -22,7 +24,7 @@ fun MessageRow(messageItem: MessageItem) {
             modifier = Modifier
                 .padding(end = 6.dp)
                 .align(Alignment.Top),
-            source = messageItem.source
+            messageSource = messageItem.messageSource
         )
         Text(
             text = messageItem.message,
@@ -38,10 +40,10 @@ private fun PreviewMessageRow() = GrodnoRoadsM3ThemePreview {
         MessageRow(
             messageItem = MessageItem(
                 message = "Test message\nTest message",
-                source = Source.App
+                messageSource = App
             )
         )
-        MessageRow(messageItem = MessageItem(message = "Test message", source = Source.Viber))
-        MessageRow(messageItem = MessageItem(message = "Test message", source = Source.Telegram))
+        MessageRow(messageItem = MessageItem(message = "Test message", messageSource = Viber))
+        MessageRow(messageItem = MessageItem(message = "Test message", messageSource = Telegram))
     }
 }

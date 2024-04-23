@@ -29,7 +29,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
+import com.egoriku.grodnoroads.shared.models.MessageSource.*
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -181,7 +182,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     messages = persistentListOf(
                         MessageItem(
                             message = "Славинского Беларуснефть на скорость",
-                            source = Source.Viber
+                            messageSource = Viber
                         )
                     )
                 ),
@@ -192,7 +193,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     messages = persistentListOf(
                         MessageItem(
                             message = "Славинского ДТП",
-                            source = Source.Viber
+                            messageSource = Viber
                         )
                     )
                 )

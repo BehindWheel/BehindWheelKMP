@@ -27,7 +27,8 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -111,7 +112,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 messages = persistentListOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
-                        source = Source.Viber
+                        messageSource = Viber
                     )
                 )
             ),
@@ -127,11 +128,11 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 messages = persistentListOf(
                     MessageItem(
                         message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
-                        source = Source.Viber
+                        messageSource = Viber
                     ),
                     MessageItem(
                         message = "(15:45) Новый мост в левой полосе по направлению",
-                        source = Source.Viber
+                        messageSource = Viber
                     )
                 ),
                 mapEventType = RoadIncident

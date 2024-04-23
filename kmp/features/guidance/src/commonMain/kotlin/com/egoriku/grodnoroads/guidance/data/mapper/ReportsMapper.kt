@@ -7,7 +7,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.roundDistanceTo
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.mutate
@@ -44,7 +44,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                         .mutate {
                             it += MessageItem(
                                 message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
-                                source = Source.sourceFromString(data.source)
+                                messageSource = MessageSource.sourceFromString(data.source)
                             )
                         },
                     position = LatLng(data.latitude, data.longitude),
@@ -58,7 +58,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     messages = persistentListOf(
                         MessageItem(
                             message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
-                            source = Source.sourceFromString(data.source)
+                            messageSource = MessageSource.sourceFromString(data.source)
                         )
                     ),
                     markerMessage = buildMarkerShortMessage(data),

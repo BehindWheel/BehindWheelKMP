@@ -16,7 +16,8 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.Messa
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
+import com.egoriku.grodnoroads.shared.models.MessageSource.*
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -76,13 +77,13 @@ private fun PreviewIncidentAlert() = GrodnoRoadsM3ThemePreview {
             messages = persistentListOf(
                 MessageItem(
                     message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
-                    source = Source.App
+                    messageSource = App
                 ),
                 MessageItem(
                     message = "(15:45) Новый мост в левой полосе по направлению",
-                    source = Source.Viber
+                    messageSource = Viber
                 ),
-                MessageItem(message = "(15:50) Новый мост", source = Source.Telegram)
+                MessageItem(message = "(15:50) Новый мост", messageSource = Telegram)
             )
         )
         IncidentAlert(
@@ -92,7 +93,7 @@ private fun PreviewIncidentAlert() = GrodnoRoadsM3ThemePreview {
             messages = persistentListOf(
                 MessageItem(
                     message = "(15:30) Славинского беларуснефть на скорость",
-                    source = Source.App
+                    messageSource = App
                 )
             )
         )

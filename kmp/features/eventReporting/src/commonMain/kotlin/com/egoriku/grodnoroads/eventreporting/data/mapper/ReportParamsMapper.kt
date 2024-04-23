@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.eventreporting.data.mapper
 
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams.EventReport
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams.MobileCameraReport
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams.EventReport
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams.MobileCameraReport
 
 internal object ReportEventMapper : (LatLng, EventReport) -> ReportsDTO {
 
@@ -21,7 +21,7 @@ internal object ReportEventMapper : (LatLng, EventReport) -> ReportsDTO {
             shortMessage = eventReport.shortMessage,
             latitude = latLng.latitude,
             longitude = latLng.longitude,
-            source = Source.App.source
+            source = App.source
         )
     }
 }

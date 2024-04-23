@@ -24,7 +24,8 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.Messa
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource
+import com.egoriku.grodnoroads.shared.models.MessageSource.*
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.persistentListOf
 
@@ -76,19 +77,19 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
             messages = persistentListOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",
-                    source = Source.App
+                    messageSource = App
                 ),
                 MessageItem(
                     message = "(12:40) м6 заправка Белорусьнефть выезд ГАИ на камеру",
-                    source = Source.Telegram
+                    messageSource = Telegram
                 ),
                 MessageItem(
                     message = "(12:41) М6 выезд стоят",
-                    source = Source.Telegram
+                    messageSource = Telegram
                 ),
                 MessageItem(
                     message = "(12:42) Выезд на М6 работают",
-                    source = Source.Viber
+                    messageSource = Viber
                 ),
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",

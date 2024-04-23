@@ -3,25 +3,17 @@ package com.egoriku.grodnoroads.screen.map.store.util
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.second
 import com.egoriku.grodnoroads.extensions.third
-import com.egoriku.grodnoroads.guidance.data.dto.ReportsDTO
 import com.egoriku.grodnoroads.guidance.data.mapper.ReportsMapper
-import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.guidance.domain.model.Source.*
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
+import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
+import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
 import kotlinx.datetime.TimeZone
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import com.egoriku.grodnoroads.extensions.util.DateUtil
-import com.egoriku.grodnoroads.map.data.mapper.ReportsMapper
-import com.egoriku.grodnoroads.shared.core.models.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.shared.core.models.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.shared.core.models.Source.*
-import com.egoriku.grodnoroads.shared.core.models.dto.ReportsDTO
-import com.google.android.gms.maps.model.LatLng
-import org.junit.Before
-import org.junit.Test
-import java.util.TimeZone
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
@@ -66,7 +58,7 @@ class MergeReportsTest {
             with(messages) {
                 assertEquals(1, size)
                 assertEquals("(8:06) Long message \uD83D\uDE93", first().message)
-                assertEquals(App, first().source)
+                assertEquals(App, first().messageSource)
             }
         }
     }
@@ -97,7 +89,7 @@ class MergeReportsTest {
             with(messages) {
                 assertEquals(1, size)
                 assertEquals("(0:30) Long message \uD83D\uDE93", first().message)
-                assertEquals(App, first().source)
+                assertEquals(App, first().messageSource)
             }
         }
     }
@@ -192,7 +184,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:30) Long message 1", message)
-                assertEquals(App, source)
+                assertEquals(App, messageSource)
             }
         }
 
@@ -206,7 +198,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:51) Long message 2", message)
-                assertEquals(Telegram, source)
+                assertEquals(Telegram, messageSource)
             }
         }
     }
@@ -248,7 +240,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:30) Long message 1", message)
-                assertEquals(App, source)
+                assertEquals(App, messageSource)
             }
         }
 
@@ -261,7 +253,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:51) Long message 2", message)
-                assertEquals(Telegram, source)
+                assertEquals(Telegram, messageSource)
             }
         }
     }
@@ -302,12 +294,12 @@ class MergeReportsTest {
             assertEquals(2, messages.size)
             with(messages.first()) {
                 assertEquals("(12:30) Long message 1", message)
-                assertEquals(App, source)
+                assertEquals(App, messageSource)
             }
 
             with(messages.second()) {
                 assertEquals("(12:51) Long message 2", message)
-                assertEquals(Telegram, source)
+                assertEquals(Telegram, messageSource)
             }
         }
     }
@@ -357,12 +349,12 @@ class MergeReportsTest {
             assertEquals(2, messages.size)
             with(messages.first()) {
                 assertEquals("(12:30) Long message 1", message)
-                assertEquals(App, source)
+                assertEquals(App, messageSource)
             }
 
             with(messages.second()) {
                 assertEquals("(12:51) Long message 2", message)
-                assertEquals(Telegram, source)
+                assertEquals(Telegram, messageSource)
             }
         }
 
@@ -375,7 +367,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:52) Long message 3", message)
-                assertEquals(Viber, source)
+                assertEquals(Viber, messageSource)
             }
         }
     }
@@ -425,7 +417,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:30) Long message 1", message)
-                assertEquals(App, source)
+                assertEquals(App, messageSource)
             }
         }
 
@@ -438,7 +430,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:40) Long message 2", message)
-                assertEquals(Telegram, source)
+                assertEquals(Telegram, messageSource)
             }
         }
 
@@ -451,7 +443,7 @@ class MergeReportsTest {
             assertEquals(1, messages.size)
             with(messages.first()) {
                 assertEquals("(12:51) Long message 3", message)
-                assertEquals(Viber, source)
+                assertEquals(Viber, messageSource)
             }
         }
     }

@@ -9,7 +9,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.shared.models.Source
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
+import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -33,9 +35,9 @@ fun MessageComponent(
 fun PreviewMessageComponent() = GrodnoRoadsM3ThemePreview {
     MessageComponent(
         messages = persistentListOf(
-            MessageItem(message = "Test message 1\nTest message 1", source = Source.App),
-            MessageItem(message = "Test message 2", source = Source.Viber),
-            MessageItem(message = "Test message 3", source = Source.Telegram)
+            MessageItem(message = "Test message 1\nTest message 1", messageSource = App),
+            MessageItem(message = "Test message 2", messageSource = Viber),
+            MessageItem(message = "Test message 3", messageSource = Telegram)
         )
     )
 }
