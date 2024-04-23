@@ -151,6 +151,7 @@ fun GoogleMap(
         }
         googleMap.setOnCameraMoveListener {
             updatedOnZoomChanged(ZoomLevelState.Moving(zoom = googleMap.zoom))
+            updatedOnProjectionChanged(googleMap.projection)
         }
 
         updateMapProperties(googleMap, mapProperties)
