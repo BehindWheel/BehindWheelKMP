@@ -16,8 +16,8 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.*
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.*
-import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.filteringMarkers
-import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.updateFiltering
+import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
+import com.egoriku.grodnoroads.shared.persistent.map.filtering.updateFiltering
 import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.persistent.map.location.updateDefaultCity
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.*

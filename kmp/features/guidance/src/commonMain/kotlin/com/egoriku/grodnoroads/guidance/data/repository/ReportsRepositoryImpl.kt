@@ -1,11 +1,9 @@
 package com.egoriku.grodnoroads.guidance.data.repository
 
 import com.egoriku.grodnoroads.extensions.common.ResultOf
-import com.egoriku.grodnoroads.guidance.data.dto.ReportsDTO
-import com.egoriku.grodnoroads.guidance.data.mapper.ReportsActionMapper
 import com.egoriku.grodnoroads.guidance.data.mapper.ReportsMapper
-import com.egoriku.grodnoroads.guidance.domain.model.report.ReportActionModel
 import com.egoriku.grodnoroads.guidance.domain.repository.ReportsRepository
+import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
 import dev.gitlive.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -27,9 +25,4 @@ internal class ReportsRepositoryImpl(databaseReference: DatabaseReference) : Rep
         .catch { ResultOf.Failure(it) }
         .flowOn(Dispatchers.IO)
 
-    override suspend fun report(actionModel: ReportActionModel) {
-        reportsReference
-            .push()
-            .setValue(ReportsActionMapper(actionModel))
-    }
 }

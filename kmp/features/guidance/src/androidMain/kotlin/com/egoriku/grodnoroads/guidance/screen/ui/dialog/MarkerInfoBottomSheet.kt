@@ -19,17 +19,12 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.guidance.domain.model.Source
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.shared.core.models.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.shared.core.models.Source
-import com.egoriku.grodnoroads.map.mode.drive.alerts.common.MessageRow
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
+import com.egoriku.grodnoroads.shared.models.Source
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.persistentListOf
 

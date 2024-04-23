@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.guidance.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
-import com.arkivanov.decompose.childContext
 import com.arkivanov.essenty.backhandler.BackCallback
 import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
@@ -12,62 +11,32 @@ import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.coroutines.coroutineScope
 import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCFlow
-import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
+import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
+import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.guidance.domain.model.*
-import com.egoriku.grodnoroads.guidance.domain.model.ReportType.RoadIncident
-import com.egoriku.grodnoroads.guidance.domain.model.ReportType.TrafficPolice
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore
-import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.CheckLocation
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.ChooseLocation
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.StartDriveMode
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.StopDriveMode
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore
-import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent.OpenReportTrafficPoliceDialog
-import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent.OpenRoadIncidentDialog
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore
-import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Intent.ReportAction
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.QuickActionsStore
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.QuickActionsStore.QuickActionsIntent
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsPref
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
 import com.egoriku.grodnoroads.guidance.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.alertSoundTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.filterMapEvents
 import com.egoriku.grodnoroads.guidance.domain.util.overSpeedTransformation
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
-import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
-import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
-import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
-import com.egoriku.grodnoroads.map.domain.extension.coroutineScope
-import com.egoriku.grodnoroads.map.domain.model.Alert
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.LastLocation
-import com.egoriku.grodnoroads.map.domain.model.MapBottomSheet
-import com.egoriku.grodnoroads.map.domain.model.MapConfig
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
 import com.egoriku.grodnoroads.map.domain.model.Notification
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.CheckLocation
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.ChooseLocation
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.StartDriveMode
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.StopDriveMode
-import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore
-import com.egoriku.grodnoroads.map.domain.store.location.LocationStore.Label
-import com.egoriku.grodnoroads.map.domain.store.mapevents.MapEventsStore
-import com.egoriku.grodnoroads.map.domain.util.SoundUtil
-import com.egoriku.grodnoroads.map.domain.util.alertMessagesTransformation
-import com.egoriku.grodnoroads.map.domain.util.alertSoundTransformation
-import com.egoriku.grodnoroads.map.domain.util.filterMapEvents
-import com.egoriku.grodnoroads.map.domain.util.overSpeedTransformation
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettingsComponent
-import com.google.android.gms.maps.model.LatLng
+import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
+import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
@@ -97,6 +66,9 @@ internal class GuidanceComponentImpl(
     override val quickSettingsComponent: QuickSettingsComponent =
         buildQuickSettingsComponent(childContext("quick_settings"))
 
+    override val specialEventComponent: SpecialEventComponent =
+        buildSpecialEventComponent(childContext(key = "special_event"))
+
     private val dialogStore: DialogStore = instanceKeeper.getStore(::get)
     private val locationStore: LocationStore = instanceKeeper.getStore(::get)
     private val mapConfigStore: MapConfigStore = instanceKeeper.getStore(::get)
@@ -111,10 +83,6 @@ internal class GuidanceComponentImpl(
     private val alertInfo = mapConfigStore.states.map { it.mapInternalConfig.alertsInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)
-
-    override val specialEventComponent: SpecialEventComponent =
-        buildSpecialEventComponent(childContext(key = "special_event"))
-
     // private val soundUtil by inject<SoundUtil>()
 
     private val backCallback = BackCallback {

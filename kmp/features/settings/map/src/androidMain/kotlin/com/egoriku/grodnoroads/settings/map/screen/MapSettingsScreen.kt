@@ -18,22 +18,19 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.settings.map.screen.ui.MarkersFilteringSection
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponentPreview
 import com.egoriku.grodnoroads.settings.map.screen.ui.DefaultLocationSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.DrivingModeSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.MapEventsSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.MapStyleSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.bottomsheet.DefaultLocationBottomSheet
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.*
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapDialogState.None
-import com.egoriku.grodnoroads.setting.map.ui.*
-import com.egoriku.grodnoroads.setting.map.ui.bottomsheet.DefaultLocationBottomSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

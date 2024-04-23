@@ -28,20 +28,16 @@ import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
-import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent.ReportDialogFlow
 import com.egoriku.grodnoroads.guidance.domain.model.*
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
-import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
-import com.egoriku.grodnoroads.guidance.domain.model.MapEventType.*
-import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Intent.ReportAction
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.model.QuickActionsState
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.screen.ui.CameraInfo
 import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
-import com.egoriku.grodnoroads.guidance.screen.ui.dialog.IncidentDialog
+import com.egoriku.grodnoroads.guidance.screen.ui.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.MarkerInfoBottomSheet
-import com.egoriku.grodnoroads.guidance.screen.ui.dialog.ReportDialog
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.UsersCount
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Large
@@ -59,30 +55,7 @@ import com.egoriku.grodnoroads.guidance.screen.util.MarkerCache
 import com.egoriku.grodnoroads.guidance.screen.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.location.toLatLng
-import com.egoriku.grodnoroads.map.appupdate.InAppUpdateHandle
-import com.egoriku.grodnoroads.map.camera.CameraInfo
-import com.egoriku.grodnoroads.map.dialog.MarkerInfoBottomSheet
-import com.egoriku.grodnoroads.map.domain.component.MapComponent
-import com.egoriku.grodnoroads.map.domain.model.*
-import com.egoriku.grodnoroads.map.domain.model.AppMode.*
-import com.egoriku.grodnoroads.map.domain.model.LastLocation.Companion.UNKNOWN_LOCATION
-import com.egoriku.grodnoroads.map.domain.model.MapEvent.Camera.*
-import com.egoriku.grodnoroads.map.foundation.ModalBottomSheet
-import com.egoriku.grodnoroads.map.foundation.UsersCount
-import com.egoriku.grodnoroads.map.google.MarkerSize.Large
-import com.egoriku.grodnoroads.map.google.MarkerSize.Small
-import com.egoriku.grodnoroads.map.google.markers.CameraMarker
-import com.egoriku.grodnoroads.map.google.markers.NavigationMarker
-import com.egoriku.grodnoroads.map.google.markers.ReportsMarker
-import com.egoriku.grodnoroads.map.google.ui.MapOverlayActions
-import com.egoriku.grodnoroads.map.google.util.rememberMapProperties
-import com.egoriku.grodnoroads.map.mode.DefaultOverlay
-import com.egoriku.grodnoroads.map.mode.chooselocation.ChooseLocation
-import com.egoriku.grodnoroads.map.mode.default.DefaultMode
-import com.egoriku.grodnoroads.map.mode.drive.DriveMode
-import com.egoriku.grodnoroads.map.ui.KeepScreenOn
-import com.egoriku.grodnoroads.map.util.MarkerCache
-import com.egoriku.grodnoroads.map.util.SnackbarMessageBuilder
+import com.egoriku.grodnoroads.map.domain.model.Notification
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
@@ -90,8 +63,8 @@ import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
-import com.egoriku.grodnoroads.shared.core.models.MapEventType.*
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ui.IconGenerator
@@ -324,8 +297,10 @@ fun GuidanceScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    Default -> onBottomNavigationVisibilityChange(true)
-                    Drive, ChooseLocation -> onBottomNavigationVisibilityChange(false)
+                    AppMode.Default -> onBottomNavigationVisibilityChange(true)
+                    AppMode.Drive, AppMode.ChooseLocation -> onBottomNavigationVisibilityChange(
+                        false
+                    )
                 }
             }
 
@@ -397,12 +372,12 @@ fun GuidanceScreen(
                                 message = mapEvent.markerMessage,
                                 iconProvider = {
                                     when (mapEvent.mapEventType) {
-                                        TrafficPolice -> markerCache.getIcon(R.drawable.ic_map_police)
-                                        RoadIncident -> markerCache.getIcon(R.drawable.ic_map_road_incident)
-                                        CarCrash -> markerCache.getIcon(R.drawable.ic_map_car_crash)
-                                        TrafficJam -> markerCache.getIcon(R.drawable.ic_map_traffic_jam)
-                                        WildAnimals -> markerCache.getIcon(R.drawable.ic_map_wild_animals)
-                                        Unsupported -> null
+                                        MapEventType.TrafficPolice -> markerCache.getIcon(R.drawable.ic_map_police)
+                                        MapEventType.RoadIncident -> markerCache.getIcon(R.drawable.ic_map_road_incident)
+                                        MapEventType.CarCrash -> markerCache.getIcon(R.drawable.ic_map_car_crash)
+                                        MapEventType.TrafficJam -> markerCache.getIcon(R.drawable.ic_map_traffic_jam)
+                                        MapEventType.WildAnimals -> markerCache.getIcon(R.drawable.ic_map_wild_animals)
+                                        MapEventType.Unsupported -> null
                                     }
                                 },
                                 iconGenerator = { iconGenerator },

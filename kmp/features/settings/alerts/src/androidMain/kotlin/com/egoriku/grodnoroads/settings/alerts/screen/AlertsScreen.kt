@@ -1,5 +1,10 @@
 package com.egoriku.grodnoroads.settings.alerts.screen
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,12 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
-import com.egoriku.grodnoroads.foundation.common.ui.list.SwitchSettings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
@@ -54,65 +60,75 @@ fun AlertsScreen(
             )
         }
     ) { paddingValues ->
-        if (state.isLoading) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
-                    .navigationBarsPadding()
-            ) {
-                val settings = state.alertSettings
-                val alertAvailability = settings.alertAvailability
-                SwitchSettings(
-                    stringResId = R.string.alerts_availability,
-                    supportingResId = R.string.alerts_availability_description,
-                    isChecked = alertAvailability.alertFeatureEnabled,
-                    onCheckedChange = { value ->
-                        alertsComponent.modify(alertAvailability.copy(alertFeatureEnabled = value))
-                    }
-                )
-
-                if (alertAvailability.alertFeatureEnabled) {
-                    AlertRadiusSection(
-                        alertRadius = settings.alertRadius,
-                        modify = alertsComponent::modify,
-                        reset = alertsComponent::reset
-                    )
-                    SwitchSettings(
-                        stringResId = R.string.alerts_voice_alerts,
-                        supportingResId = R.string.alerts_voice_alerts_description,
-                        isChecked = settings.alertAvailability.voiceAlertEnabled,
-                        onCheckedChange = { value ->
-                            alertsComponent.modify(alertAvailability.copy(voiceAlertEnabled = value))
-                        }
-                    )
+        AnimatedContent(
+            targetState = state.isLoading,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(220, delayMillis = 90)) togetherWith
+                        fadeOut(animationSpec = tween(90))
+            },
+            label = "alerts_content"
+        ) {
+            if (it) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
                 }
-                if (alertAvailability.voiceAlertEnabled) {
-                    VoiceLevelSection(
-                        alertVolumeLevel = settings.volumeInfo.alertVolumeLevel,
-                        modify = alertsComponent::modify,
-                        playTestSound = { volumeLevel ->
-                            audioPlayer.run {
-                                 setVolumeLevel(level = volumeLevel.volumeLevel)
-                                 setLoudness(volumeLevel.loudness.value)
-                                 playSound(sound = Sound.TestAudioLevel)
-                             }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .verticalScroll(rememberScrollState())
+                        .navigationBarsPadding(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    val settings = state.alertSettings
+                    val alertAvailability = settings.alertAvailability
+                    SwitchListItem(
+                        text = stringResource(R.string.alerts_availability),
+                        description = stringResource(R.string.alerts_availability_description),
+                        isChecked = alertAvailability.alertFeatureEnabled,
+                        onCheckedChange = { value ->
+                            alertsComponent.modify(alertAvailability.copy(alertFeatureEnabled = value))
                         }
                     )
-                    AlertEventsSection(
-                        alertEvents = settings.alertEvents,
-                        onCheckedChange = alertsComponent::modify
-                    )
+
+                    if (alertAvailability.alertFeatureEnabled) {
+                        AlertRadiusSection(
+                            alertRadius = settings.alertRadius,
+                            modify = alertsComponent::modify,
+                            reset = alertsComponent::reset
+                        )
+                        SwitchListItem(
+                            text = stringResource(R.string.alerts_voice_alerts),
+                            description = stringResource(R.string.alerts_voice_alerts_description),
+                            isChecked = settings.alertAvailability.voiceAlertEnabled,
+                            onCheckedChange = { value ->
+                                alertsComponent.modify(alertAvailability.copy(voiceAlertEnabled = value))
+                            }
+                        )
+                    }
+                    if (alertAvailability.voiceAlertEnabled) {
+                        VoiceLevelSection(
+                            alertVolumeLevel = settings.volumeInfo.alertVolumeLevel,
+                            modify = alertsComponent::modify,
+                            playTestSound = { volumeLevel ->
+                                audioPlayer.run {
+                                    setVolumeLevel(level = volumeLevel.volumeLevel)
+                                    setLoudness(volumeLevel.loudness.value)
+                                    playSound(sound = Sound.TestAudioLevel)
+                                }
+                            }
+                        )
+                        AlertEventsSection(
+                            alertEvents = settings.alertEvents,
+                            onCheckedChange = alertsComponent::modify
+                        )
+                    }
                 }
             }
         }

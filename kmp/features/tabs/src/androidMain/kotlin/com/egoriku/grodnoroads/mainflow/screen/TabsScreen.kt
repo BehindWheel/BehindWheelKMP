@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
-import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
+import com.egoriku.grodnoroads.coroutines.onChild
+import com.egoriku.grodnoroads.eventreporting.EventReportingScreen
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
@@ -27,9 +28,6 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
-import com.egoriku.grodnoroads.map.MapScreen
-import com.egoriku.grodnoroads.screen.main.MainComponent.Child
-import com.egoriku.grodnoroads.setting.screen.SettingsScreen
 import kotlinx.collections.immutable.persistentListOf
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -40,19 +38,29 @@ fun TabsScreen(tabsComponent: TabsComponent) {
 
     val childStack by tabsComponent.childStack.collectAsState()
 
-    when (windowSizeClass.widthSizeClass) {
-        WindowWidthSizeClass.Expanded -> {
-            HorizontalOrientationLayout(
-                childStack = { childStack },
-                onSelectTab = tabsComponent::onSelectTab,
-                activeIndex = { childStack.active.instance.index }
-            )
+    Box {
+        when (windowSizeClass.widthSizeClass) {
+            WindowWidthSizeClass.Expanded -> {
+                HorizontalOrientationLayout(
+                    childStack = { childStack },
+                    onSelectTab = tabsComponent::onSelectTab,
+                    activeIndex = { childStack.active.instance.index }
+                )
+            }
+            else -> {
+                VerticalOrientationLayout(
+                    childStack = { childStack },
+                    onSelectTab = tabsComponent::onSelectTab,
+                    activeIndex = { childStack.active.instance.index }
+                )
+            }
         }
-        else -> {
-            VerticalOrientationLayout(
-                childStack = { childStack },
-                onSelectTab = tabsComponent::onSelectTab,
-                activeIndex = { childStack.active.instance.index }
+
+        val childSlot by tabsComponent.childSlot.collectAsState()
+        childSlot.onChild {
+            EventReportingScreen(
+                onClose = tabsComponent::closeReporting,
+                onReport = tabsComponent::processReporting
             )
         }
     }
@@ -72,11 +80,6 @@ private fun VerticalOrientationLayout(
         label = "bottomPadding"
     )
 
-    val contentPaddingValues = WindowInsets
-        .systemBars
-        .add(WindowInsets(bottom = bottomPadding))
-        .asPaddingValues()
-
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
@@ -85,14 +88,20 @@ private fun VerticalOrientationLayout(
             when (val child = created.instance) {
                 is Child.Guidance -> {
                     GuidanceScreen(
-                        contentPadding = contentPaddingValues,
+                        contentPadding = WindowInsets
+                            .systemBars
+                            .add(WindowInsets(bottom = bottomPadding))
+                            .asPaddingValues(),
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isShowBottomBar = it }
                     )
                 }
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = PaddingValues(0.dp),
+                        contentPadding = WindowInsets
+                            .navigationBars
+                            .add(WindowInsets(bottom = bottomPadding))
+                            .asPaddingValues(),
                         settingsComponent = child.component
                     )
                 }
@@ -137,10 +146,6 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
-    val contentPaddingValues = WindowInsets.systemBars
-        .add(WindowInsets(left = leftPadding))
-        .asPaddingValues()
-
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
@@ -149,13 +154,17 @@ private fun HorizontalOrientationLayout(
             when (val child = created.instance) {
                 is Child.Guidance ->
                     GuidanceScreen(
-                        contentPadding = contentPaddingValues,
+                        contentPadding = WindowInsets.systemBars
+                            .add(WindowInsets(left = leftPadding))
+                            .asPaddingValues(),
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isHideBottomBar = it }
                     )
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = PaddingValues(start = leftPadding),
+                        contentPadding = WindowInsets.navigationBars
+                            .add(WindowInsets(left = leftPadding))
+                            .asPaddingValues(),
                         settingsComponent = child.component
                     )
                 }

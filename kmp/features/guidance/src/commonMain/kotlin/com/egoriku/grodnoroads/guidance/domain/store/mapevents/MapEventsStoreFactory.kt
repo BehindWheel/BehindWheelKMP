@@ -8,15 +8,24 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.repository.*
-import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.*
-import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.*
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnMediumSpeed
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnMobileCamera
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnNewReports
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnStationary
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnUpdateFilterTime
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnUserCount
+import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.State
 import com.egoriku.grodnoroads.logger.logD
-import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.filteringMarkers
+import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -40,7 +49,7 @@ internal class MapEventsStoreFactory(
 ) {
 
     private val currentTime: Long
-        get() = System.currentTimeMillis()
+        get() = DateTime.currentTimeMillis()
 
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapEventsStore =
@@ -114,7 +123,7 @@ internal class MapEventsStoreFactory(
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
+                is Failure -> {} //crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -123,7 +132,7 @@ internal class MapEventsStoreFactory(
         mediumSpeedCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
+                is Failure -> {} //crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -134,7 +143,7 @@ internal class MapEventsStoreFactory(
             .collect { result ->
                 when (result) {
                     is Success -> onLoaded(result.value)
-                    is Failure -> crashlyticsTracker.recordException(result.throwable)
+                    is Failure -> {}// crashlyticsTracker.recordException(result.throwable)
                 }
             }
     }
@@ -143,10 +152,10 @@ internal class MapEventsStoreFactory(
         stationaryCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
-                    .also {
-                        logD("Error loading stationary: ${result.throwable.message}")
-                    }
+                is Failure -> {
+                    //crashlyticsTracker.recordException(result.throwable)
+                    logD("Error loading stationary: ${result.throwable.message}")
+                }
             }
         }
     }
@@ -155,10 +164,10 @@ internal class MapEventsStoreFactory(
         userCountRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
-                    .also {
-                        logD("Error loading user count: ${result.throwable.message}")
-                    }
+                is Failure -> {
+                    //crashlyticsTracker.recordException(result.throwable)
+                    logD("Error loading user count: ${result.throwable.message}")
+                }
             }
         }
     }

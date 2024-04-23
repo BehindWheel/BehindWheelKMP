@@ -9,9 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.guidance.domain.model.Source
-import com.egoriku.grodnoroads.map.domain.model.MessageItem
-import com.egoriku.grodnoroads.shared.core.models.Source
+import com.egoriku.grodnoroads.shared.models.Source
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

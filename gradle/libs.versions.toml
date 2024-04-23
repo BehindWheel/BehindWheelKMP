@@ -27,19 +27,16 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
 androidx-annotation = "androidx.annotation:annotation:1.7.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
-androidx-annotation = "androidx.annotation:annotation:1.7.1"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-core = "androidx.core:core-ktx:1.13.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.1.0"
-androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.0-beta01"
+androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.0"
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
 
 compose-stable-marker = "com.github.skydoves:compose-stable-marker:1.0.3"
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
@@ -64,9 +61,10 @@ koin-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-core = { module = "io.insert-koin:koin-core" }
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
-kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3"
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0"
 kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.5.0"
+kotlin-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }

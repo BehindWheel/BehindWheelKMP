@@ -3,15 +3,9 @@ package com.egoriku.grodnoroads.guidance.domain.store.config
 import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.guidance.domain.model.ReportType
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
-import com.google.android.gms.maps.model.LatLng
 
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 

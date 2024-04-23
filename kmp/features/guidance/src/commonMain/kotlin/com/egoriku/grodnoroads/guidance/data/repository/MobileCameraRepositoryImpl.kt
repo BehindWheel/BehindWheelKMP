@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.guidance.data.repository
 
+import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.guidance.data.dto.MobileCameraDTO
-import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.uuid.Uuid
+import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
 import dev.gitlive.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -18,18 +18,22 @@ internal class MobileCameraRepositoryImpl(
     private val databaseReference: DatabaseReference
 ) : MobileCameraRepository {
 
+    private val currentTime = DateTime.currentTimeMillis()
+
     override fun loadAsFlow() = databaseReference
-        .child("temporary_camera/cameras")
+        .child("/v2/mobile_cameras/cameras")
         .valueEvents
         .map { resultOf ->
             Success(resultOf.value<List<MobileCameraDTO>>().map { data ->
-                MapEvent.Camera.MobileCamera(
-                    // TODO: use from backend
-                    id = Uuid.randomUUID(),
+                MobileCamera(
+                    id = data.id,
                     name = data.name,
                     position = LatLng(data.latitude, data.longitude),
                     speedCar = data.speed,
                     speedTruck = data.speed,
+                    updateTime = currentTime,
+                    angle = data.angle,
+                    bidirectional = data.bidirectional
                 )
             })
         }

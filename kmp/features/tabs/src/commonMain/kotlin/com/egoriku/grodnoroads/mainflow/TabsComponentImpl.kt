@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.mainflow
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.slot.*
 import com.arkivanov.decompose.router.stack.*
 import com.egoriku.grodnoroads.appsettings.domain.buildAppSettingsComponent
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
@@ -9,6 +10,7 @@ import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.buildGuidanceComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
 import com.egoriku.grodnoroads.shared.models.Page
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.serialization.Serializable
 
 fun buildTabComponent(
@@ -25,6 +27,8 @@ internal class TabsComponentImpl(
 ) : TabsComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
+    private val reportingNavigation = SlotNavigation<ReportingConfig>()
+
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
@@ -35,12 +39,26 @@ internal class TabsComponentImpl(
     )
 
     override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
+    override val childSlot: CStateFlow<ChildSlot<*, Any>> =
+        childSlot(
+            source = reportingNavigation,
+            serializer = ReportingConfig.serializer()
+        ) { _, _ ->
+            Any()
+        }.toStateFlow().toCStateFlow()
 
     private fun processChild(
         config: Config,
         componentContext: ComponentContext
     ) = when (config) {
-        is Config.Guidance -> Child.Guidance(buildGuidanceComponent(componentContext))
+        is Config.Guidance -> Child.Guidance(
+            buildGuidanceComponent(
+                componentContext = componentContext,
+                onOpenReporting = {
+                    reportingNavigation.activate(ReportingConfig)
+                }
+            )
+        )
         is Config.AppSettings -> Child.AppSettings(
             buildAppSettingsComponent(
                 componentContext = componentContext,
@@ -56,6 +74,15 @@ internal class TabsComponentImpl(
             navigation.bringToFront(Config.AppSettings)
         }
     }
+
+    override fun processReporting(params: ReportParams) {
+        (stack.active.instance as? Child.Guidance)?.component?.processReporting(params)
+    }
+
+    override fun closeReporting() = reportingNavigation.dismiss()
+
+    @Serializable
+    object ReportingConfig
 
     @Serializable
     private sealed interface Config {

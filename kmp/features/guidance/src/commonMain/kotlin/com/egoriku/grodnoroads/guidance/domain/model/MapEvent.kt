@@ -1,9 +1,8 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.shared.core.models.MapEventType
-import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.models.MapEventType
 import kotlinx.collections.immutable.ImmutableList
 
 @Stable

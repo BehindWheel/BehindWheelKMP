@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.setting.map.ui
+package com.egoriku.grodnoroads.settings.map.screen.ui
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -14,9 +14,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref
-import com.egoriku.grodnoroads.setting.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
-import com.egoriku.grodnoroads.shared.appsettings.types.map.filtering.Filtering.Companion.toResource
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
+import com.egoriku.grodnoroads.shared.persistent.toStringResource
 
 @Composable
 internal fun MarkersFilteringSection(
@@ -45,7 +45,7 @@ internal fun MarkersFilteringSection(
                     },
                     label = {
                         Text(
-                            text = stringResource(id = filtering.toResource()),
+                            text = stringResource(id = filtering.toStringResource()),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

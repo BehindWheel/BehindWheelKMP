@@ -3,7 +3,9 @@ package com.egoriku.grodnoroads.root.di
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.egoriku.grodnoroads.crashlytics.shared.di.crashlyticsModule
+import com.egoriku.grodnoroads.eventreporting.di.eventReportingModule
 import com.egoriku.grodnoroads.guidance.di.guidanceModule
+import com.egoriku.grodnoroads.quicksettings.di.quickSettingsModule
 import com.egoriku.grodnoroads.settings.alerts.di.alertsModule
 import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
 import com.egoriku.grodnoroads.settings.changelog.domain.di.changelogModule
@@ -21,6 +23,8 @@ import org.koin.dsl.module
 
 fun appModule() = listOf(
     guidanceModule,
+    eventReportingModule,
+    quickSettingsModule,
     specialEventModule,
 
     alertsModule,

@@ -42,7 +42,9 @@ include(":kmp:features:onboarding")
 include(":kmp:features:mainflow")
 
 include(":kmp:features:guidance")
+include(":kmp:features:eventReporting")
 include(":kmp:features:specialEventReminder")
+include(":kmp:features:quickSettings")
 
 include(":kmp:features:tabs")
 

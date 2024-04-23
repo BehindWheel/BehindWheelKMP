@@ -3,11 +3,13 @@ package com.egoriku.grodnoroads.guidance.domain.util
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera
-import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.*
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.guidance.domain.model.MapEventType
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig.MapInfo
+import com.egoriku.grodnoroads.shared.models.MapEventType
 import kotlinx.collections.immutable.toImmutableList
 
 internal fun filterMapEvents(): suspend (

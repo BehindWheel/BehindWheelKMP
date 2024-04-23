@@ -1,13 +1,11 @@
 package com.egoriku.grodnoroads.guidance.domain.store.dialog
 
 import com.arkivanov.mvikotlin.core.store.Store
-import com.egoriku.grodnoroads.guidance.domain.model.MapAlertDialog
+import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
-import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.*
-import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.map.domain.model.MapBottomSheet
-import com.egoriku.grodnoroads.map.domain.model.MapEvent
-import com.egoriku.grodnoroads.map.domain.store.dialog.DialogStore.*
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Message
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.State
 
 interface DialogStore : Store<Intent, State, Message> {
 

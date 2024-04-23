@@ -12,9 +12,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
-import com.egoriku.grodnoroads.foundation.common.ui.list.CheckboxSettings
-import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
@@ -22,7 +19,15 @@ import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListIte
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertEvents
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
-import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.*
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.CarCrash
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.MediumSpeedCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.MobileCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.RoadIncident
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.SelectAll
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.StationaryCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficJam
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficPolice
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.WildAnimals
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 
 @Composable

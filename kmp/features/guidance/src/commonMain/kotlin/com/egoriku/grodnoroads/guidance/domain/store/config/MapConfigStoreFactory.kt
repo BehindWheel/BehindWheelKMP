@@ -9,11 +9,17 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.guidance.domain.model.ReportType
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent
-import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.*
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.CheckLocation
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.ChooseLocation
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.StartDriveMode
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.StopDriveMode
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.StoreState
-import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.*
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.ChangeAppMode
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnAlertRadius
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnMapConfigInternal
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnUserZoomLevel
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnZoomLevel
 import com.egoriku.grodnoroads.guidance.domain.util.CityArea
 import com.egoriku.grodnoroads.location.util.PolyUtil
 import com.egoriku.grodnoroads.shared.persistent.alert.*
@@ -23,25 +29,6 @@ import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.*
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
-import com.egoriku.grodnoroads.map.domain.model.AppMode
-import com.egoriku.grodnoroads.map.domain.model.AppMode.Default
-import com.egoriku.grodnoroads.map.domain.model.AppMode.Drive
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.AlertsInfo
-import com.egoriku.grodnoroads.map.domain.model.MapInternalConfig.MapInfo
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.Intent.*
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStore.StoreState
-import com.egoriku.grodnoroads.map.domain.store.config.MapConfigStoreFactory.Message.*
-import com.egoriku.grodnoroads.shared.appsettings.types.alert.*
-import com.egoriku.grodnoroads.shared.appsettings.types.appearance.keepScreenOn
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomInCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.drivemode.mapZoomOutCity
-import com.egoriku.grodnoroads.shared.appsettings.types.map.location.CityArea
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapinfo.*
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.googleMapStyle
-import com.egoriku.grodnoroads.shared.appsettings.types.map.mapstyle.trafficJamOnMap
-import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -136,16 +123,16 @@ internal class MapConfigStoreFactory(
                     dispatch(OnAlertRadius(radius = alertRadius))
                 }
                 onIntent<StartDriveMode> {
-                    dispatch(ChangeAppMode(appMode = Drive))
+                    dispatch(ChangeAppMode(appMode = AppMode.Drive))
                     dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                 }
                 onIntent<StopDriveMode> {
-                    dispatch(ChangeAppMode(appMode = Default))
+                    dispatch(ChangeAppMode(appMode = AppMode.Default))
                     dispatch(OnZoomLevel(zoomLevel = 12.5f))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
                     when (state.currentAppMode) {
-                        Default -> {
+                        AppMode.Default -> {
                             dispatch(
                                 ChangeAppMode(
                                     appMode = AppMode.ChooseLocation,
@@ -155,7 +142,7 @@ internal class MapConfigStoreFactory(
                             dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                             dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
                         }
-                        Drive -> dispatch(
+                        AppMode.Drive -> dispatch(
                             ChangeAppMode(
                                 appMode = AppMode.ChooseLocation,
                                 isChooseInDriveMode = true
@@ -166,10 +153,10 @@ internal class MapConfigStoreFactory(
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {
                     if (state.isChooseInDriveMode) {
-                        dispatch(ChangeAppMode(appMode = Drive))
+                        dispatch(ChangeAppMode(appMode = AppMode.Drive))
                         dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
                     } else {
-                        dispatch(ChangeAppMode(appMode = Default))
+                        dispatch(ChangeAppMode(appMode = AppMode.Default))
                         dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
                     }
                 }

@@ -2,10 +2,12 @@ package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
+import com.arkivanov.decompose.router.slot.*
 import com.arkivanov.decompose.router.stack.*
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
@@ -67,6 +69,9 @@ internal class MainFlowComponentImpl(
             Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
         }
     }
+
+    @Serializable
+    object ReportingConfig
 
     @Serializable
     private sealed interface Config {

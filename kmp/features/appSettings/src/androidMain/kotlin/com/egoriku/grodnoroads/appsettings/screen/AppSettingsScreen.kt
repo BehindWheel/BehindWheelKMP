@@ -21,10 +21,8 @@ import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponentPreview
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
-import com.egoriku.grodnoroads.foundation.common.ui.SettingsHeader
-import com.egoriku.grodnoroads.foundation.common.ui.list.SettingsItem
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
@@ -91,7 +89,7 @@ private fun SettingsUi(
                         icon = R.drawable.ic_map,
                         name = stringResource(R.string.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
-                        onClick = { onSettingClick(Page.Map) }
+                        onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_notification_badge,
@@ -100,47 +98,47 @@ private fun SettingsUi(
                         onClick = { onSettingClick(Page.Alerts) }
                     )
                 }
-        }
-        Card(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    text = stringResource(R.string.settings_category_other)
-                )
-                SettingsListItem(
-                    icon = R.drawable.ic_changelog,
-                    name = stringResource(R.string.settings_section_changelog),
-                    paddingValues = PaddingValues(horizontal = 20.dp),
-                    onClick = { onSettingClick(Page.Changelog) }
-                )
-                if (FeatureFlags.settingsNextFeaturesEnabled) {
+            }
+            Card(modifier = Modifier.padding(horizontal = 16.dp)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = stringResource(R.string.settings_category_other)
+                    )
                     SettingsListItem(
-                        icon = Icons.Filled.Build,
-                        name = stringResource(R.string.settings_section_next_features),
+                        icon = R.drawable.ic_changelog,
+                        name = stringResource(R.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
-                        onClick = { onSettingClick(Page.NextFeatures) }
+                        onClick = { onSettingClick(Page.Changelog) }
+                    )
+                    if (FeatureFlags.settingsNextFeaturesEnabled) {
+                        SettingsListItem(
+                            icon = Icons.Filled.Build,
+                            name = stringResource(R.string.settings_section_next_features),
+                            paddingValues = PaddingValues(horizontal = 20.dp),
+                            onClick = { onSettingClick(Page.NextFeatures) }
+                        )
+                    }
+                    SettingsListItem(
+                        icon = R.drawable.ic_faq,
+                        name = stringResource(R.string.settings_section_faq),
+                        paddingValues = PaddingValues(horizontal = 20.dp),
+                        onClick = { onSettingClick(Page.FAQ) }
                     )
                 }
-                SettingsListItem(
-                    icon = R.drawable.ic_faq,
-                    name = stringResource(R.string.settings_section_faq),
-                    paddingValues = PaddingValues(horizontal = 20.dp),
-                    onClick = { onSettingClick(Page.FAQ) }
-                )
             }
+            WeightSpacer()
+            SocialNetworkSection()
+            VersionSection(appVersion = appVersion)
+            PrivacyPolicySection()
         }
-        WeightSpacer()
-        SocialNetworkSection()
-        VersionSection(appVersion = appVersion)
-        PrivacyPolicySection()
     }
-}
 }
 
 @Composable

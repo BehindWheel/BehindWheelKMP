@@ -6,7 +6,6 @@ import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactor
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStoreFactory
-import com.egoriku.grodnoroads.guidance.domain.store.quickactions.QuickActionsStoreFactory
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -27,7 +26,8 @@ val guidanceModule = module {
             userCountRepository = get(),
             reportsRepository = get(),
             // analyticsTracker = get(),
-            crashlyticsTracker = get()
+            //  crashlyticsTracker = get()
+            dataStore = get()
         ).create()
     }
 
@@ -50,13 +50,6 @@ val guidanceModule = module {
         DialogStoreFactory(
             storeFactory = get(),
             // analyticsTracker = get()
-        ).create()
-    }
-
-    factory {
-        QuickActionsStoreFactory(
-            storeFactory = get(),
-            dataStore = get()
         ).create()
     }
 }

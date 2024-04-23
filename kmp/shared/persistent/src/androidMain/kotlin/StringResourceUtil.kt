@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.shared.persistent
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.appearance.Language
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
+import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
 
 fun Language.toStringResource() = when (this) {
@@ -33,4 +34,11 @@ fun City.toStringResource(): Int = when (this) {
     City.Dyatlovo -> R.string.map_default_location_dyatlovo
     City.Novogrudok -> R.string.map_default_location_novogrudok
     City.Korelichi -> R.string.map_default_location_korelichi
+}
+
+fun Filtering.toStringResource() = when (this) {
+    Filtering.Minutes15 -> R.string.map_markers_filtering_15_minutes
+    Filtering.Minutes30 -> R.string.map_markers_filtering_30_minutes
+    Filtering.Minutes45 -> R.string.map_markers_filtering_45_minutes
+    Filtering.Hours1 -> R.string.map_markers_filtering_1_hour
 }
