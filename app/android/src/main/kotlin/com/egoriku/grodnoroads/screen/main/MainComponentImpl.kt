@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.screen.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.map.domain.component.buildMapComponent
 import com.egoriku.grodnoroads.screen.main.MainComponent.Child
 import com.egoriku.grodnoroads.setting.domain.component.buildSettingsComponent
@@ -48,8 +48,8 @@ internal class MainComponentImpl(
         }
     }
 
-    override fun processReporting(result: ReportingResult) {
-        (stack.active.instance as? Child.Map)?.component?.processReporting(result)
+    override fun processReporting(params: ReportParams) {
+        (stack.active.instance as? Child.Map)?.component?.processReporting(params)
     }
 
     private fun child(

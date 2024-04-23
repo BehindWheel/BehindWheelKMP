@@ -7,7 +7,7 @@ import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.buildMainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
@@ -69,8 +69,8 @@ class RoadsRootComponentImpl(
         rootStore.accept(Intent.CloseDialog)
     }
 
-    override fun processReporting(result: ReportingResult) {
-        (stack.active.instance as? Child.Main)?.component?.processReporting(result)
+    override fun processReporting(params: ReportParams) {
+        (stack.active.instance as? Child.Main)?.component?.processReporting(params)
     }
 
     override fun closeReporting() = reportingNavigation.dismiss()
