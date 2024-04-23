@@ -21,16 +21,14 @@ extension MapEventCamera {
     }
 }
 
-extension Source {
+extension MessageSource {
     var reportSource: ReportSource {
-        if self == Source.app {
+        if self == MessageSource.app {
             .app
-        } else if self == Source.viber {
+        } else if self == MessageSource.viber {
             .viber
-        } else if self == Source.telegram {
+        } else if self == MessageSource.telegram {
             .telegram
-        } else if self == Source.zello {
-            .zello
         } else {
             .unknown
         }

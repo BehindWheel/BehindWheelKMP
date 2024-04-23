@@ -11,6 +11,5 @@ enum ReportSource {
     case app
     case viber
     case telegram
-    case zello
     case unknown
 }
