@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
@@ -29,7 +28,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.foundation.uikit.ValidationOutlinedTextField
+import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.resources.R
 import kotlinx.collections.immutable.persistentListOf
 
@@ -92,7 +91,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
                 )
             }
         }
-        ValidationOutlinedTextField(
+        OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
@@ -107,7 +106,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
             onValueChange = { inputText = it },
             label = stringResource(R.string.reporting_mobile_camera_input_hint),
             supportingText = errorLabel,
-            onValidate = { isValidateInput = true }
+            onFocusChange = { isValidateInput = true }
         )
     }
 }

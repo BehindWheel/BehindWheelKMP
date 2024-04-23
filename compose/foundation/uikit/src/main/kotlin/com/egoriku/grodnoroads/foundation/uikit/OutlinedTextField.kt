@@ -11,16 +11,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 
 @Composable
-fun ValidationOutlinedTextField(
+fun OutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -28,18 +27,16 @@ fun ValidationOutlinedTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     supportingText: String? = null,
-    onValidate: () -> Unit
+    onFocusChange: () -> Unit
 ) {
-    var isFirstFocus by remember { mutableStateOf(true) }
+    var isFirstFocus by rememberMutableState { true }
 
     OutlinedTextField(
         modifier = modifier
             .onFocusChanged { focusState ->
-                if (isFirstFocus) {
-                    isFirstFocus = false
-                } else {
-                    if (!focusState.isFocused)
-                        onValidate()
+                when {
+                    isFirstFocus -> isFirstFocus = false
+                    !focusState.isFocused -> onFocusChange()
                 }
             },
         value = value,
