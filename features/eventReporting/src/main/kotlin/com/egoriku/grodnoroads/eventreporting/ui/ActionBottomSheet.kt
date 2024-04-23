@@ -49,6 +49,7 @@ internal enum class DragAnchors {
 internal fun ActionBottomSheet(
     onDismiss: () -> Unit,
     onResult: () -> Unit,
+    sendEnabled: Boolean,
     content: @Composable () -> Unit
 ) {
     val density = LocalDensity.current
@@ -95,7 +96,8 @@ internal fun ActionBottomSheet(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .imePadding()
+                .imePadding(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(modifier = Modifier.weight(1f)) {
                 Column(modifier = Modifier
@@ -130,7 +132,8 @@ internal fun ActionBottomSheet(
                         detectTapGestures(onTap = {
                             focusManager.clearFocus()
                         })
-                    }
+                    },
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Surface(
                         modifier = Modifier
@@ -178,6 +181,7 @@ internal fun ActionBottomSheet(
 
                 BottomActions(
                     modifier = Modifier
+                        .widthIn(max = 600.dp)
                         .onSizeChanged {
                             if (measuredHeight < it.height) {
                                 measuredHeight = it.height
@@ -189,6 +193,7 @@ internal fun ActionBottomSheet(
                         .offset {
                             IntOffset(x = 0, y = offsetY)
                         },
+                    sendEnabled = sendEnabled,
                     onCancel = internalOnDismissRequest,
                     onResult = {
                         onResult()
@@ -202,6 +207,7 @@ internal fun ActionBottomSheet(
 
 @Composable
 private fun BottomActions(
+    sendEnabled: Boolean,
     modifier: Modifier,
     onCancel: () -> Unit,
     onResult: () -> Unit
@@ -225,6 +231,7 @@ private fun BottomActions(
 
             PrimaryButton(
                 modifier = Modifier.weight(1f),
+                enabled = sendEnabled,
                 onClick = onResult
             ) {
                 Text(text = stringResource(R.string.send))

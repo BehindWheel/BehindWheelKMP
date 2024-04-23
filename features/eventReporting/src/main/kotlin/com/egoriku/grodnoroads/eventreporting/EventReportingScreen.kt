@@ -2,93 +2,80 @@ package com.egoriku.grodnoroads.eventreporting
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.eventreporting.domain.Reporting
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
-import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
-import com.egoriku.grodnoroads.eventreporting.domain.toResource
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.eventreporting.ui.ActionBottomSheet
+import com.egoriku.grodnoroads.eventreporting.ui.foundation.MobileCameraOptions
+import com.egoriku.grodnoroads.eventreporting.ui.foundation.SelectableOptions
+import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.resources.R
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun EventReportingScreen(
     onClose: () -> Unit,
-    onReport: (ReportingResult) -> Unit
+    onReport: (ReportParams) -> Unit
 ) {
-    var selectedType: ReportType by rememberMutableState { Reporting.roadIncidents }
-    var selectedOption by rememberMutableState(selectedType) {
-        selectedType.items.first()
+    var reportParams by rememberMutableState<ReportParams?> { null }
+    val sendEnabled by remember {
+        derivedStateOf {
+            when (val params = reportParams) {
+                is ReportParams.EventReport -> true
+                is ReportParams.MobileCameraReport -> params.cameraInfo.isNotEmpty()
+                null -> false
+            }
+        }
     }
-    var inputText by rememberMutableState { "" }
 
     ActionBottomSheet(
         onDismiss = onClose,
-        onResult = {
-            onReport(
-                ReportingResult(
-                    mapEventType = selectedOption.mapEventType,
-                    shortMessage = selectedOption.toSend,
-                    message = inputText.ifEmpty { selectedOption.toSend }
-                )
-            )
-        }
+        sendEnabled = sendEnabled,
+        onResult = { reportParams?.let(onReport) }
     ) {
-        ReportingUi(
-            currentType = selectedType,
-            selectedOption = selectedOption,
-            inputText = inputText,
-            onTypeChanged = {
-                selectedType = it
-            },
-            onSelectedOptionChanged = {
-                selectedOption = it
-            },
-            onInputChanged = {
-                inputText = it
-            }
-        )
+        ReportingUi(onReportParamsChange = { reportParams = it })
     }
 }
 
 @Composable
-private fun ReportingUi(
-    currentType: ReportType,
-    selectedOption: ReportingOptions,
-    inputText: String,
-    onTypeChanged: (ReportType) -> Unit,
-    onSelectedOptionChanged: (ReportingOptions) -> Unit,
-    onInputChanged: (String) -> Unit
-) {
-    val keyboardController = LocalSoftwareKeyboardController.current
+private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
     val focusManager = LocalFocusManager.current
+
+    var reportType by rememberMutableState<ReportType> { ReportType.RoadIncidents }
 
     Column(
         modifier = Modifier
@@ -109,74 +96,81 @@ private fun ReportingUi(
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(16.dp)
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            CategoryCell(
-                modifier = Modifier.weight(1f),
-                name = stringResource(R.string.reporting_category_road_incidents),
-                iconRes = R.drawable.ic_reporting_road_problem,
-                selected = currentType == Reporting.roadIncidents,
-                onClick = {
-                    onTypeChanged(Reporting.roadIncidents)
-                    focusManager.clearFocus()
-                }
-            )
-            CategoryCell(
-                modifier = Modifier.weight(1f),
-                name = stringResource(R.string.reporting_category_traffic_police),
-                iconRes = R.drawable.ic_reporting_traffic_police,
-                selected = currentType == Reporting.trafficPolice,
-                onClick = {
-                    onTypeChanged(Reporting.trafficPolice)
-                    focusManager.clearFocus()
-                }
-            )
-            CategoryCell(
-                modifier = Modifier.weight(1f),
-                name = stringResource(R.string.reporting_category_other),
-                iconRes = R.drawable.ic_reporting_other,
-                selected = currentType == Reporting.other,
-                onClick = {
-                    onTypeChanged(Reporting.other)
-                    focusManager.clearFocus()
-                }
-            )
-        }
-        VerticalSpacer(24.dp)
-        currentType.items.forEach { entry ->
-            RadioButtonListItem(
-                text = stringResource(entry.toResource()),
-                selected = selectedOption == entry,
-                onSelect = {
-                    onSelectedOptionChanged(entry)
-                    focusManager.clearFocus()
-                }
-            )
-        }
+        ReportingTypes(currentType = reportType, onTypeChanged = { reportType = it })
         VerticalSpacer(16.dp)
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    keyboardController?.hide()
+
+        when (reportType) {
+            ReportType.MobileCamera -> {
+                MobileCameraOptions(onReportParamsChange = onReportParamsChange)
+            }
+            else -> {
+                SelectableOptions(
+                    reportType = reportType,
+                    onReportParamsChange = onReportParamsChange
+                )
+            }
+        }
+        VerticalSpacer(8.dp)
+    }
+}
+
+internal data class Repo(
+    val reportType: ReportType,
+    val iconRes: Int,
+    val stringRes: Int
+)
+
+@Composable
+private fun ReportingTypes(
+    currentType: ReportType,
+    onTypeChanged: (ReportType) -> Unit,
+) {
+    val focusManager = LocalFocusManager.current
+    val items = remember {
+        persistentListOf(
+            Repo(
+                reportType = ReportType.RoadIncidents,
+                iconRes = R.drawable.ic_reporting_road_problem,
+                stringRes = R.string.reporting_category_road_incidents
+            ),
+            Repo(
+                reportType = ReportType.TrafficPolice,
+                iconRes = R.drawable.ic_reporting_traffic_police,
+                stringRes = R.string.reporting_category_traffic_police
+            ),
+            Repo(
+                reportType = ReportType.Other,
+                iconRes = R.drawable.ic_reporting_other,
+                stringRes = R.string.reporting_category_other
+            ),
+            Repo(
+                reportType = ReportType.MobileCamera,
+                iconRes = R.drawable.ic_camera_info_mobile,
+                stringRes = R.string.reporting_category_mobile_camera
+            )
+        )
+    }
+
+    val indexToScroll by remember(currentType) {
+        derivedStateOf { items.indexOfFirst { it.reportType == currentType } }
+    }
+    AutoScrollLazyRow(
+        indexToScroll = indexToScroll,
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(items) {
+            CategoryCell(
+                modifier = Modifier.width(96.dp),
+                name = stringResource(it.stringRes),
+                iconRes = it.iconRes,
+                selected = currentType == it.reportType,
+                onClick = {
+                    onTypeChanged(it.reportType)
                     focusManager.clearFocus()
                 }
-            ),
-            value = inputText,
-            shape = RoundedCornerShape(16.dp),
-            singleLine = true,
-            onValueChange = onInputChanged,
-            label = { Text(stringResource(R.string.dialog_input_hint)) }
-        )
-        VerticalSpacer(24.dp)
+            )
+        }
     }
 }
 
@@ -219,59 +213,8 @@ private fun CategoryCell(
     }
 }
 
-@Composable
-private fun RadioButtonListItem(
-    text: String,
-    selected: Boolean,
-    onSelect: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .toggleable(
-                value = selected,
-                role = Role.RadioButton,
-                onValueChange = { onSelect() }
-            )
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = onSelect,
-        )
-        Text(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .weight(1f),
-            text = text,
-            style = MaterialTheme.typography.titleMedium
-        )
-    }
-}
-
 @GrodnoRoadsPreview
 @Composable
 private fun ReportingUiPreview() = GrodnoRoadsM3ThemePreview {
-    var selectedType by rememberMutableState { Reporting.roadIncidents }
-    var selectedOption by rememberMutableState(selectedType) {
-        selectedType.items.first()
-    }
-    var inputText by remember { mutableStateOf("") }
-
-    ReportingUi(
-        currentType = selectedType,
-        selectedOption = selectedOption,
-        inputText = inputText,
-        onTypeChanged = {
-            selectedType = it
-        },
-        onSelectedOptionChanged = {
-            selectedOption = it
-        },
-        onInputChanged = {
-            inputText = it
-        }
-    )
+    ReportingUi(onReportParamsChange = {})
 }

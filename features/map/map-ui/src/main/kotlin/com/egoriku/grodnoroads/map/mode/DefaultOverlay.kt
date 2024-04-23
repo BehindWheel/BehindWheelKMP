@@ -53,9 +53,9 @@ fun DefaultOverlay(
             if (isDriveMode) {
                 Row(
                     modifier = Modifier
+                        .padding(contentPadding)
                         .padding(start = 16.dp)
-                        .fillMaxWidth()
-                        .statusBarsPadding(),
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy((-8).dp)
                 ) {
@@ -74,8 +74,7 @@ fun DefaultOverlay(
             PrimaryInverseCircleButton(
                 modifier = Modifier
                     .padding(contentPadding)
-                    .padding(horizontal = 16.dp)
-                    .statusBarsPadding(),
+                    .padding(horizontal = 16.dp),
                 onClick = onOpenQuickSettings,
                 size = Size.Small
             ) {

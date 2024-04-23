@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.map.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.eventreporting.domain.model.ReportingResult
+import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.map.domain.model.*
 import com.egoriku.grodnoroads.map.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
@@ -29,7 +29,7 @@ interface MapComponent {
 
     val speedLimit: Flow<Int>
 
-    fun processReporting(result: ReportingResult)
+    fun processReporting(params: ReportParams)
 
     fun setLocation(latLng: LatLng)
 

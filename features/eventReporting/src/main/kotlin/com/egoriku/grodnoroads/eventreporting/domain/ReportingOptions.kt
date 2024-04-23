@@ -32,8 +32,7 @@ enum class ReportingOptions(
     SITTING_IN_THE_CAR(toSend = "Сидят в машине", mapEventType = MapEventType.TrafficPolice),
     WORKING_FROM_CAR(toSend = "Работают на ходу", mapEventType = MapEventType.TrafficPolice),
     TRANSPORT_INSPECTION(toSend = "Транспортная инспекция", mapEventType = MapEventType.TrafficPolice),
-    FILTER(toSend = "Фильтр", mapEventType = MapEventType.TrafficPolice),
-    OTHER_TRAFFIC_POLICE(toSend = "Другое", mapEventType = MapEventType.TrafficPolice);
+    FILTER(toSend = "Фильтр", mapEventType = MapEventType.TrafficPolice)
 }
 
 fun ReportingOptions.toResource() = when (this) {
@@ -58,5 +57,4 @@ fun ReportingOptions.toResource() = when (this) {
     WORKING_FROM_CAR -> R.string.reporting_item_working_from_car
     TRANSPORT_INSPECTION -> R.string.reporting_item_transport_inspection
     FILTER -> R.string.reporting_item_filter
-    OTHER_TRAFFIC_POLICE -> R.string.reporting_item_other_traffic_police
 }

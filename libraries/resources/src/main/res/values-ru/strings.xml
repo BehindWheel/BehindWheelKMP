@@ -167,6 +167,7 @@
     <string name="reporting_category_road_incidents">Проблемы на дороге</string>
     <string name="reporting_category_traffic_police">ГАИ</string>
     <string name="reporting_category_other">Другое</string>
+    <string name="reporting_category_mobile_camera">Мобильная камера</string>
 
     <string name="reporting_item_road_repair">Дорожные работы</string>
     <string name="reporting_item_broken_car">Сломалась машина</string>
@@ -189,7 +190,11 @@
     <string name="reporting_item_working_from_car">Работают на ходу</string>
     <string name="reporting_item_transport_inspection">Транспортная инспекция</string>
     <string name="reporting_item_filter">Фильтр</string>
-    <string name="reporting_item_other_traffic_police">Другое</string>
+
+    <string name="reporting_mobile_camera_header">Ограничение скорости</string>
+    <string name="reporting_mobile_camera_speed">%1$s км/ч</string>
+    <string name="reporting_mobile_camera_input_hint">Местоположение камеры*</string>
+    <string name="reporting_mobile_camera_input_error">Введите информацию о камере</string>
 
     <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
 

@@ -7,4 +7,5 @@ interface AnalyticsTracker {
     fun trackOpenRoadIncidentDialog()
 
     fun eventReportAction(eventType: String, shortMessage: String)
+    fun mobileCameraReport()
 }
