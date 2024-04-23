@@ -146,6 +146,7 @@ private fun HorizontalOrientationLayout(
         targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
         label = "leftPadding"
     )
+
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
