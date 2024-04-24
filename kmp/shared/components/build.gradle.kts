@@ -3,7 +3,7 @@ import com.egoriku.grodnoroads.extension.iosTarget
 import com.egoriku.grodnoroads.extension.provideVersionName
 
 plugins {
-    id("grodnoroads.kmplibrary")
+    alias(libs.plugins.grodnoroads.kmplibrary)
     alias(libs.plugins.buildkonfig)
 }
 
@@ -21,6 +21,7 @@ buildkonfig {
     objectName = "AppBuildConfig"
     exposeObjectWithName = objectName
 
+    // TODO: use separate for iOS
     defaultConfigs {
         buildConfigField(
             type = STRING,

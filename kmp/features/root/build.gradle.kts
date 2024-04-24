@@ -3,8 +3,8 @@ import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosStaticFramework
 
 plugins {
-    id("grodnoroads.kmplibrary")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 

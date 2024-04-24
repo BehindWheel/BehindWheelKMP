@@ -5,8 +5,8 @@ import com.egoriku.grodnoroads.extension.provideVersionName
 import com.egoriku.grodnoroads.extension.release
 
 plugins {
-    id("grodnoroads.application")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.application)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.secrets)

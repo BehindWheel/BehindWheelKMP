@@ -1,7 +1,7 @@
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    id("grodnoroads.kmplibrary")
+    alias(libs.plugins.grodnoroads.kmplibrary)
 }
 
 android {

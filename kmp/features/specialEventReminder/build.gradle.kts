@@ -4,8 +4,8 @@ import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    id("grodnoroads.kmplibrary")
-    id("grodnoroads.compose")
+    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
