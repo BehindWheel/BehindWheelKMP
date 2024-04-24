@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
-import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 
 internal data class MapInternalConfig(
     val zoomLevelInCity: Float,

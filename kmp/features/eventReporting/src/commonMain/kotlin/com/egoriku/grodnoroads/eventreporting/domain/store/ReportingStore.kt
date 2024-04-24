@@ -7,11 +7,11 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.eventreporting.data.mapper.MobileCameraReportMapper
 import com.egoriku.grodnoroads.eventreporting.data.mapper.ReportEventMapper
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.eventreporting.domain.repository.ReportingRepository
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.Intent
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.State
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.coroutines.launch
 
 internal interface ReportingStore : Store<Intent, State, Nothing> {

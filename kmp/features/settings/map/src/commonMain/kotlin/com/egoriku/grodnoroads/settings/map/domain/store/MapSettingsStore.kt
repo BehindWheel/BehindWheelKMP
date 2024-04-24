@@ -1,8 +1,10 @@
 package com.egoriku.grodnoroads.settings.map.domain.store
 
 import com.arkivanov.mvikotlin.core.store.Store
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.*
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.Intent
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.StoreState
 

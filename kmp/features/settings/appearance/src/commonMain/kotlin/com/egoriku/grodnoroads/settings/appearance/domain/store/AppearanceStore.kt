@@ -2,9 +2,11 @@ package com.egoriku.grodnoroads.settings.appearance.domain.store
 
 import androidx.compose.runtime.Stable
 import com.arkivanov.mvikotlin.core.store.Store
-import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.*
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.None
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceState
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 

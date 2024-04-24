@@ -7,7 +7,11 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMess
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.extensions.openAppSettings
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
-import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.*
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.FineLocationDenied
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocationDisabled
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocationEnabled
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.PermissionDenied
+import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.ShowRationale
 import com.egoriku.grodnoroads.resources.R
 
 class SnackbarMessageBuilder(private val context: Context) {

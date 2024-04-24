@@ -13,8 +13,13 @@ import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCFlow
 import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
 import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
-import com.egoriku.grodnoroads.guidance.domain.model.*
+import com.egoriku.grodnoroads.guidance.domain.model.Alert
+import com.egoriku.grodnoroads.guidance.domain.model.AppMode
+import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
+import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
+import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.CheckLocation
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.ChooseLocation
@@ -32,6 +37,7 @@ import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.map.domain.model.Notification
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettingsComponent
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList

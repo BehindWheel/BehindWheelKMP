@@ -5,8 +5,8 @@ import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 
 @Stable
 interface TabsComponent {

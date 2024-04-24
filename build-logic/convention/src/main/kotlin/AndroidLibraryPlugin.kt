@@ -1,7 +1,11 @@
 @file:Suppress("unused")
 
 import com.egoriku.grodnoroads.extension.kotlinOptions
-import com.egoriku.grodnoroads.internal.*
+import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
+import com.egoriku.grodnoroads.internal.kotlinPluginId
+import com.egoriku.grodnoroads.internal.libraryExtension
+import com.egoriku.grodnoroads.internal.libraryPluginId
+import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project

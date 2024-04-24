@@ -24,8 +24,9 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.Messa
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
-import com.egoriku.grodnoroads.shared.models.MessageSource
-import com.egoriku.grodnoroads.shared.models.MessageSource.*
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
+import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.persistentListOf
 

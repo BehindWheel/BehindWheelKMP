@@ -1,6 +1,11 @@
 @file:Suppress("unused")
 
-import com.egoriku.grodnoroads.internal.*
+import com.egoriku.grodnoroads.internal.applicationExtension
+import com.egoriku.grodnoroads.internal.applicationPluginId
+import com.egoriku.grodnoroads.internal.implementation
+import com.egoriku.grodnoroads.internal.libraryExtension
+import com.egoriku.grodnoroads.internal.libraryPluginId
+import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

@@ -2,7 +2,18 @@ package com.egoriku.grodnoroads.settings.alerts.domain.component
 
 import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.coroutines.flow.CFlow
-import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.*
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertAvailability
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertRadiusInCity
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertRadiusOutCity
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.CarCrash
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.MediumSpeedCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.MobileCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.RoadIncident
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.StationaryCameras
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficJam
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficPolice
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.WildAnimals
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import com.egoriku.grodnoroads.shared.persistent.alert.DEFAULT_ALERT_DISTANCE_IN_CITY
 import com.egoriku.grodnoroads.shared.persistent.alert.DEFAULT_ALERT_DISTANCE_OUTSIDE_CITY

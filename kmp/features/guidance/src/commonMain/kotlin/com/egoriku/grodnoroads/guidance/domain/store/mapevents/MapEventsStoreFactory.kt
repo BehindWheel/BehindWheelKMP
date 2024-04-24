@@ -15,7 +15,11 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeed
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
-import com.egoriku.grodnoroads.guidance.domain.repository.*
+import com.egoriku.grodnoroads.guidance.domain.repository.MediumSpeedCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.ReportsRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.StationaryCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.UserCountRepository
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnMediumSpeed
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Message.OnMobileCamera

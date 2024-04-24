@@ -2,10 +2,10 @@ package com.egoriku.grodnoroads.eventreporting.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.Intent
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 

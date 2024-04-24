@@ -1,6 +1,12 @@
 package com.egoriku.grodnoroads.settings.map.screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,7 +24,6 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.settings.map.screen.ui.MarkersFilteringSection
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -30,6 +35,7 @@ import com.egoriku.grodnoroads.settings.map.screen.ui.DefaultLocationSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.DrivingModeSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.MapEventsSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.MapStyleSection
+import com.egoriku.grodnoroads.settings.map.screen.ui.MarkersFilteringSection
 import com.egoriku.grodnoroads.settings.map.screen.ui.bottomsheet.DefaultLocationBottomSheet
 
 @OptIn(ExperimentalMaterial3Api::class)

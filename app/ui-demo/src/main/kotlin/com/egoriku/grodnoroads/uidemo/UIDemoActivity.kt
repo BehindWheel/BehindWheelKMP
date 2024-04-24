@@ -6,7 +6,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,7 +32,26 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.uidemo.ui.Header
-import com.egoriku.grodnoroads.uidemo.ui.demo.*
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoActionButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoActionButtonGroup
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoCheckbox
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoClickableRange
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoFilterChip
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoListItem
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoNavigationBar
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoNavigationRail
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoPrimaryButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoPrimaryCircleButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoPrimaryInverseCircleButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoRadioButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSecondaryButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSecondaryCircleButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSnackbarSimple
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSnackbarWithAction
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSwitch
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoText
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoTextButton
+import com.egoriku.grodnoroads.uidemo.ui.demo.DemoTriStateCheckbox
 import com.egoriku.grodnoroads.uidemo.ui.palette.Material3Palette
 
 class UIDemoActivity : ComponentActivity() {

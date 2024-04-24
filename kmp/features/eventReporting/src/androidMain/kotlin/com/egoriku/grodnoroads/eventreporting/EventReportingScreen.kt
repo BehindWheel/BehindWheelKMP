@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.eventreporting.ui.ActionBottomSheet
 import com.egoriku.grodnoroads.eventreporting.ui.foundation.MobileCameraOptions
 import com.egoriku.grodnoroads.eventreporting.ui.foundation.SelectableOptions
@@ -44,6 +43,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable

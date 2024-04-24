@@ -1,7 +1,15 @@
 package com.egoriku.grodnoroads.guidance.di
 
-import com.egoriku.grodnoroads.guidance.data.repository.*
-import com.egoriku.grodnoroads.guidance.domain.repository.*
+import com.egoriku.grodnoroads.guidance.data.repository.MediumSpeedCameraRepositoryImpl
+import com.egoriku.grodnoroads.guidance.data.repository.MobileCameraRepositoryImpl
+import com.egoriku.grodnoroads.guidance.data.repository.ReportsRepositoryImpl
+import com.egoriku.grodnoroads.guidance.data.repository.StationaryCameraRepositoryImpl
+import com.egoriku.grodnoroads.guidance.data.repository.UserCountRepositoryImpl
+import com.egoriku.grodnoroads.guidance.domain.repository.MediumSpeedCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.ReportsRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.StationaryCameraRepository
+import com.egoriku.grodnoroads.guidance.domain.repository.UserCountRepository
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStoreFactory

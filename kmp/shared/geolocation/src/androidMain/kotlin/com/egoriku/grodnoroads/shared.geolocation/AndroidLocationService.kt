@@ -9,7 +9,11 @@ import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlo
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.geolocation.util.MetricUtils.speedToKilometerPerHour
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await

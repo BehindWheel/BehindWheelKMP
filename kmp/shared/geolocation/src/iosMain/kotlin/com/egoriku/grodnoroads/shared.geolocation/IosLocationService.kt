@@ -4,7 +4,11 @@ import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlo
 import com.egoriku.grodnoroads.location.LatLng
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
-import platform.CoreLocation.*
+import platform.CoreLocation.CLLocation
+import platform.CoreLocation.CLLocationManager
+import platform.CoreLocation.CLLocationManagerDelegateProtocol
+import platform.CoreLocation.kCLDistanceFilterNone
+import platform.CoreLocation.kCLLocationAccuracyBest
 import platform.Foundation.NSError
 import platform.darwin.NSObject
 import kotlin.coroutines.resume

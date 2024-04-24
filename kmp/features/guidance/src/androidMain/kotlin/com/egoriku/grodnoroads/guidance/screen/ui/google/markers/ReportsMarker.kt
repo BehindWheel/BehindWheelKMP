@@ -3,11 +3,11 @@ package com.egoriku.grodnoroads.guidance.screen.ui.google.markers
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Small
+import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.inScope
 import com.egoriku.grodnoroads.maps.compose.rememberIconMarker

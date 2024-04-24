@@ -5,7 +5,9 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
-import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.*
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Message
+import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.State
 import kotlinx.coroutines.Dispatchers
 
 internal class DialogStoreFactory(

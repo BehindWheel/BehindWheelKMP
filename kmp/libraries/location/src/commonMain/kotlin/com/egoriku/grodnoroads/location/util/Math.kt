@@ -1,6 +1,12 @@
 package com.egoriku.grodnoroads.location.util
 
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.asin
+import kotlin.math.cos
+import kotlin.math.ln
+import kotlin.math.sin
+import kotlin.math.sqrt
+import kotlin.math.tan
 
 object Math {
 

@@ -9,13 +9,24 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
-import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.*
-import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.*
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.InvalidateLocation
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.RequestCurrentLocation
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.SetUserLocation
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.StartLocationUpdates
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.StopLocationUpdates
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Label
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Message
+import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.State
 import com.egoriku.grodnoroads.shared.geolocation.LocationService
 import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class LocationStoreFactory(

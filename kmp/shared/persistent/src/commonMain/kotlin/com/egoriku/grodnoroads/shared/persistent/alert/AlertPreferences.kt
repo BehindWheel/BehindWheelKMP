@@ -1,6 +1,10 @@
 package com.egoriku.grodnoroads.shared.persistent.alert
 
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.MutablePreferences
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 
 const val DEFAULT_ALERT_DISTANCE_IN_CITY = 600
 const val DEFAULT_ALERT_DISTANCE_OUTSIDE_CITY = 1000

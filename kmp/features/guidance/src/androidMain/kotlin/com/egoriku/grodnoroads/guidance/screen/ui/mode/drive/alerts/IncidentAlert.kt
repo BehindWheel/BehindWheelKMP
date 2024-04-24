@@ -1,7 +1,15 @@
 package com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,8 +24,9 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.Messa
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
-import com.egoriku.grodnoroads.shared.models.MessageSource
-import com.egoriku.grodnoroads.shared.models.MessageSource.*
+import com.egoriku.grodnoroads.shared.models.MessageSource.App
+import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
+import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

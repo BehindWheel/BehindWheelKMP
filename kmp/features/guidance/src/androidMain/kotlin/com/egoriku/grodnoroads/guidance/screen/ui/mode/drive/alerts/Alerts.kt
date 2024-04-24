@@ -27,7 +27,6 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
-import com.egoriku.grodnoroads.shared.models.MessageSource
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList

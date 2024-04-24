@@ -1,4 +1,8 @@
-import com.egoriku.grodnoroads.extension.*
+import com.egoriku.grodnoroads.extension.debug
+import com.egoriku.grodnoroads.extension.loadKeystore
+import com.egoriku.grodnoroads.extension.provideVersionCode
+import com.egoriku.grodnoroads.extension.provideVersionName
+import com.egoriku.grodnoroads.extension.release
 
 plugins {
     id("grodnoroads.application")

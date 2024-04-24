@@ -1,10 +1,15 @@
 package com.egoriku.grodnoroads.guidance.domain.util
 
-import com.egoriku.grodnoroads.guidance.domain.model.*
+import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
+import com.egoriku.grodnoroads.guidance.domain.model.AppMode
+import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
+import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
+import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.computeOffset
 import com.egoriku.grodnoroads.location.roundDistanceTo
