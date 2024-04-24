@@ -31,6 +31,7 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.logger)
+            implementation(projects.kmp.libraries.resources)
             implementation(projects.kmp.libraries.uuid)
 
             compileOnly(libs.compose.stable.marker)
@@ -39,6 +40,7 @@ kotlin {
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.koin.core)
             implementation(libs.kotlin.collections)
+            implementation(libs.kotlin.serialization.json)
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
