@@ -4,6 +4,7 @@ import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
     alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.compose)
     alias(libs.plugins.moko.resources)
 }
 
@@ -20,6 +21,7 @@ kotlin {
             api(libs.moko.resources)
         }
         androidDependencies {
+            implementation(libs.androidx.compose.ui)
             implementation(libs.moko.resources.compose)
         }
     }

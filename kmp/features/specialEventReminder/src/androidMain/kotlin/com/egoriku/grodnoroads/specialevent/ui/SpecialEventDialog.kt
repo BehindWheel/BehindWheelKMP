@@ -10,14 +10,14 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
@@ -26,8 +26,8 @@ import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
 @Composable
 fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     val dialogContent = when (eventType) {
-        Spring -> stringResource(id = R.string.headlamp_body_spring)
-        Autumn -> stringResource(id = R.string.headlamp_body_autumn)
+        Spring -> stringResource(MR.strings.headlamp_body_spring)
+        Autumn -> stringResource(MR.strings.headlamp_body_autumn)
     }
 
     BasicAlertDialog(
@@ -43,7 +43,7 @@ fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
                 HorizontalDivider()
                 DialogButton(
                     modifier = Modifier.fillMaxWidth(),
-                    textResId = R.string.ok,
+                    textResId = MR.strings.ok.resourceId,
                     onClick = onClose
                 )
             }

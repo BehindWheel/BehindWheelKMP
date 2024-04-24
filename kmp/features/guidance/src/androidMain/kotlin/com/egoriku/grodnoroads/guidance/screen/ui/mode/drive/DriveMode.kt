@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources_old.R
 
 @Composable
 fun DriveMode(

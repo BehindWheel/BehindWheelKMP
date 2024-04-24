@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.mainflow.screen
 
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources_old.R
 
 internal sealed class Screen(
     val index: Int,
@@ -10,13 +11,13 @@ internal sealed class Screen(
 
     data object Map : Screen(
         index = 0,
-        labelId = R.string.tab_map,
+        labelId = MR.strings.tab_map.resourceId,
         iconRes = R.drawable.ic_map
     )
 
     data object AppSettings : Screen(
         index = 1,
-        labelId = R.string.tab_settings,
+        labelId = MR.strings.tab_settings.resourceId,
         iconRes = R.drawable.ic_settings
     )
 }

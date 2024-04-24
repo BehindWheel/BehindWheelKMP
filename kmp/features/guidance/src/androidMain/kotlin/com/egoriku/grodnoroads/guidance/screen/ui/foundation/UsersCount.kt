@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,12 +25,14 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources_old.R
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
 import com.skydoves.balloon.compose.rememberBalloonBuilder
 import com.skydoves.balloon.compose.setBackgroundColor
 import com.skydoves.balloon.compose.setTextColor
-import com.egoriku.grodnoroads.resources.R as R_resources
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
@@ -59,7 +60,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
         builder = builder,
         balloonContent = {
             Text(
-                text = stringResource(id = R_resources.string.map_user_count_hint),
+                text = stringResource(MR.strings.map_user_count_hint),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -100,11 +101,11 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
         ) {
             Image(
                 modifier = Modifier.size(16.dp),
-                painter = painterResource(id = R_resources.drawable.ic_info),
+                painter = painterResource(id = R.drawable.ic_info),
                 contentDescription = null
             )
             Text(
-                text = stringResource(id = R_resources.string.map_user_count, count),
+                text = stringResource(MR.strings.map_user_count, count),
                 style = MaterialTheme.typography.labelSmall
             )
         }

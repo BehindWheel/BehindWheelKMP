@@ -76,7 +76,7 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
@@ -89,7 +89,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
-import com.egoriku.grodnoroads.resources.R as R_res
+import com.egoriku.grodnoroads.resources_old.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -122,7 +122,7 @@ fun GuidanceScreen(
                     Notification.RepostingSuccess ->
                         snackbarState.show(
                             SnackbarMessage.SimpleMessage(
-                                title = MessageData.Resource(R.string.reporting_notification_sent),
+                                title = MessageData.Resource(MR.strings.reporting_notification_sent.resourceId),
                                 icon = Icon.Res(id = R.drawable.ic_check_circle)
                             )
                         )
@@ -364,8 +364,8 @@ fun GuidanceScreen(
                                     markerSize = markerSize,
                                     icon = {
                                         val id = when (markerSize) {
-                                            Large -> R_res.drawable.ic_map_stationary_camera
-                                            Small -> R_res.drawable.ic_map_stationary_camera_small
+                                            Large -> R.drawable.ic_map_stationary_camera
+                                            Small -> R.drawable.ic_map_stationary_camera_small
                                         }
                                         markerCache.getIcon(id)
                                     },
@@ -378,8 +378,8 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> R_res.drawable.ic_map_medium_speed_camera
-                                                Small -> R_res.drawable.ic_map_medium_speed_camera_small
+                                                Large -> R.drawable.ic_map_medium_speed_camera
+                                                Small -> R.drawable.ic_map_medium_speed_camera_small
                                             }
                                             markerCache.getIcon(id)
                                         },
@@ -394,8 +394,8 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> R_res.drawable.ic_map_mobile_camera
-                                                Small -> R_res.drawable.ic_map_mobile_camera_small
+                                                Large -> R.drawable.ic_map_mobile_camera
+                                                Small -> R.drawable.ic_map_mobile_camera_small
                                             }
                                             markerCache.getIcon(id)
                                         },
@@ -553,7 +553,7 @@ fun GuidanceScreen(
                 coroutineScope.launch {
                     snackbarState.show(
                         ActionMessage(
-                            title = MessageData.Resource(R.string.snackbar_in_app_update_install),
+                            title = MessageData.Resource(MR.strings.snackbar_in_app_update_install.resourceId),
                             onAction = it
                         )
                     )

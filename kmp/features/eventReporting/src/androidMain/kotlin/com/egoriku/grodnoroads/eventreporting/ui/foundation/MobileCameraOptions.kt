@@ -18,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
@@ -28,7 +27,8 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 
@@ -37,7 +37,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    val inputErrorText = stringResource(R.string.reporting_mobile_camera_input_error)
+    val inputErrorText = stringResource(MR.strings.reporting_mobile_camera_input_error)
 
     val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90) }
     var selectedSpeedLimit by rememberMutableState { speedLimits.first() }
@@ -64,7 +64,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = stringResource(R.string.reporting_mobile_camera_header),
+                text = stringResource(MR.strings.reporting_mobile_camera_header),
                 style = MaterialTheme.typography.titleMedium
             )
         }
@@ -79,7 +79,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
                 FilterChip(
                     label = {
                         Text(
-                            text = stringResource(R.string.reporting_mobile_camera_speed, limit),
+                            text = stringResource(MR.strings.reporting_mobile_camera_speed, limit),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     },
@@ -104,7 +104,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
             ),
             value = inputText,
             onValueChange = { inputText = it },
-            label = stringResource(R.string.reporting_mobile_camera_input_hint),
+            label = stringResource(MR.strings.reporting_mobile_camera_input_hint),
             supportingText = errorLabel,
             onFocusChange = { isValidateInput = true }
         )

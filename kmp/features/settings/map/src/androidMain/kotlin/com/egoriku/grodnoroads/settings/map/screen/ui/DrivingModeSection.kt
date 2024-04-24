@@ -4,14 +4,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources_old.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
 
@@ -22,7 +23,7 @@ internal fun DrivingModeSection(
     reset: (MapPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SettingsSectionHeader(title = stringResource(id = R.string.map_header_drive_mode))
+        SettingsSectionHeader(title = stringResource(MR.strings.map_header_drive_mode))
 
         MapZoomInCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
         MapZoomOutCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
@@ -39,7 +40,7 @@ private fun MapZoomInCity(
 
     BasicListItem(
         iconRes = R.drawable.ic_inside_city,
-        text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
+        text = stringResource(MR.strings.map_header_drive_mode_zoom_in_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {
         ClickableFloatRange(
@@ -65,7 +66,7 @@ private fun MapZoomOutCity(
 
     BasicListItem(
         iconRes = R.drawable.ic_outside_city,
-        text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
+        text = stringResource(MR.strings.map_header_drive_mode_zoom_outside_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {
         ClickableFloatRange(

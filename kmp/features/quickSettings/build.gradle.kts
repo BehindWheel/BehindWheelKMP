@@ -19,6 +19,7 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
+            implementation(projects.kmp.libraries.resources)
 
             compileOnly(libs.compose.stable.marker)
 

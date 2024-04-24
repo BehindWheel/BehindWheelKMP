@@ -22,6 +22,7 @@ kotlin {
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
+            implementation(projects.kmp.libraries.resources)
 
             compileOnly(libs.compose.stable.marker)
 

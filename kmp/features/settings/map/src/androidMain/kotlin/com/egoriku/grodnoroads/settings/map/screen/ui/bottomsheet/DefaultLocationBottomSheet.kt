@@ -6,7 +6,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
@@ -15,6 +14,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyC
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
@@ -43,7 +43,7 @@ internal fun DefaultLocationBottomSheet(
         content = {
             val sortedCityValues = defaultCity.values
                 .mapIndexed { index, value ->
-                    CityValue(index, stringResource(id = value.toStringResource()))
+                    CityValue(index, stringResource(value.toStringResource()))
                 }.sortedWith(compareBy(Collator.getInstance(Locale.getDefault())) { it.value })
 
             SingleChoiceLazyColumn(

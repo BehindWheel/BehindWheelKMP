@@ -18,12 +18,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -53,7 +53,7 @@ fun MapSettingsScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_map),
+                title = stringResource(MR.strings.settings_section_map),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )

@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.compose.foundation.uikit)
+    implementation(projects.kmp.libraries.resources)
     implementation(projects.libraries.resources)
 
     implementation(libs.kotlin.collections)

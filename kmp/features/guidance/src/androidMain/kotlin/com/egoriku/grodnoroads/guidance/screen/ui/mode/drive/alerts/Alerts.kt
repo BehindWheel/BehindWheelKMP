@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
@@ -21,7 +20,9 @@ import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MediumSpeedCamer
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources_old.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.CarCrash
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
@@ -47,12 +48,12 @@ fun Alerts(
             when (alert) {
                 is IncidentAlert -> {
                     val title = when (alert.mapEventType) {
-                        RoadIncident -> stringResource(R.string.alerts_incident)
-                        TrafficPolice -> stringResource(R.string.alerts_traffic_police)
-                        CarCrash -> stringResource(R.string.alerts_car_crash)
-                        TrafficJam -> stringResource(R.string.alerts_traffic_jam)
-                        WildAnimals -> stringResource(R.string.alerts_wild_animals)
-                        else -> stringResource(R.string.alerts_unsupported_message)
+                        RoadIncident -> stringResource(MR.strings.alerts_incident)
+                        TrafficPolice -> stringResource(MR.strings.alerts_traffic_police)
+                        CarCrash -> stringResource(MR.strings.alerts_car_crash)
+                        TrafficJam -> stringResource(MR.strings.alerts_traffic_jam)
+                        WildAnimals -> stringResource(MR.strings.alerts_wild_animals)
+                        else -> stringResource(MR.strings.alerts_unsupported_message)
                     }
 
                     IncidentAlert(
@@ -72,9 +73,9 @@ fun Alerts(
 
                 is CameraAlert -> {
                     val title = when (alert.cameraType) {
-                        StationaryCamera -> stringResource(R.string.alerts_stationary_camera)
-                        MobileCamera -> stringResource(R.string.alerts_mobile_camera)
-                        MediumSpeedCamera -> stringResource(R.string.alerts_medium_speed_camera)
+                        StationaryCamera -> stringResource(MR.strings.alerts_stationary_camera)
+                        MobileCamera -> stringResource(MR.strings.alerts_mobile_camera)
+                        MediumSpeedCamera -> stringResource(MR.strings.alerts_medium_speed_camera)
                     }
                     val icon = when (alert.cameraType) {
                         StationaryCamera -> R.drawable.ic_stationary_camera

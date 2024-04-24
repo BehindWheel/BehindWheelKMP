@@ -11,13 +11,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
@@ -29,8 +29,8 @@ internal fun MarkersFilteringSection(
 ) {
     Column {
         SettingsSectionHeader(
-            title = stringResource(id = R.string.map_markers_filtering),
-            description = stringResource(id = R.string.map_markers_filtering_description)
+            title = stringResource(MR.strings.map_markers_filtering),
+            description = stringResource(MR.strings.map_markers_filtering_description)
         )
         Row(
             modifier = Modifier
@@ -49,7 +49,7 @@ internal fun MarkersFilteringSection(
                     },
                     label = {
                         Text(
-                            text = stringResource(id = filtering.toStringResource()),
+                            text = stringResource(filtering.toStringResource()),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

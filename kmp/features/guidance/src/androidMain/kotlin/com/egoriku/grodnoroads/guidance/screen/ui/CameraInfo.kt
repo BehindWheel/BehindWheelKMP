@@ -36,7 +36,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamer
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.screen.util.DateTimeFormatter
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources_old.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
 
 @Composable
@@ -50,10 +51,10 @@ internal fun CameraInfo(camera: MapEvent.Camera) {
                 is MobileCamera -> R.drawable.ic_camera_info_mobile
             },
             cameraTypeId = when (camera) {
-                is StationaryCamera -> R.string.alerts_stationary_camera
-                is MediumSpeedCamera -> R.string.alerts_medium_speed_camera
-                is MobileCamera -> R.string.alerts_mobile_camera
-            }
+                is StationaryCamera -> MR.strings.alerts_stationary_camera
+                is MediumSpeedCamera -> MR.strings.alerts_medium_speed_camera
+                is MobileCamera -> MR.strings.alerts_mobile_camera
+            }.resourceId
         )
         VerticalSpacer(32.dp)
     }
@@ -80,7 +81,10 @@ private fun Info(
                 )
                 val formattedDate = DateTimeFormatter.toDate(camera.updateTime)
                 DisabledText(
-                    text = stringResource(R.string.camera_info_last_update, formattedDate),
+                    text = stringResource(
+                        MR.strings.camera_info_last_update.resourceId,
+                        formattedDate
+                    ),
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -106,7 +110,7 @@ private fun Info(
             VerticalSpacer(24.dp)
             SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
-                id = R.string.camera_info_report,
+                id = MR.strings.camera_info_report.resourceId,
                 onClick = {}
             )
         }

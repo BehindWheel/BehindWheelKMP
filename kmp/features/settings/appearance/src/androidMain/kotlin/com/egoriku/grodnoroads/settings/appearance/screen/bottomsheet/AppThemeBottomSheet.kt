@@ -6,7 +6,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
@@ -15,6 +14,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyC
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.resources.stringResource
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
@@ -41,7 +41,7 @@ fun AppThemeBottomSheet(
         content = {
             SingleChoiceLazyColumn(
                 list = theme.values.map {
-                    stringResource(id = it.toStringResource())
+                    stringResource(it.toStringResource())
                 }.toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = theme.values.indexOf(theme.current),
