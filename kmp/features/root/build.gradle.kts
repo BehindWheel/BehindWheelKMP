@@ -63,10 +63,7 @@ kotlin {
             implementation(libs.dev.gitlive.firebase.crashlytics)
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.dev.gitlive.firebase.firestore)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
-
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.main)
         }

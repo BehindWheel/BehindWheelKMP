@@ -21,11 +21,9 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
 
             compileOnly(libs.compose.stable.marker)
+
             implementation(libs.decompose)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
-
             implementation(libs.kotlin.collections)
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)

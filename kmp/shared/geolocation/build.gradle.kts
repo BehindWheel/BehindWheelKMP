@@ -21,7 +21,6 @@ kotlin {
             implementation(projects.kmp.libraries.logger)
 
             compileOnly(libs.compose.stable.marker)
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
         }
         androidDependencies {

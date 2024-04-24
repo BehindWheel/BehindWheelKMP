@@ -23,7 +23,6 @@ kotlin {
             implementation(projects.kmp.libraries.logger)
 
             implementation(libs.decompose)
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)

@@ -33,9 +33,9 @@ kotlin {
             implementation(projects.kmp.libraries.uuid)
 
             compileOnly(libs.compose.stable.marker)
+
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.database)
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.kotlin.collections)
             implementation(libs.mvikotlin)
