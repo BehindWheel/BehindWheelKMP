@@ -24,7 +24,6 @@ kotlin {
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
 
@@ -32,9 +31,6 @@ kotlin {
 
             implementation(libs.androidx.browser)
             implementation(libs.androidx.core)
-            implementation(libs.androidx.compose.foundation)
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.androidx.compose.material.icons)
         }
     }
 }

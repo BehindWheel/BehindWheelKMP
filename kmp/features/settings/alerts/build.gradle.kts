@@ -32,16 +32,12 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.core)
-            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
 
             implementation(projects.libraries.audioplayer)
             implementation(projects.libraries.resources)
 
-            implementation(libs.androidx.compose.foundation)
-            implementation(libs.androidx.compose.material3)
             implementation(libs.androidx.compose.material.icons)
         }
     }

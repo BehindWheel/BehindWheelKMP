@@ -44,7 +44,6 @@
     <string name="settings_section_map">Map</string>
     <string name="settings_section_alerts">Alerts</string>
     <string name="settings_section_changelog">Changelog</string>
-    <string name="settings_section_next_features">Next features</string>
     <string name="settings_section_faq">FAQ</string>
 
     <!-- Settings categories -->

@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +23,6 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.shared.components.FeatureFlags
 import com.egoriku.grodnoroads.shared.models.Page
 
 @Composable
@@ -117,14 +114,6 @@ private fun SettingsUi(
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
-                    if (FeatureFlags.settingsNextFeaturesEnabled) {
-                        SettingsListItem(
-                            icon = Icons.Filled.Build,
-                            name = stringResource(R.string.settings_section_next_features),
-                            paddingValues = PaddingValues(horizontal = 20.dp),
-                            onClick = { onSettingClick(Page.NextFeatures) }
-                        )
-                    }
                     SettingsListItem(
                         icon = R.drawable.ic_faq,
                         name = stringResource(R.string.settings_section_faq),

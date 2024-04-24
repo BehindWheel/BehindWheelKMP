@@ -42,7 +42,6 @@
     <string name="settings_section_map">Карта</string>
     <string name="settings_section_alerts">Оповещения</string>
     <string name="settings_section_changelog">История изменений</string>
-    <string name="settings_section_next_features">Будущие фичи</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
 
     <!-- Settings categories -->

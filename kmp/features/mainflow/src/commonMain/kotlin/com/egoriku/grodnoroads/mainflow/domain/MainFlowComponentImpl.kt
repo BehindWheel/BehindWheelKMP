@@ -2,12 +2,10 @@ package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.router.slot.*
 import com.arkivanov.decompose.router.stack.*
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
-import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
@@ -55,7 +53,6 @@ internal class MainFlowComponentImpl(
         is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
         is Config.FAQ -> Child.FAQ(buildFaqComponent(componentContext))
         is Config.MapSettings -> Child.MapSettings(buildMapSettingsComponent(componentContext))
-        is Config.NextFeatures -> TODO()
     }
 
     @OptIn(ExperimentalDecomposeApi::class)
@@ -66,12 +63,8 @@ internal class MainFlowComponentImpl(
             Page.Changelog -> navigation.pushNew(Config.Changelog)
             Page.FAQ -> navigation.pushNew(Config.FAQ)
             Page.MapSettings -> navigation.pushNew(Config.MapSettings)
-            Page.NextFeatures -> navigation.pushNew(Config.NextFeatures)
         }
     }
-
-    @Serializable
-    object ReportingConfig
 
     @Serializable
     private sealed interface Config {
@@ -89,9 +82,6 @@ internal class MainFlowComponentImpl(
 
         @Serializable
         data object Changelog : Config
-
-        @Serializable
-        data object NextFeatures : Config
 
         @Serializable
         data object FAQ : Config

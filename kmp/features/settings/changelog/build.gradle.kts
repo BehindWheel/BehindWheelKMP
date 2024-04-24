@@ -39,17 +39,9 @@ kotlin {
             implementation(libs.kotlin.test)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
-
             implementation(projects.libraries.resources)
-
-            implementation(libs.androidx.browser)
-            implementation(libs.androidx.core)
-            implementation(libs.androidx.compose.foundation)
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.androidx.compose.material.icons)
         }
     }
 }

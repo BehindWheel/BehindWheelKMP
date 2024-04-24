@@ -45,17 +45,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.preview)
     implementation(projects.compose.foundation.uikit)
     implementation(projects.compose.snackbar)
     implementation(projects.kmp.libraries.extensions)
 
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

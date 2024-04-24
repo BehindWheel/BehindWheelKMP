@@ -45,8 +45,6 @@ kotlin {
         androidDependencies {
             implementation(projects.kmp.shared.components)
             implementation(projects.compose.commonUi)
-            implementation(projects.compose.foundation.core)
-            implementation(projects.compose.foundation.preview)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.maps.compose)
             implementation(projects.compose.locationRequester)
@@ -56,8 +54,6 @@ kotlin {
 
             implementation(libs.androidx.activity.compose)
 
-            implementation(libs.androidx.compose.foundation)
-            implementation(libs.androidx.compose.material3)
             implementation(libs.androidx.compose.material.icons)
 
             implementation(libs.balloon.compose)

@@ -73,7 +73,6 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
 
-            implementation(libs.androidx.compose.material3)
             implementation(libs.decompose.compose.jetpack)
             implementation(libs.koin.android)
         }
