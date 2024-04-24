@@ -33,8 +33,7 @@ val guidanceModule = module {
             mediumSpeedCameraRepository = get(),
             userCountRepository = get(),
             reportsRepository = get(),
-            // analyticsTracker = get(),
-            //  crashlyticsTracker = get()
+            crashlyticsTracker = get(),
             dataStore = get()
         ).create()
     }
@@ -57,7 +56,7 @@ val guidanceModule = module {
     factory {
         DialogStoreFactory(
             storeFactory = get(),
-            // analyticsTracker = get()
+            analyticsTracker = get()
         ).create()
     }
 }

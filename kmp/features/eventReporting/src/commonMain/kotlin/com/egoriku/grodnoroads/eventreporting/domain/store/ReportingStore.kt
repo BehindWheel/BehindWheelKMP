@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.eventreporting.domain.repository.ReportingReposit
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.Intent
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.State
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsTracker
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.coroutines.launch
 
@@ -29,7 +30,7 @@ internal interface ReportingStore : Store<Intent, State, Nothing> {
 internal class ReportingStoreFactory(
     private val storeFactory: StoreFactory,
     private val reportingRepository: ReportingRepository,
-    // private val analyticsTracker: AnalyticsTracker,
+    private val analyticsTracker: AnalyticsTracker,
 ) {
     @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): ReportingStore = object : ReportingStore,
@@ -47,11 +48,10 @@ internal class ReportingStoreFactory(
                                         eventReport = params
                                     )
                                 )
-                                // TODO: use analytics
-                                /* analyticsTracker.eventReportAction(
+                                analyticsTracker.eventReportAction(
                                     eventType = params.mapEventType.type,
                                     shortMessage = params.shortMessage
-                                )*/
+                                )
                             }
                             is ReportParams.MobileCameraReport -> {
                                 reportingRepository.reportMobileCamera(
@@ -60,7 +60,7 @@ internal class ReportingStoreFactory(
                                         cameraReport = params
                                     )
                                 )
-                                // analyticsTracker.mobileCameraReport()
+                                analyticsTracker.mobileCameraReport()
                             }
                         }
                     }

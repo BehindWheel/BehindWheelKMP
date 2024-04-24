@@ -17,6 +17,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.shared.analytics)
             implementation(projects.kmp.shared.models)
 
             implementation(projects.kmp.libraries.coroutines)

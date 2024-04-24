@@ -8,6 +8,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.coroutines.reLaunch
+import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
@@ -47,8 +48,7 @@ internal class MapEventsStoreFactory(
     private val stationaryCameraRepository: StationaryCameraRepository,
     private val userCountRepository: UserCountRepository,
     private val reportsRepository: ReportsRepository,
-    // TODO: create analytics library
-    // private val crashlyticsTracker: CrashlyticsTracker,
+    private val crashlyticsTracker: CrashlyticsTracker,
     private val dataStore: DataStore<Preferences>
 ) {
 
@@ -127,7 +127,7 @@ internal class MapEventsStoreFactory(
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> {} //crashlyticsTracker.recordException(result.throwable)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -136,7 +136,7 @@ internal class MapEventsStoreFactory(
         mediumSpeedCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> {} //crashlyticsTracker.recordException(result.throwable)
+                is Failure -> crashlyticsTracker.recordException(result.throwable)
             }
         }
     }
@@ -147,7 +147,7 @@ internal class MapEventsStoreFactory(
             .collect { result ->
                 when (result) {
                     is Success -> onLoaded(result.value)
-                    is Failure -> {}// crashlyticsTracker.recordException(result.throwable)
+                    is Failure -> crashlyticsTracker.recordException(result.throwable)
                 }
             }
     }
@@ -157,8 +157,9 @@ internal class MapEventsStoreFactory(
             when (result) {
                 is Success -> onLoaded(result.value)
                 is Failure -> {
-                    //crashlyticsTracker.recordException(result.throwable)
-                    logD("Error loading stationary: ${result.throwable.message}")
+                    crashlyticsTracker.recordException(result.throwable).also {
+                        logD("Error loading stationary: ${result.throwable.message}")
+                    }
                 }
             }
         }
@@ -169,8 +170,9 @@ internal class MapEventsStoreFactory(
             when (result) {
                 is Success -> onLoaded(result.value)
                 is Failure -> {
-                    //crashlyticsTracker.recordException(result.throwable)
-                    logD("Error loading user count: ${result.throwable.message}")
+                    crashlyticsTracker.recordException(result.throwable).also {
+                        logD("Error loading user count: ${result.throwable.message}")
+                    }
                 }
             }
         }

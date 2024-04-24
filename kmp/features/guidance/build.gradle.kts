@@ -23,6 +23,7 @@ kotlin {
             implementation(projects.kmp.features.quickSettings)
             implementation(projects.kmp.features.specialEventReminder)
 
+            implementation(projects.kmp.shared.analytics)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.shared.geolocation)

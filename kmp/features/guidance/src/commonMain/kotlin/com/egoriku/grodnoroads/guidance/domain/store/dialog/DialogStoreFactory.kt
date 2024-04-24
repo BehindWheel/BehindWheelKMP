@@ -8,11 +8,12 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Message
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.State
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsTracker
 import kotlinx.coroutines.Dispatchers
 
 internal class DialogStoreFactory(
     private val storeFactory: StoreFactory,
-    // private val analyticsTracker: AnalyticsTracker
+    private val analyticsTracker: AnalyticsTracker
 ) {
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -24,7 +25,7 @@ internal class DialogStoreFactory(
                     dispatch(
                         Message.OpenDialog(dialog = MapBottomSheet.MarkerInfo(dialog.reports))
                     )
-                    // analyticsTracker.trackOpenMarkerInfoDialog()
+                    analyticsTracker.trackOpenMarkerInfoDialog()
                 }
                 onIntent<Intent.OpenQuickSettings> {
                     dispatch(Message.OpenDialog(dialog = MapBottomSheet.QuickSettings))

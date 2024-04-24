@@ -1,10 +1,8 @@
-package com.egoriku.grodnoroads.analytics
+package com.egoriku.grodnoroads.shared.analytics
 
 internal object AnalyticsEvent {
 
     const val EVENT_REPORT_ACTION = "event_report_action"
-    const val EVENT_OPEN_TRAFFIC_POLICE_DIALOG = "event_open_traffic_police_dialog"
-    const val EVENT_OPEN_ROAD_INCIDENT_DIALOG = "event_open_road_incident_dialog"
     const val EVENT_OPEN_MARKER_INFO_DIALOG = "event_open_marker_info_dialog"
     const val EVENT_REPORT_MOBILE_CAMERA = "event_report_mobile_camera"
 

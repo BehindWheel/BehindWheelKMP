@@ -71,13 +71,13 @@ android {
 
 dependencies {
     implementation(projects.kmp.features.root)
+    implementation(projects.kmp.shared.analytics)
     implementation(projects.kmp.shared.crashlytics)
     implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.logger)
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
-    implementation(projects.libraries.analytics)
     implementation(projects.libraries.resources)
 
     implementation(libs.androidx.activity.compose)

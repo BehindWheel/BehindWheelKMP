@@ -33,7 +33,6 @@ include(":compose:location-requester")
 include(":compose:maps:compose")
 include(":compose:snackbar")
 
-include(":libraries:analytics")
 include(":libraries:audioplayer")
 include(":libraries:resources")
 
@@ -62,6 +61,7 @@ include(":kmp:libraries:location")
 include(":kmp:libraries:logger")
 include(":kmp:libraries:uuid")
 
+include(":kmp:shared:analytics")
 include(":kmp:shared:components")
 include(":kmp:shared:crashlytics")
 include(":kmp:shared:geolocation")
