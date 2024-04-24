@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.map.domain.model
+package com.egoriku.grodnoroads.guidance.domain.model.event
 
 sealed interface Notification {
     data object RepostingSuccess: Notification

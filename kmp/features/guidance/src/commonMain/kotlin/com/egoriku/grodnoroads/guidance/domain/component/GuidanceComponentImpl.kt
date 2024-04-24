@@ -20,6 +20,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
 import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
+import com.egoriku.grodnoroads.guidance.domain.model.event.AlertEvent
+import com.egoriku.grodnoroads.guidance.domain.model.event.Notification
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.CheckLocation
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.ChooseLocation
@@ -34,7 +36,6 @@ import com.egoriku.grodnoroads.guidance.domain.util.alertSoundTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.filterMapEvents
 import com.egoriku.grodnoroads.guidance.domain.util.overSpeedTransformation
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.map.domain.model.Notification
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettingsComponent
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
@@ -89,7 +90,6 @@ internal class GuidanceComponentImpl(
     private val alertInfo = mapConfigStore.states.map { it.mapInternalConfig.alertsInfo }
 
     private val coroutineScope = coroutineScope(Dispatchers.Main)
-    // private val soundUtil by inject<SoundUtil>()
 
     private val backCallback = BackCallback {
         when (mapConfigStore.state.currentAppMode) {
@@ -110,7 +110,6 @@ internal class GuidanceComponentImpl(
             locationStore.labels bindTo ::bindLocationLabel
         }
 
-        // TODO: use SharedFlow to remove dependency SoundUtil
         combine(
             flow = alerts,
             flow2 = alertInfo,
@@ -122,18 +121,21 @@ internal class GuidanceComponentImpl(
                 data.onEach { alert ->
                     when (alert) {
                         is Alert.CameraAlert -> {
-                            /*soundUtil.playCameraLimit(
-                                id = alert.id,
-                                speedLimit = alert.speedLimit,
-                                cameraType = alert.cameraType
-                            )*/
+                            alertEvents.tryEmit(
+                                AlertEvent.CameraLimit(
+                                    id = alert.id,
+                                    speedLimit = alert.speedLimit,
+                                    cameraType = alert.cameraType
+                                )
+                            )
                         }
-
                         is Alert.IncidentAlert -> {
-                            /* soundUtil.playIncident(
-                                 id = alert.id,
-                                 mapEventType = alert.mapEventType
-                             )*/
+                            alertEvents.tryEmit(
+                                AlertEvent.IncidentAlert(
+                                    id = alert.id,
+                                    mapEventType = alert.mapEventType
+                                )
+                            )
                         }
                     }
                 }
@@ -145,7 +147,7 @@ internal class GuidanceComponentImpl(
             .debounce(500)
             .onEach {
                 if (it != -1) {
-                    // soundUtil.playOverSpeed()
+                    alertEvents.tryEmit(AlertEvent.OverSpeed)
                 }
             }
             .launchIn(coroutineScope)
@@ -153,13 +155,20 @@ internal class GuidanceComponentImpl(
         alertInfo
             .distinctUntilChanged()
             .onEach {
-                // soundUtil.setVolume(level = it.alertsVolumeLevel.volumeLevel)
-                // soundUtil.setLoudness(loudness = it.alertsVolumeLevel.loudness.value)
+                alertEvents.tryEmit(
+                    AlertEvent.VolumeChange(
+                        volume = it.alertsVolumeLevel.volumeLevel,
+                        loudness = it.alertsVolumeLevel.loudness.value
+                    )
+                )
             }
             .launchIn(coroutineScope)
     }
 
     override val notificationEvents: MutableSharedFlow<Notification> =
+        MutableSharedFlow(extraBufferCapacity = 1)
+
+    override val alertEvents: MutableSharedFlow<AlertEvent> =
         MutableSharedFlow(extraBufferCapacity = 1)
 
     override val appMode: CFlow<AppMode>

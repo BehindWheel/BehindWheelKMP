@@ -46,6 +46,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeed
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
+import com.egoriku.grodnoroads.guidance.domain.model.event.AlertEvent
+import com.egoriku.grodnoroads.guidance.domain.model.event.Notification
 import com.egoriku.grodnoroads.guidance.screen.ui.CameraInfo
 import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 import com.egoriku.grodnoroads.guidance.screen.ui.appupdate.InAppUpdateHandle
@@ -65,9 +67,9 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.default.DefaultMode
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.guidance.screen.util.MarkerCache
 import com.egoriku.grodnoroads.guidance.screen.util.SnackbarMessageBuilder
+import com.egoriku.grodnoroads.guidance.screen.util.SoundUtil
 import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.location.toLatLng
-import com.egoriku.grodnoroads.map.domain.model.Notification
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
@@ -102,6 +104,7 @@ fun GuidanceScreen(
     val snackbarState = remember { SnackbarState() }
 
     val markerCache = koinInject<MarkerCache>()
+    val soundUtil = koinInject<SoundUtil>()
 
     val specialEventSlot by component.specialEventComponent.specialEvents.collectAsState()
     specialEventSlot.onChild { dialogComponent ->
@@ -123,6 +126,31 @@ fun GuidanceScreen(
                                 icon = Icon.Res(id = R.drawable.ic_check_circle)
                             )
                         )
+                }
+            }
+            .launchIn(this)
+
+        component.alertEvents
+            .onEach {
+                when (it) {
+                    is AlertEvent.CameraLimit -> {
+                        soundUtil.playCameraLimit(
+                            id = it.id,
+                            speedLimit = it.speedLimit,
+                            cameraType = it.cameraType
+                        )
+                    }
+                    is AlertEvent.IncidentAlert -> {
+                        soundUtil.playIncident(
+                            id = it.id,
+                            mapEventType = it.mapEventType
+                        )
+                    }
+                    is AlertEvent.OverSpeed -> soundUtil.playOverSpeed()
+                    is AlertEvent.VolumeChange -> {
+                        soundUtil.setVolume(level = it.volume)
+                        soundUtil.setLoudness(loudness = it.loudness)
+                    }
                 }
             }
             .launchIn(this)
