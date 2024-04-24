@@ -64,9 +64,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     markerMessage = buildMarkerShortMessage(data),
                     dialogTitle = buildDialogTitle(data),
                     position = LatLng(data.latitude, data.longitude),
-                    mapEventType = MapEventType.eventFromString(
-                        data.type
-                    ),
+                    mapEventType = MapEventType.eventFromString(data.type),
                     timestamp = data.timestamp
                 )
 
@@ -81,29 +79,29 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
             MapEventType.TrafficPolice -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.TrafficPolice.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
             }
             MapEventType.RoadIncident -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.RoadIncident.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
             }
             MapEventType.WildAnimals -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.WildAnimals.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
             }
             MapEventType.CarCrash -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.CarCrash.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
             }
             MapEventType.TrafficJam -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.TrafficJam.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage})")
+                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
             }
-            else -> data.shortMessage
+            else -> data.shortMessage.trim()
         }
 
     private fun buildDialogTitle(data: ReportsDTO) =
