@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.guidance.domain.store.config
 import com.arkivanov.mvikotlin.core.store.Store
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
+import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.location.LatLng
@@ -23,6 +24,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
     data class StoreState(
         val mapInternalConfig: MapInternalConfig = MapInternalConfig.EMPTY,
+        val areas: List<Area> = emptyList(),
         val zoomLevel: Float = 12.5f,
         val userZoomLevel: Float = 0f,
         val alertRadius: Int = 0,

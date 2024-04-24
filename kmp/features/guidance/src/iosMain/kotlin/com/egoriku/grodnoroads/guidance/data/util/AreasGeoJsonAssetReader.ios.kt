@@ -4,5 +4,5 @@ import com.egoriku.grodnoroads.resources.MR
 
 actual object AreasGeoJsonAssetReader {
 
-    actual fun readAreasFile() = MR.files.areas.readText()
+    actual fun readAreasFile() = MR.files.areas_geojson.readText()
 }

@@ -9,6 +9,7 @@ import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
+import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.repository.CityAreasRepository
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.CheckLocation
@@ -21,7 +22,6 @@ import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactor
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnMapConfigInternal
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnUserZoomLevel
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnZoomLevel
-import com.egoriku.grodnoroads.guidance.domain.util.CityArea
 import com.egoriku.grodnoroads.location.util.PolyUtil
 import com.egoriku.grodnoroads.shared.persistent.alert.alertsDistanceInCity
 import com.egoriku.grodnoroads.shared.persistent.alert.alertsDistanceOutsideCity
@@ -71,6 +71,8 @@ internal class MapConfigStoreFactory(
             val appMode: AppMode,
             val isChooseInDriveMode: Boolean = false
         ) : Message
+
+        data class OnAreasParsed(val areas: List<Area>) : Message
     }
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -119,20 +121,16 @@ internal class MapConfigStoreFactory(
                         .launchIn(this)
 
                     launch {
-                        cityAreasRepository.load()
+                        dispatch(Message.OnAreasParsed(cityAreasRepository.load()))
                     }
                 }
-                onIntent<CheckLocation> {
-                    val latLng = it.latLng
+                onIntent<CheckLocation> { location ->
+                    val areas = state.areas
+                    val latLng = location.latLng
 
-                    val isCityArea = when {
-                        PolyUtil.containsLocation(latLng, CityArea.grodno, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.berestovitca, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.skidel, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.ozery, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.porechye, false) -> true
-                        PolyUtil.containsLocation(latLng, CityArea.volkovysk, false) -> true
-                        else -> false
+                    if (areas.isEmpty()) return@onIntent
+                    val isCityArea = areas.any {
+                        PolyUtil.containsLocation(latLng, it.coordinates, false)
                     }
 
                     val internalConfig = state.mapInternalConfig
@@ -201,6 +199,7 @@ internal class MapConfigStoreFactory(
                     )
                     is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
                     is OnAlertRadius -> copy(alertRadius = message.radius)
+                    is Message.OnAreasParsed -> copy(areas = message.areas)
                 }
             }) {}
 }

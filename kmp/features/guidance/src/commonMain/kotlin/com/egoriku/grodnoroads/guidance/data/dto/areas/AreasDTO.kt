@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.guidance.data.dto.areas
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 typealias MultiPolygon = List<List<List<List<Double>>>>
@@ -12,12 +13,21 @@ data class AreasDTO(
 
 @Serializable
 data class Feature(
-    val type: String,
+    @SerialName("geometry")
     val geometry: MultiPolygonGeometry,
+
+    @SerialName("properties")
+    val properties: Properties
 )
 
 @Serializable
 data class MultiPolygonGeometry(
-    val type: String,
+    @SerialName("coordinates")
     val coordinates: MultiPolygon
+)
+
+@Serializable
+data class Properties(
+    @SerialName("name")
+    val name: String
 )

@@ -1,10 +1,12 @@
 package com.egoriku.grodnoroads.guidance.di
 
+import com.egoriku.grodnoroads.guidance.data.repository.CityAreasRepositoryImpl
 import com.egoriku.grodnoroads.guidance.data.repository.MediumSpeedCameraRepositoryImpl
 import com.egoriku.grodnoroads.guidance.data.repository.MobileCameraRepositoryImpl
 import com.egoriku.grodnoroads.guidance.data.repository.ReportsRepositoryImpl
 import com.egoriku.grodnoroads.guidance.data.repository.StationaryCameraRepositoryImpl
 import com.egoriku.grodnoroads.guidance.data.repository.UserCountRepositoryImpl
+import com.egoriku.grodnoroads.guidance.domain.repository.CityAreasRepository
 import com.egoriku.grodnoroads.guidance.domain.repository.MediumSpeedCameraRepository
 import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
 import com.egoriku.grodnoroads.guidance.domain.repository.ReportsRepository
