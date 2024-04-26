@@ -44,14 +44,14 @@ struct TabsView: View {
                             .frame(height: Constants.buttonsHeight)
                         HStack(spacing: 16) {
                             Button(action: { component.onSelectTab(index: 0) }) {
-                                Label("Map", systemImage: "map.fill")
+                              Label(MR.strings().tab_map.desc().localized(), systemImage: "map.fill")
                                     .labelStyle(VerticalLabelStyle())
                                     .opacity(activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
                             }
                             .tint(.black)
                             .frame(maxWidth: .infinity)
                             Button(action: { component.onSelectTab(index: 1) }) {
-                                Label("Settings", systemImage: "gearshape.fill")
+                                Label(MR.strings().tab_settings.desc().localized(), systemImage: "gearshape.fill")
                                     .labelStyle(VerticalLabelStyle())
                                     .opacity(activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
                             }

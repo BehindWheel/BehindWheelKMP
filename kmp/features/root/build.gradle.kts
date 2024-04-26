@@ -36,6 +36,7 @@ kotlin {
         export(projects.kmp.shared.models)
         export(projects.kmp.libraries.coroutines)
         export(projects.kmp.libraries.location)
+        export(projects.kmp.libraries.resources)
     }
 
     sourceSets {
