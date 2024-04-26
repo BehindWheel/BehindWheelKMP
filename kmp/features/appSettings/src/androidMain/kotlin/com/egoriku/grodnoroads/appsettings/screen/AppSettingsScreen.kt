@@ -98,7 +98,7 @@ private fun SettingsUi(
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_map,
+                        icon = MR.images.ic_map.drawableResId,
                         name = stringResource(MR.strings.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.MapSettings) }

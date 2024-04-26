@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				CE243F602B475A4200B3845C /* SettingsRoundItem.swift */,
 				CEE450E22B7963AA00497E10 /* UIView.swift */,
 				CEF5D2252B5D5F110009840E /* View.swift */,
+				12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
 				CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */,
 				CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */,
+				12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */,

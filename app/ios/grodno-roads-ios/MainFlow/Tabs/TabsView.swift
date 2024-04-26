@@ -44,16 +44,18 @@ struct TabsView: View {
                             .frame(height: Constants.buttonsHeight)
                         HStack(spacing: 16) {
                             Button(action: { component.onSelectTab(index: 0) }) {
-                              Label(MR.strings().tab_map.desc().localized(), systemImage: "map.fill")
-                                    .labelStyle(VerticalLabelStyle())
-                                    .opacity(activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
+                                NavigationBarItem(
+                                    text: MR.strings().tab_map.desc().localized(),
+                                    image: MR.images().ic_map.toUIImage()!,
+                                    alpha: activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
                             }
                             .tint(.black)
                             .frame(maxWidth: .infinity)
                             Button(action: { component.onSelectTab(index: 1) }) {
-                                Label(MR.strings().tab_settings.desc().localized(), systemImage: "gearshape.fill")
-                                    .labelStyle(VerticalLabelStyle())
-                                    .opacity(activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
+                                NavigationBarItem(
+                                    text: MR.strings().tab_settings.desc().localized(),
+                                    image: MR.images().ic_settings.toUIImage()!,
+                                    alpha: activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
                             }
                             .tint(.black)
                             .frame(maxWidth: .infinity)
@@ -81,15 +83,6 @@ private struct ChildView: View {
         case let child as TabsComponentChild.Guidance: MapView(child.component)
         case let child as TabsComponentChild.AppSettings: AppSettings(child.component)
         default: EmptyView()
-        }
-    }
-}
-
-private struct VerticalLabelStyle: LabelStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .center, spacing: 8) {
-            configuration.icon
-            configuration.title
         }
     }
 }
