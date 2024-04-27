@@ -338,7 +338,6 @@
 		CE52F3032B1CF3B200D81762 /* grodno-roads-ios */ = {
 			isa = PBXGroup;
 			children = (
-				12CE78052BDC399F009ED8E6 /* Info.plist */,
 				CE11B1C02B82996000667D9F /* Models */,
 				CE11B1BB2B8297CA00667D9F /* Helpers */,
 				CEA924D22B30CCB80086E744 /* MainFlow */,
@@ -349,6 +348,7 @@
 				CE6627482B3648D300799BC2 /* AppDelegate.swift */,
 				CE52F3042B1CF3B200D81762 /* MainApp.swift */,
 				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
+				12CE78052BDC399F009ED8E6 /* Info.plist */,
 			);
 			path = "grodno-roads-ios";
 			sourceTree = "<group>";
