@@ -46,7 +46,7 @@ struct TabsView: View {
                             Button(action: { component.onSelectTab(index: 0) }) {
                                 NavigationBarItem(
                                     text: MR.strings().tab_map.desc().localized(),
-                                    image: MR.images().ic_map.toUIImage()!,
+                                    image: MR.images().ic_map.asUIImage(),
                                     alpha: activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
                             }
                             .tint(.black)
@@ -54,7 +54,7 @@ struct TabsView: View {
                             Button(action: { component.onSelectTab(index: 1) }) {
                                 NavigationBarItem(
                                     text: MR.strings().tab_settings.desc().localized(),
-                                    image: MR.images().ic_settings.toUIImage()!,
+                                    image: MR.images().ic_settings.asUIImage(),
                                     alpha: activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
                             }
                             .tint(.black)

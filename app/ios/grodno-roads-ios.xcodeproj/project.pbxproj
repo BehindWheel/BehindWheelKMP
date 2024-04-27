@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120239A62BDD1B28001577D0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A52BDD1B28001577D0 /* Image.swift */; };
 		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		120239A52BDD1B28001577D0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				CEA924C12B2FA95B0086E744 /* Decompose */,
 				CE11B1BC2B8297E900667D9F /* Shared.swift */,
 				CE11B1BE2B8298C000667D9F /* Common.swift */,
+				120239A52BDD1B28001577D0 /* Image.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				CE0718392BD4080800AA1705 /* SpeedLimitView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
 				CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */,
+				120239A62BDD1B28001577D0 /* Image.swift in Sources */,
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
 				CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */,
 				CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */,
