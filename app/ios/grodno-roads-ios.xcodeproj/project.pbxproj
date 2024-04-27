@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120239A62BDD1B28001577D0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A52BDD1B28001577D0 /* Image.swift */; };
+		120239A62BDD1B28001577D0 /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A52BDD1B28001577D0 /* ImageResource.swift */; };
+		120239A82BDD1E07001577D0 /* StringResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A72BDD1E07001577D0 /* StringResource.swift */; };
 		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
@@ -81,7 +82,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		120239A52BDD1B28001577D0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		120239A52BDD1B28001577D0 /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		120239A72BDD1E07001577D0 /* StringResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResource.swift; sourceTree = "<group>"; };
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -183,6 +185,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120239A92BDD1E25001577D0 /* Moko */ = {
+			isa = PBXGroup;
+			children = (
+				120239A52BDD1B28001577D0 /* ImageResource.swift */,
+				120239A72BDD1E07001577D0 /* StringResource.swift */,
+			);
+			path = Moko;
+			sourceTree = "<group>";
+		};
 		6A9CD2172B38B7DF0010592F /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,10 +248,10 @@
 		CE11B1BB2B8297CA00667D9F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				120239A92BDD1E25001577D0 /* Moko */,
 				CEA924C12B2FA95B0086E744 /* Decompose */,
 				CE11B1BC2B8297E900667D9F /* Shared.swift */,
 				CE11B1BE2B8298C000667D9F /* Common.swift */,
-				120239A52BDD1B28001577D0 /* Image.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -515,6 +526,7 @@
 				CE0718372BD3F9AD00AA1705 /* CameraDetailsViewController.swift in Sources */,
 				CE6627472B362C0E00799BC2 /* AlertsView.swift in Sources */,
 				CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */,
+				120239A82BDD1E07001577D0 /* StringResource.swift in Sources */,
 				CEE450DF2B77F06400497E10 /* MapReportView.swift in Sources */,
 				6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */,
 				CEA924D62B30CD310086E744 /* ChangelogView.swift in Sources */,
@@ -535,7 +547,7 @@
 				CE0718392BD4080800AA1705 /* SpeedLimitView.swift in Sources */,
 				CE46B71E2B325ED600493502 /* AppSettings.swift in Sources */,
 				CEE450E12B77F76E00497E10 /* MapCameraMarker.swift in Sources */,
-				120239A62BDD1B28001577D0 /* Image.swift in Sources */,
+				120239A62BDD1B28001577D0 /* ImageResource.swift in Sources */,
 				6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */,
 				CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */,
 				CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */,
