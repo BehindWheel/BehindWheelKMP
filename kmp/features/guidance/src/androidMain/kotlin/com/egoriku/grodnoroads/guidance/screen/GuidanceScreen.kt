@@ -77,6 +77,7 @@ import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources_old.R
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
@@ -89,7 +90,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
-import com.egoriku.grodnoroads.resources_old.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -364,7 +364,7 @@ fun GuidanceScreen(
                                     markerSize = markerSize,
                                     icon = {
                                         val id = when (markerSize) {
-                                            Large -> R.drawable.ic_map_stationary_camera
+                                            Large -> MR.images.ic_map_stationary_camera.drawableResId
                                             Small -> R.drawable.ic_map_stationary_camera_small
                                         }
                                         markerCache.getIcon(id)
@@ -378,7 +378,7 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> R.drawable.ic_map_medium_speed_camera
+                                                Large -> MR.images.ic_map_medium_speed_camera.drawableResId
                                                 Small -> R.drawable.ic_map_medium_speed_camera_small
                                             }
                                             markerCache.getIcon(id)
@@ -394,7 +394,7 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> R.drawable.ic_map_mobile_camera
+                                                Large -> MR.images.ic_map_mobile_camera.drawableResId
                                                 Small -> R.drawable.ic_map_mobile_camera_small
                                             }
                                             markerCache.getIcon(id)
