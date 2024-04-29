@@ -34,7 +34,7 @@
     <string name="social_telegram_chat">Чат</string>
     <string name="social_telegram_channel">Канал</string>
     <string name="social_share_app">Падзяліцца</string>
-    <string name="drawer_app_version">Версія: %1$s</string>
+    <string name="app_version">Версія: %1$s</string>
     <string name="settings_section_appearance">Знешні выгляд</string>
     <string name="settings_section_map">Мапа</string>
     <string name="settings_section_alerts">Абвесткі</string>

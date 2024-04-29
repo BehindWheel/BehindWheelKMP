@@ -25,7 +25,7 @@ fun VersionSection(appVersion: String) {
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.drawer_app_version, appVersion),
+            text = stringResource(R.string.app_version, appVersion),
             style = MaterialTheme.typography.labelSmall
         )
     }

@@ -35,7 +35,7 @@
     <string name="social_telegram_chat">Чатик</string>
     <string name="social_telegram_channel">Канал</string>
     <string name="social_share_app">Поделиться</string>
-    <string name="drawer_app_version">Версия: %1$s</string>
+    <string name="app_version">Версия: %1$s</string>
 
     <!-- Settings Header -->
     <string name="settings_section_appearance">Внешний вид</string>

@@ -21,7 +21,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.component.PinMarker
-import com.egoriku.grodnoroads.resources.R as R_res
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun ChooseLocation(
@@ -58,7 +58,7 @@ fun ChooseLocation(
         ) {
             PrimaryInverseCircleButton(size = Large, onClick = onCancel) {
                 Icon(
-                    painter = painterResource(R_res.drawable.ic_close),
+                    painter = painterResource(R.drawable.ic_close),
                     contentDescription = null
                 )
             }
@@ -71,7 +71,7 @@ fun ChooseLocation(
                 }
             ) {
                 Icon(
-                    painter = painterResource(R_res.drawable.ic_ok),
+                    painter = painterResource(R.drawable.ic_ok),
                     contentDescription = null
                 )
             }

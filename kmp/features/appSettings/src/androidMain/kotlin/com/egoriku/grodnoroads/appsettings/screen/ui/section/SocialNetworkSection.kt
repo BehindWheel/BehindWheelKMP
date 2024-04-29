@@ -15,6 +15,9 @@ import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberShareIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.multiplatformresources.Constants.PLAY_STORE_LINK
+import com.egoriku.grodnoroads.multiplatformresources.Constants.TG_CHANNEL_LINK
+import com.egoriku.grodnoroads.multiplatformresources.Constants.TG_CHAT_LINK
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -27,13 +30,9 @@ fun SocialNetworkSection() {
             .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-        val chatUrl = stringResource(R.string.tg_chat_link)
-        val channelUrl = stringResource(R.string.tg_channel_link)
-        val playStoreUrl = stringResource(R.string.play_store_link)
-
         SocialNetwork(
             title = stringResource(R.string.social_telegram_chat),
-            onClick = { customTabsIntent(chatUrl) }
+            onClick = { customTabsIntent(TG_CHAT_LINK) }
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_chat),
@@ -42,7 +41,7 @@ fun SocialNetworkSection() {
         }
         SocialNetwork(
             title = stringResource(R.string.social_telegram_channel),
-            onClick = { customTabsIntent(channelUrl) }
+            onClick = { customTabsIntent(TG_CHANNEL_LINK) }
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_telegram),
@@ -54,7 +53,7 @@ fun SocialNetworkSection() {
 
         SocialNetwork(
             title = stringResource(R.string.social_share_app),
-            onClick = { shareIntent(playStoreUrl) }
+            onClick = { shareIntent(PLAY_STORE_LINK) }
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_share),

@@ -36,6 +36,7 @@ import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
+import com.egoriku.grodnoroads.multiplatformresources.MR
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.Page
 

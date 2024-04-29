@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.resources"
+    namespace = "com.egoriku.grodnoroads.multiplatformresources"
 }
 
 kotlin {
@@ -26,5 +26,5 @@ kotlin {
 }
 
 multiplatformResources {
-    resourcesPackage = "com.egoriku.grodnoroads.resources"
+    resourcesPackage = "com.egoriku.grodnoroads.multiplatformresources"
 }

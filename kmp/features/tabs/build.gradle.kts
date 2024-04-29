@@ -23,13 +23,14 @@ kotlin {
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.libraries.coroutines)
+            implementation(projects.kmp.libraries.resources)
 
             compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
         }
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
-            implementation(projects.kmp.libraries.resources)
+            implementation(projects.libraries.resources)
 
             implementation(libs.androidx.compose.material3.windowsize)
             implementation(libs.decompose.compose.jetpack)

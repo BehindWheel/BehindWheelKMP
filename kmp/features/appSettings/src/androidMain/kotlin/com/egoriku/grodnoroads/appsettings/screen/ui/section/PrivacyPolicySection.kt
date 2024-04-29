@@ -15,6 +15,9 @@ import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
+import com.egoriku.grodnoroads.multiplatformresources.Constants.BULLET_SEPARATOR
+import com.egoriku.grodnoroads.multiplatformresources.Constants.PRIVACY_POLICY_LINK
+import com.egoriku.grodnoroads.multiplatformresources.Constants.TERMS_OF_SERVICE_LINK
 import com.egoriku.grodnoroads.resources.R
 
 @Composable
@@ -29,16 +32,16 @@ fun PrivacyPolicySection() {
         LinkButton(
             openUrl = { customTabsIntent(it) },
             description = stringResource(R.string.terms_of_service),
-            url = stringResource(R.string.terms_of_service_link)
+            url = TERMS_OF_SERVICE_LINK
         )
         Text(
-            text = stringResource(R.string.bullet_separator),
+            text = BULLET_SEPARATOR,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
         LinkButton(
             openUrl = { customTabsIntent(it) },
             description = stringResource(R.string.privacy_policy),
-            url = stringResource(R.string.privacy_policy_link)
+            url = PRIVACY_POLICY_LINK
         )
     }
 }

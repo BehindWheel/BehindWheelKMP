@@ -77,7 +77,7 @@ import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.multiplatformresources.MR
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
