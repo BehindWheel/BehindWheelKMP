@@ -11,6 +11,7 @@
 		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		12D440D32BDFA47C00D2676D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D440D12BDFA47C00D2676D /* Localizable.strings */; };
 		12D440D72BDFA74500D2676D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D440D62BDFA74500D2676D /* String+Extension.swift */; };
+		12D440DD2BDFC31D00D2676D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D440DB2BDFC31D00D2676D /* InfoPlist.strings */; };
 		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
@@ -90,6 +91,9 @@
 		12D440D42BDFA4AB00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		12D440D52BDFA4DA00D2676D /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		12D440D62BDFA74500D2676D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "grodno-roads-ios/Helpers/String+Extension.swift"; sourceTree = SOURCE_ROOT; };
+		12D440DC2BDFC31D00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		12D440DE2BDFC35100D2676D /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		12D440DF2BDFC35300D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				CEA924CC2B2FB5D00086E744 /* RootView.swift */,
 				12CE78052BDC399F009ED8E6 /* Info.plist */,
 				12D440D12BDFA47C00D2676D /* Localizable.strings */,
+				12D440DB2BDFC31D00D2676D /* InfoPlist.strings */,
 			);
 			path = "grodno-roads-ios";
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				12D440D32BDFA47C00D2676D /* Localizable.strings in Resources */,
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
 				CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */,
+				12D440DD2BDFC31D00D2676D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +595,16 @@
 				12D440D52BDFA4DA00D2676D /* be-BY */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		12D440DB2BDFC31D00D2676D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12D440DC2BDFC31D00D2676D /* ru */,
+				12D440DE2BDFC35100D2676D /* be-BY */,
+				12D440DF2BDFC35300D2676D /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
