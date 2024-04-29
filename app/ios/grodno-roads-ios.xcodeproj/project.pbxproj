@@ -90,10 +90,8 @@
 		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		12D440D22BDFA47C00D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		12D440D42BDFA4AB00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		12D440D52BDFA4DA00D2676D /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		12D440D62BDFA74500D2676D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "grodno-roads-ios/Helpers/String+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		12D440DC2BDFC31D00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		12D440DE2BDFC35100D2676D /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		12D440DF2BDFC35300D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		CE52F3082B1CF3B400D81762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE654B952BDC5D5A0069AE6A /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		CE654B9B2BDFCFBA0069AE6A /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE654B9C2BDFCFBA0069AE6A /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE6627462B362C0E00799BC2 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE66274A2B36491100799BC2 /* ComponentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentContext.swift; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 			knownRegions = (
 				en,
 				ru,
-				"be-BY",
+				be,
 			);
 			mainGroup = CE52F2F82B1CF3B200D81762;
 			packageReferences = (
@@ -596,7 +596,7 @@
 			children = (
 				12D440D22BDFA47C00D2676D /* en */,
 				12D440D42BDFA4AB00D2676D /* ru */,
-				12D440D52BDFA4DA00D2676D /* be-BY */,
+				CE654B9B2BDFCFBA0069AE6A /* be */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -605,8 +605,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12D440DC2BDFC31D00D2676D /* ru */,
-				12D440DE2BDFC35100D2676D /* be-BY */,
 				12D440DF2BDFC35300D2676D /* en */,
+				CE654B9C2BDFCFBA0069AE6A /* be */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
