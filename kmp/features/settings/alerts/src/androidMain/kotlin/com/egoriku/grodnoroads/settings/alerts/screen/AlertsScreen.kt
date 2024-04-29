@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
@@ -35,8 +36,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponentPreview
@@ -68,7 +68,7 @@ fun AlertsScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(MR.strings.settings_section_alerts),
+                title = stringResource(id = R.string.settings_section_alerts),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )
@@ -103,8 +103,8 @@ fun AlertsScreen(
                     val settings = state.alertSettings
                     val alertAvailability = settings.alertAvailability
                     SwitchListItem(
-                        text = stringResource(MR.strings.alerts_availability),
-                        description = stringResource(MR.strings.alerts_availability_description),
+                        text = stringResource(R.string.alerts_availability),
+                        description = stringResource(R.string.alerts_availability_description),
                         isChecked = alertAvailability.alertFeatureEnabled,
                         onCheckedChange = { value ->
                             alertsComponent.modify(alertAvailability.copy(alertFeatureEnabled = value))
@@ -118,8 +118,8 @@ fun AlertsScreen(
                             reset = alertsComponent::reset
                         )
                         SwitchListItem(
-                            text = stringResource(MR.strings.alerts_voice_alerts),
-                            description = stringResource(MR.strings.alerts_voice_alerts_description),
+                            text = stringResource(R.string.alerts_voice_alerts),
+                            description = stringResource(R.string.alerts_voice_alerts_description),
                             isChecked = settings.alertAvailability.voiceAlertEnabled,
                             onCheckedChange = { value ->
                                 alertsComponent.modify(alertAvailability.copy(voiceAlertEnabled = value))

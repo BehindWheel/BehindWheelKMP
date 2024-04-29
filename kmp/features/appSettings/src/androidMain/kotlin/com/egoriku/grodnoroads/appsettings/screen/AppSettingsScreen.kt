@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponentPreview
@@ -35,9 +36,7 @@ import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.Page
 
 @Composable
@@ -76,7 +75,7 @@ private fun SettingsUi(
                         )
                     ),
                 title = {
-                    Text(text = stringResource(MR.strings.tab_settings))
+                    Text(text = stringResource(R.string.tab_settings))
                 }
             )
             Card(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -89,23 +88,23 @@ private fun SettingsUi(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = stringResource(MR.strings.settings_category_main)
+                        text = stringResource(R.string.settings_category_main)
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_appearance,
-                        name = stringResource(MR.strings.settings_section_appearance),
+                        name = stringResource(R.string.settings_section_appearance),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
                         icon = MR.images.ic_map.drawableResId,
-                        name = stringResource(MR.strings.settings_section_map),
+                        name = stringResource(R.string.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_notification_badge,
-                        name = stringResource(MR.strings.settings_section_alerts),
+                        name = stringResource(R.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
                     )
@@ -121,17 +120,17 @@ private fun SettingsUi(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = stringResource(MR.strings.settings_category_other)
+                        text = stringResource(R.string.settings_category_other)
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_changelog,
-                        name = stringResource(MR.strings.settings_section_changelog),
+                        name = stringResource(R.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     SettingsListItem(
                         icon = R.drawable.ic_faq,
-                        name = stringResource(MR.strings.settings_section_faq),
+                        name = stringResource(R.string.settings_section_faq),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
                     )

@@ -49,6 +49,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -56,8 +57,7 @@ import com.egoriku.grodnoroads.eventreporting.ui.util.preUpPostDownNestedScrollC
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources.R
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
@@ -250,7 +250,7 @@ private fun BottomActions(
                 modifier = Modifier.weight(1f),
                 onClick = onCancel
             ) {
-                Text(text = stringResource(MR.strings.cancel))
+                Text(text = stringResource(R.string.cancel))
             }
 
             PrimaryButton(
@@ -258,7 +258,7 @@ private fun BottomActions(
                 enabled = sendEnabled,
                 onClick = onResult
             ) {
-                Text(text = stringResource(MR.strings.send))
+                Text(text = stringResource(R.string.send))
             }
         }
     }

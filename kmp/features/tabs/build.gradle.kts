@@ -21,9 +21,7 @@ kotlin {
             implementation(projects.kmp.features.appSettings)
             implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.features.eventReporting)
-
             implementation(projects.kmp.shared.models)
-
             implementation(projects.kmp.libraries.coroutines)
 
             compileOnly(libs.compose.stable.marker)

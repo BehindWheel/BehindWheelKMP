@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun DefaultMode(

@@ -9,6 +9,13 @@
     <string name="headlamp_body_spring">С 25 мая по 5 июня проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет!💡</string>
     <string name="headlamp_body_autumn">С 25 августа по 5 сентября проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет!💡</string>
 
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метра</item>
+        <item quantity="many">%1$d метров</item>
+        <item quantity="other">%1$d метра</item>
+    </plurals>
+
     <string name="alerts_stationary_camera">Стационарная камера</string>
     <string name="alerts_mobile_camera">Мобильная камера</string>
     <string name="alerts_medium_speed_camera">Камера средней скорости</string>
@@ -19,7 +26,7 @@
     <string name="alerts_wild_animals">Дикие животные</string>
     <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
 
-    <string name="camera_info_last_update">Обновлено %s</string>
+    <string name="camera_info_last_update">Обновлено %1$s</string>
     <string name="camera_info_report">Сообщить об ошибке</string>
 
     <string name="terms_of_service">Условия использования</string>
@@ -137,7 +144,7 @@
     <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
 
-    <string name="map_user_count">Онлайн: %s</string>
+    <string name="map_user_count">Онлайн: %1$s</string>
     <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
 
     <string name="snackbar_drive_mode_rationale_title">Разрешение для доступа к геолокации отклонено</string>

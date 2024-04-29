@@ -24,8 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun CheckableCard(
@@ -74,12 +73,12 @@ private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         CheckableCard(
-            title = MR.strings.map_google_map_style_minimal.resourceId,
+            title = R.string.map_google_map_style_minimal,
             selected = false,
             iconId = R.drawable.ic_map_style_minimal_night
         ) {}
         CheckableCard(
-            title = MR.strings.map_google_map_style_detailed.resourceId,
+            title = R.string.map_google_map_style_detailed,
             selected = true,
             iconId = R.drawable.ic_map_style_detailed_night
         ) {}

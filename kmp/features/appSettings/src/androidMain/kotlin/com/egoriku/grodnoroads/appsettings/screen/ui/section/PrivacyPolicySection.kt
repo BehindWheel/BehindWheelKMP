@@ -8,14 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun PrivacyPolicySection() {
@@ -28,17 +28,17 @@ fun PrivacyPolicySection() {
     ) {
         LinkButton(
             openUrl = { customTabsIntent(it) },
-            description = stringResource(MR.strings.terms_of_service),
-            url = stringResource(MR.strings.terms_of_service_link)
+            description = stringResource(R.string.terms_of_service),
+            url = stringResource(R.string.terms_of_service_link)
         )
         Text(
-            text = stringResource(MR.strings.bullet_separator),
+            text = stringResource(R.string.bullet_separator),
             modifier = Modifier.padding(horizontal = 4.dp)
         )
         LinkButton(
             openUrl = { customTabsIntent(it) },
-            description = stringResource(MR.strings.privacy_policy),
-            url = stringResource(MR.strings.privacy_policy_link)
+            description = stringResource(R.string.privacy_policy),
+            url = stringResource(R.string.privacy_policy_link)
         )
     }
 }

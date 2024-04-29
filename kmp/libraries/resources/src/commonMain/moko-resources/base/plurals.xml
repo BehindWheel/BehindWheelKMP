@@ -1,8 +1,0 @@
-<plurals name="camera_alerts_plurals_distance">
-    <item quantity="zero">0 meters</item>
-    <item quantity="one">%d meter</item>
-    <item quantity="two">%d meters</item>
-    <item quantity="few">%d meters</item>
-    <item quantity="many">%d meters</item>
-    <item quantity="other">%d meters</item>
-</plurals>

@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bullet_separator" translatable="false">•</string>
-    <string name="terms_of_service_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/TermsConditions.md</string>
-    <string name="privacy_policy_link" translatable="false">https://github.com/egorikftp/GrodnoRoads/blob/master/PrivacyPolicy.md</string>
-    <string name="tg_channel_link" translatable="false">https://t.me/grodno_roads</string>
-    <string name="tg_chat_link" translatable="false">https://t.me/grodnoroads_chat</string>
-    <string name="play_store_link" translatable="false">https://play.google.com/store/apps/details?id=com.egoriku.grodnoroads</string>
-
     <string name="app_name">Grodno roads</string>
 
     <string name="tab_map">Map</string>
@@ -15,6 +8,15 @@
 
     <string name="headlamp_body_spring">From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
     <string name="headlamp_body_autumn">From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="zero">0 meters</item>
+        <item quantity="one">%1$d meter</item>
+        <item quantity="two">%1$d meters</item>
+        <item quantity="few">%1$d meters</item>
+        <item quantity="many">%1$d meters</item>
+        <item quantity="other">%1$d meters</item>
+    </plurals>
 
     <string name="alerts_stationary_camera">Stationary camera</string>
     <string name="alerts_mobile_camera">Mobile camera</string>
@@ -26,7 +28,7 @@
     <string name="alerts_wild_animals">Wild animals</string>
     <string name="alerts_unsupported_message">Unsupported message</string>
 
-    <string name="camera_info_last_update">Updated %s</string>
+    <string name="camera_info_last_update">Updated %1$s</string>
     <string name="camera_info_report">Report an error</string>
 
     <string name="terms_of_service">Terms of Service</string>
@@ -136,7 +138,7 @@
     <string name="map_markers_traffic_jam">Traffic jam</string>
     <string name="map_markers_wild_animals">Wild animals</string>
 
-    <string name="map_user_count">Online: %s</string>
+    <string name="map_user_count">Online: %1$s</string>
     <string name="map_user_count_hint">Based on user activity in the last 10 minutes</string>
 
     <string name="dialog_report_police">Report Traffic Police</string>

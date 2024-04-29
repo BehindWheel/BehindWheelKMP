@@ -13,14 +13,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
@@ -32,7 +32,7 @@ fun VoiceLevelSection(
     playTestSound: (VolumeLevel) -> Unit
 ) {
     Column {
-        SettingsSectionHeader(title = stringResource(MR.strings.alerts_header_volume_level))
+        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_volume_level))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,7 +59,7 @@ fun VoiceLevelSection(
         }
         SimpleListItem(
             imageVector = Icons.Default.PlayCircle,
-            text = stringResource(MR.strings.alerts_play_test_audio),
+            text = stringResource(R.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )
     }

@@ -2,6 +2,13 @@
 <resources>
     <string name="app_name">За рулём | Гродна</string>
 
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метры</item>
+        <item quantity="many">%1$d метраў</item>
+        <item quantity="other">%1$d метраў</item>
+    </plurals>
+
     <string name="headlamp_body_spring">З 25 мая па 5 чэрвеня праходзіць спецыяльнае комплекснае мерапрыемства \"Увага-дзеці!\"\n\nНі забудзьцеся ўключыць блізкае святло!💡</string>
     <string name="headlamp_body_autumn">З 25 жніўня па 5 верасня праходзіць спецыяльнае комплекснае мерапрыемства \"Увага-дзеці!\"\n\nНі забудзьцеся ўключыць блізкае святло!💡</string>
 
@@ -19,7 +26,7 @@
     <string name="alerts_wild_animals">Дзікія жывёлы</string>
     <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
 
-    <string name="camera_info_last_update">Абноўлена %s</string>
+    <string name="camera_info_last_update">Абноўлена %1$s</string>
     <string name="camera_info_report">Паведаміць пра памылку</string>
 
     <string name="terms_of_service">Умовы выкарыстання</string>
@@ -129,7 +136,7 @@
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
 
-    <string name="map_user_count">Анлайн: %s</string>
+    <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
 
     <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>

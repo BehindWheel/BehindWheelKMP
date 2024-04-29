@@ -76,8 +76,8 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources_old.R
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
@@ -122,7 +122,7 @@ fun GuidanceScreen(
                     Notification.RepostingSuccess ->
                         snackbarState.show(
                             SnackbarMessage.SimpleMessage(
-                                title = MessageData.Resource(MR.strings.reporting_notification_sent.resourceId),
+                                title = MessageData.Resource(R.string.reporting_notification_sent),
                                 icon = Icon.Res(id = R.drawable.ic_check_circle)
                             )
                         )
@@ -553,7 +553,7 @@ fun GuidanceScreen(
                 coroutineScope.launch {
                     snackbarState.show(
                         ActionMessage(
-                            title = MessageData.Resource(MR.strings.snackbar_in_app_update_install.resourceId),
+                            title = MessageData.Resource(R.string.snackbar_in_app_update_install),
                             onAction = it
                         )
                     )

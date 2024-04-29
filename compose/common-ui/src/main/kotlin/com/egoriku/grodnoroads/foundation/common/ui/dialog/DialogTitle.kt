@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun DialogTitle(
@@ -54,8 +54,8 @@ fun DialogTitle(
 @Composable
 private fun PreviewDialogTitle() = GrodnoRoadsM3ThemePreview {
     Column(modifier = Modifier.fillMaxWidth()) {
-        DialogTitle(titleRes = MR.strings.app_name.resourceId)
+        DialogTitle(titleRes = R.string.app_name)
         HorizontalDivider()
-        DialogTitle(titleRes = MR.strings.app_name.resourceId, center = true)
+        DialogTitle(titleRes = R.string.app_name, center = true)
     }
 }

@@ -19,7 +19,6 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.shared.components)
             implementation(projects.kmp.shared.models)
-            implementation(projects.kmp.libraries.resources)
 
             compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)

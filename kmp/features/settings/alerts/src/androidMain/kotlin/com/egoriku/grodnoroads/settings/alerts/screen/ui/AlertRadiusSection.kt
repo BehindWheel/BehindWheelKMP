@@ -4,15 +4,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableIntRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertRadius
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 
@@ -23,14 +22,14 @@ fun AlertRadiusSection(
     reset: (AlertsPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SettingsSectionHeader(title = stringResource(MR.strings.alerts_header_notification_radius))
+        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_notification_radius))
 
-        val postfix = stringResource(MR.strings.alerts_notification_radius_postfix)
+        val postfix = stringResource(id = R.string.alerts_notification_radius_postfix)
         val radiusInCity = alertRadius.alertRadiusInCity
 
         BasicListItem(
             iconRes = R.drawable.ic_inside_city,
-            text = stringResource(MR.strings.alerts_notification_radius_in_city),
+            text = stringResource(R.string.alerts_notification_radius_in_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
             ClickableIntRange(
@@ -49,7 +48,7 @@ fun AlertRadiusSection(
         val radiusOutCity = alertRadius.alertRadiusOutCity
         BasicListItem(
             iconRes = R.drawable.ic_outside_city,
-            text = stringResource(MR.strings.alerts_notification_radius_outside_city),
+            text = stringResource(R.string.alerts_notification_radius_outside_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
             ClickableIntRange(

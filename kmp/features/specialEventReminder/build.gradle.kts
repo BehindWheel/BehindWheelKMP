@@ -21,7 +21,6 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.logger)
-            implementation(projects.kmp.libraries.resources)
 
             implementation(libs.decompose)
             implementation(libs.koin.core)

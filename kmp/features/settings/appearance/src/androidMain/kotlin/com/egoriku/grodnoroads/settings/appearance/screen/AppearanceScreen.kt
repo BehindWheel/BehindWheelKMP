@@ -18,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
@@ -26,8 +27,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
@@ -61,7 +61,7 @@ fun AppearanceScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             SettingsTopBar(
-                title = stringResource(MR.strings.settings_section_appearance),
+                title = stringResource(id = R.string.settings_section_appearance),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )
@@ -76,7 +76,7 @@ fun AppearanceScreen(
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
             VerticalSpacer(16.dp)
-            SettingsSectionHeader(title = stringResource(MR.strings.settings_category_other))
+            SettingsSectionHeader(title = stringResource(id = R.string.settings_category_other))
             KeepScreenOnSettings(state = state, onModify = appearanceComponent::update)
         }
     }
@@ -91,8 +91,8 @@ private fun LanguageSection(
 
     MoreActionListItem(
         imageVector = Icons.Default.Language,
-        text = stringResource(MR.strings.appearance_app_language),
-        value = stringResource(language.current.toStringResource()),
+        text = stringResource(R.string.appearance_app_language),
+        value = stringResource(id = language.current.toStringResource()),
         onClick = { onModify(language) },
     )
 }
@@ -106,8 +106,8 @@ private fun AppThemeSection(
 
     MoreActionListItem(
         imageVector = Icons.Default.DarkMode,
-        text = stringResource(MR.strings.appearance_app_theme),
-        value = stringResource(appTheme.current.toStringResource()),
+        text = stringResource(R.string.appearance_app_theme),
+        value = stringResource(id = appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },
     )
 }
@@ -121,8 +121,8 @@ private fun KeepScreenOnSettings(
 
     SwitchListItem(
         imageVector = Icons.Default.Brightness7,
-        text = stringResource(MR.strings.appearance_keep_screen_on),
-        description = stringResource(MR.strings.appearance_keep_screen_on_description),
+        text = stringResource(R.string.appearance_keep_screen_on),
+        description = stringResource(R.string.appearance_keep_screen_on_description),
         isChecked = keepScreenOn.enabled,
         onCheckedChange = {
             onModify(keepScreenOn.copy(enabled = it))
