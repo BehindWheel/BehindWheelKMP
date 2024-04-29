@@ -45,7 +45,7 @@ struct TabsView: View {
                         HStack(spacing: 16) {
                             Button(action: { component.onSelectTab(index: 0) }) {
                                 NavigationBarItem(
-                                    text: MR.strings().tab_map.localize(),
+                                    text: "tab_map".localized,
                                     image: MR.images().ic_map.asUIImage(),
                                     alpha: activeChild is TabsComponentChild.Guidance ? 1 : 0.5)
                             }
@@ -53,7 +53,7 @@ struct TabsView: View {
                             .frame(maxWidth: .infinity)
                             Button(action: { component.onSelectTab(index: 1) }) {
                                 NavigationBarItem(
-                                    text: MR.strings().tab_settings.localize(),
+                                    text: "tab_settings".localized,
                                     image: MR.images().ic_settings.asUIImage(),
                                     alpha: activeChild is TabsComponentChild.AppSettings ? 1 : 0.5)
                             }

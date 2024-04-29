@@ -18,7 +18,7 @@ struct AppSettings: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Text("Настройки")
+                Text("tab_settings".localized)
                     .font(.system(size: 24))
                     .frame(height: 32)
                     .frame(maxWidth: .infinity,alignment: .center)
@@ -30,14 +30,14 @@ struct AppSettings: View {
                     }())
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    SettingsHeaderView(title: "Main")
+                    SettingsHeaderView(title: "settings_category_main".localized)
                         .frame(height: 40)
                         .padding([.leading, .trailing], 16)
                         .padding(.top, 8)
                     
                     SettingsItemView(
                         leadingIcon: "swatchpalette.fill",
-                        headlineText: "Appearance",
+                        headlineText: "settings_section_appearance".localized,
                         action: { component.open(page: .appearance) }
                     )
                     .frame(height: 40)
@@ -45,7 +45,7 @@ struct AppSettings: View {
                     
                     SettingsItemView(
                         leadingIcon: "map.fill",
-                        headlineText: "Map",
+                        headlineText: "settings_section_map".localized,
                         action: { component.open(page: .mapsettings) }
                     )
                     .frame(height: 40)
@@ -53,7 +53,7 @@ struct AppSettings: View {
                     
                     SettingsItemView(
                         leadingIcon: "speaker.wave.2.bubble.fill",
-                        headlineText: "Alerts",
+                        headlineText: "settings_section_alerts".localized,
                         action: { component.open(page: .alerts) }
                     )
                     .frame(height: 40)
@@ -64,14 +64,14 @@ struct AppSettings: View {
                 .clipShape(.rect(cornerRadius: 28))
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    SettingsHeaderView(title: "Other")
+                    SettingsHeaderView(title: "settings_category_other".localized)
                         .frame(height: 40)
                         .padding([.leading, .trailing], 16)
                         .padding(.top, 8)
                     
                     SettingsItemView(
                         leadingIcon: "newspaper.fill",
-                        headlineText: "Changelog",
+                        headlineText: "settings_section_changelog".localized,
                         action: { component.open(page: .changelog) }
                     )
                     .frame(height: 40)
@@ -79,7 +79,7 @@ struct AppSettings: View {
                     
                     SettingsItemView(
                         leadingIcon: "quote.bubble.fill",
-                        headlineText: "FAQ",
+                        headlineText: "settings_section_faq".localized,
                         action: { component.open(page: .faq) }
                     )
                     .frame(height: 40)
@@ -92,21 +92,22 @@ struct AppSettings: View {
                 
                 HStack {
                     Spacer()
-                    SettingsRoundItem("Chat", image: "message.fill") {
-                        openUrl("https://t.me/grodnoroads_chat")
+                    SettingsRoundItem("social_telegram_chat".localized, image: "message.fill") {
+                        openUrl(Constants.shared.TG_CHAT_LINK)
                     }
                     Spacer()
-                    SettingsRoundItem("Channel", image: "paperplane.fill") {
-                        openUrl("https://t.me/grodno_roads")
+                    SettingsRoundItem("social_telegram_channel".localized, image: "paperplane.fill") {
+                        openUrl(Constants.shared.TG_CHANNEL_LINK)
                     }
                     Spacer()
-                    SettingsRoundItem("Share", image: "square.and.arrow.up.fill", action: { shareAppLink() })
+                    SettingsRoundItem("social_share_app".localized, image: "square.and.arrow.up.fill", action: { shareAppLink()
+                    })
                     Spacer()
                 }
                 .padding(.top, 18)
                 
                 
-                Text("Version: \(component.appVersion)")
+                Text("app_version".localized(with: component.appVersion))
                     .font(.system(size: 12, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
@@ -115,18 +116,19 @@ struct AppSettings: View {
                 HStack(alignment: .center) {
                     Spacer()
                     Button {
-                        openUrl("https://github.com/grodnoroads/GrodnoRoads/blob/release/TermsConditions.md")
+                        openUrl(Constants.shared.TERMS_OF_SERVICE_LINK)
                     } label: {
-                        Text("Условия использования").font(.system(size: 10, weight: .medium))
+                        Text("terms_of_service".localized).font(.system(size: 10, weight: .medium))
                     }
                     .tint(.black)
                     Spacer()
-                    Text("•") .font(.system(size: 10, weight: .medium))
+                    Text(Constants.shared.BULLET_SEPARATOR)
+                        .font(.system(size: 10, weight: .medium))
                     Spacer()
                     Button {
-                        openUrl("https://github.com/grodnoroads/GrodnoRoads/blob/release/PrivacyPolicy.md")
+                        openUrl(Constants.shared.PRIVACY_POLICY_LINK)
                     } label: {
-                        Text("Политика конфидециальности")
+                        Text("privacy_policy".localized)
                             .font(.system(size: 10, weight: .medium))
                     }
                     .tint(.black)
@@ -150,7 +152,7 @@ struct AppSettings: View {
             let vc = UIApplication.shared.connectedScenes
                 .compactMap({$0 as? UIWindowScene}).first?
                 .windows.first?.rootViewController,
-            let url = URL(string: "https://t.me/grodno_roads")
+            let url = URL(string: Constants.shared.APPSTORE_STORE_LINK)
         else {
             return
         }

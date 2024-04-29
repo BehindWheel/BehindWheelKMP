@@ -7,4 +7,5 @@ object Constants {
     const val TG_CHANNEL_LINK = "https://t.me/grodno_roads"
     const val TG_CHAT_LINK = "https://t.me/grodnoroads_chat"
     const val PLAY_STORE_LINK = "https://play.google.com/store/apps/details?id=com.egoriku.grodnoroads"
+    const val APPSTORE_STORE_LINK = ""
 }

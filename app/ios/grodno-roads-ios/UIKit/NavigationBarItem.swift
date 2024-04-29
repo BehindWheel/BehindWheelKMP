@@ -43,12 +43,12 @@ private struct VerticalLabelStyle: LabelStyle {
 #Preview {
     HStack(spacing: 16) {
         NavigationBarItem(
-            text: MR.strings().tab_map.localize(),
+            text: "tab_map".localized,
             image: MR.images().ic_map.asUIImage(),
             alpha: 1)
         
         NavigationBarItem(
-            text: MR.strings().tab_map.localize(),
+            text: "tab_map".localized,
             image: MR.images().ic_map.asUIImage(),
             alpha: 0.3)
     }
