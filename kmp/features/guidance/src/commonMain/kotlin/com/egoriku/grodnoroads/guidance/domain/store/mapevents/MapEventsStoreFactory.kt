@@ -127,7 +127,9 @@ internal class MapEventsStoreFactory(
         mobileCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
+                is Failure -> crashlyticsTracker.recordException(result.throwable).also {
+                    logD("Error loading Mobile: ${result.throwable.message}")
+                }
             }
         }
     }
@@ -136,7 +138,9 @@ internal class MapEventsStoreFactory(
         mediumSpeedCameraRepository.loadAsFlow().collect { result ->
             when (result) {
                 is Success -> onLoaded(result.value)
-                is Failure -> crashlyticsTracker.recordException(result.throwable)
+                is Failure -> crashlyticsTracker.recordException(result.throwable).also {
+                    logD("Error loading Medium speed: ${result.throwable.message}")
+                }
             }
         }
     }
@@ -147,7 +151,9 @@ internal class MapEventsStoreFactory(
             .collect { result ->
                 when (result) {
                     is Success -> onLoaded(result.value)
-                    is Failure -> crashlyticsTracker.recordException(result.throwable)
+                    is Failure -> crashlyticsTracker.recordException(result.throwable).also {
+                        logD("Error loading Reports: ${result.throwable.message}")
+                    }
                 }
             }
     }
