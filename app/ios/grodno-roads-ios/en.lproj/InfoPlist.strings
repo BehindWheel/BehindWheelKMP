@@ -1,9 +1,9 @@
 /* 
-  IInfoPlist.strings
+  InfoPlist.strings
   grodno-roads-ios
 
   Created by Yahor Urbanovich on 29.04.24.
   
 */
 
-"CFBundleDisplayName" = "Grodno roads";
+"CFBundleDisplayName" = "Driving | Grodno";
