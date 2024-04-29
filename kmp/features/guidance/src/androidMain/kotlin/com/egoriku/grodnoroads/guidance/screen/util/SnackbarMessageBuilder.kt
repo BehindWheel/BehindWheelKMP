@@ -12,44 +12,44 @@ import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocat
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocationEnabled
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.PermissionDenied
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.ShowRationale
-import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.R
 
 class SnackbarMessageBuilder(private val context: Context) {
 
     fun handleDriveModeRequest(status: LocationRequestStatus): SnackbarMessage? = when (status) {
         ShowRationale -> SimpleMessage(
-            title = Resource(MR.strings.snackbar_drive_mode_rationale_title.resourceId),
-            description = Resource(MR.strings.snackbar_drive_mode_rationale_description.resourceId)
+            title = Resource(R.string.snackbar_drive_mode_rationale_title),
+            description = Resource(R.string.snackbar_drive_mode_rationale_description)
         )
         FineLocationDenied -> SimpleMessage(
-            title = Resource(MR.strings.snackbar_drive_mode_fine_location_denied.resourceId)
+            title = Resource(R.string.snackbar_drive_mode_fine_location_denied)
         )
         PermissionDenied -> ActionMessage(
-            title = Resource(MR.strings.snackbar_drive_mode_permission_denied.resourceId),
+            title = Resource(R.string.snackbar_drive_mode_permission_denied),
             onAction = {
                 context.openAppSettings()
             }
         )
         GmsLocationDisabled -> SimpleMessage(
-            title = Resource(MR.strings.snackbar_drive_mode_gms_disabled_title.resourceId),
-            description = Resource(MR.strings.snackbar_drive_mode_gms_disabled_description.resourceId)
+            title = Resource(R.string.snackbar_drive_mode_gms_disabled_title),
+            description = Resource(R.string.snackbar_drive_mode_gms_disabled_description)
         )
         GmsLocationEnabled -> null
     }
 
     fun handleCurrentLocationRequest(status: LocationRequestStatus): SnackbarMessage? =
         when (status) {
-            ShowRationale -> SimpleMessage(title = Resource(MR.strings.snackbar_current_location_rationale_title.resourceId))
-            FineLocationDenied -> SimpleMessage(title = Resource(MR.strings.snackbar_current_location_fine_location_denied.resourceId))
+            ShowRationale -> SimpleMessage(title = Resource(R.string.snackbar_current_location_rationale_title))
+            FineLocationDenied -> SimpleMessage(title = Resource(R.string.snackbar_current_location_fine_location_denied))
             PermissionDenied -> ActionMessage(
-                title = Resource(MR.strings.snackbar_current_location_permission_denied.resourceId),
+                title = Resource(R.string.snackbar_current_location_permission_denied),
                 onAction = {
                     context.openAppSettings()
                 }
             )
             GmsLocationDisabled -> SimpleMessage(
-                title = Resource(MR.strings.snackbar_current_location_gms_disabled_title.resourceId),
-                description = Resource(MR.strings.snackbar_current_location_gms_disabled_description.resourceId)
+                title = Resource(R.string.snackbar_current_location_gms_disabled_title),
+                description = Resource(R.string.snackbar_current_location_gms_disabled_description)
             )
             GmsLocationEnabled -> null
         }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
@@ -36,9 +37,7 @@ import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppT
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MarkerFiltering
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 
 @Composable
@@ -49,7 +48,7 @@ internal fun QuickSettingsContent(
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
-            text = stringResource(MR.strings.quick_settings_header),
+            text = stringResource(R.string.quick_settings_header),
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(26.dp)
@@ -65,14 +64,14 @@ internal fun QuickSettingsContent(
         VerticalSpacer(16.dp)
         SwitchSetting(
             iconRes = R.drawable.ic_notification,
-            name = stringResource(MR.strings.quick_settings_voice_alerts),
+            name = stringResource(R.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
             iconRes = R.drawable.ic_traffic_jam,
-            name = stringResource(MR.strings.quick_settings_traffic_conditions),
+            name = stringResource(R.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
         )
@@ -87,7 +86,7 @@ private fun AppearanceSection(
 ) {
     BasicSection(
         iconRes = R.drawable.ic_moon,
-        name = stringResource(MR.strings.quick_settings_app_theme)
+        name = stringResource(id = R.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
             appTheme.values.forEach { theme ->
@@ -117,7 +116,7 @@ private fun FilteringSection(
 ) {
     BasicSection(
         iconRes = R.drawable.ic_filter,
-        name = stringResource(MR.strings.quick_settings_markers_filtering)
+        name = stringResource(id = R.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {
             markerFiltering.values.forEach { filtering ->
@@ -130,7 +129,7 @@ private fun FilteringSection(
                     },
                     label = {
                         Text(
-                            text = stringResource(filtering.toStringResource()),
+                            text = stringResource(id = filtering.toStringResource()),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

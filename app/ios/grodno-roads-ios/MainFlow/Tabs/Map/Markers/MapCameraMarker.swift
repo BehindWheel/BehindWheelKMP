@@ -6,6 +6,7 @@
 //
 
 import GoogleMaps
+import Root
 
 class MapCameraMarker: GMSMarker, MapMarkerProtocol {
     
@@ -17,11 +18,11 @@ class MapCameraMarker: GMSMarker, MapMarkerProtocol {
         
         switch cameraType {
         case .stationary:
-            self.icon = UIImage(systemName: "camera.fill")
+            self.icon = MR.images().ic_map_stationary_camera.asUIImage()
         case .medium:
-            self.icon = UIImage(systemName: "camera.on.rectangle.fill")
+            self.icon = MR.images().ic_map_medium_speed_camera.asUIImage()
         case .mobile:
-            self.icon = UIImage(systemName: "camera.rotate.fill")
+            self.icon = MR.images().ic_map_mobile_camera.asUIImage()
         case .unknown:
             self.icon = nil
         }

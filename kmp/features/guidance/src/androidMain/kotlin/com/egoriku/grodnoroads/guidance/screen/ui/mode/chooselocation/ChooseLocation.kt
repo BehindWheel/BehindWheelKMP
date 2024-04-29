@@ -21,7 +21,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.component.PinMarker
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun ChooseLocation(

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -15,9 +16,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertEvents
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.CarCrash
@@ -51,10 +50,10 @@ fun AlertEventsSection(
             }
         }
 
-        SettingsSectionHeader(title = stringResource(MR.strings.alerts_header_voice_alerts))
+        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_voice_alerts))
 
         TriStateCheckBoxListItem(
-            text = stringResource(MR.strings.alerts_notifications_select_all), state = state,
+            text = stringResource(id = R.string.alerts_notifications_select_all), state = state,
             onToggle = onToggle
         )
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -82,7 +81,7 @@ private fun StationaryCameras(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_stationary_camera,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_stationary_cameras),
+        text = stringResource(R.string.alerts_notifications_stationary_cameras),
         isChecked = stationaryCameras.isNotify,
         onCheckedChange = {
             onCheckedChange(stationaryCameras.copy(isNotify = it))
@@ -99,7 +98,7 @@ private fun MediumSpeedCameras(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_medium_speed_camera,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_medium_speed_cameras),
+        text = stringResource(R.string.alerts_notifications_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isNotify,
         onCheckedChange = {
             onCheckedChange(mediumSpeedCameras.copy(isNotify = it))
@@ -116,7 +115,7 @@ private fun MobileCameras(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_mobile_camera,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_mobile_cameras),
+        text = stringResource(R.string.alerts_notifications_mobile_cameras),
         isChecked = mobileCameras.isNotify,
         onCheckedChange = {
             onCheckedChange(mobileCameras.copy(isNotify = it))
@@ -133,7 +132,7 @@ private fun TrafficPolice(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_settings_traffic_police,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_traffic_police),
+        text = stringResource(R.string.alerts_notifications_traffic_police),
         isChecked = trafficPolice.isNotify,
         onCheckedChange = {
             onCheckedChange(trafficPolice.copy(isNotify = it))
@@ -150,7 +149,7 @@ private fun RoadIncidents(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_settings_road_incident,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_incidents),
+        text = stringResource(R.string.alerts_notifications_incidents),
         isChecked = roadIncident.isNotify,
         onCheckedChange = {
             onCheckedChange(roadIncident.copy(isNotify = it))
@@ -167,7 +166,7 @@ private fun CarCrash(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_settings_car_crash,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_car_crash),
+        text = stringResource(R.string.alerts_notifications_car_crash),
         isChecked = carCrash.isNotify,
         onCheckedChange = {
             onCheckedChange(carCrash.copy(isNotify = it))
@@ -184,7 +183,7 @@ private fun TrafficConditions(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_settings_traffic_jam,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_traffic_jam),
+        text = stringResource(R.string.alerts_notifications_traffic_jam),
         isChecked = trafficJam.isNotify,
         onCheckedChange = {
             onCheckedChange(trafficJam.copy(isNotify = it))
@@ -201,7 +200,7 @@ private fun WildAnimals(
         paddingValues = subGroupPaddingValues,
         iconRes = R.drawable.ic_settings_wild_animals,
         iconSize = iconSize,
-        text = stringResource(MR.strings.alerts_notifications_wild_animals),
+        text = stringResource(R.string.alerts_notifications_wild_animals),
         isChecked = wildAnimals.isNotify,
         onCheckedChange = {
             onCheckedChange(wildAnimals.copy(isNotify = it))

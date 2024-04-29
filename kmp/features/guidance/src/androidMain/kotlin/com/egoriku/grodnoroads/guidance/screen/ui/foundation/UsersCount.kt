@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,9 +26,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources.stringResource
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
 import com.skydoves.balloon.compose.rememberBalloonBuilder
@@ -60,7 +59,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
         builder = builder,
         balloonContent = {
             Text(
-                text = stringResource(MR.strings.map_user_count_hint),
+                text = stringResource(id = R.string.map_user_count_hint),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -105,7 +104,7 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
                 contentDescription = null
             )
             Text(
-                text = stringResource(MR.strings.map_user_count, count),
+                text = stringResource(id = R.string.map_user_count, count),
                 style = MaterialTheme.typography.labelSmall
             )
         }

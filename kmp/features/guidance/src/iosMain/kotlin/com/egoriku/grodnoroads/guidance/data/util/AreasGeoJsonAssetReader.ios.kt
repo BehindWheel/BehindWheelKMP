@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.guidance.data.util
 
-import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.multiplatformresources.MR
 
 actual object AreasGeoJsonAssetReader {
 

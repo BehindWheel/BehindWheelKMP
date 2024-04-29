@@ -42,8 +42,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.resources.MR
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 
@@ -93,7 +92,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            text = stringResource(MR.strings.reporting_header.resourceId),
+            text = stringResource(R.string.reporting_header),
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(16.dp)
@@ -132,22 +131,22 @@ private fun ReportingTypes(
             Repo(
                 reportType = ReportType.RoadIncidents,
                 iconRes = R.drawable.ic_reporting_road_problem,
-                stringRes = MR.strings.reporting_category_road_incidents.resourceId
+                stringRes = R.string.reporting_category_road_incidents
             ),
             Repo(
                 reportType = ReportType.TrafficPolice,
                 iconRes = R.drawable.ic_reporting_traffic_police,
-                stringRes = MR.strings.reporting_category_traffic_police.resourceId
+                stringRes = R.string.reporting_category_traffic_police
             ),
             Repo(
                 reportType = ReportType.Other,
                 iconRes = R.drawable.ic_reporting_other,
-                stringRes = MR.strings.reporting_category_other.resourceId
+                stringRes = R.string.reporting_category_other
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
                 iconRes = R.drawable.ic_camera_info_mobile,
-                stringRes = MR.strings.reporting_category_mobile_camera.resourceId
+                stringRes = R.string.reporting_category_mobile_camera
             )
         )
     }

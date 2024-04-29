@@ -1,6 +1,0 @@
-<plurals name="camera_alerts_plurals_distance">
-    <item quantity="one">%d метр</item>
-    <item quantity="few">%d метра</item>
-    <item quantity="many">%d метров</item>
-    <item quantity="other">%d метра</item>
-</plurals>

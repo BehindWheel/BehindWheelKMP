@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.MR
+import com.egoriku.grodnoroads.resources.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,15 +53,15 @@ fun PreviewDialogButton() = GrodnoRoadsM3ThemePreview {
     Column {
         DialogButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = MR.strings.ok.resourceId
+            textResId = R.string.ok
         ) {}
         DialogButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = MR.strings.cancel.resourceId
+            textResId = R.string.cancel
         ) {}
         DialogButton(
             modifier = Modifier.fillMaxWidth(),
-            textResId = MR.strings.cancel.resourceId,
+            textResId = R.string.cancel,
             enabled = false
         ) {}
     }

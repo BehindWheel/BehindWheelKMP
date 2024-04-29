@@ -24,18 +24,21 @@ internal class MobileCameraRepositoryImpl(
         .child("/v2/mobile_cameras/cameras")
         .valueEvents
         .map { resultOf ->
-            Success(resultOf.value<List<MobileCameraDTO>>().map { data ->
-                MobileCamera(
-                    id = data.id,
-                    name = data.name,
-                    position = LatLng(data.latitude, data.longitude),
-                    speedCar = data.speed,
-                    speedTruck = data.speed,
-                    updateTime = currentTime,
-                    angle = data.angle,
-                    bidirectional = data.bidirectional
-                )
-            })
+            Success(
+                resultOf.children
+                    .map { it.value<MobileCameraDTO>() }
+                    .map { data ->
+                        MobileCamera(
+                            id = data.id,
+                            name = data.name,
+                            position = LatLng(data.latitude, data.longitude),
+                            speedCar = data.speed,
+                            speedTruck = data.speed,
+                            updateTime = currentTime,
+                            angle = data.angle,
+                            bidirectional = data.bidirectional
+                        )
+                    })
         }
         .catch { ResultOf.Failure(it) }
         .flowOn(Dispatchers.IO)

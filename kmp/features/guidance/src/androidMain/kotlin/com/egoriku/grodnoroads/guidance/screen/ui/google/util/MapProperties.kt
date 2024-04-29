@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
 import com.egoriku.grodnoroads.location.requester.rememberLocationPermissionsState
 import com.egoriku.grodnoroads.maps.compose.MapProperties
 import com.egoriku.grodnoroads.maps.compose.MapType
-import com.egoriku.grodnoroads.resources_old.R
+import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 import com.google.android.gms.maps.model.MapStyleOptions
 
