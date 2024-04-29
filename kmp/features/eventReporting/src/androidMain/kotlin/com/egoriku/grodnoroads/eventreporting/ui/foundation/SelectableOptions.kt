@@ -98,9 +98,9 @@ private fun RadioButtonListItem(
                 role = Role.RadioButton,
                 onValueChange = { onSelect() }
             )
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(0.dp)
     ) {
         RadioButton(
             selected = selected,
