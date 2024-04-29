@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.multiplatformresources
+package com.egoriku.grodnoroads.shared.resources
 
 object Constants {
     const val BULLET_SEPARATOR = "•"

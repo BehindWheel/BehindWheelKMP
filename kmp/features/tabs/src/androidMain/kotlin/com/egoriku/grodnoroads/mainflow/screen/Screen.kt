@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.mainflow.screen
 
-import com.egoriku.grodnoroads.multiplatformresources.MR
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.resources.R
 
 internal sealed class Screen(

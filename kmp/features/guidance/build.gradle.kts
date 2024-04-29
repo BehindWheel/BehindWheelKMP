@@ -28,11 +28,11 @@ kotlin {
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
+            implementation(projects.kmp.shared.resources)
 
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.logger)
-            implementation(projects.kmp.libraries.resources)
             implementation(projects.kmp.libraries.uuid)
 
             compileOnly(libs.compose.stable.marker)

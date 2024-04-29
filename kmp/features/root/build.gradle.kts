@@ -34,9 +34,9 @@ kotlin {
         export(projects.kmp.features.tabs)
         export(projects.kmp.shared.analytics)
         export(projects.kmp.shared.models)
+        export(projects.kmp.shared.resources)
         export(projects.kmp.libraries.coroutines)
         export(projects.kmp.libraries.location)
-        export(projects.kmp.libraries.resources)
     }
 
     sourceSets {
@@ -56,13 +56,13 @@ kotlin {
             api(projects.kmp.features.tabs)
             api(projects.kmp.shared.analytics)
             api(projects.kmp.shared.models)
+            api(projects.kmp.libraries.coroutines)
+            api(projects.kmp.libraries.location)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
-            api(projects.kmp.libraries.coroutines)
-            api(projects.kmp.libraries.location)
+            implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.datastore)
-            implementation(projects.kmp.libraries.resources)
 
             compileOnly(libs.compose.stable.marker)
 
