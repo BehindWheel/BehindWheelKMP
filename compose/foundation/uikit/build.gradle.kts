@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.shared.resources)
+
     api(projects.compose.foundation.core)
     api(projects.compose.foundation.preview)
 
