@@ -90,19 +90,18 @@ struct AppSettings: View {
                 .clipShape(.rect(cornerRadius: 28))
                 .padding(.top, 8)
                 
-                HStack {
-                    Spacer()
+                HStack(alignment: .top, spacing: 8) {
                     SettingsRoundItem("social_telegram_chat".localized, image: "message.fill") {
                         openUrl(Constants.shared.TG_CHAT_LINK)
                     }
-                    Spacer()
+                    .frame(width: (geometry.size.width - 48) / 3)
                     SettingsRoundItem("social_telegram_channel".localized, image: "paperplane.fill") {
                         openUrl(Constants.shared.TG_CHANNEL_LINK)
                     }
-                    Spacer()
+                    .frame(width: (geometry.size.width - 48) / 3)
                     SettingsRoundItem("social_share_app".localized, image: "square.and.arrow.up.fill", action: { shareAppLink()
                     })
-                    Spacer()
+                    .frame(width: (geometry.size.width - 48) / 3)
                 }
                 .padding(.top, 18)
                 
@@ -136,7 +135,7 @@ struct AppSettings: View {
                 }
                 .padding(.top, 12)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 16)
             .padding(.bottom, {
                 let bottomSafeArea = geometry.safeAreaInsets.bottom
                 let height: CGFloat = bottomSafeArea == 0 ? 16 : bottomSafeArea - 12
