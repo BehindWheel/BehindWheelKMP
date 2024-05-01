@@ -18,6 +18,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.Modify
+import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.Update
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Message
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.settings.appearance.domain.util.getCurrentLanguage
@@ -62,35 +63,32 @@ class AppearanceStoreFactory(
                 onIntent<CloseDialog> {
                     dispatch(Message.Dialog(dialogState = None))
                 }
-                onIntent<Modify> {
-                    when (it.preference) {
+                onIntent<Modify> { modify ->
+                    when (modify.preference) {
                         is AppTheme -> {
                             dispatch(
-                                Message.Dialog(dialogState = ThemeDialogState(it.preference))
+                                Message.Dialog(dialogState = ThemeDialogState(modify.preference))
                             )
                         }
-
                         is AppLanguage -> {
                             dispatch(
-                                Message.Dialog(dialogState = LanguageDialogState(it.preference))
+                                Message.Dialog(dialogState = LanguageDialogState(modify.preference))
                             )
                         }
-
                         is KeepScreenOn -> error("Not supported")
                     }
                 }
-                onIntent<Intent.Update> { dialogResult ->
-                    when (dialogResult.preference) {
+                onIntent<Update> { update ->
+                    when (update.preference) {
                         is AppTheme -> {
                             launch {
                                 dataStore.edit {
-                                    updateAppTheme(dialogResult.preference.current.theme)
+                                    updateAppTheme(update.preference.current.theme)
                                 }
                             }
                         }
-
                         is AppLanguage -> {
-                            val language = dialogResult.preference.current
+                            val language = update.preference.current
 
                             when (language) {
                                 Language.System -> resetAppLanguage()
@@ -99,11 +97,10 @@ class AppearanceStoreFactory(
 
                             dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
                         }
-
                         is KeepScreenOn -> {
                             launch {
                                 dataStore.edit {
-                                    updateKeepScreenOn(dialogResult.preference.enabled)
+                                    updateKeepScreenOn(update.preference.enabled)
                                 }
                             }
                         }
