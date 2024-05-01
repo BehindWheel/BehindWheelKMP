@@ -38,20 +38,21 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
-import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponentPreview
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
+import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertAvailability
 import com.egoriku.grodnoroads.settings.alerts.screen.ui.AlertEventsSection
 import com.egoriku.grodnoroads.settings.alerts.screen.ui.AlertRadiusSection
 import com.egoriku.grodnoroads.settings.alerts.screen.ui.VoiceLevelSection
+import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlertsScreen(
     alertsComponent: AlertsComponent,
     onBack: () -> Unit
 ) {
     val state by alertsComponent.state.collectAsState(initial = AlertState())
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     val context = LocalContext.current
     val audioPlayer = remember { AudioPlayer(context) }
@@ -61,6 +62,32 @@ fun AlertsScreen(
             audioPlayer.release()
         }
     }
+
+    AlertsUI(
+        state = state,
+        onBack = onBack,
+        modify = alertsComponent::modify,
+        reset = alertsComponent::reset,
+        playTestSound = { volumeLevel ->
+            audioPlayer.run {
+                setVolumeLevel(level = volumeLevel.volumeLevel)
+                setLoudness(volumeLevel.loudness.value)
+                playSound(sound = Sound.TestAudioLevel)
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AlertsUI(
+    state: AlertState,
+    onBack: () -> Unit,
+    modify: (AlertsPref) -> Unit,
+    reset: (AlertsPref) -> Unit,
+    playTestSound: (VolumeLevel) -> Unit
+) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -107,40 +134,34 @@ fun AlertsScreen(
                         description = stringResource(R.string.alerts_availability_description),
                         isChecked = alertAvailability.alertFeatureEnabled,
                         onCheckedChange = { value ->
-                            alertsComponent.modify(alertAvailability.copy(alertFeatureEnabled = value))
+                            modify(alertAvailability.copy(alertFeatureEnabled = value))
                         }
                     )
 
                     if (alertAvailability.alertFeatureEnabled) {
                         AlertRadiusSection(
                             alertRadius = settings.alertRadius,
-                            modify = alertsComponent::modify,
-                            reset = alertsComponent::reset
+                            modify = modify,
+                            reset = reset
                         )
                         SwitchListItem(
                             text = stringResource(R.string.alerts_voice_alerts),
                             description = stringResource(R.string.alerts_voice_alerts_description),
                             isChecked = settings.alertAvailability.voiceAlertEnabled,
                             onCheckedChange = { value ->
-                                alertsComponent.modify(alertAvailability.copy(voiceAlertEnabled = value))
+                                modify(alertAvailability.copy(voiceAlertEnabled = value))
                             }
                         )
                     }
                     if (alertAvailability.voiceAlertEnabled) {
                         VoiceLevelSection(
                             alertVolumeLevel = settings.volumeInfo.alertVolumeLevel,
-                            modify = alertsComponent::modify,
-                            playTestSound = { volumeLevel ->
-                                audioPlayer.run {
-                                    setVolumeLevel(level = volumeLevel.volumeLevel)
-                                    setLoudness(volumeLevel.loudness.value)
-                                    playSound(sound = Sound.TestAudioLevel)
-                                }
-                            }
+                            modify = modify,
+                            playTestSound = playTestSound
                         )
                         AlertEventsSection(
                             alertEvents = settings.alertEvents,
-                            onCheckedChange = alertsComponent::modify
+                            onCheckedChange = modify
                         )
                     }
                 }
@@ -152,8 +173,19 @@ fun AlertsScreen(
 @GrodnoRoadsDarkLightPreview
 @Composable
 private fun AlertsScreenPreview() = GrodnoRoadsM3ThemePreview {
-    AlertsScreen(
-        alertsComponent = AlertsComponentPreview(),
-        onBack = {}
+    AlertsUI(
+        state = AlertState(
+            isLoading = false,
+            alertSettings = AlertSettings(
+                alertAvailability = AlertAvailability(
+                    alertFeatureEnabled = true,
+                    voiceAlertEnabled = true
+                )
+            )
+        ),
+        onBack = {},
+        modify = {},
+        reset = {},
+        playTestSound = {}
     )
 }

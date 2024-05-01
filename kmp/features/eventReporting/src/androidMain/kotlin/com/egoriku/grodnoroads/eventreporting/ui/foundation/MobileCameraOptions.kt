@@ -103,6 +103,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
                 }
             ),
             value = inputText,
+            isError = errorLabel != null,
             onValueChange = { inputText = it },
             label = stringResource(R.string.reporting_mobile_camera_input_hint),
             supportingText = errorLabel,

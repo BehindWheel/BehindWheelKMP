@@ -22,6 +22,7 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
+            implementation(projects.kmp.libraries.location)
 
             compileOnly(libs.compose.stable.marker)
 

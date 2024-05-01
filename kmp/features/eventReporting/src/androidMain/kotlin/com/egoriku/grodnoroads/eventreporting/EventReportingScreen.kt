@@ -156,7 +156,7 @@ private fun ReportingTypes(
     }
     AutoScrollLazyRow(
         indexToScroll = indexToScroll,
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items) {
