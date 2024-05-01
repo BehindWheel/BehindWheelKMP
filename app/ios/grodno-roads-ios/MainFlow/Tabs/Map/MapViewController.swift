@@ -20,11 +20,25 @@ class MapViewController: UIViewController {
         static let bottomSheetCornerRadius: CGFloat = 28
     }
     
-    private lazy var mapView = GMSMapView()
+    private lazy var mapView: GMSMapView = {
+        let options = GMSMapViewOptions()
+        options.camera = GMSCameraPosition(
+            latitude: 53.6813060334033,
+            longitude: 23.82895337660837,
+            zoom: 12
+        )
+        
+        let mapView = GMSMapView(options: options)
+        mapView.delegate = self
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        return mapView
+    }()
     
     private let viewModel: GuidanceComponent
     
     private var cancelables: Set<AnyCancellable> = []
+    private var cancellations = [Cancellation]()
     
     init(_ viewModel: GuidanceComponent) {
         self.viewModel = viewModel
@@ -39,7 +53,6 @@ class MapViewController: UIViewController {
         super.loadView()
         
         self.view = mapView
-        self.mapView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,18 +61,16 @@ class MapViewController: UIViewController {
         calculateMapInsets()
     }
     
+    deinit {
+        cancelables.forEach { $0.cancel() }
+        cancelables.removeAll()
+        
+        cancellations.forEach { $0.cancel() }
+        cancellations.removeAll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mapView.moveCamera(
-            GMSCameraUpdate.setCamera(
-                GMSCameraPosition(
-                    latitude: 53.6813060334033,
-                    longitude: 23.82895337660837,
-                    zoom: 12
-                )
-            )
-        )
         
         asPublisher(viewModel.mapEvents)
             .map { $0.data.compactMap { MapItem(event: $0) } }
@@ -69,6 +80,13 @@ class MapViewController: UIViewController {
                 guard let self else { return }
                 updateMap(with: items)
             }.store(in: &cancelables)
+        
+        let mapConfig = FlowWrapper<MapConfig>(flow: viewModel.mapConfig).collect { [weak mapView] config in
+            guard let config else { return }
+            UIApplication.shared.isIdleTimerDisabled = config.keepScreenOn
+            mapView?.isTrafficEnabled = config.trafficJanOnMap
+        }
+        cancellations.append(mapConfig)
     }
 }
 

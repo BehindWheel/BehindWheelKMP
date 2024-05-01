@@ -78,8 +78,8 @@ struct AppearanceView: View {
                 Spacer()
                 
                 let keepScreenOnBinding = Binding<Bool>(
-                    get: { state.appearanceState.keepScreenOn.enabled},
-                    set: { component.update(preference: AppearanceComponentAppearancePrefKeepScreenOn(enabled: $0))}
+                    get: { state.appearanceState.keepScreenOn.enabled },
+                    set: { component.update(preference: AppearanceComponentAppearancePrefKeepScreenOn(enabled: $0)) }
                 )
                 
                 Toggle("", isOn: keepScreenOnBinding)
