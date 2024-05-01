@@ -7,3 +7,6 @@
 */
 
 "CFBundleDisplayName" = "За рулем | Гродно";
+
+"NSLocationWhenInUseUsageDescription" = "Используется для отображения местоположения на карте";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Используется для отображения местоположения на карте";
