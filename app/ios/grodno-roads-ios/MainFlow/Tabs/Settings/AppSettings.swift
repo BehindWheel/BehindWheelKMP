@@ -50,7 +50,14 @@ struct AppSettings: View {
                     )
                     .frame(height: 40)
                     .padding([.leading, .trailing], 16)
-                    
+                    .modify { view in
+#if DEBUG
+                        return view
+#else
+                        return view.padding(.bottom, 8)
+#endif
+                    }
+#if DEBUG
                     SettingsItemView(
                         leadingIcon: "speaker.wave.2.bubble.fill",
                         headlineText: "settings_section_alerts".localized,
@@ -59,6 +66,7 @@ struct AppSettings: View {
                     .frame(height: 40)
                     .padding([.leading, .trailing], 16)
                     .padding(.bottom, 8)
+#endif
                 }
                 .background(.white)
                 .clipShape(.rect(cornerRadius: 28))

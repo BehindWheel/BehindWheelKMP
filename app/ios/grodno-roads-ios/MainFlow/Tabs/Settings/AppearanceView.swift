@@ -26,14 +26,14 @@ struct AppearanceView: View {
         }
     }()
     
-    @State
-    private var alwaysOn = false
+    @StateValue
+    private var state: AppearanceStoreState
     
     init(_ component: AppearanceComponent, onBack: @escaping (() -> Void)) {
         self.component = component
         self.onBack = onBack
         
-        alwaysOn = component.state.value.appearanceState.keepScreenOn.enabled
+        _state = StateValue(component.state)
     }
     
     var body: some View {
@@ -58,6 +58,7 @@ struct AppearanceView: View {
             }
             .tint(.gray)
             .padding([.top, .horizontal], 16)
+#if DEBUG
             Text("settings_category_other".localized)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(.black.opacity(0.75))
@@ -75,16 +76,21 @@ struct AppearanceView: View {
                 }
                 .padding(.horizontal, 8)
                 Spacer()
-                Toggle("", isOn: $alwaysOn)
+                
+                let keepScreenOnBinding = Binding<Bool>(
+                    get: { state.appearanceState.keepScreenOn.enabled },
+                    set: { component.update(preference: AppearanceComponentAppearancePrefKeepScreenOn(enabled: $0)) }
+                )
+                
+                Toggle("", isOn: keepScreenOnBinding)
                     .labelsHidden()
-                    .onChange(of: alwaysOn) { value in
-                        component.modify(
-                            preference: AppearanceComponentAppearancePrefKeepScreenOn(enabled: value)
-                        )
+                    .onChange(of: keepScreenOnBinding.wrappedValue) { newValue in
+                        keepScreenOnBinding.wrappedValue = newValue
                     }
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
+#endif
             Spacer()
         }
         .navigation(

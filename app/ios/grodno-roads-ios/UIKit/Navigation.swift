@@ -28,7 +28,7 @@ struct Navigation: ViewModifier {
                         Button {
                             onBack?()
                         } label: {
-                            Image(systemName: "chevron.backward")
+                            Image(systemName: "chevron.backward").foregroundStyle(.black)
                         }
                     }
                 }
