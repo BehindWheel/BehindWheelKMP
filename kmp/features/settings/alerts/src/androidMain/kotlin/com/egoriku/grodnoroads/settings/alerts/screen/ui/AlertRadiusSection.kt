@@ -14,6 +14,7 @@ import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertRadius
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun AlertRadiusSection(
@@ -28,7 +29,7 @@ fun AlertRadiusSection(
         val radiusInCity = alertRadius.alertRadiusInCity
 
         BasicListItem(
-            iconRes = R.drawable.ic_inside_city,
+            iconRes = MR.images.ic_inside_city.drawableResId,
             text = stringResource(R.string.alerts_notification_radius_in_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
@@ -47,7 +48,7 @@ fun AlertRadiusSection(
 
         val radiusOutCity = alertRadius.alertRadiusOutCity
         BasicListItem(
-            iconRes = R.drawable.ic_outside_city,
+            iconRes = MR.images.ic_outside_city.drawableResId,
             text = stringResource(R.string.alerts_notification_radius_outside_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {

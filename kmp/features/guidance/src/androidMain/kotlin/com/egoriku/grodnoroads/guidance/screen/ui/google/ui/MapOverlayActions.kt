@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.ActionIcon
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun MapOverlayActions(
@@ -45,7 +45,7 @@ fun MapOverlayActions(
         ) {
             ActionButton(
                 onClick = locationRequesterState::launchRequest,
-                icon = R.drawable.ic_geo,
+                icon = MR.images.ic_geo.drawableResId,
             )
         }
     }

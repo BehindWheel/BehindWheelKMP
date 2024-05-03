@@ -36,6 +36,7 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
+            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.resources)
 
             implementation(libs.androidx.appcompat)

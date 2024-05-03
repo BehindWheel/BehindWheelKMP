@@ -7,7 +7,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Brightness7
-import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -41,6 +40,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.
 import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppLanguageBottomSheet
 import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppThemeBottomSheet
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -105,7 +105,7 @@ private fun AppThemeSection(
     val appTheme = state.appearanceState.appTheme
 
     MoreActionListItem(
-        imageVector = Icons.Default.DarkMode,
+        iconRes = MR.images.ic_moon.drawableResId,
         text = stringResource(R.string.appearance_app_theme),
         value = stringResource(id = appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },

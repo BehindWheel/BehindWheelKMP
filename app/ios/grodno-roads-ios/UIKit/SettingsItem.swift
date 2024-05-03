@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Root
 
 struct SettingsItemView : View {
-    private let leadingIcon: String
+    private let leadingIcon: UIImage
     private let headlineText: String
     private let action: (() -> Void)
     
-    init(leadingIcon: String, headlineText: String, action: @escaping () -> Void) {
+    init(leadingIcon: UIImage, headlineText: String, action: @escaping () -> Void) {
         self.leadingIcon = leadingIcon
         self.headlineText = headlineText
         self.action = action
@@ -23,7 +24,7 @@ struct SettingsItemView : View {
             action()
         } label: {
             HStack(spacing: 16) {
-                Image(systemName: leadingIcon)
+                Image(uiImage: leadingIcon)
                     .foregroundColor(Color.black.opacity(0.6))
                 Text(headlineText).font(.system(size: 16, weight: .medium))
                 Spacer()
@@ -36,6 +37,9 @@ struct SettingsItemView : View {
 }
 
 #Preview {
-    SettingsItemView(leadingIcon: "map.fill", headlineText: "Map", action: {})
+    SettingsItemView(
+        leadingIcon: MR.images().ic_appearance.asUIImage(),
+        headlineText: "Map",
+        action: {})
     .background(Color.gray.opacity(0.2))
 }

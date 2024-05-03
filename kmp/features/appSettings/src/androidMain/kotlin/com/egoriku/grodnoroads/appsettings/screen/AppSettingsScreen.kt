@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -24,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -36,9 +34,9 @@ import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.Page
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun AppSettingsScreen(
@@ -92,7 +90,7 @@ private fun SettingsUi(
                         text = stringResource(R.string.settings_category_main)
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_appearance,
+                        icon = MR.images.ic_appearance.drawableResId,
                         name = stringResource(R.string.settings_section_appearance),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
@@ -104,7 +102,7 @@ private fun SettingsUi(
                         onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_notification_badge,
+                        icon = MR.images.ic_notification_badge.drawableResId,
                         name = stringResource(R.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
@@ -124,13 +122,13 @@ private fun SettingsUi(
                         text = stringResource(R.string.settings_category_other)
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_changelog,
+                        icon = MR.images.ic_changelog.drawableResId,
                         name = stringResource(R.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     SettingsListItem(
-                        icon = R.drawable.ic_faq,
+                        icon = MR.images.ic_faq.drawableResId,
                         name = stringResource(R.string.settings_section_faq),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
@@ -142,30 +140,6 @@ private fun SettingsUi(
             VersionSection(appVersion = appVersion)
             PrivacyPolicySection()
         }
-    }
-}
-
-@Composable
-private fun SettingsListItem(
-    icon: ImageVector,
-    name: String,
-    paddingValues: PaddingValues = PaddingValues(),
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .sizeIn(minHeight = 44.dp)
-            .clickable(onClick = onClick)
-            .padding(paddingValues),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null
-        )
-        Text(text = name, style = MaterialTheme.typography.titleMedium)
     }
 }
 

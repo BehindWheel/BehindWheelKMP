@@ -39,6 +39,7 @@ import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.Traf
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 internal fun QuickSettingsContent(
@@ -63,14 +64,14 @@ internal fun QuickSettingsContent(
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            iconRes = R.drawable.ic_notification,
+            iconRes = MR.images.ic_notification.drawableResId,
             name = stringResource(R.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            iconRes = R.drawable.ic_traffic_jam,
+            iconRes = MR.images.ic_traffic_jam.drawableResId,
             name = stringResource(R.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
@@ -85,7 +86,7 @@ private fun AppearanceSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        iconRes = R.drawable.ic_moon,
+        iconRes = MR.images.ic_moon.drawableResId,
         name = stringResource(id = R.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
@@ -115,7 +116,7 @@ private fun FilteringSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        iconRes = R.drawable.ic_filter,
+        iconRes = MR.images.ic_filter.drawableResId,
         name = stringResource(id = R.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {

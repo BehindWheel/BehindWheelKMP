@@ -14,6 +14,7 @@ import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 internal fun DrivingModeSection(
@@ -38,7 +39,7 @@ private fun MapZoomInCity(
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
     BasicListItem(
-        iconRes = R.drawable.ic_inside_city,
+        iconRes = MR.images.ic_inside_city.drawableResId,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {
@@ -64,7 +65,7 @@ private fun MapZoomOutCity(
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
     BasicListItem(
-        iconRes = R.drawable.ic_outside_city,
+        iconRes = MR.images.ic_outside_city.drawableResId,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {

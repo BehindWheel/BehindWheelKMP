@@ -36,7 +36,7 @@ struct AppSettings: View {
                         .padding(.top, 8)
                     
                     SettingsItemView(
-                        leadingIcon: "swatchpalette.fill",
+                        leadingIcon: MR.images().ic_appearance.asUIImage(),
                         headlineText: "settings_section_appearance".localized,
                         action: { component.open(page: .appearance) }
                     )
@@ -44,7 +44,7 @@ struct AppSettings: View {
                     .padding([.leading, .trailing], 16)
                     
                     SettingsItemView(
-                        leadingIcon: "map.fill",
+                        leadingIcon: MR.images().ic_map.asUIImage(),
                         headlineText: "settings_section_map".localized,
                         action: { component.open(page: .mapsettings) }
                     )
@@ -59,7 +59,7 @@ struct AppSettings: View {
                     }
 #if DEBUG
                     SettingsItemView(
-                        leadingIcon: "speaker.wave.2.bubble.fill",
+                        leadingIcon: MR.images().ic_notification_badge.asUIImage(),
                         headlineText: "settings_section_alerts".localized,
                         action: { component.open(page: .alerts) }
                     )
@@ -78,7 +78,7 @@ struct AppSettings: View {
                         .padding(.top, 8)
                     
                     SettingsItemView(
-                        leadingIcon: "newspaper.fill",
+                        leadingIcon: MR.images().ic_changelog.asUIImage(),
                         headlineText: "settings_section_changelog".localized,
                         action: { component.open(page: .changelog) }
                     )
@@ -86,7 +86,7 @@ struct AppSettings: View {
                     .padding([.leading, .trailing], 16)
                     
                     SettingsItemView(
-                        leadingIcon: "quote.bubble.fill",
+                        leadingIcon: MR.images().ic_faq.asUIImage(),
                         headlineText: "settings_section_faq".localized,
                         action: { component.open(page: .faq) }
                     )
@@ -99,16 +99,19 @@ struct AppSettings: View {
                 .padding(.top, 8)
                 
                 HStack(alignment: .top, spacing: 8) {
-                    SettingsRoundItem("social_telegram_chat".localized, image: "message.fill") {
+                    SettingsRoundItem("social_telegram_chat".localized,
+                                      image: MR.images().ic_chat.asUIImage()) {
                         openUrl(Constants.shared.TG_CHAT_LINK)
                     }
                     .frame(width: (geometry.size.width - 48) / 3)
-                    SettingsRoundItem("social_telegram_channel".localized, image: "paperplane.fill") {
+                    SettingsRoundItem("social_telegram_channel".localized, 
+                                      image: MR.images().ic_telegram.asUIImage()) {
                         openUrl(Constants.shared.TG_CHANNEL_LINK)
                     }
                     .frame(width: (geometry.size.width - 48) / 3)
-                    SettingsRoundItem("social_share_app".localized, image: "square.and.arrow.up.fill", action: { shareAppLink()
-                    })
+                    SettingsRoundItem("social_share_app".localized, 
+                                      image: MR.images().ic_share.asUIImage(),
+                                      action: { shareAppLink()})
                     .frame(width: (geometry.size.width - 48) / 3)
                 }
                 .padding(.top, 18)
@@ -128,10 +131,8 @@ struct AppSettings: View {
                         Text("terms_of_service".localized).font(.system(size: 10, weight: .medium))
                     }
                     .tint(.black)
-                    Spacer()
                     Text(Constants.shared.BULLET_SEPARATOR)
                         .font(.system(size: 10, weight: .medium))
-                    Spacer()
                     Button {
                         openUrl(Constants.shared.PRIVACY_POLICY_LINK)
                     } label: {

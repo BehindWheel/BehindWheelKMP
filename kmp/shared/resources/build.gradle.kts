@@ -20,7 +20,7 @@ kotlin {
             api(libs.moko.resources)
         }
         androidDependencies {
-            implementation(libs.moko.resources.compose)
+            api(libs.moko.resources.compose)
         }
     }
 }

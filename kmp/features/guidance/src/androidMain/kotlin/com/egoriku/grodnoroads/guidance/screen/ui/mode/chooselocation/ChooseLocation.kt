@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
@@ -21,7 +20,8 @@ import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.component.PinMarker
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun ChooseLocation(
@@ -58,7 +58,7 @@ fun ChooseLocation(
         ) {
             PrimaryInverseCircleButton(size = Large, onClick = onCancel) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_close),
+                    painter = painterResource(MR.images.ic_close),
                     contentDescription = null
                 )
             }
@@ -71,7 +71,7 @@ fun ChooseLocation(
                 }
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_ok),
+                    painter = painterResource(MR.images.ic_ok),
                     contentDescription = null
                 )
             }

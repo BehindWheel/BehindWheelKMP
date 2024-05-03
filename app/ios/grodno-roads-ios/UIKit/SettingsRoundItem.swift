@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import Root
 
 struct SettingsRoundItem: View {
     
     private let title: String
-    private let image: String
+    private let image: UIImage
     private let action: (() -> Void)
     
-    init(_ title: String, image: String, action: @escaping () -> Void) {
+    init(_ title: String, image: UIImage, action: @escaping () -> Void) {
         self.title = title
         self.image = image
         self.action = action
@@ -24,7 +25,7 @@ struct SettingsRoundItem: View {
             action()
         } label: {
             VStack(spacing: 8) {
-                Image(systemName: image)
+                Image(uiImage: image)
                     .padding(.all, 8)
                     .frame(width: 48, height: 48)
                     .background(.white)
@@ -42,5 +43,5 @@ struct SettingsRoundItem: View {
 }
 
 #Preview {
-    SettingsRoundItem("Chat", image: "questionmark.circle.fill") {}
+    SettingsRoundItem("Chat", image: MR.images().ic_chat.asUIImage()) {}
 }

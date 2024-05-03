@@ -77,8 +77,8 @@ import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.resources.R
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.shared.models.MapEventType
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
@@ -123,7 +123,7 @@ fun GuidanceScreen(
                         snackbarState.show(
                             SnackbarMessage.SimpleMessage(
                                 title = MessageData.Resource(R.string.reporting_notification_sent),
-                                icon = Icon.Res(id = R.drawable.ic_check_circle)
+                                icon = Icon.Res(id = MR.images.ic_check_circle.drawableResId)
                             )
                         )
                 }
