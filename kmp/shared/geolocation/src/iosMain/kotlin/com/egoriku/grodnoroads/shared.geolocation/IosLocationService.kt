@@ -46,9 +46,18 @@ class IosLocationService : LocationService {
         locationManager.delegate = null
     }
 
+    @OptIn(ExperimentalForeignApi::class)
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
-            lastKnownLocation = runCatching { requestLocation() }.getOrNull()
+            val location = locationManager.location ?: return null
+
+            location.coordinate.useContents {
+                lastKnownLocation = LocationInfo(
+                    latLng = LatLng(latitude, longitude),
+                    bearing = location.course.toFloat(),
+                    speed = location.speed.toInt()
+                )
+            }
         }
 
         return lastKnownLocation

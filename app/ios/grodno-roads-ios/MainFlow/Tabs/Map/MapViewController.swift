@@ -30,8 +30,8 @@ class MapViewController: UIViewController {
         
         let mapView = GMSMapView(options: options)
         mapView.delegate = self
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = false
+        mapView.settings.myLocationButton = false
         return mapView
     }()
     
