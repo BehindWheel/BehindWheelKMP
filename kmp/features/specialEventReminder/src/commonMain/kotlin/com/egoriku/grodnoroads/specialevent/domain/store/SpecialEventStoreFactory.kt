@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.specialevent.domain.store
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.store.SpecialEventStore.State
@@ -18,7 +17,6 @@ class SpecialEventStoreFactory(private val storeFactory: StoreFactory) {
         data class EventTypeChanged(val eventType: EventType) : Message
     }
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): SpecialEventStore =
         object : SpecialEventStore,
             Store<Nothing, State, Nothing> by storeFactory.create(

@@ -88,7 +88,7 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.material)
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    coreLibraryDesugaring(libs.desugar.jdk)
 }
 
 secrets {

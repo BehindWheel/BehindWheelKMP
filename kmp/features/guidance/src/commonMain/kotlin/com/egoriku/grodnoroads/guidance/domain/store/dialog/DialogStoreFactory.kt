@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.guidance.domain.store.dialog
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.MapBottomSheet
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore.Intent
@@ -16,7 +15,6 @@ internal class DialogStoreFactory(
     private val analyticsTracker: AnalyticsTracker
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): DialogStore =
         object : DialogStore, Store<Intent, State, Message> by storeFactory.create(
             initialState = State(),

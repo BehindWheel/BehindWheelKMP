@@ -61,7 +61,7 @@ kotlin {
             implementation(libs.androidx.compose.material.icons)
 
             implementation(libs.balloon.compose)
-            implementation(libs.decompose.compose.jetpack)
+            implementation(libs.decompose.compose)
             implementation(libs.google.app.update)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)

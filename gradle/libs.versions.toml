@@ -3,15 +3,15 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.3.2"
-compose-compiler = "1.5.12"
-decompose = "2.2.2"
+agp = "8.4.0"
+compose-compiler = "1.5.13"
+decompose = "3.0.0"
 kotlin = "1.9.23"
-moko-resources = "0.24.0-beta-1"
-mvikotlin = "3.3.0"
+moko-resources = "0.24.0-beta-2"
+mvikotlin = "4.0.0"
 
 [libraries]
-androidx-compose-bom = "androidx.compose:compose-bom:2024.04.01"
+androidx-compose-bom = "androidx.compose:compose-bom:2024.05.00"
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material3-windowsize = { module = "androidx.compose.material3:material3-window-size-class" }
@@ -25,10 +25,10 @@ androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
 androidx-annotation = "androidx.annotation:annotation:1.7.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-browser = "androidx.browser:browser:1.8.0"
-androidx-core = "androidx.core:core-ktx:1.13.0"
+androidx-core = "androidx.core:core-ktx:1.13.1"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
-androidx-datastore = "androidx.datastore:datastore-preferences:1.1.0"
-androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.0"
+androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
+androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.1"
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
@@ -36,8 +36,9 @@ balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
 compose-stable-marker = "com.github.skydoves:compose-stable-marker:1.0.4"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-compose-jetpack = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
+decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
+desugar-jdk = "com.android.tools:desugar_jdk_libs:2.0.4"
 dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.12.0"
 dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.12.0"
 dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.12.0"
@@ -49,7 +50,7 @@ firebase-analytics = "com.google.firebase:firebase-analytics:21.6.2"
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.0.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
-google-material = "com.google.android.material:material:1.11.0"
+google-material = "com.google.android.material:material:1.12.0"
 
 koin-android = "io.insert-koin:koin-android:3.5.6"
 koin-compose = "io.insert-koin:koin-androidx-compose:3.5.6"
@@ -81,7 +82,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.1" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.0" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.1" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

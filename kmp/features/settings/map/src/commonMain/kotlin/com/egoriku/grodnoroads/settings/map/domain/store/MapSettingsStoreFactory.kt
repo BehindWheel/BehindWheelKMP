@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -76,7 +75,6 @@ internal class MapSettingsStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapSettingsStore =
         object : MapSettingsStore, Store<Intent, StoreState, Nothing> by storeFactory.create(
             initialState = StoreState(),

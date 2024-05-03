@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
@@ -41,7 +40,6 @@ class AppearanceStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): AppearanceStore = object : AppearanceStore,
         Store<Intent, State, Nothing> by storeFactory.create(initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {

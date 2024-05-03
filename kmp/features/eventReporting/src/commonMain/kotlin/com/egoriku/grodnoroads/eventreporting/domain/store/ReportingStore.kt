@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.eventreporting.domain.store
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.eventreporting.data.mapper.MobileCameraReportMapper
 import com.egoriku.grodnoroads.eventreporting.data.mapper.ReportEventMapper
@@ -32,7 +31,6 @@ internal class ReportingStoreFactory(
     private val reportingRepository: ReportingRepository,
     private val analyticsTracker: AnalyticsTracker,
 ) {
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): ReportingStore = object : ReportingStore,
         Store<Intent, State, Nothing> by storeFactory.create<Intent, Unit, Nothing, State, Nothing>(
             initialState = State(),

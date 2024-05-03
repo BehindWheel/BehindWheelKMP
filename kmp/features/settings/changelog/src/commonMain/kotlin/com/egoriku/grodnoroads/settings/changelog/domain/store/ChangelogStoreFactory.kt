@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.settings.changelog.domain.store
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf
@@ -20,7 +19,6 @@ internal class ChangelogStoreFactory(
     private val crashlyticsTracker: CrashlyticsTracker
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     internal fun create(): ChangelogStore =
         object : ChangelogStore, Store<Nothing, State, Nothing> by storeFactory.create(
             initialState = State(),

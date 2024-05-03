@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
@@ -55,7 +54,6 @@ internal class MapEventsStoreFactory(
     private val currentTime: Long
         get() = DateTime.currentTimeMillis()
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapEventsStore =
         object : MapEventsStore, Store<Nothing, State, Nothing> by storeFactory.create(
             initialState = State(),
@@ -104,8 +102,8 @@ internal class MapEventsStoreFactory(
                         while (true) {
                             delay(2.minutes)
 
-                            val filterTime = currentTime - state.filterEventsTime
-                            dispatch(OnNewReports(state.reports.filter { it.timestamp >= filterTime }))
+                            val filterTime = currentTime - state().filterEventsTime
+                            dispatch(OnNewReports(state().reports.filter { it.timestamp >= filterTime }))
                         }
                     }
                 }

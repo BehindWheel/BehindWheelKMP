@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -35,7 +34,6 @@ internal class LocationStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): LocationStore =
         object : LocationStore, Store<Intent, State, Label> by storeFactory.create(
             initialState = State(),
@@ -96,14 +94,14 @@ internal class LocationStoreFactory(
                         Message.OnUserLocation(
                             lastLocation = LastLocation(
                                 latLng = it.latLng,
-                                bearing = state.lastLocation.bearing,
-                                speed = state.lastLocation.speed
+                                bearing = state().lastLocation.bearing,
+                                speed = state().lastLocation.speed
                             )
                         )
                     )
                 }
                 onIntent<InvalidateLocation> {
-                    dispatch(Message.OnNewLocation(lastLocation = state.userLocation))
+                    dispatch(Message.OnNewLocation(lastLocation = state().userLocation))
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),

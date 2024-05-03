@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
@@ -75,7 +74,6 @@ internal class MapConfigStoreFactory(
         data class OnAreasParsed(val areas: List<Area>) : Message
     }
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): MapConfigStore =
         object : MapConfigStore, Store<Intent, StoreState, Nothing> by storeFactory.create(
             initialState = StoreState(),
@@ -125,7 +123,7 @@ internal class MapConfigStoreFactory(
                     }
                 }
                 onIntent<CheckLocation> { location ->
-                    val areas = state.areas
+                    val areas = state().areas
                     val latLng = location.latLng
 
                     if (areas.isEmpty()) return@onIntent
@@ -133,7 +131,7 @@ internal class MapConfigStoreFactory(
                         PolyUtil.containsLocation(latLng, it.coordinates, false)
                     }
 
-                    val internalConfig = state.mapInternalConfig
+                    val internalConfig = state().mapInternalConfig
                     val zoomLevel = when {
                         isCityArea -> internalConfig.zoomLevelInCity
                         else -> internalConfig.zoomLevelOutOfCity
@@ -148,14 +146,14 @@ internal class MapConfigStoreFactory(
                 }
                 onIntent<StartDriveMode> {
                     dispatch(ChangeAppMode(appMode = AppMode.Drive))
-                    dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                    dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
                 }
                 onIntent<StopDriveMode> {
                     dispatch(ChangeAppMode(appMode = AppMode.Default))
                     dispatch(OnZoomLevel(zoomLevel = 12.5f))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
-                    when (state.currentAppMode) {
+                    when (state().currentAppMode) {
                         AppMode.Default -> {
                             dispatch(
                                 ChangeAppMode(
@@ -163,8 +161,8 @@ internal class MapConfigStoreFactory(
                                     isChooseInDriveMode = false
                                 )
                             )
-                            dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
-                            dispatch(OnUserZoomLevel(userZoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                            dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                            dispatch(OnUserZoomLevel(userZoomLevel = state().mapInternalConfig.zoomLevelInCity))
                         }
                         AppMode.Drive -> dispatch(
                             ChangeAppMode(
@@ -176,12 +174,12 @@ internal class MapConfigStoreFactory(
                     }
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {
-                    if (state.isChooseInDriveMode) {
+                    if (state().isChooseInDriveMode) {
                         dispatch(ChangeAppMode(appMode = AppMode.Drive))
-                        dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                        dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
                     } else {
                         dispatch(ChangeAppMode(appMode = AppMode.Default))
-                        dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel - 2f))
+                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel - 2f))
                     }
                 }
                 onIntent<ChooseLocation.UserMapZoom> {

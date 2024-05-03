@@ -37,7 +37,7 @@ private class ValueStateFlow<out T : Any>(private val source: Value<T>) : StateF
 
     override suspend fun collect(collector: FlowCollector<T>): Nothing {
         val flow = MutableStateFlow(source.value)
-        val disposable = source.observe { flow.value = it }
+        val disposable = source.subscribe { flow.value = it }
 
         try {
             flow.collect(collector)

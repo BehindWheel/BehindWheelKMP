@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
@@ -37,7 +36,6 @@ internal class QuickSettingsStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): QuickSettingsStore =
         object : QuickSettingsStore,
             Store<Intent, QuickSettingsState, Nothing> by storeFactory.create(

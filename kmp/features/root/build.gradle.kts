@@ -80,7 +80,7 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
 
-            implementation(libs.decompose.compose.jetpack)
+            implementation(libs.decompose.compose)
             implementation(libs.koin.android)
         }
     }

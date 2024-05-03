@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings
@@ -68,7 +67,6 @@ internal class AlertsStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {
-    @OptIn(ExperimentalMviKotlinApi::class)
     fun create(): AlertsStore = object : AlertsStore,
         Store<AlertsIntent, StoreAlertState, Nothing> by storeFactory.create(
             initialState = StoreAlertState(),
