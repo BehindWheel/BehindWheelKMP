@@ -18,6 +18,8 @@ class MapViewController: UIViewController {
         static let tabBarControlsHeight: CGFloat = 48
         static let tabBarHeaderHeight: CGFloat = 28
         static let bottomSheetCornerRadius: CGFloat = 28
+        static let horizontalInset: CGFloat = 16
+        static let onlineButtonBottomInset: CGFloat = 8
     }
     
     private lazy var mapView: GMSMapView = {
@@ -34,6 +36,48 @@ class MapViewController: UIViewController {
         mapView.settings.myLocationButton = false
         return mapView
     }()
+    
+    private lazy var onlineButtonAttributes: AttributeContainer = {
+        AttributeContainer([
+            .font: UIFont.systemFont(ofSize: 13, weight: .medium),
+            .foregroundColor: UIColor.black,
+            .paragraphStyle: {
+                let p = NSMutableParagraphStyle()
+                p.minimumLineHeight = 14
+                p.maximumLineHeight = 14
+                return p
+            }()
+        ])
+    }()
+    
+    private lazy var onlineButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.image = UIImage(
+            systemName: "info.circle.fill",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .regular, scale: .small)
+        )
+        config.imagePadding = 2
+        config.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 1, bottom: 1, trailing: 3)
+        config.cornerStyle = .capsule
+        config.baseBackgroundColor = UIColor.white
+        config.baseForegroundColor = UIColor.systemBlue
+        
+        let button = UIButton(
+            configuration: config,
+            primaryAction: UIAction(handler: { [weak self] _ in
+                self?.showOnlineTipView()
+            })
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = .zero
+        button.layer.shadowRadius = 1.5
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    private var onlineButtonBottomConstraint: NSLayoutConstraint?
     
     private let viewModel: GuidanceComponent
     
@@ -72,6 +116,22 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+        setupBinding()
+    }
+}
+
+// MARK: - Controller setup
+
+private extension MapViewController {
+    func setupViews() {
+        view.addSubview(onlineButton)
+        onlineButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalInset).isActive = true
+        onlineButtonBottomConstraint = onlineButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        onlineButtonBottomConstraint?.isActive = true
+    }
+    
+    func setupBinding() {
         asPublisher(viewModel.mapEvents)
             .map { $0.data.compactMap { MapItem(event: $0) } }
             .removeDuplicates()
@@ -81,6 +141,15 @@ class MapViewController: UIViewController {
                 updateMap(with: items)
             }.store(in: &cancelables)
         
+        let userCount = FlowWrapper<KotlinInt>(flow: viewModel.userCount).collect { [weak self] count in
+            guard let self, let count else { return }
+            if onlineButton.isHidden { onlineButton.isHidden = false }
+            onlineButton.configuration?.attributedTitle = AttributedString(
+                "map_user_count".localized(with: count.intValue), attributes: onlineButtonAttributes
+            )
+        }
+        cancellations.append(userCount)
+        
         let mapConfig = FlowWrapper<MapConfig>(flow: viewModel.mapConfig).collect { [weak mapView] config in
             guard let config else { return }
             UIApplication.shared.isIdleTimerDisabled = config.keepScreenOn
@@ -89,6 +158,18 @@ class MapViewController: UIViewController {
         cancellations.append(mapConfig)
     }
 }
+
+// MARK: - Controller actions
+
+private extension MapViewController {
+    func showOnlineTipView() {
+        view.addSubview(
+            OnlineTipView(targetPoint: CGPoint(x: onlineButton.center.x, y: onlineButton.frame.minY - 3))
+        )
+    }
+}
+
+// MARK: - Map action
 
 private extension MapViewController {
     func updateMap(with items: [MapItem]) {
@@ -105,14 +186,13 @@ private extension MapViewController {
     func clearMap() {
         mapView.clear()
     }
-}
 
-private extension MapViewController {
     func calculateMapInsets() {
         let safeArea = view.safeAreaInsets
         let safeAreaBottom = safeArea.bottom == 0 ? Constants.verticalInset : 0
         let bottomPadding = safeAreaBottom + Constants.tabBarControlsHeight + Constants.tabBarHeaderHeight - Constants.verticalInset
         mapView.padding.bottom = bottomPadding
+        onlineButtonBottomConstraint?.constant = -bottomPadding - safeArea.bottom - Constants.onlineButtonBottomInset
     }
 }
 
