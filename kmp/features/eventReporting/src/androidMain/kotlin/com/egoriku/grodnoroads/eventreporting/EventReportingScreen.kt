@@ -44,6 +44,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
+import com.egoriku.grodnoroads.shared.resources.MR
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable
@@ -145,7 +146,7 @@ private fun ReportingTypes(
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
-                iconRes = R.drawable.ic_camera_info_mobile,
+                iconRes = MR.images.nt_ic_camera_info_mobile.drawableResId,
                 stringRes = R.string.reporting_category_mobile_camera
             )
         )

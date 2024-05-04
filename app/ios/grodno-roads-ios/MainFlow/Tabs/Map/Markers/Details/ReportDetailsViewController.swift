@@ -109,7 +109,6 @@ class ReportDetailsViewController: UIViewController {
         } else if let reports = mapItem?.event as? MapEventReports {
             setupReports(reports: reports)
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -157,7 +156,6 @@ class ReportDetailsViewController: UIViewController {
                 equalTo: view.trailingAnchor,
                 constant: -Constants.rootEdge
             ),
-            
             
             _scrollView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,

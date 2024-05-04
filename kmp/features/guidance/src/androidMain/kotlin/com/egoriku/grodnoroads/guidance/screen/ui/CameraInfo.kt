@@ -38,16 +38,17 @@ import com.egoriku.grodnoroads.guidance.screen.util.DateTimeFormatter
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
-internal fun CameraInfo(camera: MapEvent.Camera) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
         Info(
             camera = camera,
             iconId = when (camera) {
-                is StationaryCamera -> R.drawable.ic_camera_info_stationary
-                is MediumSpeedCamera -> R.drawable.ic_camera_info_medium_speed
-                is MobileCamera -> R.drawable.ic_camera_info_mobile
+                is StationaryCamera -> MR.images.nt_ic_camera_info_stationary.drawableResId
+                is MediumSpeedCamera -> MR.images.nt_ic_camera_info_medium_speed.drawableResId
+                is MobileCamera -> MR.images.nt_ic_camera_info_mobile.drawableResId
             },
             cameraTypeId = when (camera) {
                 is StationaryCamera -> R.string.alerts_stationary_camera
@@ -78,6 +79,7 @@ private fun Info(
                     text = stringResource(cameraTypeId),
                     style = MaterialTheme.typography.bodyMedium
                 )
+                // TODO: make separate UI model with formatted value
                 val formattedDate = DateTimeFormatter.toDate(camera.updateTime)
                 DisabledText(
                     text = stringResource(R.string.camera_info_last_update, formattedDate),
@@ -150,16 +152,48 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
 @GrodnoRoadsPreview
 @Composable
 private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
-    CameraInfo(
-        camera = StationaryCamera(
-            id = "",
-            name = "Гродно, ул. Магистральная",
-            angle = -1.0f,
-            bidirectional = false,
-            updateTime = 1683234000000,
-            speedCar = 100,
-            speedTruck = 80,
-            position = LatLng(-1.0, -1.0),
+    Column(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        CameraInfo(
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+            camera = StationaryCamera(
+                id = "",
+                name = "Гродно, ул. Магистральная",
+                angle = -1.0f,
+                bidirectional = false,
+                updateTime = 1683234000000,
+                speedCar = 100,
+                speedTruck = 80,
+                position = LatLng(-1.0, -1.0),
+            )
         )
-    )
+        CameraInfo(
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+            camera = MediumSpeedCamera(
+                id = "",
+                name = "Гродно, ул. Магистральная",
+                angle = -1.0f,
+                bidirectional = false,
+                updateTime = 1683234000000,
+                speedCar = 100,
+                speedTruck = 80,
+                position = LatLng(-1.0, -1.0),
+            )
+        )
+        CameraInfo(
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+            camera = MobileCamera(
+                id = "",
+                name = "Гродно, ул. Магистральная",
+                angle = -1.0f,
+                bidirectional = false,
+                updateTime = 1683234000000,
+                speedCar = 100,
+                speedTruck = 80,
+                position = LatLng(-1.0, -1.0),
+            )
+        )
+    }
 }

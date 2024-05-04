@@ -16,11 +16,11 @@ enum MapEventCameraType {
     var title: String {
         switch self {
         case .stationary:
-            "Стационарная камера"
+            "alerts_stationary_camera".localized
         case .mobile:
-            "Мобильная камера"
+            "alerts_mobile_camera".localized
         case .medium:
-            "Камера средней скорости"
+            "alerts_medium_speed_camera".localized
         case .unknown:
             ""
         }

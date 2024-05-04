@@ -178,8 +178,16 @@ class CameraDetailsViewController: UIViewController {
             return
         }
         
-        cameraImageView.image = mapItem.marker.icon?.withRenderingMode(.alwaysOriginal)
-        
+        switch camera.cameraType {
+        case .stationarycamera:
+            cameraImageView.image = MR.images().nt_ic_camera_info_stationary.asUIImage()
+        case .mobilecamera:
+            cameraImageView.image = MR.images().nt_ic_camera_info_mobile.asUIImage()
+        case .mediumspeedcamera:
+            cameraImageView.image = MR.images().nt_ic_camera_info_medium_speed.asUIImage()
+        default: fatalError("unsupported message type")
+        }
+                
         titleLabel.text = camera.name
         typeLabel.text = camera.nativeCameraType.title
         
