@@ -412,11 +412,11 @@ fun GuidanceScreen(
                                 message = mapEvent.markerMessage,
                                 iconProvider = {
                                     when (mapEvent.mapEventType) {
-                                        MapEventType.TrafficPolice -> markerCache.getIcon(R.drawable.ic_map_police)
-                                        MapEventType.RoadIncident -> markerCache.getIcon(R.drawable.ic_map_road_incident)
-                                        MapEventType.CarCrash -> markerCache.getIcon(R.drawable.ic_map_car_crash)
-                                        MapEventType.TrafficJam -> markerCache.getIcon(R.drawable.ic_map_traffic_jam)
-                                        MapEventType.WildAnimals -> markerCache.getIcon(R.drawable.ic_map_wild_animals)
+                                        MapEventType.TrafficPolice -> markerCache.getIcon(MR.images.nt_ic_marker_police.drawableResId)
+                                        MapEventType.RoadIncident -> markerCache.getIcon(MR.images.nt_ic_marker_road_incident.drawableResId)
+                                        MapEventType.CarCrash -> markerCache.getIcon(MR.images.nt_ic_marker_car_crash.drawableResId)
+                                        MapEventType.TrafficJam -> markerCache.getIcon(MR.images.nt_ic_marker_traffic_jam.drawableResId)
+                                        MapEventType.WildAnimals -> markerCache.getIcon(MR.images.nt_ic_marker_wild_animals.drawableResId)
                                         MapEventType.Unsupported -> null
                                     }
                                 },
