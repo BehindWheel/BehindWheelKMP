@@ -12,8 +12,6 @@ class DetailsItemView: UIView {
     
     private lazy var sourceView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "message.fill")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -33,6 +31,16 @@ class DetailsItemView: UIView {
         
         textView.text = message.message
         
+        switch message.messageSource {
+        case .viber:
+            sourceView.image = MR.images().nt_ic_viber.asUIImage()
+        case .app:
+            sourceView.image = MR.images().nt_ic_app.asUIImage()
+        case .telegram:
+            sourceView.image = MR.images().nt_ic_telegram.asUIImage()
+        default: fatalError("unsupported message type")
+        }
+    
         NSLayoutConstraint.activate([
             sourceView.topAnchor.constraint(equalTo: self.topAnchor),
             sourceView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
