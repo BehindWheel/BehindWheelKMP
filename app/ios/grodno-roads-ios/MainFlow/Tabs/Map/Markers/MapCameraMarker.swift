@@ -18,11 +18,11 @@ class MapCameraMarker: GMSMarker, MapMarkerProtocol {
         
         switch cameraType {
         case .stationary:
-            self.icon = MR.images().ic_map_stationary_camera.asUIImage()
+            self.icon = MR.images().nt_ic_marker_stationary_camera.asUIImage()
         case .medium:
-            self.icon = MR.images().ic_map_medium_speed_camera.asUIImage()
+            self.icon = MR.images().nt_ic_marker_medium_speed_camera.asUIImage()
         case .mobile:
-            self.icon = MR.images().ic_map_mobile_camera.asUIImage()
+            self.icon = MR.images().nt_ic_marker_mobile_camera.asUIImage()
         case .unknown:
             self.icon = nil
         }

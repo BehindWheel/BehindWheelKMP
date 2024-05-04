@@ -364,7 +364,7 @@ fun GuidanceScreen(
                                     markerSize = markerSize,
                                     icon = {
                                         val id = when (markerSize) {
-                                            Large -> MR.images.ic_map_stationary_camera.drawableResId
+                                            Large -> MR.images.nt_ic_marker_stationary_camera.drawableResId
                                             Small -> R.drawable.ic_map_stationary_camera_small
                                         }
                                         markerCache.getIcon(id)
@@ -378,7 +378,7 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> MR.images.ic_map_medium_speed_camera.drawableResId
+                                                Large -> MR.images.nt_ic_marker_medium_speed_camera.drawableResId
                                                 Small -> R.drawable.ic_map_medium_speed_camera_small
                                             }
                                             markerCache.getIcon(id)
@@ -394,7 +394,7 @@ fun GuidanceScreen(
                                         markerSize = markerSize,
                                         icon = {
                                             val id = when (markerSize) {
-                                                Large -> MR.images.ic_map_mobile_camera.drawableResId
+                                                Large -> MR.images.nt_ic_marker_mobile_camera.drawableResId
                                                 Small -> R.drawable.ic_map_mobile_camera_small
                                             }
                                             markerCache.getIcon(id)
