@@ -14,8 +14,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
 import com.egoriku.grodnoroads.location.requester.rememberLocationPermissionsState
 import com.egoriku.grodnoroads.maps.compose.MapProperties
 import com.egoriku.grodnoroads.maps.compose.MapType
-import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.google.android.gms.maps.model.MapStyleOptions
 
 @Composable
@@ -40,14 +40,14 @@ fun rememberMapProperties(
         when (mapConfig.googleMapStyle) {
             Style.Minimal -> {
                 when {
-                    isLight -> R.raw.map_style_light_minimal
-                    else -> R.raw.map_style_dark_minimal
+                    isLight -> MR.files.map_style_light_minimal_json.rawResId
+                    else -> MR.files.map_style_dark_minimal_json.rawResId
                 }
             }
             Style.Detailed -> {
                 when {
-                    isLight -> R.raw.map_style_light_detailed
-                    else -> R.raw.map_style_dark_detailed
+                    isLight -> MR.files.map_style_light_detailed_json.rawResId
+                    else -> MR.files.map_style_dark_detailed_json.rawResId
                 }
             }
             Style.Unknown -> error("googleMap style can't be unknown")
