@@ -96,12 +96,12 @@ private fun Info(
             SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
                 speed = camera.speedCar,
-                iconId = R.drawable.ic_speed_limit_car
+                iconId = MR.images.ic_car.drawableResId
             )
             SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
                 speed = camera.speedTruck,
-                iconId = R.drawable.ic_speed_limit_truck
+                iconId = MR.images.ic_truck.drawableResId
             )
         }
 

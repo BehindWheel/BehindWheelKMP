@@ -203,6 +203,7 @@ class CameraDetailsViewController: UIViewController {
         
         let carLimit = SpeedLimitView()
         carLimit.speedLimit = camera.speedCar.description
+        carLimit.isCar = true
         limitsStackView.addArrangedSubview(carLimit)
         
         let truckLimit = SpeedLimitView()

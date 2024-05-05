@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Root
 
 class SpeedLimitView: UIView {
     
     var isCar: Bool = true {
         didSet {
-            vehicleImageView.image = isCar ? UIImage(systemName: "car.fill") : UIImage(systemName: "box.truck.fill")
+            vehicleImageView.image = isCar ? MR.images().ic_car.asUIImage().withRenderingMode(.alwaysTemplate) : MR.images().ic_truck.asUIImage().withRenderingMode(.alwaysTemplate)
         }
     }
     
@@ -32,7 +33,6 @@ class SpeedLimitView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "car.side.fill")
         return imageView
     }()
     
