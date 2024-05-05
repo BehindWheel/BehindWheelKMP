@@ -39,7 +39,6 @@ fun DefaultMode(
                 onClick = openReportFlow
             ) {
                 Icon(
-                    modifier = Modifier.size(24.dp),
                     painter = painterResource(MR.images.ic_pin_location),
                     contentDescription = null
                 )
