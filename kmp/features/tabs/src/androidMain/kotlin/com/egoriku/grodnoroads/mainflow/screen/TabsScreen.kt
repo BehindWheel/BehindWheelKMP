@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -90,6 +89,11 @@ private fun VerticalOrientationLayout(
         label = "bottomPadding"
     )
 
+    val contentPadding = WindowInsets
+        .systemBars
+        .add(WindowInsets(bottom = bottomPadding))
+        .asPaddingValues()
+
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
@@ -98,20 +102,14 @@ private fun VerticalOrientationLayout(
             when (val child = created.instance) {
                 is Child.Guidance -> {
                     GuidanceScreen(
-                        contentPadding = WindowInsets
-                            .systemBars
-                            .add(WindowInsets(bottom = bottomPadding))
-                            .asPaddingValues(),
+                        contentPadding = contentPadding,
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isShowBottomBar = it }
                     )
                 }
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = WindowInsets
-                            .navigationBars
-                            .add(WindowInsets(bottom = bottomPadding))
-                            .asPaddingValues(),
+                        contentPadding = contentPadding,
                         settingsComponent = child.component
                     )
                 }
@@ -157,6 +155,10 @@ private fun HorizontalOrientationLayout(
         label = "leftPadding"
     )
 
+    val contentPadding = WindowInsets.systemBars
+        .add(WindowInsets(left = leftPadding))
+        .asPaddingValues()
+
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
@@ -165,17 +167,13 @@ private fun HorizontalOrientationLayout(
             when (val child = created.instance) {
                 is Child.Guidance ->
                     GuidanceScreen(
-                        contentPadding = WindowInsets.systemBars
-                            .add(WindowInsets(left = leftPadding))
-                            .asPaddingValues(),
+                        contentPadding = contentPadding,
                         component = child.component,
                         onBottomNavigationVisibilityChange = { isHideBottomBar = it }
                     )
                 is Child.AppSettings -> {
                     AppSettingsScreen(
-                        contentPadding = WindowInsets.navigationBars
-                            .add(WindowInsets(left = leftPadding))
-                            .asPaddingValues(),
+                        contentPadding = contentPadding,
                         settingsComponent = child.component
                     )
                 }
