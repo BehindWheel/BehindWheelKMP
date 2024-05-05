@@ -67,13 +67,14 @@ fun DefaultOverlay(
 ) {
     Box {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             if (isDriveMode) {
                 Row(
                     modifier = Modifier
-                        .padding(contentPadding)
                         .padding(start = 16.dp)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
