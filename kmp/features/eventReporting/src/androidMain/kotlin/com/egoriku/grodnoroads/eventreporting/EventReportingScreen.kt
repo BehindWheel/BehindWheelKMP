@@ -132,17 +132,17 @@ private fun ReportingTypes(
         persistentListOf(
             Repo(
                 reportType = ReportType.RoadIncidents,
-                iconRes = R.drawable.ic_reporting_road_problem,
+                iconRes = MR.images.nt_ic_road_problem_bold.drawableResId,
                 stringRes = R.string.reporting_category_road_incidents
             ),
             Repo(
                 reportType = ReportType.TrafficPolice,
-                iconRes = R.drawable.ic_reporting_traffic_police,
+                iconRes = MR.images.nt_ic_traffic_police_bold.drawableResId,
                 stringRes = R.string.reporting_category_traffic_police
             ),
             Repo(
                 reportType = ReportType.Other,
-                iconRes = R.drawable.ic_reporting_other,
+                iconRes = MR.images.nt_ic_road_incident_bold.drawableResId,
                 stringRes = R.string.reporting_category_other
             ),
             Repo(

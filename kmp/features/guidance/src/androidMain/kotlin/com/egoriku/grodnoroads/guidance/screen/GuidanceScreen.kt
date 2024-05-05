@@ -350,7 +350,7 @@ fun GuidanceScreen(
                         appMode = appMode,
                         position = location.latLng,
                         bearing = location.bearing,
-                        icon = { markerCache.getIcon(id = R.drawable.ic_navigation_arrow) },
+                        icon = { markerCache.getIcon(id = MR.images.nt_ic_navigation_arrow.drawableResId) },
                         rotation = location.bearing
                     )
                 }

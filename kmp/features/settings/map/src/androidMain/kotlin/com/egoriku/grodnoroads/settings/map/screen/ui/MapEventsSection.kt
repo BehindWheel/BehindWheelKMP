@@ -131,7 +131,7 @@ private fun TrafficPolice(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_settings_traffic_police,
+        iconRes = MR.images.nt_ic_traffic_police.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_traffic_police),
         isChecked = trafficPolice.isShow,
@@ -150,7 +150,7 @@ private fun RoadIncidents(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_settings_road_incident,
+        iconRes = MR.images.nt_ic_road_incident.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_incidents),
         isChecked = roadIncident.isShow,
@@ -169,7 +169,7 @@ private fun CarCrash(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_settings_car_crash,
+        iconRes = MR.images.nt_ic_car_crash.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_car_crash),
         isChecked = carCrash.isShow,
@@ -188,7 +188,7 @@ private fun TrafficConditions(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_settings_traffic_jam,
+        iconRes = MR.images.nt_ic_traffic_jam.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_traffic_jam),
         isChecked = trafficJam.isShow,
@@ -207,7 +207,7 @@ private fun WildAnimals(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_settings_wild_animals,
+        iconRes = MR.images.nt_ic_wild_animals.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_wild_animals),
         isChecked = wildAnimals.isShow,
