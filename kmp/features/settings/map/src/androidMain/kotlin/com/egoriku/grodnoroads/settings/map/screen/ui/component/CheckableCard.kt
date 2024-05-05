@@ -1,9 +1,7 @@
 package com.egoriku.grodnoroads.settings.map.screen.ui.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,11 +15,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.resources.R
@@ -30,7 +28,7 @@ import com.egoriku.grodnoroads.resources.R
 fun CheckableCard(
     title: Int,
     selected: Boolean,
-    iconId: Int,
+    imageUrl: String,
     onClick: () -> Unit
 ) {
     Column(modifier = Modifier.width(120.dp)) {
@@ -43,14 +41,12 @@ fun CheckableCard(
                 else -> null
             }
         ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = iconId),
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit
-                )
-            }
+            AsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                placeholder = ColorPainter(MaterialTheme.colorScheme.outlineVariant),
+                model = imageUrl,
+                contentDescription = null
+            )
         }
         Text(
             modifier = Modifier
@@ -75,12 +71,14 @@ private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
         CheckableCard(
             title = R.string.map_google_map_style_minimal,
             selected = false,
-            iconId = R.drawable.ic_map_style_minimal_night
-        ) {}
+            imageUrl = "",
+            onClick = {},
+        )
         CheckableCard(
             title = R.string.map_google_map_style_detailed,
             selected = true,
-            iconId = R.drawable.ic_map_style_detailed_night
-        ) {}
+            imageUrl = "",
+            onClick = {},
+        )
     }
 }

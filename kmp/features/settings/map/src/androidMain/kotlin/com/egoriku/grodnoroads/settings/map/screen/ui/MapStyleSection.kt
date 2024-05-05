@@ -17,6 +17,10 @@ import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_DETAILED
+import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_MINIMAL
+import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_DETAILED
+import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_MINIMAL
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.settings.map.screen.ui.component.CheckableCard
@@ -52,10 +56,9 @@ private fun GoogleMapStyle(
         CheckableCard(
             title = R.string.map_google_map_style_minimal,
             selected = googleMapStyle.style == Style.Minimal,
-            iconId = if (MaterialTheme.colorScheme.isLight) {
-                R.drawable.ic_map_style_minimal_light
-            } else {
-                R.drawable.ic_map_style_minimal_night
+            imageUrl = when {
+                MaterialTheme.colorScheme.isLight -> LIGHT_MINIMAL
+                else -> DARK_MINIMAL
             },
             onClick = {
                 onCheckedChange(googleMapStyle.copy(style = Style.Minimal))
@@ -65,10 +68,9 @@ private fun GoogleMapStyle(
         CheckableCard(
             title = R.string.map_google_map_style_detailed,
             selected = googleMapStyle.style == Style.Detailed,
-            iconId = if (MaterialTheme.colorScheme.isLight) {
-                R.drawable.ic_map_style_detailed_light
-            } else {
-                R.drawable.ic_map_style_detailed_night
+            imageUrl = when {
+                MaterialTheme.colorScheme.isLight -> LIGHT_DETAILED
+                else -> DARK_DETAILED
             },
             onClick = {
                 onCheckedChange(googleMapStyle.copy(style = Style.Detailed))

@@ -33,6 +33,7 @@ androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
 
+coil = "io.coil-kt:coil-compose:2.6.0"
 compose-stable-marker = "com.github.skydoves:compose-stable-marker:1.0.4"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
