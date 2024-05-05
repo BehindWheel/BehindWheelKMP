@@ -28,6 +28,7 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -77,9 +78,9 @@ fun Alerts(
                         MediumSpeedCamera -> stringResource(R.string.alerts_medium_speed_camera)
                     }
                     val icon = when (alert.cameraType) {
-                        StationaryCamera -> R.drawable.ic_stationary_camera
-                        MobileCamera -> R.drawable.ic_mobile_camera
-                        MediumSpeedCamera -> R.drawable.ic_medium_speed_camera
+                        StationaryCamera -> MR.images.nt_ic_stationary_camera.drawableResId
+                        MobileCamera -> MR.images.nt_ic_mobile_camera.drawableResId
+                        MediumSpeedCamera -> MR.images.nt_ic_medium_speed_camera.drawableResId
                     }
                     CameraAlert(
                         modifier = Modifier.animateItemPlacement(

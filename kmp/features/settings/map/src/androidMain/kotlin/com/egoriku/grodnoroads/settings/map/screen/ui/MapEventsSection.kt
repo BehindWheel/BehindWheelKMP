@@ -22,6 +22,7 @@ import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 import com.egoriku.grodnoroads.shared.persistent.Selectable
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 internal fun MapEventsSection(
@@ -73,7 +74,7 @@ private fun StationaryCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_stationary_camera,
+        iconRes = MR.images.nt_ic_stationary_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_stationary_cameras),
         isChecked = stationaryCameras.isShow,
@@ -92,7 +93,7 @@ private fun MediumSpeedCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_medium_speed_camera,
+        iconRes = MR.images.nt_ic_medium_speed_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isShow,
@@ -111,7 +112,7 @@ private fun MobileCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_mobile_camera,
+        iconRes = MR.images.nt_ic_mobile_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.map_markers_mobile_cameras),
         isChecked = mobileCameras.isShow,

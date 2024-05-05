@@ -48,6 +48,7 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.kmp.shared.components)
+            implementation(projects.kmp.shared.resources)
             implementation(projects.compose.commonUi)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.maps.compose)

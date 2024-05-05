@@ -29,6 +29,7 @@ import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficPolice
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.WildAnimals
 import com.egoriku.grodnoroads.shared.persistent.Selectable
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun AlertEventsSection(
@@ -79,7 +80,7 @@ private fun StationaryCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_stationary_camera,
+        iconRes = MR.images.nt_ic_stationary_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_stationary_cameras),
         isChecked = stationaryCameras.isNotify,
@@ -96,7 +97,7 @@ private fun MediumSpeedCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_medium_speed_camera,
+        iconRes = MR.images.nt_ic_medium_speed_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isNotify,
@@ -113,7 +114,7 @@ private fun MobileCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = R.drawable.ic_mobile_camera,
+        iconRes = MR.images.nt_ic_mobile_camera.drawableResId,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_mobile_cameras),
         isChecked = mobileCameras.isNotify,

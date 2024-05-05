@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -146,7 +147,7 @@ private fun ReportingTypes(
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
-                iconRes = MR.images.nt_ic_camera_info_mobile.drawableResId,
+                iconRes = MR.images.nt_ic_mobile_camera_bold.drawableResId,
                 stringRes = R.string.reporting_category_mobile_camera
             )
         )
@@ -203,6 +204,7 @@ private fun CategoryCell(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Image(
+            modifier = Modifier.size(64.dp),
             painter = painterResource(iconRes),
             contentDescription = null
         )

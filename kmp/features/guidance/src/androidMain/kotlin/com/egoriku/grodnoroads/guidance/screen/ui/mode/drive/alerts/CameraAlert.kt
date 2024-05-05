@@ -25,6 +25,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.SpeedLimitSign
 import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun CameraAlert(
@@ -85,37 +86,37 @@ private fun PreviewStationaryAlert() = GrodnoRoadsM3ThemePreview {
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableId = R.drawable.ic_stationary_camera,
+            drawableId = MR.images.nt_ic_stationary_camera.drawableResId,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableId = R.drawable.ic_stationary_camera,
+            drawableId = MR.images.nt_ic_stationary_camera.drawableResId,
             title = stringResource(R.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableId = R.drawable.ic_mobile_camera,
+            drawableId = MR.images.nt_ic_mobile_camera.drawableResId,
             title = stringResource(R.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableId = R.drawable.ic_mobile_camera,
+            drawableId = MR.images.nt_ic_mobile_camera.drawableResId,
             title = stringResource(R.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableId = R.drawable.ic_medium_speed_camera,
+            drawableId = MR.images.nt_ic_medium_speed_camera.drawableResId,
             title = stringResource(R.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableId = R.drawable.ic_medium_speed_camera,
+            drawableId = MR.images.nt_ic_medium_speed_camera.drawableResId,
             title = stringResource(R.string.alerts_mobile_camera)
         )
     }

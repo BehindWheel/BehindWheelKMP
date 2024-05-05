@@ -180,11 +180,11 @@ class CameraDetailsViewController: UIViewController {
         
         switch camera.cameraType {
         case .stationarycamera:
-            cameraImageView.image = MR.images().nt_ic_camera_info_stationary.asUIImage()
+            cameraImageView.image = MR.images().nt_ic_stationary_camera_bold.asUIImage()
         case .mobilecamera:
-            cameraImageView.image = MR.images().nt_ic_camera_info_mobile.asUIImage()
+            cameraImageView.image = MR.images().nt_ic_mobile_camera_bold.asUIImage()
         case .mediumspeedcamera:
-            cameraImageView.image = MR.images().nt_ic_camera_info_medium_speed.asUIImage()
+            cameraImageView.image = MR.images().nt_ic_medium_speed_camera_bold.asUIImage()
         default: fatalError("unsupported message type")
         }
                 

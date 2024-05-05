@@ -46,9 +46,9 @@ internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) 
         Info(
             camera = camera,
             iconId = when (camera) {
-                is StationaryCamera -> MR.images.nt_ic_camera_info_stationary.drawableResId
-                is MediumSpeedCamera -> MR.images.nt_ic_camera_info_medium_speed.drawableResId
-                is MobileCamera -> MR.images.nt_ic_camera_info_mobile.drawableResId
+                is StationaryCamera -> MR.images.nt_ic_stationary_camera_bold.drawableResId
+                is MediumSpeedCamera -> MR.images.nt_ic_medium_speed_camera_bold.drawableResId
+                is MobileCamera -> MR.images.nt_ic_mobile_camera_bold.drawableResId
             },
             cameraTypeId = when (camera) {
                 is StationaryCamera -> R.string.alerts_stationary_camera
@@ -69,6 +69,7 @@ private fun Info(
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         Row {
             Image(
+                modifier = Modifier.size(64.dp),
                 painter = painterResource(iconId),
                 contentDescription = null
             )
