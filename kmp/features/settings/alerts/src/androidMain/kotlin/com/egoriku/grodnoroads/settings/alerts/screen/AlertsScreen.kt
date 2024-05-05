@@ -36,7 +36,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
@@ -95,7 +95,7 @@ private fun AlertsUI(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_alerts),
+                title = stringResource(R.string.settings_section_alerts),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )

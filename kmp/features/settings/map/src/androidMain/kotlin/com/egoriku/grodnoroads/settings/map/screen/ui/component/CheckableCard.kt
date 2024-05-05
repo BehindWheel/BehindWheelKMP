@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 
 @Composable
 fun CheckableCard(
@@ -52,7 +52,7 @@ fun CheckableCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
-            text = stringResource(id = title),
+            text = stringResource(title),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
         )

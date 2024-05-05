@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
 import com.egoriku.grodnoroads.shared.resources.MR
@@ -23,7 +23,7 @@ internal fun DrivingModeSection(
     reset: (MapPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SettingsSectionHeader(title = stringResource(id = R.string.map_header_drive_mode))
+        SettingsSectionHeader(title = stringResource(R.string.map_header_drive_mode))
 
         MapZoomInCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)
         MapZoomOutCity(driveModeZoom = driveModeZoom, modify = modify, reset = reset)

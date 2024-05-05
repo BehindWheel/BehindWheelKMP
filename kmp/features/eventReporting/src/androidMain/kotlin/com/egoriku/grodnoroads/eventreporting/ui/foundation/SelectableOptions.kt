@@ -30,7 +30,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 
 @Composable

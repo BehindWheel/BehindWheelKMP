@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.mainflow.screen
 
 import com.egoriku.grodnoroads.shared.resources.MR
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 
 internal sealed class Screen(
     val index: Int,

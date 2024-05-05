@@ -33,7 +33,7 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
-            implementation(projects.libraries.resources)
+            implementation(projects.libraries.localization)
         }
         commonTestDependencies {
             implementation(libs.kotlin.test)

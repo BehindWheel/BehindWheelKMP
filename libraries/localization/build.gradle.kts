@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.resources"
+    namespace = "com.egoriku.grodnoroads.localization"
 }

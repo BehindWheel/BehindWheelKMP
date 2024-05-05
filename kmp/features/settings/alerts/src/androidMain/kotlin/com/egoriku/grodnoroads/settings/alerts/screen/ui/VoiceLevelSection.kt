@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
@@ -32,7 +32,7 @@ fun VoiceLevelSection(
     playTestSound: (VolumeLevel) -> Unit
 ) {
     Column {
-        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_volume_level))
+        SettingsSectionHeader(title = stringResource(R.string.alerts_header_volume_level))
         Row(
             modifier = Modifier
                 .fillMaxWidth()

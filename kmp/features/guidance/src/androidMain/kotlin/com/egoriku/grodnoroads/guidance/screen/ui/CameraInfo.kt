@@ -36,7 +36,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamer
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.screen.util.DateTimeFormatter
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
 import com.egoriku.grodnoroads.shared.resources.MR
 

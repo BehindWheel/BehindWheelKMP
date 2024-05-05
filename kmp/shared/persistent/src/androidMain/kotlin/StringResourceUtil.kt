@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.shared.persistent
 
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.persistent.appearance.Language
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering

@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
@@ -26,8 +26,8 @@ import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
 @Composable
 fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     val dialogContent = when (eventType) {
-        Spring -> stringResource(id = R.string.headlamp_body_spring)
-        Autumn -> stringResource(id = R.string.headlamp_body_autumn)
+        Spring -> stringResource(R.string.headlamp_body_spring)
+        Autumn -> stringResource(R.string.headlamp_body_autumn)
     }
 
     BasicAlertDialog(

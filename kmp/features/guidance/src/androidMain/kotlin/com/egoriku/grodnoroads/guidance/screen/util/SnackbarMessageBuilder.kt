@@ -12,7 +12,7 @@ import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocat
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocationEnabled
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.PermissionDenied
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.ShowRationale
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 
 class SnackbarMessageBuilder(private val context: Context) {
 

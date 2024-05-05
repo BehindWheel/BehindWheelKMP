@@ -57,7 +57,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                     modifier = Modifier.fillMaxWidth(),
                     text = when (val title = message.title) {
                         is Raw -> title.text
-                        is Resource -> stringResource(id = title.id)
+                        is Resource -> stringResource(title.id)
                     }
                 )
             }
@@ -67,7 +67,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                     modifier = Modifier.fillMaxWidth(),
                     text = when (description) {
                         is Raw -> description.text
-                        is Resource -> stringResource(id = description.id)
+                        is Resource -> stringResource(description.id)
                     },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.inverseOnSurface,

@@ -26,7 +26,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
@@ -61,7 +61,7 @@ fun AppearanceScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_appearance),
+                title = stringResource(R.string.settings_section_appearance),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )
@@ -76,7 +76,7 @@ fun AppearanceScreen(
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
             VerticalSpacer(16.dp)
-            SettingsSectionHeader(title = stringResource(id = R.string.settings_category_other))
+            SettingsSectionHeader(title = stringResource(R.string.settings_category_other))
             KeepScreenOnSettings(state = state, onModify = appearanceComponent::update)
         }
     }
@@ -92,7 +92,7 @@ private fun LanguageSection(
     MoreActionListItem(
         imageVector = Icons.Default.Language,
         text = stringResource(R.string.appearance_app_language),
-        value = stringResource(id = language.current.toStringResource()),
+        value = stringResource(language.current.toStringResource()),
         onClick = { onModify(language) },
     )
 }
@@ -107,7 +107,7 @@ private fun AppThemeSection(
     MoreActionListItem(
         iconRes = MR.images.ic_moon.drawableResId,
         text = stringResource(R.string.appearance_app_theme),
-        value = stringResource(id = appTheme.current.toStringResource()),
+        value = stringResource(appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },
     )
 }

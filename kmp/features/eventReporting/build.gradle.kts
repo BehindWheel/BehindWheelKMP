@@ -38,7 +38,7 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
             implementation(projects.kmp.shared.resources)
-            implementation(projects.libraries.resources)
+            implementation(projects.libraries.localization)
 
             implementation(libs.androidx.activity.compose)
         }

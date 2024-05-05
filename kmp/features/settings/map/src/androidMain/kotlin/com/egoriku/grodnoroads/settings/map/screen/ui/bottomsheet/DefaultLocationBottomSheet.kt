@@ -43,7 +43,7 @@ internal fun DefaultLocationBottomSheet(
         content = {
             val sortedCityValues = defaultCity.values
                 .mapIndexed { index, value ->
-                    CityValue(index, stringResource(id = value.toStringResource()))
+                    CityValue(index, stringResource(value.toStringResource()))
                 }.sortedWith(compareBy(Collator.getInstance(Locale.getDefault())) { it.value })
 
             SingleChoiceLazyColumn(

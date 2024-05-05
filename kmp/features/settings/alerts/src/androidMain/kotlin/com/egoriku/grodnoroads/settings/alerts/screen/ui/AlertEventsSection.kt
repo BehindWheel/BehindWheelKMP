@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertEvents
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.CarCrash
@@ -51,10 +51,11 @@ fun AlertEventsSection(
             }
         }
 
-        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_voice_alerts))
+        SettingsSectionHeader(title = stringResource(R.string.alerts_header_voice_alerts))
 
         TriStateCheckBoxListItem(
-            text = stringResource(id = R.string.alerts_notifications_select_all), state = state,
+            text = stringResource(R.string.alerts_notifications_select_all),
+            state = state,
             onToggle = onToggle
         )
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

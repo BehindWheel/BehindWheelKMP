@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_DETAILED
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_MINIMAL
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_DETAILED
@@ -32,7 +32,7 @@ internal fun MapStyleSection(
     onCheckedChange: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsSectionHeader(title = stringResource(id = R.string.map_header_appearance))
+        SettingsSectionHeader(title = stringResource(R.string.map_header_appearance))
 
         GoogleMapStyle(mapStyle, onCheckedChange)
         VerticalSpacer(16.dp)

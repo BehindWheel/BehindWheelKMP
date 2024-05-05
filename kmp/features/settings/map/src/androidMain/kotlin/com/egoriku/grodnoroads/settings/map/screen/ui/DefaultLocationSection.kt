@@ -7,7 +7,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.LocationInfo
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
@@ -19,13 +19,13 @@ internal fun DefaultLocationSection(
     onCheckedChange: (MapPref) -> Unit
 ) {
     Column {
-        SettingsSectionHeader(title = stringResource(id = R.string.map_header_default_location))
+        SettingsSectionHeader(title = stringResource(R.string.map_header_default_location))
 
         val defaultCity = locationInfo.defaultCity
         MoreActionListItem(
             iconRes = MR.images.ic_my_city.drawableResId,
-            text = stringResource(id = R.string.map_default_location),
-            value = stringResource(id = defaultCity.current.toStringResource())
+            text = stringResource(R.string.map_default_location),
+            value = stringResource(defaultCity.current.toStringResource())
         ) {
             onCheckedChange(defaultCity)
         }

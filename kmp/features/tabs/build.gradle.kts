@@ -22,7 +22,6 @@ kotlin {
             implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.shared.models)
-            implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.coroutines)
 
             compileOnly(libs.compose.stable.marker)
@@ -30,7 +29,8 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
-            implementation(projects.libraries.resources)
+            implementation(projects.kmp.shared.resources)
+            implementation(projects.libraries.localization)
 
             implementation(libs.androidx.compose.material3.windowsize)
             implementation(libs.decompose.compose)

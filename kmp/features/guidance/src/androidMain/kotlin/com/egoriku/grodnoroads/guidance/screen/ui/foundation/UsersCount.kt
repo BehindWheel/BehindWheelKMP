@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.resources.MR
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
@@ -60,7 +60,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
         builder = builder,
         balloonContent = {
             Text(
-                text = stringResource(id = R.string.map_user_count_hint),
+                text = stringResource(R.string.map_user_count_hint),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -105,7 +105,7 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
                 contentDescription = null
             )
             Text(
-                text = stringResource(id = R.string.map_user_count, count),
+                text = stringResource(R.string.map_user_count, count),
                 style = MaterialTheme.typography.labelSmall
             )
         }

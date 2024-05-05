@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
@@ -29,8 +29,8 @@ internal fun MarkersFilteringSection(
 ) {
     Column {
         SettingsSectionHeader(
-            title = stringResource(id = R.string.map_markers_filtering),
-            description = stringResource(id = R.string.map_markers_filtering_description)
+            title = stringResource(R.string.map_markers_filtering),
+            description = stringResource(R.string.map_markers_filtering_description)
         )
         Row(
             modifier = Modifier
@@ -49,7 +49,7 @@ internal fun MarkersFilteringSection(
                     },
                     label = {
                         Text(
-                            text = stringResource(id = filtering.toStringResource()),
+                            text = stringResource(filtering.toStringResource()),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

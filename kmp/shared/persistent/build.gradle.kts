@@ -22,7 +22,7 @@ kotlin {
             compileOnly(libs.compose.stable.marker)
         }
         androidDependencies {
-            implementation(projects.libraries.resources)
+            implementation(projects.libraries.localization)
         }
     }
 }

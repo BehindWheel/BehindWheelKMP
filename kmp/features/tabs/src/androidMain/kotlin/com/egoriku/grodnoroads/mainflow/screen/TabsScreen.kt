@@ -134,7 +134,7 @@ private fun VerticalOrientationLayout(
                             )
                         },
                         label = {
-                            Text(text = stringResource(id = screen.labelId))
+                            Text(text = stringResource(screen.labelId))
                         }
                     )
                 }

@@ -40,7 +40,7 @@ fun AppLanguageBottomSheet(
         content = {
             SingleChoiceLazyColumn(
                 list = language.values.map {
-                    stringResource(id = it.toStringResource())
+                    stringResource(it.toStringResource())
                 }.toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = language.values.indexOf(language.current),

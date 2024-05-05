@@ -41,7 +41,7 @@ fun AppThemeBottomSheet(
         content = {
             SingleChoiceLazyColumn(
                 list = theme.values.map {
-                    stringResource(id = it.toStringResource())
+                    stringResource(it.toStringResource())
                 }.toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = theme.values.indexOf(theme.current),

@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberShareIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.resources.Constants.PLAY_STORE_LINK
 import com.egoriku.grodnoroads.shared.resources.Constants.TG_CHANNEL_LINK
 import com.egoriku.grodnoroads.shared.resources.Constants.TG_CHAT_LINK

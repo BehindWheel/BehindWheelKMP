@@ -15,7 +15,7 @@ import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.resources.Constants.BULLET_SEPARATOR
 import com.egoriku.grodnoroads.shared.resources.Constants.PRIVACY_POLICY_LINK
 import com.egoriku.grodnoroads.shared.resources.Constants.TERMS_OF_SERVICE_LINK

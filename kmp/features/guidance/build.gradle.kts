@@ -28,7 +28,6 @@ kotlin {
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
-            implementation(projects.kmp.shared.resources)
 
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
@@ -47,15 +46,15 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.kmp.shared.components)
-            implementation(projects.kmp.shared.resources)
             implementation(projects.compose.commonUi)
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.maps.compose)
             implementation(projects.compose.locationRequester)
             implementation(projects.compose.snackbar)
+            implementation(projects.kmp.shared.components)
+            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.audioplayer)
-            implementation(projects.libraries.resources)
+            implementation(projects.libraries.localization)
 
             implementation(libs.androidx.activity.compose)
 

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -53,7 +53,7 @@ fun MapSettingsScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_map),
+                title = stringResource(R.string.settings_section_map),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )

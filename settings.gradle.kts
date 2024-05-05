@@ -41,7 +41,7 @@ include(":compose:maps:compose")
 include(":compose:snackbar")
 
 include(":libraries:audioplayer")
-include(":libraries:resources")
+include(":libraries:localization")
 
 include(":kmp:features:root")
 include(":kmp:features:onboarding")

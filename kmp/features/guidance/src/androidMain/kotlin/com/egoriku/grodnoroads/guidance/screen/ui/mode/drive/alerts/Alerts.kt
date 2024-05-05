@@ -21,7 +21,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MediumSpeedCamer
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.CarCrash
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam

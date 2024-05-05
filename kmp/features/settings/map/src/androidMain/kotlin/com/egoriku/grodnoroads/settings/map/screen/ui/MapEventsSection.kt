@@ -18,7 +18,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 import com.egoriku.grodnoroads.shared.persistent.Selectable
@@ -44,9 +44,10 @@ internal fun MapEventsSection(
             }
         }
 
-        SettingsSectionHeader(title = stringResource(id = R.string.map_header_markers))
+        SettingsSectionHeader(title = stringResource(R.string.map_header_markers))
         TriStateCheckBoxListItem(
-            text = stringResource(id = R.string.map_markers_select_all), state = state,
+            text = stringResource(R.string.map_markers_select_all),
+            state = state,
             onToggle = onToggle
         )
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

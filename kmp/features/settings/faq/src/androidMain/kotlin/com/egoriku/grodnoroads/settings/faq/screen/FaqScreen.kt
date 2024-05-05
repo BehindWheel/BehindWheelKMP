@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponentPreview
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
@@ -47,7 +47,7 @@ fun FaqScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(id = R.string.settings_section_faq),
+                title = stringResource(R.string.settings_section_faq),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )

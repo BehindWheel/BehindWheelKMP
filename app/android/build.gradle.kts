@@ -78,7 +78,7 @@ dependencies {
 
     implementation(projects.compose.foundation.core)
     implementation(projects.compose.foundation.theme)
-    implementation(projects.libraries.resources)
+    implementation(projects.libraries.localization)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)

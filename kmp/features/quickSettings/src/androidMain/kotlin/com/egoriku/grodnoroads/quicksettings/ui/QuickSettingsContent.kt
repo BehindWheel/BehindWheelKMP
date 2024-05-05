@@ -31,13 +31,13 @@ import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppTheme
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MarkerFiltering
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
-import com.egoriku.grodnoroads.resources.R
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import com.egoriku.grodnoroads.shared.resources.MR
 
@@ -87,7 +87,7 @@ private fun AppearanceSection(
 ) {
     BasicSection(
         iconRes = MR.images.ic_moon.drawableResId,
-        name = stringResource(id = R.string.quick_settings_app_theme)
+        name = stringResource(R.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
             appTheme.values.forEach { theme ->
@@ -117,7 +117,7 @@ private fun FilteringSection(
 ) {
     BasicSection(
         iconRes = MR.images.ic_filter.drawableResId,
-        name = stringResource(id = R.string.quick_settings_markers_filtering)
+        name = stringResource(R.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {
             markerFiltering.values.forEach { filtering ->
@@ -130,7 +130,7 @@ private fun FilteringSection(
                     },
                     label = {
                         Text(
-                            text = stringResource(id = filtering.toStringResource()),
+                            text = stringResource(filtering.toStringResource()),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

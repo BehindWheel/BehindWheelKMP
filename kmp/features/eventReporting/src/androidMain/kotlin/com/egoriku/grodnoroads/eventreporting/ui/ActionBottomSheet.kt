@@ -57,7 +57,7 @@ import com.egoriku.grodnoroads.eventreporting.ui.util.preUpPostDownNestedScrollC
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter

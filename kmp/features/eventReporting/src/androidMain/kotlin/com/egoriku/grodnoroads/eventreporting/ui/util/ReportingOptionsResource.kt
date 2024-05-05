@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.eventreporting.ui.util
 
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 
 fun ReportingOptions.toStringResource() = when (this) {
     ReportingOptions.ROAD_REPAIR -> R.string.reporting_item_road_repair

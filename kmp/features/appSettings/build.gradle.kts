@@ -19,7 +19,6 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.shared.components)
             implementation(projects.kmp.shared.models)
-            implementation(projects.kmp.shared.resources)
 
             compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
@@ -27,8 +26,8 @@ kotlin {
         androidDependencies {
             implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.commonUi)
-
-            implementation(projects.libraries.resources)
+            implementation(projects.kmp.shared.resources)
+            implementation(projects.libraries.localization)
 
             implementation(libs.androidx.browser)
             implementation(libs.androidx.core)

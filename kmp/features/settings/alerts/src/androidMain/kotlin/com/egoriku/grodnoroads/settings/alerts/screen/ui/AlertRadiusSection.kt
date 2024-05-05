@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableIntRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertRadius
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.shared.resources.MR
@@ -23,9 +23,9 @@ fun AlertRadiusSection(
     reset: (AlertsPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SettingsSectionHeader(title = stringResource(id = R.string.alerts_header_notification_radius))
+        SettingsSectionHeader(title = stringResource(R.string.alerts_header_notification_radius))
 
-        val postfix = stringResource(id = R.string.alerts_notification_radius_postfix)
+        val postfix = stringResource(R.string.alerts_notification_radius_postfix)
         val radiusInCity = alertRadius.alertRadiusInCity
 
         BasicListItem(
@@ -70,5 +70,9 @@ fun AlertRadiusSection(
 @GrodnoRoadsPreview
 @Composable
 private fun AlertRadiusSectionPreview() = GrodnoRoadsM3ThemePreview {
-    AlertRadiusSection(alertRadius = AlertRadius(), modify = {}, reset = {})
+    AlertRadiusSection(
+        alertRadius = AlertRadius(),
+        modify = {},
+        reset = {}
+    )
 }

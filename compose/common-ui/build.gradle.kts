@@ -10,7 +10,7 @@ android {
 dependencies {
     implementation(projects.compose.foundation.uikit)
     implementation(projects.kmp.shared.resources)
-    implementation(projects.libraries.resources)
+    implementation(projects.libraries.localization)
 
     implementation(libs.kotlin.collections)
 }
