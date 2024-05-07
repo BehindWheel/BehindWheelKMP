@@ -28,6 +28,7 @@ kotlin {
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
+            implementation(projects.kmp.shared.resources)
 
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
@@ -52,7 +53,6 @@ kotlin {
             implementation(projects.compose.locationRequester)
             implementation(projects.compose.snackbar)
             implementation(projects.kmp.shared.components)
-            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.audioplayer)
             implementation(projects.libraries.localization)
 
