@@ -40,7 +40,6 @@ kotlin {
             implementation(projects.libraries.localization)
 
             implementation(libs.androidx.appcompat)
-            implementation(libs.androidx.compose.material.icons)
         }
     }
 }

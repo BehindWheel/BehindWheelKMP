@@ -48,8 +48,7 @@ dependencies {
     implementation(projects.compose.foundation.uikit)
     implementation(projects.compose.snackbar)
     implementation(projects.kmp.libraries.extensions)
-
-    implementation(libs.androidx.compose.material.icons)
+    implementation(projects.kmp.shared.resources)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

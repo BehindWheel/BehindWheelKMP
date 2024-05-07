@@ -1,13 +1,12 @@
 package com.egoriku.grodnoroads.foundation.uikit.listitem
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Brightness7
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -17,17 +16,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.Switch
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun SwitchListItem(
-    imageVector: ImageVector? = null,
+    @DrawableRes iconRes: Int? = null,
     text: String,
     description: String,
     isChecked: Boolean,
@@ -45,13 +45,13 @@ fun SwitchListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (imageVector != null) {
+        if (iconRes != null) {
             Icon(
                 modifier = Modifier
                     .align(Alignment.Top)
                     .padding(top = 8.dp),
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                imageVector = imageVector,
+                painter = painterResource(iconRes),
                 contentDescription = null
             )
         }
@@ -80,7 +80,7 @@ fun SwitchListItem(
 
 @Composable
 fun SwitchListItem(
-    imageVector: ImageVector? = null,
+    iconRes: Int? = null,
     text: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
@@ -91,7 +91,7 @@ fun SwitchListItem(
             role = Role.Switch,
             onValueChange = onCheckedChange
         ),
-        imageVector = imageVector,
+        iconRes = iconRes,
         text = text,
     ) {
         Switch(
@@ -110,20 +110,20 @@ private fun PreviewSwitchListItem() = GrodnoRoadsM3ThemePreview {
 
     Column {
         SwitchListItem(
-            imageVector = Icons.Default.Brightness7,
+            iconRes = MR.images.ic_brightness.drawableResId,
             text = "За рулем | Гродно",
             isChecked = isChecked1,
             onCheckedChange = { isChecked1 = it }
         )
         SwitchListItem(
-            imageVector = Icons.Default.Brightness7,
+            iconRes = MR.images.ic_brightness.drawableResId,
             text = "За рулем | Гродно",
             description = "За рулем | Гродно",
             isChecked = isChecked2,
             onCheckedChange = { isChecked2 = it }
         )
         SwitchListItem(
-            imageVector = Icons.Default.Brightness7,
+            iconRes = MR.images.ic_brightness.drawableResId,
             text = "За рулем | Гродно",
             description = "За рулем | Гродно\nЗа рулем | Гродно",
             isChecked = isChecked3,

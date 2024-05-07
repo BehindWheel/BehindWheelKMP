@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +26,8 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun PrimaryInverseCircleButton(
@@ -81,13 +81,13 @@ private fun PrimaryInverseCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     Column(modifier = Modifier.padding(16.dp)) {
         PrimaryInverseCircleButton(onClick = {}, size = Size.Large) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                painter = painterResource(MR.images.ic_arrow_right),
                 contentDescription = null
             )
         }
         PrimaryInverseCircleButton(onClick = {}, size = Size.Small) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                painter = painterResource(MR.images.ic_arrow_right),
                 contentDescription = null
             )
         }

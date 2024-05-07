@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +22,7 @@ import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun VoiceLevelSection(
@@ -58,7 +57,7 @@ fun VoiceLevelSection(
             }
         }
         SimpleListItem(
-            imageVector = Icons.Default.PlayCircle,
+            iconRes = MR.images.ic_play.drawableResId,
             text = stringResource(R.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )

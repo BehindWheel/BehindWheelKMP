@@ -9,5 +9,6 @@ android {
 
 dependencies {
     implementation(projects.compose.foundation.uikit)
+    implementation(projects.kmp.shared.resources)
     implementation(projects.kmp.libraries.extensions)
 }

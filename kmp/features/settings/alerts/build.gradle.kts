@@ -35,8 +35,6 @@ kotlin {
             implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.audioplayer)
             implementation(projects.libraries.localization)
-
-            implementation(libs.androidx.compose.material.icons)
         }
     }
 }

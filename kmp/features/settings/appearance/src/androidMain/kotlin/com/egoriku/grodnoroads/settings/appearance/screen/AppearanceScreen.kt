@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Brightness7
-import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -90,7 +87,7 @@ private fun LanguageSection(
     val language = state.appearanceState.appLanguage
 
     MoreActionListItem(
-        imageVector = Icons.Default.Language,
+        iconRes = MR.images.ic_language.drawableResId,
         text = stringResource(R.string.appearance_app_language),
         value = stringResource(language.current.toStringResource()),
         onClick = { onModify(language) },
@@ -120,7 +117,7 @@ private fun KeepScreenOnSettings(
     val keepScreenOn = state.appearanceState.keepScreenOn
 
     SwitchListItem(
-        imageVector = Icons.Default.Brightness7,
+        iconRes = MR.images.ic_brightness.drawableResId,
         text = stringResource(R.string.appearance_keep_screen_on),
         description = stringResource(R.string.appearance_keep_screen_on_description),
         isChecked = keepScreenOn.enabled,

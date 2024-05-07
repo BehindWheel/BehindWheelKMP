@@ -18,9 +18,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.RemoveCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +37,8 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.core.unboundClickable
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -66,7 +65,7 @@ fun ClickableFloatRange(
                         isError = true
                     }
                 },
-            imageVector = Icons.Default.RemoveCircle,
+            painter = painterResource(MR.images.ic_remove_circle),
             contentDescription = null,
         )
         AnimatedContent(
@@ -144,7 +143,7 @@ fun ClickableFloatRange(
                         isError = true
                     }
                 },
-            imageVector = Icons.Default.AddCircle,
+            painter = painterResource(MR.images.ic_add_circle),
             contentDescription = null,
         )
     }

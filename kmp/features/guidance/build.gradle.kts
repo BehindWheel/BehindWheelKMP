@@ -58,8 +58,6 @@ kotlin {
 
             implementation(libs.androidx.activity.compose)
 
-            implementation(libs.androidx.compose.material.icons)
-
             implementation(libs.balloon.compose)
             implementation(libs.decompose.compose)
             implementation(libs.google.app.update)

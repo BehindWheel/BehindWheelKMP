@@ -2,8 +2,6 @@ package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,7 +13,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun DemoPrimaryCircleButton() {
@@ -31,13 +31,13 @@ fun DemoPrimaryCircleButton() {
                 Text(text = "large", style = MaterialTheme.typography.titleSmall)
                 PrimaryCircleButton(size = Large, onClick = { }) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(MR.images.ic_arrow_right),
                         contentDescription = null
                     )
                 }
                 PrimaryCircleButton(size = Large, onClick = { }, enabled = false) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(MR.images.ic_arrow_right),
                         contentDescription = null
                     )
                 }
@@ -49,13 +49,13 @@ fun DemoPrimaryCircleButton() {
                 Text(text = "small", style = MaterialTheme.typography.titleSmall)
                 PrimaryCircleButton(size = Small, onClick = { }) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(MR.images.ic_arrow_right),
                         contentDescription = null
                     )
                 }
                 PrimaryCircleButton(size = Small, onClick = { }, enabled = false) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(MR.images.ic_arrow_right),
                         contentDescription = null
                     )
                 }

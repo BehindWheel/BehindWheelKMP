@@ -3,8 +3,6 @@ package com.egoriku.grodnoroads.foundation.uikit
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -12,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun Switch(
@@ -23,7 +23,7 @@ fun Switch(
     val icon: (@Composable () -> Unit)? = if (checked) {
         {
             Icon(
-                imageVector = Icons.Filled.Check,
+                painter = painterResource(MR.images.ic_check),
                 contentDescription = null,
                 modifier = Modifier.size(SwitchDefaults.IconSize),
             )

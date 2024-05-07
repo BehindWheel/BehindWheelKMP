@@ -3,16 +3,12 @@ package com.egoriku.grodnoroads.guidance.screen.ui.google.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButton
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButtonGroup
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionIcon
@@ -34,8 +30,8 @@ fun MapOverlayActions(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ActionButtonGroup {
-            ActionIcon(imageVector = Icons.Default.Add, onClick = zoomIn)
-            ActionIcon(imageVector = Icons.Default.Remove, onClick = zoomOut)
+            ActionIcon(iconRes = MR.images.ic_add.drawableResId, onClick = zoomIn)
+            ActionIcon(iconRes = MR.images.ic_remove.drawableResId, onClick = zoomOut)
         }
 
         val locationRequesterState = rememberLocationRequesterState()
@@ -58,7 +54,6 @@ private fun MapOverlayActionsPreview() = GrodnoRoadsM3ThemePreview {
         modifier = Modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        VerticalSpacer(dp = 64.dp)
         MapOverlayActions(
             zoomIn = {},
             zoomOut = {},

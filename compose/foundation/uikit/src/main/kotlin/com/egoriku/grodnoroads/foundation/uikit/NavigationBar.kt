@@ -2,9 +2,6 @@ package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +10,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 import androidx.compose.material3.NavigationBarItem as Material3NavigationBarItem
 
 @Composable
@@ -67,7 +66,7 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    imageVector = Icons.Default.AccountCircle,
+                    painter = painterResource(MR.images.ic_map),
                     contentDescription = null
                 )
             },
@@ -80,7 +79,7 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Build,
+                    painter = painterResource(MR.images.ic_settings),
                     contentDescription = null
                 )
             },
