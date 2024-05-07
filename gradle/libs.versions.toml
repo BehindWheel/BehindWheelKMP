@@ -3,7 +3,8 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.4.0"
+# https://issuetracker.google.com/issues/338411137 (AGP 8.4.0)
+agp = "8.3.2"
 compose-compiler = "1.5.13"
 decompose = "3.0.0"
 kotlin = "1.9.23"
