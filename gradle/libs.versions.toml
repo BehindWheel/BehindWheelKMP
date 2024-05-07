@@ -8,7 +8,7 @@ agp = "8.3.2"
 compose-compiler = "1.5.13"
 decompose = "3.0.0"
 kotlin = "1.9.23"
-moko-resources = "0.24.0-beta-2"
+moko-resources = "0.24.0-beta-3"
 mvikotlin = "4.0.0"
 
 [libraries]
