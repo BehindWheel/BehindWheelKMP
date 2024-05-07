@@ -26,8 +26,8 @@ import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
 @Composable
 fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     val dialogContent = when (eventType) {
-        Spring -> stringResource(R.string.headlamp_body_spring)
-        Autumn -> stringResource(R.string.headlamp_body_autumn)
+        Spring -> stringResource(R.string.event_reminder_spring_body)
+        Autumn -> stringResource(R.string.event_reminder_autumn_body)
     }
 
     BasicAlertDialog(

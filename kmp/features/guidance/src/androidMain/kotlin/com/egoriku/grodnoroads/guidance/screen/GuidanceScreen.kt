@@ -68,6 +68,7 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.guidance.screen.util.MarkerCache
 import com.egoriku.grodnoroads.guidance.screen.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.guidance.screen.util.SoundUtil
+import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
@@ -76,7 +77,6 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog

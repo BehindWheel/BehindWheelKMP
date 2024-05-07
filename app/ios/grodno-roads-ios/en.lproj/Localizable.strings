@@ -1,8 +1,8 @@
 "tab_map" = "Map";
 "tab_chat" = "Chat";
 "tab_settings" = "Settings";
-"headlamp_body_spring" = "From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!";
-"headlamp_body_autumn" = "From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam!";
+"event_reminder_spring_body" = "From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam! 🚘💡";
+"event_reminder_autumn_body" = "From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam! 🚘💡";
 "camera_alerts_plurals_distance" = "%1$d meter";
 "alerts_stationary_camera" = "Stationary camera";
 "alerts_mobile_camera" = "Mobile camera";

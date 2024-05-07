@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		120239A62BDD1B28001577D0 /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A52BDD1B28001577D0 /* ImageResource.swift */; };
+		125830C32BEA166900CB0771 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125830C22BEA166900CB0771 /* ModalView.swift */; };
 		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		12D440D32BDFA47C00D2676D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D440D12BDFA47C00D2676D /* Localizable.strings */; };
 		12D440D72BDFA74500D2676D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D440D62BDFA74500D2676D /* String+Extension.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		120239A52BDD1B28001577D0 /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		125830C22BEA166900CB0771 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		12D440D22BDFA47C00D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				CE11B1BC2B8297E900667D9F /* Shared.swift */,
 				12D440D62BDFA74500D2676D /* String+Extension.swift */,
 				CE11B1BE2B8298C000667D9F /* Common.swift */,
+				125830C22BEA166900CB0771 /* ModalView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				12D440D72BDFA74500D2676D /* String+Extension.swift in Sources */,
 				12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */,
 				CEA924CA2B2FA95B0086E744 /* ObservableState.swift in Sources */,
+				125830C32BEA166900CB0771 /* ModalView.swift in Sources */,
 				CEA924C72B2FA95B0086E744 /* StateValue.swift in Sources */,
 				CEE450DD2B77EF0700497E10 /* MapItem.swift in Sources */,
 				CE11B1BF2B8298C000667D9F /* Common.swift in Sources */,
