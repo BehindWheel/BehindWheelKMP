@@ -3,12 +3,11 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-# https://issuetracker.google.com/issues/338411137 (AGP 8.4.0)
-agp = "8.3.2"
-compose-compiler = "1.5.13"
+agp = "8.4.0"
+compose-compiler = "1.5.14"
 decompose = "3.0.0"
-kotlin = "1.9.23"
-moko-resources = "0.24.0-beta-3"
+kotlin = "1.9.24"
+moko-resources = "0.24.0-beta-4"
 mvikotlin = "4.0.0"
 
 [libraries]
@@ -22,7 +21,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
-androidx-annotation = "androidx.annotation:annotation:1.7.1"
+androidx-annotation = "androidx.annotation:annotation:1.8.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-core = "androidx.core:core-ktx:1.13.1"
@@ -58,9 +57,9 @@ koin-compose = "io.insert-koin:koin-androidx-compose:3.5.6"
 koin-core = "io.insert-koin:koin-core:3.5.6"
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
-kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
-kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0"
-kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.5.0"
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
+kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
+kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.0"
 kotlin-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3"
 kotlin-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -83,7 +82,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.1" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.0" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.1" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.1" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
