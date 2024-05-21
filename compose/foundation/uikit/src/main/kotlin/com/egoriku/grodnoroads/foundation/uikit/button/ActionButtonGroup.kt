@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.foundation.uikit.button
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
@@ -47,7 +48,7 @@ fun ActionButtonGroup(
 
 @Composable
 fun ActionIcon(
-    imageVector: ImageVector,
+    @DrawableRes iconRes: Int,
     onClick: () -> Unit,
 ) {
     Box(
@@ -57,7 +58,7 @@ fun ActionIcon(
     ) {
         Icon(
             modifier = Modifier.align(Alignment.Center),
-            imageVector = imageVector,
+            painter = painterResource(iconRes),
             contentDescription = null
         )
     }

@@ -8,15 +8,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.preview)
-    implementation(projects.compose.foundation.theme)
     implementation(projects.compose.foundation.uikit)
+    implementation(projects.kmp.shared.resources)
+    implementation(projects.libraries.localization)
 
-    implementation(projects.libraries.resources)
-
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons)
-
-    implementation(libs.immutable.collections)
+    implementation(libs.kotlin.collections)
 }

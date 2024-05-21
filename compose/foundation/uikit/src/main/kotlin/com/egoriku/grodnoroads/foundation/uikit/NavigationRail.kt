@@ -2,9 +2,6 @@ package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRailItemDefaults
@@ -15,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun NavigationRail(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
@@ -64,7 +63,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    imageVector = Icons.Default.AccountCircle,
+                    painter = painterResource(MR.images.ic_map),
                     contentDescription = null
                 )
             }
@@ -74,7 +73,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Build,
+                    painter = painterResource(MR.images.ic_settings),
                     contentDescription = null
                 )
             }

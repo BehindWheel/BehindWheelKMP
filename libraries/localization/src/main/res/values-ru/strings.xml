@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">За рулем | Гродно</string>
+
+    <string name="tab_map">Карта</string>
+    <string name="tab_chat">Чат</string>
+    <string name="tab_settings">Настройки</string>
+
+    <string name="event_reminder_spring_body">С 25 мая по 5 июня проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет! 🚘💡</string>
+    <string name="event_reminder_autumn_body">С 25 августа по 5 сентября проходит специальное комплексное мероприятие \"Внимание – дети!\"\n\nНе забудьте включить ближний свет! 🚘💡</string>
+
+    <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метра</item>
+        <item quantity="many">%1$d метров</item>
+        <item quantity="other">%1$d метра</item>
+    </plurals>
+
+    <string name="alerts_stationary_camera">Стационарная камера</string>
+    <string name="alerts_mobile_camera">Мобильная камера</string>
+    <string name="alerts_medium_speed_camera">Камера средней скорости</string>
+    <string name="alerts_incident">Дорожное происшествие</string>
+    <string name="alerts_traffic_police">Экипаж ГАИ</string>
+    <string name="alerts_car_crash">ДТП</string>
+    <string name="alerts_traffic_jam">Пробка</string>
+    <string name="alerts_wild_animals">Дикие животные</string>
+    <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
+
+    <string name="camera_info_last_update">Обновлено %1$s</string>
+    <string name="camera_info_report">Сообщить об ошибке</string>
+
+    <string name="terms_of_service">Условия использования</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+
+    <string name="social_telegram_chat">Чатик</string>
+    <string name="social_telegram_channel">Канал</string>
+    <string name="social_share_app">Поделиться</string>
+    <string name="app_version">Версия: %1$s</string>
+
+    <!-- Settings Header -->
+    <string name="settings_section_appearance">Внешний вид</string>
+    <string name="settings_section_map">Карта</string>
+    <string name="settings_section_alerts">Оповещения</string>
+    <string name="settings_section_changelog">История изменений</string>
+    <string name="settings_section_faq">Часто задаваемые вопросы</string>
+
+    <!-- Settings categories -->
+    <string name="settings_category_main">Основные</string>
+    <string name="settings_category_other">Другое</string>
+
+    <!-- Appearance -->
+    <string name="appearance_app_theme">Тема</string>
+    <string name="appearance_app_theme_system">Системная</string>
+    <string name="appearance_app_theme_dark">Темная</string>
+    <string name="appearance_app_theme_light">Светлая</string>
+
+    <string name="appearance_app_language">Язык</string>
+    <string name="appearance_app_language_ru">Русский</string>
+    <string name="appearance_app_language_en">Английский</string>
+    <string name="appearance_app_language_be">Белорусский</string>
+    <string name="appearance_app_language_system">Системный</string>
+
+    <string name="appearance_keep_screen_on">Не выключать экран</string>
+    <string name="appearance_keep_screen_on_description">Сохраняет экран Карты всегда включенным (может увеличить расход батареи)</string>
+
+    <!-- Alert -->
+    <string name="alerts_availability">Оповещения</string>
+    <string name="alerts_availability_description">Показываются на экране при приближении к событию на карте</string>
+    <string name="alerts_voice_alerts">Голосовые оповещения</string>
+    <string name="alerts_voice_alerts_description">Включаются при приближении к событию на карте</string>
+
+
+    <string name="alerts_header_volume_level">Уровень громкости</string>
+    <string name="alerts_volume_level_low">Низкий</string>
+    <string name="alerts_volume_level_medium">Средний</string>
+    <string name="alerts_volume_level_high">Высокий</string>
+    <string name="alerts_play_test_audio">Прослушать тестовое сообщение</string>
+
+    <string name="alerts_header_notification_radius">Радиус оповещения</string>
+    <string name="alerts_notification_radius_in_city">В городе</string>
+    <string name="alerts_notification_radius_outside_city">За городом</string>
+    <string name="alerts_notification_radius_postfix">м</string>
+
+    <string name="alerts_header_voice_alerts">Типы голосовых оповещений</string>
+    <string name="alerts_notifications_select_all">Выбрать все</string>
+    <string name="alerts_notifications_stationary_cameras">Стационарные камеры</string>
+    <string name="alerts_notifications_medium_speed_cameras">Камеры средней скорости</string>
+    <string name="alerts_notifications_mobile_cameras">Мобильные камеры</string>
+    <string name="alerts_notifications_traffic_police">ГАИ</string>
+    <string name="alerts_notifications_incidents">Проблемы на дороге</string>
+    <string name="alerts_notifications_car_crash">ДТП</string>
+    <string name="alerts_notifications_traffic_jam">Пробки</string>
+    <string name="alerts_notifications_wild_animals">Дикие животные</string>
+
+    <!-- Map -->
+    <string name="map_header_appearance">Внешний вид</string>
+    <string name="map_traffic_conditions_appearance">Загруженность дорог</string>
+    <string name="map_google_map_style_minimal">Минимализм</string>
+    <string name="map_google_map_style_detailed">Подробная</string>
+
+    <string name="map_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="map_markers_filtering_description">Применяется только к маркерам с тектовым сообщением (ГАИ, Пробки и т.д.)</string>
+    <string name="map_markers_filtering_15_minutes">15 мин</string>
+    <string name="map_markers_filtering_30_minutes">30 мин</string>
+    <string name="map_markers_filtering_45_minutes">45 мин</string>
+    <string name="map_markers_filtering_1_hour">1 час</string>
+
+    <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбрать все</string>
+    <string name="map_markers_stationary_cameras">Стационарные камеры</string>
+    <string name="map_markers_medium_speed_cameras">Камеры средней скорости</string>
+    <string name="map_markers_mobile_cameras">Мобильные камеры</string>
+    <string name="map_markers_traffic_police">ГАИ</string>
+    <string name="map_markers_incidents">Проблемы на дороге</string>
+    <string name="map_markers_car_crash">ДТП</string>
+    <string name="map_markers_traffic_jam">Пробки</string>
+    <string name="map_markers_wild_animals">Дикие животные</string>
+
+    <string name="dialog_report_police">Сообщить о ГАИ</string>
+    <string name="dialog_incident">Сообщить о проблеме</string>
+    <string name="dialog_input_hint">Опциональное сообщение</string>
+
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="send">Отправить</string>
+    <string name="map_header_default_location">Местоположение по умолчанию</string>
+    <string name="map_default_location">Мой город</string>
+    <string name="map_default_location_grodno">Гродно</string>
+    <string name="map_default_location_skidel">Скидель</string>
+    <string name="map_default_location_volkovysk">Волковыск</string>
+    <string name="map_default_location_ozery">Озёры</string>
+    <string name="map_default_location_porechye">Поречье</string>
+    <string name="map_default_location_berestovitca">Большая Берестовица</string>
+    <string name="map_default_location_shuchin">Щучин</string>
+    <string name="map_default_location_mosty">Мосты</string>
+    <string name="map_default_location_slonim">Слоним</string>
+    <string name="map_default_location_lida">Лида</string>
+    <string name="map_default_location_indura">Индура</string>
+    <string name="map_default_location_dyatlovo">Дятлово</string>
+    <string name="map_default_location_novogrudok">Новогрудок</string>
+    <string name="map_default_location_korelichi">Кореличи</string>
+
+    <string name="map_header_drive_mode">Режим навигации</string>
+    <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
+
+    <string name="map_user_count">Онлайн: %1$s</string>
+    <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Разрешение для доступа к геолокации отклонено</string>
+    <string name="snackbar_drive_mode_rationale_description">Используется для отображения маркера в режиме навигации</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Для навигации нужен доступ к более точному местоположению</string>
+    <string name="snackbar_drive_mode_permission_denied">Доступ к геолокации запрещен. Вы можете дать разрешение в настройках</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Для навигации нужен доступ к геолокации</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
+
+    <string name="snackbar_current_location_rationale_title">Разрешение для доступа к геолокации отклонено</string>
+    <string name="snackbar_current_location_fine_location_denied">Нужен доступ к более точному местоположению</string>
+    <string name="snackbar_current_location_permission_denied">Доступ к геолокации запрещен. Вы можете дать разрешение в настройках</string>
+    <string name="snackbar_current_location_gms_disabled_title">Доступ к геолокации отклонен</string>
+    <string name="snackbar_current_location_gms_disabled_description">Ее можно включить самостоятельно в панели уведомлений</string>
+
+    <string name="snackbar_in_app_update_install">Обновление готово к установке</string>
+
+    <string name="reporting_header">Выберите событие</string>
+    <string name="reporting_category_road_incidents">Проблемы на дороге</string>
+    <string name="reporting_category_traffic_police">ГАИ</string>
+    <string name="reporting_category_other">Другое</string>
+    <string name="reporting_category_mobile_camera">Мобильная камера</string>
+
+    <string name="reporting_item_road_repair">Дорожные работы</string>
+    <string name="reporting_item_broken_car">Сломалась машина</string>
+    <string name="reporting_item_tow_truck_working">Работает эвакуатор</string>
+    <string name="reporting_item_pedestrian_on_road">Пешеход на дороге</string>
+    <string name="reporting_item_traffic_controller">Регулировщик</string>
+    <string name="reporting_item_non_working_traffic_lights">Не работают светофоры</string>
+    <string name="reporting_item_open_hatch">Открытый люк</string>
+    <string name="reporting_item_road_blocked">Дорога перекрыта</string>
+    <string name="reporting_item_other_road_incident">Другое</string>
+    <string name="reporting_item_traffic_jam">Пробка</string>
+    <string name="reporting_item_wild_animals">Дикие животные</string>
+    <string name="reporting_item_car_accident">ДТП</string>
+    <string name="reporting_item_traffic_police">ГАИ</string>
+    <string name="reporting_item_working_with_radar">Работают с радаром</string>
+    <string name="reporting_item_stay_on_beacons">Стоят на маячках</string>
+    <string name="reporting_item_document_check">Проверка документов</string>
+    <string name="reporting_item_stopped_on_the_move">Остановили на ходу</string>
+    <string name="reporting_item_sitting_in_the_car">Сидят в машине</string>
+    <string name="reporting_item_working_from_car">Работают на ходу</string>
+    <string name="reporting_item_transport_inspection">Транспортная инспекция</string>
+    <string name="reporting_item_filter">Фильтр</string>
+
+    <string name="reporting_mobile_camera_header">Ограничение скорости</string>
+    <string name="reporting_mobile_camera_speed">%1$s км/ч</string>
+    <string name="reporting_mobile_camera_input_hint">Местоположение камеры*</string>
+    <string name="reporting_mobile_camera_input_error">Введите информацию о камере</string>
+
+    <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
+
+    <string name="quick_settings_header">Быстрые настройки</string>
+    <string name="quick_settings_app_theme">Смена темы</string>
+    <string name="quick_settings_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="quick_settings_voice_alerts">Голосовые оповещения</string>
+    <string name="quick_settings_traffic_conditions">Загруженность дорог</string>
+</resources>

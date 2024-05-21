@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,7 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun OutlinedTextField(
@@ -24,6 +29,7 @@ fun OutlinedTextField(
     onValueChange: (String) -> Unit,
     label: String,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     supportingText: String? = null,
@@ -40,6 +46,7 @@ fun OutlinedTextField(
                 }
             },
         value = value,
+        isError = isError,
         onValueChange = onValueChange,
         label = label,
         keyboardOptions = keyboardOptions,
@@ -54,6 +61,8 @@ fun OutlinedTextField(
     onValueChange: (String) -> Unit,
     label: String,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     supportingText: String? = null
@@ -65,15 +74,40 @@ fun OutlinedTextField(
         value = value,
         shape = RoundedCornerShape(16.dp),
         singleLine = true,
+        enabled = enabled,
+        isError = isError,
+        colors = OutlinedTextFieldDefaults.colors().copy(
+            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
+            disabledIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+
+            focusedLabelColor = MaterialTheme.colorScheme.onSurface,
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
+            disabledLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+
+            errorLabelColor = MaterialTheme.colorScheme.error,
+
+            errorSupportingTextColor = MaterialTheme.colorScheme.error,
+
+            disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+        ),
         onValueChange = onValueChange,
         label = { Text(text = label) },
+        trailingIcon = when {
+            isError -> {
+                {
+                    Icon(
+                        painter = painterResource(MR.images.ic_error),
+                        contentDescription = null
+                    )
+                }
+            }
+            else -> null
+        },
         supportingText = when {
             supportingText != null -> {
                 {
-                    Text(
-                        text = supportingText,
-                        color = MaterialTheme.colorScheme.error
-                    )
+                    Text(text = supportingText)
                 }
             }
             else -> null
@@ -83,21 +117,34 @@ fun OutlinedTextField(
 
 @GrodnoRoadsPreview
 @Composable
-private fun OutlinedTextFieldPreview() {
+private fun OutlinedTextFieldPreview() = GrodnoRoadsM3ThemePreview {
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         OutlinedTextField(
-            value = "Text",
+            value = "",
             onValueChange = {},
-            label = "Label",
+            label = "Опциональное сообщение",
         )
         OutlinedTextField(
-            value = "Text",
+            value = "Тавлая",
             onValueChange = {},
-            label = "Label",
-            supportingText = "Error text"
+            isError = true,
+            label = "Обязательное сообщение*",
+            supportingText = "Текст описания ошибки"
+        )
+        OutlinedTextField(
+            value = "Тавлая",
+            onValueChange = {},
+            label = "Опциональное сообщение",
+        )
+
+        OutlinedTextField(
+            value = "Тавлая",
+            enabled = false,
+            onValueChange = {},
+            label = "Опциональное сообщение",
         )
     }
 }

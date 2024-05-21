@@ -1,8 +1,5 @@
 package com.egoriku.grodnoroads.uidemo.ui.demo
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +10,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun DemoNavigationBar() {
@@ -28,9 +27,9 @@ fun DemoNavigationBar() {
                     onClick = { selected = it },
                     icon = {
                         Icon(
-                            imageVector = when (it) {
-                                NavElement.Map -> Icons.Default.Map
-                                NavElement.Settings -> Icons.Default.Settings
+                            painter = when (it) {
+                                NavElement.Map -> painterResource(MR.images.ic_map)
+                                NavElement.Settings -> painterResource(MR.images.ic_settings)
                             },
                             contentDescription = null
                         )

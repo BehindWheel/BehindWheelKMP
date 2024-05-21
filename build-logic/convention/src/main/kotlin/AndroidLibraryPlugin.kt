@@ -1,7 +1,11 @@
 @file:Suppress("unused")
 
 import com.egoriku.grodnoroads.extension.kotlinOptions
-import com.egoriku.grodnoroads.internal.*
+import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
+import com.egoriku.grodnoroads.internal.kotlinPluginId
+import com.egoriku.grodnoroads.internal.libraryExtension
+import com.egoriku.grodnoroads.internal.libraryPluginId
+import com.egoriku.grodnoroads.internal.libs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -26,7 +30,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
 
             buildTypes {
                 release {
-                    isMinifyEnabled = true
+                    isMinifyEnabled = false
                     proguardFiles(
                         getDefaultProguardFile("proguard-android-optimize.txt"),
                         "proguard-rules.pro"
@@ -35,7 +39,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
             }
 
             kotlinOptions {
-                freeCompilerArgs = listOf("-Xcontext-receivers")
+                freeCompilerArgs += "-Xcontext-receivers"
                 languageVersion = KotlinVersion.KOTLIN_1_9.version
             }
 

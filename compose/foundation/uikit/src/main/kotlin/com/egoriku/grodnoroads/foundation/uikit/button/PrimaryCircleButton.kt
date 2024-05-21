@@ -1,8 +1,11 @@
 package com.egoriku.grodnoroads.foundation.uikit.button
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -14,6 +17,8 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun PrimaryCircleButton(
@@ -45,10 +50,16 @@ private fun PrimaryCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         PrimaryCircleButton(size = Large, onClick = {}) {
-            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+            Icon(
+                painter = painterResource(MR.images.ic_arrow_right),
+                contentDescription = null
+            )
         }
         PrimaryCircleButton(size = Small, onClick = {}) {
-            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+            Icon(
+                painter = painterResource(MR.images.ic_arrow_right),
+                contentDescription = null
+            )
         }
 
     }

@@ -4,8 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -13,30 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-
-@Composable
-fun ActionButton(
-    modifier: Modifier = Modifier,
-    imageVector: ImageVector,
-    onClick: () -> Unit
-) {
-    ActionButton(
-        modifier = modifier,
-        onClick = onClick
-    ) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = null
-        )
-    }
-}
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun ActionButton(
@@ -49,7 +30,7 @@ fun ActionButton(
         onClick = onClick
     ) {
         Icon(
-            painter = painterResource(id = icon),
+            painter = painterResource(icon),
             contentDescription = null
         )
     }
@@ -88,5 +69,8 @@ private fun ActionButton(
 @GrodnoRoadsPreview
 @Composable
 private fun ActionButtonPreview() = GrodnoRoadsM3ThemePreview {
-    ActionButton(imageVector = Icons.Default.Close) {}
+    ActionButton(
+        icon = MR.images.ic_geo.drawableResId,
+        onClick = {}
+    )
 }

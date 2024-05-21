@@ -2,12 +2,19 @@ package com.egoriku.grodnoroads.foundation.common.ui
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.material3.*
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.resources.R
+import com.egoriku.grodnoroads.shared.resources.MR
+import dev.icerock.moko.resources.compose.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +31,7 @@ fun SettingsTopBar(
         navigationIcon = {
             IconButton(onClick = onBack) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_close),
+                    painter = painterResource(MR.images.ic_close),
                     contentDescription = null
                 )
             }

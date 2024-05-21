@@ -8,10 +8,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.preview)
-    implementation(projects.compose.foundation.theme)
+    implementation(projects.kmp.shared.resources)
 
-    implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.material3)
+    api(projects.compose.foundation.core)
+    api(projects.compose.foundation.preview)
+
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.runtime)
+    api(libs.androidx.compose.ui)
 }

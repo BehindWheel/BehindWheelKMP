@@ -1,0 +1,30 @@
+import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.iosTarget
+
+plugins {
+    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.moko.resources)
+}
+
+android {
+    namespace = "com.egoriku.grodnoroads.shared.resources"
+}
+
+kotlin {
+    androidTarget()
+    iosTarget()
+
+    sourceSets {
+        commonDependencies {
+            api(libs.moko.resources)
+        }
+        androidDependencies {
+            api(libs.moko.resources.compose)
+        }
+    }
+}
+
+multiplatformResources {
+    resourcesPackage = "com.egoriku.grodnoroads.shared.resources"
+}

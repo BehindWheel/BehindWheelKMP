@@ -2,10 +2,6 @@ package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Brightness7
-import androidx.compose.material.icons.filled.LocationCity
-import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -15,7 +11,12 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.uikit.listitem.*
+import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
+import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.R
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
@@ -44,13 +45,13 @@ fun DemoListItem() {
             onCheckedChange = { state = it }
         )
         MoreActionListItem(
-            imageVector = Icons.Default.LocationCity,
+            iconRes = MR.images.ic_my_city.drawableResId,
             text = "My city",
             value = "Grodno",
             onClick = {}
         )
         SimpleListItem(
-            imageVector = Icons.Default.PlayCircle,
+            iconRes = MR.images.ic_brightness.drawableResId,
             text = "Test test test",
             onClick = {}
         )
@@ -61,13 +62,13 @@ fun DemoListItem() {
 
         Column {
             SwitchListItem(
-                imageVector = Icons.Default.Brightness7,
+                iconRes = MR.images.ic_brightness.drawableResId,
                 text = "За рулем | Гродно",
                 isChecked = isChecked1,
                 onCheckedChange = { isChecked1 = it }
             )
             SwitchListItem(
-                imageVector = Icons.Default.Brightness7,
+                iconRes = MR.images.ic_brightness.drawableResId,
                 text = "За рулем | Гродно",
                 description = "За рулем | Гродно",
                 isChecked = isChecked2,
