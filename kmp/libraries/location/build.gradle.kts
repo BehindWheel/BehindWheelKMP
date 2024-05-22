@@ -1,9 +1,9 @@
+
 import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
 }
 
 android {
@@ -15,9 +15,6 @@ kotlin {
     iosTarget()
 
     sourceSets {
-        commonDependencies {
-            compileOnly(libs.compose.stable.marker)
-        }
         androidDependencies {
             implementation(libs.play.services.maps)
         }

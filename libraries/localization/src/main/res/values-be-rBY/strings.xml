@@ -117,20 +117,28 @@
     <string name="send">Адправіць</string>
     <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
     <string name="map_default_location">Мой горад</string>
+
+    <string name="map_default_location_berestovitca">Вялікая Бераставіца</string>
+    <string name="map_default_location_berezovka">Бярозаўка</string>
+    <string name="map_default_location_dyatlovo">Дзятлава</string>
     <string name="map_default_location_grodno">Гродна</string>
-    <string name="map_default_location_skidel">Скідзель</string>
-    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_indura">Індура</string>
+    <string name="map_default_location_ivie">Іўе</string>
+    <string name="map_default_location_korelichi">Карэлічы</string>
+    <string name="map_default_location_lida">Ліда</string>
+    <string name="map_default_location_mosty">Масты</string>
+    <string name="map_default_location_novogrudok">Навагрудак</string>
+    <string name="map_default_location_ostrovec">Астравец</string>
     <string name="map_default_location_ozery">Азёры</string>>
     <string name="map_default_location_porechye">Парэчча</string>>
-    <string name="map_default_location_berestovitca">Вялікая Бераставіца</string>
+    <string name="map_default_location_ruzhany">Ружаны</string>
     <string name="map_default_location_shuchin">Шчучын</string>
-    <string name="map_default_location_mosty">Масты</string>
+    <string name="map_default_location_skidel">Скідзель</string>
     <string name="map_default_location_slonim">Слонім</string>
-    <string name="map_default_location_lida">Ліда</string>
-    <string name="map_default_location_indura">Індура</string>
-    <string name="map_default_location_dyatlovo">Дзятлава</string>
-    <string name="map_default_location_novogrudok">Навагрудак</string>
-    <string name="map_default_location_korelichi">Карэлічы</string>
+    <string name="map_default_location_svisloch">Свіслач</string>
+    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_voronovo">Воранава</string>
+    <string name="map_default_location_zelva">Зэльва</string>
 
     <string name="map_header_drive_mode">Рэжым навігацыі</string>
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>

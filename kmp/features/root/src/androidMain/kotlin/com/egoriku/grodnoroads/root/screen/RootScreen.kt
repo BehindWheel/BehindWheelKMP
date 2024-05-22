@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.egoriku.grodnoroads.mainflow.screen.MainFlowScreen
-import com.egoriku.grodnoroads.onboarding.screen.OnboardingScreen
+import com.egoriku.grodnoroads.onboarding.ui.OnboardingScreen
 import com.egoriku.grodnoroads.root.domain.RootComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
 

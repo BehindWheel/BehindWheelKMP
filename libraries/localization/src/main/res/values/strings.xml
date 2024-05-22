@@ -96,20 +96,28 @@
     <!-- Map -->
     <string name="map_header_default_location">Default location</string>
     <string name="map_default_location">My City</string>
+
+    <string name="map_default_location_berestovitca">Berestovitca</string>
+    <string name="map_default_location_berezovka">Berezovka</string>
+    <string name="map_default_location_dyatlovo">Dyatlovo</string>
     <string name="map_default_location_grodno">Grodno</string>
-    <string name="map_default_location_skidel">Skidel</string>
-    <string name="map_default_location_volkovysk">Volkovysk</string>
+    <string name="map_default_location_indura">Indura</string>
+    <string name="map_default_location_ivie">Ivie</string>
+    <string name="map_default_location_korelichi">Korelichi</string>
+    <string name="map_default_location_lida">Lida</string>
+    <string name="map_default_location_mosty">Mosty</string>
+    <string name="map_default_location_novogrudok">Novogrudok</string>
+    <string name="map_default_location_ostrovec">Ostrovec</string>
     <string name="map_default_location_ozery">Ozery</string>
     <string name="map_default_location_porechye">Porechye</string>
-    <string name="map_default_location_berestovitca">Berestovitca</string>
+    <string name="map_default_location_ruzhany">Ruzhany</string>
     <string name="map_default_location_shuchin">Shuchin</string>
-    <string name="map_default_location_mosty">Mosty</string>
+    <string name="map_default_location_skidel">Skidel</string>
     <string name="map_default_location_slonim">Slonim</string>
-    <string name="map_default_location_lida">Lida</string>
-    <string name="map_default_location_indura">Indura</string>
-    <string name="map_default_location_dyatlovo">Dyatlovo</string>
-    <string name="map_default_location_novogrudok">Novogrudok</string>
-    <string name="map_default_location_korelichi">Korelichi</string>
+    <string name="map_default_location_svisloch">Svisloch</string>
+    <string name="map_default_location_volkovysk">Volkovysk</string>
+    <string name="map_default_location_voronovo">Voronovo</string>
+    <string name="map_default_location_zelva">Zelva</string>
 
     <string name="map_header_drive_mode">Navigation mode</string>
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>

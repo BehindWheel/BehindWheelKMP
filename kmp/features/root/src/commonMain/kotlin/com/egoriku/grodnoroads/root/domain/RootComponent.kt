@@ -6,7 +6,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
-import com.egoriku.grodnoroads.onboarding.domain.OnboardingComponent
+import com.egoriku.grodnoroads.onboarding.domain.component.OnboardingComponent
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 
 fun buildRootComponent(

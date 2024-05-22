@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.component
 
-import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -29,7 +28,6 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -163,12 +161,13 @@ private fun animateColorAsState(
     label = label
 )
 
+/*
 @Preview(device = "id:Nexus One")
 @Preview(device = "id:pixel_3a")
 @Preview(device = "id:pixel_3a_xl", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(device = "id:pixel_6_pro")
 @Preview(device = "id:Nexus 7")
-@Preview(device = "id:pixel_c")
+@Preview(device = "id:pixel_c")*/
 @Composable
 private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
     Box(Modifier.size(300.dp)) {

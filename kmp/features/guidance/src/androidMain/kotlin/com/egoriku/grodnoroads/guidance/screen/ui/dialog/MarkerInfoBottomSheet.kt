@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
@@ -21,8 +22,8 @@ import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.MessageRow
-import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.localization.R
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
@@ -61,7 +62,7 @@ fun MarkerInfoBottomSheet(
         footer = {
             TextButton(
                 modifier = Modifier.fillMaxWidth(),
-                id = R.string.ok,
+                text = stringResource(R.string.ok),
                 onClick = { sheetCloseBehaviour.cancel() }
             )
         }

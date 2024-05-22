@@ -30,8 +30,8 @@ fun MapOverlayActions(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ActionButtonGroup {
-            ActionIcon(iconRes = MR.images.ic_add.drawableResId, onClick = zoomIn)
-            ActionIcon(iconRes = MR.images.ic_remove.drawableResId, onClick = zoomOut)
+            ActionIcon(icon = MR.images.ic_add, onClick = zoomIn)
+            ActionIcon(icon = MR.images.ic_remove, onClick = zoomOut)
         }
 
         val locationRequesterState = rememberLocationRequesterState()
@@ -41,7 +41,7 @@ fun MapOverlayActions(
         ) {
             ActionButton(
                 onClick = locationRequesterState::launchRequest,
-                icon = MR.images.ic_geo.drawableResId,
+                icon = MR.images.ic_geo,
             )
         }
     }

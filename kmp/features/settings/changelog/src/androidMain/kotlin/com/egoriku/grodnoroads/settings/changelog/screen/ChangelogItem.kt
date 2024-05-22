@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.settings.changelog.screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,11 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
@@ -51,6 +46,7 @@ internal fun ChangelogItem(
         }
     }
 }
+/*
 
 @GrodnoRoadsPreview
 @Composable
@@ -77,4 +73,4 @@ private fun ChangelogPreview(@PreviewParameter(LoremIpsum::class) lorem: String)
             )
         }
     }
-}
+}*/

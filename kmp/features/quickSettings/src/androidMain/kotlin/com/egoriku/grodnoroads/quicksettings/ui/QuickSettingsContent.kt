@@ -40,6 +40,7 @@ import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.Traf
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun QuickSettingsContent(

@@ -22,6 +22,8 @@ build/
 .cxx
 local.properties
 secrets.properties
+.kotlin
+kotlin-js-store/
 
 # Mac OS X
 *.DS_Store

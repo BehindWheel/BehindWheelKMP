@@ -3,8 +3,9 @@ import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.setupIosStaticFramework
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.moko.resources)
 }
@@ -58,13 +59,12 @@ kotlin {
             api(projects.kmp.shared.models)
             api(projects.kmp.libraries.coroutines)
             api(projects.kmp.libraries.location)
+            implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.datastore)
-
-            compileOnly(libs.compose.stable.marker)
 
             api(libs.decompose)
             api(libs.essenty.lifecycle)
@@ -78,8 +78,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.uikit)
-
             implementation(libs.decompose.compose)
             implementation(libs.koin.android)
         }

@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
 }
 
 android {

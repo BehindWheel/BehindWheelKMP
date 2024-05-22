@@ -3,7 +3,7 @@ import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
 }
 
 android {
@@ -20,7 +20,6 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.logger)
 
-            compileOnly(libs.compose.stable.marker)
             implementation(libs.koin.core)
         }
         androidDependencies {

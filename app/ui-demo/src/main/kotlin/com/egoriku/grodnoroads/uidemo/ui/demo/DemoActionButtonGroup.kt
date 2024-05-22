@@ -16,8 +16,8 @@ fun DemoActionButtonGroup() {
     UIDemoContainer(name = "ActionButtonGroup") {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ActionButtonGroup {
-                ActionIcon(iconRes = MR.images.ic_add.drawableResId, onClick = {})
-                ActionIcon(iconRes = MR.images.ic_remove.drawableResId, onClick = {})
+                ActionIcon(icon = MR.images.ic_add, onClick = {})
+                ActionIcon(icon = MR.images.ic_remove, onClick = {})
             }
         }
     }

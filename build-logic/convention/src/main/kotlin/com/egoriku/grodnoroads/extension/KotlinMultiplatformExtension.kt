@@ -4,6 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 
+fun KotlinMultiplatformExtension.applyTargets() {
+    androidTarget()
+    iosTarget()
+}
+
 fun KotlinMultiplatformExtension.iosTarget() {
     iosX64()
     iosArm64()

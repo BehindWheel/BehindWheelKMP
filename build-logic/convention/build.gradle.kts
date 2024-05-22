@@ -17,13 +17,13 @@ gradlePlugin {
             id = "grodnoroads.library"
             implementationClass = "AndroidLibraryPlugin"
         }
-        register("grodnoroads.kmplibrary") {
-            id = "grodnoroads.kmplibrary"
+        register("grodnoroads.kmp.library") {
+            id = "grodnoroads.kmp.library"
             implementationClass = "AndroidKmpLibraryPlugin"
         }
-        register("grodnoroads.compose") {
-            id = "grodnoroads.compose"
-            implementationClass = "AndroidComposePlugin"
+        register("grodnoroads.kmp.compose") {
+            id = "grodnoroads.kmp.compose"
+            implementationClass = "KmpComposePlugin"
         }
         register("grodnoroads.application") {
             id = "grodnoroads.application"

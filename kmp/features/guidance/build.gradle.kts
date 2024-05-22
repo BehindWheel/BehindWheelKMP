@@ -4,8 +4,9 @@ import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -22,7 +23,8 @@ kotlin {
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.features.quickSettings)
             implementation(projects.kmp.features.specialEventReminder)
-
+            implementation(projects.kmp.compose.commonUi)
+            implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.shared.analytics)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.models)
@@ -35,8 +37,6 @@ kotlin {
             implementation(projects.kmp.libraries.logger)
             implementation(projects.kmp.libraries.uuid)
 
-            compileOnly(libs.compose.stable.marker)
-
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.koin.core)
@@ -47,8 +47,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.compose.commonUi)
-            implementation(projects.compose.foundation.uikit)
             implementation(projects.compose.maps.compose)
             implementation(projects.compose.locationRequester)
             implementation(projects.compose.snackbar)

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.grodnoroads.library)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.compose)
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.uikit)
+    implementation(projects.kmp.compose.foundation.uikit)
     implementation(projects.kmp.shared.resources)
     implementation(projects.kmp.libraries.extensions)
 }

@@ -4,8 +4,9 @@ import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -19,6 +20,8 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.compose.commonUi)
+            implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.logger)
 
@@ -31,8 +34,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.uikit)
-            implementation(projects.compose.commonUi)
             implementation(projects.libraries.localization)
         }
         commonTestDependencies {
