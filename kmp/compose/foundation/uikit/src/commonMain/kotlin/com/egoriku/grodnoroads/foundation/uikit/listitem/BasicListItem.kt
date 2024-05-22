@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun BasicListItem(
     touchModifier: Modifier = Modifier,
     imageVector: ImageVector? = null,
-    iconRes: ImageResource? = null,
+    drawableResource: DrawableResource? = null,
     text: String,
     textStyle: TextStyle = MaterialTheme.typography.titleMedium,
     content: @Composable RowScope.() -> Unit = {}
@@ -41,9 +41,9 @@ fun BasicListItem(
                 contentDescription = null
             )
         }
-        if (iconRes != null) {
+        if (drawableResource != null) {
             Icon(
-                painter = painterResource(iconRes),
+                painter = painterResource(drawableResource),
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )

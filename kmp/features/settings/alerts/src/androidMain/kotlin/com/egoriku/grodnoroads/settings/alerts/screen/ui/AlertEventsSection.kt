@@ -10,6 +10,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.nt_ic_car_crash
+import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident
+import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police
+import com.egoriku.grodnoroads.compose.resources.nt_ic_wild_animals
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
@@ -29,7 +38,6 @@ import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.TrafficPolice
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.WildAnimals
 import com.egoriku.grodnoroads.shared.persistent.Selectable
-import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun AlertEventsSection(
@@ -81,7 +89,7 @@ private fun StationaryCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_stationary_camera,
+        drawableResource = Res.drawable.nt_ic_stationary_camera,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_stationary_cameras),
         isChecked = stationaryCameras.isNotify,
@@ -98,7 +106,7 @@ private fun MediumSpeedCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_medium_speed_camera,
+        drawableResource = Res.drawable.nt_ic_medium_speed_camera,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isNotify,
@@ -115,7 +123,7 @@ private fun MobileCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_mobile_camera,
+        drawableResource = Res.drawable.nt_ic_mobile_camera,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_mobile_cameras),
         isChecked = mobileCameras.isNotify,
@@ -132,7 +140,7 @@ private fun TrafficPolice(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_traffic_police,
+        drawableResource = Res.drawable.nt_ic_traffic_police,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_traffic_police),
         isChecked = trafficPolice.isNotify,
@@ -149,7 +157,7 @@ private fun RoadIncidents(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_road_incident,
+        drawableResource = Res.drawable.nt_ic_road_incident,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_incidents),
         isChecked = roadIncident.isNotify,
@@ -166,7 +174,7 @@ private fun CarCrash(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_car_crash,
+        drawableResource = Res.drawable.nt_ic_car_crash,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_car_crash),
         isChecked = carCrash.isNotify,
@@ -183,7 +191,7 @@ private fun TrafficConditions(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_traffic_jam,
+        drawableResource = Res.drawable.nt_ic_traffic_jam,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_traffic_jam),
         isChecked = trafficJam.isNotify,
@@ -200,7 +208,7 @@ private fun WildAnimals(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        imageResource = MR.images.nt_ic_wild_animals,
+        drawableResource = Res.drawable.nt_ic_wild_animals,
         iconSize = iconSize,
         text = stringResource(R.string.alerts_notifications_wild_animals),
         isChecked = wildAnimals.isNotify,

@@ -25,6 +25,7 @@ kotlin {
             implementation(projects.kmp.features.specialEventReminder)
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.analytics)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.models)

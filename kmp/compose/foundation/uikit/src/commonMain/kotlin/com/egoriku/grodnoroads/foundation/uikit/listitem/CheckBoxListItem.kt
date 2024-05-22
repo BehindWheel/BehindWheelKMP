@@ -20,19 +20,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckBoxListItem(
-    imageResource: ImageResource,
+    drawableResource: DrawableResource,
     iconSize: DpSize = DpSize(24.dp, 24.dp),
     paddingValues: PaddingValues = PaddingValues(),
     text: String,
@@ -67,7 +68,7 @@ fun CheckBoxListItem(
         HorizontalSpacer(12.dp)
         Image(
             modifier = Modifier.size(iconSize),
-            painter = painterResource(imageResource),
+            painter = painterResource(drawableResource),
             contentDescription = null
         )
     }
@@ -81,7 +82,7 @@ private fun CheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
     CheckBoxListItem(
         text = "Мобильная камера",
         isChecked = state,
-        imageResource = MR.images.nt_ic_mobile_camera,
+        drawableResource = Res.drawable.nt_ic_mobile_camera,
         onCheckedChange = { state = it }
     )
 }

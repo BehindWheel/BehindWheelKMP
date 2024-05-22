@@ -12,14 +12,17 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.screen.ui.SocialNetwork
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberShareIntent
+import com.egoriku.grodnoroads.compose.resources.Constants.PLAY_STORE_LINK
+import com.egoriku.grodnoroads.compose.resources.Constants.TG_CHANNEL_LINK
+import com.egoriku.grodnoroads.compose.resources.Constants.TG_CHAT_LINK
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_chat
+import com.egoriku.grodnoroads.compose.resources.ic_share
+import com.egoriku.grodnoroads.compose.resources.ic_telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.localization.R
-import com.egoriku.grodnoroads.shared.resources.Constants.PLAY_STORE_LINK
-import com.egoriku.grodnoroads.shared.resources.Constants.TG_CHANNEL_LINK
-import com.egoriku.grodnoroads.shared.resources.Constants.TG_CHAT_LINK
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SocialNetworkSection() {
@@ -36,7 +39,7 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(TG_CHAT_LINK) }
         ) {
             Icon(
-                painter = painterResource(MR.images.ic_chat),
+                painter = painterResource(Res.drawable.ic_chat),
                 contentDescription = stringResource(R.string.social_telegram_chat)
             )
         }
@@ -45,7 +48,7 @@ fun SocialNetworkSection() {
             onClick = { customTabsIntent(TG_CHANNEL_LINK) }
         ) {
             Icon(
-                painter = painterResource(MR.images.ic_telegram),
+                painter = painterResource(Res.drawable.ic_telegram),
                 contentDescription = stringResource(R.string.social_telegram_channel)
             )
         }
@@ -57,7 +60,7 @@ fun SocialNetworkSection() {
             onClick = { shareIntent(PLAY_STORE_LINK) }
         ) {
             Icon(
-                painter = painterResource(MR.images.ic_share),
+                painter = painterResource(Res.drawable.ic_share),
                 contentDescription = stringResource(R.string.social_share_app)
             )
         }

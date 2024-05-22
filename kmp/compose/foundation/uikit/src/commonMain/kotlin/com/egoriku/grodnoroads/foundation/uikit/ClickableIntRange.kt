@@ -33,13 +33,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_add_circle
+import com.egoriku.grodnoroads.compose.resources.ic_remove_circle
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.core.unboundClickable
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ClickableIntRange(
@@ -64,7 +66,7 @@ fun ClickableIntRange(
                         else -> isError = true
                     }
                 },
-            painter = painterResource(MR.images.ic_remove_circle),
+            painter = painterResource(Res.drawable.ic_remove_circle),
             contentDescription = null,
         )
         AnimatedContent(
@@ -141,7 +143,7 @@ fun ClickableIntRange(
                         else -> isError = true
                     }
                 },
-            painter = painterResource(MR.images.ic_add_circle),
+            painter = painterResource(Res.drawable.ic_add_circle),
             contentDescription = null,
         )
     }

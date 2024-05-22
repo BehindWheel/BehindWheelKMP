@@ -1,9 +1,9 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
+import org.jetbrains.compose.resources.DrawableResource
 
 sealed interface MessageData {
     @JvmInline
@@ -15,7 +15,7 @@ sealed interface MessageData {
 
 sealed interface Icon {
     @JvmInline
-    value class Res(@DrawableRes val id: Int) : Icon
+    value class DrawableRes(val resource: DrawableResource) : Icon
 
     @JvmInline
     value class Vector(val imageVector: ImageVector) : Icon

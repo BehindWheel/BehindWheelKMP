@@ -11,18 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_geo
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
-    icon: ImageResource,
+    drawableResource: DrawableResource,
     onClick: () -> Unit
 ) {
     ActionButton(
@@ -30,7 +31,7 @@ fun ActionButton(
         onClick = onClick
     ) {
         Icon(
-            painter = painterResource(icon),
+            painter = painterResource(drawableResource),
             contentDescription = null
         )
     }
@@ -70,7 +71,7 @@ private fun ActionButton(
 @Composable
 private fun ActionButtonPreview() = GrodnoRoadsM3ThemePreview {
     ActionButton(
-        icon = MR.images.ic_geo,
+        drawableResource = Res.drawable.ic_geo,
         onClick = {}
     )
 }

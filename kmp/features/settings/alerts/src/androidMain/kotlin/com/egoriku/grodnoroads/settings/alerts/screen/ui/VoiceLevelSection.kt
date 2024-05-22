@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_play
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
@@ -22,7 +24,6 @@ import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
-import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun VoiceLevelSection(
@@ -57,7 +58,7 @@ fun VoiceLevelSection(
             }
         }
         SimpleListItem(
-            iconRes = MR.images.ic_play,
+            drawableResource = Res.drawable.ic_play,
             text = stringResource(R.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )

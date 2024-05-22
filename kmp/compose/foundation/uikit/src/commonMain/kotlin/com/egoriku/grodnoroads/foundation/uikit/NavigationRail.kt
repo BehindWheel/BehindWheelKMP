@@ -9,14 +9,19 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_map
+import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun NavigationRail(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+fun NavigationRail(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
     val tonalElevation = MaterialTheme.tonalElevation
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
@@ -63,7 +68,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(MR.images.ic_map),
+                    painter = painterResource(Res.drawable.ic_map),
                     contentDescription = null
                 )
             }
@@ -73,7 +78,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(MR.images.ic_settings),
+                    painter = painterResource(Res.drawable.ic_settings),
                     contentDescription = null
                 )
             }

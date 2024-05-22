@@ -12,10 +12,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_arrow_left
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SecondaryCircleButton(
@@ -42,7 +43,7 @@ private fun SecondaryButtonPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.padding(16.dp)) {
         SecondaryCircleButton(onClick = {}) {
             Icon(
-                painter = painterResource(MR.images.ic_arrow_left),
+                painter = painterResource(Res.drawable.ic_arrow_left),
                 contentDescription = null
             )
         }

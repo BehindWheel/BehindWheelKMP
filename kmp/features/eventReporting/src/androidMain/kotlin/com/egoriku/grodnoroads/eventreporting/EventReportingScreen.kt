@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.eventreporting
 
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -30,10 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera_bold
+import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident_bold
+import com.egoriku.grodnoroads.compose.resources.nt_ic_road_problem_bold
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police_bold
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
 import com.egoriku.grodnoroads.eventreporting.ui.ActionBottomSheet
 import com.egoriku.grodnoroads.eventreporting.ui.foundation.MobileCameraOptions
@@ -45,8 +48,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
-import com.egoriku.grodnoroads.shared.resources.MR
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun EventReportingScreen(
@@ -118,7 +122,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
 
 internal data class Repo(
     val reportType: ReportType,
-    val iconRes: Int,
+    val drawableResource: DrawableResource,
     val stringRes: Int
 )
 
@@ -132,22 +136,22 @@ private fun ReportingTypes(
         persistentListOf(
             Repo(
                 reportType = ReportType.RoadIncidents,
-                iconRes = MR.images.nt_ic_road_problem_bold.drawableResId,
+                drawableResource = Res.drawable.nt_ic_road_problem_bold,
                 stringRes = R.string.reporting_category_road_incidents
             ),
             Repo(
                 reportType = ReportType.TrafficPolice,
-                iconRes = MR.images.nt_ic_traffic_police_bold.drawableResId,
+                drawableResource = Res.drawable.nt_ic_traffic_police_bold,
                 stringRes = R.string.reporting_category_traffic_police
             ),
             Repo(
                 reportType = ReportType.Other,
-                iconRes = MR.images.nt_ic_road_incident_bold.drawableResId,
+                drawableResource = Res.drawable.nt_ic_road_incident_bold,
                 stringRes = R.string.reporting_category_other
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
-                iconRes = MR.images.nt_ic_mobile_camera_bold.drawableResId,
+                drawableResource = Res.drawable.nt_ic_mobile_camera_bold,
                 stringRes = R.string.reporting_category_mobile_camera
             )
         )
@@ -165,7 +169,7 @@ private fun ReportingTypes(
             CategoryCell(
                 modifier = Modifier.width(96.dp),
                 name = stringResource(it.stringRes),
-                iconRes = it.iconRes,
+                drawableResource = it.drawableResource,
                 selected = currentType == it.reportType,
                 onClick = {
                     onTypeChanged(it.reportType)
@@ -179,7 +183,7 @@ private fun ReportingTypes(
 @Composable
 private fun CategoryCell(
     name: String,
-    @DrawableRes iconRes: Int,
+    drawableResource: DrawableResource,
     selected: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -205,7 +209,7 @@ private fun CategoryCell(
     ) {
         Image(
             modifier = Modifier.size(64.dp),
-            painter = painterResource(iconRes),
+            painter = painterResource(drawableResource),
             contentDescription = null
         )
         Text(

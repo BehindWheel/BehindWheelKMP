@@ -14,15 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_chevron_right
+import com.egoriku.grodnoroads.compose.resources.ic_my_city
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MoreActionListItem(
-    imageResource: ImageResource? = null,
+    drawableResource: DrawableResource? = null,
     text: String,
     value: String,
     onClick: () -> Unit
@@ -36,9 +38,9 @@ fun MoreActionListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (imageResource != null) {
+        if (drawableResource != null) {
             Icon(
-                painter = painterResource(imageResource),
+                painter = painterResource(drawableResource),
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
@@ -57,7 +59,7 @@ fun MoreActionListItem(
             Text(text = value, style = MaterialTheme.typography.titleSmall)
             Icon(
                 modifier = Modifier.size(20.dp),
-                painter = painterResource(MR.images.ic_chevron_right),
+                painter = painterResource(Res.drawable.ic_chevron_right),
                 contentDescription = null,
             )
         }
@@ -68,7 +70,7 @@ fun MoreActionListItem(
 @Composable
 private fun MoreActionListItemPreview() = GrodnoRoadsM3ThemePreview {
     MoreActionListItem(
-        imageResource = MR.images.ic_my_city,
+        drawableResource = Res.drawable.ic_my_city,
         text = "My city",
         value = "Grodno",
         onClick = {}

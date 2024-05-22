@@ -20,6 +20,7 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
 
@@ -31,10 +32,7 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.localization)
-
-            implementation(compose.components.resources)
         }
     }
 }

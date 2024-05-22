@@ -20,13 +20,13 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.components)
             implementation(projects.kmp.shared.models)
 
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.localization)
 
             implementation(libs.androidx.browser)

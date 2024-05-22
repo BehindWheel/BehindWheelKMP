@@ -17,11 +17,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_error
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun OutlinedTextField(
@@ -97,7 +98,7 @@ fun OutlinedTextField(
             isError -> {
                 {
                     Icon(
-                        painter = painterResource(MR.images.ic_error),
+                        painter = painterResource(Res.drawable.ic_error),
                         contentDescription = null
                     )
                 }

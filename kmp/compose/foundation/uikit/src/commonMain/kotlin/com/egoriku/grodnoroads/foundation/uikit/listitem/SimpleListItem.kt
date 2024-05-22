@@ -6,13 +6,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_play
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.ImageResource
+import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
 fun SimpleListItem(
-    iconRes: ImageResource? = null,
+    drawableResource: DrawableResource? = null,
     text: String,
     onClick: () -> Unit
 ) {
@@ -20,7 +21,7 @@ fun SimpleListItem(
         touchModifier = Modifier
             .heightIn(min = 48.dp)
             .clickable(onClick = onClick),
-        iconRes = iconRes,
+        drawableResource = drawableResource,
         text = text,
         textStyle = MaterialTheme.typography.bodyMedium
     )
@@ -29,7 +30,7 @@ fun SimpleListItem(
 @Composable
 private fun SimpleListItemPreview() = GrodnoRoadsM3ThemePreview {
     SimpleListItem(
-        iconRes = MR.images.ic_play,
+        drawableResource = Res.drawable.ic_play,
         text = "Test test test",
         onClick = {}
     )

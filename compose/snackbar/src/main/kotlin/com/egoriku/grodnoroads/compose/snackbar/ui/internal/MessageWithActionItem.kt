@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
@@ -22,8 +24,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
@@ -52,7 +53,7 @@ fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
                     }
                 ) {
                     Icon(
-                        painter = painterResource(MR.images.ic_arrow_right),
+                        painter = painterResource(Res.drawable.ic_arrow_right),
                         contentDescription = null
                     )
                 }

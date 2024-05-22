@@ -18,8 +18,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ActionButtonGroup(
@@ -48,7 +48,7 @@ fun ActionButtonGroup(
 
 @Composable
 fun ActionIcon(
-    icon: ImageResource,
+    drawableResource: DrawableResource,
     onClick: () -> Unit,
 ) {
     Box(
@@ -58,7 +58,7 @@ fun ActionIcon(
     ) {
         Icon(
             modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(icon),
+            painter = painterResource(drawableResource),
             contentDescription = null
         )
     }

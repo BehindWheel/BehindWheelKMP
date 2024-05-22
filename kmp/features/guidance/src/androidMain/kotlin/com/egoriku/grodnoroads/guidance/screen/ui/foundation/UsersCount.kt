@@ -21,18 +21,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.nt_ic_info
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.localization.R
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
 import com.skydoves.balloon.compose.rememberBalloonBuilder
 import com.skydoves.balloon.compose.setBackgroundColor
 import com.skydoves.balloon.compose.setTextColor
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
@@ -101,7 +102,7 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
         ) {
             Image(
                 modifier = Modifier.size(16.dp),
-                painter = painterResource(MR.images.nt_ic_info),
+                painter = painterResource(Res.drawable.nt_ic_info),
                 contentDescription = null
             )
             Text(

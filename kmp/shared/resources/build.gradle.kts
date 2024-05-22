@@ -18,7 +18,6 @@ kotlin {
     sourceSets {
         commonDependencies {
             api(libs.moko.resources)
-            api(libs.moko.resources.compose)
         }
     }
 }

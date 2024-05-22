@@ -7,11 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_map
+import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.material3.NavigationBarItem as Material3NavigationBarItem
 
 @Composable
@@ -66,7 +68,7 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(MR.images.ic_map),
+                    painter = painterResource(Res.drawable.ic_map),
                     contentDescription = null
                 )
             },
@@ -79,7 +81,7 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(MR.images.ic_settings),
+                    painter = painterResource(Res.drawable.ic_settings),
                     contentDescription = null
                 )
             },

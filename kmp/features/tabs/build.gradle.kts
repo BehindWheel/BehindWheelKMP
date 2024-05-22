@@ -23,13 +23,13 @@ kotlin {
             implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.libraries.coroutines)
 
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.kmp.shared.resources)
             implementation(projects.libraries.localization)
 
             implementation(libs.material3.windowsize)

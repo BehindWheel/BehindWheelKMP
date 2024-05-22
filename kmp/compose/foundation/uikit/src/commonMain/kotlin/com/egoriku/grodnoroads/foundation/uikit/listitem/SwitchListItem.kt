@@ -17,17 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_brightness
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.Switch
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SwitchListItem(
-    iconRes: ImageResource? = null,
+    drawableResource: DrawableResource? = null,
     text: String,
     description: String,
     isChecked: Boolean,
@@ -45,13 +46,13 @@ fun SwitchListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (iconRes != null) {
+        if (drawableResource != null) {
             Icon(
                 modifier = Modifier
                     .align(Alignment.Top)
                     .padding(top = 8.dp),
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                painter = painterResource(iconRes),
+                painter = painterResource(drawableResource),
                 contentDescription = null
             )
         }
@@ -80,7 +81,7 @@ fun SwitchListItem(
 
 @Composable
 fun SwitchListItem(
-    iconRes: ImageResource? = null,
+    drawableResource: DrawableResource? = null,
     text: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
@@ -91,7 +92,7 @@ fun SwitchListItem(
             role = Role.Switch,
             onValueChange = onCheckedChange
         ),
-        iconRes = iconRes,
+        drawableResource = drawableResource,
         text = text,
     ) {
         Switch(
@@ -110,20 +111,20 @@ private fun PreviewSwitchListItem() = GrodnoRoadsM3ThemePreview {
 
     Column {
         SwitchListItem(
-            iconRes = MR.images.ic_brightness,
+            drawableResource = Res.drawable.ic_brightness,
             text = "За рулем | Гродно",
             isChecked = isChecked1,
             onCheckedChange = { isChecked1 = it }
         )
         SwitchListItem(
-            iconRes = MR.images.ic_brightness,
+            drawableResource = Res.drawable.ic_brightness,
             text = "За рулем | Гродно",
             description = "За рулем | Гродно",
             isChecked = isChecked2,
             onCheckedChange = { isChecked2 = it }
         )
         SwitchListItem(
-            iconRes = MR.images.ic_brightness,
+            drawableResource = Res.drawable.ic_brightness,
             text = "За рулем | Гродно",
             description = "За рулем | Гродно\nЗа рулем | Гродно",
             isChecked = isChecked3,

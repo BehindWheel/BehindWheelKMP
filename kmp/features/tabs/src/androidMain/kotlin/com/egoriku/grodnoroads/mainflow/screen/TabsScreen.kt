@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -38,6 +37,7 @@ import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.TabsComponent
 import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.painterResource
 
 private val NavigationBarHeight: Dp = 80.dp
 
@@ -127,7 +127,7 @@ private fun VerticalOrientationLayout(
                         onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
-                                painter = painterResource(id = screen.iconRes),
+                                painter = painterResource(screen.drawableResource),
                                 contentDescription = null
                             )
                         },
@@ -188,7 +188,7 @@ private fun HorizontalOrientationLayout(
                         onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
-                                painter = painterResource(id = screen.iconRes),
+                                painter = painterResource(screen.drawableResource),
                                 contentDescription = null
                             )
                         }

@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -29,12 +28,19 @@ import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponentPreview
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.PrivacyPolicySection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_appearance
+import com.egoriku.grodnoroads.compose.resources.ic_changelog
+import com.egoriku.grodnoroads.compose.resources.ic_faq
+import com.egoriku.grodnoroads.compose.resources.ic_map
+import com.egoriku.grodnoroads.compose.resources.ic_notification_badge
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.Page
-import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun AppSettingsScreen(
@@ -88,19 +94,19 @@ private fun SettingsUi(
                         text = stringResource(R.string.settings_category_main)
                     )
                     SettingsListItem(
-                        icon = MR.images.ic_appearance.drawableResId,
+                        drawableResource = Res.drawable.ic_appearance,
                         name = stringResource(R.string.settings_section_appearance),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
-                        icon = MR.images.ic_map.drawableResId,
+                        drawableResource = Res.drawable.ic_map,
                         name = stringResource(R.string.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
-                        icon = MR.images.ic_notification_badge.drawableResId,
+                        drawableResource = Res.drawable.ic_notification_badge,
                         name = stringResource(R.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
@@ -120,13 +126,13 @@ private fun SettingsUi(
                         text = stringResource(R.string.settings_category_other)
                     )
                     SettingsListItem(
-                        icon = MR.images.ic_changelog.drawableResId,
+                        drawableResource = Res.drawable.ic_changelog,
                         name = stringResource(R.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     SettingsListItem(
-                        icon = MR.images.ic_faq.drawableResId,
+                        drawableResource = Res.drawable.ic_faq,
                         name = stringResource(R.string.settings_section_faq),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
@@ -143,7 +149,7 @@ private fun SettingsUi(
 
 @Composable
 private fun SettingsListItem(
-    icon: Int,
+    drawableResource: DrawableResource,
     name: String,
     paddingValues: PaddingValues = PaddingValues(),
     onClick: () -> Unit
@@ -158,7 +164,7 @@ private fun SettingsListItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = icon),
+            painter = painterResource(drawableResource),
             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             contentDescription = null
         )

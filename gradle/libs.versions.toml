@@ -56,7 +56,6 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref =
 material3-windowsize = "dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0"
 
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }

@@ -22,14 +22,9 @@ kotlin {
             implementation(projects.kmp.libraries.location)
 
             implementation(compose.runtime)
-            implementation(compose.components.resources)
         }
         androidDependencies {
             implementation(projects.libraries.localization)
         }
     }
-}
-
-compose.resources {
-    generateResClass = never
 }
