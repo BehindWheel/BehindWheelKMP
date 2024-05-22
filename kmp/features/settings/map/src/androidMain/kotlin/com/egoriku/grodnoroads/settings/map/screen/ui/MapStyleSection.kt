@@ -8,15 +8,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.map_google_map_style_detailed
+import com.egoriku.grodnoroads.compose.resources.map_google_map_style_minimal
+import com.egoriku.grodnoroads.compose.resources.map_header_appearance
+import com.egoriku.grodnoroads.compose.resources.map_traffic_conditions_appearance
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_DETAILED
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.DARK_MINIMAL
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_DETAILED
@@ -25,6 +28,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
 import com.egoriku.grodnoroads.settings.map.screen.ui.component.CheckableCard
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MapStyleSection(
@@ -32,7 +36,7 @@ internal fun MapStyleSection(
     onCheckedChange: (MapPref) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        SettingsSectionHeader(title = stringResource(R.string.map_header_appearance))
+        SettingsSectionHeader(title = stringResource(Res.string.map_header_appearance))
 
         GoogleMapStyle(mapStyle, onCheckedChange)
         VerticalSpacer(16.dp)
@@ -54,7 +58,7 @@ private fun GoogleMapStyle(
             .padding(vertical = 8.dp)
     ) {
         CheckableCard(
-            title = R.string.map_google_map_style_minimal,
+            title = stringResource(Res.string.map_google_map_style_minimal),
             selected = googleMapStyle.style == Style.Minimal,
             imageUrl = when {
                 MaterialTheme.colorScheme.isLight -> LIGHT_MINIMAL
@@ -66,7 +70,7 @@ private fun GoogleMapStyle(
         )
 
         CheckableCard(
-            title = R.string.map_google_map_style_detailed,
+            title = stringResource(Res.string.map_google_map_style_detailed),
             selected = googleMapStyle.style == Style.Detailed,
             imageUrl = when {
                 MaterialTheme.colorScheme.isLight -> LIGHT_DETAILED
@@ -87,7 +91,7 @@ private fun TrafficConditions(
     val trafficJamOnMap = mapStyle.trafficJamOnMap
 
     SwitchListItem(
-        text = stringResource(R.string.map_traffic_conditions_appearance),
+        text = stringResource(Res.string.map_traffic_conditions_appearance),
         isChecked = trafficJamOnMap.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJamOnMap.copy(isShow = it))

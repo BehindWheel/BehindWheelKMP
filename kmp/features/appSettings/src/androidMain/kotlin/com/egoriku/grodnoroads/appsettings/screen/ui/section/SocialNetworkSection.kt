@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.screen.ui.SocialNetwork
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
@@ -19,10 +18,13 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.ic_chat
 import com.egoriku.grodnoroads.compose.resources.ic_share
 import com.egoriku.grodnoroads.compose.resources.ic_telegram
+import com.egoriku.grodnoroads.compose.resources.social_share_app
+import com.egoriku.grodnoroads.compose.resources.social_telegram_channel
+import com.egoriku.grodnoroads.compose.resources.social_telegram_chat
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.localization.R
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SocialNetworkSection() {
@@ -35,33 +37,33 @@ fun SocialNetworkSection() {
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         SocialNetwork(
-            title = stringResource(R.string.social_telegram_chat),
+            title = stringResource(Res.string.social_telegram_chat),
             onClick = { customTabsIntent(TG_CHAT_LINK) }
         ) {
             Icon(
                 painter = painterResource(Res.drawable.ic_chat),
-                contentDescription = stringResource(R.string.social_telegram_chat)
+                contentDescription = stringResource(Res.string.social_telegram_chat)
             )
         }
         SocialNetwork(
-            title = stringResource(R.string.social_telegram_channel),
+            title = stringResource(Res.string.social_telegram_channel),
             onClick = { customTabsIntent(TG_CHANNEL_LINK) }
         ) {
             Icon(
                 painter = painterResource(Res.drawable.ic_telegram),
-                contentDescription = stringResource(R.string.social_telegram_channel)
+                contentDescription = stringResource(Res.string.social_telegram_channel)
             )
         }
 
         val shareIntent = rememberShareIntent()
 
         SocialNetwork(
-            title = stringResource(R.string.social_share_app),
+            title = stringResource(Res.string.social_share_app),
             onClick = { shareIntent(PLAY_STORE_LINK) }
         ) {
             Icon(
                 painter = painterResource(Res.drawable.ic_share),
-                contentDescription = stringResource(R.string.social_share_app)
+                contentDescription = stringResource(Res.string.social_share_app)
             )
         }
     }

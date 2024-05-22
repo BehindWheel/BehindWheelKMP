@@ -33,7 +33,6 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.libraries.audioplayer)
-            implementation(projects.libraries.localization)
         }
     }
 }

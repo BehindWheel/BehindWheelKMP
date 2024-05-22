@@ -11,20 +11,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.ic_check_circle
 import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
-import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Resource
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.StringRes
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SimpleMessageItem(message: SimpleMessage) {
@@ -57,7 +57,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                     modifier = Modifier.fillMaxWidth(),
                     text = when (val title = message.title) {
                         is Raw -> title.text
-                        is Resource -> stringResource(title.id)
+                        is StringRes -> stringResource(title.resource)
                     }
                 )
             }
@@ -67,7 +67,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                     modifier = Modifier.fillMaxWidth(),
                     text = when (description) {
                         is Raw -> description.text
-                        is Resource -> stringResource(description.id)
+                        is StringRes -> stringResource(description.resource)
                     },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.inverseOnSurface,

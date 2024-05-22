@@ -1,13 +1,13 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
 
-import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 
 sealed interface MessageData {
     @JvmInline
-    value class Resource(@StringRes val id: Int) : MessageData
+    value class StringRes(val resource: StringResource) : MessageData
 
     @JvmInline
     value class Raw(val text: String) : MessageData

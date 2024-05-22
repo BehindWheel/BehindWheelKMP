@@ -35,7 +35,6 @@ include(":compose:maps:compose")
 include(":compose:snackbar")
 
 include(":libraries:audioplayer")
-include(":libraries:localization")
 
 include(":kmp:compose:common-ui")
 include(":kmp:compose:foundation:core")

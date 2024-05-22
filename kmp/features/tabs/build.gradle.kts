@@ -30,8 +30,6 @@ kotlin {
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.libraries.localization)
-
             implementation(libs.material3.windowsize)
             implementation(libs.decompose.compose)
             implementation(libs.kotlin.collections)

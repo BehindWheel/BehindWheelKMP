@@ -53,7 +53,6 @@ kotlin {
             implementation(projects.compose.snackbar)
             implementation(projects.kmp.shared.components)
             implementation(projects.libraries.audioplayer)
-            implementation(projects.libraries.localization)
 
             implementation(libs.androidx.activity.compose)
 

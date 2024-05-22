@@ -10,24 +10,27 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.event_reminder_autumn_body
+import com.egoriku.grodnoroads.compose.resources.event_reminder_spring_body
+import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     val dialogContent = when (eventType) {
-        Spring -> stringResource(R.string.event_reminder_spring_body)
-        Autumn -> stringResource(R.string.event_reminder_autumn_body)
+        Spring -> stringResource(Res.string.event_reminder_spring_body)
+        Autumn -> stringResource(Res.string.event_reminder_autumn_body)
     }
 
     BasicAlertDialog(
@@ -43,7 +46,7 @@ fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
                 HorizontalDivider()
                 DialogButton(
                     modifier = Modifier.fillMaxWidth(),
-                    text = stringResource(R.string.ok),
+                    text = stringResource(Res.string.ok),
                     onClick = onClose
                 )
             }

@@ -74,12 +74,11 @@ dependencies {
     implementation(projects.kmp.features.root)
     implementation(projects.kmp.compose.foundation.core)
     implementation(projects.kmp.compose.foundation.theme)
+    implementation(projects.kmp.compose.resources)
     implementation(projects.kmp.shared.analytics)
     implementation(projects.kmp.shared.crashlytics)
     implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.logger)
-
-    implementation(projects.libraries.localization)
 
     implementation(compose.foundation)
     implementation(compose.material3)

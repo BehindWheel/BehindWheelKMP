@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_header_notification_radius
+import com.egoriku.grodnoroads.compose.resources.alerts_notification_radius_in_city
+import com.egoriku.grodnoroads.compose.resources.alerts_notification_radius_outside_city
+import com.egoriku.grodnoroads.compose.resources.alerts_notification_radius_postfix
 import com.egoriku.grodnoroads.compose.resources.ic_inside_city
 import com.egoriku.grodnoroads.compose.resources.ic_outside_city
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
@@ -14,9 +17,9 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableIntRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertRadius
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AlertRadiusSection(
@@ -25,14 +28,14 @@ fun AlertRadiusSection(
     reset: (AlertsPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SettingsSectionHeader(title = stringResource(R.string.alerts_header_notification_radius))
+        SettingsSectionHeader(title = stringResource(Res.string.alerts_header_notification_radius))
 
-        val postfix = stringResource(R.string.alerts_notification_radius_postfix)
+        val postfix = stringResource(Res.string.alerts_notification_radius_postfix)
         val radiusInCity = alertRadius.alertRadiusInCity
 
         BasicListItem(
             drawableResource = Res.drawable.ic_inside_city,
-            text = stringResource(R.string.alerts_notification_radius_in_city),
+            text = stringResource(Res.string.alerts_notification_radius_in_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
             ClickableIntRange(
@@ -51,7 +54,7 @@ fun AlertRadiusSection(
         val radiusOutCity = alertRadius.alertRadiusOutCity
         BasicListItem(
             drawableResource = Res.drawable.ic_outside_city,
-            text = stringResource(R.string.alerts_notification_radius_outside_city),
+            text = stringResource(Res.string.alerts_notification_radius_outside_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
             ClickableIntRange(

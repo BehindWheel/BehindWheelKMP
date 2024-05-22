@@ -49,19 +49,21 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.cancel
+import com.egoriku.grodnoroads.compose.resources.send
 import com.egoriku.grodnoroads.eventreporting.ui.util.preUpPostDownNestedScrollConnection
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
-import com.egoriku.grodnoroads.localization.R
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 
 internal enum class DragAnchors {
     Start,
@@ -250,7 +252,7 @@ private fun BottomActions(
                 modifier = Modifier.weight(1f),
                 onClick = onCancel
             ) {
-                Text(text = stringResource(R.string.cancel))
+                Text(text = stringResource(Res.string.cancel))
             }
 
             PrimaryButton(
@@ -258,7 +260,7 @@ private fun BottomActions(
                 enabled = sendEnabled,
                 onClick = onResult
             ) {
-                Text(text = stringResource(R.string.send))
+                Text(text = stringResource(Res.string.send))
             }
         }
     }

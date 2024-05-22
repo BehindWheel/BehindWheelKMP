@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
@@ -21,6 +20,7 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
@@ -32,9 +32,6 @@ kotlin {
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
-        }
-        androidDependencies {
-            implementation(projects.libraries.localization)
         }
     }
 }

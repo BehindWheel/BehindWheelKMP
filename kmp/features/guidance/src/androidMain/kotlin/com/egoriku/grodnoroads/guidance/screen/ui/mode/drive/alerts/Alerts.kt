@@ -10,8 +10,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_car_crash
+import com.egoriku.grodnoroads.compose.resources.alerts_incident
+import com.egoriku.grodnoroads.compose.resources.alerts_medium_speed_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.alerts_traffic_police
+import com.egoriku.grodnoroads.compose.resources.alerts_unsupported_message
+import com.egoriku.grodnoroads.compose.resources.alerts_wild_animals
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
@@ -21,7 +30,6 @@ import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MediumSpeedCamer
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.MapEventType.CarCrash
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
@@ -32,6 +40,7 @@ import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -48,12 +57,12 @@ fun Alerts(
             when (alert) {
                 is IncidentAlert -> {
                     val title = when (alert.mapEventType) {
-                        RoadIncident -> stringResource(R.string.alerts_incident)
-                        TrafficPolice -> stringResource(R.string.alerts_traffic_police)
-                        CarCrash -> stringResource(R.string.alerts_car_crash)
-                        TrafficJam -> stringResource(R.string.alerts_traffic_jam)
-                        WildAnimals -> stringResource(R.string.alerts_wild_animals)
-                        else -> stringResource(R.string.alerts_unsupported_message)
+                        RoadIncident -> stringResource(Res.string.alerts_incident)
+                        TrafficPolice -> stringResource(Res.string.alerts_traffic_police)
+                        CarCrash -> stringResource(Res.string.alerts_car_crash)
+                        TrafficJam -> stringResource(Res.string.alerts_traffic_jam)
+                        WildAnimals -> stringResource(Res.string.alerts_wild_animals)
+                        else -> stringResource(Res.string.alerts_unsupported_message)
                     }
 
                     IncidentAlert(
@@ -68,14 +77,13 @@ fun Alerts(
                         distance = alert.distance,
                         messages = alert.messages
                     )
-
                 }
 
                 is CameraAlert -> {
                     val title = when (alert.cameraType) {
-                        StationaryCamera -> stringResource(R.string.alerts_stationary_camera)
-                        MobileCamera -> stringResource(R.string.alerts_mobile_camera)
-                        MediumSpeedCamera -> stringResource(R.string.alerts_medium_speed_camera)
+                        StationaryCamera -> stringResource(Res.string.alerts_stationary_camera)
+                        MobileCamera -> stringResource(Res.string.alerts_mobile_camera)
+                        MediumSpeedCamera -> stringResource(Res.string.alerts_medium_speed_camera)
                     }
                     val icon = when (alert.cameraType) {
                         StationaryCamera -> MR.images.nt_ic_stationary_camera.drawableResId

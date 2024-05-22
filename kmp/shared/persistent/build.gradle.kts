@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
@@ -17,14 +16,11 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            api(projects.kmp.libraries.datastore)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.libraries.location)
+            api(projects.kmp.libraries.datastore)
 
             implementation(compose.runtime)
-        }
-        androidDependencies {
-            implementation(projects.libraries.localization)
         }
     }
 }

@@ -36,8 +36,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(projects.libraries.localization)
-
             implementation(libs.androidx.appcompat)
         }
     }

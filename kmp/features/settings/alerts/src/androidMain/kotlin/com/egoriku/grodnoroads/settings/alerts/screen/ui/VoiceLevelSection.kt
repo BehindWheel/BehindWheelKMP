@@ -11,19 +11,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_header_volume_level
+import com.egoriku.grodnoroads.compose.resources.alerts_play_test_audio
 import com.egoriku.grodnoroads.compose.resources.ic_play
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertVolumeLevel
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun VoiceLevelSection(
@@ -32,7 +33,7 @@ fun VoiceLevelSection(
     playTestSound: (VolumeLevel) -> Unit
 ) {
     Column {
-        SettingsSectionHeader(title = stringResource(R.string.alerts_header_volume_level))
+        SettingsSectionHeader(title = stringResource(Res.string.alerts_header_volume_level))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,7 +60,7 @@ fun VoiceLevelSection(
         }
         SimpleListItem(
             drawableResource = Res.drawable.ic_play,
-            text = stringResource(R.string.alerts_play_test_audio),
+            text = stringResource(Res.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )
     }

@@ -9,11 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.app_version
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.localization.R
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun VersionSection(appVersion: String) {
@@ -25,7 +26,7 @@ fun VersionSection(appVersion: String) {
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.app_version, appVersion),
+            text = stringResource(Res.string.app_version, appVersion),
             style = MaterialTheme.typography.labelSmall
         )
     }

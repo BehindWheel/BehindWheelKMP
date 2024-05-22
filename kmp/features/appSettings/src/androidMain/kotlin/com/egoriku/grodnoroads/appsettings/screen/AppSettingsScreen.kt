@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.AppSettingsComponent
@@ -34,13 +33,21 @@ import com.egoriku.grodnoroads.compose.resources.ic_changelog
 import com.egoriku.grodnoroads.compose.resources.ic_faq
 import com.egoriku.grodnoroads.compose.resources.ic_map
 import com.egoriku.grodnoroads.compose.resources.ic_notification_badge
+import com.egoriku.grodnoroads.compose.resources.settings_category_main
+import com.egoriku.grodnoroads.compose.resources.settings_category_other
+import com.egoriku.grodnoroads.compose.resources.settings_section_alerts
+import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
+import com.egoriku.grodnoroads.compose.resources.settings_section_changelog
+import com.egoriku.grodnoroads.compose.resources.settings_section_faq
+import com.egoriku.grodnoroads.compose.resources.settings_section_map
+import com.egoriku.grodnoroads.compose.resources.tab_settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.Page
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppSettingsScreen(
@@ -77,7 +84,7 @@ private fun SettingsUi(
             ) {
                 Text(
                     textAlign = TextAlign.Center,
-                    text = stringResource(R.string.tab_settings),
+                    text = stringResource(Res.string.tab_settings),
                     style = MaterialTheme.typography.headlineSmall
                 )
             }
@@ -91,23 +98,23 @@ private fun SettingsUi(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = stringResource(R.string.settings_category_main)
+                        text = stringResource(Res.string.settings_category_main)
                     )
                     SettingsListItem(
                         drawableResource = Res.drawable.ic_appearance,
-                        name = stringResource(R.string.settings_section_appearance),
+                        name = stringResource(Res.string.settings_section_appearance),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
                         drawableResource = Res.drawable.ic_map,
-                        name = stringResource(R.string.settings_section_map),
+                        name = stringResource(Res.string.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
                         drawableResource = Res.drawable.ic_notification_badge,
-                        name = stringResource(R.string.settings_section_alerts),
+                        name = stringResource(Res.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
                     )
@@ -123,17 +130,17 @@ private fun SettingsUi(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = stringResource(R.string.settings_category_other)
+                        text = stringResource(Res.string.settings_category_other)
                     )
                     SettingsListItem(
                         drawableResource = Res.drawable.ic_changelog,
-                        name = stringResource(R.string.settings_section_changelog),
+                        name = stringResource(Res.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     SettingsListItem(
                         drawableResource = Res.drawable.ic_faq,
-                        name = stringResource(R.string.settings_section_faq),
+                        name = stringResource(Res.string.settings_section_faq),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
                     )

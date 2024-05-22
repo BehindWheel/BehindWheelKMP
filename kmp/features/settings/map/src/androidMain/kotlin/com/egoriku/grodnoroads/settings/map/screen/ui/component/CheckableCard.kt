@@ -16,17 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import com.egoriku.grodnoroads.localization.R
 
 @Composable
 fun CheckableCard(
-    title: Int,
+    title: String,
     selected: Boolean,
     imageUrl: String,
     onClick: () -> Unit
@@ -52,7 +50,7 @@ fun CheckableCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
-            text = stringResource(title),
+            text = title,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
         )
@@ -69,13 +67,13 @@ private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         CheckableCard(
-            title = R.string.map_google_map_style_minimal,
+            title = "Minimal",
             selected = false,
             imageUrl = "",
             onClick = {},
         )
         CheckableCard(
-            title = R.string.map_google_map_style_detailed,
+            title = "Detailed",
             selected = true,
             imageUrl = "",
             onClick = {},

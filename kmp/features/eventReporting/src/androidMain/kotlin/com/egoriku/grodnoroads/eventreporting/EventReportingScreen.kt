@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
@@ -37,6 +36,11 @@ import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera_bold
 import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident_bold
 import com.egoriku.grodnoroads.compose.resources.nt_ic_road_problem_bold
 import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police_bold
+import com.egoriku.grodnoroads.compose.resources.reporting_category_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.reporting_category_other
+import com.egoriku.grodnoroads.compose.resources.reporting_category_road_incidents
+import com.egoriku.grodnoroads.compose.resources.reporting_category_traffic_police
+import com.egoriku.grodnoroads.compose.resources.reporting_header
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
 import com.egoriku.grodnoroads.eventreporting.ui.ActionBottomSheet
 import com.egoriku.grodnoroads.eventreporting.ui.foundation.MobileCameraOptions
@@ -46,11 +50,12 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun EventReportingScreen(
@@ -98,7 +103,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            text = stringResource(R.string.reporting_header),
+            text = stringResource(Res.string.reporting_header),
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(16.dp)
@@ -123,7 +128,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
 internal data class Repo(
     val reportType: ReportType,
     val drawableResource: DrawableResource,
-    val stringRes: Int
+    val stringResource: StringResource
 )
 
 @Composable
@@ -137,22 +142,22 @@ private fun ReportingTypes(
             Repo(
                 reportType = ReportType.RoadIncidents,
                 drawableResource = Res.drawable.nt_ic_road_problem_bold,
-                stringRes = R.string.reporting_category_road_incidents
+                stringResource = Res.string.reporting_category_road_incidents
             ),
             Repo(
                 reportType = ReportType.TrafficPolice,
                 drawableResource = Res.drawable.nt_ic_traffic_police_bold,
-                stringRes = R.string.reporting_category_traffic_police
+                stringResource = Res.string.reporting_category_traffic_police
             ),
             Repo(
                 reportType = ReportType.Other,
                 drawableResource = Res.drawable.nt_ic_road_incident_bold,
-                stringRes = R.string.reporting_category_other
+                stringResource = Res.string.reporting_category_other
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
                 drawableResource = Res.drawable.nt_ic_mobile_camera_bold,
-                stringRes = R.string.reporting_category_mobile_camera
+                stringResource = Res.string.reporting_category_mobile_camera
             )
         )
     }
@@ -168,7 +173,7 @@ private fun ReportingTypes(
         items(items) {
             CategoryCell(
                 modifier = Modifier.width(96.dp),
-                name = stringResource(it.stringRes),
+                name = stringResource(it.stringResource),
                 drawableResource = it.drawableResource,
                 selected = currentType == it.reportType,
                 onClick = {

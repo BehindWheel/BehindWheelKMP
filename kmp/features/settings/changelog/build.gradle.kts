@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
@@ -22,6 +21,7 @@ kotlin {
         commonDependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
@@ -36,9 +36,6 @@ kotlin {
         }
         commonTestDependencies {
             implementation(libs.kotlin.test)
-        }
-        androidDependencies {
-            implementation(projects.libraries.localization)
         }
     }
 }

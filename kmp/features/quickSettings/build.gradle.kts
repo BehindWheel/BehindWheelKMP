@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
@@ -30,9 +29,6 @@ kotlin {
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
-        }
-        androidDependencies {
-            implementation(projects.libraries.localization)
         }
     }
 }

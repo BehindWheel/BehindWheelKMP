@@ -17,7 +17,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
@@ -25,6 +24,11 @@ import com.egoriku.grodnoroads.compose.resources.ic_filter
 import com.egoriku.grodnoroads.compose.resources.ic_moon
 import com.egoriku.grodnoroads.compose.resources.ic_notification
 import com.egoriku.grodnoroads.compose.resources.ic_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.quick_settings_app_theme
+import com.egoriku.grodnoroads.compose.resources.quick_settings_header
+import com.egoriku.grodnoroads.compose.resources.quick_settings_markers_filtering
+import com.egoriku.grodnoroads.compose.resources.quick_settings_traffic_conditions
+import com.egoriku.grodnoroads.compose.resources.quick_settings_voice_alerts
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -34,7 +38,6 @@ import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppTheme
@@ -54,7 +57,7 @@ internal fun QuickSettingsContent(
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
-            text = stringResource(R.string.quick_settings_header),
+            text = stringResource(Res.string.quick_settings_header),
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(26.dp)
@@ -70,14 +73,14 @@ internal fun QuickSettingsContent(
         VerticalSpacer(16.dp)
         SwitchSetting(
             drawableResource = Res.drawable.ic_notification,
-            name = stringResource(R.string.quick_settings_voice_alerts),
+            name = stringResource(Res.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
             drawableResource = Res.drawable.ic_traffic_jam,
-            name = stringResource(R.string.quick_settings_traffic_conditions),
+            name = stringResource(Res.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
         )
@@ -92,7 +95,7 @@ private fun AppearanceSection(
 ) {
     BasicSection(
         drawableResource = Res.drawable.ic_moon,
-        name = stringResource(R.string.quick_settings_app_theme)
+        name = stringResource(Res.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
             appTheme.values.forEach { theme ->
@@ -122,7 +125,7 @@ private fun FilteringSection(
 ) {
     BasicSection(
         drawableResource = Res.drawable.ic_filter,
-        name = stringResource(R.string.quick_settings_markers_filtering)
+        name = stringResource(Res.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {
             markerFiltering.values.forEach { filtering ->
