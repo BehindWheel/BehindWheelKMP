@@ -43,7 +43,7 @@ fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
                 HorizontalDivider()
                 DialogButton(
                     modifier = Modifier.fillMaxWidth(),
-                    textResId = R.string.ok,
+                    text = stringResource(R.string.ok),
                     onClick = onClose
                 )
             }

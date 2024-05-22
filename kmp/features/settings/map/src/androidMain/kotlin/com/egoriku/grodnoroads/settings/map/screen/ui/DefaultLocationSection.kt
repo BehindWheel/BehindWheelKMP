@@ -12,6 +12,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.LocationInfo
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DefaultLocationSection(
@@ -23,7 +24,7 @@ internal fun DefaultLocationSection(
 
         val defaultCity = locationInfo.defaultCity
         MoreActionListItem(
-            iconRes = MR.images.ic_my_city.drawableResId,
+            imageResource = MR.images.ic_my_city,
             text = stringResource(R.string.map_default_location),
             value = stringResource(defaultCity.current.toStringResource())
         ) {

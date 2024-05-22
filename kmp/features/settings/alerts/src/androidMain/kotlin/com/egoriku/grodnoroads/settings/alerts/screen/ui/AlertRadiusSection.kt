@@ -29,7 +29,7 @@ fun AlertRadiusSection(
         val radiusInCity = alertRadius.alertRadiusInCity
 
         BasicListItem(
-            iconRes = MR.images.ic_inside_city.drawableResId,
+            iconRes = MR.images.ic_inside_city,
             text = stringResource(R.string.alerts_notification_radius_in_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {
@@ -48,7 +48,7 @@ fun AlertRadiusSection(
 
         val radiusOutCity = alertRadius.alertRadiusOutCity
         BasicListItem(
-            iconRes = MR.images.ic_outside_city.drawableResId,
+            iconRes = MR.images.ic_outside_city,
             text = stringResource(R.string.alerts_notification_radius_outside_city),
             textStyle = MaterialTheme.typography.bodyMedium
         ) {

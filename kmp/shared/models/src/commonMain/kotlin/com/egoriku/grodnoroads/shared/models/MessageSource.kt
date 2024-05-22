@@ -1,8 +1,5 @@
 package com.egoriku.grodnoroads.shared.models
 
-import androidx.compose.runtime.Stable
-
-@Stable
 enum class MessageSource(val source: String) {
     App("app"),
     Viber("viber"),

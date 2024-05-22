@@ -35,8 +35,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeed
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.screen.util.DateTimeFormatter
-import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.localization.R
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
 import com.egoriku.grodnoroads.shared.resources.MR
 
@@ -109,7 +109,7 @@ private fun Info(
             VerticalSpacer(24.dp)
             SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
-                id = R.string.camera_info_report,
+                text = stringResource(R.string.camera_info_report),
                 onClick = {}
             )
         }

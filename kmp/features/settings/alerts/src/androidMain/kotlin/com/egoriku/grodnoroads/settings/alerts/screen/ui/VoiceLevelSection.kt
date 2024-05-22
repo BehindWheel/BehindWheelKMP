@@ -57,7 +57,7 @@ fun VoiceLevelSection(
             }
         }
         SimpleListItem(
-            iconRes = MR.images.ic_play.drawableResId,
+            iconRes = MR.images.ic_play,
             text = stringResource(R.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )

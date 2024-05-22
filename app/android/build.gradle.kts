@@ -6,9 +6,10 @@ import com.egoriku.grodnoroads.extension.release
 
 plugins {
     alias(libs.plugins.grodnoroads.application)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.secrets)
 }
 
@@ -71,22 +72,22 @@ android {
 
 dependencies {
     implementation(projects.kmp.features.root)
+    implementation(projects.kmp.compose.foundation.core)
+    implementation(projects.kmp.compose.foundation.theme)
     implementation(projects.kmp.shared.analytics)
     implementation(projects.kmp.shared.crashlytics)
     implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.logger)
 
-    implementation(projects.compose.foundation.core)
-    implementation(projects.compose.foundation.theme)
     implementation(projects.libraries.localization)
 
+    implementation(compose.foundation)
+    implementation(compose.material3)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.windowsize)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.google.maps)
     implementation(libs.google.material)
+    implementation(libs.material3.windowsize)
 
     coreLibraryDesugaring(libs.desugar.jdk)
 }

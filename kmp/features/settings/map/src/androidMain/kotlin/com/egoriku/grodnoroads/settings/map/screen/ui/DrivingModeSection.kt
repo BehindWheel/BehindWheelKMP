@@ -39,7 +39,7 @@ private fun MapZoomInCity(
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
     BasicListItem(
-        iconRes = MR.images.ic_inside_city.drawableResId,
+        iconRes = MR.images.ic_inside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_in_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {
@@ -65,7 +65,7 @@ private fun MapZoomOutCity(
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
     BasicListItem(
-        iconRes = MR.images.ic_outside_city.drawableResId,
+        iconRes = MR.images.ic_outside_city,
         text = stringResource(R.string.map_header_drive_mode_zoom_outside_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {

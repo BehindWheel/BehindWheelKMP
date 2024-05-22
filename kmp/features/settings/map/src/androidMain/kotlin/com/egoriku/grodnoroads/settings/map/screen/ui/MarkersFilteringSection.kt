@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MarkersFilteringSection(

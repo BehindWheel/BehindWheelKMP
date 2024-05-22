@@ -5,6 +5,7 @@ import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.egoriku.grodnoroads.crashlytics.shared.di.crashlyticsModule
 import com.egoriku.grodnoroads.eventreporting.di.eventReportingModule
 import com.egoriku.grodnoroads.guidance.di.guidanceModule
+import com.egoriku.grodnoroads.onboarding.di.onboardingModule
 import com.egoriku.grodnoroads.quicksettings.di.quickSettingsModule
 import com.egoriku.grodnoroads.settings.alerts.di.alertsModule
 import com.egoriku.grodnoroads.settings.appearance.di.appearanceModule
@@ -23,6 +24,8 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 fun appModule() = listOf(
+    onboardingModule,
+
     guidanceModule,
     eventReportingModule,
     quickSettingsModule,

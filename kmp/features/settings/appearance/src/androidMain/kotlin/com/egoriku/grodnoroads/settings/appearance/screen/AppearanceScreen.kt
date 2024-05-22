@@ -38,6 +38,7 @@ import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppLanguag
 import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppThemeBottomSheet
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,7 +88,7 @@ private fun LanguageSection(
     val language = state.appearanceState.appLanguage
 
     MoreActionListItem(
-        iconRes = MR.images.ic_language.drawableResId,
+        imageResource = MR.images.ic_language,
         text = stringResource(R.string.appearance_app_language),
         value = stringResource(language.current.toStringResource()),
         onClick = { onModify(language) },
@@ -102,7 +103,7 @@ private fun AppThemeSection(
     val appTheme = state.appearanceState.appTheme
 
     MoreActionListItem(
-        iconRes = MR.images.ic_moon.drawableResId,
+        imageResource = MR.images.ic_moon,
         text = stringResource(R.string.appearance_app_theme),
         value = stringResource(appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },
@@ -117,7 +118,7 @@ private fun KeepScreenOnSettings(
     val keepScreenOn = state.appearanceState.keepScreenOn
 
     SwitchListItem(
-        iconRes = MR.images.ic_brightness.drawableResId,
+        iconRes = MR.images.ic_brightness,
         text = stringResource(R.string.appearance_keep_screen_on),
         description = stringResource(R.string.appearance_keep_screen_on_description),
         isChecked = keepScreenOn.enabled,

@@ -291,6 +291,5 @@ internal class GuidanceComponentImpl(
 
     private fun bindLocationLabel(label: Label) = when (label) {
         is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
-        else -> Unit
     }
 }
