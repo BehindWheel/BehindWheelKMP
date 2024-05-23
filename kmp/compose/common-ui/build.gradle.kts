@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.egoriku.grodnoroads.foundation.theme"
+    namespace = "com.egoriku.grodnoroads.foundation.common.ui"
 }
 kotlin {
     applyTargets()
