@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.grodnoroads.library)
-    alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
 android {

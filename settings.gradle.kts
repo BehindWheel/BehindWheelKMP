@@ -18,7 +18,9 @@ pluginManagement {
 
 dependencyResolutionManagement {
     // https://stackoverflow.com/a/75032841
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()

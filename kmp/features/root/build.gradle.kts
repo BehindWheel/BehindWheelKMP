@@ -4,8 +4,7 @@ import com.egoriku.grodnoroads.extension.setupIosStaticFramework
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
-    alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.moko.resources)
 }
