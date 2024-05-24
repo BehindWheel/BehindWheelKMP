@@ -1,10 +1,11 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.setupIosStaticFramework
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
+    alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.moko.resources)
 }
@@ -14,29 +15,41 @@ android {
 }
 
 kotlin {
-    androidTarget()
-    setupIosStaticFramework(name = "root") {
-        export(libs.decompose)
-        export(libs.essenty.lifecycle)
-        export(libs.moko.resources)
+    applyTargets()
 
-        export(projects.kmp.features.appSettings)
-        export(projects.kmp.features.guidance)
-        export(projects.kmp.features.eventReporting)
-        export(projects.kmp.features.specialEventReminder)
-        export(projects.kmp.features.mainflow)
-        export(projects.kmp.features.onboarding)
-        export(projects.kmp.features.settings.alerts)
-        export(projects.kmp.features.settings.appearance)
-        export(projects.kmp.features.settings.changelog)
-        export(projects.kmp.features.settings.faq)
-        export(projects.kmp.features.settings.map)
-        export(projects.kmp.features.tabs)
-        export(projects.kmp.shared.analytics)
-        export(projects.kmp.shared.models)
-        export(projects.kmp.shared.resources)
-        export(projects.kmp.libraries.coroutines)
-        export(projects.kmp.libraries.location)
+    cocoapods {
+        version = "1.0.0"
+
+        homepage = "https://github.com/grodnoroads/GrodnoRoads"
+        summary = "Shared functionality for iOS"
+
+        pod("FirebaseCore", linkOnly = true)
+
+        framework {
+            baseName = "Root"
+
+            export(libs.decompose)
+            export(libs.essenty.lifecycle)
+            export(libs.moko.resources)
+
+            export(projects.kmp.features.appSettings)
+            export(projects.kmp.features.guidance)
+            export(projects.kmp.features.eventReporting)
+            export(projects.kmp.features.specialEventReminder)
+            export(projects.kmp.features.mainflow)
+            export(projects.kmp.features.onboarding)
+            export(projects.kmp.features.settings.alerts)
+            export(projects.kmp.features.settings.appearance)
+            export(projects.kmp.features.settings.changelog)
+            export(projects.kmp.features.settings.faq)
+            export(projects.kmp.features.settings.map)
+            export(projects.kmp.features.tabs)
+            export(projects.kmp.shared.analytics)
+            export(projects.kmp.shared.models)
+            export(projects.kmp.shared.resources)
+            export(projects.kmp.libraries.coroutines)
+            export(projects.kmp.libraries.location)
+        }
     }
 
     sourceSets {

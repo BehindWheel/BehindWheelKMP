@@ -1,0 +1,10 @@
+source 'https://cdn.cocoapods.org'
+use_frameworks!
+platform :ios, '15.0'
+
+target 'grodno-roads-ios' do
+   pod 'GoogleMaps', '~> 8.4.0'
+   pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
+   pod 'FirebaseCore', '~> 10.23.0'
+   pod 'root', :path => '../../kmp/features/root'
+end
