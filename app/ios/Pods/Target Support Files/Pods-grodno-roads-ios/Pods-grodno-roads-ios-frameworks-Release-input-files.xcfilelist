@@ -1,7 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks.sh
-${BUILT_PRODUCTS_DIR}/BottomSheet/BottomSheet.framework
-${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
-${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework
-${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
-${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
-${PODS_ROOT}/../../../kmp/features/root/build/cocoapods/framework/Root.framework

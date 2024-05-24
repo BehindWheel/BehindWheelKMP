@@ -8,8 +8,11 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Shared functionality for iOS'
     spec.vendored_frameworks      = 'build/cocoapods/framework/Root.framework'
     spec.libraries                = 'c++'
-                
+    spec.ios.deployment_target    = '15.0'
     spec.dependency 'FirebaseCore'
+    spec.dependency 'FirebaseCrashlytics'
+    spec.dependency 'FirebaseDatabase'
+    spec.dependency 'FirebaseFirestore'
                 
     if !Dir.exist?('build/cocoapods/framework/Root.framework') || Dir.empty?('build/cocoapods/framework/Root.framework')
         raise "

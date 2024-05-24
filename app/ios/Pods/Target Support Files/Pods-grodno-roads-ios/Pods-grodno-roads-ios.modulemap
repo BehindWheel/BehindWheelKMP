@@ -1,6 +1,0 @@
-framework module Pods_grodno_roads_ios {
-  umbrella header "Pods-grodno-roads-ios-umbrella.h"
-
-  export *
-  module * { export * }
-}

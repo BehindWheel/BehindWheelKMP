@@ -19,11 +19,17 @@ kotlin {
 
     cocoapods {
         version = "1.0.0"
+        ios.deploymentTarget = "15.0"
+
+        podfile = project.file("../../../app/ios/Podfile")
 
         homepage = "https://github.com/grodnoroads/GrodnoRoads"
         summary = "Shared functionality for iOS"
 
         pod("FirebaseCore", linkOnly = true)
+        pod("FirebaseDatabase", linkOnly = true)
+        pod("FirebaseCrashlytics", linkOnly = true)
+        pod("FirebaseFirestore", linkOnly = true)
 
         framework {
             baseName = "Root"

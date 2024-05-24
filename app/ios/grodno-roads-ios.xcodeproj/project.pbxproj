@@ -17,7 +17,6 @@
 		6A9CD2192B38B7F60010592F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD2182B38B7F60010592F /* LoadingView.swift */; };
 		6A9CD21D2B38C1700010592F /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */; };
 		6A9CD21F2B38C2F60010592F /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CD21E2B38C2F60010592F /* SettingsItem.swift */; };
-		7D16C20F3C29B0C7780D3839 /* Pods_grodno_roads_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B64E068C7BCC2D8ACC2F2F /* Pods_grodno_roads_ios.framework */; };
 		CE0718372BD3F9AD00AA1705 /* CameraDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0718362BD3F9AD00AA1705 /* CameraDetailsViewController.swift */; };
 		CE0718392BD4080800AA1705 /* SpeedLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0718382BD4080800AA1705 /* SpeedLimitView.swift */; };
 		CE11B1BD2B8297E900667D9F /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B1BC2B8297E900667D9F /* Shared.swift */; };
@@ -74,12 +73,10 @@
 		12D440D62BDFA74500D2676D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "grodno-roads-ios/Helpers/String+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		12D440DC2BDFC31D00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		12D440DF2BDFC35300D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		66A9B02FD39E80020FB18BE3 /* Pods-grodno-roads-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-grodno-roads-ios.release.xcconfig"; path = "Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios.release.xcconfig"; sourceTree = "<group>"; };
 		6A9CD2152B3870D60010592F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9CD2182B38B7F60010592F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A9CD21C2B38C1700010592F /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		6A9CD21E2B38C2F60010592F /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
-		A3B64E068C7BCC2D8ACC2F2F /* Pods_grodno_roads_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_grodno_roads_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0718362BD3F9AD00AA1705 /* CameraDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDetailsViewController.swift; sourceTree = "<group>"; };
 		CE0718382BD4080800AA1705 /* SpeedLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedLimitView.swift; sourceTree = "<group>"; };
 		CE11B1BC2B8297E900667D9F /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
@@ -127,7 +124,6 @@
 		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFlowWrapper.swift; sourceTree = "<group>"; };
-		E24BB9859CDECC0478843180 /* Pods-grodno-roads-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-grodno-roads-ios.debug.xcconfig"; path = "Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +131,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D16C20F3C29B0C7780D3839 /* Pods_grodno_roads_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,8 +148,6 @@
 		19BEC1CF30123329EFA8ED21 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E24BB9859CDECC0478843180 /* Pods-grodno-roads-ios.debug.xcconfig */,
-				66A9B02FD39E80020FB18BE3 /* Pods-grodno-roads-ios.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -268,7 +261,6 @@
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
 				19BEC1CF30123329EFA8ED21 /* Pods */,
-				EAD4D60733975160885710D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -343,14 +335,6 @@
 			path = Markers;
 			sourceTree = "<group>";
 		};
-		EAD4D60733975160885710D6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A3B64E068C7BCC2D8ACC2F2F /* Pods_grodno_roads_ios.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -358,13 +342,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE52F30F2B1CF3B400D81762 /* Build configuration list for PBXNativeTarget "grodno-roads-ios" */;
 			buildPhases = (
-				D55485929019EE73A473B444 /* [CP] Check Pods Manifest.lock */,
 				CE52F2FD2B1CF3B200D81762 /* Sources */,
 				CE52F2FE2B1CF3B200D81762 /* Frameworks */,
 				CE52F2FF2B1CF3B200D81762 /* Resources */,
 				6A540C8C2B711A130064299D /* Configure moko-resources */,
-				0417B05B299DFE8F6AB1CFF3 /* [CP] Embed Pods Frameworks */,
-				82D743A4DA53764CCDCD6CE7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -426,23 +407,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0417B05B299DFE8F6AB1CFF3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6A540C8C2B711A130064299D /* Configure moko-resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -461,45 +425,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/../../gradlew\" -p \"$SRCROOT/../../\" :kmp:features:root:copyFrameworkResourcesToApp \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \\\n    -Pkotlin.native.cocoapods.platform=\"$PLATFORM_NAME\" \\\n    -Pkotlin.native.cocoapods.archs=\"$ARCHS\" \\\n    -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\" \n";
-		};
-		82D743A4DA53764CCDCD6CE7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D55485929019EE73A473B444 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-grodno-roads-ios-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -710,7 +635,6 @@
 		};
 		CE52F3102B1CF3B400D81762 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E24BB9859CDECC0478843180 /* Pods-grodno-roads-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -758,7 +682,6 @@
 		};
 		CE52F3112B1CF3B400D81762 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66A9B02FD39E80020FB18BE3 /* Pods-grodno-roads-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
