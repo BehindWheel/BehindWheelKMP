@@ -102,7 +102,7 @@
 "map_markers_car_crash" = "ДТЗ";
 "map_markers_traffic_jam" = "Заторы";
 "map_markers_wild_animals" = "Дзікія жывёлы";
-"map_user_count" = "Анлайн: %1$@";
+"map_user_count" = "Анлайн: %1$d";
 "map_user_count_hint" = "На аснове актыўнасці за апошнія 10 хвілін";
 "dialog_report_police" = "Паведаміць аб ДАІ";
 "dialog_incident" = "Паведаміць аб праблеме";

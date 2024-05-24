@@ -80,6 +80,7 @@
 		CEE450ED2B79857600497E10 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = CEE450EC2B79857600497E10 /* BottomSheet */; };
 		CEE450EF2B7AD78400497E10 /* ReportDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE450EE2B7AD78400497E10 /* ReportDetailsViewController.swift */; };
 		CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */; };
+		CEF4C8242BE67FD100DE58FA /* OnlineTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4C8232BE67FD100DE58FA /* OnlineTipView.swift */; };
 		CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2232B5D5A680009840E /* Scrollable.swift */; };
 		CEF5D2262B5D5F110009840E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2252B5D5F110009840E /* View.swift */; };
 		CEF5D2282B5DD1980009840E /* CFlowWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */; };
@@ -160,6 +161,7 @@
 		CEE450E92B79696100497E10 /* MapMarkerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarkerProtocol.swift; sourceTree = "<group>"; };
 		CEE450EE2B7AD78400497E10 /* ReportDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailsViewController.swift; sourceTree = "<group>"; };
 		CEE8CD7E2B5C519E0070B4ED /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		CEF4C8232BE67FD100DE58FA /* OnlineTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTipView.swift; sourceTree = "<group>"; };
 		CEF5D2232B5D5A680009840E /* Scrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrollable.swift; sourceTree = "<group>"; };
 		CEF5D2252B5D5F110009840E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CEF5D2272B5DD1980009840E /* CFlowWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFlowWrapper.swift; sourceTree = "<group>"; };
@@ -282,7 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE450E62B79692300497E10 /* Markers */,
-				CEE450DE2B77F06400497E10 /* MapReportView.swift */,
+				CEF4C8222BE67FB800DE58FA /* Views */,
 				CE46B71B2B325EBE00493502 /* MapView.swift */,
 				CE6627D22B3A127E00799BC2 /* MapViewController.swift */,
 				CE6627D12B3A127E00799BC2 /* MapViewControllerBridge.swift */,
@@ -410,6 +412,15 @@
 				CEE450E72B79694400497E10 /* MapReportMarker.swift */,
 			);
 			path = Markers;
+			sourceTree = "<group>";
+		};
+		CEF4C8222BE67FB800DE58FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEE450DE2B77F06400497E10 /* MapReportView.swift */,
+				CEF4C8232BE67FD100DE58FA /* OnlineTipView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -586,6 +597,7 @@
 				CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */,
 				CEE8CD7F2B5C519E0070B4ED /* Navigation.swift in Sources */,
 				CEA924C92B2FA95B0086E744 /* StackView.swift in Sources */,
+				CEF4C8242BE67FD100DE58FA /* OnlineTipView.swift in Sources */,
 				CE11B1C42B82998200667D9F /* MapEventCameraType.swift in Sources */,
 				CEF5D2282B5DD1980009840E /* CFlowWrapper.swift in Sources */,
 				CEF5D2242B5D5A680009840E /* Scrollable.swift in Sources */,
@@ -759,9 +771,12 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "grodno-roads-ios/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services gps magnetometer";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -804,9 +819,12 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "grodno-roads-ios/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services gps magnetometer";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

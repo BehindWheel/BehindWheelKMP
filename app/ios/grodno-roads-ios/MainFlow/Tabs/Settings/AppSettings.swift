@@ -52,9 +52,9 @@ struct AppSettings: View {
                     .padding([.leading, .trailing], 16)
                     .modify { view in
 #if DEBUG
-                        return view
+                        view
 #else
-                        return view.padding(.bottom, 8)
+                        view.padding(.bottom, 8)
 #endif
                     }
 #if DEBUG

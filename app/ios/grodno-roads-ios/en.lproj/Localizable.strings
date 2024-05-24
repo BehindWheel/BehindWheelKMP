@@ -102,7 +102,7 @@
 "map_markers_car_crash" = "Car crash";
 "map_markers_traffic_jam" = "Traffic jam";
 "map_markers_wild_animals" = "Wild animals";
-"map_user_count" = "Online: %1$@";
+"map_user_count" = "Online: %1$d";
 "map_user_count_hint" = "Based on user activity in the last 10 minutes";
 "dialog_report_police" = "Report Traffic Police";
 "dialog_incident" = "Report Road Incident";
