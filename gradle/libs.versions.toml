@@ -66,6 +66,7 @@ play-services-maps = "com.google.android.gms:play-services-maps:18.2.0"
 
 # Dependencies for build-logic module
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+compose-compiler-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]

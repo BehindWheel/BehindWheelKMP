@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-import com.egoriku.grodnoroads.internal.kmmExtension
+import com.egoriku.grodnoroads.internal.kmpExtension
 import com.egoriku.grodnoroads.internal.kotlinMultiplatformPluginId
 import com.egoriku.grodnoroads.internal.libraryExtension
 import com.egoriku.grodnoroads.internal.libraryPluginId
@@ -9,23 +9,21 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 class AndroidKmpLibraryPlugin : Plugin<Project> {
 
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     override fun apply(target: Project) = with(target) {
         apply(plugin = libraryPluginId)
         apply(plugin = kotlinMultiplatformPluginId)
 
-        kmmExtension {
-            targets.all {
-                compilations.all {
-                    kotlinOptions {
-                        freeCompilerArgs += "-Xcontext-receivers"
-                        freeCompilerArgs += "-Xexpect-actual-classes"
-                        languageVersion = KotlinVersion.KOTLIN_1_9.version
-                    }
-                }
+        kmpExtension {
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    "-Xcontext-receivers",
+                    "-Xexpect-actual-classes"
+                )
             }
         }
 
