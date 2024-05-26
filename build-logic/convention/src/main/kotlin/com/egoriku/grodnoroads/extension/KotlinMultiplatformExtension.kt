@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.extension
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 
 fun KotlinMultiplatformExtension.applyTargets() {
     androidTarget()
@@ -14,31 +13,6 @@ fun KotlinMultiplatformExtension.iosTarget() {
     iosArm64()
     iosSimulatorArm64()
 }
-
-fun KotlinMultiplatformExtension.setupIosStaticFramework(
-    name: String,
-    configure: Framework.() -> Unit
-) {
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = name.toFrameworkName()
-            isStatic = true
-            configure()
-        }
-    }
-}
-
-private fun String.toFrameworkName() = split("_")
-    .joinToString(
-        separator = "",
-        transform = {
-            it.replaceFirstChar(Char::titlecase)
-        }
-    )
 
 fun KotlinMultiplatformExtension.commonDependencies(
     configure: KotlinDependencyHandler.() -> Unit,

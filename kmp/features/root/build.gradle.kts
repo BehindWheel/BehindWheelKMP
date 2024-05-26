@@ -26,13 +26,11 @@ kotlin {
         homepage = "https://github.com/grodnoroads/GrodnoRoads"
         summary = "Shared functionality for iOS"
 
-        pod("FirebaseCore", linkOnly = true)
-        pod("FirebaseDatabase", linkOnly = true)
-        pod("FirebaseCrashlytics", linkOnly = true)
-        pod("FirebaseFirestore", linkOnly = true)
+        noPodspec()
 
         framework {
             baseName = "Root"
+            isStatic = true
 
             export(libs.decompose)
             export(libs.essenty.lifecycle)
