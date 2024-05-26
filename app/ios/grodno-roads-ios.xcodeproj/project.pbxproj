@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		120239A62BDD1B28001577D0 /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120239A52BDD1B28001577D0 /* ImageResource.swift */; };
 		125830C32BEA166900CB0771 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125830C22BEA166900CB0771 /* ModalView.swift */; };
+		12AC8ED92C0337CC00A1B381 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 12AC8ED82C0337CC00A1B381 /* GoogleMaps.bundle */; };
 		12CE780B2BDC4794009ED8E6 /* NavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */; };
 		12D440D32BDFA47C00D2676D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D440D12BDFA47C00D2676D /* Localizable.strings */; };
 		12D440D72BDFA74500D2676D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D440D62BDFA74500D2676D /* String+Extension.swift */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		120239A52BDD1B28001577D0 /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
 		125830C22BEA166900CB0771 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		12AC8ED82C0337CC00A1B381 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12CE780A2BDC4794009ED8E6 /* NavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItem.swift; sourceTree = "<group>"; };
 		12D440D22BDFA47C00D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		CE46B7202B325F4A00493502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				12AC8ED82C0337CC00A1B381 /* GoogleMaps.bundle */,
 				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
 				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
 				CE6627B12B38CF4500799BC2 /* secrets.properties */,
@@ -420,6 +423,7 @@
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
 				CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */,
 				12D440DD2BDFC31D00D2676D /* InfoPlist.strings in Resources */,
+				12AC8ED92C0337CC00A1B381 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
