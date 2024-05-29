@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.specialevent.ui
+package com.egoriku.grodnoroads.specialevent.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

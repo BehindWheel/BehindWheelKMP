@@ -82,7 +82,7 @@ import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.quicksettings.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.resources.MR
-import com.egoriku.grodnoroads.specialevent.ui.SpecialEventDialog
+import com.egoriku.grodnoroads.specialevent.screen.SpecialEventDialog
 import com.google.android.gms.maps.Projection
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ui.IconGenerator

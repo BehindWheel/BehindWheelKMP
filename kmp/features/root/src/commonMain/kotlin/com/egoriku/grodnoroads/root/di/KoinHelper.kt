@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.settings.changelog.domain.di.changelogModule
 import com.egoriku.grodnoroads.settings.faq.di.faqModule
 import com.egoriku.grodnoroads.settings.map.di.mapSettingsModule
 import com.egoriku.grodnoroads.shared.analytics.di.analyticsModule
-import com.egoriku.grodnoroads.specialevent.domain.di.specialEventModule
+import com.egoriku.grodnoroads.specialevent.di.specialEventModule
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.crashlytics.crashlytics
 import dev.gitlive.firebase.database.database

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.specialevent.domain.di
+package com.egoriku.grodnoroads.specialevent.di
 
 import com.egoriku.grodnoroads.specialevent.domain.store.SpecialEventStoreFactory
 import org.koin.dsl.module
