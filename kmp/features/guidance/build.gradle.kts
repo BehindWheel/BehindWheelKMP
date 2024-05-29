@@ -49,8 +49,8 @@ kotlin {
             implementation(projects.compose.maps.compose)
             implementation(projects.compose.locationRequester)
             implementation(projects.compose.snackbar)
+            implementation(projects.kmp.shared.audioplayer)
             implementation(projects.kmp.shared.components)
-            implementation(projects.libraries.audioplayer)
 
             implementation(libs.androidx.activity.compose)
 

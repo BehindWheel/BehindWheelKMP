@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.guidance.screen.util
 
 import android.content.Context
-import com.egoriku.grodnoroads.audioplayer.AudioPlayer
-import com.egoriku.grodnoroads.audioplayer.Sound
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType
+import com.egoriku.grodnoroads.shared.audioplayer.AudioPlayer
+import com.egoriku.grodnoroads.shared.audioplayer.Sound
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.uuid.Uuid
 import kotlin.time.Duration.Companion.minutes
@@ -88,7 +88,7 @@ class SoundUtil(context: Context) {
 
     private fun playSound(
         sound: Sound,
-        id: String = Uuid.randomUUID().toString(),
+        id: String = Uuid.randomUUID(),
         expiration: Long = FIVE_MINUTE
     ) {
         val currentTimeMillis = currentTimeMillis

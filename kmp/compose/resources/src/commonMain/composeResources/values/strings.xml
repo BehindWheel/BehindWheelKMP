@@ -6,8 +6,8 @@
     <string name="tab_chat">Chat</string>
     <string name="tab_settings">Settings</string>
 
-    <string name="event_reminder_spring_body">From May 25 to June 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam! 🚘💡</string>
-    <string name="event_reminder_autumn_body">From August 25 to September 5, there is a special comprehensive event \"Attention – children!\"\n\nDon\'t forget to turn on the low beam! 🚘💡</string>
+    <string name="event_reminder_spring_body">From May 25 to June 5, there is a special comprehensive event "Attention – children!"\n\nDon't forget to turn on the low beam! 🚘💡</string>
+    <string name="event_reminder_autumn_body">From August 25 to September 5, there is a special comprehensive event "Attention – children!"\n\nDon't forget to turn on the low beam! 🚘💡</string>
 
     <plurals name="camera_alerts_plurals_distance">
         <item quantity="zero">0 meters</item>
