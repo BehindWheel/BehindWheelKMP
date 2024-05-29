@@ -23,6 +23,8 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.location)
 
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
             implementation(libs.decompose)
             implementation(libs.koin.core)
             implementation(libs.kotlin.collections)
@@ -31,7 +33,7 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(libs.coil)
+            implementation(libs.ktor.client.android)
         }
     }
 }

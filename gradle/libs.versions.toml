@@ -4,8 +4,10 @@ minSdk = "23" # Android 6.0
 targetSdk = "34"
 
 agp = "8.4.1"
+coil = "3.0.0-alpha06"
 decompose = "3.0.0"
 kotlin = "2.0.0"
+ktor = "2.3.11"
 moko-resources = "0.24.0-beta-5"
 mvikotlin = "4.0.0"
 
@@ -22,7 +24,8 @@ androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
 
-coil = "io.coil-kt:coil-compose:2.6.0"
+coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
@@ -52,6 +55,8 @@ kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.0"
 kotlin-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3"
 kotlin-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 
 material3-windowsize = "dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0"
 

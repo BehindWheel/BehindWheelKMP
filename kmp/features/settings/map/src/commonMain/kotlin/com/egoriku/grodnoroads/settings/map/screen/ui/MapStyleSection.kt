@@ -26,7 +26,7 @@ import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_DETAILED
 import com.egoriku.grodnoroads.settings.map.domain.MapStyleUrl.LIGHT_MINIMAL
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapStyle
-import com.egoriku.grodnoroads.settings.map.screen.ui.component.CheckableCard
+import com.egoriku.grodnoroads.settings.map.screen.ui.foundation.CheckableCard
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 import org.jetbrains.compose.resources.stringResource
 
