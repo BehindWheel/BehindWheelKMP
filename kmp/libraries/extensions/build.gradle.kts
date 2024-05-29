@@ -21,6 +21,8 @@ kotlin {
         }
         androidDependencies {
             implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.browser)
+            implementation(libs.androidx.core)
         }
         commonTestDependencies {
             implementation(libs.kotlin.test)

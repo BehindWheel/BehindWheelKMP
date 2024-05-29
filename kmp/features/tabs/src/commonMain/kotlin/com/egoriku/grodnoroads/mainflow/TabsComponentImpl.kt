@@ -12,7 +12,7 @@ import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
-import com.egoriku.grodnoroads.appsettings.domain.buildAppSettingsComponent
+import com.egoriku.grodnoroads.appsettings.domain.component.buildAppSettingsComponent
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow

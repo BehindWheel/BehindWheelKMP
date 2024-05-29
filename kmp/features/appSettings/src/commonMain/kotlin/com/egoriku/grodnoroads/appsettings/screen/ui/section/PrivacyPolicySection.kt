@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
+import com.egoriku.grodnoroads.appsettings.domain.util.rememberUrlLauncher
 import com.egoriku.grodnoroads.compose.resources.Constants.BULLET_SEPARATOR
 import com.egoriku.grodnoroads.compose.resources.Constants.PRIVACY_POLICY_LINK
 import com.egoriku.grodnoroads.compose.resources.Constants.TERMS_OF_SERVICE_LINK
@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PrivacyPolicySection() {
-    val customTabsIntent = rememberCustomTabIntent()
+    val urlLauncher = rememberUrlLauncher()
 
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -32,7 +32,7 @@ fun PrivacyPolicySection() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         LinkButton(
-            openUrl = { customTabsIntent(it) },
+            openUrl = urlLauncher::openUrl,
             description = stringResource(Res.string.terms_of_service),
             url = TERMS_OF_SERVICE_LINK
         )
@@ -41,7 +41,7 @@ fun PrivacyPolicySection() {
             modifier = Modifier.padding(horizontal = 4.dp)
         )
         LinkButton(
-            openUrl = { customTabsIntent(it) },
+            openUrl = urlLauncher::openUrl,
             description = stringResource(Res.string.privacy_policy),
             url = PRIVACY_POLICY_LINK
         )

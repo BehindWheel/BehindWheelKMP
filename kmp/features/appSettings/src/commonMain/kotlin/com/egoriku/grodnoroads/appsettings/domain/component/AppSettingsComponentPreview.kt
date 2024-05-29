@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.appsettings.domain
+package com.egoriku.grodnoroads.appsettings.domain.component
 
 import com.egoriku.grodnoroads.shared.models.Page
 
