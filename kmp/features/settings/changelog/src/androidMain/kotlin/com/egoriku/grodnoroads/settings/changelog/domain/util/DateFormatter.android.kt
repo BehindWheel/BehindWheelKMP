@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+// TODO: Use formatting from kotlinx-datetime
 actual class DateFormatter {
     private val dayMonthYearFormatter = SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault())
 

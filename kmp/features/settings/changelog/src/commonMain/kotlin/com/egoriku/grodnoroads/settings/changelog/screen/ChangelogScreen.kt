@@ -28,6 +28,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponentPreview
+import com.egoriku.grodnoroads.settings.changelog.screen.ui.ChangelogItem
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

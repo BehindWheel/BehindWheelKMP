@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.settings.changelog.screen
+package com.egoriku.grodnoroads.settings.changelog.screen.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,8 +46,8 @@ internal fun ChangelogItem(
         }
     }
 }
-/*
 
+/*
 @GrodnoRoadsPreview
 @Composable
 private fun ChangelogPreview(@PreviewParameter(LoremIpsum::class) lorem: String) {
