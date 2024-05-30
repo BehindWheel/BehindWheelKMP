@@ -34,7 +34,6 @@ include(":app:ui-demo")
 
 include(":compose:location-requester")
 include(":compose:maps:compose")
-include(":compose:snackbar")
 
 include(":kmp:compose:common-ui")
 include(":kmp:compose:foundation:core")
@@ -42,6 +41,7 @@ include(":kmp:compose:foundation:preview")
 include(":kmp:compose:foundation:theme")
 include(":kmp:compose:foundation:uikit")
 include(":kmp:compose:resources")
+include(":kmp:compose:snackbar")
 
 include(":kmp:features:root")
 include(":kmp:features:onboarding")
