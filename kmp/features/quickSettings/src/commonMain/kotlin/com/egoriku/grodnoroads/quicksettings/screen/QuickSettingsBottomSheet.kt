@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.quicksettings
+package com.egoriku.grodnoroads.quicksettings.screen
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -8,7 +8,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottom
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
-import com.egoriku.grodnoroads.quicksettings.ui.QuickSettingsContent
+import com.egoriku.grodnoroads.quicksettings.screen.ui.QuickSettingsContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

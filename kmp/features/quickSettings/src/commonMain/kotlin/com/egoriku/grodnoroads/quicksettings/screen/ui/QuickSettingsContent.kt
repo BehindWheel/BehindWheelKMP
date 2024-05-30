@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.quicksettings.ui
+package com.egoriku.grodnoroads.quicksettings.screen.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
