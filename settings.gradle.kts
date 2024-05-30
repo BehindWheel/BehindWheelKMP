@@ -32,7 +32,6 @@ rootProject.name = "Grodno-Roads"
 include(":app:android")
 include(":app:ui-demo")
 
-include(":compose:location-requester")
 include(":compose:maps:compose")
 
 include(":kmp:compose:common-ui")
@@ -40,6 +39,7 @@ include(":kmp:compose:foundation:core")
 include(":kmp:compose:foundation:preview")
 include(":kmp:compose:foundation:theme")
 include(":kmp:compose:foundation:uikit")
+include(":kmp:compose:location-requester")
 include(":kmp:compose:resources")
 include(":kmp:compose:snackbar")
 

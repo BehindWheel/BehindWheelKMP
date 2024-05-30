@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.location.requester.core.hasLocationPermissions
+import com.egoriku.grodnoroads.location.requester.internal.hasLocationPermissions
 
 data class PermissionState(val allPermissionsGranted: Boolean)
 

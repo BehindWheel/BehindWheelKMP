@@ -18,7 +18,6 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.extensions.openAppSettings
-import com.egoriku.grodnoroads.guidance.R
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.FineLocationDenied
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus.GmsLocationDisabled

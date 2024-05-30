@@ -3,3 +3,4 @@
 - add Input field into UIKit
 - Make audio player as kmp module
 - mvikotlin as bundle dependency
+- remove unnecessary material dependency for activity

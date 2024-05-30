@@ -21,10 +21,13 @@ kotlin {
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.features.quickSettings)
             implementation(projects.kmp.features.specialEventReminder)
+
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.locationRequester)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.compose.snackbar)
+
             implementation(projects.kmp.shared.analytics)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.models)
@@ -48,7 +51,6 @@ kotlin {
         }
         androidDependencies {
             implementation(projects.compose.maps.compose)
-            implementation(projects.compose.locationRequester)
             implementation(projects.kmp.shared.audioplayer)
             implementation(projects.kmp.shared.components)
 
