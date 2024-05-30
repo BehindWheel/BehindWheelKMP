@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
 
@@ -32,9 +31,6 @@ kotlin {
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
-        }
-        androidDependencies {
-            implementation(libs.androidx.activity.compose)
         }
     }
 }

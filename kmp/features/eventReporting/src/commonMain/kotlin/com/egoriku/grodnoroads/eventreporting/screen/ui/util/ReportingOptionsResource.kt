@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting.ui.util
+package com.egoriku.grodnoroads.eventreporting.screen.ui.util
 
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.reporting_item_broken_car

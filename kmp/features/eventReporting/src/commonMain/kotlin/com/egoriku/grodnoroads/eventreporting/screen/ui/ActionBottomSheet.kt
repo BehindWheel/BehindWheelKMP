@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting.ui
+package com.egoriku.grodnoroads.eventreporting.screen.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.cancel
 import com.egoriku.grodnoroads.compose.resources.send
-import com.egoriku.grodnoroads.eventreporting.ui.util.preUpPostDownNestedScrollConnection
+import com.egoriku.grodnoroads.eventreporting.screen.ui.util.preUpPostDownNestedScrollConnection
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton

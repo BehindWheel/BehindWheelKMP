@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting.ui.foundation
+package com.egoriku.grodnoroads.eventreporting.screen.ui.foundation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.dialog_input_hint
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting
-import com.egoriku.grodnoroads.eventreporting.ui.util.toStringResource
+import com.egoriku.grodnoroads.eventreporting.screen.ui.util.toStringResource
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview

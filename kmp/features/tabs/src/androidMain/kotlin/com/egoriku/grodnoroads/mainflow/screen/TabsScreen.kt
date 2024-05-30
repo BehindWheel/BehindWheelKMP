@@ -23,7 +23,7 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
 import com.egoriku.grodnoroads.coroutines.onChild
-import com.egoriku.grodnoroads.eventreporting.EventReportingScreen
+import com.egoriku.grodnoroads.eventreporting.screen.EventReportingScreen
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility

@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting.ui.util
+package com.egoriku.grodnoroads.eventreporting.screen.ui.util
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.AnchoredDraggableState

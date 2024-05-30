@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting.ui.foundation
+package com.egoriku.grodnoroads.eventreporting.screen.ui.foundation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

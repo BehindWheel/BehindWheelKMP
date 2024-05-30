@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.eventreporting
+package com.egoriku.grodnoroads.eventreporting.screen
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -42,9 +42,9 @@ import com.egoriku.grodnoroads.compose.resources.reporting_category_road_inciden
 import com.egoriku.grodnoroads.compose.resources.reporting_category_traffic_police
 import com.egoriku.grodnoroads.compose.resources.reporting_header
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
-import com.egoriku.grodnoroads.eventreporting.ui.ActionBottomSheet
-import com.egoriku.grodnoroads.eventreporting.ui.foundation.MobileCameraOptions
-import com.egoriku.grodnoroads.eventreporting.ui.foundation.SelectableOptions
+import com.egoriku.grodnoroads.eventreporting.screen.ui.ActionBottomSheet
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MobileCameraOptions
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOptions
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
