@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.eventreporting.screen.ui
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
@@ -56,6 +55,7 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.cancel
 import com.egoriku.grodnoroads.compose.resources.send
 import com.egoriku.grodnoroads.eventreporting.screen.ui.util.preUpPostDownNestedScrollConnection
+import com.egoriku.grodnoroads.foundation.core.BackHandler
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
