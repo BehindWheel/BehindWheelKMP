@@ -83,6 +83,7 @@ kotlin {
             implementation(projects.kmp.libraries.datastore)
 
             api(libs.decompose)
+            api(libs.decompose.compose)
             api(libs.essenty.lifecycle)
             api(libs.moko.resources)
 
@@ -94,7 +95,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(libs.decompose.compose)
             implementation(libs.koin.android)
         }
     }
