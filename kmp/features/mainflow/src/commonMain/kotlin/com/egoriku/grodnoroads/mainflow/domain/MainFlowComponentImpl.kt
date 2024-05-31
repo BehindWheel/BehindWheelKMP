@@ -10,7 +10,6 @@ import com.arkivanov.decompose.router.stack.pushNew
 import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
-import com.egoriku.grodnoroads.mainflow.buildTabComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent

@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
 
@@ -28,8 +27,6 @@ kotlin {
             implementation(projects.kmp.libraries.coroutines)
 
             implementation(libs.decompose)
-        }
-        androidDependencies {
             implementation(libs.decompose.compose)
         }
     }
