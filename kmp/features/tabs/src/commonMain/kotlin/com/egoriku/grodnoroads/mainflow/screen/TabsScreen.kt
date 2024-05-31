@@ -33,8 +33,8 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
-import com.egoriku.grodnoroads.mainflow.TabsComponent
-import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
+import com.egoriku.grodnoroads.mainflow.domain.TabsComponent
+import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

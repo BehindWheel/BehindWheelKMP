@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow
+package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.buildGuidanceComponent
-import com.egoriku.grodnoroads.mainflow.TabsComponent.Child
+import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
 import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.serialization.Serializable

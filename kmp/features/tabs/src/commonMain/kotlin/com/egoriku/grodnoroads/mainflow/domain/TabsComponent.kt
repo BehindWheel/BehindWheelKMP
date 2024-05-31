@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow
+package com.egoriku.grodnoroads.mainflow.domain
 
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.router.slot.ChildSlot
