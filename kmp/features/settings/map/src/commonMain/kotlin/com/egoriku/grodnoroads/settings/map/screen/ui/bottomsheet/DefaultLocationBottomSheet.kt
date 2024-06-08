@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extensions.Collator
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
@@ -20,8 +21,6 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.stringResource
-import java.text.Collator
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +43,7 @@ internal fun DefaultLocationBottomSheet(
             val sortedCityValues = defaultCity.values
                 .mapIndexed { index, value ->
                     CityValue(index, stringResource(value.toStringResource()))
-                }.sortedWith(compareBy(Collator.getInstance(Locale.getDefault())) { it.value })
+                }.sortedWith(compareBy(Collator.collator) { it.value })
 
             SingleChoiceLazyColumn(
                 list = sortedCityValues.map { it.value }.toImmutableList(),

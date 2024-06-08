@@ -8,7 +8,7 @@ import com.egoriku.grodnoroads.location.requester.internal.PermissionRequester
 actual class LocationRequesterState {
     internal var permissionRequester: PermissionRequester? = null
 
-    fun launchRequest() {
+    actual fun launchRequest() {
         permissionRequester?.launch(LOCATION_PERMISSIONS)
     }
 }

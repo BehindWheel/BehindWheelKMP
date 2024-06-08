@@ -32,14 +32,13 @@ rootProject.name = "Grodno-Roads"
 include(":app:android")
 include(":app:ui-demo")
 
-include(":compose:maps:compose")
-
 include(":kmp:compose:common-ui")
 include(":kmp:compose:foundation:core")
 include(":kmp:compose:foundation:preview")
 include(":kmp:compose:foundation:theme")
 include(":kmp:compose:foundation:uikit")
 include(":kmp:compose:location-requester")
+include(":kmp:compose:maps-compose")
 include(":kmp:compose:resources")
 include(":kmp:compose:snackbar")
 
@@ -72,6 +71,7 @@ include(":kmp:shared:audioplayer")
 include(":kmp:shared:analytics")
 include(":kmp:shared:components")
 include(":kmp:shared:crashlytics")
+include(":kmp:shared:formatter")
 include(":kmp:shared:geolocation")
 include(":kmp:shared:models")
 include(":kmp:shared:persistent")

@@ -6,6 +6,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.Velocity
+import kotlin.jvm.JvmName
 
 @OptIn(ExperimentalFoundationApi::class)
 internal fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection() =

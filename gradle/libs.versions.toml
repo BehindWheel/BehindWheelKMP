@@ -45,7 +45,7 @@ google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
 google-material = "com.google.android.material:material:1.12.0"
 
 koin-android = "io.insert-koin:koin-android:3.5.6"
-koin-compose = "io.insert-koin:koin-androidx-compose:3.5.6"
+koin-compose = "io.insert-koin:koin-compose:1.1.5"
 koin-core = "io.insert-koin:koin-core:3.5.6"
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
@@ -82,7 +82,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.1" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.1" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.51.0" }
-jetbrains-compose = { id = "org.jetbrains.compose", version = "1.6.10" }
+jetbrains-compose = { id = "org.jetbrains.compose", version = "1.6.11" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }

@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
@@ -22,10 +21,10 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
+import com.egoriku.grodnoroads.compose.snackbar.tool.rememberToastHelper
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.DismissableRow
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.MessageWithActionItem
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.SimpleMessageItem
-import com.egoriku.grodnoroads.extensions.toast
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import kotlinx.coroutines.launch
@@ -50,7 +49,7 @@ fun Snackbar(snackbarData: SnackbarData) {
 @GrodnoRoadsDarkLightPreview
 @Composable
 private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
-    val context = LocalContext.current
+    val toastHelper = rememberToastHelper()
     val scope = rememberCoroutineScope()
     val snackbarState = remember { SnackbarState() }
 
@@ -84,7 +83,7 @@ private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
                             description = Raw("Используются для доступа к данным карт и работы функций навигации"),
                             onAction = {
                                 if (!isInPreview) {
-                                    context.toast("action performed")
+                                    toastHelper.show("action performed")
                                 }
                             }
                         )

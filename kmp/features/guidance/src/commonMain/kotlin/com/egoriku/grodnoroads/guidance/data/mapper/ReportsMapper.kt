@@ -5,7 +5,7 @@ import com.egoriku.grodnoroads.extensions.appendIfNotEmpty
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.location.roundDistanceTo
+import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO

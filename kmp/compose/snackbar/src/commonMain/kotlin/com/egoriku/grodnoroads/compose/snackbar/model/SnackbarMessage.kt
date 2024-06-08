@@ -1,9 +1,9 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
-
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import kotlin.jvm.JvmInline
 
 sealed interface MessageData {
     @JvmInline

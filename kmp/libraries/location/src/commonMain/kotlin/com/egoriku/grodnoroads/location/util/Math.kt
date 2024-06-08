@@ -8,7 +8,7 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-object Math {
+internal object Math {
 
     private const val DEGREES_TO_RADIANS = 0.017453292519943295
     private const val RADIANS_TO_DEGREES = 57.29577951308232

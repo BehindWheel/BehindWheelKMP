@@ -5,11 +5,16 @@ import com.egoriku.grodnoroads.internal.kotlinMultiplatformPluginId
 import com.egoriku.grodnoroads.internal.libraryExtension
 import com.egoriku.grodnoroads.internal.libraryPluginId
 import com.egoriku.grodnoroads.internal.libs
+import org.gradle.api.Action
 import org.gradle.api.JavaVersion
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.apply
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 class AndroidKmpLibraryPlugin : Plugin<Project> {
 
@@ -24,6 +29,12 @@ class AndroidKmpLibraryPlugin : Plugin<Project> {
                     "-Xcontext-receivers",
                     "-Xexpect-actual-classes"
                 )
+            }
+
+            sourceSets {
+                all {
+                    languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+                }
             }
         }
 
@@ -54,3 +65,8 @@ class AndroidKmpLibraryPlugin : Plugin<Project> {
         }
     }
 }
+
+fun KotlinMultiplatformExtension.sourceSets(
+    configure: Action<NamedDomainObjectContainer<KotlinSourceSet>>
+): Unit = (this as ExtensionAware).extensions.configure("sourceSets", configure)
+

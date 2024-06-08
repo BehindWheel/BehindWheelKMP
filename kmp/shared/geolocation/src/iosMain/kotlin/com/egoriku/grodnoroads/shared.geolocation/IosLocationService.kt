@@ -35,6 +35,7 @@ class IosLocationService : LocationService {
         locationManager.delegate = LocationDelegate().apply {
             onLocationUpdate = { location ->
                 if (location != null) {
+                    println("location=$location")
                     lastLocationFlow.tryEmit(location)
                 }
             }
@@ -106,6 +107,7 @@ class IosLocationService : LocationService {
         }
 
         override fun locationManager(manager: CLLocationManager, didFailWithError: NSError) {
+            println("locationManager=$didFailWithError")
             onLocationUpdate?.invoke(null)
         }
     }
