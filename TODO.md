@@ -11,6 +11,6 @@ ios:
 - zoom animation duration
 - marker animation not implemented
 - choose on map modal not working
-- change language should redirect to system
 - native radiobutton and switch
 - handle location permission decline
+- launch icon

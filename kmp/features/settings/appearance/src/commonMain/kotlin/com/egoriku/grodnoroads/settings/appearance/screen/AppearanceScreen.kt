@@ -16,12 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.appearance_app_language
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on_description
 import com.egoriku.grodnoroads.compose.resources.ic_brightness
-import com.egoriku.grodnoroads.compose.resources.ic_language
 import com.egoriku.grodnoroads.compose.resources.ic_moon
 import com.egoriku.grodnoroads.compose.resources.settings_category_other
 import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
@@ -88,19 +86,10 @@ fun AppearanceScreen(
 }
 
 @Composable
-private fun LanguageSection(
+expect fun LanguageSection(
     state: State,
     onModify: (AppLanguage) -> Unit
-) {
-    val language = state.appearanceState.appLanguage
-
-    MoreActionListItem(
-        drawableResource = Res.drawable.ic_language,
-        text = stringResource(Res.string.appearance_app_language),
-        value = stringResource(language.current.toStringResource()),
-        onClick = { onModify(language) },
-    )
-}
+)
 
 @Composable
 private fun AppThemeSection(

@@ -6,10 +6,8 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.snackbar_drive_mode_permission_denied
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
+import com.egoriku.grodnoroads.extensions.openAppSettings
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
-import platform.Foundation.NSURL
-import platform.UIKit.UIApplication
-import platform.UIKit.UIApplicationOpenSettingsURLString
 
 private class SnackbarMessageBuilderIos : SnackbarMessageBuilder {
     override fun handleDriveModeRequest(locationRequestStatus: LocationRequestStatus): SnackbarMessage? {
@@ -21,8 +19,7 @@ private class SnackbarMessageBuilderIos : SnackbarMessageBuilder {
                 SnackbarMessage.ActionMessage(
                     title = MessageData.StringRes(Res.string.snackbar_drive_mode_permission_denied),
                     onAction = {
-                        val settingsUrl = NSURL.URLWithString(UIApplicationOpenSettingsURLString)!!
-                        UIApplication.sharedApplication.openURL(settingsUrl)
+                        openAppSettings()
                     }
                 )
             }
