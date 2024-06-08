@@ -1017,10 +1017,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMaps (8.4.0):
-    - GoogleMaps/Maps (= 8.4.0)
-  - GoogleMaps/Base (8.4.0)
-  - GoogleMaps/Maps (8.4.0):
+  - GoogleMaps (9.0.0):
+    - GoogleMaps/Maps (= 9.0.0)
+  - GoogleMaps/Base (9.0.0)
+  - GoogleMaps/Maps (9.0.0):
     - GoogleMaps/Base
   - GoogleUtilities/Environment (7.13.3):
     - GoogleUtilities/Privacy
@@ -1133,7 +1133,7 @@ DEPENDENCIES:
   - FirebaseCrashlytics (~> 10.25.0)
   - FirebaseDatabase (~> 10.25.0)
   - FirebaseFirestore (~> 10.25.0)
-  - GoogleMaps (~> 8.4.0)
+  - GoogleMaps (~> 9.0.0)
   - root (from `../../kmp/features/root`)
 
 SPEC REPOS:
@@ -1190,7 +1190,7 @@ SPEC CHECKSUMS:
   FirebaseSessions: c0939656253a1fa0e94ecc266ccf770cc8b33732
   FirebaseSharedSwift: 0274086954b1b2d5fd7e829eccc587044d72a4ba
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
+  GoogleMaps: 4907d0d42bf8cd58f56743e31f91d23c10682745
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   "gRPC-C++": e725ef63c4475d7cdb7e2cf16eb0fde84bd9ee51
   gRPC-Core: eee4be35df218649fe66d721a05a7f27a28f069b
@@ -1200,6 +1200,6 @@ SPEC CHECKSUMS:
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   root: c159425f24fbabc5bf5acedc1609303b76df6614
 
-PODFILE CHECKSUM: c589db0d552b90362bbff8a9487752a81603868c
+PODFILE CHECKSUM: df15ee9be2f7c4f8dea638976f1697c4eedaed3c
 
 COCOAPODS: 1.15.2
