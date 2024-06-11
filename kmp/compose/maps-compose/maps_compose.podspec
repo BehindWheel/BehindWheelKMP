@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Shared functionali ty for iOS'
+    spec.summary                  = 'Shared functionality for iOS'
     spec.vendored_frameworks      = 'build/cocoapods/framework/maps_compose.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '15.0'

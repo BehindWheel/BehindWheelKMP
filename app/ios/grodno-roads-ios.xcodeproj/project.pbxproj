@@ -726,7 +726,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
 				);
@@ -748,6 +747,7 @@
 					"$(inherited)",
 					"-framework",
 					Root,
+					"-w",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.egoriku.grodnoroads;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -22,7 +22,7 @@ kotlin {
         podfile = project.file("../../../app/ios/Podfile")
 
         homepage = "https://github.com/grodnoroads/GrodnoRoads"
-        summary = "Shared functionali ty for iOS"
+        summary = "Shared functionality for iOS"
 
         pod("GoogleMaps") {
             extraOpts += listOf("-compiler-option", "-fmodules")
