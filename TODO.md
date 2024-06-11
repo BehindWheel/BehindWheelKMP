@@ -13,4 +13,3 @@ ios:
 - choose on map modal not working
 - native radiobutton and switch
 - handle location permission decline
-- launch icon
