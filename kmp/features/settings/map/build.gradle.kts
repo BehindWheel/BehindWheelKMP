@@ -1,6 +1,7 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.iosDependencies
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -35,6 +36,9 @@ kotlin {
         }
         androidDependencies {
             implementation(libs.ktor.client.android)
+        }
+        iosDependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
