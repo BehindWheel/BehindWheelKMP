@@ -18,6 +18,13 @@ import kotlin.coroutines.suspendCoroutine
 class IosLocationService : LocationService {
 
     private val locationManager = CLLocationManager()
+    private val locationDelegate = LocationDelegate().apply {
+        onLocationUpdate = { location ->
+            if (location != null) {
+                lastLocationFlow.tryEmit(location)
+            }
+        }
+    }
 
     private var lastKnownLocation: LocationInfo? = null
 
@@ -32,14 +39,7 @@ class IosLocationService : LocationService {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
 
-        locationManager.delegate = LocationDelegate().apply {
-            onLocationUpdate = { location ->
-                if (location != null) {
-                    println("location=$location")
-                    lastLocationFlow.tryEmit(location)
-                }
-            }
-        }
+        locationManager.delegate = locationDelegate
     }
 
     override fun stopLocationUpdates() {
@@ -107,7 +107,6 @@ class IosLocationService : LocationService {
         }
 
         override fun locationManager(manager: CLLocationManager, didFailWithError: NSError) {
-            println("locationManager=$didFailWithError")
             onLocationUpdate?.invoke(null)
         }
     }
