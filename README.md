@@ -40,3 +40,7 @@ Build ui-demo: `./gradlew app:ui-demo:assembleRelease`
 
 Build app debug: `./gradlew app:android:assembleDebug`
 Build app release: `./gradlew app:android:assembleRelease`
+
+Pods:
+remove pod: `pod deintegrate`
+init pod: `pod install`
