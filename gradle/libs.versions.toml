@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.4.1"
+agp = "8.4.2"
 coil = "3.0.0-alpha06"
 decompose = "3.0.0"
 kotlinx-serialization = "1.7.0"
