@@ -4,6 +4,11 @@ import cocoapods.GoogleMaps.GMSCameraPosition
 import cocoapods.GoogleMaps.GMSCameraUpdate
 import cocoapods.GoogleMaps.animateWithCameraUpdate
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.location.calc.computeOffset
+import com.egoriku.grodnoroads.location.calc.distanceTo
+import com.egoriku.grodnoroads.location.calc.headingTo
+import com.egoriku.grodnoroads.location.calc.roundDistanceTo
+import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.core.Marker
 import com.egoriku.grodnoroads.maps.compose.extension.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.extension.zoom
@@ -20,6 +25,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import platform.CoreGraphics.CGPoint
+import platform.CoreGraphics.CGPointMake
+import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.QuartzCore.CATransaction
 
 @OptIn(ExperimentalForeignApi::class)
@@ -36,14 +44,27 @@ class MapUpdaterImplIos(
     private var minZoom = -1f
     private var maxZoom = -1f
 
-    /* private val bottomRightPoint by lazy {
-         val projection = googleMap.projection
-         projection.toScreenLocation(projection.visibleRegion.nearRight)
-     }
+    private val bottomRightPoint: CGPoint by lazy {
+        val projection = googleMap.projection
+        val point = projection.visibleRegion().useContents { nearRight }
 
-     private val center: Point by lazy { Point(bottomRightPoint.x / 2, bottomRightPoint.y / 2) }
-     private val offset: Point by lazy { Point(center.x, 2 * bottomRightPoint.y / 3) }
- */
+        projection
+            .pointForCoordinate(CLLocationCoordinate2DMake(point.latitude, point.longitude))
+            .useContents { this }
+    }
+    private val center by lazy {
+        CGPointMake(
+            x = bottomRightPoint.x / 2,
+            y = bottomRightPoint.y / 2
+        )
+    }
+    private val offset by lazy {
+        CGPointMake(
+            x = center.useContents { x },
+            y = 2 * bottomRightPoint.y / 3
+        )
+    }
+
     private var lastLocation: LatLng? = null
     private var lastZoom: Float? = null
 
@@ -117,28 +138,9 @@ class MapUpdaterImplIos(
                     viewingAngle = 35.0,
                 )
             ),
-            duration = 0.7
+            duration = 0.7,
+            onFinish = { additionalPadding(top = 0) }
         )
-    }
-
-    override fun animateTarget(
-        target: LatLng,
-        zoom: Float?,
-        onFinish: () -> Unit,
-        onCancel: () -> Unit
-    ) {
-        val bearing = googleMap.camera.bearing
-
-        val zoomLevel = zoom ?: googleMap.zoom
-        val cameraUpdate = GMSCameraUpdate.setCamera(
-            GMSCameraPosition(
-                target = target.cValue,
-                bearing = bearing,
-                zoom = zoomLevel,
-                viewingAngle = 0.0
-            )
-        )
-        animateCamera(cameraUpdate = cameraUpdate, duration = 1.0)
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
@@ -158,29 +160,14 @@ class MapUpdaterImplIos(
                 duration = 0.7
             )
         } else {
-            // animateWithShadowPoint(target = target, zoom = zoom)
+            animateWithShadowPoint(target = target, zoom = zoom)
         }
 
         lastZoom = zoom
         lastLocation = target
     }
 
-    override fun animateZoom(zoom: Float) {
-        val target = googleMap.camera.target
-        val bearing = googleMap.camera.bearing
-
-        val cameraUpdate = GMSCameraUpdate.setCamera(
-            GMSCameraPosition(
-                target = target,
-                bearing = bearing,
-                zoom = zoom,
-                viewingAngle = 0.0
-            )
-        )
-        animateCamera(cameraUpdate = cameraUpdate, duration = 1.0)
-    }
-
-    /*private fun animateWithShadowPoint(target: LatLng, zoom: Float) {
+    private fun animateWithShadowPoint(target: LatLng, zoom: Float) {
         val lastLocation = lastLocation ?: return
         val distance = lastLocation roundDistanceTo target
         if (distance < 5) return
@@ -188,31 +175,73 @@ class MapUpdaterImplIos(
         val bearing = lastLocation headingTo target
 
         val projection = googleMap.projection
-        val centerLocation = projection.fromScreenLocation(center)
-        val offsetLocation = projection.fromScreenLocation(offset)
+        val centerLocation = projection.coordinateForPoint(center).toLatLng()
+        val offsetLocation = projection.coordinateForPoint(offset).toLatLng()
 
         val offsetDistance = centerLocation distanceTo offsetLocation
 
         val shadowTarget = computeOffset(target, offsetDistance, bearing)
         animateCamera(
-            cameraUpdate = CameraUpdateFactory.newCameraPosition(
-                cameraPosition {
-                    target(shadowTarget.platform)
-                    bearing(bearing.toFloat())
-                    zoom(zoom)
-                    tilt(35.0f)
-                }
+            GMSCameraUpdate.setCamera(
+                GMSCameraPosition(
+                    target = shadowTarget.cValue,
+                    bearing = bearing,
+                    zoom = zoom,
+                    viewingAngle = 35.0
+                )
             ),
-            duration = 400
+            duration = 0.7
         )
-    }*/
+    }
+
+    override fun animateTarget(
+        target: LatLng,
+        zoom: Float?,
+        onFinish: () -> Unit,
+        onCancel: () -> Unit
+    ) {
+        val bearing = googleMap.camera.bearing
+
+        val zoomLevel = zoom ?: googleMap.zoom
+        animateCamera(
+            cameraUpdate = GMSCameraUpdate.setCamera(
+                GMSCameraPosition(
+                    target = target.cValue,
+                    bearing = bearing,
+                    zoom = zoomLevel,
+                    viewingAngle = 0.0
+                )
+            ),
+            duration = 1.0,
+            onFinish = onFinish
+        )
+    }
+
+    override fun animateZoom(zoom: Float) {
+        val target = googleMap.camera.target
+        val bearing = googleMap.camera.bearing
+
+        animateCamera(
+            cameraUpdate = GMSCameraUpdate.setCamera(
+                GMSCameraPosition(
+                    target = target,
+                    bearing = bearing,
+                    zoom = zoom,
+                    viewingAngle = 0.0
+                )
+            ),
+            duration = 1.0
+        )
+    }
 
     private fun animateCamera(
         cameraUpdate: GMSCameraUpdate,
-        duration: Double
+        duration: Double,
+        onFinish: () -> Unit = {},
     ) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
+        CATransaction.setCompletionBlock(onFinish)
         googleMap.animateWithCameraUpdate(cameraUpdate)
         CATransaction.commit()
     }

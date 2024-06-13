@@ -8,6 +8,8 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 
 actual typealias PlatformLatLng = IOSLatLng
 
+fun CValue<CLLocationCoordinate2D>.toLatLng() = LatLng(IOSLatLng(this))
+
 @OptIn(ExperimentalForeignApi::class)
 class IOSLatLng(val cValue: CValue<CLLocationCoordinate2D>)
 

@@ -2,9 +2,11 @@ package com.egoriku.grodnoroads.maps.compose.updater
 
 import android.graphics.Point
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.location.PlatformLatLng
 import com.egoriku.grodnoroads.location.calc.computeOffset
+import com.egoriku.grodnoroads.location.calc.distanceTo
+import com.egoriku.grodnoroads.location.calc.headingTo
 import com.egoriku.grodnoroads.location.calc.roundDistanceTo
+import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.extension.zoom
 import com.egoriku.grodnoroads.maps.compose.impl.MapStateUpdater
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecorator
@@ -15,7 +17,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.SphericalUtil
 import com.google.maps.android.ktx.markerClickEvents
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.model.markerOptions
@@ -157,8 +158,8 @@ internal class MapUpdaterAndroid(
         val bearing = lastLocation headingTo target
 
         val projection = googleMap.projection
-        val centerLocation = projection.fromScreenLocation(center)
-        val offsetLocation = projection.fromScreenLocation(offset)
+        val centerLocation = projection.fromScreenLocation(center).toLatLng()
+        val offsetLocation = projection.fromScreenLocation(offset).toLatLng()
 
         val offsetDistance = centerLocation distanceTo offsetLocation
 
@@ -230,12 +231,3 @@ internal class MapUpdaterAndroid(
         }
     )
 }
-
-infix fun PlatformLatLng.distanceTo(latLng: PlatformLatLng): Double = computeDistance(this, latLng)
-infix fun LatLng.headingTo(latLng: LatLng): Double = computeHeading(this, latLng)
-
-private fun computeHeading(from: LatLng, to: LatLng) =
-    SphericalUtil.computeHeading(from.platform, to.platform)
-
-private fun computeDistance(from: PlatformLatLng, to: PlatformLatLng) =
-    SphericalUtil.computeDistanceBetween(from, to)

@@ -50,6 +50,7 @@ fun NavigationMarker(
                 updatePosition(position)
             } else {
                 animateMarker(
+                    marker = this,
                     start = this.currentPosition,
                     destination = position,
                     onInterpolated = {

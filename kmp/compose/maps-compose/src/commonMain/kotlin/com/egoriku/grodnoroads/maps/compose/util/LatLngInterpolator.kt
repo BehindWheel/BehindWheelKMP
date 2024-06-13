@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.maps.compose.util
 
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.maps.compose.core.Marker
 import kotlin.math.abs
 import kotlin.math.sign
 
@@ -21,6 +22,7 @@ open class LatLngInterpolator {
 }
 
 expect fun animateMarker(
+    marker: Marker,
     start: LatLng,
     destination: LatLng,
     onInterpolated: (LatLng) -> Unit

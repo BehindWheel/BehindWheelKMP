@@ -3,8 +3,10 @@ package com.egoriku.grodnoroads.maps.compose.util
 import android.animation.ValueAnimator
 import android.view.animation.LinearInterpolator
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.maps.compose.core.Marker
 
 actual fun animateMarker(
+    marker: Marker,
     start: LatLng,
     destination: LatLng,
     onInterpolated: (LatLng) -> Unit
