@@ -184,7 +184,7 @@ private fun MapPaddingDecorator.updateContentPadding(
 @OptIn(ExperimentalForeignApi::class)
 private fun updateMapProperties(googleMap: GMSMapView, mapProperties: MapProperties) {
     googleMap.apply {
-        myLocationEnabled = false
+        myLocationEnabled = mapProperties.isMyLocationEnabled
         mapType = mapProperties.mapType.toiOSMapType()
         trafficEnabled = mapProperties.isTrafficEnabled
         mapStyle = mapProperties.mapStyleOptions
