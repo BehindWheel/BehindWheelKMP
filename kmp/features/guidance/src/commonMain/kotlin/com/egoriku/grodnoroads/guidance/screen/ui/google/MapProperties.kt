@@ -14,6 +14,7 @@ import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
 import com.egoriku.grodnoroads.maps.compose.configuration.MapType
 import com.egoriku.grodnoroads.maps.compose.style.rememberMapStyleLoader
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
+import com.egoriku.grodnoroads.shared.resources.MR
 
 @Composable
 fun rememberMapProperties(
@@ -33,18 +34,18 @@ fun rememberMapProperties(
     }
 
     val permissionsState = rememberLocationPermissionsState()
-    val mapStyle by rememberMutableState(mapConfig.googleMapStyle, isLight) {
+    val mapStyleResource by rememberMutableState(mapConfig.googleMapStyle, isLight) {
         when (mapConfig.googleMapStyle) {
             Style.Minimal -> {
                 when {
-                    isLight -> "files/map_style_light_minimal.json"
-                    else -> "files/map_style_dark_minimal.json"
+                    isLight -> MR.files.map_style_light_minimal_json
+                    else -> MR.files.map_style_dark_minimal_json
                 }
             }
             Style.Detailed -> {
                 when {
-                    isLight -> "files/map_style_light_detailed.json"
-                    else -> "files/map_style_dark_detailed.json"
+                    isLight -> MR.files.map_style_light_detailed_json
+                    else ->MR.files.map_style_dark_detailed_json
                 }
             }
             Style.Unknown -> error("googleMap style can't be unknown")
@@ -62,9 +63,9 @@ fun rememberMapProperties(
         mapProperties = mapProperties.copy(isTrafficEnabled = mapConfig.trafficJanOnMap)
     }
 
-    LaunchedEffect(mapStyle) {
+    LaunchedEffect(mapStyleResource) {
         mapProperties = mapProperties.copy(
-            mapStyleOptions = mapStyleLoader.load(mapStyle),
+            mapStyleOptions = mapStyleLoader.load(mapStyleResource),
         )
     }
 
