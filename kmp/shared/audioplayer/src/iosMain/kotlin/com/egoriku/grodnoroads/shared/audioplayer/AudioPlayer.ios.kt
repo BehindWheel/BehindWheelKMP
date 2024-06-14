@@ -7,6 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import platform.AVFAudio.AVAudioPlayer
 import platform.AVFAudio.AVAudioPlayerDelegateProtocol
+import platform.AVFAudio.AVAudioSession
+import platform.AVFAudio.AVAudioSessionCategoryPlayback
+import platform.AVFAudio.setActive
 import platform.darwin.NSObject
 
 @Composable
@@ -28,7 +31,12 @@ actual class AudioPlayer {
         }
     }
 
+    private val audioSession = AVAudioSession.sharedInstance()
+
     init {
+        audioSession.setCategory(AVAudioSessionCategoryPlayback, null)
+        audioSession.setActive(active = true, error = null)
+
         audioPlayer?.volume = 1f
     }
 
@@ -57,6 +65,9 @@ actual class AudioPlayer {
         audioPlayer?.stop()
         audioPlayer?.delegate = null
         audioPlayer = null
+
+        audioSession.setCategory(null, null)
+        audioSession.setActive(active = false, error = null)
     }
 
     private fun enqueueNextSound() {
