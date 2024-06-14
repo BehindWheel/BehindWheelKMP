@@ -30,6 +30,8 @@ actual fun rememberMarkerGenerator(): MarkerGenerator {
 
 @OptIn(ExperimentalForeignApi::class)
 class MapReportView(text: String) : UIView(frame = CGRectZero.readValue()) {
+    private val maxLabelWidth = 300.0
+
     private val titleLabel by lazy {
         UILabel().apply {
             textColor = UIColor.grayColor
@@ -44,6 +46,21 @@ class MapReportView(text: String) : UIView(frame = CGRectZero.readValue()) {
 
         titleLabel.text = text
         titleLabel.sizeToFit()
+
+        val labelWidth = titleLabel.bounds.useContents { size.width }
+
+        if (labelWidth > maxLabelWidth) {
+            titleLabel.setFrame(
+                titleLabel.frame.useContents {
+                    CGRectMake(
+                        x = origin.x,
+                        y = origin.y,
+                        width = maxLabelWidth,
+                        height = size.height
+                    )
+                }
+            )
+        }
 
         setFrame(
             CGRectMake(
@@ -65,6 +82,8 @@ class MapReportView(text: String) : UIView(frame = CGRectZero.readValue()) {
         val width = frame.useContents { size.width - 2 }
         val height = frame.useContents { size.height - 10 }
         val centerX = frame.useContents { size.width / 2f }
+
+        println("width=$width, height=$height, text=$text")
 
         val path = UIBezierPath()
         path.moveToPoint(CGPointMake(0.0, 4.0))
