@@ -17,6 +17,7 @@ import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VolumeChangeReceiver
 import com.egoriku.grodnoroads.shared.audioplayer.util.AudioEffectUtil
 import com.egoriku.grodnoroads.shared.audioplayer.util.audioManager
+import com.egoriku.grodnoroads.shared.resources.MR
 import kotlin.math.roundToInt
 
 @Composable
@@ -101,7 +102,7 @@ actual class AudioPlayer(private val context: Context) {
 
         mediaPlayer.reset()
 
-        val assetFileDescriptor = context.assets.openFd(sound.uri)
+        val assetFileDescriptor = context.assets.openFd(sound.assetResource.path)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mediaPlayer.setDataSource(assetFileDescriptor)
         } else {

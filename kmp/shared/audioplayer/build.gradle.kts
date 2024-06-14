@@ -17,19 +17,14 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(projects.kmp.libraries.logger)
+            implementation(projects.kmp.shared.resources)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.components.resources)
         }
         androidDependencies {
             implementation(libs.androidx.core)
             implementation(libs.androidx.media)
         }
     }
-}
-
-compose.resources {
-    packageOfResClass = "com.egoriku.grodnoroads.shared.audioplayer"
-    generateResClass = always
 }

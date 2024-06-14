@@ -74,7 +74,7 @@ fun AlertsScreen(
             audioPlayer.run {
                 setVolumeLevel(level = volumeLevel.volumeLevel)
                 setLoudness(volumeLevel.loudness.value)
-                playSound(sound = Sound.TestAudioLevel)
+                enqueueSound(sound = Sound.TestAudioLevel)
             }
         }
     )
