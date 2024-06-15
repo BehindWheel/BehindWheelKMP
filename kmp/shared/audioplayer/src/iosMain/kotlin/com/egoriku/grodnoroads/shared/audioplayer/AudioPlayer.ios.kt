@@ -9,6 +9,7 @@ import platform.AVFAudio.AVAudioPlayer
 import platform.AVFAudio.AVAudioPlayerDelegateProtocol
 import platform.AVFAudio.AVAudioSession
 import platform.AVFAudio.AVAudioSessionCategoryPlayback
+import platform.AVFAudio.AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
 import platform.AVFAudio.setActive
 import platform.darwin.NSObject
 
@@ -35,8 +36,7 @@ actual class AudioPlayer {
 
     init {
         audioSession.setCategory(AVAudioSessionCategoryPlayback, null)
-        audioSession.setActive(active = true, error = null)
-
+        audioSession.setActive(active = false, error = null)
         audioPlayer?.volume = 1f
     }
 
@@ -55,6 +55,7 @@ actual class AudioPlayer {
 
     actual fun playSound(sound: Sound) {
         scope.launch {
+            audioSession.setActive(active = true, error = null)
             audioPlayer = AVAudioPlayer(sound.assetResource.url, null)
             audioPlayer?.delegate = delegate
             audioPlayer?.play()
@@ -76,7 +77,14 @@ actual class AudioPlayer {
                 playSound(soundQueue.removeAt(0))
                 true
             }
-            else -> false
+            else -> {
+                audioSession.setActive(
+                    active = false,
+                    withOptions = AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation,
+                    error = null
+                )
+                false
+            }
         }
     }
 }
