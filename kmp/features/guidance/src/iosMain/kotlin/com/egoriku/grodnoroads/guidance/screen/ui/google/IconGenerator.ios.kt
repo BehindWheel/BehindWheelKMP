@@ -83,8 +83,6 @@ class MapReportView(text: String) : UIView(frame = CGRectZero.readValue()) {
         val height = frame.useContents { size.height - 10 }
         val centerX = frame.useContents { size.width / 2f }
 
-        println("width=$width, height=$height, text=$text")
-
         val path = UIBezierPath()
         path.moveToPoint(CGPointMake(0.0, 4.0))
         path.addArcWithCenter(
