@@ -5,7 +5,8 @@ targetSdk = "34"
 
 agp = "8.5.0"
 coil = "3.0.0-alpha06"
-decompose = "3.0.0"
+decompose = "3.1.0"
+essenty = "2.1.0"
 kotlinx-serialization = "1.7.0"
 kotlin = "2.0.0"
 ktor = "2.3.11"
@@ -36,8 +37,8 @@ dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.12.0"
 dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.12.0"
 dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.12.0"
 
-essenty-backhandler = "com.arkivanov.essenty:back-handler:2.1.0"
-essenty-lifecycle = "com.arkivanov.essenty:lifecycle:2.1.0"
+essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
+essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 
 firebase-analytics = "com.google.firebase:firebase-analytics:21.6.2"
 
