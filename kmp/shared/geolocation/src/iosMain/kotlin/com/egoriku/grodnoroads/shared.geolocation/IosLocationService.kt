@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.shared.geolocation
 
 import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import platform.CoreLocation.CLLocation
@@ -56,7 +57,7 @@ class IosLocationService : LocationService {
                 lastKnownLocation = LocationInfo(
                     latLng = LatLng(latitude, longitude),
                     bearing = location.course.toFloat(),
-                    speed = location.speed.toInt()
+                    speed = 0
                 )
             }
         }
@@ -99,7 +100,10 @@ class IosLocationService : LocationService {
                         LocationInfo(
                             latLng = LatLng(latitude, longitude),
                             bearing = location.course.toFloat(),
-                            speed = location.speed.toInt()
+                            speed = when {
+                                location.speed >= 0 -> location.speed.toKilometersPerHour()
+                                else -> 0
+                            }
                         )
                     )
                 }
