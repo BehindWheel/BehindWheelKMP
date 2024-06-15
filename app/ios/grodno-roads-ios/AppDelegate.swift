@@ -12,8 +12,17 @@ import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    private(set) lazy var root: RootComponent = RootComponentKt.buildRootComponent(componentContext: .context())
-    
+    var backDispatcher: BackDispatcher = BackDispatcherKt.BackDispatcher()
+
+    private(set) lazy var root: RootComponent = RootComponentKt.buildRootComponent(
+        componentContext: DefaultComponentContext(
+            lifecycle: ApplicationLifecycle(),
+            stateKeeper: nil,
+            instanceKeeper: nil,
+            backHandler: backDispatcher
+        )
+    )
+        
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil

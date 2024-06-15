@@ -10,9 +10,11 @@ import Root
 
 struct RootView2: UIViewControllerRepresentable {
     let root: RootComponent
+    let backDispatcher: BackDispatcher
     
     func makeUIViewController(context: Context) -> UIViewController {
-           let controller = RootViewController().create(rootComponent: root)
+           let controller = RootViewController().create(rootComponent: root,
+                                                        backDispatcher: backDispatcher)
            return controller
        }
 

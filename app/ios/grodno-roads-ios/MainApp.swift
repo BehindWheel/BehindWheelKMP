@@ -15,7 +15,7 @@ struct MainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView2(root: delegate.root)
+            RootView2(root: delegate.root, backDispatcher: delegate.backDispatcher)
                 .ignoresSafeArea()
         }
     }

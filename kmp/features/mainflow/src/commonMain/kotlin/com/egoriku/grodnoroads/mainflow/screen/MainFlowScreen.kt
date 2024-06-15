@@ -3,16 +3,9 @@ package com.egoriku.grodnoroads.mainflow.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.FaultyDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.fade
-import com.arkivanov.decompose.extensions.compose.stack.animation.isFront
-import com.arkivanov.decompose.extensions.compose.stack.animation.plus
-import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.predictiveBackAnimation
-import com.arkivanov.decompose.extensions.compose.stack.animation.scale
-import com.arkivanov.decompose.extensions.compose.stack.animation.slide
-import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimation
+import com.arkivanov.essenty.backhandler.BackHandler
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
@@ -21,24 +14,16 @@ import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.settings.map.screen.MapSettingsScreen
 
-@OptIn(ExperimentalDecomposeApi::class, FaultyDecomposeApi::class)
 @Composable
 fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
     val stack by mainFlowComponent.childStack.collectAsState()
 
     Children(
         stack = stack,
-        animation = predictiveBackAnimation(
+        animation = backAnimation(
             backHandler = mainFlowComponent.backHandler,
-            fallbackAnimation = stackAnimation { _, _, direction ->
-                if (direction.isFront) {
-                    slide() + fade()
-                } else {
-                    scale(frontFactor = 1F, backFactor = 0.7F) + fade()
-                }
-            },
             onBack = mainFlowComponent::onBack,
-        )
+        ),
     ) {
         when (val child = it.instance) {
             is Child.Tabs -> TabsScreen(tabsComponent = child.component)
@@ -65,3 +50,8 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
         }
     }
 }
+
+expect fun <C : Any, T : Any> backAnimation(
+    backHandler: BackHandler,
+    onBack: () -> Unit,
+): StackAnimation<C, T>

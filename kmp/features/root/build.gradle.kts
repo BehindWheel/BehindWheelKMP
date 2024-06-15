@@ -33,6 +33,7 @@ kotlin {
             isStatic = true
 
             export(libs.decompose)
+            export(libs.essenty.backhandler)
             export(libs.essenty.lifecycle)
             export(libs.moko.resources)
 
@@ -86,6 +87,7 @@ kotlin {
 
             api(libs.decompose)
             api(libs.decompose.compose)
+            api(libs.essenty.backhandler)
             api(libs.essenty.lifecycle)
             api(libs.moko.resources)
 
