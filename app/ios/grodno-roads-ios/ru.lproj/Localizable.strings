@@ -102,7 +102,7 @@
 "map_markers_car_crash" = "ДТП";
 "map_markers_traffic_jam" = "Пробки";
 "map_markers_wild_animals" = "Дикие животные";
-"map_user_count" = "Онлайн: %1$@";
+"map_user_count" = "Онлайн: %1$d";
 "map_user_count_hint" = "На основе активности за последние 10 минут";
 "dialog_report_police" = "Сообщить о ГАИ";
 "dialog_incident" = "Сообщить о проблеме";
