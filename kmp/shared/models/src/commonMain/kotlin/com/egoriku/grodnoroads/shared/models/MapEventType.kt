@@ -1,8 +1,5 @@
 package com.egoriku.grodnoroads.shared.models
 
-import androidx.compose.runtime.Stable
-
-@Stable
 enum class MapEventType(
     val type: String,
     val emoji: String

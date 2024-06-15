@@ -1,7 +1,8 @@
 @file:Suppress("unused")
 
-import com.egoriku.grodnoroads.extension.kotlinOptions
+import com.egoriku.grodnoroads.extension.compilerOptions
 import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
+import com.egoriku.grodnoroads.internal.kotlinExtension
 import com.egoriku.grodnoroads.internal.kotlinPluginId
 import com.egoriku.grodnoroads.internal.libraryExtension
 import com.egoriku.grodnoroads.internal.libraryPluginId
@@ -10,7 +11,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 class AndroidLibraryPlugin : Plugin<Project> {
 
@@ -38,9 +38,10 @@ class AndroidLibraryPlugin : Plugin<Project> {
                 }
             }
 
-            kotlinOptions {
-                freeCompilerArgs += "-Xcontext-receivers"
-                languageVersion = KotlinVersion.KOTLIN_1_9.version
+            kotlinExtension {
+                compilerOptions {
+                    freeCompilerArgs.add("-Xcontext-receivers")
+                }
             }
 
             compileOptions {

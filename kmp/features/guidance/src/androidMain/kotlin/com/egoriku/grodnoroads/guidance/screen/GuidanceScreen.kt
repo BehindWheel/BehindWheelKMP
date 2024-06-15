@@ -23,6 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_check_circle
+import com.egoriku.grodnoroads.compose.resources.reporting_notification_sent
+import com.egoriku.grodnoroads.compose.resources.snackbar_in_app_update_install
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
 import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
@@ -68,7 +72,6 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.guidance.screen.util.MarkerCache
 import com.egoriku.grodnoroads.guidance.screen.util.SnackbarMessageBuilder
 import com.egoriku.grodnoroads.guidance.screen.util.SoundUtil
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.location.toGmsLatLng
 import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
@@ -122,8 +125,8 @@ fun GuidanceScreen(
                     Notification.RepostingSuccess ->
                         snackbarState.show(
                             SnackbarMessage.SimpleMessage(
-                                title = MessageData.Resource(R.string.reporting_notification_sent),
-                                icon = Icon.Res(id = MR.images.ic_check_circle.drawableResId)
+                                title = MessageData.StringRes(Res.string.reporting_notification_sent),
+                                icon = Icon.DrawableRes(resource = Res.drawable.ic_check_circle)
                             )
                         )
                 }
@@ -553,7 +556,7 @@ fun GuidanceScreen(
                 coroutineScope.launch {
                     snackbarState.show(
                         ActionMessage(
-                            title = MessageData.Resource(R.string.snackbar_in_app_update_install),
+                            title = MessageData.StringRes(Res.string.snackbar_in_app_update_install),
                             onAction = it
                         )
                     )

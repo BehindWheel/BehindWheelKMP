@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_arrow_left
+import com.egoriku.grodnoroads.compose.resources.ic_telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoSecondaryCircleButton() {
@@ -18,7 +20,7 @@ fun DemoSecondaryCircleButton() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             SecondaryCircleButton(onClick = { }) {
                 Icon(
-                    painter = painterResource(MR.images.ic_telegram),
+                    painter = painterResource(Res.drawable.ic_telegram),
                     contentDescription = null
                 )
             }
@@ -27,7 +29,7 @@ fun DemoSecondaryCircleButton() {
                 enabled = false
             ) {
                 Icon(
-                    painter = painterResource(MR.images.ic_arrow_left),
+                    painter = painterResource(Res.drawable.ic_arrow_left),
                     contentDescription = null
                 )
             }

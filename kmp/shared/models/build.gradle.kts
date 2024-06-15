@@ -2,7 +2,7 @@ import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -16,8 +16,6 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            compileOnly(libs.compose.stable.marker)
-
             implementation(libs.kotlin.serialization.core)
         }
     }

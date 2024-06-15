@@ -11,16 +11,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.map_markers_filtering
+import com.egoriku.grodnoroads.compose.resources.map_markers_filtering_description
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MarkersFilteringSection(
@@ -29,8 +31,8 @@ internal fun MarkersFilteringSection(
 ) {
     Column {
         SettingsSectionHeader(
-            title = stringResource(R.string.map_markers_filtering),
-            description = stringResource(R.string.map_markers_filtering_description)
+            title = stringResource(Res.string.map_markers_filtering),
+            description = stringResource(Res.string.map_markers_filtering_description)
         )
         Row(
             modifier = Modifier

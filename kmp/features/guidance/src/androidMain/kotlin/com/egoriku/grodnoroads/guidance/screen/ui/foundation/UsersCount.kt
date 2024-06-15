@@ -17,22 +17,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.map_user_count
+import com.egoriku.grodnoroads.compose.resources.map_user_count_hint
+import com.egoriku.grodnoroads.compose.resources.nt_ic_info
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import com.egoriku.grodnoroads.localization.R
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
 import com.skydoves.balloon.compose.rememberBalloonBuilder
 import com.skydoves.balloon.compose.setBackgroundColor
 import com.skydoves.balloon.compose.setTextColor
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun UsersCount(modifier: Modifier = Modifier, count: Int) {
@@ -60,7 +62,7 @@ fun UsersCount(modifier: Modifier = Modifier, count: Int) {
         builder = builder,
         balloonContent = {
             Text(
-                text = stringResource(R.string.map_user_count_hint),
+                text = stringResource(Res.string.map_user_count_hint),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -101,11 +103,11 @@ private fun UsersCountBadge(count: Int, onClick: () -> Unit) {
         ) {
             Image(
                 modifier = Modifier.size(16.dp),
-                painter = painterResource(MR.images.nt_ic_info),
+                painter = painterResource(Res.drawable.nt_ic_info),
                 contentDescription = null
             )
             Text(
-                text = stringResource(R.string.map_user_count, count),
+                text = stringResource(Res.string.map_user_count, count),
                 style = MaterialTheme.typography.labelSmall
             )
         }

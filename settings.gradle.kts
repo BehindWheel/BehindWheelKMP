@@ -18,7 +18,9 @@ pluginManagement {
 
 dependencyResolutionManagement {
     // https://stackoverflow.com/a/75032841
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
@@ -30,18 +32,18 @@ rootProject.name = "Grodno-Roads"
 include(":app:android")
 include(":app:ui-demo")
 
-include(":compose:foundation:core")
-include(":compose:foundation:preview")
-include(":compose:foundation:theme")
-include(":compose:foundation:uikit")
-
-include(":compose:common-ui")
 include(":compose:location-requester")
 include(":compose:maps:compose")
 include(":compose:snackbar")
 
 include(":libraries:audioplayer")
-include(":libraries:localization")
+
+include(":kmp:compose:common-ui")
+include(":kmp:compose:foundation:core")
+include(":kmp:compose:foundation:preview")
+include(":kmp:compose:foundation:theme")
+include(":kmp:compose:foundation:uikit")
+include(":kmp:compose:resources")
 
 include(":kmp:features:root")
 include(":kmp:features:onboarding")

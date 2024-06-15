@@ -19,10 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_medium_speed_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
+import com.egoriku.grodnoroads.compose.resources.camera_info_last_update
+import com.egoriku.grodnoroads.compose.resources.camera_info_report
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.Red
@@ -36,9 +41,10 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamer
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.screen.util.DateTimeFormatter
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
 import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) {
@@ -50,10 +56,10 @@ internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) 
                 is MediumSpeedCamera -> MR.images.nt_ic_medium_speed_camera_bold.drawableResId
                 is MobileCamera -> MR.images.nt_ic_mobile_camera_bold.drawableResId
             },
-            cameraTypeId = when (camera) {
-                is StationaryCamera -> R.string.alerts_stationary_camera
-                is MediumSpeedCamera -> R.string.alerts_medium_speed_camera
-                is MobileCamera -> R.string.alerts_mobile_camera
+            cameraResource = when (camera) {
+                is StationaryCamera -> Res.string.alerts_stationary_camera
+                is MediumSpeedCamera -> Res.string.alerts_medium_speed_camera
+                is MobileCamera -> Res.string.alerts_mobile_camera
             }
         )
         VerticalSpacer(32.dp)
@@ -64,7 +70,7 @@ internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) 
 private fun Info(
     camera: MapEvent.Camera,
     iconId: Int,
-    cameraTypeId: Int
+    cameraResource: StringResource
 ) {
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         Row {
@@ -77,13 +83,13 @@ private fun Info(
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(text = camera.name, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    text = stringResource(cameraTypeId),
+                    text = stringResource(cameraResource),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 // TODO: make separate UI model with formatted value
                 val formattedDate = DateTimeFormatter.toDate(camera.updateTime)
                 DisabledText(
-                    text = stringResource(R.string.camera_info_last_update, formattedDate),
+                    text = stringResource(Res.string.camera_info_last_update, formattedDate),
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -109,7 +115,7 @@ private fun Info(
             VerticalSpacer(24.dp)
             SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
-                id = R.string.camera_info_report,
+                text = stringResource(Res.string.camera_info_report),
                 onClick = {}
             )
         }

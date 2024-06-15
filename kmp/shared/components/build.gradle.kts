@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.extension.iosTarget
 import com.egoriku.grodnoroads.extension.provideVersionName
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.buildkonfig)
 }
 

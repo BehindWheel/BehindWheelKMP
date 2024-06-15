@@ -18,10 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.dialog_input_hint
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting
 import com.egoriku.grodnoroads.eventreporting.ui.util.toStringResource
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -30,8 +31,8 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun SelectableOptions(
@@ -80,7 +81,7 @@ internal fun SelectableOptions(
         ),
         value = inputText,
         onValueChange = { inputText = it },
-        label = stringResource(R.string.dialog_input_hint)
+        label = stringResource(Res.string.dialog_input_hint)
     )
 }
 

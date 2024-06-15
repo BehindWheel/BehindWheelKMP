@@ -41,7 +41,8 @@ class AppearanceStoreFactory(
 ) {
 
     fun create(): AppearanceStore = object : AppearanceStore,
-        Store<Intent, State, Nothing> by storeFactory.create(initialState = State(),
+        Store<Intent, State, Nothing> by storeFactory.create(
+            initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 onAction<Unit> {
                     dataStore.data

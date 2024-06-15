@@ -28,15 +28,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.audioplayer.AudioPlayer
 import com.egoriku.grodnoroads.audioplayer.Sound
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_availability
+import com.egoriku.grodnoroads.compose.resources.alerts_availability_description
+import com.egoriku.grodnoroads.compose.resources.alerts_voice_alerts
+import com.egoriku.grodnoroads.compose.resources.alerts_voice_alerts_description
+import com.egoriku.grodnoroads.compose.resources.settings_section_alerts
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertState
@@ -46,6 +50,7 @@ import com.egoriku.grodnoroads.settings.alerts.screen.ui.AlertEventsSection
 import com.egoriku.grodnoroads.settings.alerts.screen.ui.AlertRadiusSection
 import com.egoriku.grodnoroads.settings.alerts.screen.ui.VoiceLevelSection
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AlertsScreen(
@@ -95,7 +100,7 @@ private fun AlertsUI(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(R.string.settings_section_alerts),
+                title = stringResource(Res.string.settings_section_alerts),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )
@@ -130,8 +135,8 @@ private fun AlertsUI(
                     val settings = state.alertSettings
                     val alertAvailability = settings.alertAvailability
                     SwitchListItem(
-                        text = stringResource(R.string.alerts_availability),
-                        description = stringResource(R.string.alerts_availability_description),
+                        text = stringResource(Res.string.alerts_availability),
+                        description = stringResource(Res.string.alerts_availability_description),
                         isChecked = alertAvailability.alertFeatureEnabled,
                         onCheckedChange = { value ->
                             modify(alertAvailability.copy(alertFeatureEnabled = value))
@@ -145,8 +150,8 @@ private fun AlertsUI(
                             reset = reset
                         )
                         SwitchListItem(
-                            text = stringResource(R.string.alerts_voice_alerts),
-                            description = stringResource(R.string.alerts_voice_alerts_description),
+                            text = stringResource(Res.string.alerts_voice_alerts),
+                            description = stringResource(Res.string.alerts_voice_alerts_description),
                             isChecked = settings.alertAvailability.voiceAlertEnabled,
                             onCheckedChange = { value ->
                                 modify(alertAvailability.copy(voiceAlertEnabled = value))

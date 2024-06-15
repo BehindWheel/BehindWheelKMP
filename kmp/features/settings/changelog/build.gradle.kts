@@ -1,11 +1,10 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.commonTestDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -19,11 +18,12 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.compose.commonUi)
+            implementation(projects.kmp.compose.foundation.uikit)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
-
-            compileOnly(libs.compose.stable.marker)
 
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.firestore)
@@ -35,11 +35,6 @@ kotlin {
         }
         commonTestDependencies {
             implementation(libs.kotlin.test)
-        }
-        androidDependencies {
-            implementation(projects.compose.foundation.uikit)
-            implementation(projects.compose.commonUi)
-            implementation(projects.libraries.localization)
         }
     }
 }

@@ -5,14 +5,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_map
+import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoNavigationBar() {
@@ -28,8 +30,8 @@ fun DemoNavigationBar() {
                     icon = {
                         Icon(
                             painter = when (it) {
-                                NavElement.Map -> painterResource(MR.images.ic_map)
-                                NavElement.Settings -> painterResource(MR.images.ic_settings)
+                                NavElement.Map -> painterResource(Res.drawable.ic_map)
+                                NavElement.Settings -> painterResource(Res.drawable.ic_settings)
                             },
                             contentDescription = null
                         )

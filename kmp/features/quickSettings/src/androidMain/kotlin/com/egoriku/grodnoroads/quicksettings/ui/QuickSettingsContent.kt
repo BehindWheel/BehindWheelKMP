@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.quicksettings.ui
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,10 +17,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_filter
+import com.egoriku.grodnoroads.compose.resources.ic_moon
+import com.egoriku.grodnoroads.compose.resources.ic_notification
+import com.egoriku.grodnoroads.compose.resources.ic_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.quick_settings_app_theme
+import com.egoriku.grodnoroads.compose.resources.quick_settings_header
+import com.egoriku.grodnoroads.compose.resources.quick_settings_markers_filtering
+import com.egoriku.grodnoroads.compose.resources.quick_settings_traffic_conditions
+import com.egoriku.grodnoroads.compose.resources.quick_settings_voice_alerts
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
@@ -31,7 +38,6 @@ import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppTheme
@@ -39,7 +45,9 @@ import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.Mark
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun QuickSettingsContent(
@@ -49,7 +57,7 @@ internal fun QuickSettingsContent(
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
-            text = stringResource(R.string.quick_settings_header),
+            text = stringResource(Res.string.quick_settings_header),
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(26.dp)
@@ -64,15 +72,15 @@ internal fun QuickSettingsContent(
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            iconRes = MR.images.ic_notification.drawableResId,
-            name = stringResource(R.string.quick_settings_voice_alerts),
+            drawableResource = Res.drawable.ic_notification,
+            name = stringResource(Res.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            iconRes = MR.images.ic_traffic_jam.drawableResId,
-            name = stringResource(R.string.quick_settings_traffic_conditions),
+            drawableResource = Res.drawable.ic_traffic_jam,
+            name = stringResource(Res.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
         )
@@ -86,8 +94,8 @@ private fun AppearanceSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        iconRes = MR.images.ic_moon.drawableResId,
-        name = stringResource(R.string.quick_settings_app_theme)
+        drawableResource = Res.drawable.ic_moon,
+        name = stringResource(Res.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
             appTheme.values.forEach { theme ->
@@ -116,8 +124,8 @@ private fun FilteringSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        iconRes = MR.images.ic_filter.drawableResId,
-        name = stringResource(R.string.quick_settings_markers_filtering)
+        drawableResource = Res.drawable.ic_filter,
+        name = stringResource(Res.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {
             markerFiltering.values.forEach { filtering ->
@@ -142,7 +150,7 @@ private fun FilteringSection(
 
 @Composable
 private fun BasicSection(
-    @DrawableRes iconRes: Int,
+    drawableResource: DrawableResource,
     name: String,
     content: @Composable () -> Unit
 ) {
@@ -152,7 +160,7 @@ private fun BasicSection(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                painter = painterResource(iconRes),
+                painter = painterResource(drawableResource),
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
@@ -167,7 +175,7 @@ private fun BasicSection(
 
 @Composable
 private fun SwitchSetting(
-    @DrawableRes iconRes: Int,
+    drawableResource: DrawableResource,
     name: String,
     checked: Boolean,
     paddingValues: PaddingValues = PaddingValues(horizontal = 20.dp),
@@ -186,7 +194,7 @@ private fun SwitchSetting(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(iconRes),
+            painter = painterResource(drawableResource),
             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             contentDescription = null
         )

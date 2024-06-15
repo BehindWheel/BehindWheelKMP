@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.specialevent.domain.util.SpecialEventDispatcher
 import kotlinx.datetime.LocalDateTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class SpecialEventDispatcherTest {
 
@@ -20,6 +21,6 @@ class SpecialEventDispatcherTest {
 
         assertEquals(EventType.Spring, springType)
         assertEquals(EventType.Autumn, autumnType)
-        assertEquals(EventType.None, noneType)
+        assertNull(noneType)
     }
 }

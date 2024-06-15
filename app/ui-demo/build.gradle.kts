@@ -4,7 +4,7 @@ import com.egoriku.grodnoroads.extension.release
 
 plugins {
     alias(libs.plugins.grodnoroads.application)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
 android {
@@ -45,12 +45,15 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.uikit)
-    implementation(projects.compose.snackbar)
+    implementation(projects.kmp.compose.foundation.uikit)
+    implementation(projects.kmp.compose.resources)
     implementation(projects.kmp.libraries.extensions)
-    implementation(projects.kmp.shared.resources)
+    implementation(projects.compose.snackbar)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
+
+    implementation(compose.preview)
+    debugImplementation(compose.uiTooling)
 }

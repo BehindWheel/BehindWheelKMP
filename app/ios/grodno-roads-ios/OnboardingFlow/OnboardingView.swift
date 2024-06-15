@@ -16,13 +16,19 @@ struct OnboardingView: View {
     }
     
     var body: some View {
-        VStack {
-            Button {
-                component.finishOnboarding()
-            } label: {
-                Text("Complete onboarding")
-            }.buttonStyle(.borderedProminent)
-        }
+        OnboardingRepresentable(component: component)
+    }
+}
+
+struct OnboardingRepresentable: UIViewControllerRepresentable {
+    
+    var component: OnboardingComponent
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        return OnboardingViewController().create(onboardingComponent: component)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }
 

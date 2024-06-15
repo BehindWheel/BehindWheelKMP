@@ -13,20 +13,17 @@ import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.nullable.toCNullableStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
 import com.egoriku.grodnoroads.coroutines.toStateFlow
-import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
-import com.egoriku.grodnoroads.onboarding.domain.buildOnboardingComponent
+import com.egoriku.grodnoroads.onboarding.domain.component.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
-import com.egoriku.grodnoroads.shared.persistent.onboarding.completeOnboarding
 import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import org.koin.core.component.KoinComponent
@@ -74,12 +71,6 @@ internal class RootComponentImpl(
             buildOnboardingComponent(
                 componentContext = componentContext,
                 onFinishOnboarding = {
-                    // TODO: make inside onboarding feature
-                    coroutineScope.launch {
-                        dataStore.edit {
-                            completeOnboarding()
-                        }
-                    }
                     navigation.replaceAll(Config.MainFlow)
                 }
             )

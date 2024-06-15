@@ -3,8 +3,8 @@ import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -24,15 +24,13 @@ kotlin {
             implementation(projects.kmp.features.settings.changelog)
             implementation(projects.kmp.features.settings.faq)
             implementation(projects.kmp.features.settings.map)
+            implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.libraries.coroutines)
 
-            compileOnly(libs.compose.stable.marker)
             implementation(libs.decompose)
         }
         androidDependencies {
-            implementation(projects.compose.foundation.uikit)
-
             implementation(libs.decompose.compose)
         }
     }

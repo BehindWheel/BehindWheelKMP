@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_arrow
+import com.egoriku.grodnoroads.compose.resources.ic_pin_location
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
@@ -19,8 +22,7 @@ import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 import com.egoriku.grodnoroads.location.requester.WithLocationRequester
 import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DefaultMode(
@@ -39,7 +41,7 @@ fun DefaultMode(
                 onClick = openReportFlow
             ) {
                 Icon(
-                    painter = painterResource(MR.images.ic_pin_location),
+                    painter = painterResource(Res.drawable.ic_pin_location),
                     contentDescription = null
                 )
             }
@@ -55,7 +57,7 @@ fun DefaultMode(
                 ) {
                     Icon(
                         modifier = Modifier.size(24.dp),
-                        painter = painterResource(MR.images.ic_arrow),
+                        painter = painterResource(Res.drawable.ic_arrow),
                         contentDescription = null
                     )
                 }

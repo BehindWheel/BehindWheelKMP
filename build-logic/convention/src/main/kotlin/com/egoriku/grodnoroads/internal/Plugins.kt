@@ -13,3 +13,9 @@ internal val Project.kotlinMultiplatformPluginId
 
 internal val Project.libraryPluginId
     get() = libs.plugins.android.library.get().pluginId
+
+internal val Project.jetbrainsComposePluginId
+    get() = libs.plugins.jetbrains.compose.get().pluginId
+
+internal val Project.composeCompilerPluginId
+    get() = libs.plugins.compose.compiler.get().pluginId

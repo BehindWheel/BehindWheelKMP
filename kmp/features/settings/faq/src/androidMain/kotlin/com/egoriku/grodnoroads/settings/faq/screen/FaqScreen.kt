@@ -23,16 +23,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.settings_section_faq
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponentPreview
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Question
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +48,7 @@ fun FaqScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
-                title = stringResource(R.string.settings_section_faq),
+                title = stringResource(Res.string.settings_section_faq),
                 onBack = onBack,
                 scrollBehavior = scrollBehavior
             )

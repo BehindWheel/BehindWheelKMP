@@ -11,22 +11,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_map
+import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoNavigationRail() {
     UIDemoContainer(name = "NavigationRail") {
         Row {
-            val mapPainter = painterResource(MR.images.ic_map)
-            val settingsPainter = painterResource(MR.images.ic_settings)
+            val mapPainter = painterResource(Res.drawable.ic_map)
+            val settingsPainter = painterResource(Res.drawable.ic_settings)
 
             val elements by rememberMutableState {
                 listOf(

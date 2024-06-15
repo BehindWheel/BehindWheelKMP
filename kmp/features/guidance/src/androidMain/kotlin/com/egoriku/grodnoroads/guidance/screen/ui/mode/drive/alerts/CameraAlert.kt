@@ -15,17 +15,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
+import com.egoriku.grodnoroads.compose.resources.camera_alerts_plurals_distance
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.SpeedLimitSign
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.pluralStringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CameraAlert(
@@ -63,7 +66,7 @@ fun CameraAlert(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         text = pluralStringResource(
-                            R.plurals.camera_alerts_plurals_distance,
+                            Res.plurals.camera_alerts_plurals_distance,
                             distance,
                             distance
                         ),
@@ -87,37 +90,37 @@ private fun PreviewStationaryAlert() = GrodnoRoadsM3ThemePreview {
             distance = 200,
             speedLimit = 60,
             drawableId = MR.images.nt_ic_stationary_camera.drawableResId,
-            title = stringResource(R.string.alerts_stationary_camera)
+            title = stringResource(Res.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
             drawableId = MR.images.nt_ic_stationary_camera.drawableResId,
-            title = stringResource(R.string.alerts_stationary_camera)
+            title = stringResource(Res.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
             drawableId = MR.images.nt_ic_mobile_camera.drawableResId,
-            title = stringResource(R.string.alerts_mobile_camera)
+            title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
             drawableId = MR.images.nt_ic_mobile_camera.drawableResId,
-            title = stringResource(R.string.alerts_mobile_camera)
+            title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
             drawableId = MR.images.nt_ic_medium_speed_camera.drawableResId,
-            title = stringResource(R.string.alerts_mobile_camera)
+            title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
             drawableId = MR.images.nt_ic_medium_speed_camera.drawableResId,
-            title = stringResource(R.string.alerts_mobile_camera)
+            title = stringResource(Res.string.alerts_mobile_camera)
         )
     }
 }

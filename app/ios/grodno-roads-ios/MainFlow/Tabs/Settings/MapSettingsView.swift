@@ -25,7 +25,7 @@ struct MapSettingsView: View {
     var body: some View {
         let trafficEnabled = Binding<Bool>(
             get: { state.mapSettings.mapInfo.trafficJam.isShow },
-            set: { component.modify(preference_: MapSettingsComponentMapPrefTrafficJam(isShow: $0)) }
+            set: { component.modify(preference__: MapSettingsComponentMapPrefTrafficJam(isShow: $0)) }
         )
         
         VStack {

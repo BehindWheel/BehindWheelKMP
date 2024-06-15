@@ -8,21 +8,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.map_header_markers
+import com.egoriku.grodnoroads.compose.resources.map_markers_car_crash
+import com.egoriku.grodnoroads.compose.resources.map_markers_incidents
+import com.egoriku.grodnoroads.compose.resources.map_markers_medium_speed_cameras
+import com.egoriku.grodnoroads.compose.resources.map_markers_mobile_cameras
+import com.egoriku.grodnoroads.compose.resources.map_markers_select_all
+import com.egoriku.grodnoroads.compose.resources.map_markers_stationary_cameras
+import com.egoriku.grodnoroads.compose.resources.map_markers_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.map_markers_traffic_police
+import com.egoriku.grodnoroads.compose.resources.map_markers_wild_animals
+import com.egoriku.grodnoroads.compose.resources.nt_ic_car_crash
+import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident
+import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_jam
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police
+import com.egoriku.grodnoroads.compose.resources.nt_ic_wild_animals
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
-import com.egoriku.grodnoroads.localization.R
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.MapInfo
 import com.egoriku.grodnoroads.shared.persistent.Selectable
-import com.egoriku.grodnoroads.shared.resources.MR
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MapEventsSection(
@@ -44,9 +61,9 @@ internal fun MapEventsSection(
             }
         }
 
-        SettingsSectionHeader(title = stringResource(R.string.map_header_markers))
+        SettingsSectionHeader(title = stringResource(Res.string.map_header_markers))
         TriStateCheckBoxListItem(
-            text = stringResource(R.string.map_markers_select_all),
+            text = stringResource(Res.string.map_markers_select_all),
             state = state,
             onToggle = onToggle
         )
@@ -75,9 +92,9 @@ private fun StationaryCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_stationary_camera.drawableResId,
+        drawableResource = Res.drawable.nt_ic_stationary_camera,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_stationary_cameras),
+        text = stringResource(Res.string.map_markers_stationary_cameras),
         isChecked = stationaryCameras.isShow,
         onCheckedChange = {
             onCheckedChange(stationaryCameras.copy(isShow = it))
@@ -94,9 +111,9 @@ private fun MediumSpeedCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_medium_speed_camera.drawableResId,
+        drawableResource = Res.drawable.nt_ic_medium_speed_camera,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_medium_speed_cameras),
+        text = stringResource(Res.string.map_markers_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isShow,
         onCheckedChange = {
             onCheckedChange(mediumSpeedCameras.copy(isShow = it))
@@ -113,9 +130,9 @@ private fun MobileCameras(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_mobile_camera.drawableResId,
+        drawableResource = Res.drawable.nt_ic_mobile_camera,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_mobile_cameras),
+        text = stringResource(Res.string.map_markers_mobile_cameras),
         isChecked = mobileCameras.isShow,
         onCheckedChange = {
             onCheckedChange(mobileCameras.copy(isShow = it))
@@ -132,9 +149,9 @@ private fun TrafficPolice(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_traffic_police.drawableResId,
+        drawableResource = Res.drawable.nt_ic_traffic_police,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_traffic_police),
+        text = stringResource(Res.string.map_markers_traffic_police),
         isChecked = trafficPolice.isShow,
         onCheckedChange = {
             onCheckedChange(trafficPolice.copy(isShow = it))
@@ -151,9 +168,9 @@ private fun RoadIncidents(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_road_incident.drawableResId,
+        drawableResource = Res.drawable.nt_ic_road_incident,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_incidents),
+        text = stringResource(Res.string.map_markers_incidents),
         isChecked = roadIncident.isShow,
         onCheckedChange = {
             onCheckedChange(roadIncident.copy(isShow = it))
@@ -170,9 +187,9 @@ private fun CarCrash(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_car_crash.drawableResId,
+        drawableResource = Res.drawable.nt_ic_car_crash,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_car_crash),
+        text = stringResource(Res.string.map_markers_car_crash),
         isChecked = carCrash.isShow,
         onCheckedChange = {
             onCheckedChange(carCrash.copy(isShow = it))
@@ -189,9 +206,9 @@ private fun TrafficConditions(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_traffic_jam.drawableResId,
+        drawableResource = Res.drawable.nt_ic_traffic_jam,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_traffic_jam),
+        text = stringResource(Res.string.map_markers_traffic_jam),
         isChecked = trafficJam.isShow,
         onCheckedChange = {
             onCheckedChange(trafficJam.copy(isShow = it))
@@ -208,9 +225,9 @@ private fun WildAnimals(
 
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        iconRes = MR.images.nt_ic_wild_animals.drawableResId,
+        drawableResource = Res.drawable.nt_ic_wild_animals,
         iconSize = iconSize,
-        text = stringResource(R.string.map_markers_wild_animals),
+        text = stringResource(Res.string.map_markers_wild_animals),
         isChecked = wildAnimals.isShow,
         onCheckedChange = {
             onCheckedChange(wildAnimals.copy(isShow = it))

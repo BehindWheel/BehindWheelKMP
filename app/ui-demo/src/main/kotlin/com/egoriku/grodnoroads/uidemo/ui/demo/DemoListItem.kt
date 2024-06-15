@@ -8,6 +8,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_brightness
+import com.egoriku.grodnoroads.compose.resources.ic_my_city
+import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
@@ -16,8 +20,6 @@ import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
-import com.egoriku.grodnoroads.shared.resources.MR
-import com.egoriku.grodnoroads.uidemo.R
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
@@ -40,18 +42,18 @@ fun DemoListItem() {
             paddingValues = PaddingValues(start = 34.dp),
             text = "ГАИ",
             isChecked = state,
-            iconRes = R.drawable.ic_settings_traffic_police,
+            drawableResource = Res.drawable.nt_ic_traffic_police,
             iconSize = DpSize(32.dp, 32.dp),
             onCheckedChange = { state = it }
         )
         MoreActionListItem(
-            iconRes = MR.images.ic_my_city.drawableResId,
+            drawableResource = Res.drawable.ic_my_city,
             text = "My city",
             value = "Grodno",
             onClick = {}
         )
         SimpleListItem(
-            iconRes = MR.images.ic_brightness.drawableResId,
+            drawableResource = Res.drawable.ic_brightness,
             text = "Test test test",
             onClick = {}
         )
@@ -62,13 +64,13 @@ fun DemoListItem() {
 
         Column {
             SwitchListItem(
-                iconRes = MR.images.ic_brightness.drawableResId,
+                drawableResource = Res.drawable.ic_brightness,
                 text = "За рулем | Гродно",
                 isChecked = isChecked1,
                 onCheckedChange = { isChecked1 = it }
             )
             SwitchListItem(
-                iconRes = MR.images.ic_brightness.drawableResId,
+                drawableResource = Res.drawable.ic_brightness,
                 text = "За рулем | Гродно",
                 description = "За рулем | Гродно",
                 isChecked = isChecked2,

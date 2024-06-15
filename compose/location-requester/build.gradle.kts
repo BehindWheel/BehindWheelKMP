@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.grodnoroads.library)
-    alias(libs.plugins.grodnoroads.compose)
+    alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
 android {
@@ -8,15 +8,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.compose.foundation.core)
+    implementation(projects.kmp.compose.foundation.core)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
-
     implementation(libs.kotlin.coroutines.playservices)
-
     implementation(libs.play.services.location)
+    implementation(compose.material3)
+    implementation(compose.runtime)
 }

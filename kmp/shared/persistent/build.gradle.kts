@@ -1,9 +1,9 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmplibrary)
+    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
 android {
@@ -16,13 +16,11 @@ kotlin {
 
     sourceSets {
         commonDependencies {
-            api(projects.kmp.libraries.datastore)
+            implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.libraries.location)
+            api(projects.kmp.libraries.datastore)
 
-            compileOnly(libs.compose.stable.marker)
-        }
-        androidDependencies {
-            implementation(projects.libraries.localization)
+            implementation(compose.runtime)
         }
     }
 }

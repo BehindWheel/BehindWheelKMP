@@ -13,11 +13,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_appearance
+import com.egoriku.grodnoroads.compose.resources.ic_moon
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.compose.painterResource
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,12 +38,12 @@ fun Header(
         WeightSpacer()
         CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
             IconButton(onClick = onPalette) {
-                Icon(painter = painterResource(MR.images.ic_appearance), contentDescription = null)
+                Icon(painter = painterResource(Res.drawable.ic_appearance), contentDescription = null)
             }
         }
         CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
             IconButton(onClick = onThemeChange) {
-                Icon(painter = painterResource(MR.images.ic_moon), contentDescription = null)
+                Icon(painter = painterResource(Res.drawable.ic_moon), contentDescription = null)
             }
         }
     }

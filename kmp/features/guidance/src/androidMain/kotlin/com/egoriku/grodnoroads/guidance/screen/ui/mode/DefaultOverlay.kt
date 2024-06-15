@@ -36,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.ic_more
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
@@ -48,12 +50,11 @@ import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.egoriku.grodnoroads.uuid.Uuid
-import dev.icerock.moko.resources.compose.painterResource
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DefaultOverlay(
@@ -100,7 +101,7 @@ fun DefaultOverlay(
                 size = Size.Small
             ) {
                 Icon(
-                    painter = painterResource(MR.images.ic_more),
+                    painter = painterResource(Res.drawable.ic_more),
                     contentDescription = null
                 )
             }

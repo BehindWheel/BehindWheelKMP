@@ -8,17 +8,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.appsettings.screen.util.rememberCustomTabIntent
+import com.egoriku.grodnoroads.compose.resources.Constants.BULLET_SEPARATOR
+import com.egoriku.grodnoroads.compose.resources.Constants.PRIVACY_POLICY_LINK
+import com.egoriku.grodnoroads.compose.resources.Constants.TERMS_OF_SERVICE_LINK
+import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.privacy_policy
+import com.egoriku.grodnoroads.compose.resources.terms_of_service
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
-import com.egoriku.grodnoroads.localization.R
-import com.egoriku.grodnoroads.shared.resources.Constants.BULLET_SEPARATOR
-import com.egoriku.grodnoroads.shared.resources.Constants.PRIVACY_POLICY_LINK
-import com.egoriku.grodnoroads.shared.resources.Constants.TERMS_OF_SERVICE_LINK
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PrivacyPolicySection() {
@@ -31,7 +33,7 @@ fun PrivacyPolicySection() {
     ) {
         LinkButton(
             openUrl = { customTabsIntent(it) },
-            description = stringResource(R.string.terms_of_service),
+            description = stringResource(Res.string.terms_of_service),
             url = TERMS_OF_SERVICE_LINK
         )
         Text(
@@ -40,7 +42,7 @@ fun PrivacyPolicySection() {
         )
         LinkButton(
             openUrl = { customTabsIntent(it) },
-            description = stringResource(R.string.privacy_policy),
+            description = stringResource(Res.string.privacy_policy),
             url = PRIVACY_POLICY_LINK
         )
     }
