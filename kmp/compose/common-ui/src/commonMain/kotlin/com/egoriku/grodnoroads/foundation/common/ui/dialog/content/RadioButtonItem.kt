@@ -12,6 +12,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 
+// TODO: use new design
 @Composable
 fun RadioButtonItem(
     item: String,
@@ -21,7 +22,7 @@ fun RadioButtonItem(
 ) {
     ListItem(
         modifier = Modifier
-            .height(48.dp)
+            .height(40.dp)
             .clickable { onSelect(index) },
         leadingContent = {
             RadioButton(

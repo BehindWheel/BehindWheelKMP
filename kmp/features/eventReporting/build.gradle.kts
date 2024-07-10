@@ -1,6 +1,5 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.iosTarget
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -12,8 +11,7 @@ android {
 }
 
 kotlin {
-    androidTarget()
-    iosTarget()
+    applyTargets()
 
     sourceSets {
         commonDependencies {
@@ -33,9 +31,6 @@ kotlin {
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
-        }
-        androidDependencies {
-            implementation(libs.androidx.activity.compose)
         }
     }
 }

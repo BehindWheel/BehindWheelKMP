@@ -1,6 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
-import com.egoriku.grodnoroads.extension.iosTarget
+import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.provideVersionName
 
 plugins {
@@ -13,8 +13,7 @@ android {
 }
 
 kotlin {
-    androidTarget()
-    iosTarget()
+    applyTargets()
 }
 
 buildkonfig {

@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.root.di
 
 import android.content.Context
 import com.egoriku.grodnoroads.datastore.dataStore
-import com.egoriku.grodnoroads.guidance.screen.di.guidanceUiModule
+import com.egoriku.grodnoroads.guidance.di.guidanceModule
 import com.egoriku.grodnoroads.shared.geolocation.AndroidLocationService
 import com.egoriku.grodnoroads.shared.geolocation.LocationService
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +19,7 @@ fun initKoin(context: Context) {
 }
 
 internal actual val platformDataStoreModule = module {
-    includes(guidanceUiModule)
+    includes(guidanceModule)
     single { get<Context>().dataStore() }
     singleOf(::AndroidLocationService) { bind<LocationService>() }
 }

@@ -16,11 +16,14 @@ import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactor
 import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStoreFactory
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStoreFactory
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 val guidanceModule = module {
+    includes(guidancePlatformModule)
+
     factoryOf(::UserCountRepositoryImpl) { bind<UserCountRepository>() }
     factoryOf(::StationaryCameraRepositoryImpl) { bind<StationaryCameraRepository>() }
     factoryOf(::MediumSpeedCameraRepositoryImpl) { bind<MediumSpeedCameraRepository>() }
@@ -64,3 +67,5 @@ val guidanceModule = module {
         ).create()
     }
 }
+
+expect val guidancePlatformModule: Module

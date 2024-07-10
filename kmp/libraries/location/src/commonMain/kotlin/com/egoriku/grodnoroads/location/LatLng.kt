@@ -1,14 +1,11 @@
 package com.egoriku.grodnoroads.location
 
-import com.egoriku.grodnoroads.location.util.SphericalUtil
-import kotlin.math.roundToInt
+expect class PlatformLatLng
 
-data class LatLng(val latitude: Double, val longitude: Double)
+expect class LatLng(platform: PlatformLatLng) {
 
-infix fun LatLng.roundDistanceTo(latLng: LatLng): Int = computeDistance(this, latLng).roundToInt()
+    val latitude: Double
+    val longitude: Double
 
-fun computeOffset(from: LatLng, distance: Double, heading: Double): LatLng =
-    SphericalUtil.computeOffset(from, distance, heading)
-
-private fun computeDistance(from: LatLng, to: LatLng) =
-    SphericalUtil.computeDistanceBetween(from, to)
+    constructor(latitude: Double, longitude: Double)
+}

@@ -8,7 +8,7 @@ import androidx.core.location.LocationRequestCompat.QUALITY_HIGH_ACCURACY
 import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.logger.logD
-import com.egoriku.grodnoroads.shared.geolocation.util.MetricUtils.speedToKilometerPerHour
+import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -35,7 +35,7 @@ class AndroidLocationService(context: Context) : LocationService {
                     latLng = LatLng(location.latitude, location.longitude),
                     bearing = location.bearing,
                     speed = when {
-                        location.hasSpeed() -> speedToKilometerPerHour(location.speed)
+                        location.hasSpeed() -> location.speed.toKilometersPerHour()
                         else -> 0
                     }
                 )

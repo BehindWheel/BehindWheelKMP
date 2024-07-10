@@ -11,8 +11,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.location.computeOffset
-import com.egoriku.grodnoroads.location.roundDistanceTo
+import com.egoriku.grodnoroads.location.calc.computeOffset
+import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList

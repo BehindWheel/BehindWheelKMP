@@ -14,10 +14,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("grodnoroads.library") {
-            id = "grodnoroads.library"
-            implementationClass = "AndroidLibraryPlugin"
-        }
         register("grodnoroads.kmp.library") {
             id = "grodnoroads.kmp.library"
             implementationClass = "AndroidKmpLibraryPlugin"

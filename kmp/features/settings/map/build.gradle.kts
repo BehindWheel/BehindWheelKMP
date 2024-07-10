@@ -1,6 +1,7 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
+import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.iosTarget
+import com.egoriku.grodnoroads.extension.iosDependencies
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -12,8 +13,7 @@ android {
 }
 
 kotlin {
-    androidTarget()
-    iosTarget()
+    applyTargets()
 
     sourceSets {
         commonDependencies {
@@ -22,8 +22,11 @@ kotlin {
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.coroutines)
+            implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.location)
 
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
             implementation(libs.decompose)
             implementation(libs.koin.core)
             implementation(libs.kotlin.collections)
@@ -32,7 +35,10 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(libs.coil)
+            implementation(libs.ktor.client.android)
+        }
+        iosDependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

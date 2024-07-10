@@ -33,6 +33,7 @@ kotlin {
             isStatic = true
 
             export(libs.decompose)
+            export(libs.essenty.backhandler)
             export(libs.essenty.lifecycle)
             export(libs.moko.resources)
 
@@ -48,6 +49,7 @@ kotlin {
             export(projects.kmp.features.settings.faq)
             export(projects.kmp.features.settings.map)
             export(projects.kmp.features.tabs)
+            export(projects.kmp.compose.resources)
             export(projects.kmp.shared.analytics)
             export(projects.kmp.shared.models)
             export(projects.kmp.shared.resources)
@@ -71,6 +73,7 @@ kotlin {
             api(projects.kmp.features.settings.faq)
             api(projects.kmp.features.settings.map)
             api(projects.kmp.features.tabs)
+            api(projects.kmp.compose.resources)
             api(projects.kmp.shared.analytics)
             api(projects.kmp.shared.models)
             api(projects.kmp.libraries.coroutines)
@@ -83,6 +86,8 @@ kotlin {
             implementation(projects.kmp.libraries.datastore)
 
             api(libs.decompose)
+            api(libs.decompose.compose)
+            api(libs.essenty.backhandler)
             api(libs.essenty.lifecycle)
             api(libs.moko.resources)
 
@@ -94,7 +99,6 @@ kotlin {
             implementation(libs.mvikotlin.main)
         }
         androidDependencies {
-            implementation(libs.decompose.compose)
             implementation(libs.koin.android)
         }
     }

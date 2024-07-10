@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.shared.geolocation
 
 import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import platform.CoreLocation.CLLocation
@@ -18,6 +19,13 @@ import kotlin.coroutines.suspendCoroutine
 class IosLocationService : LocationService {
 
     private val locationManager = CLLocationManager()
+    private val locationDelegate = LocationDelegate().apply {
+        onLocationUpdate = { location ->
+            if (location != null) {
+                lastLocationFlow.tryEmit(location)
+            }
+        }
+    }
 
     private var lastKnownLocation: LocationInfo? = null
 
@@ -32,13 +40,7 @@ class IosLocationService : LocationService {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
 
-        locationManager.delegate = LocationDelegate().apply {
-            onLocationUpdate = { location ->
-                if (location != null) {
-                    lastLocationFlow.tryEmit(location)
-                }
-            }
-        }
+        locationManager.delegate = locationDelegate
     }
 
     override fun stopLocationUpdates() {
@@ -55,7 +57,7 @@ class IosLocationService : LocationService {
                 lastKnownLocation = LocationInfo(
                     latLng = LatLng(latitude, longitude),
                     bearing = location.course.toFloat(),
-                    speed = location.speed.toInt()
+                    speed = 0
                 )
             }
         }
@@ -98,7 +100,10 @@ class IosLocationService : LocationService {
                         LocationInfo(
                             latLng = LatLng(latitude, longitude),
                             bearing = location.course.toFloat(),
-                            speed = location.speed.toInt()
+                            speed = when {
+                                location.speed >= 0 -> location.speed.toKilometersPerHour()
+                                else -> 0
+                            }
                         )
                     )
                 }

@@ -5,7 +5,6 @@ import com.egoriku.grodnoroads.guidance.data.dto.areas.AreasDTO
 import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.repository.CityAreasRepository
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.logger.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -30,8 +29,6 @@ class CityAreasRepositoryImpl : CityAreasRepository {
                     )
                 }
             )
-        }.also {
-            logD(it.joinToString())
         }
     }
 }
