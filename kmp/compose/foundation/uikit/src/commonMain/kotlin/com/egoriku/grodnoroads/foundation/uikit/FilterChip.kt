@@ -8,11 +8,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_check
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Check
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun FilterChip(
@@ -43,7 +42,7 @@ fun FilterChip(
             {
                 Icon(
                     modifier = Modifier.size(FilterChipDefaults.IconSize),
-                    painter = painterResource(Res.drawable.ic_check),
+                    imageVector = GrodnoRoads.Outlined.Check,
                     contentDescription = null,
                 )
             }

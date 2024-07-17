@@ -17,23 +17,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckBoxListItem(
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     iconSize: DpSize = DpSize(24.dp, 24.dp),
     paddingValues: PaddingValues = PaddingValues(),
     text: String,
@@ -68,7 +67,7 @@ fun CheckBoxListItem(
         HorizontalSpacer(12.dp)
         Image(
             modifier = Modifier.size(iconSize),
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             contentDescription = null
         )
     }
@@ -82,7 +81,7 @@ private fun CheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
     CheckBoxListItem(
         text = "Мобильная камера",
         isChecked = state,
-        drawableResource = Res.drawable.nt_ic_mobile_camera,
+        imageVector = GrodnoRoads.Colored.MobileCamera,
         onCheckedChange = { state = it }
     )
 }

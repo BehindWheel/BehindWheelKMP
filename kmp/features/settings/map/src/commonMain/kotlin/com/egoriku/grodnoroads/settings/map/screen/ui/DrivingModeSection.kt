@@ -6,12 +6,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_inside_city
-import com.egoriku.grodnoroads.compose.resources.ic_outside_city
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode_zoom_in_city
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode_zoom_outside_city
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.InsideCity
+import com.egoriku.grodnoroads.foundation.icons.outlined.OutsideCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
@@ -43,7 +44,7 @@ private fun MapZoomInCity(
     val mapZoomInCity = driveModeZoom.mapZoomInCity
 
     BasicListItem(
-        drawableResource = Res.drawable.ic_inside_city,
+        imageVector = GrodnoRoads.Outlined.InsideCity,
         text = stringResource(Res.string.map_header_drive_mode_zoom_in_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {
@@ -69,7 +70,7 @@ private fun MapZoomOutCity(
     val mapZoomOutCity = driveModeZoom.mapZoomOutCity
 
     BasicListItem(
-        drawableResource = Res.drawable.ic_outside_city,
+        imageVector = GrodnoRoads.Outlined.OutsideCity,
         text = stringResource(Res.string.map_header_drive_mode_zoom_outside_city),
         textStyle = MaterialTheme.typography.bodyMedium
     ) {

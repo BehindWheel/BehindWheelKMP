@@ -12,18 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.StringRes
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -53,7 +52,7 @@ fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
                     }
                 ) {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_arrow_right),
+                        imageVector = GrodnoRoads.Outlined.ArrowRight,
                         contentDescription = null
                     )
                 }

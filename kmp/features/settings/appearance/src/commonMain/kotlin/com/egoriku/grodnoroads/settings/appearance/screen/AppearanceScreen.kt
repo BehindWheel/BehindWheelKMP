@@ -19,12 +19,13 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on_description
-import com.egoriku.grodnoroads.compose.resources.ic_brightness
-import com.egoriku.grodnoroads.compose.resources.ic_moon
 import com.egoriku.grodnoroads.compose.resources.settings_category_other
 import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
+import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
@@ -99,7 +100,7 @@ private fun AppThemeSection(
     val appTheme = state.appearanceState.appTheme
 
     MoreActionListItem(
-        drawableResource = Res.drawable.ic_moon,
+        imageVector = GrodnoRoads.Outlined.Moon,
         text = stringResource(Res.string.appearance_app_theme),
         value = stringResource(appTheme.current.toStringResource()),
         onClick = { onModify(appTheme) },
@@ -114,7 +115,7 @@ private fun KeepScreenOnSettings(
     val keepScreenOn = state.appearanceState.keepScreenOn
 
     SwitchListItem(
-        drawableResource = Res.drawable.ic_brightness,
+        imageVector = GrodnoRoads.Outlined.Brightness,
         text = stringResource(Res.string.appearance_keep_screen_on),
         description = stringResource(Res.string.appearance_keep_screen_on_description),
         isChecked = keepScreenOn.enabled,

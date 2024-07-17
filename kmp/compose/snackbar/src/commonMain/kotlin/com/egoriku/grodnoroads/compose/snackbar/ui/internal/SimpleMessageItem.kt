@@ -12,17 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_check_circle
 import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.StringRes
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.CheckCircle
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -43,7 +42,7 @@ fun SimpleMessageItem(message: SimpleMessage) {
                 if (icon != null) {
                     when (icon) {
                         is Icon.DrawableRes -> Icon(
-                            painter = painterResource(icon.resource),
+                            imageVector = icon.imageVector,
                             contentDescription = null
                         )
                         is Icon.Vector -> Icon(
@@ -93,7 +92,7 @@ private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
         SimpleMessageItem(
             message = SimpleMessage(
                 title = Raw("Доступ к геолокации запрещен."),
-                icon = Icon.DrawableRes(Res.drawable.ic_check_circle)
+                icon = Icon.DrawableRes(imageVector = GrodnoRoads.Outlined.CheckCircle)
             )
         )
     }

@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.component.AppSettingsComponent
@@ -28,11 +29,6 @@ import com.egoriku.grodnoroads.appsettings.screen.ui.section.PrivacyPolicySectio
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.SocialNetworkSection
 import com.egoriku.grodnoroads.appsettings.screen.ui.section.VersionSection
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_appearance
-import com.egoriku.grodnoroads.compose.resources.ic_changelog
-import com.egoriku.grodnoroads.compose.resources.ic_faq
-import com.egoriku.grodnoroads.compose.resources.ic_map
-import com.egoriku.grodnoroads.compose.resources.ic_notification_badge
 import com.egoriku.grodnoroads.compose.resources.settings_category_main
 import com.egoriku.grodnoroads.compose.resources.settings_category_other
 import com.egoriku.grodnoroads.compose.resources.settings_section_alerts
@@ -41,12 +37,16 @@ import com.egoriku.grodnoroads.compose.resources.settings_section_changelog
 import com.egoriku.grodnoroads.compose.resources.settings_section_faq
 import com.egoriku.grodnoroads.compose.resources.settings_section_map
 import com.egoriku.grodnoroads.compose.resources.tab_settings
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Appearance
+import com.egoriku.grodnoroads.foundation.icons.outlined.Changelog
+import com.egoriku.grodnoroads.foundation.icons.outlined.Faq
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.NotificationBadge
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.shared.models.Page
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -101,19 +101,19 @@ private fun SettingsUi(
                         text = stringResource(Res.string.settings_category_main)
                     )
                     SettingsListItem(
-                        drawableResource = Res.drawable.ic_appearance,
+                        imageVector = GrodnoRoads.Outlined.Appearance,
                         name = stringResource(Res.string.settings_section_appearance),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Appearance) }
                     )
                     SettingsListItem(
-                        drawableResource = Res.drawable.ic_map,
+                        imageVector = GrodnoRoads.Outlined.Map,
                         name = stringResource(Res.string.settings_section_map),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.MapSettings) }
                     )
                     SettingsListItem(
-                        drawableResource = Res.drawable.ic_notification_badge,
+                        imageVector = GrodnoRoads.Outlined.NotificationBadge,
                         name = stringResource(Res.string.settings_section_alerts),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Alerts) }
@@ -133,13 +133,13 @@ private fun SettingsUi(
                         text = stringResource(Res.string.settings_category_other)
                     )
                     SettingsListItem(
-                        drawableResource = Res.drawable.ic_changelog,
+                        imageVector = GrodnoRoads.Outlined.Changelog,
                         name = stringResource(Res.string.settings_section_changelog),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.Changelog) }
                     )
                     SettingsListItem(
-                        drawableResource = Res.drawable.ic_faq,
+                        imageVector = GrodnoRoads.Outlined.Faq,
                         name = stringResource(Res.string.settings_section_faq),
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
@@ -156,7 +156,7 @@ private fun SettingsUi(
 
 @Composable
 private fun SettingsListItem(
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     name: String,
     paddingValues: PaddingValues = PaddingValues(),
     onClick: () -> Unit
@@ -171,7 +171,7 @@ private fun SettingsListItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             contentDescription = null
         )

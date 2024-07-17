@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.map_user_count
-import com.egoriku.grodnoroads.compose.resources.nt_ic_info
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.Info
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -58,7 +58,7 @@ fun UsersCountBadge(
         ) {
             Image(
                 modifier = Modifier.size(16.dp),
-                painter = painterResource(Res.drawable.nt_ic_info),
+                imageVector = GrodnoRoads.Colored.Info,
                 contentDescription = null
             )
             Text(

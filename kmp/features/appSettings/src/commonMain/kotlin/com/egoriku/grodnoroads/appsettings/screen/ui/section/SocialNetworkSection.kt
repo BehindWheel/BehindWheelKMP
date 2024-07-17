@@ -15,15 +15,15 @@ import com.egoriku.grodnoroads.appsettings.screen.ui.SocialNetwork
 import com.egoriku.grodnoroads.compose.resources.Constants.TG_CHANNEL_LINK
 import com.egoriku.grodnoroads.compose.resources.Constants.TG_CHAT_LINK
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_chat
-import com.egoriku.grodnoroads.compose.resources.ic_share
-import com.egoriku.grodnoroads.compose.resources.ic_telegram
 import com.egoriku.grodnoroads.compose.resources.social_share_app
 import com.egoriku.grodnoroads.compose.resources.social_telegram_channel
 import com.egoriku.grodnoroads.compose.resources.social_telegram_chat
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Chat
+import com.egoriku.grodnoroads.foundation.icons.outlined.Share
+import com.egoriku.grodnoroads.foundation.icons.outlined.Telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -41,7 +41,7 @@ fun SocialNetworkSection() {
             onClick = { urlLauncher.openUrl(TG_CHAT_LINK) }
         ) {
             Icon(
-                painter = painterResource(Res.drawable.ic_chat),
+                imageVector = GrodnoRoads.Outlined.Chat,
                 contentDescription = stringResource(Res.string.social_telegram_chat)
             )
         }
@@ -50,7 +50,7 @@ fun SocialNetworkSection() {
             onClick = { urlLauncher.openUrl(TG_CHANNEL_LINK) }
         ) {
             Icon(
-                painter = painterResource(Res.drawable.ic_telegram),
+                imageVector = GrodnoRoads.Outlined.Telegram,
                 contentDescription = stringResource(Res.string.social_telegram_channel)
             )
         }
@@ -62,7 +62,7 @@ fun SocialNetworkSection() {
             onClick = { urlShare.share(STORE_URL) }
         ) {
             Icon(
-                painter = painterResource(Res.drawable.ic_share),
+                imageVector = GrodnoRoads.Outlined.Share,
                 contentDescription = stringResource(Res.string.social_share_app)
             )
         }

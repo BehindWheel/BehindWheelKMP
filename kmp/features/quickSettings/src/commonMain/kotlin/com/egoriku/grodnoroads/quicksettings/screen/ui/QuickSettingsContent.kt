@@ -17,13 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_filter
-import com.egoriku.grodnoroads.compose.resources.ic_moon
-import com.egoriku.grodnoroads.compose.resources.ic_notification
-import com.egoriku.grodnoroads.compose.resources.ic_traffic_jam
 import com.egoriku.grodnoroads.compose.resources.quick_settings_app_theme
 import com.egoriku.grodnoroads.compose.resources.quick_settings_header
 import com.egoriku.grodnoroads.compose.resources.quick_settings_markers_filtering
@@ -32,6 +29,11 @@ import com.egoriku.grodnoroads.compose.resources.quick_settings_voice_alerts
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Filter
+import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
+import com.egoriku.grodnoroads.foundation.icons.outlined.Notification
+import com.egoriku.grodnoroads.foundation.icons.outlined.TrafficJam
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
@@ -45,8 +47,6 @@ import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.Mark
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -72,14 +72,14 @@ internal fun QuickSettingsContent(
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            drawableResource = Res.drawable.ic_notification,
+            imageVector = GrodnoRoads.Outlined.Notification,
             name = stringResource(Res.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
-            drawableResource = Res.drawable.ic_traffic_jam,
+            imageVector = GrodnoRoads.Outlined.TrafficJam,
             name = stringResource(Res.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
@@ -94,7 +94,7 @@ private fun AppearanceSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        drawableResource = Res.drawable.ic_moon,
+        imageVector = GrodnoRoads.Outlined.Moon,
         name = stringResource(Res.string.quick_settings_app_theme)
     ) {
         HorizontalScrollableRow {
@@ -124,7 +124,7 @@ private fun FilteringSection(
     onChanged: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
-        drawableResource = Res.drawable.ic_filter,
+        imageVector = GrodnoRoads.Outlined.Filter,
         name = stringResource(Res.string.quick_settings_markers_filtering)
     ) {
         HorizontalScrollableRow {
@@ -150,7 +150,7 @@ private fun FilteringSection(
 
 @Composable
 private fun BasicSection(
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     name: String,
     content: @Composable () -> Unit
 ) {
@@ -160,7 +160,7 @@ private fun BasicSection(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                painter = painterResource(drawableResource),
+                imageVector = imageVector,
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
@@ -175,7 +175,7 @@ private fun BasicSection(
 
 @Composable
 private fun SwitchSetting(
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     name: String,
     checked: Boolean,
     paddingValues: PaddingValues = PaddingValues(horizontal = 20.dp),
@@ -194,7 +194,7 @@ private fun SwitchSetting(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             contentDescription = null
         )

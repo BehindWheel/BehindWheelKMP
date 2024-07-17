@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -27,11 +28,12 @@ import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
 import com.egoriku.grodnoroads.compose.resources.camera_info_last_update
 import com.egoriku.grodnoroads.compose.resources.camera_info_report
-import com.egoriku.grodnoroads.compose.resources.ic_car
-import com.egoriku.grodnoroads.compose.resources.ic_truck
-import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera_bold
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera_bold
-import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera_bold
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCameraBold
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
+import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCameraBold
+import com.egoriku.grodnoroads.foundation.icons.outlined.Car
+import com.egoriku.grodnoroads.foundation.icons.outlined.Truck
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.theme.Red
@@ -46,9 +48,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryC
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
 import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -56,10 +56,10 @@ internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) 
     Column(modifier = modifier.fillMaxWidth()) {
         Info(
             camera = camera,
-            drawableResource = when (camera) {
-                is StationaryCamera -> Res.drawable.nt_ic_stationary_camera_bold
-                is MediumSpeedCamera -> Res.drawable.nt_ic_medium_speed_camera_bold
-                is MobileCamera -> Res.drawable.nt_ic_mobile_camera_bold
+            imageVector = when (camera) {
+                is StationaryCamera -> GrodnoRoads.Colored.StationaryCameraBold
+                is MediumSpeedCamera -> GrodnoRoads.Colored.MediumSpeedCameraBold
+                is MobileCamera -> GrodnoRoads.Colored.MobileCameraBold
             },
             cameraResource = when (camera) {
                 is StationaryCamera -> Res.string.alerts_stationary_camera
@@ -74,14 +74,14 @@ internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) 
 @Composable
 private fun Info(
     camera: MapEvent.Camera,
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     cameraResource: StringResource
 ) {
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         Row {
             Image(
                 modifier = Modifier.size(64.dp),
-                painter = painterResource(drawableResource),
+                imageVector = imageVector,
                 contentDescription = null
             )
             HorizontalSpacer(16.dp)
@@ -107,12 +107,12 @@ private fun Info(
             SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
                 speed = camera.speedCar,
-                drawableResource = Res.drawable.ic_car
+                imageVector = GrodnoRoads.Outlined.Car
             )
             SpeedLimitGroup(
                 modifier = Modifier.weight(0.5f),
                 speed = camera.speedTruck,
-                drawableResource = Res.drawable.ic_truck
+                imageVector = GrodnoRoads.Outlined.Truck
             )
         }
 
@@ -130,7 +130,7 @@ private fun Info(
 @Composable
 private fun SpeedLimitGroup(
     modifier: Modifier = Modifier,
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     speed: Int
 ) {
     Row(
@@ -139,7 +139,7 @@ private fun SpeedLimitGroup(
         horizontalArrangement = Arrangement.Center
     ) {
         Icon(
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             contentDescription = null
         )
         HorizontalSpacer(18.dp)

@@ -36,10 +36,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_more
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.More
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
@@ -54,7 +54,6 @@ import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DefaultOverlay(
@@ -101,7 +100,7 @@ fun DefaultOverlay(
                 size = Size.Small
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_more),
+                    imageVector = GrodnoRoads.Outlined.More,
                     contentDescription = null
                 )
             }

@@ -13,17 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_close
-import com.egoriku.grodnoroads.compose.resources.ic_ok
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Close
+import com.egoriku.grodnoroads.foundation.icons.outlined.Ok
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.component.PinMarker
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ChooseLocation(
@@ -60,7 +59,7 @@ fun ChooseLocation(
         ) {
             PrimaryInverseCircleButton(size = Large, onClick = onCancel) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_close),
+                    imageVector = GrodnoRoads.Outlined.Close,
                     contentDescription = null
                 )
             }
@@ -73,7 +72,7 @@ fun ChooseLocation(
                 }
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_ok),
+                    imageVector = GrodnoRoads.Outlined.Ok,
                     contentDescription = null
                 )
             }

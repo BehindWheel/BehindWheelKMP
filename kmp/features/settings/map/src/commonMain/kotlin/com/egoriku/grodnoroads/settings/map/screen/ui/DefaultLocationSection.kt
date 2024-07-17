@@ -3,10 +3,11 @@ package com.egoriku.grodnoroads.settings.map.screen.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_my_city
 import com.egoriku.grodnoroads.compose.resources.map_default_location
 import com.egoriku.grodnoroads.compose.resources.map_header_default_location
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.MyCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
@@ -25,7 +26,7 @@ internal fun DefaultLocationSection(
 
         val defaultCity = locationInfo.defaultCity
         MoreActionListItem(
-            drawableResource = Res.drawable.ic_my_city,
+            imageVector = GrodnoRoads.Outlined.MyCity,
             text = stringResource(Res.string.map_default_location),
             value = stringResource(defaultCity.current.toStringResource())
         ) {

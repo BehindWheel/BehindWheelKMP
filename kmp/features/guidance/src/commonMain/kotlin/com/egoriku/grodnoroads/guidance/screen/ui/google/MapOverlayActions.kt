@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_add
-import com.egoriku.grodnoroads.compose.resources.ic_geo
-import com.egoriku.grodnoroads.compose.resources.ic_remove
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Add
+import com.egoriku.grodnoroads.foundation.icons.outlined.Geo
+import com.egoriku.grodnoroads.foundation.icons.outlined.Remove
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButton
@@ -33,8 +33,8 @@ fun MapOverlayActions(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ActionButtonGroup {
-            ActionIcon(drawableResource = Res.drawable.ic_add, onClick = zoomIn)
-            ActionIcon(drawableResource = Res.drawable.ic_remove, onClick = zoomOut)
+            ActionIcon(imageVector = GrodnoRoads.Outlined.Add, onClick = zoomIn)
+            ActionIcon(imageVector = GrodnoRoads.Outlined.Remove, onClick = zoomOut)
         }
 
         val locationRequesterState = rememberLocationRequesterState()
@@ -44,7 +44,7 @@ fun MapOverlayActions(
         ) {
             ActionButton(
                 onClick = locationRequesterState::launchRequest,
-                drawableResource = Res.drawable.ic_geo,
+                imageVector = GrodnoRoads.Outlined.Geo,
             )
         }
     }

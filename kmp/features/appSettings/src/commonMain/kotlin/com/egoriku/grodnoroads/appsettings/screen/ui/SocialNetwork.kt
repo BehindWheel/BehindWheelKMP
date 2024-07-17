@@ -12,12 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_telegram
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SocialNetwork(
@@ -44,7 +43,7 @@ private fun SocialNetworkPreview() = GrodnoRoadsM3ThemePreview {
                 modifier = Modifier
                     .size(32.dp)
                     .padding(end = 2.dp),
-                painter = painterResource(Res.drawable.ic_telegram),
+                imageVector = GrodnoRoads.Outlined.Telegram,
                 contentDescription = null
             )
         }

@@ -3,7 +3,8 @@ package com.egoriku.grodnoroads.settings.appearance.screen
 import androidx.compose.runtime.Composable
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.appearance_app_language
-import com.egoriku.grodnoroads.compose.resources.ic_language
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Language
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore
@@ -18,7 +19,7 @@ actual fun LanguageSection(
     val language = state.appearanceState.appLanguage
 
     MoreActionListItem(
-        drawableResource = Res.drawable.ic_language,
+        imageVector = GrodnoRoads.Outlined.Language,
         text = stringResource(Res.string.appearance_app_language),
         value = stringResource(language.current.toStringResource()),
         onClick = { onModify(language) },

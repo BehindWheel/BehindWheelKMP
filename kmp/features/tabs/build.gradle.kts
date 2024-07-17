@@ -19,6 +19,7 @@ kotlin {
             implementation(projects.kmp.features.appSettings)
             implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.features.eventReporting)
+            implementation(projects.kmp.compose.foundation.icons)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.models)

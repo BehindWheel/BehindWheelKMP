@@ -8,11 +8,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_brightness
-import com.egoriku.grodnoroads.compose.resources.ic_my_city
-import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPolice
+import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
+import com.egoriku.grodnoroads.foundation.icons.outlined.MyCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
@@ -42,18 +42,18 @@ fun DemoListItem() {
             paddingValues = PaddingValues(start = 34.dp),
             text = "ГАИ",
             isChecked = state,
-            drawableResource = Res.drawable.nt_ic_traffic_police,
+            imageVector = GrodnoRoads.Colored.TrafficPolice,
             iconSize = DpSize(32.dp, 32.dp),
             onCheckedChange = { state = it }
         )
         MoreActionListItem(
-            drawableResource = Res.drawable.ic_my_city,
+            imageVector = GrodnoRoads.Outlined.MyCity,
             text = "My city",
             value = "Grodno",
             onClick = {}
         )
         SimpleListItem(
-            drawableResource = Res.drawable.ic_brightness,
+            imageVector = GrodnoRoads.Outlined.Brightness,
             text = "Test test test",
             onClick = {}
         )
@@ -64,13 +64,13 @@ fun DemoListItem() {
 
         Column {
             SwitchListItem(
-                drawableResource = Res.drawable.ic_brightness,
+                imageVector = GrodnoRoads.Outlined.Brightness,
                 text = "За рулем | Гродно",
                 isChecked = isChecked1,
                 onCheckedChange = { isChecked1 = it }
             )
             SwitchListItem(
-                drawableResource = Res.drawable.ic_brightness,
+                imageVector = GrodnoRoads.Outlined.Brightness,
                 text = "За рулем | Гродно",
                 description = "За рулем | Гродно",
                 isChecked = isChecked2,

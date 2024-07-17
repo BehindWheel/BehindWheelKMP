@@ -11,29 +11,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_map
-import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoNavigationRail() {
     UIDemoContainer(name = "NavigationRail") {
         Row {
-            val mapPainter = painterResource(Res.drawable.ic_map)
-            val settingsPainter = painterResource(Res.drawable.ic_settings)
-
             val elements by rememberMutableState {
                 listOf(
-                    RailElement.Map to mapPainter,
-                    RailElement.Settings to settingsPainter
+                    RailElement.Map to GrodnoRoads.Outlined.Map,
+                    RailElement.Settings to GrodnoRoads.Outlined.Settings
                 )
             }
             var selected by rememberMutableState { RailElement.Map }
@@ -44,7 +40,10 @@ fun DemoNavigationRail() {
                         selected = selected == it.first,
                         onClick = { selected = it.first },
                         icon = {
-                            Icon(painter = it.second, contentDescription = null)
+                            Icon(
+                                imageVector = it.second,
+                                contentDescription = null
+                            )
                         }
                     )
                 }
@@ -56,7 +55,7 @@ fun DemoNavigationRail() {
                     onClick = { },
                     icon = {
                         Icon(
-                            painter = settingsPainter,
+                            imageVector = GrodnoRoads.Outlined.Settings,
                             contentDescription = null
                         )
                     }
@@ -67,7 +66,7 @@ fun DemoNavigationRail() {
                     onClick = { },
                     icon = {
                         Icon(
-                            painter = settingsPainter,
+                            imageVector = GrodnoRoads.Outlined.Settings,
                             contentDescription = null
                         )
                     }
@@ -79,7 +78,7 @@ fun DemoNavigationRail() {
                     onClick = { },
                     icon = {
                         Icon(
-                            painter = settingsPainter,
+                            imageVector = GrodnoRoads.Outlined.Settings,
                             contentDescription = null
                         )
                     }
@@ -90,7 +89,7 @@ fun DemoNavigationRail() {
                     onClick = { },
                     icon = {
                         Icon(
-                            painter = settingsPainter,
+                            imageVector = GrodnoRoads.Outlined.Settings,
                             contentDescription = null
                         )
                     }
