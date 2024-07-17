@@ -15,11 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ActionButtonGroup(
@@ -48,7 +47,7 @@ fun ActionButtonGroup(
 
 @Composable
 fun ActionIcon(
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     onClick: () -> Unit,
 ) {
     Box(
@@ -58,7 +57,7 @@ fun ActionIcon(
     ) {
         Icon(
             modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             contentDescription = null
         )
     }

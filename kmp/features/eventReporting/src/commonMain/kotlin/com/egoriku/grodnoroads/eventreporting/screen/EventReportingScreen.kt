@@ -27,15 +27,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera_bold
-import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident_bold
-import com.egoriku.grodnoroads.compose.resources.nt_ic_road_problem_bold
-import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police_bold
 import com.egoriku.grodnoroads.compose.resources.reporting_category_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.reporting_category_other
 import com.egoriku.grodnoroads.compose.resources.reporting_category_road_incidents
@@ -47,14 +44,17 @@ import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MobileCameraO
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOptions
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
+import com.egoriku.grodnoroads.foundation.icons.colored.RoadIncidentBold
+import com.egoriku.grodnoroads.foundation.icons.colored.RoadProblemBold
+import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPoliceBold
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -127,7 +127,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
 
 internal data class Repo(
     val reportType: ReportType,
-    val drawableResource: DrawableResource,
+    val imageVector: ImageVector,
     val stringResource: StringResource
 )
 
@@ -141,22 +141,22 @@ private fun ReportingTypes(
         persistentListOf(
             Repo(
                 reportType = ReportType.RoadIncidents,
-                drawableResource = Res.drawable.nt_ic_road_problem_bold,
+                imageVector = GrodnoRoads.Colored.RoadProblemBold,
                 stringResource = Res.string.reporting_category_road_incidents
             ),
             Repo(
                 reportType = ReportType.TrafficPolice,
-                drawableResource = Res.drawable.nt_ic_traffic_police_bold,
+                imageVector = GrodnoRoads.Colored.TrafficPoliceBold,
                 stringResource = Res.string.reporting_category_traffic_police
             ),
             Repo(
                 reportType = ReportType.Other,
-                drawableResource = Res.drawable.nt_ic_road_incident_bold,
+                imageVector = GrodnoRoads.Colored.RoadIncidentBold,
                 stringResource = Res.string.reporting_category_other
             ),
             Repo(
                 reportType = ReportType.MobileCamera,
-                drawableResource = Res.drawable.nt_ic_mobile_camera_bold,
+                imageVector = GrodnoRoads.Colored.MobileCameraBold,
                 stringResource = Res.string.reporting_category_mobile_camera
             )
         )
@@ -174,7 +174,7 @@ private fun ReportingTypes(
             CategoryCell(
                 modifier = Modifier.width(96.dp),
                 name = stringResource(it.stringResource),
-                drawableResource = it.drawableResource,
+                imageVector = it.imageVector,
                 selected = currentType == it.reportType,
                 onClick = {
                     onTypeChanged(it.reportType)
@@ -188,7 +188,7 @@ private fun ReportingTypes(
 @Composable
 private fun CategoryCell(
     name: String,
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     selected: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
@@ -214,7 +214,7 @@ private fun CategoryCell(
     ) {
         Image(
             modifier = Modifier.size(64.dp),
-            painter = painterResource(drawableResource),
+            imageVector = imageVector,
             contentDescription = null
         )
         Text(

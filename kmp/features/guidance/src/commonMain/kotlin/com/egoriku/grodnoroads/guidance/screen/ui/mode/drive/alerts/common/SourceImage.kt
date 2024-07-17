@@ -2,16 +2,18 @@ package com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.nt_ic_app
-import com.egoriku.grodnoroads.compose.resources.nt_ic_telegram
-import com.egoriku.grodnoroads.compose.resources.nt_ic_viber
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.App
+import com.egoriku.grodnoroads.foundation.icons.colored.AppDark
+import com.egoriku.grodnoroads.foundation.icons.colored.Telegram
+import com.egoriku.grodnoroads.foundation.icons.colored.Viber
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.shared.models.MessageSource
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SourceImage(
@@ -20,10 +22,15 @@ fun SourceImage(
 ) {
     Image(
         modifier = modifier,
-        painter = when (messageSource) {
-            MessageSource.Viber -> painterResource(Res.drawable.nt_ic_viber)
-            MessageSource.Telegram -> painterResource(Res.drawable.nt_ic_telegram)
-            MessageSource.App -> painterResource(Res.drawable.nt_ic_app)
+        imageVector = when (messageSource) {
+            MessageSource.Viber -> GrodnoRoads.Colored.Viber
+            MessageSource.Telegram -> GrodnoRoads.Colored.Telegram
+            MessageSource.App -> {
+                when {
+                    MaterialTheme.colorScheme.isLight -> GrodnoRoads.Colored.App
+                    else -> GrodnoRoads.Colored.AppDark
+                }
+            }
         },
         contentDescription = "Source App"
     )

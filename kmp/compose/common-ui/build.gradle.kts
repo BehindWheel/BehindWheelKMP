@@ -14,6 +14,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.compose.foundation.icons)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
 

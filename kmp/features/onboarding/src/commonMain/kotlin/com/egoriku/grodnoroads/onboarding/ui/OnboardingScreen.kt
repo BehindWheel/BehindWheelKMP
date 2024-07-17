@@ -16,9 +16,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_left
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
-import com.egoriku.grodnoroads.compose.resources.ic_check
 import com.egoriku.grodnoroads.compose.resources.img_1
 import com.egoriku.grodnoroads.compose.resources.img_2
 import com.egoriku.grodnoroads.compose.resources.img_3
@@ -29,6 +26,10 @@ import com.egoriku.grodnoroads.compose.resources.onboarding_infographic_2_title
 import com.egoriku.grodnoroads.compose.resources.onboarding_infographic_3_description
 import com.egoriku.grodnoroads.compose.resources.onboarding_infographic_3_title
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowLeft
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
+import com.egoriku.grodnoroads.foundation.icons.outlined.Check
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
@@ -41,7 +42,6 @@ import com.egoriku.grodnoroads.onboarding.ui.foundation.ChooseCityPage
 import com.egoriku.grodnoroads.onboarding.ui.foundation.InfographicPage
 import com.egoriku.grodnoroads.onboarding.ui.foundation.PageIndicator
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -146,7 +146,7 @@ private fun Footer(
 private fun PreviousButton(onClick: () -> Unit) {
     SecondaryCircleButton(onClick = onClick) {
         Icon(
-            painter = painterResource(Res.drawable.ic_arrow_left),
+            imageVector = GrodnoRoads.Outlined.ArrowLeft,
             contentDescription = null
         )
     }
@@ -159,7 +159,7 @@ private fun NextButton(onClick: () -> Unit) {
         size = Size.Small
     ) {
         Icon(
-            painter = painterResource(Res.drawable.ic_arrow_right),
+            imageVector = GrodnoRoads.Outlined.ArrowRight,
             contentDescription = null
         )
     }
@@ -172,7 +172,7 @@ private fun DoneButton(onClick: () -> Unit) {
         size = Size.Small
     ) {
         Icon(
-            painter = painterResource(Res.drawable.ic_check),
+            imageVector = GrodnoRoads.Outlined.Check,
             contentDescription = null
         )
     }

@@ -23,6 +23,7 @@ kotlin {
             implementation(projects.kmp.features.specialEventReminder)
 
             implementation(projects.kmp.compose.commonUi)
+            implementation(projects.kmp.compose.foundation.icons)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.mapsCompose)
             implementation(projects.kmp.compose.locationRequester)

@@ -21,14 +21,13 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PrimaryInverseCircleButton(
@@ -82,13 +81,13 @@ private fun PrimaryInverseCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     Column(modifier = Modifier.padding(16.dp)) {
         PrimaryInverseCircleButton(onClick = {}, size = Size.Large) {
             Icon(
-                painter = painterResource(Res.drawable.ic_arrow_right),
+                imageVector = GrodnoRoads.Outlined.ArrowRight,
                 contentDescription = null
             )
         }
         PrimaryInverseCircleButton(onClick = {}, size = Size.Small) {
             Icon(
-                painter = painterResource(Res.drawable.ic_arrow_right),
+                imageVector = GrodnoRoads.Outlined.ArrowRight,
                 contentDescription = null
             )
         }

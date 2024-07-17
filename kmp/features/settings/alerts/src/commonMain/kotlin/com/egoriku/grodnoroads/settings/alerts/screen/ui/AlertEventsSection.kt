@@ -20,16 +20,17 @@ import com.egoriku.grodnoroads.compose.resources.alerts_notifications_stationary
 import com.egoriku.grodnoroads.compose.resources.alerts_notifications_traffic_jam
 import com.egoriku.grodnoroads.compose.resources.alerts_notifications_traffic_police
 import com.egoriku.grodnoroads.compose.resources.alerts_notifications_wild_animals
-import com.egoriku.grodnoroads.compose.resources.nt_ic_car_crash
-import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_road_incident
-import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_jam
-import com.egoriku.grodnoroads.compose.resources.nt_ic_traffic_police
-import com.egoriku.grodnoroads.compose.resources.nt_ic_wild_animals
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.CarCrash
+import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.RoadIncident
+import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.TrafficJam
+import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPolice
+import com.egoriku.grodnoroads.foundation.icons.colored.WildAnimals
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
@@ -98,7 +99,7 @@ private fun StationaryCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_stationary_camera,
+        imageVector = GrodnoRoads.Colored.StationaryCamera,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_stationary_cameras),
         isChecked = stationaryCameras.isNotify,
@@ -115,7 +116,7 @@ private fun MediumSpeedCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_medium_speed_camera,
+        imageVector = GrodnoRoads.Colored.MediumSpeedCamera,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_medium_speed_cameras),
         isChecked = mediumSpeedCameras.isNotify,
@@ -132,7 +133,7 @@ private fun MobileCameras(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_mobile_camera,
+        imageVector = GrodnoRoads.Colored.MobileCamera,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_mobile_cameras),
         isChecked = mobileCameras.isNotify,
@@ -149,7 +150,7 @@ private fun TrafficPolice(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_traffic_police,
+        imageVector = GrodnoRoads.Colored.TrafficPolice,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_traffic_police),
         isChecked = trafficPolice.isNotify,
@@ -166,7 +167,7 @@ private fun RoadIncidents(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_road_incident,
+        imageVector = GrodnoRoads.Colored.RoadIncident,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_incidents),
         isChecked = roadIncident.isNotify,
@@ -183,7 +184,7 @@ private fun CarCrash(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_car_crash,
+        imageVector = GrodnoRoads.Colored.CarCrash,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_car_crash),
         isChecked = carCrash.isNotify,
@@ -200,7 +201,7 @@ private fun TrafficConditions(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_traffic_jam,
+        imageVector = GrodnoRoads.Colored.TrafficJam,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_traffic_jam),
         isChecked = trafficJam.isNotify,
@@ -217,7 +218,7 @@ private fun WildAnimals(
 ) {
     CheckBoxListItem(
         paddingValues = subGroupPaddingValues,
-        drawableResource = Res.drawable.nt_ic_wild_animals,
+        imageVector = GrodnoRoads.Colored.WildAnimals,
         iconSize = iconSize,
         text = stringResource(Res.string.alerts_notifications_wild_animals),
         isChecked = wildAnimals.isNotify,

@@ -36,7 +36,6 @@ import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.domain.TabsComponent
 import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
 import kotlinx.collections.immutable.persistentListOf
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 private val NavigationBarHeight: Dp = 80.dp
@@ -127,7 +126,7 @@ private fun VerticalOrientationLayout(
                         onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
-                                painter = painterResource(screen.drawableResource),
+                                imageVector = screen.imageVector,
                                 contentDescription = null
                             )
                         },
@@ -188,7 +187,7 @@ private fun HorizontalOrientationLayout(
                         onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
-                                painter = painterResource(screen.drawableResource),
+                                imageVector = screen.imageVector,
                                 contentDescription = null
                             )
                         }

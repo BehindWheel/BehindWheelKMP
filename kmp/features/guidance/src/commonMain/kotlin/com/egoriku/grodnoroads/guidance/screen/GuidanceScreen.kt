@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_check_circle
 import com.egoriku.grodnoroads.compose.resources.reporting_notification_sent
 import com.egoriku.grodnoroads.compose.resources.snackbar_in_app_update_install
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
@@ -37,6 +36,8 @@ import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.CheckCircle
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -136,7 +137,7 @@ fun GuidanceScreen(
                         snackbarState.show(
                             SnackbarMessage.SimpleMessage(
                                 title = MessageData.StringRes(Res.string.reporting_notification_sent),
-                                icon = Icon.DrawableRes(resource = Res.drawable.ic_check_circle)
+                                icon = Icon.DrawableRes(imageVector = GrodnoRoads.Outlined.CheckCircle)
                             )
                         )
                 }

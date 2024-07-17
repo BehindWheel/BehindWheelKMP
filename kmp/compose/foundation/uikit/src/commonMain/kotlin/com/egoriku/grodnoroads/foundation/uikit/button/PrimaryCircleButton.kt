@@ -12,14 +12,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PrimaryCircleButton(
@@ -52,16 +51,15 @@ private fun PrimaryCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     ) {
         PrimaryCircleButton(size = Large, onClick = {}) {
             Icon(
-                painter = painterResource(Res.drawable.ic_arrow_right),
+                imageVector = GrodnoRoads.Outlined.ArrowRight,
                 contentDescription = null
             )
         }
         PrimaryCircleButton(size = Small, onClick = {}) {
             Icon(
-                painter = painterResource(Res.drawable.ic_arrow_right),
+                imageVector = GrodnoRoads.Outlined.ArrowRight,
                 contentDescription = null
             )
         }
-
     }
 }

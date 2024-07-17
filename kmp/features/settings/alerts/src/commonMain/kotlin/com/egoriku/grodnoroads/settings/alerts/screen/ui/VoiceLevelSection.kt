@@ -15,8 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.alerts_header_volume_level
 import com.egoriku.grodnoroads.compose.resources.alerts_play_test_audio
-import com.egoriku.grodnoroads.compose.resources.ic_play
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Play
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
@@ -59,7 +60,7 @@ fun VoiceLevelSection(
             }
         }
         SimpleListItem(
-            drawableResource = Res.drawable.ic_play,
+            imageVector = GrodnoRoads.Outlined.Play,
             text = stringResource(Res.string.alerts_play_test_audio),
             onClick = { playTestSound(alertVolumeLevel.current) }
         )

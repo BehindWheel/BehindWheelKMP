@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_add
-import com.egoriku.grodnoroads.compose.resources.ic_remove
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Add
+import com.egoriku.grodnoroads.foundation.icons.outlined.Remove
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButtonGroup
@@ -18,8 +18,8 @@ fun DemoActionButtonGroup() {
     UIDemoContainer(name = "ActionButtonGroup") {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ActionButtonGroup {
-                ActionIcon(drawableResource = Res.drawable.ic_add, onClick = {})
-                ActionIcon(drawableResource = Res.drawable.ic_remove, onClick = {})
+                ActionIcon(imageVector = GrodnoRoads.Outlined.Add, onClick = {})
+                ActionIcon(imageVector = GrodnoRoads.Outlined.Remove, onClick = {})
             }
         }
     }

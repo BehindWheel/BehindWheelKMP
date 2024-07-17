@@ -5,16 +5,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_map
-import com.egoriku.grodnoroads.compose.resources.ic_settings
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoNavigationBar() {
@@ -29,9 +28,9 @@ fun DemoNavigationBar() {
                     onClick = { selected = it },
                     icon = {
                         Icon(
-                            painter = when (it) {
-                                NavElement.Map -> painterResource(Res.drawable.ic_map)
-                                NavElement.Settings -> painterResource(Res.drawable.ic_settings)
+                            imageVector = when (it) {
+                                NavElement.Map -> GrodnoRoads.Outlined.Map
+                                NavElement.Settings -> GrodnoRoads.Outlined.Settings
                             },
                             contentDescription = null
                         )

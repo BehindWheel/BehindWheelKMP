@@ -45,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.kmp.compose.foundation.icons)
     implementation(projects.kmp.compose.foundation.uikit)
     implementation(projects.kmp.compose.resources)
     implementation(projects.kmp.compose.snackbar)

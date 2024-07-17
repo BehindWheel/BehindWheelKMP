@@ -9,13 +9,12 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_map
-import com.egoriku.grodnoroads.compose.resources.ic_settings
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun NavigationRail(
@@ -68,7 +67,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_map),
+                    imageVector = GrodnoRoads.Outlined.Map,
                     contentDescription = null
                 )
             }
@@ -78,7 +77,7 @@ private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
             onClick = {},
             icon = {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_settings),
+                    imageVector = GrodnoRoads.Outlined.Settings,
                     contentDescription = null
                 )
             }

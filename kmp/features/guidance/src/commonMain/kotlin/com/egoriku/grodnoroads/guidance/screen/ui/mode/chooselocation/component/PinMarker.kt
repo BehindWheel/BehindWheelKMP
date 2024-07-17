@@ -31,9 +31,9 @@ import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.common.ui.iconpack.GrodnoRoadsIcons
-import com.egoriku.grodnoroads.foundation.common.ui.iconpack.icons.icPinMarker
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.PinMarker
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
@@ -116,7 +116,7 @@ fun PinMarker(
                 .graphicsLayer {
                     translationY = markerTranslation.value
                 },
-            imageVector = GrodnoRoadsIcons.icPinMarker,
+            imageVector = GrodnoRoads.Outlined.PinMarker,
             contentDescription = null,
         )
     }

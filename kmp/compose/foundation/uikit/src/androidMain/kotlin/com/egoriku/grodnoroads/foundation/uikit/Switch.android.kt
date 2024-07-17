@@ -8,11 +8,10 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_check
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Check
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 actual fun Switch(
@@ -24,7 +23,7 @@ actual fun Switch(
     val icon: (@Composable () -> Unit)? = if (checked) {
         {
             Icon(
-                painter = painterResource(Res.drawable.ic_check),
+                imageVector = GrodnoRoads.Outlined.Check,
                 contentDescription = null,
                 modifier = Modifier.size(SwitchDefaults.IconSize),
             )

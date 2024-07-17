@@ -13,18 +13,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_chevron_right
-import com.egoriku.grodnoroads.compose.resources.ic_my_city
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ChevronRight
+import com.egoriku.grodnoroads.foundation.icons.outlined.MyCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MoreActionListItem(
-    drawableResource: DrawableResource? = null,
+    imageVector: ImageVector? = null,
     text: String,
     value: String,
     onClick: () -> Unit
@@ -38,9 +37,9 @@ fun MoreActionListItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (drawableResource != null) {
+        if (imageVector != null) {
             Icon(
-                painter = painterResource(drawableResource),
+                imageVector = imageVector,
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                 contentDescription = null
             )
@@ -59,7 +58,7 @@ fun MoreActionListItem(
             Text(text = value, style = MaterialTheme.typography.titleSmall)
             Icon(
                 modifier = Modifier.size(20.dp),
-                painter = painterResource(Res.drawable.ic_chevron_right),
+                imageVector = GrodnoRoads.Outlined.ChevronRight,
                 contentDescription = null,
             )
         }
@@ -70,7 +69,7 @@ fun MoreActionListItem(
 @Composable
 private fun MoreActionListItemPreview() = GrodnoRoadsM3ThemePreview {
     MoreActionListItem(
-        drawableResource = Res.drawable.ic_my_city,
+        imageVector = GrodnoRoads.Outlined.MyCity,
         text = "My city",
         value = "Grodno",
         onClick = {}

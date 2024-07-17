@@ -5,14 +5,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_left
-import com.egoriku.grodnoroads.compose.resources.ic_telegram
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowLeft
+import com.egoriku.grodnoroads.foundation.icons.outlined.Telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoSecondaryCircleButton() {
@@ -20,7 +19,7 @@ fun DemoSecondaryCircleButton() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             SecondaryCircleButton(onClick = { }) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_telegram),
+                    imageVector = GrodnoRoads.Outlined.Telegram,
                     contentDescription = null
                 )
             }
@@ -29,7 +28,7 @@ fun DemoSecondaryCircleButton() {
                 enabled = false
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_arrow_left),
+                    imageVector = GrodnoRoads.Outlined.ArrowLeft,
                     contentDescription = null
                 )
             }

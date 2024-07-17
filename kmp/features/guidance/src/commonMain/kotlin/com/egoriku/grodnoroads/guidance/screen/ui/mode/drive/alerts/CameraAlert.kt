@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,15 +22,14 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
 import com.egoriku.grodnoroads.compose.resources.camera_alerts_plurals_distance
-import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.SpeedLimitSign
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -37,7 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 fun CameraAlert(
     distance: Int,
     speedLimit: Int,
-    drawableResource: DrawableResource,
+    imageVector: ImageVector,
     title: String,
     modifier: Modifier = Modifier
 ) {
@@ -52,7 +52,7 @@ fun CameraAlert(
             ) {
                 Image(
                     modifier = Modifier.size(46.dp),
-                    painter = painterResource(drawableResource),
+                    imageVector = imageVector,
                     contentDescription = null
                 )
                 Column(
@@ -92,37 +92,37 @@ private fun PreviewStationaryAlert() = GrodnoRoadsM3ThemePreview {
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableResource = Res.drawable.nt_ic_stationary_camera,
+            imageVector = GrodnoRoads.Colored.StationaryCamera,
             title = stringResource(Res.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableResource = Res.drawable.nt_ic_stationary_camera,
+            imageVector = GrodnoRoads.Colored.StationaryCamera,
             title = stringResource(Res.string.alerts_stationary_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableResource = Res.drawable.nt_ic_mobile_camera,
+            imageVector = GrodnoRoads.Colored.MobileCamera,
             title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableResource = Res.drawable.nt_ic_mobile_camera,
+            imageVector = GrodnoRoads.Colored.MobileCamera,
             title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = 60,
-            drawableResource = Res.drawable.nt_ic_medium_speed_camera,
+            imageVector = GrodnoRoads.Colored.MediumSpeedCamera,
             title = stringResource(Res.string.alerts_mobile_camera)
         )
         CameraAlert(
             distance = 200,
             speedLimit = -1,
-            drawableResource = Res.drawable.nt_ic_medium_speed_camera,
+            imageVector = GrodnoRoads.Colored.MediumSpeedCamera,
             title = stringResource(Res.string.alerts_mobile_camera)
         )
     }

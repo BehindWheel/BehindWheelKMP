@@ -8,15 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ic_arrow_right
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DemoPrimaryCircleButton() {
@@ -32,13 +31,13 @@ fun DemoPrimaryCircleButton() {
                 Text(text = "large", style = MaterialTheme.typography.titleSmall)
                 PrimaryCircleButton(size = Large, onClick = { }) {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_arrow_right),
+                        imageVector = GrodnoRoads.Outlined.ArrowRight,
                         contentDescription = null
                     )
                 }
                 PrimaryCircleButton(size = Large, onClick = { }, enabled = false) {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_arrow_right),
+                        imageVector = GrodnoRoads.Outlined.ArrowRight,
                         contentDescription = null
                     )
                 }
@@ -50,13 +49,13 @@ fun DemoPrimaryCircleButton() {
                 Text(text = "small", style = MaterialTheme.typography.titleSmall)
                 PrimaryCircleButton(size = Small, onClick = { }) {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_arrow_right),
+                        imageVector = GrodnoRoads.Outlined.ArrowRight,
                         contentDescription = null
                     )
                 }
                 PrimaryCircleButton(size = Small, onClick = { }, enabled = false) {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_arrow_right),
+                        imageVector = GrodnoRoads.Outlined.ArrowRight,
                         contentDescription = null
                     )
                 }

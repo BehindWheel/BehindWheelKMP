@@ -21,9 +21,10 @@ import com.egoriku.grodnoroads.compose.resources.alerts_traffic_jam
 import com.egoriku.grodnoroads.compose.resources.alerts_traffic_police
 import com.egoriku.grodnoroads.compose.resources.alerts_unsupported_message
 import com.egoriku.grodnoroads.compose.resources.alerts_wild_animals
-import com.egoriku.grodnoroads.compose.resources.nt_ic_medium_speed_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_mobile_camera
-import com.egoriku.grodnoroads.compose.resources.nt_ic_stationary_camera
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
+import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
@@ -88,9 +89,9 @@ fun Alerts(
                         MediumSpeedCamera -> stringResource(Res.string.alerts_medium_speed_camera)
                     }
                     val icon = when (alert.cameraType) {
-                        StationaryCamera -> Res.drawable.nt_ic_stationary_camera
-                        MobileCamera -> Res.drawable.nt_ic_mobile_camera
-                        MediumSpeedCamera -> Res.drawable.nt_ic_medium_speed_camera
+                        StationaryCamera -> GrodnoRoads.Colored.StationaryCamera
+                        MobileCamera -> GrodnoRoads.Colored.MobileCamera
+                        MediumSpeedCamera -> GrodnoRoads.Colored.MediumSpeedCamera
                     }
                     CameraAlert(
                         modifier = Modifier.animateItemPlacement(
@@ -101,7 +102,7 @@ fun Alerts(
                         ),
                         distance = alert.distance,
                         speedLimit = alert.speedLimit,
-                        drawableResource = icon,
+                        imageVector = icon,
                         title = title
                     )
                 }
