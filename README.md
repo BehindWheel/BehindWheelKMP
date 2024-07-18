@@ -33,12 +33,15 @@ In case bug and suggestions, please create issue.
 ### Useful gradle commands
 
 Check dependency updates: `./gradlew dependencyUpdates`
+
 Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true` 
+
 Generate kmp buildconfig: `./gradlew :kmp:shared:components:generateBuildKonfig`
 
 Build ui-demo: `./gradlew app:ui-demo:assembleRelease`
 
 Build app debug: `./gradlew app:android:assembleDebug`
+
 Build app release: `./gradlew app:android:assembleRelease`
 
 Pods:

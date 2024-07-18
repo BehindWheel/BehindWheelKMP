@@ -6,3 +6,5 @@
     public static *** w(...);
     public static *** wtf(...);
 }
+
+-dontwarn org.slf4j.impl.StaticLoggerBinder

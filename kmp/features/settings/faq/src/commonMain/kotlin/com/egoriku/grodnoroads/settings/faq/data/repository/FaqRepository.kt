@@ -5,7 +5,6 @@ import com.egoriku.grodnoroads.settings.faq.data.dto.FaqDTO
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.repository.FaqRepository
 import dev.gitlive.firebase.firestore.FirebaseFirestore
-import dev.gitlive.firebase.firestore.orderBy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext

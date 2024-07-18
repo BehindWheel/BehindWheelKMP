@@ -7,7 +7,6 @@ import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRep
 import com.egoriku.grodnoroads.settings.changelog.domain.util.DateFormatter
 import dev.gitlive.firebase.firestore.Direction
 import dev.gitlive.firebase.firestore.FirebaseFirestore
-import dev.gitlive.firebase.firestore.orderBy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
