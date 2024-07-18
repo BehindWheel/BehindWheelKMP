@@ -3,14 +3,14 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.5.0"
-coil = "3.0.0-alpha06"
+agp = "8.5.1"
+coil = "3.0.0-alpha08"
 decompose = "3.1.0"
 essenty = "2.1.0"
-kotlinx-serialization = "1.7.0"
+kotlinx-serialization = "1.7.1"
 kotlin = "2.0.0"
-ktor = "2.3.11"
-moko-resources = "0.24.0"
+ktor = "2.3.12"
+moko-resources = "0.24.1"
 mvikotlin = "4.1.0"
 
 [libraries]
@@ -24,7 +24,7 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.1"
 androidx-media = "androidx.media:media:1.7.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.4"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.5"
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
@@ -33,17 +33,17 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
 desugar-jdk = "com.android.tools:desugar_jdk_libs:2.0.4"
-dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.12.0"
-dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.12.0"
-dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.12.0"
+dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.13.0"
+dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.13.0"
+dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.13.0"
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 
-firebase-analytics = "com.google.firebase:firebase-analytics:21.6.2"
+firebase-analytics = "com.google.firebase:firebase-analytics:22.0.2"
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
-google-maps = "com.google.maps.android:maps-ktx:5.0.0"
+google-maps = "com.google.maps.android:maps-ktx:5.1.1"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
 google-material = "com.google.android.material:material:1.12.0"
 
@@ -70,8 +70,8 @@ mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mviko
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
 mvikotlin-extensions = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 
-play-services-location = "com.google.android.gms:play-services-location:21.2.0"
-play-services-maps = "com.google.android.gms:play-services-maps:18.2.0"
+play-services-location = "com.google.android.gms:play-services-location:21.3.0"
+play-services-maps = "com.google.android.gms:play-services-maps:19.0.0"
 
 # Dependencies for build-logic module
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -83,13 +83,13 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.1" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.1" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.2" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
 gradle-dependency-check = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 jetbrains-compose = { id = "org.jetbrains.compose", version = "1.6.11" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
