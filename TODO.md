@@ -2,6 +2,7 @@
 - mvikotlin as bundle dependency
 - remove unnecessary material dependency for activity
 - create CI for running tests
+- add new cities
 
 ios:
 - choose on map modal not working

@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.guidance.data.repository
 
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.guidance.data.dto.areas.AreasDTO
+import com.egoriku.grodnoroads.guidance.data.dto.areas.AreaDTO
 import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.repository.CityAreasRepository
 import com.egoriku.grodnoroads.location.LatLng
@@ -16,16 +16,16 @@ class CityAreasRepositoryImpl : CityAreasRepository {
 
     @OptIn(ExperimentalResourceApi::class)
     override suspend fun load(): List<Area> = withContext(Dispatchers.Default) {
-        val areas = Res.readBytes("files/areas.geojson").decodeToString()
-        val featureCollection = json.decodeFromString<AreasDTO>(areas)
+        val areasJson = Res.readBytes("files/areas.geojson").decodeToString()
+        val areas = json.decodeFromString<List<AreaDTO>>(areasJson)
 
-        featureCollection.features.map {
+        areas.map {
             Area(
-                name = it.properties.name,
-                coordinates = it.geometry.coordinates.first().first().map { coordinates ->
+                name = it.name,
+                coordinates = it.coordinates.map { latLng ->
                     LatLng(
-                        latitude = coordinates[1],
-                        longitude = coordinates[0]
+                        latitude = latLng.latitude,
+                        longitude = latLng.longitude
                     )
                 }
             )
