@@ -83,7 +83,6 @@ dependencies {
     implementation(compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.google.maps)
     implementation(libs.google.material)
     implementation(libs.material3.windowsize)
 
