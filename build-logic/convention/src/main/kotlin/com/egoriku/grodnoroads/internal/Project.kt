@@ -11,25 +11,32 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
-internal val Project.libs
+context(Project)
+internal val libs
     get() = the<LibrariesForLibs>()
 
-internal fun Project.libraryExtension(action: LibraryExtension.() -> Unit) =
+context(Project)
+internal fun libraryExtension(action: LibraryExtension.() -> Unit) =
     extensions.configure<LibraryExtension>(action)
 
-internal fun Project.kmpExtension(action: KotlinMultiplatformExtension.() -> Unit) =
+context(Project)
+internal fun kmpExtension(action: KotlinMultiplatformExtension.() -> Unit) =
     extensions.configure<KotlinMultiplatformExtension>(action)
 
-internal fun Project.applicationExtension(action: ApplicationExtension.() -> Unit) =
+context(Project)
+internal fun applicationExtension(action: ApplicationExtension.() -> Unit) =
     extensions.configure<ApplicationExtension>(action)
 
-internal fun Project.kotlinExtension(action: KotlinProjectExtension.() -> Unit) =
+context(Project)
+internal fun kotlinExtension(action: KotlinProjectExtension.() -> Unit) =
     extensions.configure<KotlinProjectExtension>(action)
 
-fun Project.composeCompiler(block: ComposeCompilerGradlePluginExtension.() -> Unit) =
+context(Project)
+fun composeCompiler(block: ComposeCompilerGradlePluginExtension.() -> Unit) =
     extensions.configure<ComposeCompilerGradlePluginExtension>(block)
 
-internal fun Project.configureKotlinAndroidToolchain() {
+context(Project)
+internal fun configureKotlinAndroidToolchain() {
     extensions.configure<KotlinAndroidProjectExtension> {
         jvmToolchain(17)
     }

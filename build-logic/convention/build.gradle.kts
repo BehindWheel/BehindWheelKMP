@@ -1,8 +1,16 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     `kotlin-dsl`
 }
 
 group = "com.egoriku.grodnoroads"
+
+tasks.named("compileKotlin", KotlinCompilationTask::class.java) {
+    compilerOptions {
+        freeCompilerArgs.add("-Xcontext-receivers")
+    }
+}
 
 dependencies {
     compileOnly(libs.android.gradle.plugin)
