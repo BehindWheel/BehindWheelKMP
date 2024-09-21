@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.screen.main.buildMainComponent
 import com.egoriku.grodnoroads.screen.root.RoadsRootComponent.Child
 import com.egoriku.grodnoroads.screen.root.store.RootStore
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.MigrationModel
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.setting.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.buildAppearanceComponent
@@ -62,6 +63,8 @@ class RoadsRootComponentImpl(
                 else -> StateData.Loaded(it.theme)
             }
         }
+
+    override val migrationModel: Flow<MigrationModel> = rootStore.states.map { it.migrationModel }
 
     override val headlampDialogState: Flow<HeadLampType> = rootStore.states.map { it.headLampType }
 
