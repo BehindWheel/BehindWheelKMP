@@ -64,7 +64,7 @@ jobs:
 
       - name: Upload *.aab artifact
         id: uploadArtifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: android
           path: app/android/build/outputs/bundle/release/android-release.aab
