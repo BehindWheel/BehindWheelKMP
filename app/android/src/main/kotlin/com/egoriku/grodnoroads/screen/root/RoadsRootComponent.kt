@@ -8,6 +8,7 @@ import com.arkivanov.essenty.backhandler.BackHandlerOwner
 import com.egoriku.grodnoroads.eventreporting.domain.model.ReportParams
 import com.egoriku.grodnoroads.extensions.common.StateData
 import com.egoriku.grodnoroads.screen.main.MainComponent
+import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.MigrationModel
 import com.egoriku.grodnoroads.screen.root.store.headlamp.HeadLampType
 import com.egoriku.grodnoroads.setting.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.setting.appearance.domain.component.AppearanceComponent
@@ -22,6 +23,7 @@ interface RoadsRootComponent : BackHandlerOwner {
 
     val childStack: Value<ChildStack<*, Child>>
     val childSlot: Value<ChildSlot<*, Any>>
+    val migrationModel: Flow<MigrationModel>
 
     fun closeReporting()
     fun processReporting(params: ReportParams)
