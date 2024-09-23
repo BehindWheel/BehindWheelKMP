@@ -15,6 +15,7 @@ import com.egoriku.grodnoroads.settings.map.di.mapSettingsModule
 import com.egoriku.grodnoroads.shared.analytics.di.analyticsModule
 import com.egoriku.grodnoroads.specialevent.di.specialEventModule
 import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.analytics.analytics
 import dev.gitlive.firebase.crashlytics.crashlytics
 import dev.gitlive.firebase.database.database
 import dev.gitlive.firebase.firestore.firestore
@@ -45,9 +46,10 @@ fun appModule() = listOf(
 
 val appScopeModule = module {
     singleOf(::DefaultStoreFactory) { bind<StoreFactory>() }
-    single { Firebase.firestore }
-    single { Firebase.database.reference() }
+    single { Firebase.analytics }
     single { Firebase.crashlytics }
+    single { Firebase.database.reference() }
+    single { Firebase.firestore }
 }
 
 internal expect val platformDataStoreModule: Module
