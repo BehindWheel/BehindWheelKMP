@@ -48,10 +48,6 @@ jobs:
       - name: Make sh executable
         run: chmod +x ./increment.sh
 
-      - name: Increment build number
-        run: ./increment.sh "./config/versioning/android.properties"
-        shell: bash
-
       - name: Build Release AAB
         id: buildRelease
         run: ./gradlew clean app:android:bundleRelease
@@ -77,6 +73,10 @@ jobs:
           track: internalsharing
           mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
+
+      - name: Increment build number
+        run: ./increment.sh "./config/versioning/android.properties"
+        shell: bash
 
       - name: Commit files
         run: |

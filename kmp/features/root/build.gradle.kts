@@ -91,6 +91,7 @@ kotlin {
             api(libs.essenty.lifecycle)
             api(libs.moko.resources)
 
+            implementation(libs.dev.gitlive.firebase.analytics)
             implementation(libs.dev.gitlive.firebase.crashlytics)
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.dev.gitlive.firebase.firestore)
