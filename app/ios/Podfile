@@ -6,10 +6,11 @@ target 'grodno-roads-ios' do
 
    pod 'GoogleMaps', '~> 9.0.0'
    pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
-   pod 'FirebaseCore', '~> 10.23.0'
-   pod 'FirebaseDatabase', '~> 10.25.0'
-   pod 'FirebaseCrashlytics', '~> 10.25.0'
-   pod 'FirebaseFirestore', '~> 10.25.0'
+   pod 'FirebaseCore', '~> 11.1.0'
+   pod 'FirebaseDatabase', '~> 11.1.0'
+   pod 'FirebaseAnalytics', '~> 11.1.0'
+   pod 'FirebaseCrashlytics', '~> 11.1.0'
+   pod 'FirebaseFirestore', '~> 11.1.0'
    pod 'root', :path => '../../kmp/features/root'
 end
 
@@ -17,6 +18,16 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+
+    if target.name == 'BoringSSL-GRPC'
+      target.source_build_phase.files.each do |file|
+        if file.settings && file.settings['COMPILER_FLAGS']
+          flags = file.settings['COMPILER_FLAGS'].split
+          flags.reject! { |flag| flag == '-GCC_WARN_INHIBIT_ALL_WARNINGS' }
+          file.settings['COMPILER_FLAGS'] = flags.join(' ')
+        end
+      end
     end
   end
 end
