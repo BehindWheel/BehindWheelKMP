@@ -11,15 +11,15 @@ import com.egoriku.grodnoroads.maps.compose.core.remove
 import com.egoriku.grodnoroads.maps.compose.marker.MarkerOptions
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 
-context(MapUpdater)
 @Composable
 fun rememberSimpleMarker(
+    mapUpdater: MapUpdater,
     markerOptions: () -> MarkerOptions
 ): Marker? {
     var marker by remember { mutableStateOf<Marker?>(null) }
 
     DisposableEffect(Unit) {
-        marker = addMarker(markerOptions = markerOptions())
+        marker = mapUpdater.addMarker(markerOptions = markerOptions())
 
         onDispose {
             marker?.remove()

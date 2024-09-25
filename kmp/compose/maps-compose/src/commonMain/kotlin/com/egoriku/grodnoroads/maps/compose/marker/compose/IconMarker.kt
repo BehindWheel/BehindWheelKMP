@@ -18,9 +18,9 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-context(MapUpdater)
 @Composable
 fun rememberIconMarker(
+    mapUpdater: MapUpdater,
     position: LatLng,
     icon: () -> MarkerImage,
     zIndex: Float = 0.0f,
@@ -32,14 +32,14 @@ fun rememberIconMarker(
     var marker by remember { mutableStateOf<Marker?>(null) }
 
     LaunchedEffect(marker) {
-        clickedMarker
+        mapUpdater.clickedMarker
             .filter { it == marker }
             .onEach { updatedOnMarkerClick() }
             .launchIn(this)
     }
 
     DisposableEffect(position, title) {
-        marker = addMarker(
+        marker = mapUpdater.addMarker(
             MarkerOptions(
                 position = position,
                 icon = icon(),
