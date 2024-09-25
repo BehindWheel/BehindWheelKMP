@@ -10,6 +10,7 @@ Pod::Spec.new do |spec|
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '15.0'
     spec.dependency 'FirebaseCore'
+    spec.dependency 'FirebaseAnalytics'
     spec.dependency 'FirebaseCrashlytics'
     spec.dependency 'FirebaseDatabase'
     spec.dependency 'FirebaseFirestore'
