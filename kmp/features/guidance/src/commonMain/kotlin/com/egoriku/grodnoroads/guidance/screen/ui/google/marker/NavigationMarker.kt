@@ -17,9 +17,8 @@ import com.egoriku.grodnoroads.maps.compose.util.animateMarker
 
 const val ANIMATE_DISTANCE_THRESHOLD = 300
 
-context(MapUpdater)
 @Composable
-fun NavigationMarker(
+fun MapUpdater.NavigationMarker(
     appMode: AppMode,
     position: LatLng,
     bearing: Float,
@@ -27,6 +26,7 @@ fun NavigationMarker(
     rotation: Float,
 ) {
     val marker = rememberSimpleMarker(
+        mapUpdater = this,
         markerOptions = {
             MarkerOptions(
                 position = position,

@@ -12,9 +12,8 @@ import com.egoriku.grodnoroads.maps.compose.marker.compose.rememberIconMarker
 import com.egoriku.grodnoroads.maps.compose.marker.inScope
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 
-context(MapUpdater)
 @Composable
-fun ReportsMarker(
+fun MapUpdater.ReportsMarker(
     position: LatLng,
     markerSize: MarkerSize,
     markerGenerator: () -> MarkerGenerator,
@@ -34,6 +33,7 @@ fun ReportsMarker(
     }
 
     val marker = rememberIconMarker(
+        mapUpdater = this,
         position = position,
         icon = icon,
         zIndex = 2f,
