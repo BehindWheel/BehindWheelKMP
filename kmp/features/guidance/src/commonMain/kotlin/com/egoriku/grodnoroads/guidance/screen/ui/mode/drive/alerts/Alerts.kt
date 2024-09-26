@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.compose.resources.alerts_traffic_jam
 import com.egoriku.grodnoroads.compose.resources.alerts_traffic_police
 import com.egoriku.grodnoroads.compose.resources.alerts_unsupported_message
 import com.egoriku.grodnoroads.compose.resources.alerts_wild_animals
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
@@ -40,7 +41,6 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
@@ -119,7 +119,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
             IncidentAlert(
                 mapEventType = TrafficPolice,
                 distance = 1,
-                id = Uuid.randomUUID(),
+                id = Uuid.random(),
                 messages = persistentListOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
@@ -128,13 +128,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 )
             ),
             CameraAlert(
-                id = Uuid.randomUUID(),
+                id = Uuid.random(),
                 distance = 2,
                 speedLimit = 60,
                 cameraType = StationaryCamera
             ),
             IncidentAlert(
-                id = Uuid.randomUUID(),
+                id = Uuid.random(),
                 distance = 5,
                 messages = persistentListOf(
                     MessageItem(
@@ -149,13 +149,13 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
                 mapEventType = RoadIncident
             ),
             CameraAlert(
-                id = Uuid.randomUUID(),
+                id = Uuid.random(),
                 distance = 220,
                 speedLimit = -1,
                 cameraType = MobileCamera
             ),
             CameraAlert(
-                id = Uuid.randomUUID(),
+                id = Uuid.random(),
                 distance = 220,
                 speedLimit = 60,
                 cameraType = MobileCamera
