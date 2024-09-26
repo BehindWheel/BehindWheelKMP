@@ -2,8 +2,6 @@
 - mvikotlin as bundle dependency
 - remove unnecessary material dependency for activity
 - create CI for running tests
-- add new cities
-- integrate kmm analytics
 
 ios:
 - choose on map modal not working

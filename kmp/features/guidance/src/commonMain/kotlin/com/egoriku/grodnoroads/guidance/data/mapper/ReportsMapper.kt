@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.guidance.data.mapper
 
 import com.egoriku.grodnoroads.extensions.DateTime
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.extensions.appendIfNotEmpty
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
@@ -9,7 +10,6 @@ import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
-import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
@@ -54,7 +54,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                 )
             } else {
                 val action = Reports(
-                    id = Uuid.randomUUID(),
+                    id = Uuid.random(),
                     messages = persistentListOf(
                         MessageItem(
                             message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",

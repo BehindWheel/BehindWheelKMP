@@ -44,7 +44,6 @@ kotlin {
             implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.logger)
-            implementation(projects.kmp.libraries.uuid)
 
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.database)
