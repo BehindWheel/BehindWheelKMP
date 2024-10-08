@@ -1,14 +1,14 @@
 package com.egoriku.grodnoroads.uidemo.ui.demo
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
@@ -29,8 +29,8 @@ fun DemoNavigationBar() {
                     icon = {
                         Icon(
                             imageVector = when (it) {
-                                NavElement.Map -> Icons.Default.Map
-                                NavElement.Settings -> Icons.Default.Settings
+                                NavElement.Map -> GrodnoRoads.Outlined.Map
+                                NavElement.Settings -> GrodnoRoads.Outlined.Settings
                             },
                             contentDescription = null
                         )

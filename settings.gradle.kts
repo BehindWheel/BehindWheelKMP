@@ -1,16 +1,26 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
-        includeBuild("build-logic")
-        gradlePluginPortal()
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // https://stackoverflow.com/a/75032841
+    @Suppress("UnstableApiUsage")
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
@@ -22,39 +32,47 @@ rootProject.name = "Grodno-Roads"
 include(":app:android")
 include(":app:ui-demo")
 
-include(":features:map:map-data")
-include(":features:map:map-domain")
-include(":features:map:map-ui")
+include(":kmp:compose:common-ui")
+include(":kmp:compose:foundation:core")
+include(":kmp:compose:foundation:preview")
+include(":kmp:compose:foundation:theme")
+include(":kmp:compose:foundation:uikit")
+include(":kmp:compose:foundation:icons")
+include(":kmp:compose:location-requester")
+include(":kmp:compose:maps-compose")
+include(":kmp:compose:resources")
+include(":kmp:compose:snackbar")
 
-include(":features:eventReporting")
-include(":features:quickSettings")
+include(":kmp:features:root")
+include(":kmp:features:onboarding")
+include(":kmp:features:mainflow")
 
-include(":features:settings")
+include(":kmp:features:guidance")
+include(":kmp:features:eventReporting")
+include(":kmp:features:specialEventReminder")
+include(":kmp:features:quickSettings")
 
-include(":features:setting:alerts")
-include(":features:setting:appearance")
-include(":features:setting:faq")
-include(":features:setting:map")
-include(":features:setting:changelog")
+include(":kmp:features:tabs")
 
-include(":compose:foundation:core")
-include(":compose:foundation:preview")
-include(":compose:foundation:theme")
-include(":compose:foundation:uikit")
+include(":kmp:features:appSettings")
+include(":kmp:features:settings:alerts")
+include(":kmp:features:settings:appearance")
+include(":kmp:features:settings:changelog")
+include(":kmp:features:settings:faq")
+include(":kmp:features:settings:map")
 
-include(":compose:common-ui")
-include(":compose:location-requester")
-include(":compose:maps:compose")
-include(":compose:maps:core")
-include(":compose:snackbar")
+include(":kmp:libraries:coroutines")
+include(":kmp:libraries:datastore")
+include(":kmp:libraries:extensions")
+include(":kmp:libraries:location")
+include(":kmp:libraries:logger")
 
-include(":libraries:analytics")
-include(":libraries:audioplayer")
-include(":libraries:crashlytics")
-include(":libraries:extensions")
-include(":libraries:location")
-include(":libraries:resources")
-
-include(":shared:appComponent")
-include(":shared:appSettings")
-include(":shared:coreModels")
+include(":kmp:shared:audioplayer")
+include(":kmp:shared:analytics")
+include(":kmp:shared:components")
+include(":kmp:shared:crashlytics")
+include(":kmp:shared:formatter")
+include(":kmp:shared:geolocation")
+include(":kmp:shared:models")
+include(":kmp:shared:persistent")
+include(":kmp:shared:resources")

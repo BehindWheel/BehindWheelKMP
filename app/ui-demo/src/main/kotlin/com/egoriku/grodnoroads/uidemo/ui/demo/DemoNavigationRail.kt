@@ -1,9 +1,10 @@
 package com.egoriku.grodnoroads.uidemo.ui.demo
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,6 +12,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Map
+import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.uikit.NavigationRail
@@ -24,8 +28,8 @@ fun DemoNavigationRail() {
         Row {
             val elements by rememberMutableState {
                 listOf(
-                    RailElement.Map to Icons.Default.Map,
-                    RailElement.Settings to Icons.Default.Settings
+                    RailElement.Map to GrodnoRoads.Outlined.Map,
+                    RailElement.Settings to GrodnoRoads.Outlined.Settings
                 )
             }
             var selected by rememberMutableState { RailElement.Map }
@@ -36,7 +40,10 @@ fun DemoNavigationRail() {
                         selected = selected == it.first,
                         onClick = { selected = it.first },
                         icon = {
-                            Icon(imageVector = it.second, contentDescription = null)
+                            Icon(
+                                imageVector = it.second,
+                                contentDescription = null
+                            )
                         }
                     )
                 }
@@ -47,7 +54,10 @@ fun DemoNavigationRail() {
                     selected = true,
                     onClick = { },
                     icon = {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(
+                            imageVector = GrodnoRoads.Outlined.Settings,
+                            contentDescription = null
+                        )
                     }
                 )
                 NavigationRailItem(
@@ -55,7 +65,10 @@ fun DemoNavigationRail() {
                     enabled = false,
                     onClick = { },
                     icon = {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(
+                            imageVector = GrodnoRoads.Outlined.Settings,
+                            contentDescription = null
+                        )
                     }
                 )
             }
@@ -64,7 +77,10 @@ fun DemoNavigationRail() {
                     selected = false,
                     onClick = { },
                     icon = {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(
+                            imageVector = GrodnoRoads.Outlined.Settings,
+                            contentDescription = null
+                        )
                     }
                 )
                 NavigationRailItem(
@@ -72,7 +88,10 @@ fun DemoNavigationRail() {
                     enabled = false,
                     onClick = { },
                     icon = {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                        Icon(
+                            imageVector = GrodnoRoads.Outlined.Settings,
+                            contentDescription = null
+                        )
                     }
                 )
             }

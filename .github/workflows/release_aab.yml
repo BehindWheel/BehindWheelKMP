@@ -55,7 +55,7 @@ jobs:
         run: chmod +x ./increment.sh
 
       - name: Increment build number
-        run: ./increment.sh
+        run: ./increment.sh "./config/versioning/android.properties"
         shell: bash
 
       - name: Build Release AAB
