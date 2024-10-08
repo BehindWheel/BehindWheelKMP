@@ -7,8 +7,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.ExperimentalMviKotlinApi
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.extensions.common.ResultOf
-import com.egoriku.grodnoroads.screen.root.migration.MigrationRepository
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Intent.CloseDialog
 import com.egoriku.grodnoroads.screen.root.store.RootStoreFactory.Message.UpdateHeadLampDialog
@@ -28,8 +26,7 @@ interface RootStore : Store<Intent, State, Nothing>
 
 class RootStoreFactory(
     private val storeFactory: StoreFactory,
-    private val dataStore: DataStore<Preferences>,
-    private val migrationRepository: MigrationRepository
+    private val dataStore: DataStore<Preferences>
 ) {
 
     sealed interface Intent {
@@ -37,21 +34,13 @@ class RootStoreFactory(
     }
 
     sealed interface Message {
-        data class OnTheme(val theme: Theme) : Message
-        data class OnMigration(val migrationModel: MigrationModel) : Message
+        data class NewState(val state: State) : Message
         data class UpdateHeadLampDialog(val headLampType: HeadLampType) : Message
     }
 
     data class State(
         val theme: Theme? = null,
-        val headLampType: HeadLampType = HeadLampType.None,
-        val migrationModel: MigrationModel = MigrationModel()
-    )
-
-    data class MigrationModel(
-        val enabled: Boolean = false,
-        val link: String = "",
-        val newPackage: String = ""
+        val headLampType: HeadLampType = HeadLampType.None
     )
 
     @OptIn(ExperimentalMviKotlinApi::class)
@@ -62,27 +51,14 @@ class RootStoreFactory(
                 onAction<Unit> {
                     dataStore.data
                         .map { preferences ->
-                            Theme.fromOrdinal(preferences.appTheme.theme)
+                            State(theme = Theme.fromOrdinal(preferences.appTheme.theme))
                         }
                         .distinctUntilChanged()
-                        .onEach { dispatch(Message.OnTheme(theme = it)) }
+                        .onEach { dispatch(Message.NewState(state = it)) }
                         .launchIn(this)
 
                     launch {
                         dispatch(UpdateHeadLampDialog(headLampType = HeadLampDispatcher.calculateType()))
-                    }
-
-                    launch {
-                        migrationRepository.loadAsFlow()
-                            .collect {
-                                when (it) {
-                                    is ResultOf.Failure -> {}
-                                    is ResultOf.Success -> {
-                                        dispatch(Message.OnMigration(it.value))
-                                    }
-                                }
-                            }
-
                     }
                 }
                 onIntent<CloseDialog> {
@@ -94,9 +70,8 @@ class RootStoreFactory(
             bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.OnTheme -> copy(theme = message.theme)
+                    is Message.NewState -> copy(theme = message.state.theme)
                     is UpdateHeadLampDialog -> copy(headLampType = message.headLampType)
-                    is Message.OnMigration -> copy(migrationModel = message.migrationModel)
                 }
             }
         ) {}

@@ -16,12 +16,11 @@ import com.egoriku.grodnoroads.resources.R
 
 @Composable
 fun SocialNetwork(
-    modifier: Modifier = Modifier,
     title: String,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
 ) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SecondaryCircleButton(onClick = onClick, content = content)
         Text(
             modifier = Modifier.padding(top = 8.dp),
