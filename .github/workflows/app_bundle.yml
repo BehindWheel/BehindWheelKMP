@@ -41,7 +41,7 @@ jobs:
         run: echo ${{ secrets.SECRETS_PROPERTIES }} | base64 --decode > secrets.properties
 
       - name: "Check keystore existence"
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@v3
         with:
           files: "app/android/keystore.jks"
 
