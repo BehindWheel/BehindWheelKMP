@@ -6,12 +6,12 @@ import com.egoriku.grodnoroads.guidance.data.mapper.ReportsMapper
 import com.egoriku.grodnoroads.guidance.domain.repository.ReportsRepository
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
 import dev.gitlive.firebase.database.DatabaseReference
+import kotlin.time.Duration.Companion.hours
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlin.time.Duration.Companion.hours
 
 internal class ReportsRepositoryImpl(
     private val databaseReference: DatabaseReference

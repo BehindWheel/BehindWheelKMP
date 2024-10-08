@@ -37,7 +37,8 @@ internal class MediumSpeedCameraRepositoryImpl(
                                 speedTruck = data.speedTruck,
                                 position = LatLng(data.latitude, data.longitude)
                             )
-                        })
+                        }
+                )
             }
             .catch { ResultOf.Failure(it) }
             .flowOn(Dispatchers.IO)

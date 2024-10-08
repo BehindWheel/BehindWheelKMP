@@ -4,6 +4,7 @@ import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 
+// TODO: remove all preview components
 class AppearanceComponentPreview : AppearanceComponent {
 
     override val state: CStateFlow<State>

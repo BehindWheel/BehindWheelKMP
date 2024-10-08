@@ -78,7 +78,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Preview
 @Composable
-private fun GrodnoRoadsColoredPack() = GrodnoRoadsM3ThemePreview {
+private fun GrodnoRoadsColoredPackPreview() = GrodnoRoadsM3ThemePreview {
     val icons = listOf(
         GrodnoRoads.Colored.App,
         GrodnoRoads.Colored.AppDark,
@@ -108,7 +108,7 @@ private fun GrodnoRoadsColoredPack() = GrodnoRoadsM3ThemePreview {
         items(icons) { icon ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Image(
                     imageVector = icon,
@@ -128,7 +128,7 @@ private fun GrodnoRoadsColoredPack() = GrodnoRoadsM3ThemePreview {
 
 @Preview
 @Composable
-private fun GrodnoRoadsOutlinedPack() = GrodnoRoadsM3ThemePreview {
+private fun GrodnoRoadsOutlinedPackPreview() = GrodnoRoadsM3ThemePreview {
     val icons = listOf(
         GrodnoRoads.Outlined.Add,
         GrodnoRoads.Outlined.AddCircle,
@@ -179,7 +179,7 @@ private fun GrodnoRoadsOutlinedPack() = GrodnoRoadsM3ThemePreview {
         items(icons) { icon ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Icon(
                     imageVector = icon,

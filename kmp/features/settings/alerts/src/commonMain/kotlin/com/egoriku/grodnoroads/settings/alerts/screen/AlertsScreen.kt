@@ -34,8 +34,8 @@ import com.egoriku.grodnoroads.compose.resources.alerts_voice_alerts
 import com.egoriku.grodnoroads.compose.resources.alerts_voice_alerts_description
 import com.egoriku.grodnoroads.compose.resources.settings_section_alerts
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings
@@ -107,7 +107,7 @@ private fun AlertsUI(
             targetState = state.isLoading,
             transitionSpec = {
                 fadeIn(animationSpec = tween(220, delayMillis = 90)) togetherWith
-                        fadeOut(animationSpec = tween(90))
+                    fadeOut(animationSpec = tween(90))
             },
             label = "alerts_content"
         ) {
@@ -172,7 +172,7 @@ private fun AlertsUI(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun AlertsScreenPreview() = GrodnoRoadsM3ThemePreview {
     AlertsUI(

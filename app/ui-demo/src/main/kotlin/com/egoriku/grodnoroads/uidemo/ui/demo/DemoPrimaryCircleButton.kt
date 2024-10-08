@@ -7,22 +7,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoPrimaryCircleButton() {
-    UIDemoContainer(name = "PrimaryCircleButton") {
+fun DemoPrimaryCircleButton(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "PrimaryCircleButton") {
         Row(
             horizontalArrangement = Arrangement.spacedBy(32.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -64,7 +65,7 @@ fun DemoPrimaryCircleButton() {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoPrimaryCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     DemoPrimaryCircleButton()

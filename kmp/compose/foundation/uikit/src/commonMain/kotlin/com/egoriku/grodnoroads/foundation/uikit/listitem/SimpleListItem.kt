@@ -13,12 +13,13 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
 fun SimpleListItem(
-    imageVector: ImageVector? = null,
     text: String,
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector? = null,
     onClick: () -> Unit
 ) {
     BasicListItem(
-        touchModifier = Modifier
+        touchModifier = modifier
             .heightIn(min = 48.dp)
             .clickable(onClick = onClick),
         imageVector = imageVector,

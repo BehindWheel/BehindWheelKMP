@@ -27,7 +27,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.SpeedLimitSign
 import org.jetbrains.compose.resources.pluralStringResource
@@ -56,7 +56,7 @@ fun CameraAlert(
                     contentDescription = null
                 )
                 Column(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
@@ -85,9 +85,9 @@ fun CameraAlert(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewStationaryAlert() = GrodnoRoadsM3ThemePreview {
+private fun PreviewStationaryAlertPreview() = GrodnoRoadsM3ThemePreview {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         CameraAlert(
             distance = 200,

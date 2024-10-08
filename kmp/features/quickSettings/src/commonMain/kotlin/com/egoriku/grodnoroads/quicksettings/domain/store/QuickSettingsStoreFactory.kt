@@ -37,7 +37,8 @@ internal class QuickSettingsStoreFactory(
 ) {
 
     fun create(): QuickSettingsStore =
-        object : QuickSettingsStore,
+        object :
+            QuickSettingsStore,
             Store<Intent, QuickSettingsState, Nothing> by storeFactory.create(
                 initialState = QuickSettingsState(),
                 executorFactory = coroutineExecutorFactory(Dispatchers.Main) {

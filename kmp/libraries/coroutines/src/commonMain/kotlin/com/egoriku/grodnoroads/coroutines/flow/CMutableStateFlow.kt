@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 class CMutableStateFlow<T : Any>(
     private val mutableStateFlow: MutableStateFlow<T>
-) : CStateFlow<T>(mutableStateFlow), MutableStateFlow<T> by mutableStateFlow {
+) : CStateFlow<T>(mutableStateFlow),
+    MutableStateFlow<T> by mutableStateFlow {
     constructor(initialValue: T) : this(MutableStateFlow(initialValue))
 }

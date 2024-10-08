@@ -20,15 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun ThemeColor(
     colorName: String,
     currentColor: Color,
-    onClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
 ) {
     val colorHex by rememberMutableState(currentColor) {
         currentColor.copy(alpha = 0f).toArgb()
@@ -41,7 +42,7 @@ fun ThemeColor(
             )
     }
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = { onClick(colorHex) })
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -59,16 +60,16 @@ fun ThemeColor(
         )
         Text(
             style = MaterialTheme.typography.titleSmall,
-            text = colorHex,
+            text = colorHex
         )
         Text(
             style = MaterialTheme.typography.bodySmall,
-            text = colorName,
+            text = colorName
         )
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun ThemeColorPreview() = GrodnoRoadsM3ThemePreview {
     ThemeColor(

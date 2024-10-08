@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.map_user_count_hint
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.compose.Balloon
@@ -22,7 +22,7 @@ import com.skydoves.balloon.compose.setTextColor
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-actual fun UsersCount(modifier: Modifier, count: Int) {
+actual fun UsersCount(count: Int, modifier: Modifier) {
     val bgColor = MaterialTheme.colorScheme.inversePrimary
     val textColor = MaterialTheme.colorScheme.onSurface
     val isLight = MaterialTheme.colorScheme.isLight
@@ -62,7 +62,7 @@ actual fun UsersCount(modifier: Modifier, count: Int) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun UsersCountBadgePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.padding(16.dp)) {

@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun SecondaryCircleButton(
@@ -36,7 +36,7 @@ fun SecondaryCircleButton(
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun SecondaryButtonPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.padding(16.dp)) {

@@ -20,7 +20,9 @@ fun buildAppearanceComponent(
 
 internal class AppearanceComponentImpl(
     componentContext: ComponentContext
-) : AppearanceComponent, ComponentContext by componentContext, KoinComponent {
+) : AppearanceComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val appearanceStore: AppearanceStore = instanceKeeper.getStore(::get)
 

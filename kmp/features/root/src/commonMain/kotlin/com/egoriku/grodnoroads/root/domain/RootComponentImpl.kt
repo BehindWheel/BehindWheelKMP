@@ -31,7 +31,9 @@ import org.koin.core.component.inject
 
 internal class RootComponentImpl(
     componentContext: ComponentContext
-) : RootComponent, ComponentContext by componentContext, KoinComponent {
+) : RootComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val dataStore by inject<DataStore<Preferences>>()
     private val coroutineScope = coroutineScope()

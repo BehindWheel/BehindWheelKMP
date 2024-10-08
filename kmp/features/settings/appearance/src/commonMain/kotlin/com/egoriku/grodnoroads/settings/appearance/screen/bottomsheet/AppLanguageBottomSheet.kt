@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetClo
 import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
@@ -43,7 +43,7 @@ fun AppLanguageBottomSheet(
                     .toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = language.values.indexOf(language.current),
-                onSelected = { position ->
+                onSelect = { position ->
                     language = language.copy(current = language.values[position])
                 }
             )
@@ -58,9 +58,9 @@ fun AppLanguageBottomSheet(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewAppLanguageBottomSheet() = GrodnoRoadsM3ThemePreview {
+private fun PreviewAppLanguageBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     AppLanguageBottomSheet(
         languageDialogState = LanguageDialogState(languages = AppearancePref.AppLanguage()),
         onCancel = { },

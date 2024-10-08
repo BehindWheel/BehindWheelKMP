@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:property-naming")
+
 package com.egoriku.grodnoroads.datastore
 
 import androidx.datastore.core.DataStore
@@ -16,11 +18,11 @@ import okio.Path.Companion.toPath
 internal const val dataStoreFileName = "settings.preferences_pb"
 
 fun createDataStore(
-    producePath: () -> String,
+    producePath: () -> String
 ): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
     corruptionHandler = null,
     migrations = emptyList(),
-    produceFile = { producePath().toPath() },
+    produceFile = { producePath().toPath() }
 )
 
 suspend fun <T> DataStore<Preferences>.put(key: String, value: T) {

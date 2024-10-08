@@ -19,14 +19,17 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMess
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.CheckCircle
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SimpleMessageItem(message: SimpleMessage) {
-    SnackbarSurface {
+fun SimpleMessageItem(
+    message: SimpleMessage,
+    modifier: Modifier = Modifier
+) {
+    SnackbarSurface(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,14 +71,14 @@ fun SimpleMessageItem(message: SimpleMessage) {
                         is StringRes -> stringResource(description.resource)
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    color = MaterialTheme.colorScheme.inverseOnSurface
                 )
             }
         }
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
     Column(
@@ -85,7 +88,7 @@ private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
         SimpleMessageItem(
             message = SimpleMessage(
                 title = Raw("Доступ к геолокации запрещен."),
-                description = Raw("Используется для доступа к данным карт"),
+                description = Raw("Используется для доступа к данным карт")
             )
         )
         SimpleMessageItem(message = SimpleMessage(title = Raw("Доступ к геолокации запрещен.")))

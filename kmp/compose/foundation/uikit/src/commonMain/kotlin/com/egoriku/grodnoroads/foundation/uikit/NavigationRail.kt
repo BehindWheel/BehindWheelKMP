@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
@@ -12,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
@@ -36,12 +37,14 @@ fun NavigationRailItem(
     selected: Boolean,
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
     val tonalElevation = MaterialTheme.tonalElevation
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
 
-    androidx.compose.material3.NavigationRailItem(
+    NavigationRailItem(
+        modifier = modifier,
         colors = NavigationRailItemDefaults.colors(
             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                 alpha = 0.45f
@@ -49,7 +52,7 @@ fun NavigationRailItem(
             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                 alpha = 0.45f
             ),
-            indicatorColor = containerColor,
+            indicatorColor = containerColor
         ),
         selected = selected,
         onClick = onClick,
@@ -58,7 +61,7 @@ fun NavigationRailItem(
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun RadioButtonPreview() = GrodnoRoadsM3ThemePreview {
     NavigationRail(modifier = Modifier.height(200.dp)) {

@@ -26,7 +26,7 @@ import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-expect fun UsersCount(modifier: Modifier = Modifier, count: Int)
+expect fun UsersCount(count: Int, modifier: Modifier = Modifier)
 
 @Composable
 fun UsersCountBadge(

@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun rememberSheetCloseBehaviour(
     onCancel: () -> Unit,
-    onResult: () -> Unit = {},
+    onResult: () -> Unit = {}
 ): SheetCloseBehaviour {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -43,7 +43,7 @@ class SheetCloseBehaviour(
     private val scope: CoroutineScope,
     val sheetState: SheetState,
     private val onCancel: () -> Unit,
-    private val onResult: () -> Unit,
+    private val onResult: () -> Unit
 ) {
     fun cancel() {
         scope.launch {
@@ -72,13 +72,15 @@ class SheetCloseBehaviour(
 fun BasicModalBottomSheet(
     sheetState: SheetState,
     onCancel: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
     footer: @Composable ColumnScope.() -> Unit,
-    footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 16.dp)
+    modifier: Modifier = Modifier,
+    footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
 
     ModalBottomSheet(
+        modifier = modifier,
         onDismissRequest = onCancel,
         dragHandle = { BottomSheetDefaults.DragHandle() },
         sheetState = sheetState,
@@ -103,11 +105,13 @@ fun BasicModalBottomSheet(
 fun BasicModalBottomSheet(
     sheetState: SheetState,
     onCancel: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
 
     ModalBottomSheet(
+        modifier = modifier,
         onDismissRequest = onCancel,
         dragHandle = { BottomSheetDefaults.DragHandle() },
         sheetState = sheetState,

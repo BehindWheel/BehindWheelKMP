@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +28,7 @@ import com.egoriku.grodnoroads.eventreporting.domain.Reporting
 import com.egoriku.grodnoroads.eventreporting.screen.ui.util.toStringResource
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
@@ -39,6 +40,8 @@ internal fun SelectableOptions(
     reportType: Reporting.ReportType,
     onReportParamsChange: (ReportParams) -> Unit
 ) {
+    val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
+
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
@@ -48,7 +51,7 @@ internal fun SelectableOptions(
     var inputText by rememberMutableState { "" }
 
     LaunchedEffect(reportType, selectedOption, inputText) {
-        onReportParamsChange(
+        updatedReportParamsChange(
             ReportParams.EventReport(
                 mapEventType = selectedOption.mapEventType,
                 shortMessage = selectedOption.toSend,
@@ -105,7 +108,7 @@ private fun RadioButtonListItem(
     ) {
         RadioButton(
             selected = selected,
-            onClick = onSelect,
+            onClick = onSelect
         )
         Text(
             modifier = Modifier
@@ -117,7 +120,7 @@ private fun RadioButtonListItem(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun SelectableOptionsPreview() = GrodnoRoadsM3ThemePreview {
     Column {

@@ -37,7 +37,7 @@ internal fun InfographicPage(
             VerticalSpacer(16.dp)
             Text(
                 text = description,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge
             )
         }
     }

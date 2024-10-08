@@ -15,7 +15,6 @@ inline fun <T> rememberMutableState(
     crossinline calculation: @DisallowComposableCalls () -> T
 ) = remember { mutableStateOf(calculation(), policy) }
 
-
 @Composable
 inline fun <T> rememberMutableState(
     key1: Any?,
@@ -63,5 +62,3 @@ inline fun rememberMutableIntState(
 inline fun rememberMutableFloatState(
     crossinline value: @DisallowComposableCalls () -> Float
 ) = remember { mutableFloatStateOf(value()) }
-
-

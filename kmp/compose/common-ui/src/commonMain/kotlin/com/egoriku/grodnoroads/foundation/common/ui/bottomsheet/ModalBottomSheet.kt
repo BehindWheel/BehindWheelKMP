@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
@@ -16,11 +17,13 @@ import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 fun ModalBottomSheet(
     onDismissRequest: () -> Unit,
     sheetState: SheetState,
+    modifier: Modifier = Modifier,
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     dragHandle: @Composable (() -> Unit)? = null,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     ModalBottomSheet(
+        modifier = modifier,
         tonalElevation = MaterialTheme.tonalElevation,
         onDismissRequest = onDismissRequest,
         shape = shape,

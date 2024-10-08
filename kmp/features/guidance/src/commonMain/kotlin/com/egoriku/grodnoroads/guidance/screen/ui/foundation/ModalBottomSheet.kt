@@ -34,7 +34,7 @@ fun <T> ModalBottomSheet(
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
     dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaults.DragHandle() },
     windowInsets: WindowInsets = WindowInsets(0, 0, 0, 0),
-    content: @Composable ColumnScope.(T) -> Unit,
+    content: @Composable ColumnScope.(T) -> Unit
 ) {
     if (data != null) {
         val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()

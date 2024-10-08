@@ -30,5 +30,5 @@ internal class StationaryDTO(
     val speedCar: Int,
 
     @SerialName("speed_truck")
-    val speedTruck: Int,
+    val speedTruck: Int
 )

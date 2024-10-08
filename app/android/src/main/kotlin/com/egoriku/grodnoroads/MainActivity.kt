@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads
 
+import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -8,7 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.*
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
@@ -48,13 +53,13 @@ class MainActivity : AppCompatActivity() {
                 DisposableEffect(isDarkTheme) {
                     enableEdgeToEdge(
                         statusBarStyle = SystemBarStyle.auto(
-                            lightScrim = android.graphics.Color.TRANSPARENT,
-                            darkScrim = android.graphics.Color.TRANSPARENT,
+                            lightScrim = AndroidColor.TRANSPARENT,
+                            darkScrim = AndroidColor.TRANSPARENT
                         ) { isDarkTheme },
                         navigationBarStyle = SystemBarStyle.auto(
-                            lightScrim = android.graphics.Color.TRANSPARENT,
-                            darkScrim = android.graphics.Color.TRANSPARENT,
-                        ) { isDarkTheme },
+                            lightScrim = AndroidColor.TRANSPARENT,
+                            darkScrim = AndroidColor.TRANSPARENT
+                        ) { isDarkTheme }
                     )
                     onDispose {}
                 }
@@ -62,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
                         LocalWindowSizeClass provides calculateWindowSizeClass(),
-                        LocalActivity provides this,
+                        LocalActivity provides this
                     ) {
                         RootContent(root)
                     }

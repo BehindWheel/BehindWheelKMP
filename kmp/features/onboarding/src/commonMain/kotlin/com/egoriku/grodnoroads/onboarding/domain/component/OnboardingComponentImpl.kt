@@ -17,7 +17,7 @@ import org.koin.core.component.get
 
 fun buildOnboardingComponent(
     componentContext: ComponentContext,
-    onFinishOnboarding: () -> Unit,
+    onFinishOnboarding: () -> Unit
 ): OnboardingComponent = OnboardingComponentImpl(
     componentContext = componentContext,
     onFinishOnboarding = onFinishOnboarding
@@ -26,7 +26,9 @@ fun buildOnboardingComponent(
 internal class OnboardingComponentImpl(
     componentContext: ComponentContext,
     private val onFinishOnboarding: () -> Unit
-) : OnboardingComponent, ComponentContext by componentContext, KoinComponent {
+) : OnboardingComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val onboardingStore: OnboardingStore = instanceKeeper.getStore(::get)
 

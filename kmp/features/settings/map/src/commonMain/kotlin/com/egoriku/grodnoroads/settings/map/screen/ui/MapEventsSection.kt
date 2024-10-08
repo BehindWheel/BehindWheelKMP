@@ -34,7 +34,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.TrafficJam
 import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPolice
 import com.egoriku.grodnoroads.foundation.icons.colored.WildAnimals
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
@@ -236,8 +236,8 @@ private fun WildAnimals(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewMapEventsSection() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMapEventsSectionPreview() = GrodnoRoadsM3ThemePreview {
     MapEventsSection(mapInfo = MapInfo()) { }
 }

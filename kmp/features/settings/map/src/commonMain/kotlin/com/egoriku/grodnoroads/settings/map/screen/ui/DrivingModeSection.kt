@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.InsideCity
 import com.egoriku.grodnoroads.foundation.icons.outlined.OutsideCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
@@ -56,7 +56,7 @@ private fun MapZoomInCity(
             onLongClick = { reset(driveModeZoom.mapZoomInCity) },
             onValueChange = {
                 modify(mapZoomInCity.copy(current = it))
-            },
+            }
         )
     }
 }
@@ -82,12 +82,12 @@ private fun MapZoomOutCity(
             onLongClick = { reset(mapZoomOutCity) },
             onValueChange = {
                 modify(mapZoomOutCity.copy(current = it))
-            },
+            }
         )
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun DrivingModeSectionSectionPreview() = GrodnoRoadsM3ThemePreview {
     DrivingModeSection(

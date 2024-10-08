@@ -7,19 +7,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoPrimaryInverseCircleButton() {
-    UIDemoContainer(name = "PrimaryInverseCircleButton") {
+fun DemoPrimaryInverseCircleButton(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "PrimaryInverseCircleButton") {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(32.dp)
@@ -56,7 +57,7 @@ fun DemoPrimaryInverseCircleButton() {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoPrimaryInverseCircleButtonPreview() = GrodnoRoadsM3ThemePreview {
     DemoPrimaryInverseCircleButton()

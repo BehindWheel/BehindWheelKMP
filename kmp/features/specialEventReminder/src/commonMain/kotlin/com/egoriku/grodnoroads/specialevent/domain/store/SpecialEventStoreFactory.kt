@@ -18,7 +18,8 @@ class SpecialEventStoreFactory(private val storeFactory: StoreFactory) {
     }
 
     fun create(): SpecialEventStore =
-        object : SpecialEventStore,
+        object :
+            SpecialEventStore,
             Store<Nothing, State, Nothing> by storeFactory.create(
                 initialState = State(),
                 executorFactory = coroutineExecutorFactory(Dispatchers.Main) {

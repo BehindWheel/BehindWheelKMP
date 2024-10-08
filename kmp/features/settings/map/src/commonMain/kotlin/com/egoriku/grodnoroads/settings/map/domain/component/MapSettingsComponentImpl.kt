@@ -19,7 +19,9 @@ fun buildMapSettingsComponent(
 
 internal class MapSettingsComponentImpl(
     componentContext: ComponentContext
-) : MapSettingsComponent, ComponentContext by componentContext, KoinComponent {
+) : MapSettingsComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val mapSettingsStore: MapSettingsStore = instanceKeeper.getStore(::get)
 
@@ -28,7 +30,7 @@ internal class MapSettingsComponentImpl(
             MapSettingState(
                 isLoading = storeState.isLoading,
                 mapSettings = storeState.mapSettings,
-                mapDialogState = storeState.mapDialogState,
+                mapDialogState = storeState.mapDialogState
             )
         }.toCFlow()
 

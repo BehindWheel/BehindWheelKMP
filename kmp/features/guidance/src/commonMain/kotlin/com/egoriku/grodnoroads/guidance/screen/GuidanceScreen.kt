@@ -17,6 +17,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -110,8 +111,11 @@ import org.koin.compose.koinInject
 fun GuidanceScreen(
     contentPadding: PaddingValues,
     component: GuidanceComponent,
+    modifier: Modifier = Modifier,
     onBottomNavigationVisibilityChange: (Boolean) -> Unit
 ) {
+    val updatedBottomNavigationVisibility by rememberUpdatedState(onBottomNavigationVisibilityChange)
+
     val snackbarMessageBuilder = rememberSnackbarMessageBuilder()
     val snackbarState = remember { SnackbarState() }
 
@@ -170,7 +174,7 @@ fun GuidanceScreen(
             .launchIn(this)
     }
 
-    Surface {
+    Surface(modifier = modifier) {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
 
         val alerts by component.alerts.collectAsState(initial = persistentListOf())
@@ -240,7 +244,7 @@ fun GuidanceScreen(
                 backgroundColor = MaterialTheme.colorScheme.surface,
                 contentPadding = contentPadding,
                 mapProperties = mapProperties,
-                onMapLoaded = { map ->
+                onMapLoad = { map ->
                     projection = map.projection
                     isMapLoaded = true
                 },
@@ -250,13 +254,13 @@ fun GuidanceScreen(
                         zoom = mapConfig.zoomLevel
                     )
                 },
-                onMapUpdaterChanged = { mapUpdater = it },
-                onProjectionChanged = {
+                onMapUpdaterChange = { mapUpdater = it },
+                onProjectionChange = {
                     if (appMode == AppMode.ChooseLocation) {
                         projection = it
                     }
                 },
-                onZoomChanged = { zoomLevel ->
+                onZoomChange = { zoomLevel ->
                     when (zoomLevel) {
                         is ZoomLevelState.Idle -> {
                             val zoom = zoomLevel.zoom
@@ -269,7 +273,7 @@ fun GuidanceScreen(
                         is ZoomLevelState.Moving -> Unit
                     }
                 },
-                cameraMoveStateChanged = { state ->
+                cameraMoveStateChange = { state ->
                     cameraMoveState = state
 
                     when (appMode) {
@@ -308,8 +312,9 @@ fun GuidanceScreen(
                             )
                         }
 
-                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None)
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None) {
                             return@LaunchedEffect
+                        }
 
                         mapUpdater.animateCamera(
                             target = location.latLng,
@@ -350,8 +355,8 @@ fun GuidanceScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    AppMode.Default -> onBottomNavigationVisibilityChange(true)
-                    AppMode.Drive, AppMode.ChooseLocation -> onBottomNavigationVisibilityChange(
+                    AppMode.Default -> updatedBottomNavigationVisibility(true)
+                    AppMode.Drive, AppMode.ChooseLocation -> updatedBottomNavigationVisibility(
                         false
                     )
                 }
@@ -420,23 +425,25 @@ fun GuidanceScreen(
                             }
                         }
                         is MapEvent.Reports -> {
-                             ReportsMarker(
-                                 position = mapEvent.position,
-                                 markerSize = markerSize,
-                                 message = mapEvent.markerMessage,
-                                 iconProvider = {
-                                     when (mapEvent.mapEventType) {
-                                         MapEventType.TrafficPolice -> markerCache.getOrPut(Police)
-                                         MapEventType.RoadIncident -> markerCache.getOrPut(RoadIncident)
-                                         MapEventType.CarCrash -> markerCache.getOrPut(CarCrash)
-                                         MapEventType.TrafficJam -> markerCache.getOrPut(TrafficJam)
-                                         MapEventType.WildAnimals -> markerCache.getOrPut(WildAnimals)
-                                         MapEventType.Unsupported -> null
-                                     }
-                                 },
-                                 markerGenerator = { iconGenerator },
-                                 onClick = { component.showMarkerInfoDialog(mapEvent) }
-                             )
+                            ReportsMarker(
+                                position = mapEvent.position,
+                                markerSize = markerSize,
+                                message = mapEvent.markerMessage,
+                                iconProvider = {
+                                    when (mapEvent.mapEventType) {
+                                        MapEventType.TrafficPolice -> markerCache.getOrPut(Police)
+                                        MapEventType.RoadIncident -> markerCache.getOrPut(
+                                            RoadIncident
+                                        )
+                                        MapEventType.CarCrash -> markerCache.getOrPut(CarCrash)
+                                        MapEventType.TrafficJam -> markerCache.getOrPut(TrafficJam)
+                                        MapEventType.WildAnimals -> markerCache.getOrPut(WildAnimals)
+                                        MapEventType.Unsupported -> null
+                                    }
+                                },
+                                markerGenerator = { iconGenerator },
+                                onClick = { component.showMarkerInfoDialog(mapEvent) }
+                            )
                         }
                     }
                 }
@@ -456,7 +463,7 @@ fun GuidanceScreen(
                     when (state) {
                         AppMode.Default -> {
                             DefaultMode(
-                                onLocationRequestStateChanged = {
+                                onLocationRequestStateChange = {
                                     val message = snackbarMessageBuilder.handleDriveModeRequest(it)
 
                                     if (message == null) {
@@ -483,7 +490,7 @@ fun GuidanceScreen(
                                 isCameraMoving = isCameraMoving,
                                 isChooseInDriveMode = mapConfig.isChooseInDriveMode,
                                 onCancel = component::cancelChooseLocationFlow,
-                                onLocationSelected = { offset ->
+                                onLocationSelect = { offset ->
                                     val latLng = projection?.toScreenLatLng(
                                         Point(
                                             x = offset.x,
@@ -497,23 +504,23 @@ fun GuidanceScreen(
                     }
                 }
                 UsersCount(
+                    count = userCount,
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(bottom = 4.dp, end = 16.dp)
-                        .padding(contentPadding),
-                    count = userCount
+                        .padding(contentPadding)
                 )
                 FadeInOutAnimatedVisibility(
                     modifier = Modifier
                         .padding(contentPadding)
                         .align(OffsetAlignment(xOffset = 1f, yOffset = 0.45f)),
-                    visible = overlayVisible,
+                    visible = overlayVisible
                 ) {
                     MapOverlayActions(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
-                        onLocationRequestStateChanged = {
+                        onLocationRequestStateChange = {
                             if (appMode == AppMode.Drive) {
                                 mapUpdater.onMapScope {
                                     animateCurrentLocation(
@@ -535,7 +542,7 @@ fun GuidanceScreen(
                                     }
                                 }
                             }
-                        },
+                        }
                     )
                 }
                 DefaultOverlay(
@@ -560,10 +567,10 @@ fun GuidanceScreen(
         ModalBottomSheet(
             data = cameraInfo,
             onDismissRequest = { cameraInfo = null },
-            content = { CameraInfo(it) },
+            content = { CameraInfo(it) }
         )
         InAppUpdateHandle(
-            onDownloaded = {
+            onDownload = {
                 coroutineScope.launch {
                     snackbarState.show(
                         ActionMessage(

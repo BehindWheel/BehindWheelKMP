@@ -2,10 +2,10 @@ package com.egoriku.grodnoroads.specialevent.util
 
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.util.SpecialEventDispatcher
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.datetime.LocalDateTime
 
 class SpecialEventDispatcherTest {
 

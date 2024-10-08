@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.settings_section_changelog
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponentPreview
 import com.egoriku.grodnoroads.settings.changelog.screen.ui.ChangelogItem
@@ -35,12 +35,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ChangelogScreen(
     changelogComponent: ChangelogComponent,
+    modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
@@ -70,7 +71,7 @@ fun ChangelogScreen(
                     .navigationBars
                     .add(WindowInsets(left = 16.dp, right = 16.dp, top = 16.dp, bottom = 16.dp))
                     .asPaddingValues(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 itemsIndexed(state.releaseNotes) { index, releaseNotes ->
                     ChangelogItem(isLatestRelease = index == 0, release = releaseNotes)
@@ -80,7 +81,7 @@ fun ChangelogScreen(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun ChangelogScreenPreview() = GrodnoRoadsM3ThemePreview {
     ChangelogScreen(

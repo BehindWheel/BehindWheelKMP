@@ -50,7 +50,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.RoadIncidentBold
 import com.egoriku.grodnoroads.foundation.icons.colored.RoadProblemBold
 import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPoliceBold
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
@@ -97,7 +97,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
                 detectTapGestures(onTap = {
                     focusManager.clearFocus()
                 })
-            },
+            }
     ) {
         Text(
             modifier = Modifier
@@ -107,7 +107,7 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(16.dp)
-        ReportingTypes(currentType = reportType, onTypeChanged = { reportType = it })
+        ReportingTypes(currentType = reportType, onTypeChange = { reportType = it })
         VerticalSpacer(16.dp)
 
         when (reportType) {
@@ -134,7 +134,7 @@ internal data class Repo(
 @Composable
 private fun ReportingTypes(
     currentType: ReportType,
-    onTypeChanged: (ReportType) -> Unit,
+    onTypeChange: (ReportType) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val items = remember {
@@ -177,7 +177,7 @@ private fun ReportingTypes(
                 imageVector = it.imageVector,
                 selected = currentType == it.reportType,
                 onClick = {
-                    onTypeChanged(it.reportType)
+                    onTypeChange(it.reportType)
                     focusManager.clearFocus()
                 }
             )
@@ -225,7 +225,7 @@ private fun CategoryCell(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun ReportingUiPreview() = GrodnoRoadsM3ThemePreview {
     ReportingUi(onReportParamsChange = {})

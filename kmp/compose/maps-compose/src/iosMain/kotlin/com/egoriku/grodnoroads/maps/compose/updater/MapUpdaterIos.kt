@@ -31,7 +31,7 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.QuartzCore.CATransaction
 
 @OptIn(ExperimentalForeignApi::class)
-class MapUpdaterImplIos(
+class MapUpdaterIos(
     private val googleMap: GoogleMap,
     override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap),
     private val onZoomChanged: () -> Unit
@@ -135,7 +135,7 @@ class MapUpdaterImplIos(
                     target = target.cValue,
                     bearing = bearing.toDouble(),
                     zoom = zoom,
-                    viewingAngle = 35.0,
+                    viewingAngle = 35.0
                 )
             ),
             duration = 0.7,
@@ -154,7 +154,7 @@ class MapUpdaterImplIos(
                         target = target.cValue,
                         bearing = bearing.toDouble(),
                         zoom = zoom,
-                        viewingAngle = 35.0,
+                        viewingAngle = 35.0
                     )
                 ),
                 duration = 0.7
@@ -237,7 +237,7 @@ class MapUpdaterImplIos(
     private fun animateCamera(
         cameraUpdate: GMSCameraUpdate,
         duration: Double,
-        onFinish: () -> Unit = {},
+        onFinish: () -> Unit = {}
     ) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)

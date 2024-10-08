@@ -38,19 +38,19 @@ import com.egoriku.grodnoroads.foundation.core.unboundClickable
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.AddCircle
 import com.egoriku.grodnoroads.foundation.icons.outlined.RemoveCircle
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import kotlinx.coroutines.launch
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
 
 @Composable
 fun ClickableFloatRange(
-    modifier: Modifier = Modifier,
     min: Float,
     max: Float,
     step: Float,
     value: Float,
     onLongClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onValueChange: (Float) -> Unit
 ) {
     var isError by rememberMutableState { false }
@@ -67,7 +67,7 @@ fun ClickableFloatRange(
                     }
                 },
             imageVector = GrodnoRoads.Outlined.RemoveCircle,
-            contentDescription = null,
+            contentDescription = null
         )
         AnimatedContent(
             modifier = Modifier.align(CenterVertically),
@@ -75,10 +75,10 @@ fun ClickableFloatRange(
             transitionSpec = {
                 if (targetState > initialState) {
                     (slideInVertically { height -> height } + fadeIn()) togetherWith
-                            slideOutVertically { height -> -height } + fadeOut()
+                        slideOutVertically { height -> -height } + fadeOut()
                 } else {
                     slideInVertically { height -> -height } + fadeIn() togetherWith
-                            slideOutVertically { height -> height } + fadeOut()
+                        slideOutVertically { height -> height } + fadeOut()
                 }.using(
                     SizeTransform(clip = false)
                 )
@@ -114,7 +114,7 @@ fun ClickableFloatRange(
                                 }
                                 x at durationMillis / 10 * i using easing
                             }
-                        },
+                        }
                     )
                 }
             }
@@ -145,7 +145,7 @@ fun ClickableFloatRange(
                     }
                 },
             imageVector = GrodnoRoads.Outlined.AddCircle,
-            contentDescription = null,
+            contentDescription = null
         )
     }
 }
@@ -160,7 +160,7 @@ private fun decrement(value: Float, step: Float): Float {
     return (result * 10.0f).roundToInt() / 10.0f
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun ClickableFloatRangePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(200.dp, 50.dp)) {

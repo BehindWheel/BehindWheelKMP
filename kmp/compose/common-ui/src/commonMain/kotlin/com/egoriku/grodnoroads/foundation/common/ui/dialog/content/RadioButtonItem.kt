@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 
 // TODO: use new design
@@ -18,10 +18,11 @@ fun RadioButtonItem(
     item: String,
     index: Int,
     selected: Boolean,
+    modifier: Modifier = Modifier,
     onSelect: (index: Int) -> Unit
 ) {
     ListItem(
-        modifier = Modifier
+        modifier = modifier
             .height(40.dp)
             .clickable { onSelect(index) },
         leadingContent = {
@@ -29,21 +30,21 @@ fun RadioButtonItem(
                 selected = selected,
                 onClick = {
                     onSelect(index)
-                },
+                }
             )
         },
         headlineContent = {
             Text(
                 item,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewRadioButtonItem() = GrodnoRoadsM3ThemePreview {
+private fun PreviewRadioButtonItemPreview() = GrodnoRoadsM3ThemePreview {
     RadioButtonItem(
         item = "test",
         index = 0,

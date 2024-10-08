@@ -21,7 +21,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Error
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 
 @Composable
 fun OutlinedTextField(
@@ -51,7 +51,7 @@ fun OutlinedTextField(
         label = label,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        supportingText = supportingText,
+        supportingText = supportingText
     )
 }
 
@@ -89,7 +89,7 @@ fun OutlinedTextField(
 
             errorSupportingTextColor = MaterialTheme.colorScheme.error,
 
-            disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+            disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
         ),
         onValueChange = onValueChange,
         label = { Text(text = label) },
@@ -115,7 +115,7 @@ fun OutlinedTextField(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun OutlinedTextFieldPreview() = GrodnoRoadsM3ThemePreview {
     Column(
@@ -125,7 +125,7 @@ private fun OutlinedTextFieldPreview() = GrodnoRoadsM3ThemePreview {
         OutlinedTextField(
             value = "",
             onValueChange = {},
-            label = "Опциональное сообщение",
+            label = "Опциональное сообщение"
         )
         OutlinedTextField(
             value = "Тавлая",
@@ -137,14 +137,14 @@ private fun OutlinedTextFieldPreview() = GrodnoRoadsM3ThemePreview {
         OutlinedTextField(
             value = "Тавлая",
             onValueChange = {},
-            label = "Опциональное сообщение",
+            label = "Опциональное сообщение"
         )
 
         OutlinedTextField(
             value = "Тавлая",
             enabled = false,
             onValueChange = {},
-            label = "Опциональное сообщение",
+            label = "Опциональное сообщение"
         )
     }
 }

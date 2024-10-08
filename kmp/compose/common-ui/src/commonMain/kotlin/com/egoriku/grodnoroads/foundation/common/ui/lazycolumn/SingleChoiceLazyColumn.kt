@@ -11,17 +11,17 @@ import com.egoriku.grodnoroads.foundation.common.ui.dialog.ListItems
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.RadioButtonItem
 import com.egoriku.grodnoroads.foundation.core.rememberMutableIntState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SingleChoiceLazyColumn(
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
     list: ImmutableList<String>,
     initialSelection: Int,
-    onSelected: (selected: Int) -> Unit
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(),
+    onSelect: (selected: Int) -> Unit
 ) {
     var selectedItem by rememberMutableIntState { initialSelection }
 
@@ -29,7 +29,7 @@ fun SingleChoiceLazyColumn(
         modifier = modifier,
         contentPadding = contentPadding,
         list = list,
-        onClick = { index, _ -> selectedItem = index },
+        onClick = { index, _ -> selectedItem = index }
     ) { index, item ->
         val selected = remember(selectedItem) { index == selectedItem }
 
@@ -39,19 +39,19 @@ fun SingleChoiceLazyColumn(
             selected = selected,
             onSelect = {
                 selectedItem = index
-                onSelected(index)
+                onSelect(index)
             }
         )
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewListSingleChoiceDialog() = GrodnoRoadsM3ThemePreview {
+private fun PreviewListSingleChoiceDialogPreview() = GrodnoRoadsM3ThemePreview {
     SingleChoiceLazyColumn(
         list = listOf("System", "Dark", "Light").toImmutableList(),
         contentPadding = PaddingValues(vertical = 16.dp),
         initialSelection = 0,
-        onSelected = {}
+        onSelect = {}
     )
 }

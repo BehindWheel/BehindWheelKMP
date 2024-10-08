@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Play
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref
@@ -31,9 +31,10 @@ import org.jetbrains.compose.resources.stringResource
 fun VoiceLevelSection(
     alertVolumeLevel: AlertVolumeLevel,
     modify: (AlertsPref) -> Unit,
+    modifier: Modifier = Modifier,
     playTestSound: (VolumeLevel) -> Unit
 ) {
-    Column {
+    Column(modifier = modifier) {
         SettingsSectionHeader(title = stringResource(Res.string.alerts_header_volume_level))
         Row(
             modifier = Modifier
@@ -67,7 +68,7 @@ fun VoiceLevelSection(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun VoiceLevelSectionPreview() = GrodnoRoadsM3ThemePreview {
     VoiceLevelSection(

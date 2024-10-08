@@ -18,7 +18,9 @@ fun buildAlertsComponent(
 
 internal class AlertsComponentImpl(
     componentContext: ComponentContext
-) : AlertsComponent, ComponentContext by componentContext, KoinComponent {
+) : AlertsComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val alertsStore: AlertsStore = instanceKeeper.getStore(::get)
 

@@ -34,6 +34,6 @@ actual fun LanguageSection(
         imageVector = GrodnoRoads.Outlined.Language,
         text = stringResource(Res.string.appearance_app_language),
         value = stringResource(language.toStringResource()),
-        onClick = ::openAppSettings,
+        onClick = ::openAppSettings
     )
 }

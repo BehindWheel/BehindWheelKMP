@@ -41,7 +41,7 @@ fun appModule() = listOf(
     appScopeModule,
     analyticsModule,
     crashlyticsModule,
-    platformDataStoreModule,
+    platformDataStoreModule
 )
 
 val appScopeModule = module {

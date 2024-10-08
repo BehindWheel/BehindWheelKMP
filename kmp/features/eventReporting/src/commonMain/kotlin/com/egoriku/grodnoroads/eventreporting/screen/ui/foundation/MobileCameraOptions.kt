@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -29,7 +30,7 @@ import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
@@ -38,6 +39,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
+    val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
+
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -49,12 +52,15 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
 
     var isValidateInput by rememberMutableState { false }
     val errorLabel by rememberMutableState(inputText, isValidateInput) {
-        if (isValidateInput && inputText.isBlank()) inputErrorText
-        else null
+        if (isValidateInput && inputText.isBlank()) {
+            inputErrorText
+        } else {
+            null
+        }
     }
 
     LaunchedEffect(selectedSpeedLimit, inputText) {
-        onReportParamsChange(
+        updatedReportParamsChange(
             ReportParams.MobileCameraReport(
                 speedLimit = selectedSpeedLimit,
                 cameraInfo = inputText
@@ -116,7 +122,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun MobileCameraOptionsPreview() = GrodnoRoadsM3ThemePreview {
     MobileCameraOptions(onReportParamsChange = {})

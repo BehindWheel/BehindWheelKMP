@@ -35,7 +35,7 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.icons.outlined.Notification
 import com.egoriku.grodnoroads.foundation.icons.outlined.TrafficJam
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
@@ -52,9 +52,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun QuickSettingsContent(
     quickSettingsState: QuickSettingsState,
-    onChanged: (QuickSettingsPref) -> Unit
+    modifier: Modifier = Modifier,
+    onChange: (QuickSettingsPref) -> Unit
 ) {
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+    Column(modifier = modifier.verticalScroll(rememberScrollState())) {
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
             text = stringResource(Res.string.quick_settings_header),
@@ -63,26 +64,26 @@ internal fun QuickSettingsContent(
         VerticalSpacer(26.dp)
         AppearanceSection(
             appTheme = quickSettingsState.appTheme,
-            onChanged = onChanged
+            onChange = onChange
         )
         VerticalSpacer(24.dp)
         FilteringSection(
             markerFiltering = quickSettingsState.markerFiltering,
-            onChanged = onChanged
+            onChange = onChange
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
             imageVector = GrodnoRoads.Outlined.Notification,
             name = stringResource(Res.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
-            onCheckedChange = { onChanged(quickSettingsState.voiceAlerts.copy(enabled = it)) }
+            onCheckedChange = { onChange(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
         VerticalSpacer(16.dp)
         SwitchSetting(
             imageVector = GrodnoRoads.Outlined.TrafficJam,
             name = stringResource(Res.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
-            onCheckedChange = { onChanged(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
+            onCheckedChange = { onChange(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
         )
         VerticalSpacer(32.dp)
     }
@@ -91,7 +92,7 @@ internal fun QuickSettingsContent(
 @Composable
 private fun AppearanceSection(
     appTheme: AppTheme,
-    onChanged: (QuickSettingsPref) -> Unit
+    onChange: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
         imageVector = GrodnoRoads.Outlined.Moon,
@@ -110,7 +111,7 @@ private fun AppearanceSection(
                     },
                     selected = selected,
                     onClick = {
-                        onChanged(appTheme.copy(current = theme))
+                        onChange(appTheme.copy(current = theme))
                     }
                 )
             }
@@ -121,7 +122,7 @@ private fun AppearanceSection(
 @Composable
 private fun FilteringSection(
     markerFiltering: MarkerFiltering,
-    onChanged: (QuickSettingsPref) -> Unit
+    onChange: (QuickSettingsPref) -> Unit
 ) {
     BasicSection(
         imageVector = GrodnoRoads.Outlined.Filter,
@@ -134,7 +135,7 @@ private fun FilteringSection(
                 FilterChip(
                     selected = selected,
                     onClick = {
-                        onChanged(markerFiltering.copy(current = filtering))
+                        onChange(markerFiltering.copy(current = filtering))
                     },
                     label = {
                         Text(
@@ -208,14 +209,14 @@ private fun SwitchSetting(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun QuickSettingsContentPreview() = GrodnoRoadsM3ThemePreview {
     var state by rememberMutableState { QuickSettingsState() }
 
     QuickSettingsContent(
         quickSettingsState = state,
-        onChanged = {
+        onChange = {
             state = when (it) {
                 is AppTheme -> state.copy(appTheme = it)
                 is MarkerFiltering -> state.copy(markerFiltering = it)

@@ -14,12 +14,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HorizontalScrollableRow(
+    modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(horizontal = 20.dp),
     horizontalArrangement: Arrangement.HorizontalOrVertical = Arrangement.spacedBy(8.dp),
     content: @Composable RowScope.() -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
             .padding(paddingValues),

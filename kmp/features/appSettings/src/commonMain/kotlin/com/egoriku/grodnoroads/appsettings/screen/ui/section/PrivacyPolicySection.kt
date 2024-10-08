@@ -18,16 +18,16 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.privacy_policy
 import com.egoriku.grodnoroads.compose.resources.terms_of_service
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun PrivacyPolicySection() {
+fun PrivacyPolicySection(modifier: Modifier = Modifier) {
     val urlLauncher = rememberUrlLauncher()
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -62,7 +62,7 @@ private fun LinkButton(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun PrivacyPolicySectionPreview() = GrodnoRoadsM3ThemePreview {
     PrivacyPolicySection()

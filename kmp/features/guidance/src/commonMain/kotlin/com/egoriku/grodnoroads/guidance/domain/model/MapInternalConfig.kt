@@ -22,7 +22,7 @@ internal data class MapInternalConfig(
         val showTrafficPolice: Boolean,
         val showCarCrash: Boolean,
         val showTrafficJam: Boolean,
-        val showWildAnimals: Boolean,
+        val showWildAnimals: Boolean
     )
 
     internal data class AlertsInfo(
@@ -36,7 +36,7 @@ internal data class MapInternalConfig(
         val notifyTrafficPolice: Boolean,
         val notifyCarCrash: Boolean,
         val notifyTrafficJam: Boolean,
-        val notifyWildAnimals: Boolean,
+        val notifyWildAnimals: Boolean
     )
 
     companion object {

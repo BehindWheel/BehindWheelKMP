@@ -36,6 +36,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -67,7 +68,7 @@ import org.jetbrains.compose.resources.stringResource
 
 internal enum class DragAnchors {
     Start,
-    End,
+    End
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -78,6 +79,9 @@ internal fun ActionBottomSheet(
     sendEnabled: Boolean,
     content: @Composable () -> Unit
 ) {
+    val updatedOnDismiss by rememberUpdatedState(onDismiss)
+    val updatedOnResult by rememberUpdatedState(onResult)
+
     val density = LocalDensity.current
     val focusManager = LocalFocusManager.current
 
@@ -88,7 +92,7 @@ internal fun ActionBottomSheet(
             initialValue = DragAnchors.End,
             animationSpec = tween(),
             positionalThreshold = { distance: Float -> distance * 0.5f },
-            velocityThreshold = { with(density) { 50.dp.toPx() } },
+            velocityThreshold = { with(density) { 50.dp.toPx() } }
         )
     }
     val internalOnDismissRequest: () -> Unit = remember {
@@ -96,7 +100,7 @@ internal fun ActionBottomSheet(
             scope.launch {
                 anchoredDraggableState.animateTo(DragAnchors.End)
             }.invokeOnCompletion {
-                onDismiss()
+                updatedOnDismiss()
             }
         }
     }
@@ -116,7 +120,7 @@ internal fun ActionBottomSheet(
         AnimatedVisibility(visible = true) {
             Scrim(
                 color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.32f),
-                onDismissRequest = internalOnDismissRequest,
+                onDismissRequest = internalOnDismissRequest
             )
         }
         Column(
@@ -126,39 +130,40 @@ internal fun ActionBottomSheet(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(modifier = Modifier.weight(1f)) {
-                Column(modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .offset {
-                        IntOffset(
-                            x = 0,
-                            y = anchoredDraggableState
-                                .requireOffset()
-                                .toInt()
-                        )
-                    }
-                    .nestedScroll(
-                        remember(anchoredDraggableState) {
-                            anchoredDraggableState.preUpPostDownNestedScrollConnection()
-                        },
-                    )
-                    .onSizeChanged {
-                        height = it.height
-
-                        val anchors = DraggableAnchors {
-                            DragAnchors.Start at 0f
-                            DragAnchors.End at it.height.toFloat()
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .offset {
+                            IntOffset(
+                                x = 0,
+                                y = anchoredDraggableState
+                                    .requireOffset()
+                                    .toInt()
+                            )
                         }
-                        anchoredDraggableState.updateAnchors(anchors)
-                    }
-                    .anchoredDraggable(
-                        state = anchoredDraggableState,
-                        orientation = Orientation.Vertical
-                    )
-                    .pointerInput(Unit) {
-                        detectTapGestures(onTap = {
-                            focusManager.clearFocus()
-                        })
-                    },
+                        .nestedScroll(
+                            remember(anchoredDraggableState) {
+                                anchoredDraggableState.preUpPostDownNestedScrollConnection()
+                            }
+                        )
+                        .onSizeChanged {
+                            height = it.height
+
+                            val anchors = DraggableAnchors {
+                                DragAnchors.Start at 0f
+                                DragAnchors.End at it.height.toFloat()
+                            }
+                            anchoredDraggableState.updateAnchors(anchors)
+                        }
+                        .anchoredDraggable(
+                            state = anchoredDraggableState,
+                            orientation = Orientation.Vertical
+                        )
+                        .pointerInput(Unit) {
+                            detectTapGestures(onTap = {
+                                focusManager.clearFocus()
+                            })
+                        },
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Surface(
@@ -192,7 +197,7 @@ internal fun ActionBottomSheet(
                         .drop(1)
                         .filter { it == DragAnchors.End }
                         .collectLatest {
-                            onDismiss()
+                            updatedOnDismiss()
                         }
                 }
             }
@@ -222,7 +227,7 @@ internal fun ActionBottomSheet(
                     sendEnabled = sendEnabled,
                     onCancel = internalOnDismissRequest,
                     onResult = {
-                        onResult()
+                        updatedOnResult()
                         internalOnDismissRequest()
                     }
                 )
@@ -234,8 +239,8 @@ internal fun ActionBottomSheet(
 @Composable
 private fun BottomActions(
     sendEnabled: Boolean,
-    modifier: Modifier,
     onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
     onResult: () -> Unit
 ) {
     Box(
@@ -246,7 +251,7 @@ private fun BottomActions(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
         ) {
             SecondaryButton(
                 modifier = Modifier.weight(1f),
@@ -280,7 +285,7 @@ private fun DragHandle() {
 @Composable
 private fun Scrim(
     color: Color,
-    onDismissRequest: () -> Unit,
+    onDismissRequest: () -> Unit
 ) {
     val alpha by animateFloatAsState(
         targetValue = 1f,

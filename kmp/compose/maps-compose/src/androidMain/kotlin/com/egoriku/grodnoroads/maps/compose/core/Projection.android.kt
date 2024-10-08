@@ -10,8 +10,10 @@ actual fun Projection.toScreenLatLng(point: Point) = LatLng(
     fromScreenLocation(
         /* point = */
         android.graphics.Point(
-            /* x = */ point.x.toInt(),
-            /* y = */point.y.toInt()
+            /* x = */
+            point.x.toInt(),
+            /* y = */
+            point.y.toInt()
         )
     )
 )

@@ -33,7 +33,8 @@ fun buildTabComponent(
 internal class TabsComponentImpl(
     componentContext: ComponentContext,
     private val onOpenPage: (Page) -> Unit
-) : TabsComponent, ComponentContext by componentContext {
+) : TabsComponent,
+    ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
     private val reportingNavigation = SlotNavigation<ReportingConfig>()

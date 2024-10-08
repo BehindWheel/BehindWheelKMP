@@ -8,9 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Answer(text: String) {
+fun Answer(
+    text: String,
+    modifier: Modifier = Modifier
+) {
     Text(
-        modifier = Modifier.padding(top = 4.dp),
+        modifier = modifier.padding(top = 4.dp),
         text = text,
         style = MaterialTheme.typography.bodyMedium
     )

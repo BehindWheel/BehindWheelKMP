@@ -29,7 +29,9 @@ fun buildSpecialEventComponent(
 
 internal class SpecialEventComponentImpl(
     componentContext: ComponentContext
-) : SpecialEventComponent, ComponentContext by componentContext, KoinComponent {
+) : SpecialEventComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val specialEventStore = instanceKeeper.getStore<SpecialEventStore>(::get)
 
@@ -46,7 +48,7 @@ internal class SpecialEventComponentImpl(
     override val specialEvents: CStateFlow<ChildSlot<*, DialogComponent>> = childSlot(
         source = eventsNavigation,
         serializer = EventConfig.serializer(),
-        handleBackButton = true,
+        handleBackButton = true
     ) { config, childComponentContext ->
         buildDialogComponent(
             componentContext = childComponentContext,

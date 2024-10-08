@@ -2,7 +2,13 @@ package com.egoriku.grodnoroads.foundation.uikit
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem as Material3NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -10,10 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
-import androidx.compose.material3.NavigationBarItem as Material3NavigationBarItem
 
 @Composable
 fun NavigationBar(
@@ -58,7 +63,7 @@ fun RowScope.NavigationBarItem(
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
     NavigationBar {
@@ -72,7 +77,7 @@ private fun NavigationBarPreview() = GrodnoRoadsM3ThemePreview {
                 )
             },
             label = {
-                Text("Account")
+                Text(text = "Account")
             }
         )
         NavigationBarItem(

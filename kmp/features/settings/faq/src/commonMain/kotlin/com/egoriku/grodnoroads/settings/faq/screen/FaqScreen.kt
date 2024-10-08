@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.settings_section_faq
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponentPreview
 import com.egoriku.grodnoroads.settings.faq.screen.ui.Answer
@@ -39,12 +39,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FaqScreen(
     faqComponent: FaqComponent,
+    modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopBar(
@@ -93,7 +94,7 @@ fun FaqScreen(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun FaqScreenPreview() = GrodnoRoadsM3ThemePreview {
     FaqScreen(

@@ -25,7 +25,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
 
@@ -33,14 +33,15 @@ import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
 @Composable
 fun CheckBoxListItem(
     imageVector: ImageVector,
-    iconSize: DpSize = DpSize(24.dp, 24.dp),
-    paddingValues: PaddingValues = PaddingValues(),
     text: String,
     isChecked: Boolean,
+    modifier: Modifier = Modifier,
+    iconSize: DpSize = DpSize(24.dp, 24.dp),
+    paddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .toggleable(
                 value = isChecked,
@@ -49,7 +50,7 @@ fun CheckBoxListItem(
             )
             .padding(paddingValues)
             .padding(start = 6.dp, end = 20.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides true) {
             Checkbox(
@@ -73,7 +74,7 @@ fun CheckBoxListItem(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun CheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
     var state by rememberMutableState { true }

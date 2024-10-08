@@ -3,6 +3,9 @@ package com.egoriku.grodnoroads.shared.geolocation
 import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import platform.CoreLocation.CLLocation
@@ -12,9 +15,6 @@ import platform.CoreLocation.kCLDistanceFilterNone
 import platform.CoreLocation.kCLLocationAccuracyBest
 import platform.Foundation.NSError
 import platform.darwin.NSObject
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class IosLocationService : LocationService {
 
@@ -89,7 +89,9 @@ class IosLocationService : LocationService {
     }
 
     @OptIn(ExperimentalForeignApi::class)
-    private class LocationDelegate : NSObject(), CLLocationManagerDelegateProtocol {
+    private class LocationDelegate :
+        NSObject(),
+        CLLocationManagerDelegateProtocol {
         var onLocationUpdate: ((LocationInfo?) -> Unit)? = null
 
         override fun locationManager(manager: CLLocationManager, didUpdateLocations: List<*>) {

@@ -20,26 +20,27 @@ internal class FaqStoreFactory(
 ) {
 
     internal fun create(): FaqStore =
-        object : FaqStore, Store<Nothing, State, Nothing> by storeFactory.create(
-            initialState = State(),
-            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                onAction<Unit> {
-                    launch {
-                        when (val result = faqRepository.load()) {
-                            is ResultOf.Success -> dispatch(Message.Success(result.value))
-                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
+        object :
+            FaqStore,
+            Store<Nothing, State, Nothing> by storeFactory.create(
+                initialState = State(),
+                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                    onAction<Unit> {
+                        launch {
+                            when (val result = faqRepository.load()) {
+                                is ResultOf.Success -> dispatch(Message.Success(result.value))
+                                is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
+                            }
+                            dispatch(Message.Loading(false))
                         }
-                        dispatch(Message.Loading(false))
-
+                    }
+                },
+                bootstrapper = SimpleBootstrapper(Unit),
+                reducer = { message: Message ->
+                    when (message) {
+                        is Message.Loading -> copy(isLoading = message.isLoading)
+                        is Message.Success -> copy(faq = message.faq.toImmutableList())
                     }
                 }
-            },
-            bootstrapper = SimpleBootstrapper(Unit),
-            reducer = { message: Message ->
-                when (message) {
-                    is Message.Loading -> copy(isLoading = message.isLoading)
-                    is Message.Success -> copy(faq = message.faq.toImmutableList())
-                }
-            }
-        ) {}
+            ) {}
 }

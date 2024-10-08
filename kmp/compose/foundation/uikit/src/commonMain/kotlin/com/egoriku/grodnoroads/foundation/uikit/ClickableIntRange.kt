@@ -38,19 +38,19 @@ import com.egoriku.grodnoroads.foundation.core.unboundClickable
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.AddCircle
 import com.egoriku.grodnoroads.foundation.icons.outlined.RemoveCircle
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import kotlinx.coroutines.launch
 
 @Composable
 fun ClickableIntRange(
-    modifier: Modifier = Modifier,
     min: Int,
     max: Int,
     step: Int,
     value: Int,
     onLongClick: () -> Unit,
     onValueChange: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     formatter: (Int) -> String = { it.toString() }
 ) {
     var isError by rememberMutableState { false }
@@ -66,7 +66,7 @@ fun ClickableIntRange(
                     }
                 },
             imageVector = GrodnoRoads.Outlined.RemoveCircle,
-            contentDescription = null,
+            contentDescription = null
         )
         AnimatedContent(
             modifier = Modifier.align(CenterVertically),
@@ -74,10 +74,10 @@ fun ClickableIntRange(
             transitionSpec = {
                 if (targetState > initialState) {
                     (slideInVertically { height -> height } + fadeIn()) togetherWith
-                            slideOutVertically { height -> -height } + fadeOut()
+                        slideOutVertically { height -> -height } + fadeOut()
                 } else {
                     slideInVertically { height -> -height } + fadeIn() togetherWith
-                            slideOutVertically { height -> height } + fadeOut()
+                        slideOutVertically { height -> height } + fadeOut()
                 }.using(
                     SizeTransform(clip = false)
                 )
@@ -113,7 +113,7 @@ fun ClickableIntRange(
                                 }
                                 x at durationMillis / 10 * i using easing
                             }
-                        },
+                        }
                     )
                 }
             }
@@ -143,12 +143,12 @@ fun ClickableIntRange(
                     }
                 },
             imageVector = GrodnoRoads.Outlined.AddCircle,
-            contentDescription = null,
+            contentDescription = null
         )
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun ClickableIntRangePreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.size(200.dp, 50.dp)) {

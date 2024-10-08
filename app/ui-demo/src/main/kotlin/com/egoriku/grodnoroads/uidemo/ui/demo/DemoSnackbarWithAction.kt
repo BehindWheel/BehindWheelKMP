@@ -1,19 +1,20 @@
 package com.egoriku.grodnoroads.uidemo.ui.demo
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.MessageWithActionItem
 import com.egoriku.grodnoroads.extensions.toast
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoSnackbarWithAction() {
-    UIDemoContainer(name = "SnackbarWithAction") {
+fun DemoSnackbarWithAction(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "SnackbarWithAction") {
         val context = LocalContext.current
         val isInPreview = LocalInspectionMode.current
 
@@ -32,7 +33,7 @@ fun DemoSnackbarWithAction() {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoSnackbarWithActionPreview() = GrodnoRoadsM3ThemePreview {
     DemoSnackbarWithAction()

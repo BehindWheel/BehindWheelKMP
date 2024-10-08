@@ -17,10 +17,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ConfirmationFooter(
     onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
     onAccept: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         TextButton(modifier = Modifier.weight(1f), onClick = onDismiss) {

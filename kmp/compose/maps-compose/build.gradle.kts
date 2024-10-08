@@ -31,6 +31,7 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.compose.foundation.core)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.location)

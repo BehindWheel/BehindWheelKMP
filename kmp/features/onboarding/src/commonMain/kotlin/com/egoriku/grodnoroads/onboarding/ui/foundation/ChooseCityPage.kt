@@ -49,7 +49,7 @@ internal fun ChooseCityPage(
             initialSelection = sortedCityValues.indexOfFirst { cityValue ->
                 cityValue.index == City.entries.indexOf(City.Grodno)
             },
-            onSelected = { position ->
+            onSelect = { position ->
                 onModify(defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index]))
             }
         )

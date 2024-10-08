@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:filename")
+
 package com.egoriku.grodnoroads.maps.compose
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,7 +34,7 @@ import com.egoriku.grodnoroads.maps.compose.extension.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.extension.zoom
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
-import com.egoriku.grodnoroads.maps.compose.updater.MapUpdaterImplIos
+import com.egoriku.grodnoroads.maps.compose.updater.MapUpdaterIos
 import com.egoriku.grodnoroads.maps.compose.util.toUIColor
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.readValue
@@ -44,24 +46,24 @@ import platform.darwin.NSObject
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun GoogleMap(
+    cameraPositionProvider: () -> CameraPosition,
     modifier: Modifier,
     backgroundColor: Color,
     contentPadding: PaddingValues,
     mapProperties: MapProperties,
     mapUiSettings: MapUiSettings,
-    onMapLoaded: (GoogleMap) -> Unit,
-    cameraPositionProvider: () -> CameraPosition,
-    onMapUpdaterChanged: (MapUpdater?) -> Unit,
-    onProjectionChanged: (Projection) -> Unit,
-    onZoomChanged: (ZoomLevelState) -> Unit,
-    cameraMoveStateChanged: (CameraMoveState) -> Unit
+    onMapLoad: (GoogleMap) -> Unit,
+    onMapUpdaterChange: (MapUpdater?) -> Unit,
+    onProjectionChange: (Projection) -> Unit,
+    onZoomChange: (ZoomLevelState) -> Unit,
+    cameraMoveStateChange: (CameraMoveState) -> Unit
 ) {
-    val updatedOnMapLoaded by rememberUpdatedState(onMapLoaded)
+    val updatedOnMapLoad by rememberUpdatedState(onMapLoad)
     val updatedCameraPositionProvider by rememberUpdatedState(cameraPositionProvider)
-    val updatedOnMapUpdaterChanged by rememberUpdatedState(onMapUpdaterChanged)
-    val updatedOnProjectionChanged by rememberUpdatedState(onProjectionChanged)
-    val updatedOnZoomChanged by rememberUpdatedState(onZoomChanged)
-    val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChanged)
+    val updatedOnMapUpdaterChange by rememberUpdatedState(onMapUpdaterChange)
+    val updatedOnProjectionChange by rememberUpdatedState(onProjectionChange)
+    val updatedOnZoomChange by rememberUpdatedState(onZoomChange)
+    val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChange)
 
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
@@ -76,8 +78,8 @@ actual fun GoogleMap(
     }
 
     var mapUpdater by remember(googleMap) {
-        mutableStateOf<MapUpdaterImplIos?>(
-            MapUpdaterImplIos(
+        mutableStateOf<MapUpdaterIos?>(
+            MapUpdaterIos(
                 googleMap = googleMap,
                 onZoomChanged = {
                     updatedCameraMoveState(CameraMoveState.UserGesture)
@@ -89,7 +91,7 @@ actual fun GoogleMap(
     val delegate = remember {
         object : NSObject(), GMSMapViewDelegateProtocol {
             override fun mapViewSnapshotReady(mapView: GMSMapView) {
-                updatedOnMapLoaded(googleMap)
+                updatedOnMapLoad(googleMap)
             }
 
             override fun mapView(mapView: GMSMapView, willMove: Boolean) {
@@ -106,8 +108,8 @@ actual fun GoogleMap(
                 idleAtCameraPosition: GMSCameraPosition
             ) {
                 updatedCameraMoveState(CameraMoveState.Idle)
-                updatedOnProjectionChanged(googleMap.projection)
-                updatedOnZoomChanged(ZoomLevelState.Idle(zoom = googleMap.zoom))
+                updatedOnProjectionChange(googleMap.projection)
+                updatedOnZoomChange(ZoomLevelState.Idle(zoom = googleMap.zoom))
             }
 
             override fun mapView(
@@ -142,7 +144,7 @@ actual fun GoogleMap(
 
             updateContentPadding(contentPadding, density, layoutDirection)
         }
-        updatedOnMapUpdaterChanged(mapUpdater)
+        updatedOnMapUpdaterChange(mapUpdater)
         onDispose {
             mapUpdater?.detach()
             mapUpdater = null
@@ -153,7 +155,7 @@ actual fun GoogleMap(
         mapUpdater?.updateContentPadding(
             contentPadding = contentPadding,
             density = density,
-            layoutDirection = layoutDirection,
+            layoutDirection = layoutDirection
         )
     }
 

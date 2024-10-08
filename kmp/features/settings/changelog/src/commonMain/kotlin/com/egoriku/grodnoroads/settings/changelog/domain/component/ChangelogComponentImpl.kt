@@ -16,7 +16,9 @@ fun buildChangelogComponent(
 
 internal class ChangelogComponentImpl(
     componentContext: ComponentContext
-) : ChangelogComponent, KoinComponent, ComponentContext by componentContext {
+) : ChangelogComponent,
+    KoinComponent,
+    ComponentContext by componentContext {
 
     private val changelogStore: ChangelogStore = instanceKeeper.getStore(::get)
 

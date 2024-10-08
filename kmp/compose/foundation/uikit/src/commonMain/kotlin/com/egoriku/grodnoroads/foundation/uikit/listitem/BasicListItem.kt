@@ -17,14 +17,15 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BasicListItem(
+    text: String,
+    modifier: Modifier = Modifier,
     touchModifier: Modifier = Modifier,
     imageVector: ImageVector? = null,
-    text: String,
     textStyle: TextStyle = MaterialTheme.typography.titleMedium,
     content: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .then(touchModifier)
             .padding(horizontal = 20.dp),

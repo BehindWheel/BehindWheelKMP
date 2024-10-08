@@ -15,14 +15,14 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Geo
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun ActionButton(
-    modifier: Modifier = Modifier,
     imageVector: ImageVector,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     ActionButton(
@@ -36,12 +36,11 @@ fun ActionButton(
     }
 }
 
-
 @Composable
 private fun ActionButton(
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    icon: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: @Composable () -> Unit
 ) {
     val shadowColor = when {
         MaterialTheme.colorScheme.isLight -> MaterialTheme.colorScheme.outline
@@ -66,7 +65,7 @@ private fun ActionButton(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun ActionButtonPreview() = GrodnoRoadsM3ThemePreview {
     ActionButton(

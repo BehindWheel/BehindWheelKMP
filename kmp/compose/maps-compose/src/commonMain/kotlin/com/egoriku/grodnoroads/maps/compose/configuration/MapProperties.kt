@@ -8,5 +8,5 @@ data class MapProperties(
     val mapStyleOptions: MapStyleOptions? = null,
     val mapType: MapType = MapType.Normal,
     val maxZoomPreference: Float = 21.0f,
-    val minZoomPreference: Float = 3.0f,
+    val minZoomPreference: Float = 3.0f
 )

@@ -23,7 +23,7 @@ internal fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection()
         override fun onPostScroll(
             consumed: Offset,
             available: Offset,
-            source: NestedScrollSource,
+            source: NestedScrollSource
         ): Offset {
             return if (source == NestedScrollSource.Drag) {
                 dispatchRawDelta(available.toFloat()).toOffset()

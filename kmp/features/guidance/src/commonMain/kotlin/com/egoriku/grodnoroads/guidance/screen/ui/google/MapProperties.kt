@@ -29,7 +29,7 @@ fun rememberMapProperties(
         MapProperties(
             mapType = MapType.Normal,
             minZoomPreference = 6.0f,
-            maxZoomPreference = 17.5f,
+            maxZoomPreference = 17.5f
         )
     }
 
@@ -45,7 +45,7 @@ fun rememberMapProperties(
             Style.Detailed -> {
                 when {
                     isLight -> MR.files.map_style_light_detailed_json
-                    else ->MR.files.map_style_dark_detailed_json
+                    else -> MR.files.map_style_dark_detailed_json
                 }
             }
             Style.Unknown -> error("googleMap style can't be unknown")
@@ -55,7 +55,7 @@ fun rememberMapProperties(
     LaunchedEffect(appMode, isRequestCurrentLocation) {
         mapProperties = mapProperties.copy(
             isMyLocationEnabled = permissionsState.allPermissionsGranted &&
-                    appMode != AppMode.Drive
+                appMode != AppMode.Drive
         )
     }
 
@@ -65,7 +65,7 @@ fun rememberMapProperties(
 
     LaunchedEffect(mapStyleResource) {
         mapProperties = mapProperties.copy(
-            mapStyleOptions = mapStyleLoader.load(mapStyleResource),
+            mapStyleOptions = mapStyleLoader.load(mapStyleResource)
         )
     }
 

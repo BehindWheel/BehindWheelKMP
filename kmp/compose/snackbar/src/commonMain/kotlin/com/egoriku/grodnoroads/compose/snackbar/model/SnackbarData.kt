@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
 import androidx.compose.runtime.Stable
-import kotlinx.coroutines.CancellableContinuation
 import kotlin.coroutines.resume
+import kotlinx.coroutines.CancellableContinuation
 
 @Stable
 interface SnackbarData {

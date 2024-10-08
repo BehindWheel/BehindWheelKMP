@@ -27,10 +27,10 @@ actual fun <C : Any, T : Any> backAnimation(
         predictiveBackAnimatable(
             initialBackEvent = initialBackEvent,
             exitModifier = { progress, _ -> Modifier.slideExitModifier(progress = progress) },
-            enterModifier = { progress, _ -> Modifier.slideEnterModifier(progress = progress) },
+            enterModifier = { progress, _ -> Modifier.slideEnterModifier(progress = progress) }
         )
     },
-    onBack = onBack,
+    onBack = onBack
 )
 
 private fun iosLikeSlide(animationSpec: FiniteAnimationSpec<Float> = tween()): StackAnimator =

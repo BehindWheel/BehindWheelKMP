@@ -16,7 +16,9 @@ fun buildFaqComponent(
 
 internal class FaqComponentImpl(
     componentContext: ComponentContext
-) : FaqComponent, KoinComponent, ComponentContext by componentContext {
+) : FaqComponent,
+    KoinComponent,
+    ComponentContext by componentContext {
 
     private val faqStore: FaqStore = instanceKeeper.getStore(::get)
 

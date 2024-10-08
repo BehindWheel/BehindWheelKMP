@@ -85,7 +85,7 @@ interface AlertsComponent {
         @Stable
         data class AlertRadius(
             val alertRadiusInCity: AlertRadiusInCity = AlertRadiusInCity(),
-            val alertRadiusOutCity: AlertRadiusOutCity = AlertRadiusOutCity(),
+            val alertRadiusOutCity: AlertRadiusOutCity = AlertRadiusOutCity()
         )
 
         @Stable

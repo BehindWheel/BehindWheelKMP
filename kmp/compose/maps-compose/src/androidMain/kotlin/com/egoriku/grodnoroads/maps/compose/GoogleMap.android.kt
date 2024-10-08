@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
@@ -49,24 +50,24 @@ import com.google.maps.android.ktx.buildGoogleMapOptions
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 actual fun GoogleMap(
+    cameraPositionProvider: () -> CameraPosition,
     modifier: Modifier,
     backgroundColor: Color,
     contentPadding: PaddingValues,
     mapProperties: MapProperties,
     mapUiSettings: MapUiSettings,
-    onMapLoaded: (GoogleMap) -> Unit,
-    cameraPositionProvider: () -> CameraPosition,
-    onMapUpdaterChanged: (MapUpdater?) -> Unit,
-    onProjectionChanged: (Projection) -> Unit,
-    onZoomChanged: (ZoomLevelState) -> Unit,
-    cameraMoveStateChanged: (CameraMoveState) -> Unit
+    onMapLoad: (GoogleMap) -> Unit,
+    onMapUpdaterChange: (MapUpdater?) -> Unit,
+    onProjectionChange: (Projection) -> Unit,
+    onZoomChange: (ZoomLevelState) -> Unit,
+    cameraMoveStateChange: (CameraMoveState) -> Unit
 ) {
-    val updatedOnMapLoaded by rememberUpdatedState(onMapLoaded)
+    val updatedOnMapLoaded by rememberUpdatedState(onMapLoad)
     val updatedCameraPositionProvider by rememberUpdatedState(cameraPositionProvider)
-    val updatedOnMapUpdaterChanged by rememberUpdatedState(onMapUpdaterChanged)
-    val updatedOnProjectionChanged by rememberUpdatedState(onProjectionChanged)
-    val updatedOnZoomChanged by rememberUpdatedState(onZoomChanged)
-    val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChanged)
+    val updatedOnMapUpdaterChanged by rememberUpdatedState(onMapUpdaterChange)
+    val updatedOnProjectionChanged by rememberUpdatedState(onProjectionChange)
+    val updatedOnZoomChanged by rememberUpdatedState(onZoomChange)
+    val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChange)
 
     val context = LocalContext.current
     val density = LocalDensity.current
@@ -74,24 +75,28 @@ actual fun GoogleMap(
 
     val mapView = remember {
         MapView(
-            /* context = */ context,
-            /* options = */ buildGoogleMapOptions {
+            /* context = */
+            context,
+            /* options = */
+            buildGoogleMapOptions {
                 backgroundColor(backgroundColor.toArgb())
                 camera(updatedCameraPositionProvider().platformCameraPosition)
             }
         )
     }
-    var googleMap by remember { mutableStateOf<GoogleMap?>(null) }
+    var googleMap by rememberMutableState<GoogleMap?> { null }
     var mapUpdater by remember(googleMap) {
-        mutableStateOf(googleMap?.let {
-            MapUpdaterAndroid(
-                mapView = mapView,
-                googleMap = it,
-                onZoomChanged = {
-                    updatedCameraMoveState(CameraMoveState.UserGesture)
-                }
-            )
-        })
+        mutableStateOf(
+            googleMap?.let {
+                MapUpdaterAndroid(
+                    mapView = mapView,
+                    googleMap = it,
+                    onZoomChanged = {
+                        updatedCameraMoveState(CameraMoveState.UserGesture)
+                    }
+                )
+            }
+        )
     }
 
     AndroidView(
@@ -130,7 +135,7 @@ actual fun GoogleMap(
         mapUpdater.updateContentPadding(
             contentPadding = contentPadding,
             density = density,
-            layoutDirection = layoutDirection,
+            layoutDirection = layoutDirection
         )
     }
 
@@ -173,7 +178,7 @@ private fun MapPaddingDecorator.updateContentPadding(
     density: Density,
     layoutDirection: LayoutDirection
 ) {
-    println("left=${contentPadding}")
+    println("left=$contentPadding")
     with(density) {
         println("left=${contentPadding.calculateLeftPadding(layoutDirection).roundToPx()}")
         println("top=${contentPadding.calculateBottomPadding().roundToPx()}")
@@ -212,7 +217,7 @@ private fun updateMapUiSettings(googleMap: GoogleMap, mapUiSettings: MapUiSettin
 private fun MapLifecycle(mapView: MapView) {
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
-    val previousState = remember { mutableStateOf(Lifecycle.Event.ON_CREATE) }
+    val previousState = rememberMutableState { Lifecycle.Event.ON_CREATE }
     DisposableEffect(context, lifecycle, mapView) {
         val mapLifecycleObserver = mapView.lifecycleObserver(previousState)
         val callbacks = mapView.componentCallbacks()

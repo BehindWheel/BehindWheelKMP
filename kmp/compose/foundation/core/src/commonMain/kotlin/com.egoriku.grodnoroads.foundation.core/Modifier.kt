@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:compose:material-two", "ktlint:compose:modifier-composable-check")
+
 package com.egoriku.grodnoroads.foundation.core
 
 import androidx.compose.foundation.clickable

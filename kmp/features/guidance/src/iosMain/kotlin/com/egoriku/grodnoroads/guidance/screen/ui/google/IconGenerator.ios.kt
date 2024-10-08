@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.guidance.screen.ui.google
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.egoriku.grodnoroads.maps.compose.extension.MarkerImage
+import kotlin.math.PI
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.readValue
 import kotlinx.cinterop.useContents
@@ -17,7 +18,6 @@ import platform.UIKit.UIGraphicsImageRenderer
 import platform.UIKit.UIImage
 import platform.UIKit.UILabel
 import platform.UIKit.UIView
-import kotlin.math.PI
 
 actual class MarkerGenerator {
     actual fun makeIcon(text: String): MarkerImage = MapReportView(text).snapshot

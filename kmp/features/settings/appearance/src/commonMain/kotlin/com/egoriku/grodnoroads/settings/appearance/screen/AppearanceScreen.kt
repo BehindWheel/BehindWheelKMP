@@ -26,8 +26,8 @@ import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
@@ -50,6 +50,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AppearanceScreen(
     appearanceComponent: AppearanceComponent,
+    modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
     val state by appearanceComponent.state.collectAsState(initial = State())
@@ -61,7 +62,7 @@ fun AppearanceScreen(
         onResult = appearanceComponent::update
     )
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             SettingsTopBar(
@@ -95,7 +96,7 @@ expect fun LanguageSection(
 @Composable
 private fun AppThemeSection(
     state: State,
-    onModify: (AppTheme) -> Unit,
+    onModify: (AppTheme) -> Unit
 ) {
     val appTheme = state.appearanceState.appTheme
 
@@ -103,7 +104,7 @@ private fun AppThemeSection(
         imageVector = GrodnoRoads.Outlined.Moon,
         text = stringResource(Res.string.appearance_app_theme),
         value = stringResource(appTheme.current.toStringResource()),
-        onClick = { onModify(appTheme) },
+        onClick = { onModify(appTheme) }
     )
 }
 
@@ -155,7 +156,7 @@ private fun DialogHandler(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun AppearanceScreenPreview() = GrodnoRoadsM3ThemePreview {
     AppearanceScreen(

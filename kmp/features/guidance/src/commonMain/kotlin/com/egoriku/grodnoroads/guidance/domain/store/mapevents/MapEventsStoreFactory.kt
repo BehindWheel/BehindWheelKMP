@@ -30,6 +30,7 @@ import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.Me
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore.State
 import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
+import kotlin.time.Duration.Companion.minutes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -38,7 +39,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.minutes
 
 internal class MapEventsStoreFactory(
     private val storeFactory: StoreFactory,
@@ -55,71 +55,73 @@ internal class MapEventsStoreFactory(
         get() = DateTime.currentTimeMillis()
 
     fun create(): MapEventsStore =
-        object : MapEventsStore, Store<Nothing, State, Nothing> by storeFactory.create(
-            initialState = State(),
-            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                var reports: Job? = null
+        object :
+            MapEventsStore,
+            Store<Nothing, State, Nothing> by storeFactory.create(
+                initialState = State(),
+                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                    var reports: Job? = null
 
-                onAction<Unit> {
-                    dataStore.data
-                        .map { it.filteringMarkers.timeInMilliseconds }
-                        .distinctUntilChanged()
-                        .onEach { time ->
-                            dispatch(OnUpdateFilterTime(time))
+                    onAction<Unit> {
+                        dataStore.data
+                            .map { it.filteringMarkers.timeInMilliseconds }
+                            .distinctUntilChanged()
+                            .onEach { time ->
+                                dispatch(OnUpdateFilterTime(time))
 
-                            reports = reLaunch(reports) {
-                                subscribeForReports(
-                                    onLoaded = { list ->
-                                        val filterTime = currentTime - time
-                                        dispatch(OnNewReports(data = list.filter { it.timestamp >= filterTime }))
-                                    }
-                                )
+                                reports = reLaunch(reports) {
+                                    subscribeForReports(
+                                        onLoaded = { list ->
+                                            val filterTime = currentTime - time
+                                            dispatch(OnNewReports(data = list.filter { it.timestamp >= filterTime }))
+                                        }
+                                    )
+                                }
+                            }
+                            .launchIn(this)
+
+                        launch {
+                            subscribeForStationaryCameras {
+                                dispatch(OnStationary(data = it))
                             }
                         }
-                        .launchIn(this)
+                        launch {
+                            subscribeForMediumSpeedCameras {
+                                dispatch(OnMediumSpeed(data = it))
+                            }
+                        }
+                        launch {
+                            subscribeForMobileCameras {
+                                dispatch(OnMobileCamera(data = it))
+                            }
+                        }
+                        launch {
+                            subscribeForUserCount {
+                                dispatch(OnUserCount(data = it))
+                            }
+                        }
+                        launch {
+                            while (true) {
+                                delay(2.minutes)
 
-                    launch {
-                        subscribeForStationaryCameras {
-                            dispatch(OnStationary(data = it))
+                                val filterTime = currentTime - state().filterEventsTime
+                                dispatch(OnNewReports(state().reports.filter { it.timestamp >= filterTime }))
+                            }
                         }
                     }
-                    launch {
-                        subscribeForMediumSpeedCameras {
-                            dispatch(OnMediumSpeed(data = it))
-                        }
-                    }
-                    launch {
-                        subscribeForMobileCameras {
-                            dispatch(OnMobileCamera(data = it))
-                        }
-                    }
-                    launch {
-                        subscribeForUserCount {
-                            dispatch(OnUserCount(data = it))
-                        }
-                    }
-                    launch {
-                        while (true) {
-                            delay(2.minutes)
-
-                            val filterTime = currentTime - state().filterEventsTime
-                            dispatch(OnNewReports(state().reports.filter { it.timestamp >= filterTime }))
-                        }
+                },
+                bootstrapper = SimpleBootstrapper(Unit),
+                reducer = { message: Message ->
+                    when (message) {
+                        is OnStationary -> copy(stationaryCameras = message.data)
+                        is OnMediumSpeed -> copy(mediumSpeedCameras = message.data)
+                        is OnNewReports -> copy(reports = message.data)
+                        is OnMobileCamera -> copy(mobileCameras = message.data)
+                        is OnUserCount -> copy(userCount = message.data)
+                        is OnUpdateFilterTime -> copy(filterEventsTime = message.time)
                     }
                 }
-            },
-            bootstrapper = SimpleBootstrapper(Unit),
-            reducer = { message: Message ->
-                when (message) {
-                    is OnStationary -> copy(stationaryCameras = message.data)
-                    is OnMediumSpeed -> copy(mediumSpeedCameras = message.data)
-                    is OnNewReports -> copy(reports = message.data)
-                    is OnMobileCamera -> copy(mobileCameras = message.data)
-                    is OnUserCount -> copy(userCount = message.data)
-                    is OnUpdateFilterTime -> copy(filterEventsTime = message.time)
-                }
-            }
-        ) {}
+            ) {}
 
     private suspend fun subscribeForMobileCameras(onLoaded: (List<MobileCamera>) -> Unit) {
         mobileCameraRepository.loadAsFlow().collect { result ->

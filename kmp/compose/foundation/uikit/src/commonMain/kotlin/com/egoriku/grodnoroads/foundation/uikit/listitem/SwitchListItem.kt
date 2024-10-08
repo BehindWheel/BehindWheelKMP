@@ -22,19 +22,20 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.Switch
 
 @Composable
 fun SwitchListItem(
-    imageVector: ImageVector? = null,
     text: String,
     description: String,
     isChecked: Boolean,
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector? = null,
     onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .toggleable(
                 value = isChecked,
@@ -73,16 +74,17 @@ fun SwitchListItem(
         Switch(
             modifier = Modifier.align(Alignment.Top),
             checked = isChecked,
-            onCheckedChange = onCheckedChange,
+            onCheckedChange = onCheckedChange
         )
     }
 }
 
 @Composable
 fun SwitchListItem(
-    imageVector: ImageVector? = null,
     text: String,
     isChecked: Boolean,
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector? = null,
     onCheckedChange: (Boolean) -> Unit
 ) {
     BasicListItem(
@@ -92,18 +94,18 @@ fun SwitchListItem(
             onValueChange = onCheckedChange
         ),
         imageVector = imageVector,
-        text = text,
+        text = text
     ) {
         Switch(
             checked = isChecked,
-            onCheckedChange = onCheckedChange,
+            onCheckedChange = onCheckedChange
         )
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewSwitchListItem() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSwitchListItemPreview() = GrodnoRoadsM3ThemePreview {
     var isChecked1 by rememberMutableState { false }
     var isChecked2 by rememberMutableState { false }
     var isChecked3 by rememberMutableState { false }

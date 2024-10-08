@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Arrow
 import com.egoriku.grodnoroads.foundation.icons.outlined.PinLocation
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
@@ -25,15 +25,16 @@ import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
 
 @Composable
 fun DefaultMode(
-    onLocationRequestStateChanged: (LocationRequestStatus) -> Unit,
+    onLocationRequestStateChange: (LocationRequestStatus) -> Unit,
+    modifier: Modifier = Modifier,
     openReportFlow: () -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(start = 16.dp, bottom = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             PrimaryInverseCircleButton(
                 size = Large,
@@ -48,11 +49,11 @@ fun DefaultMode(
             val locationRequesterState = rememberLocationRequesterState()
             WithLocationRequester(
                 locationRequesterState = locationRequesterState,
-                onStateChanged = onLocationRequestStateChanged
+                onStateChange = onLocationRequestStateChange
             ) {
                 PrimaryCircleButton(
                     size = Large,
-                    onClick = locationRequesterState::launchRequest,
+                    onClick = locationRequesterState::launchRequest
                 ) {
                     Icon(
                         modifier = Modifier.size(24.dp),
@@ -65,8 +66,11 @@ fun DefaultMode(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DefaultModePreview() = GrodnoRoadsM3ThemePreview {
-    DefaultMode({}, {})
+    DefaultMode(
+        onLocationRequestStateChange = {},
+        openReportFlow = {}
+    )
 }

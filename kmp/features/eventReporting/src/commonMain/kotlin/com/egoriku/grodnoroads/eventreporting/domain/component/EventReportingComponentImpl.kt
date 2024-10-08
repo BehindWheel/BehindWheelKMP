@@ -10,12 +10,14 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
 fun buildEventReportingComponent(
-    componentContext: ComponentContext,
+    componentContext: ComponentContext
 ): EventReportingComponent = EventReportingComponentImpl(componentContext = componentContext)
 
 internal class EventReportingComponentImpl(
-    componentContext: ComponentContext,
-) : EventReportingComponent, ComponentContext by componentContext, KoinComponent {
+    componentContext: ComponentContext
+) : EventReportingComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val reportingStore: ReportingStore = instanceKeeper.getStore(::get)
 

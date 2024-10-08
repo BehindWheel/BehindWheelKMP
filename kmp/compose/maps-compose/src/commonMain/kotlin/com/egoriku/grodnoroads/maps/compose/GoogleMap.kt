@@ -17,15 +17,15 @@ import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 
 @Composable
 expect fun GoogleMap(
+    cameraPositionProvider: () -> CameraPosition,
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.Unspecified,
     contentPadding: PaddingValues = PaddingValues(),
     mapProperties: MapProperties = DefaultMapProperties,
     mapUiSettings: MapUiSettings = DefaultMapUiSettings,
-    onMapLoaded: (GoogleMap) -> Unit = {},
-    cameraPositionProvider: () -> CameraPosition,
-    onMapUpdaterChanged: (MapUpdater?) -> Unit = {},
-    onProjectionChanged: (Projection) -> Unit = {},
-    onZoomChanged: (ZoomLevelState) -> Unit = {},
-    cameraMoveStateChanged: (CameraMoveState) -> Unit = {}
+    onMapLoad: (GoogleMap) -> Unit = {},
+    onMapUpdaterChange: (MapUpdater?) -> Unit = {},
+    onProjectionChange: (Projection) -> Unit = {},
+    onZoomChange: (ZoomLevelState) -> Unit = {},
+    cameraMoveStateChange: (CameraMoveState) -> Unit = {}
 )
