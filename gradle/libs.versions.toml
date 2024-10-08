@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.6.1"
+agp = "8.7.0"
 coil = "3.0.0-rc01"
 decompose = "3.1.0"
 essenty = "2.1.0"
