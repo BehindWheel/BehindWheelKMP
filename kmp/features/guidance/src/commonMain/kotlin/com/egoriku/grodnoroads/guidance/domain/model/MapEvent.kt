@@ -28,7 +28,7 @@ sealed interface MapEvent {
             override val bidirectional: Boolean,
             override val position: LatLng,
             override val speedCar: Int,
-            override val speedTruck: Int,
+            override val speedTruck: Int
         ) : Camera
 
         data class MobileCamera(
@@ -40,7 +40,7 @@ sealed interface MapEvent {
             override val bidirectional: Boolean,
             override val position: LatLng,
             override val speedCar: Int,
-            override val speedTruck: Int,
+            override val speedTruck: Int
         ) : Camera
 
         data class MediumSpeedCamera(
@@ -52,7 +52,7 @@ sealed interface MapEvent {
             override val bidirectional: Boolean,
             override val position: LatLng,
             override val speedCar: Int,
-            override val speedTruck: Int,
+            override val speedTruck: Int
         ) : Camera
     }
 
@@ -63,6 +63,6 @@ sealed interface MapEvent {
         val dialogTitle: String,
         val messages: ImmutableList<MessageItem>,
         val mapEventType: MapEventType,
-        override val position: LatLng,
+        override val position: LatLng
     ) : MapEvent
 }

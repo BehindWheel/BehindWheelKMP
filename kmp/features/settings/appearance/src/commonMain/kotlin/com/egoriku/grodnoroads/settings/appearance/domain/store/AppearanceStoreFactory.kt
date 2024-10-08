@@ -40,7 +40,8 @@ class AppearanceStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    fun create(): AppearanceStore = object : AppearanceStore,
+    fun create(): AppearanceStore = object :
+        AppearanceStore,
         Store<Intent, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
@@ -117,5 +118,6 @@ class AppearanceStoreFactory(
                         )
                     )
                 }
-            }) {}
+            }
+        ) {}
 }

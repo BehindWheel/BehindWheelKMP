@@ -10,8 +10,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapConfig
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.guidance.domain.model.event.AlertEvent
-import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.guidance.domain.model.event.Notification
+import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent

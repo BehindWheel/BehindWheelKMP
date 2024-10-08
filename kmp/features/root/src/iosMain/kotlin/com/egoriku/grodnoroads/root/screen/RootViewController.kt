@@ -41,11 +41,11 @@ object RootViewController {
             PredictiveBackGestureOverlay(
                 backDispatcher = backDispatcher,
                 backIcon = null,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize()
             ) {
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
-                        LocalWindowSizeClass provides calculateWindowSizeClass(),
+                        LocalWindowSizeClass provides calculateWindowSizeClass()
                     ) {
                         RootContent(rootComponent)
                     }

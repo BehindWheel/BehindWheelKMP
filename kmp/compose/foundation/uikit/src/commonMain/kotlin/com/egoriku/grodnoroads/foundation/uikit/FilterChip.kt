@@ -4,14 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.*
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Check
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun FilterChip(
@@ -19,7 +23,7 @@ fun FilterChip(
     onClick: () -> Unit,
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
+    enabled: Boolean = true
 ) {
     FilterChip(
         modifier = modifier,
@@ -43,7 +47,7 @@ fun FilterChip(
                 Icon(
                     modifier = Modifier.size(FilterChipDefaults.IconSize),
                     imageVector = GrodnoRoads.Outlined.Check,
-                    contentDescription = null,
+                    contentDescription = null
                 )
             }
         } else {
@@ -52,19 +56,19 @@ fun FilterChip(
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun FilterChipPreview() = GrodnoRoadsM3ThemePreview {
     Row(modifier = Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilterChip(
             selected = true,
             onClick = {},
-            label = { Text("Option 1") }
+            label = { Text(text = "Option 1") }
         )
         FilterChip(
             selected = false,
             onClick = {},
-            label = { Text("Option 1") }
+            label = { Text(text = "Option 1") }
         )
     }
 }

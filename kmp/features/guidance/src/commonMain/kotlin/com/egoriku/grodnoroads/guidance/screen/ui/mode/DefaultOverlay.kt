@@ -41,8 +41,8 @@ import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibi
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.More
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
@@ -63,9 +63,10 @@ fun DefaultOverlay(
     currentSpeed: Int,
     speedLimit: Int,
     alerts: ImmutableList<Alert>,
+    modifier: Modifier = Modifier,
     onOpenQuickSettings: () -> Unit
 ) {
-    Box {
+    Box(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -109,7 +110,10 @@ fun DefaultOverlay(
 }
 
 @Composable
-private fun CarSpeed(modifier: Modifier = Modifier, speed: Int) {
+private fun CarSpeed(
+    speed: Int,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier.size(64.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
@@ -121,7 +125,7 @@ private fun CarSpeed(modifier: Modifier = Modifier, speed: Int) {
                 text = speed.toString(),
                 textAlign = TextAlign.Center,
                 fontSize = 26.sp,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Bold
             )
         }
     }
@@ -132,7 +136,7 @@ private fun SpeedLimit(limit: Int) {
     val circles = listOf(
         remember { Animatable(initialValue = 0.4f) },
         remember { Animatable(initialValue = 0.4f) },
-        remember { Animatable(initialValue = 0.4f) },
+        remember { Animatable(initialValue = 0.4f) }
     )
 
     val animationDelay = 1500
@@ -169,7 +173,7 @@ private fun SpeedLimit(limit: Int) {
                 .fillMaxSize()
                 .clip(CircleShape)
                 .background(Color.White)
-                .border(width = 3.dp, color = Color.Red, shape = CircleShape),
+                .border(width = 3.dp, color = Color.Red, shape = CircleShape)
         ) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
@@ -181,8 +185,7 @@ private fun SpeedLimit(limit: Int) {
     }
 }
 
-
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
     var limit by rememberMutableState { -1 }

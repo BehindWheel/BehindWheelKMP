@@ -94,7 +94,7 @@ interface MapSettingsComponent {
         val driveModeZoom: DriveModeZoom = DriveModeZoom(),
         val mapStyle: MapStyle = MapStyle(),
         val markerFiltering: MarkerFiltering = MarkerFiltering(),
-        val mapInfo: MapInfo = MapInfo(),
+        val mapInfo: MapInfo = MapInfo()
     ) {
         @Stable
         data class LocationInfo(
@@ -104,7 +104,7 @@ interface MapSettingsComponent {
         @Stable
         data class DriveModeZoom(
             val mapZoomInCity: MapZoomInCity = MapZoomInCity(),
-            val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity(),
+            val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity()
         )
 
         @Stable
@@ -123,7 +123,7 @@ interface MapSettingsComponent {
         @Stable
         data class MapStyle(
             val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),
-            val googleMapStyle: GoogleMapStyle = GoogleMapStyle(),
+            val googleMapStyle: GoogleMapStyle = GoogleMapStyle()
         )
     }
 }

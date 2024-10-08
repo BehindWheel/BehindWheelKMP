@@ -25,8 +25,8 @@ import com.egoriku.grodnoroads.compose.snackbar.tool.rememberToastHelper
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.DismissableRow
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.MessageWithActionItem
 import com.egoriku.grodnoroads.compose.snackbar.ui.internal.SimpleMessageItem
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import kotlinx.coroutines.launch
 
 @Composable
@@ -46,7 +46,7 @@ fun Snackbar(snackbarData: SnackbarData) {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun SnakbarPreview() = GrodnoRoadsM3ThemePreview {
     val toastHelper = rememberToastHelper()

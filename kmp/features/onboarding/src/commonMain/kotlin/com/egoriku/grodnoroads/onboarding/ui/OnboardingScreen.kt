@@ -45,10 +45,13 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingScreen(onboardingComponent: OnboardingComponent) {
+fun OnboardingScreen(
+    onboardingComponent: OnboardingComponent,
+    modifier: Modifier = Modifier
+) {
     val state by onboardingComponent.state.collectAsState(State())
 
-    Box(modifier = Modifier.systemBarsPadding()) {
+    Box(modifier = modifier.systemBarsPadding()) {
         OnboardingUi(
             state = state,
             onModify = onboardingComponent::modify,
@@ -70,7 +73,7 @@ private fun OnboardingUi(
         HorizontalPager(
             modifier = Modifier.weight(1f),
             state = pagerState,
-            userScrollEnabled = true,
+            userScrollEnabled = true
         ) {
             when (it) {
                 0 -> InfographicPage(

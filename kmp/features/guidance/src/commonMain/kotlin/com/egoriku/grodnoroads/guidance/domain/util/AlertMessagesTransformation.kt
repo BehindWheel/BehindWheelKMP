@@ -86,7 +86,9 @@ private fun makeAlertMessage(
                                 speedLimit = event.speedCar,
                                 cameraType = event.cameraType
                             )
-                        } else null
+                        } else {
+                            null
+                        }
                     }
                     is Reports -> {
                         IncidentAlert(

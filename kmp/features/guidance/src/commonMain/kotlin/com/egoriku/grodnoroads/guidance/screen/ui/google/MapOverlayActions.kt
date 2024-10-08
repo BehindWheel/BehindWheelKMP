@@ -11,8 +11,8 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Add
 import com.egoriku.grodnoroads.foundation.icons.outlined.Geo
 import com.egoriku.grodnoroads.foundation.icons.outlined.Remove
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButton
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionButtonGroup
 import com.egoriku.grodnoroads.foundation.uikit.button.ActionIcon
@@ -22,10 +22,10 @@ import com.egoriku.grodnoroads.location.requester.rememberLocationRequesterState
 
 @Composable
 fun MapOverlayActions(
-    modifier: Modifier = Modifier,
     zoomIn: () -> Unit,
     zoomOut: () -> Unit,
-    onLocationRequestStateChanged: (LocationRequestStatus) -> Unit,
+    modifier: Modifier = Modifier,
+    onLocationRequestStateChange: (LocationRequestStatus) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -40,17 +40,17 @@ fun MapOverlayActions(
         val locationRequesterState = rememberLocationRequesterState()
         WithLocationRequester(
             locationRequesterState = locationRequesterState,
-            onStateChanged = onLocationRequestStateChanged
+            onStateChange = onLocationRequestStateChange
         ) {
             ActionButton(
                 onClick = locationRequesterState::launchRequest,
-                imageVector = GrodnoRoads.Outlined.Geo,
+                imageVector = GrodnoRoads.Outlined.Geo
             )
         }
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun MapOverlayActionsPreview() = GrodnoRoadsM3ThemePreview {
     Column(
@@ -60,7 +60,7 @@ private fun MapOverlayActionsPreview() = GrodnoRoadsM3ThemePreview {
         MapOverlayActions(
             zoomIn = {},
             zoomOut = {},
-            onLocationRequestStateChanged = {},
+            onLocationRequestStateChange = {}
         )
     }
 }

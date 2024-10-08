@@ -15,7 +15,8 @@ fun buildAppSettingsComponent(
 internal class AppSettingsComponentImpl(
     componentContext: ComponentContext,
     private val onOpen: (Page) -> Unit
-) : AppSettingsComponent, ComponentContext by componentContext {
+) : AppSettingsComponent,
+    ComponentContext by componentContext {
 
     override val appVersion = AppBuildConfig.versionName
 

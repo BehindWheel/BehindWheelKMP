@@ -17,7 +17,6 @@ import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VolumeChangeReceiver
 import com.egoriku.grodnoroads.shared.audioplayer.util.AudioEffectUtil
 import com.egoriku.grodnoroads.shared.audioplayer.util.audioManager
-import com.egoriku.grodnoroads.shared.resources.MR
 import kotlin.math.roundToInt
 
 @Composable
@@ -69,10 +68,14 @@ actual class AudioPlayer(private val context: Context) {
         }
         loudnessEnhancer = LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
         ContextCompat.registerReceiver(
-            /* context = */ context.applicationContext,
-            /* receiver = */ volumeChangeReceiver,
-            /* filter = */ IntentFilter(VOLUME_CHANGE_ACTION),
-            /* flags = */ ContextCompat.RECEIVER_NOT_EXPORTED
+            /* context = */
+            context.applicationContext,
+            /* receiver = */
+            volumeChangeReceiver,
+            /* filter = */
+            IntentFilter(VOLUME_CHANGE_ACTION),
+            /* flags = */
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
 
@@ -95,9 +98,12 @@ actual class AudioPlayer(private val context: Context) {
     actual fun playSound(sound: Sound) {
         AudioManagerCompat.requestAudioFocus(audioManager, audioFocusRequest)
         audioManager.setStreamVolume(
-            /* streamType = */ AudioManager.STREAM_MUSIC,
-            /* index = */ (maxVolume * volumeLevel).roundToInt(),
-            /* flags = */ 0
+            /* streamType = */
+            AudioManager.STREAM_MUSIC,
+            /* index = */
+            (maxVolume * volumeLevel).roundToInt(),
+            /* flags = */
+            0
         )
 
         mediaPlayer.reset()

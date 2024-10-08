@@ -18,7 +18,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Close
 import com.egoriku.grodnoroads.foundation.icons.outlined.Ok
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
@@ -29,7 +29,8 @@ fun ChooseLocation(
     isCameraMoving: Boolean,
     isChooseInDriveMode: Boolean,
     onCancel: () -> Unit,
-    onLocationSelected: (Offset) -> Unit
+    modifier: Modifier = Modifier,
+    onLocationSelect: (Offset) -> Unit
 ) {
     var markerOffset = remember { Offset.Zero }
 
@@ -41,11 +42,11 @@ fun ChooseLocation(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         PinMarker(
             modifier = Modifier.align(offsetAlignment),
             animate = isCameraMoving,
-            onGloballyPositioned = {
+            onGloballyPosition = {
                 markerOffset = it
             }
         )
@@ -67,7 +68,7 @@ fun ChooseLocation(
                 size = Large,
                 onClick = {
                     if (!isCameraMoving) {
-                        onLocationSelected(markerOffset)
+                        onLocationSelect(markerOffset)
                     }
                 }
             ) {
@@ -80,13 +81,13 @@ fun ChooseLocation(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun ChooseLocationPreview() = GrodnoRoadsM3ThemePreview {
     ChooseLocation(
         isCameraMoving = false,
         isChooseInDriveMode = true,
         onCancel = {},
-        onLocationSelected = {}
+        onLocationSelect = {}
     )
 }

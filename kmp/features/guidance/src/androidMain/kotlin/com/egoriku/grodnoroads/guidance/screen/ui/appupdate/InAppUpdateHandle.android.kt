@@ -5,8 +5,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -18,7 +20,9 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 @Composable
-actual fun InAppUpdateHandle(onDownloaded: (complete: () -> Unit) -> Unit)  {
+actual fun InAppUpdateHandle(onDownload: (complete: () -> Unit) -> Unit) {
+    val updatedDownload by rememberUpdatedState(onDownload)
+
     val dataStore = koinInject<DataStore<Preferences>>()
     val updatePreferences = remember { InAppUpdatePreferences(dataStore) }
 
@@ -51,7 +55,7 @@ actual fun InAppUpdateHandle(onDownloaded: (complete: () -> Unit) -> Unit)  {
                     updatePreferences.incrementRequestCount()
                 }
             }
-            is AppUpdateResult.Downloaded -> onDownloaded {
+            is AppUpdateResult.Downloaded -> updatedDownload {
                 scope.launch {
                     appUpdateResult.completeUpdate()
                 }

@@ -67,7 +67,8 @@ internal class AlertsStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>
 ) {
-    fun create(): AlertsStore = object : AlertsStore,
+    fun create(): AlertsStore = object :
+        AlertsStore,
         Store<AlertsIntent, StoreAlertState, Nothing> by storeFactory.create(
             initialState = StoreAlertState(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
@@ -84,10 +85,14 @@ internal class AlertsStoreFactory(
                             val notifyWildAnimals = pref.isNotifyWildAnimals
 
                             val isShowMarkers = listOf(
-                                notifyStationaryCameras, notifyMediumSpeedCameras,
-                                notifyMobileCameras, notifyTrafficPolice,
-                                notifyRoadIncidents, notifyCarCrash,
-                                notifyTrafficJam, notifyWildAnimals
+                                notifyStationaryCameras,
+                                notifyMediumSpeedCameras,
+                                notifyMobileCameras,
+                                notifyTrafficPolice,
+                                notifyRoadIncidents,
+                                notifyCarCrash,
+                                notifyTrafficJam,
+                                notifyWildAnimals
                             )
 
                             val isAllMarkersDisabled = isShowMarkers.none { it }

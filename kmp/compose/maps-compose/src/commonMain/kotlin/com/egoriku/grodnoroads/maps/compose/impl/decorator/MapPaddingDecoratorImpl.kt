@@ -15,13 +15,15 @@ internal class MapPaddingDecoratorImpl(
             top == mapPadding.paddingTop &&
             right == mapPadding.paddingRight &&
             bottom == mapPadding.paddingBottom
-        ) return
+        ) {
+            return
+        }
 
         mapPadding = mapPadding.copy(
             paddingLeft = left,
             paddingTop = top,
             paddingRight = right,
-            paddingBottom = bottom,
+            paddingBottom = bottom
         )
         setPadding(mapPadding + additionalPadding)
     }
@@ -31,13 +33,15 @@ internal class MapPaddingDecoratorImpl(
             top == additionalPadding.paddingTop &&
             right == additionalPadding.paddingRight &&
             bottom == additionalPadding.paddingBottom
-        ) return
+        ) {
+            return
+        }
 
         additionalPadding = additionalPadding.copy(
             paddingLeft = left,
             paddingTop = top,
             paddingRight = right,
-            paddingBottom = bottom,
+            paddingBottom = bottom
         )
         setPadding(mapPadding + additionalPadding)
     }
@@ -55,7 +59,7 @@ internal class MapPaddingDecoratorImpl(
         var paddingLeft: Int = 0,
         var paddingTop: Int = 0,
         var paddingRight: Int = 0,
-        var paddingBottom: Int = 0,
+        var paddingBottom: Int = 0
     )
 
     internal operator fun MapPadding.plus(mapPadding: MapPadding): MapPadding {

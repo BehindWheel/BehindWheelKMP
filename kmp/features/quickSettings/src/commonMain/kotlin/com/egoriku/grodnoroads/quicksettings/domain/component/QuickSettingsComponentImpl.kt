@@ -18,7 +18,9 @@ fun buildQuickSettingsComponent(
 
 internal class QuickSettingsComponentImpl(
     componentContext: ComponentContext
-) : QuickSettingsComponent, ComponentContext by componentContext, KoinComponent {
+) : QuickSettingsComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val quickSettingsStore: QuickSettingsStore = instanceKeeper.getStore(::get)
 

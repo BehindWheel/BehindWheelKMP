@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Check
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 actual fun Switch(
@@ -25,7 +25,7 @@ actual fun Switch(
             Icon(
                 imageVector = GrodnoRoads.Outlined.Check,
                 contentDescription = null,
-                modifier = Modifier.size(SwitchDefaults.IconSize),
+                modifier = Modifier.size(SwitchDefaults.IconSize)
             )
         }
     } else {
@@ -40,9 +40,9 @@ actual fun Switch(
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
-private fun PreviewSwitch() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSwitchPreview() = GrodnoRoadsM3ThemePreview {
     Column(modifier = Modifier.padding(16.dp)) {
         Switch(
             checked = true,

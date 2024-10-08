@@ -47,8 +47,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 
@@ -114,6 +114,9 @@ actual fun Switch(
     Column(
         modifier = modifier
             .minimumInteractiveComponentSize()
+            .wrapContentSize(Alignment.Center)
+            .size(IosSwitchDefaults.Width, IosSwitchDefaults.Height)
+            .clip(IosSwitchDefaults.Shape)
             .toggleable(
                 value = checked,
                 onValueChange = onCheckedChange,
@@ -122,13 +125,10 @@ actual fun Switch(
                 interactionSource = interactionSource,
                 indication = null
             )
-            .wrapContentSize(Alignment.Center)
-            .size(IosSwitchDefaults.Width, IosSwitchDefaults.Height)
-            .clip(IosSwitchDefaults.Shape)
             .drawBehind {
                 drawRect(animatedBackground)
             }
-            .padding(ThumbPadding),
+            .padding(ThumbPadding)
     ) {
         Box(
             Modifier
@@ -151,7 +151,9 @@ actual fun Switch(
                             elevation = IosSwitchDefaults.EnabledThumbElevation,
                             shape = IosSwitchDefaults.Shape
                         )
-                    } else it.clip(IosSwitchDefaults.Shape)
+                    } else {
+                        it.clip(IosSwitchDefaults.Shape)
+                    }
                 }
                 .background(colors.thumbColor(enabled).value)
         )
@@ -234,7 +236,7 @@ object IosSwitchDefaults {
         disabledCheckedTrackColor: Color = checkedTrackColor.copy(alpha = .33f),
         disabledCheckedIconColor: Color = checkedIconColor,
         disabledUncheckedTrackColor: Color = uncheckedTrackColor,
-        disabledUncheckedIconColor: Color = checkedIconColor,
+        disabledUncheckedIconColor: Color = checkedIconColor
     ): CupertinoSwitchColors = CupertinoSwitchColors(
         thumbColor = thumbColor,
         disabledThumbColor = disabledThumbColor,
@@ -255,9 +257,9 @@ private val AspectRationAnimationSpec = cupertinoTween<Float>(durationMillis = 3
 private val ColorAnimationSpec = cupertinoTween<Color>(durationMillis = 300)
 private val AlignmentAnimationSpec = AspectRationAnimationSpec
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
-private fun PreviewSwitch() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSwitchPreview() = GrodnoRoadsM3ThemePreview {
     var checked by rememberMutableState { true }
 
     Column(

@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
@@ -27,13 +27,18 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
+fun SpecialEventDialog(
+    eventType: EventType,
+    modifier: Modifier = Modifier,
+    onClose: () -> Unit
+) {
     val dialogContent = when (eventType) {
         Spring -> stringResource(Res.string.event_reminder_spring_body)
         Autumn -> stringResource(Res.string.event_reminder_autumn_body)
     }
 
     BasicAlertDialog(
+        modifier = modifier,
         properties = DialogProperties(
             usePlatformDefaultWidth = true,
             dismissOnClickOutside = false
@@ -54,14 +59,14 @@ fun SpecialEventDialog(eventType: EventType, onClose: () -> Unit) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewSpecialEventDialogSpring() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSpecialEventDialogSpringPreview() = GrodnoRoadsM3ThemePreview {
     SpecialEventDialog(eventType = Spring) {}
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewSpecialEventDialogAutumn() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSpecialEventDialogAutumnPreview() = GrodnoRoadsM3ThemePreview {
     SpecialEventDialog(eventType = Autumn) {}
 }

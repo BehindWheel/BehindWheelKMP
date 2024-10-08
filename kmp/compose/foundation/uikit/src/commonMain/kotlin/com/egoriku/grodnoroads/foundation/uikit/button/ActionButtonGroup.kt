@@ -22,6 +22,7 @@ import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun ActionButtonGroup(
+    modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(10.dp),
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -30,7 +31,7 @@ fun ActionButtonGroup(
         else -> Color.Black
     }
     Surface(
-        modifier = Modifier
+        modifier = modifier
             .shadow(
                 elevation = 12.dp,
                 shape = RoundedCornerShape(10.dp),
@@ -48,10 +49,11 @@ fun ActionButtonGroup(
 @Composable
 fun ActionIcon(
     imageVector: ImageVector,
-    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = onClick)
             .padding(8.dp)
     ) {

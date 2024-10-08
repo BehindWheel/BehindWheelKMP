@@ -20,16 +20,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 
 @Composable
 fun CheckableCard(
     title: String,
     selected: Boolean,
     imageUrl: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Column(modifier = Modifier.width(120.dp)) {
+    Column(modifier = modifier.width(120.dp)) {
         Card(
             modifier = Modifier.size(120.dp),
             onClick = onClick,
@@ -52,12 +53,12 @@ fun CheckableCard(
                 .padding(top = 4.dp),
             text = title,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
     Row(
@@ -70,13 +71,13 @@ private fun CheckableCardPreview() = GrodnoRoadsM3ThemePreview {
             title = "Minimal",
             selected = false,
             imageUrl = "",
-            onClick = {},
+            onClick = {}
         )
         CheckableCard(
             title = "Detailed",
             selected = true,
             imageUrl = "",
-            onClick = {},
+            onClick = {}
         )
     }
 }

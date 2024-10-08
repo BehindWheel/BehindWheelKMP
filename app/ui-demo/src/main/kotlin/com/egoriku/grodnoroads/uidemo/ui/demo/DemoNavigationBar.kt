@@ -5,19 +5,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoNavigationBar() {
-    UIDemoContainer(name = "NavigationBar") {
+fun DemoNavigationBar(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "NavigationBar") {
         val elements by rememberMutableState { listOf(NavElement.Map, NavElement.Settings) }
         var selected by rememberMutableState { NavElement.Map }
 
@@ -54,7 +55,7 @@ private enum class NavElement {
     Settings
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoNavigationBarPreview() = GrodnoRoadsM3ThemePreview {
     DemoNavigationBar()

@@ -10,7 +10,7 @@ expect fun rememberLocationRequesterState(): LocationRequesterState
 @Composable
 expect fun WithLocationRequester(
     locationRequesterState: LocationRequesterState,
+    onStateChange: (LocationRequestStatus) -> Unit,
     modifier: Modifier = Modifier,
-    onStateChanged: (LocationRequestStatus) -> Unit,
     content: @Composable BoxScope.() -> Unit
 )

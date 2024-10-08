@@ -20,7 +20,7 @@ interface OnboardingStore : Store<Intent, State, Label> {
     )
 
     sealed interface Label {
-        data object FinishOnboarding: Label
+        data object FinishOnboarding : Label
     }
 
     sealed interface Message {

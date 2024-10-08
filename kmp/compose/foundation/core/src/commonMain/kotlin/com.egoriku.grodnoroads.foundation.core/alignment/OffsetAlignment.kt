@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 
 class OffsetAlignment(
     private val xOffset: Float,
-    private val yOffset: Float,
+    private val yOffset: Float
 ) : Alignment {
     override fun align(
         size: IntSize,

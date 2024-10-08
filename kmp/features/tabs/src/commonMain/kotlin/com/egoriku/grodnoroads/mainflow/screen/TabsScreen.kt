@@ -41,12 +41,15 @@ import org.jetbrains.compose.resources.stringResource
 private val NavigationBarHeight: Dp = 80.dp
 
 @Composable
-fun TabsScreen(tabsComponent: TabsComponent) {
+fun TabsScreen(
+    tabsComponent: TabsComponent,
+    modifier: Modifier = Modifier
+) {
     val windowSizeClass = LocalWindowSizeClass.current
 
     val childStack by tabsComponent.childStack.collectAsState()
 
-    Box {
+    Box(modifier = modifier) {
         when (windowSizeClass.widthSizeClass) {
             WindowWidthSizeClass.Expanded -> {
                 HorizontalOrientationLayout(
@@ -78,7 +81,7 @@ fun TabsScreen(tabsComponent: TabsComponent) {
 private fun VerticalOrientationLayout(
     childStack: () -> ChildStack<*, Child>,
     activeIndex: () -> Int,
-    onSelectTab: (Int) -> Unit,
+    onSelectTab: (Int) -> Unit
 ) {
     val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.AppSettings) }
     var isShowBottomBar by rememberMutableState { true }
@@ -96,7 +99,7 @@ private fun VerticalOrientationLayout(
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
-            stack = childStack(),
+            stack = childStack()
         ) { created ->
             when (val child = created.instance) {
                 is Child.Guidance -> {
@@ -144,7 +147,7 @@ private fun VerticalOrientationLayout(
 private fun HorizontalOrientationLayout(
     childStack: () -> ChildStack<*, Child>,
     activeIndex: () -> Int,
-    onSelectTab: (Int) -> Unit,
+    onSelectTab: (Int) -> Unit
 ) {
     val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.AppSettings) }
     var isHideBottomBar by rememberMutableState { true }
@@ -161,7 +164,7 @@ private fun HorizontalOrientationLayout(
     Box(modifier = Modifier.fillMaxSize()) {
         Children(
             modifier = Modifier.fillMaxSize(),
-            stack = childStack(),
+            stack = childStack()
         ) { created ->
             when (val child = created.instance) {
                 is Child.Guidance ->

@@ -3,9 +3,9 @@ package com.egoriku.grodnoroads.maps.compose.marker.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.maps.compose.core.Marker
 import com.egoriku.grodnoroads.maps.compose.core.remove
 import com.egoriku.grodnoroads.maps.compose.marker.MarkerOptions
@@ -16,10 +16,12 @@ fun rememberSimpleMarker(
     mapUpdater: MapUpdater,
     markerOptions: () -> MarkerOptions
 ): Marker? {
-    var marker by remember { mutableStateOf<Marker?>(null) }
+    val updatedMarkerOptions by rememberUpdatedState(markerOptions)
+
+    var marker by rememberMutableState<Marker?> { null }
 
     DisposableEffect(Unit) {
-        marker = mapUpdater.addMarker(markerOptions = markerOptions())
+        marker = mapUpdater.addMarker(markerOptions = updatedMarkerOptions())
 
         onDispose {
             marker?.remove()

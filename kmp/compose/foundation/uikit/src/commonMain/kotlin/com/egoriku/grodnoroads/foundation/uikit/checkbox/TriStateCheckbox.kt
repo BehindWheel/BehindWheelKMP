@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun TriStateCheckbox(
@@ -23,11 +23,11 @@ fun TriStateCheckbox(
         modifier = modifier,
         enabled = enabled,
         state = state,
-        onClick = onClick,
+        onClick = onClick
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun TriStateCheckboxPreview() = GrodnoRoadsM3ThemePreview {
     Row(modifier = Modifier.padding(16.dp)) {
@@ -36,9 +36,13 @@ private fun TriStateCheckboxPreview() = GrodnoRoadsM3ThemePreview {
             val (state2, onStateChange2) = rememberMutableState { false }
 
             val parentState = remember(state, state2) {
-                if (state && state2) ToggleableState.On
-                else if (!state && !state2) ToggleableState.Off
-                else ToggleableState.Indeterminate
+                if (state && state2) {
+                    ToggleableState.On
+                } else if (!state && !state2) {
+                    ToggleableState.Off
+                } else {
+                    ToggleableState.Indeterminate
+                }
             }
             val onParentClick = {
                 val s = parentState != ToggleableState.On
@@ -48,7 +52,7 @@ private fun TriStateCheckboxPreview() = GrodnoRoadsM3ThemePreview {
 
             TriStateCheckbox(
                 state = parentState,
-                onClick = onParentClick,
+                onClick = onParentClick
             )
             Checkbox(
                 modifier = Modifier.padding(start = 32.dp),

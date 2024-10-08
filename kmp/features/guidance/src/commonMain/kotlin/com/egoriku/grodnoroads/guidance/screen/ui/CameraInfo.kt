@@ -35,7 +35,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCameraBold
 import com.egoriku.grodnoroads.foundation.icons.outlined.Car
 import com.egoriku.grodnoroads.foundation.icons.outlined.Truck
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.Red
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
@@ -52,7 +52,10 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-internal fun CameraInfo(camera: MapEvent.Camera, modifier: Modifier = Modifier) {
+internal fun CameraInfo(
+    camera: MapEvent.Camera,
+    modifier: Modifier = Modifier
+) {
     Column(modifier = modifier.fillMaxWidth()) {
         Info(
             camera = camera,
@@ -95,7 +98,7 @@ private fun Info(
                 val formattedDate = CameraFormatter.format(camera.updateTime)
                 DisabledText(
                     text = stringResource(Res.string.camera_info_last_update, formattedDate),
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
         }
@@ -116,7 +119,7 @@ private fun Info(
             )
         }
 
-        if (FeatureFlags.screenReportCameraProblemEnabled) {
+        if (FeatureFlags.REPORT_CAMERA_PROBLEMS_ENABLED) {
             VerticalSpacer(24.dp)
             SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
@@ -129,9 +132,9 @@ private fun Info(
 
 @Composable
 private fun SpeedLimitGroup(
-    modifier: Modifier = Modifier,
     imageVector: ImageVector,
-    speed: Int
+    speed: Int,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier,
@@ -165,7 +168,7 @@ private fun SpeedLimit(value: Int, size: Dp = 44.dp) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
     Column(
@@ -182,7 +185,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 updateTime = 1683234000000,
                 speedCar = 100,
                 speedTruck = 80,
-                position = LatLng(-1.0, -1.0),
+                position = LatLng(-1.0, -1.0)
             )
         )
         CameraInfo(
@@ -195,7 +198,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 updateTime = 1683234000000,
                 speedCar = 100,
                 speedTruck = 80,
-                position = LatLng(-1.0, -1.0),
+                position = LatLng(-1.0, -1.0)
             )
         )
         CameraInfo(
@@ -208,7 +211,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 updateTime = 1683234000000,
                 speedCar = 100,
                 speedTruck = 80,
-                position = LatLng(-1.0, -1.0),
+                position = LatLng(-1.0, -1.0)
             )
         )
     }

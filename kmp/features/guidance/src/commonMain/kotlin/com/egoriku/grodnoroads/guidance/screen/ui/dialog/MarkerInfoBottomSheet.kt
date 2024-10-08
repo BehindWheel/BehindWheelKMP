@@ -19,7 +19,7 @@ import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
@@ -36,11 +36,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MarkerInfoBottomSheet(
     reports: Reports,
+    modifier: Modifier = Modifier,
     onClose: () -> Unit
 ) {
     val sheetCloseBehaviour = rememberSheetCloseBehaviour(onCancel = onClose)
 
     BasicModalBottomSheet(
+        modifier = modifier,
         sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onClose,
         content = {
@@ -52,7 +54,7 @@ fun MarkerInfoBottomSheet(
             )
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(16.dp)
             ) {
                 items(reports.messages) {
                     MessageRow(messageItem = it)
@@ -70,10 +72,9 @@ fun MarkerInfoBottomSheet(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private
-fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMarkerInfoBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     MarkerInfoBottomSheet(
         reports = Reports(
             id = Uuid.random(),
@@ -93,7 +94,7 @@ fun PreviewMarkerInfoBottomSheet() = GrodnoRoadsM3ThemePreview {
                 MessageItem(
                     message = "(12:42) Выезд на М6 работают",
                     messageSource = Viber
-                ),
+                )
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",

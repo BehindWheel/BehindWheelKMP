@@ -104,7 +104,7 @@ abstract class SharedSoundController : SoundController {
         return soundHistory
             .filterValues { soundTimeStamp ->
                 soundTimeStamp.sound == sound &&
-                        soundTimeStamp.timestamp >= currentTimeMillis - expiration
+                    soundTimeStamp.timestamp >= currentTimeMillis - expiration
             }
             .isNotEmpty()
     }

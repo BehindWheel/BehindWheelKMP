@@ -7,7 +7,7 @@ import com.google.maps.android.ktx.model.cameraPosition
 actual typealias PlatformCameraPosition = CameraPosition
 
 actual class CameraPosition actual constructor(
-   val platformCameraPosition: PlatformCameraPosition
+    val platformCameraPosition: PlatformCameraPosition
 ) {
     actual constructor(
         target: LatLng,

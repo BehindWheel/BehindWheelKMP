@@ -9,7 +9,7 @@ actual typealias PlatformCameraPosition = GMSCameraPosition
 
 @OptIn(ExperimentalForeignApi::class)
 actual class CameraPosition actual constructor(
-   val platformCameraPosition: PlatformCameraPosition
+    val platformCameraPosition: PlatformCameraPosition
 ) {
     actual constructor(
         target: LatLng,

@@ -13,9 +13,18 @@ android {
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads.uidemo"
 
-        minSdk = libs.versions.minSdk.get().toInt()
-        compileSdk = libs.versions.compileSdk.get().toInt()
-        targetSdk = libs.versions.compileSdk.get().toInt()
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
+        compileSdk =
+            libs.versions.compileSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.compileSdk
+                .get()
+                .toInt()
 
         versionCode = 1
         versionName = "1.0.0"

@@ -44,7 +44,7 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Faq
 import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.NotificationBadge
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.shared.models.Page
 import org.jetbrains.compose.resources.stringResource
@@ -179,7 +179,7 @@ private fun SettingsListItem(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun AppSettingsScreenPreview() = GrodnoRoadsM3ThemePreview {
     AppSettingsScreen(

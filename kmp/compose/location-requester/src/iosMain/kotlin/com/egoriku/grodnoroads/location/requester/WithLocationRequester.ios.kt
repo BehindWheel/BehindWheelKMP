@@ -8,6 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -22,8 +24,6 @@ import platform.CoreLocation.kCLAuthorizationStatusAuthorizedWhenInUse
 import platform.CoreLocation.kCLAuthorizationStatusDenied
 import platform.CoreLocation.kCLAuthorizationStatusNotDetermined
 import platform.darwin.NSObject
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 @Composable
 actual fun rememberLocationRequesterState() = remember { LocationRequesterState() }
@@ -31,8 +31,8 @@ actual fun rememberLocationRequesterState() = remember { LocationRequesterState(
 @Composable
 actual fun WithLocationRequester(
     locationRequesterState: LocationRequesterState,
+    onStateChange: (LocationRequestStatus) -> Unit,
     modifier: Modifier,
-    onStateChanged: (LocationRequestStatus) -> Unit,
     content: @Composable BoxScope.() -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -46,7 +46,7 @@ actual fun WithLocationRequester(
 
     LaunchedEffect(Unit) {
         locationRequester.events
-            .onEach(onStateChanged)
+            .onEach(onStateChange)
             .launchIn(this)
     }
 
@@ -97,7 +97,9 @@ class LocationRequester(
     }
 }
 
-class LocationManagerDelegate : NSObject(), CLLocationManagerDelegateProtocol {
+class LocationManagerDelegate :
+    NSObject(),
+    CLLocationManagerDelegateProtocol {
     private var callback: ((CLAuthorizationStatus) -> Unit)? = null
 
     private val locationManager = CLLocationManager()

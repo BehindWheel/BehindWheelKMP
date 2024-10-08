@@ -55,8 +55,12 @@ object PolyUtil {
     }
 
     private fun intersects(
-        lat1: Double, lat2: Double, lng2: Double,
-        lat3: Double, lng3: Double, geodesic: Boolean
+        lat1: Double,
+        lat2: Double,
+        lng2: Double,
+        lat3: Double,
+        lng3: Double,
+        geodesic: Boolean
     ): Boolean {
         // Both ends on the same side of lng3.
         if (lng3 >= 0 && lng3 >= lng2 || lng3 < 0 && lng3 < lng2) {

@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.shared.formatter
 
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class CameraFormatterTest {
 

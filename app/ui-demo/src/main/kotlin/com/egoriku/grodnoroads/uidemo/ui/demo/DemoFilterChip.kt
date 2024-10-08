@@ -7,16 +7,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoFilterChip() {
-    UIDemoContainer(name = "FilterChip") {
+fun DemoFilterChip(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "FilterChip") {
         Column {
             Row {
                 var isSelected by rememberMutableState { true }
@@ -65,7 +66,7 @@ fun DemoFilterChip() {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoFilterChipPreview() = GrodnoRoadsM3ThemePreview {
     DemoFilterChip()

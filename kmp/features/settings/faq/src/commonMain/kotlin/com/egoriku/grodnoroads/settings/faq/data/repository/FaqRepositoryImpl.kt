@@ -30,7 +30,6 @@ internal class FaqRepositoryImpl(
                     )
                 }
             )
-
         }.getOrElse {
             ResultOf.Failure(it)
         }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -13,8 +14,8 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPolice
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.icons.outlined.MyCity
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
@@ -23,8 +24,8 @@ import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListIte
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoListItem() {
-    UIDemoContainer(name = "ListItem") {
+fun DemoListItem(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "ListItem") {
         var triState by rememberMutableState { ToggleableState.Off }
         TriStateCheckBoxListItem(
             text = "За рулем | Гродно",
@@ -86,7 +87,7 @@ fun DemoListItem() {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoListItemPreview() = GrodnoRoadsM3ThemePreview {
     DemoListItem()

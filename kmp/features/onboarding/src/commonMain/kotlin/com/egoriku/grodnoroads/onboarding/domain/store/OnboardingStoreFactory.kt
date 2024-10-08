@@ -26,7 +26,8 @@ internal class OnboardingStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    fun create(): OnboardingStore = object : OnboardingStore,
+    fun create(): OnboardingStore = object :
+        OnboardingStore,
         Store<OnboardingStore.Intent, OnboardingStore.State, Label> by storeFactory.create(
             initialState = OnboardingStore.State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {

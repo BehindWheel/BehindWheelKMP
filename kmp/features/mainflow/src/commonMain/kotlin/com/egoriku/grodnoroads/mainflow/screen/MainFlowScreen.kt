@@ -22,8 +22,8 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
         stack = stack,
         animation = backAnimation(
             backHandler = mainFlowComponent.backHandler,
-            onBack = mainFlowComponent::onBack,
-        ),
+            onBack = mainFlowComponent::onBack
+        )
     ) {
         when (val child = it.instance) {
             is Child.Tabs -> TabsScreen(tabsComponent = child.component)
@@ -53,5 +53,5 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
 
 expect fun <C : Any, T : Any> backAnimation(
     backHandler: BackHandler,
-    onBack: () -> Unit,
+    onBack: () -> Unit
 ): StackAnimation<C, T>

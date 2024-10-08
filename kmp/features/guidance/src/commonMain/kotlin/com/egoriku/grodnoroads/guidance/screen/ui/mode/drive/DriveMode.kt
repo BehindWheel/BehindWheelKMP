@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.PinLocation
 import com.egoriku.grodnoroads.foundation.icons.outlined.Undo
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
@@ -23,15 +23,16 @@ import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 @Composable
 fun DriveMode(
     back: () -> Unit,
+    modifier: Modifier = Modifier,
     openChooseLocation: () -> Unit
 ) {
     KeepScreenOn()
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(start = 16.dp, bottom = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             PrimaryInverseCircleButton(size = Large, onClick = openChooseLocation) {
                 Icon(
@@ -49,9 +50,9 @@ fun DriveMode(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun DriveModePReview() = GrodnoRoadsM3ThemePreview {
+private fun DriveModePReviewPreview() = GrodnoRoadsM3ThemePreview {
     DriveMode(
         back = {},
         openChooseLocation = {}

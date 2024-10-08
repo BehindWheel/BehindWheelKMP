@@ -18,11 +18,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 
 @Composable
 fun SpeedLimitSign(
     limit: Int,
+    modifier: Modifier = Modifier,
     fontSize: TextUnit = TextUnit.Unspecified
 ) {
     val borderSize = when (fontSize) {
@@ -31,8 +32,7 @@ fun SpeedLimitSign(
     }
 
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
+        modifier = modifier
             .background(Color.White, shape = CircleShape)
             .border(borderSize, Color.Red, CircleShape)
             .layout { measurable, constraints ->
@@ -40,13 +40,15 @@ fun SpeedLimitSign(
 
                 val currentHeight = placeable.height
                 var heightCircle = currentHeight
-                if (placeable.width > heightCircle)
+                if (placeable.width > heightCircle) {
                     heightCircle = placeable.width
+                }
 
                 layout(heightCircle, heightCircle) {
                     placeable.placeRelative(0, (heightCircle - currentHeight) / 2)
                 }
-            }
+            },
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = limit.toString(),
@@ -71,9 +73,9 @@ fun SpeedLimitSign(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun SpeedLimitSignPreview() {
+private fun SpeedLimitSignPreview() {
     Column {
         SpeedLimitSign(limit = 70)
         SpeedLimitSign(fontSize = 30.sp, limit = 70)

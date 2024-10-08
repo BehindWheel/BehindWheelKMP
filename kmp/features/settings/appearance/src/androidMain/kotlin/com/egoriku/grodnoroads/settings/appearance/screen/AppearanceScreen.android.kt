@@ -22,6 +22,6 @@ actual fun LanguageSection(
         imageVector = GrodnoRoads.Outlined.Language,
         text = stringResource(Res.string.appearance_app_language),
         value = stringResource(language.current.toStringResource()),
-        onClick = { onModify(language) },
+        onClick = { onModify(language) }
     )
 }

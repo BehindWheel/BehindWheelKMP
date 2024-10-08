@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import com.egoriku.grodnoroads.extensions.toast
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun Material3Palette(modifier: Modifier = Modifier) {
@@ -55,7 +55,7 @@ fun Material3Palette(modifier: Modifier = Modifier) {
 
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(3)
     ) {
         items(colors) {
             ThemeColor(
@@ -75,7 +75,7 @@ private data class Palette(
     val name: String
 )
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun Material3PalettePreview() = GrodnoRoadsM3ThemePreview {
     Material3Palette()

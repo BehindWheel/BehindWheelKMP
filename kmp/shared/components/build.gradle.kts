@@ -48,6 +48,9 @@ fun NamedDomainObjectContainer<TargetConfigDsl>.android(block: TargetConfigDsl.(
     create("android", block)
 }
 
-fun TargetConfigDsl.buildConfigField(name: String, value: String) {
+fun TargetConfigDsl.buildConfigField(
+    name: String,
+    value: String
+) {
     buildConfigField(type = STRING, name = name, value = value, const = true)
 }

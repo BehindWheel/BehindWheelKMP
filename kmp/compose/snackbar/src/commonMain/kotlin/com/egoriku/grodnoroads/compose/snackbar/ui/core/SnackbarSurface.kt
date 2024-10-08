@@ -8,9 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun SnackbarSurface(content: @Composable () -> Unit) {
+internal fun SnackbarSurface(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
     Surface(
-        modifier = Modifier.widthIn(max = 420.dp),
+        modifier = modifier.widthIn(max = 420.dp),
         color = MaterialTheme.colorScheme.inverseSurface,
         shadowElevation = 0.dp,
         tonalElevation = 0.dp,

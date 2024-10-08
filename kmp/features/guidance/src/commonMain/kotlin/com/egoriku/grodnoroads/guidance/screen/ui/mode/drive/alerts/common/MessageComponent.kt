@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
@@ -17,12 +17,12 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun MessageComponent(
-    modifier: Modifier = Modifier,
-    messages: ImmutableList<MessageItem>
+    messages: ImmutableList<MessageItem>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         messages.forEach {
             MessageRow(messageItem = it)
@@ -30,9 +30,9 @@ fun MessageComponent(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewMessageComponent() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMessageComponentPreview() = GrodnoRoadsM3ThemePreview {
     MessageComponent(
         messages = persistentListOf(
             MessageItem(message = "Test message 1\nTest message 1", messageSource = App),

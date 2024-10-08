@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import com.egoriku.grodnoroads.location.LatLng
@@ -28,8 +26,9 @@ fun rememberIconMarker(
     onMarkerClick: () -> Unit
 ): Marker? {
     val updatedOnMarkerClick by rememberUpdatedState(onMarkerClick)
+    val updatedIcon by rememberUpdatedState(icon)
 
-    var marker by remember { mutableStateOf<Marker?>(null) }
+    var marker by rememberMutableState<Marker?> { null }
 
     LaunchedEffect(marker) {
         mapUpdater.clickedMarker
@@ -42,9 +41,9 @@ fun rememberIconMarker(
         marker = mapUpdater.addMarker(
             MarkerOptions(
                 position = position,
-                icon = icon(),
+                icon = updatedIcon(),
                 zIndex = zIndex,
-                title = title,
+                title = title
             )
         )
 

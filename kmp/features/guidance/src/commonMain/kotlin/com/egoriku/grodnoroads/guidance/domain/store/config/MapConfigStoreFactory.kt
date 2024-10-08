@@ -75,129 +75,132 @@ internal class MapConfigStoreFactory(
     }
 
     fun create(): MapConfigStore =
-        object : MapConfigStore, Store<Intent, StoreState, Nothing> by storeFactory.create(
-            initialState = StoreState(),
-            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                onAction<Unit> {
-                    dataStore.data
-                        .map { pref ->
-                            MapInternalConfig(
-                                zoomLevelInCity = pref.mapZoomInCity,
-                                zoomLevelOutOfCity = pref.mapZoomOutCity,
-                                alertsDistanceInCity = pref.alertsDistanceInCity,
-                                alertsDistanceOutCity = pref.alertsDistanceOutsideCity,
-                                mapInfo = MapInternalConfig.MapInfo(
-                                    showStationaryCameras = pref.isShowStationaryCameras,
-                                    showMediumSpeedCameras = pref.isShowMediumSpeedCameras,
-                                    showMobileCameras = pref.isShowMobileCameras,
-                                    showRoadIncident = pref.isShowRoadIncidents,
-                                    showTrafficPolice = pref.isShowTrafficPolice,
-                                    showTrafficJam = pref.isShowTrafficJam,
-                                    showCarCrash = pref.isShowCarCrash,
-                                    showWildAnimals = pref.isShowWildAnimals
-                                ),
-                                alertsInfo = MapInternalConfig.AlertsInfo(
-                                    alertsEnabled = pref.alertsEnabled,
-                                    alertsVolumeLevel = pref.alertsVolumeLevel,
-                                    voiceAlertsEnabled = pref.alertsVoiceAlertEnabled,
-                                    notifyStationaryCameras = pref.isNotifyStationaryCameras,
-                                    notifyMediumSpeedCameras = pref.isNotifyMediumSpeedCameras,
-                                    notifyMobileCameras = pref.isNotifyMobileCameras,
-                                    notifyRoadIncident = pref.isNotifyRoadIncidents,
-                                    notifyTrafficPolice = pref.isNotifyTrafficPolice,
-                                    notifyTrafficJam = pref.isNotifyTrafficJam,
-                                    notifyCarCrash = pref.isNotifyCarCrash,
-                                    notifyWildAnimals = pref.isNotifyWildAnimals
-                                ),
-                                googleMapStyle = pref.googleMapStyle,
-                                trafficJanOnMap = pref.trafficJamOnMap,
-                                keepScreenOn = pref.keepScreenOn
-                            )
-                        }
-                        .distinctUntilChanged()
-                        .onEach { dispatch(OnMapConfigInternal(it)) }
-                        .launchIn(this)
-
-                    launch {
-                        dispatch(Message.OnAreasParsed(cityAreasRepository.load()))
-                    }
-                }
-                onIntent<CheckLocation> { location ->
-                    val areas = state().areas
-                    val latLng = location.latLng
-
-                    if (areas.isEmpty()) return@onIntent
-                    val isCityArea = areas.any {
-                        PolyUtil.containsLocation(latLng, it.coordinates, false)
-                    }
-
-                    val internalConfig = state().mapInternalConfig
-                    val zoomLevel = when {
-                        isCityArea -> internalConfig.zoomLevelInCity
-                        else -> internalConfig.zoomLevelOutOfCity
-                    }
-                    dispatch(OnZoomLevel(zoomLevel))
-
-                    val alertRadius = when {
-                        isCityArea -> internalConfig.alertsDistanceInCity
-                        else -> internalConfig.alertsDistanceOutCity
-                    }
-                    dispatch(OnAlertRadius(radius = alertRadius))
-                }
-                onIntent<StartDriveMode> {
-                    dispatch(ChangeAppMode(appMode = AppMode.Drive))
-                    dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
-                }
-                onIntent<StopDriveMode> {
-                    dispatch(ChangeAppMode(appMode = AppMode.Default))
-                    dispatch(OnZoomLevel(zoomLevel = 12.5f))
-                }
-                onIntent<ChooseLocation.OpenChooseLocation> {
-                    when (state().currentAppMode) {
-                        AppMode.Default -> {
-                            dispatch(
-                                ChangeAppMode(
-                                    appMode = AppMode.ChooseLocation,
-                                    isChooseInDriveMode = false
+        object :
+            MapConfigStore,
+            Store<Intent, StoreState, Nothing> by storeFactory.create(
+                initialState = StoreState(),
+                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                    onAction<Unit> {
+                        dataStore.data
+                            .map { pref ->
+                                MapInternalConfig(
+                                    zoomLevelInCity = pref.mapZoomInCity,
+                                    zoomLevelOutOfCity = pref.mapZoomOutCity,
+                                    alertsDistanceInCity = pref.alertsDistanceInCity,
+                                    alertsDistanceOutCity = pref.alertsDistanceOutsideCity,
+                                    mapInfo = MapInternalConfig.MapInfo(
+                                        showStationaryCameras = pref.isShowStationaryCameras,
+                                        showMediumSpeedCameras = pref.isShowMediumSpeedCameras,
+                                        showMobileCameras = pref.isShowMobileCameras,
+                                        showRoadIncident = pref.isShowRoadIncidents,
+                                        showTrafficPolice = pref.isShowTrafficPolice,
+                                        showTrafficJam = pref.isShowTrafficJam,
+                                        showCarCrash = pref.isShowCarCrash,
+                                        showWildAnimals = pref.isShowWildAnimals
+                                    ),
+                                    alertsInfo = MapInternalConfig.AlertsInfo(
+                                        alertsEnabled = pref.alertsEnabled,
+                                        alertsVolumeLevel = pref.alertsVolumeLevel,
+                                        voiceAlertsEnabled = pref.alertsVoiceAlertEnabled,
+                                        notifyStationaryCameras = pref.isNotifyStationaryCameras,
+                                        notifyMediumSpeedCameras = pref.isNotifyMediumSpeedCameras,
+                                        notifyMobileCameras = pref.isNotifyMobileCameras,
+                                        notifyRoadIncident = pref.isNotifyRoadIncidents,
+                                        notifyTrafficPolice = pref.isNotifyTrafficPolice,
+                                        notifyTrafficJam = pref.isNotifyTrafficJam,
+                                        notifyCarCrash = pref.isNotifyCarCrash,
+                                        notifyWildAnimals = pref.isNotifyWildAnimals
+                                    ),
+                                    googleMapStyle = pref.googleMapStyle,
+                                    trafficJanOnMap = pref.trafficJamOnMap,
+                                    keepScreenOn = pref.keepScreenOn
                                 )
-                            )
-                            dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
-                            dispatch(OnUserZoomLevel(userZoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                            }
+                            .distinctUntilChanged()
+                            .onEach { dispatch(OnMapConfigInternal(it)) }
+                            .launchIn(this)
+
+                        launch {
+                            dispatch(Message.OnAreasParsed(cityAreasRepository.load()))
                         }
-                        AppMode.Drive -> dispatch(
-                            ChangeAppMode(
-                                appMode = AppMode.ChooseLocation,
-                                isChooseInDriveMode = true
-                            )
-                        )
-                        else -> {}
                     }
-                }
-                onIntent<ChooseLocation.CancelChooseLocation> {
-                    if (state().isChooseInDriveMode) {
+                    onIntent<CheckLocation> { location ->
+                        val areas = state().areas
+                        val latLng = location.latLng
+
+                        if (areas.isEmpty()) return@onIntent
+                        val isCityArea = areas.any {
+                            PolyUtil.containsLocation(latLng, it.coordinates, false)
+                        }
+
+                        val internalConfig = state().mapInternalConfig
+                        val zoomLevel = when {
+                            isCityArea -> internalConfig.zoomLevelInCity
+                            else -> internalConfig.zoomLevelOutOfCity
+                        }
+                        dispatch(OnZoomLevel(zoomLevel))
+
+                        val alertRadius = when {
+                            isCityArea -> internalConfig.alertsDistanceInCity
+                            else -> internalConfig.alertsDistanceOutCity
+                        }
+                        dispatch(OnAlertRadius(radius = alertRadius))
+                    }
+                    onIntent<StartDriveMode> {
                         dispatch(ChangeAppMode(appMode = AppMode.Drive))
                         dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
-                    } else {
+                    }
+                    onIntent<StopDriveMode> {
                         dispatch(ChangeAppMode(appMode = AppMode.Default))
-                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel - 2f))
+                        dispatch(OnZoomLevel(zoomLevel = 12.5f))
+                    }
+                    onIntent<ChooseLocation.OpenChooseLocation> {
+                        when (state().currentAppMode) {
+                            AppMode.Default -> {
+                                dispatch(
+                                    ChangeAppMode(
+                                        appMode = AppMode.ChooseLocation,
+                                        isChooseInDriveMode = false
+                                    )
+                                )
+                                dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                                dispatch(OnUserZoomLevel(userZoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                            }
+                            AppMode.Drive -> dispatch(
+                                ChangeAppMode(
+                                    appMode = AppMode.ChooseLocation,
+                                    isChooseInDriveMode = true
+                                )
+                            )
+                            else -> {}
+                        }
+                    }
+                    onIntent<ChooseLocation.CancelChooseLocation> {
+                        if (state().isChooseInDriveMode) {
+                            dispatch(ChangeAppMode(appMode = AppMode.Drive))
+                            dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                        } else {
+                            dispatch(ChangeAppMode(appMode = AppMode.Default))
+                            dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel - 2f))
+                        }
+                    }
+                    onIntent<ChooseLocation.UserMapZoom> {
+                        dispatch(OnUserZoomLevel(it.zoom))
+                    }
+                },
+                bootstrapper = SimpleBootstrapper(Unit),
+                reducer = { message: Message ->
+                    when (message) {
+                        is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
+                        is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
+                        is ChangeAppMode -> copy(
+                            currentAppMode = message.appMode,
+                            isChooseInDriveMode = message.isChooseInDriveMode
+                        )
+                        is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
+                        is OnAlertRadius -> copy(alertRadius = message.radius)
+                        is Message.OnAreasParsed -> copy(areas = message.areas)
                     }
                 }
-                onIntent<ChooseLocation.UserMapZoom> {
-                    dispatch(OnUserZoomLevel(it.zoom))
-                }
-            },
-            bootstrapper = SimpleBootstrapper(Unit),
-            reducer = { message: Message ->
-                when (message) {
-                    is OnMapConfigInternal -> copy(mapInternalConfig = message.mapConfig)
-                    is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
-                    is ChangeAppMode -> copy(
-                        currentAppMode = message.appMode,
-                        isChooseInDriveMode = message.isChooseInDriveMode
-                    )
-                    is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
-                    is OnAlertRadius -> copy(alertRadius = message.radius)
-                    is Message.OnAreasParsed -> copy(areas = message.areas)
-                }
-            }) {}
+            ) {}
 }

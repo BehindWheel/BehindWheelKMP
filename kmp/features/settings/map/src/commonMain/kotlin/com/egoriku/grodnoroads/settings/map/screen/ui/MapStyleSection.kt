@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.compose.resources.map_header_appearance
 import com.egoriku.grodnoroads.compose.resources.map_traffic_conditions_appearance
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
@@ -99,8 +99,8 @@ private fun TrafficConditions(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewMapStyleSection() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMapStyleSectionPreview() = GrodnoRoadsM3ThemePreview {
     MapStyleSection(mapStyle = MapStyle()) { }
 }

@@ -17,7 +17,7 @@ import com.egoriku.grodnoroads.compose.resources.map_markers_filtering
 import com.egoriku.grodnoroads.compose.resources.map_markers_filtering_description
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
@@ -61,8 +61,8 @@ internal fun MarkersFilteringSection(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewMarkersFilteringSection() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMarkersFilteringSectionPreview() = GrodnoRoadsM3ThemePreview {
     MarkersFilteringSection(markersFiltering = MarkerFiltering(), modify = {})
 }

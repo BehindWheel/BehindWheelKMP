@@ -25,7 +25,8 @@ fun buildMainFlowComponent(
 
 internal class MainFlowComponentImpl(
     componentContext: ComponentContext
-) : MainFlowComponent, ComponentContext by componentContext {
+) : MainFlowComponent,
+    ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
     private val stack = childStack(

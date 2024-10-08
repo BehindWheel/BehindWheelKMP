@@ -38,7 +38,8 @@ internal class MobileCameraRepositoryImpl(
                             angle = data.angle,
                             bidirectional = data.bidirectional
                         )
-                    })
+                    }
+            )
         }
         .catch { ResultOf.Failure(it) }
         .flowOn(Dispatchers.IO)

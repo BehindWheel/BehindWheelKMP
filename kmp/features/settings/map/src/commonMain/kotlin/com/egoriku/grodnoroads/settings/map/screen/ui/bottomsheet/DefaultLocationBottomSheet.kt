@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetClo
 import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
@@ -51,7 +51,7 @@ internal fun DefaultLocationBottomSheet(
                 initialSelection = sortedCityValues.indexOfFirst { cityValue ->
                     cityValue.index == defaultCity.values.indexOf(defaultCity.current)
                 },
-                onSelected = { position ->
+                onSelect = { position ->
                     defaultCity =
                         defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index])
                 }
@@ -72,9 +72,9 @@ private data class CityValue(
     val value: String
 )
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewDefaultLocationBottomSheet() = GrodnoRoadsM3ThemePreview {
+private fun PreviewDefaultLocationBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     DefaultLocationBottomSheet(
         defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
         onCancel = {},

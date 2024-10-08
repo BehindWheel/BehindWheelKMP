@@ -12,16 +12,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
 
 @Composable
-fun MessageRow(messageItem: MessageItem) {
+fun MessageRow(
+    messageItem: MessageItem,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         SourceImage(
@@ -37,9 +40,9 @@ fun MessageRow(messageItem: MessageItem) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewMessageRow() = GrodnoRoadsM3ThemePreview {
+private fun PreviewMessageRowPreview() = GrodnoRoadsM3ThemePreview {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         MessageRow(
             messageItem = MessageItem(

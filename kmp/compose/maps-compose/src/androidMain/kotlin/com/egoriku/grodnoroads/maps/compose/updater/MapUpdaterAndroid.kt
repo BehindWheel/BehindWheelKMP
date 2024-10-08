@@ -220,7 +220,7 @@ internal class MapUpdaterAndroid(
         cameraUpdate: CameraUpdate,
         duration: Int,
         onFinish: () -> Unit = {},
-        onCancel: () -> Unit = {},
+        onCancel: () -> Unit = {}
     ) = googleMap.animateCamera(
         cameraUpdate,
         duration,

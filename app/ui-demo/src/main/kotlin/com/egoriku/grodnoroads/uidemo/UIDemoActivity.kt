@@ -1,6 +1,6 @@
 package com.egoriku.grodnoroads.uidemo
 
-import android.graphics.Color
+import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -69,13 +69,13 @@ class UIDemoActivity : ComponentActivity() {
                 DisposableEffect(isDark) {
                     enableEdgeToEdge(
                         statusBarStyle = SystemBarStyle.auto(
-                            lightScrim = Color.TRANSPARENT,
-                            darkScrim = Color.TRANSPARENT,
+                            lightScrim = AndroidColor.TRANSPARENT,
+                            darkScrim = AndroidColor.TRANSPARENT
                         ) { isDark },
                         navigationBarStyle = SystemBarStyle.auto(
-                            lightScrim = Color.TRANSPARENT,
-                            darkScrim = Color.TRANSPARENT,
-                        ) { isDark },
+                            lightScrim = AndroidColor.TRANSPARENT,
+                            darkScrim = AndroidColor.TRANSPARENT
+                        ) { isDark }
                     )
                     onDispose {}
                 }
@@ -86,7 +86,7 @@ class UIDemoActivity : ComponentActivity() {
                                 .padding(horizontal = 16.dp)
                                 .statusBarsPadding(),
                             onPalette = { isOpenPalette = true },
-                            onThemeChange = { isDark = !isDark },
+                            onThemeChange = { isDark = !isDark }
                         )
                         DemoComponents()
                     }

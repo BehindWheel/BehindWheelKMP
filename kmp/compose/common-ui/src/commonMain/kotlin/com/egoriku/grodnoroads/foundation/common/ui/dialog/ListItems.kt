@@ -10,14 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.collections.immutable.ImmutableList
 
+@Suppress("ktlint:compose:content-slot-reused")
 @Composable
 fun <T> ListItems(
+    list: ImmutableList<T>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
-    list: ImmutableList<T>,
     onClick: (index: Int, item: T) -> Unit = { _, _ -> },
     footer: @Composable () -> Unit = {},
-    item: @Composable (index: Int, T) -> Unit = { _, _ -> },
+    item: @Composable (index: Int, T) -> Unit = { _, _ -> }
 ) {
     LazyColumn(
         modifier = modifier.fillMaxWidth(),

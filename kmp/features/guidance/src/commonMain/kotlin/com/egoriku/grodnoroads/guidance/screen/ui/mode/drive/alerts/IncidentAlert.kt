@@ -20,7 +20,7 @@ import com.egoriku.grodnoroads.compose.resources.alerts_incident
 import com.egoriku.grodnoroads.compose.resources.alerts_traffic_police
 import com.egoriku.grodnoroads.compose.resources.camera_alerts_plurals_distance
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.MessageComponent
 import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
@@ -43,7 +43,7 @@ fun IncidentAlert(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
             modifier = Modifier
@@ -59,7 +59,7 @@ fun IncidentAlert(
                     append(" ")
                     append(title)
                 },
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge
             )
             Text(
                 text = pluralStringResource(
@@ -78,9 +78,9 @@ fun IncidentAlert(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewIncidentAlert() = GrodnoRoadsM3ThemePreview {
+private fun PreviewIncidentAlertPreview() = GrodnoRoadsM3ThemePreview {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         IncidentAlert(
             emoji = RoadIncident.emoji,

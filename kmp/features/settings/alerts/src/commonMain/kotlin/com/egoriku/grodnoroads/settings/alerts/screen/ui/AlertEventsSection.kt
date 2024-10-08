@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -32,7 +33,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.TrafficJam
 import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPolice
 import com.egoriku.grodnoroads.foundation.icons.colored.WildAnimals
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertEvents
@@ -52,9 +53,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AlertEventsSection(
     alertEvents: AlertEvents,
+    modifier: Modifier = Modifier,
     onCheckedChange: (AlertsPref) -> Unit
 ) {
-    Column {
+    Column(modifier = modifier) {
         val state by rememberMutableState(alertEvents.selectable) {
             when (alertEvents.selectable) {
                 Selectable.AllDisabled -> ToggleableState.Off
@@ -228,7 +230,7 @@ private fun WildAnimals(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun AlertEventsSectionPreview() = GrodnoRoadsM3ThemePreview {
     AlertEventsSection(alertEvents = AlertEvents()) {}

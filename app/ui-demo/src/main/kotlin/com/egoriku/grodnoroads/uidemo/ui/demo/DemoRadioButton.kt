@@ -5,17 +5,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
 
 @Composable
-fun DemoRadioButton() {
-    UIDemoContainer(name = "RadioButton") {
+fun DemoRadioButton(modifier: Modifier = Modifier) {
+    UIDemoContainer(modifier = modifier, name = "RadioButton") {
         var selectedOption by rememberMutableState { Option.F }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -30,32 +31,33 @@ fun DemoRadioButton() {
             WeightSpacer()
             RadioButton(
                 selected = true,
-                onClick = {},
+                onClick = {}
             )
             RadioButton(
                 selected = true,
                 enabled = false,
-                onClick = {},
+                onClick = {}
             )
             RadioButton(
                 selected = false,
                 enabled = true,
-                onClick = {},
+                onClick = {}
             )
             RadioButton(
                 selected = false,
                 enabled = false,
-                onClick = {},
+                onClick = {}
             )
         }
     }
 }
 
 private enum class Option {
-    F, S
+    F,
+    S
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DemoRadioButtonPreview() = GrodnoRoadsM3ThemePreview {
     DemoRadioButton()

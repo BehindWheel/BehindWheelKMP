@@ -2,6 +2,8 @@ package com.egoriku.grodnoroads.guidance.screen.ui.google.marker
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.maps.compose.core.setIcon
@@ -18,17 +20,19 @@ fun MapUpdater.CameraMarker(
     zIndex: Float = 1f,
     onClick: () -> Unit
 ) {
+    val updatedIcon by rememberUpdatedState(icon)
+
     val marker = rememberIconMarker(
         mapUpdater = this,
         position = position,
-        icon = icon,
+        icon = updatedIcon,
         onMarkerClick = onClick,
         zIndex = zIndex
     )
 
     LaunchedEffect(markerSize) {
         marker.inScope {
-            setIcon(icon())
+            setIcon(updatedIcon())
         }
     }
 }

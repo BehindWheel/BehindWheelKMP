@@ -19,17 +19,18 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ChevronRight
 import com.egoriku.grodnoroads.foundation.icons.outlined.MyCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 
 @Composable
 fun MoreActionListItem(
-    imageVector: ImageVector? = null,
     text: String,
     value: String,
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector? = null,
     onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .heightIn(min = 48.dp)
@@ -59,13 +60,13 @@ fun MoreActionListItem(
             Icon(
                 modifier = Modifier.size(20.dp),
                 imageVector = GrodnoRoads.Outlined.ChevronRight,
-                contentDescription = null,
+                contentDescription = null
             )
         }
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun MoreActionListItemPreview() = GrodnoRoadsM3ThemePreview {
     MoreActionListItem(

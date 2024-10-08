@@ -11,14 +11,14 @@ import com.egoriku.grodnoroads.foundation.icons.colored.AppDark
 import com.egoriku.grodnoroads.foundation.icons.colored.Telegram
 import com.egoriku.grodnoroads.foundation.icons.colored.Viber
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.isLight
 import com.egoriku.grodnoroads.shared.models.MessageSource
 
 @Composable
 fun SourceImage(
-    modifier: Modifier = Modifier,
-    messageSource: MessageSource
+    messageSource: MessageSource,
+    modifier: Modifier = Modifier
 ) {
     Image(
         modifier = modifier,
@@ -36,9 +36,9 @@ fun SourceImage(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-private fun PreviewSourceImage() = GrodnoRoadsM3ThemePreview {
+private fun PreviewSourceImagePreview() = GrodnoRoadsM3ThemePreview {
     Column {
         SourceImage(messageSource = MessageSource.App)
         SourceImage(messageSource = MessageSource.Viber)

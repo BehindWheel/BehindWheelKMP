@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun Checkbox(
@@ -19,11 +19,11 @@ fun Checkbox(
         modifier = modifier,
         checked = checked,
         enabled = enabled,
-        onCheckedChange = onCheckedChange,
+        onCheckedChange = onCheckedChange
     )
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun CheckboxPreview() = GrodnoRoadsM3ThemePreview {
     Row(modifier = Modifier.padding(16.dp)) {

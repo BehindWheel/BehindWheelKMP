@@ -11,19 +11,22 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Close
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsTopBar(
     title: String,
     onBack: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior
+    scrollBehavior: TopAppBarScrollBehavior,
+    modifier: Modifier = Modifier
 ) {
     CenterAlignedTopAppBar(
+        modifier = modifier,
         windowInsets = WindowInsets.statusBars,
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
@@ -43,7 +46,7 @@ fun SettingsTopBar(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun SettingsTopBarPreview() = GrodnoRoadsM3ThemePreview {
     SettingsTopBar(

@@ -13,13 +13,16 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.app_version
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun VersionSection(appVersion: String) {
+fun VersionSection(
+    appVersion: String,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -32,8 +35,8 @@ fun VersionSection(appVersion: String) {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewVersionSection() = GrodnoRoadsM3ThemePreview {
+private fun PreviewVersionSectionPreview() = GrodnoRoadsM3ThemePreview {
     VersionSection("1.0.0")
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.alerts_header_notification_radius
@@ -15,7 +16,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.InsideCity
 import com.egoriku.grodnoroads.foundation.icons.outlined.OutsideCity
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.ClickableIntRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertSettings.AlertRadius
@@ -26,9 +27,13 @@ import org.jetbrains.compose.resources.stringResource
 fun AlertRadiusSection(
     alertRadius: AlertRadius,
     modify: (AlertsPref) -> Unit,
+    modifier: Modifier = Modifier,
     reset: (AlertsPref) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         SettingsSectionHeader(title = stringResource(Res.string.alerts_header_notification_radius))
 
         val postfix = stringResource(Res.string.alerts_notification_radius_postfix)
@@ -48,7 +53,7 @@ fun AlertRadiusSection(
                 onLongClick = { reset(alertRadius.alertRadiusInCity) },
                 onValueChange = {
                     modify(radiusInCity.copy(current = it))
-                },
+                }
             )
         }
 
@@ -67,13 +72,13 @@ fun AlertRadiusSection(
                 onLongClick = { reset(radiusOutCity) },
                 onValueChange = {
                     modify(radiusOutCity.copy(current = it))
-                },
+                }
             )
         }
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun AlertRadiusSectionPreview() = GrodnoRoadsM3ThemePreview {
     AlertRadiusSection(

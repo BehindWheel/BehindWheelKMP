@@ -18,9 +18,18 @@ android {
     defaultConfig {
         applicationId = "com.egoriku.grodnoroads"
 
-        minSdk = libs.versions.minSdk.get().toInt()
-        compileSdk = libs.versions.compileSdk.get().toInt()
-        targetSdk = libs.versions.compileSdk.get().toInt()
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
+        compileSdk =
+            libs.versions.compileSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.compileSdk
+                .get()
+                .toInt()
 
         versionCode = provideVersionCode("$rootDir/config/versioning/android.properties")
         versionName = provideVersionName("$rootDir/config/versioning/android.properties")

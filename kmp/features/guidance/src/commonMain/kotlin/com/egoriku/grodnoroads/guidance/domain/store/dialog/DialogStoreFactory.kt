@@ -16,27 +16,29 @@ internal class DialogStoreFactory(
 ) {
 
     fun create(): DialogStore =
-        object : DialogStore, Store<Intent, State, Message> by storeFactory.create(
-            initialState = State(),
-            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                onIntent<Intent.OpenMarkerInfoDialog> { dialog ->
-                    dispatch(
-                        Message.OpenDialog(dialog = MapBottomSheet.MarkerInfo(dialog.reports))
-                    )
-                    analyticsTracker.trackOpenMarkerInfoDialog()
+        object :
+            DialogStore,
+            Store<Intent, State, Message> by storeFactory.create(
+                initialState = State(),
+                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                    onIntent<Intent.OpenMarkerInfoDialog> { dialog ->
+                        dispatch(
+                            Message.OpenDialog(dialog = MapBottomSheet.MarkerInfo(dialog.reports))
+                        )
+                        analyticsTracker.trackOpenMarkerInfoDialog()
+                    }
+                    onIntent<Intent.OpenQuickSettings> {
+                        dispatch(Message.OpenDialog(dialog = MapBottomSheet.QuickSettings))
+                    }
+                    onIntent<Intent.CloseDialog> {
+                        dispatch(Message.CloseDialog(dialog = MapBottomSheet.None))
+                    }
+                },
+                reducer = { message: Message ->
+                    when (message) {
+                        is Message.OpenDialog -> copy(mapBottomSheet = message.dialog)
+                        is Message.CloseDialog -> copy(mapBottomSheet = message.dialog)
+                    }
                 }
-                onIntent<Intent.OpenQuickSettings> {
-                    dispatch(Message.OpenDialog(dialog = MapBottomSheet.QuickSettings))
-                }
-                onIntent<Intent.CloseDialog> {
-                    dispatch(Message.CloseDialog(dialog = MapBottomSheet.None))
-                }
-            },
-            reducer = { message: Message ->
-                when (message) {
-                    is Message.OpenDialog -> copy(mapBottomSheet = message.dialog)
-                    is Message.CloseDialog -> copy(mapBottomSheet = message.dialog)
-                }
-            }
-        ) {}
+            ) {}
 }

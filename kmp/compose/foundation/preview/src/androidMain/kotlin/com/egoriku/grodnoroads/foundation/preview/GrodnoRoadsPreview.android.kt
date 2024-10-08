@@ -7,8 +7,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(showBackground = true, locale = "ru")
 @Preview(showBackground = true, locale = "be")
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-actual annotation class GrodnoRoadsPreview
+actual annotation class PreviewGrodnoRoads
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-actual annotation class GrodnoRoadsDarkLightPreview
+actual annotation class PreviewGrodnoRoadsDarkLight

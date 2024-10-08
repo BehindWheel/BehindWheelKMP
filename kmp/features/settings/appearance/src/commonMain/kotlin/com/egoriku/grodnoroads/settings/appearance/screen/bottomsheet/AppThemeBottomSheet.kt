@@ -13,7 +13,7 @@ import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetClo
 import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.ThemeDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
@@ -45,7 +45,7 @@ fun AppThemeBottomSheet(
                 }.toImmutableList(),
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = theme.values.indexOf(theme.current),
-                onSelected = { position ->
+                onSelect = { position ->
                     theme = theme.copy(current = theme.values[position])
                 }
             )
@@ -60,9 +60,9 @@ fun AppThemeBottomSheet(
     )
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewAppThemeBottomSheet() = GrodnoRoadsM3ThemePreview {
+private fun PreviewAppThemeBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     AppThemeBottomSheet(
         themeDialogState = ThemeDialogState(themes = AppTheme()),
         onCancel = {},

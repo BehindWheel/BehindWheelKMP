@@ -27,7 +27,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
@@ -48,13 +48,13 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Alerts(
-    modifier: Modifier = Modifier,
-    alerts: ImmutableList<Alert>
+    alerts: ImmutableList<Alert>,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
     ) {
         items(items = alerts, key = { it.id }) { alert ->
             when (alert) {
@@ -72,7 +72,7 @@ fun Alerts(
                         modifier = Modifier.animateItemPlacement(
                             animationSpec = tween(
                                 durationMillis = 500,
-                                easing = LinearOutSlowInEasing,
+                                easing = LinearOutSlowInEasing
                             )
                         ),
                         emoji = alert.mapEventType.emoji,
@@ -97,7 +97,7 @@ fun Alerts(
                         modifier = Modifier.animateItemPlacement(
                             animationSpec = tween(
                                 durationMillis = 500,
-                                easing = LinearOutSlowInEasing,
+                                easing = LinearOutSlowInEasing
                             )
                         ),
                         distance = alert.distance,
@@ -111,7 +111,7 @@ fun Alerts(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
     Alerts(

@@ -17,7 +17,8 @@ internal class DialogComponentImpl(
     componentContext: ComponentContext,
     override val eventType: EventType,
     private val onDismissed: () -> Unit
-) : DialogComponent, ComponentContext by componentContext {
+) : DialogComponent,
+    ComponentContext by componentContext {
 
     override fun dismiss() = onDismissed()
 }

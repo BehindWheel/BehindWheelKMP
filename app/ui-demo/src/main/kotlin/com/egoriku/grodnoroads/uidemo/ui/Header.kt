@@ -16,16 +16,16 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Appearance
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Header(
-    modifier: Modifier = Modifier,
     onPalette: () -> Unit,
-    onThemeChange: () -> Unit,
+    modifier: Modifier = Modifier,
+    onThemeChange: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -54,7 +54,7 @@ fun Header(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun HeaderPreview() = GrodnoRoadsM3ThemePreview {
     Header(onThemeChange = {}, onPalette = {})

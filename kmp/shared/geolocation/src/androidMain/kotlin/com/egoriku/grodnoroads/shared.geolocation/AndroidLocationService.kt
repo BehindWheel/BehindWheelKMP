@@ -103,5 +103,4 @@ class AndroidLocationService(context: Context) : LocationService {
             }
         }
     }
-
 }

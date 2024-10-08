@@ -28,8 +28,8 @@ actual fun rememberLocationRequesterState() = remember { LocationRequesterState(
 @Composable
 actual fun WithLocationRequester(
     locationRequesterState: LocationRequesterState,
+    onStateChange: (LocationRequestStatus) -> Unit,
     modifier: Modifier,
-    onStateChanged: (LocationRequestStatus) -> Unit,
     content: @Composable BoxScope.() -> Unit
 ) {
     // When in preview, early return a Box with the received modifier preserving layout
@@ -44,8 +44,8 @@ actual fun WithLocationRequester(
 
     val resolutionResolver = rememberResolutionResolver {
         when (it.resultCode) {
-            Activity.RESULT_OK -> onStateChanged(LocationRequestStatus.GmsLocationEnabled)
-            else -> onStateChanged(LocationRequestStatus.GmsLocationDisabled)
+            Activity.RESULT_OK -> onStateChange(LocationRequestStatus.GmsLocationEnabled)
+            else -> onStateChange(LocationRequestStatus.GmsLocationDisabled)
         }
     }
     val settingsClient = rememberSettingsClient()
@@ -61,19 +61,19 @@ actual fun WithLocationRequester(
                             val request = IntentSenderRequest.Builder(intent).build()
                             resolutionResolver.launch(request)
                         }
-                        SettingsState.Resolved -> onStateChanged(LocationRequestStatus.GmsLocationEnabled)
-                        SettingsState.Unresolvable -> onStateChanged(LocationRequestStatus.GmsLocationDisabled)
+                        SettingsState.Resolved -> onStateChange(LocationRequestStatus.GmsLocationEnabled)
+                        SettingsState.Unresolvable -> onStateChange(LocationRequestStatus.GmsLocationDisabled)
                     }
                 }
             }
             permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                onStateChanged(LocationRequestStatus.FineLocationDenied)
+                onStateChange(LocationRequestStatus.FineLocationDenied)
             }
             else -> {
                 if (activity.shouldShowRationale(LOCATION_PERMISSIONS)) {
-                    onStateChanged(LocationRequestStatus.ShowRationale)
+                    onStateChange(LocationRequestStatus.ShowRationale)
                 } else {
-                    onStateChanged(LocationRequestStatus.PermissionDenied)
+                    onStateChange(LocationRequestStatus.PermissionDenied)
                 }
             }
         }

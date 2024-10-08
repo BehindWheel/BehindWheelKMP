@@ -15,16 +15,20 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
 
 @Composable
 fun SocialNetwork(
     title: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         SecondaryCircleButton(onClick = onClick, content = content)
         Text(
             modifier = Modifier.padding(top = 8.dp),
@@ -34,7 +38,7 @@ fun SocialNetwork(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun SocialNetworkPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.padding(32.dp)) {

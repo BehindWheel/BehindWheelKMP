@@ -27,5 +27,5 @@ actual fun <C : Any, T : Any> backAnimation(
         }
     },
     selector = { backEvent, _, _ -> androidPredictiveBackAnimatable(backEvent) },
-    onBack = onBack,
+    onBack = onBack
 )

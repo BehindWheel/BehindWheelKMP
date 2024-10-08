@@ -82,5 +82,5 @@ internal val darkColorScheme = darkColorScheme(
     error = Color(0xFFE25850),
     onError = Color(0xFF57120F),
     errorContainer = Color(0xFFAF251D),
-    onErrorContainer = Color(0xFFAF251D),
+    onErrorContainer = Color(0xFFAF251D)
 )

@@ -7,5 +7,5 @@ enum class Filtering(val timeInMilliseconds: Long) {
     Minutes15(15.minutes.inWholeMilliseconds),
     Minutes30(30.minutes.inWholeMilliseconds),
     Minutes45(45.minutes.inWholeMilliseconds),
-    Hours1(1.hours.inWholeMilliseconds);
+    Hours1(1.hours.inWholeMilliseconds)
 }

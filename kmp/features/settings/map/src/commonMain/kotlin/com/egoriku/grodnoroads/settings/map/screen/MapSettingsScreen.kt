@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.settings_section_map
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -43,13 +43,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MapSettingsScreen(
     mapSettingsComponent: MapSettingsComponent,
+    modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
     val state by mapSettingsComponent.state.collectAsState(initial = MapSettingState())
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.surface,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
@@ -140,7 +141,7 @@ private fun DialogHandler(
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun MapSettingsScreenPreview() = GrodnoRoadsM3ThemePreview {
     MapSettingsScreen(

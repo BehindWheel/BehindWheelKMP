@@ -11,7 +11,7 @@ data class MapConfig(
     val keepScreenOn: Boolean,
     val alertsEnabled: Boolean,
     val alertRadius: Int,
-    val isChooseInDriveMode: Boolean,
+    val isChooseInDriveMode: Boolean
 ) {
     companion object {
         val EMPTY = MapConfig(

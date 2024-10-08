@@ -19,14 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
-import kotlinx.coroutines.launch
 import kotlin.math.abs
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun DismissableRow(
-    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
-    content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -77,7 +77,7 @@ internal fun DismissableRow(
                         offsetX.animateTo(
                             targetValue = targetValue,
                             animationSpec = tween(
-                                durationMillis = 300,
+                                durationMillis = 300
                             )
                         )
                         if (targetValue != 0f) onDismiss()
@@ -101,7 +101,7 @@ internal fun DismissableRow(
                         offsetY.animateTo(
                             targetValue = targetValue,
                             animationSpec = tween(
-                                durationMillis = 300,
+                                durationMillis = 300
                             )
                         )
                         if (targetValue != 0f) onDismiss()

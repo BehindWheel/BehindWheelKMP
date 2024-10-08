@@ -23,7 +23,7 @@ fun MapUpdater.NavigationMarker(
     position: LatLng,
     bearing: Float,
     icon: () -> MarkerImage,
-    rotation: Float,
+    rotation: Float
 ) {
     val marker = rememberSimpleMarker(
         mapUpdater = this,
@@ -35,7 +35,7 @@ fun MapUpdater.NavigationMarker(
                 anchor = Anchor(0.5f, 0.5f),
                 rotation = bearing - rotation
             )
-        },
+        }
     )
 
     LaunchedEffect(appMode) {

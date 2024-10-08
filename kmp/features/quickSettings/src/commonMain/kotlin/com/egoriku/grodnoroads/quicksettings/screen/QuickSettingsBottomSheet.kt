@@ -24,7 +24,7 @@ fun QuickSettingsBottomSheet(
         content = {
             QuickSettingsContent(
                 quickSettingsState = quickSettingsState,
-                onChanged = component::updatePreferences
+                onChange = component::updatePreferences
             )
         }
     )

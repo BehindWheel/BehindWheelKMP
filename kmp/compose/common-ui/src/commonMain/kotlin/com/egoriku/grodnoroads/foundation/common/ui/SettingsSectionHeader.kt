@@ -11,9 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SettingsSectionHeader(title: String, description: String? = null) {
+fun SettingsSectionHeader(
+    title: String,
+    modifier: Modifier = Modifier,
+    description: String? = null
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 8.dp)
     ) {

@@ -29,9 +29,10 @@ internal interface ReportingStore : Store<Intent, State, Nothing> {
 internal class ReportingStoreFactory(
     private val storeFactory: StoreFactory,
     private val reportingRepository: ReportingRepository,
-    private val analyticsTracker: AnalyticsTracker,
+    private val analyticsTracker: AnalyticsTracker
 ) {
-    fun create(): ReportingStore = object : ReportingStore,
+    fun create(): ReportingStore = object :
+        ReportingStore,
         Store<Intent, State, Nothing> by storeFactory.create<Intent, Unit, Nothing, State, Nothing>(
             initialState = State(),
             bootstrapper = SimpleBootstrapper(Unit),

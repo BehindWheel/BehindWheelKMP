@@ -52,10 +52,10 @@ fun SnackbarHost(
         transitionSpec = {
             if (initialState != targetState) {
                 (slideInVertically { height -> height } + fadeIn()) togetherWith
-                        slideOutVertically { height -> height } + fadeOut()
+                    slideOutVertically { height -> height } + fadeOut()
             } else {
                 slideInVertically { height -> -height } + fadeIn() togetherWith
-                        slideOutVertically { height -> -height } + fadeOut()
+                    slideOutVertically { height -> -height } + fadeOut()
             }.using(
                 SizeTransform(clip = false)
             )

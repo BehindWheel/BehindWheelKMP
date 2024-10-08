@@ -18,16 +18,20 @@ import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMess
 import com.egoriku.grodnoroads.compose.snackbar.ui.core.SnackbarSurface
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsDarkLightPreview
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Small
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
-    SnackbarSurface {
+fun MessageWithActionItem(
+    message: ActionMessage,
+    modifier: Modifier = Modifier,
+    onAction: () -> Unit
+) {
+    SnackbarSurface(modifier = modifier) {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -42,7 +46,7 @@ fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
                     text = when (val title = message.title) {
                         is Raw -> title.text
                         is StringRes -> stringResource(title.resource)
-                    },
+                    }
                 )
                 PrimaryInverseCircleButton(
                     size = Small,
@@ -73,7 +77,7 @@ fun MessageWithActionItem(message: ActionMessage, onAction: () -> Unit) {
     }
 }
 
-@GrodnoRoadsDarkLightPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
 private fun MessageWithActionItemPreview() = GrodnoRoadsM3ThemePreview {
     Column(

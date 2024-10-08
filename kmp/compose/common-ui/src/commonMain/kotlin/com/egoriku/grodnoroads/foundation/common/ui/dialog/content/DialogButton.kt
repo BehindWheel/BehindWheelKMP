@@ -18,15 +18,15 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.cancel
 import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DialogButton(
+    text: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    text: String,
     onClick: () -> Unit
 ) {
     CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
@@ -49,9 +49,9 @@ fun DialogButton(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
-fun PreviewDialogButton() = GrodnoRoadsM3ThemePreview {
+private fun PreviewDialogButtonPreview() = GrodnoRoadsM3ThemePreview {
     Column {
         DialogButton(
             modifier = Modifier.fillMaxWidth(),

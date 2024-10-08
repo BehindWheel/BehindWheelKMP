@@ -23,18 +23,18 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Chat
 import com.egoriku.grodnoroads.foundation.icons.outlined.Share
 import com.egoriku.grodnoroads.foundation.icons.outlined.Telegram
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SocialNetworkSection() {
+fun SocialNetworkSection(modifier: Modifier = Modifier) {
     val urlLauncher = rememberUrlLauncher()
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         SocialNetwork(
             title = stringResource(Res.string.social_telegram_chat),
@@ -69,7 +69,7 @@ fun SocialNetworkSection() {
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun SocialNetworkSectionPreview() = GrodnoRoadsM3ThemePreview {
     SocialNetworkSection()

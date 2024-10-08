@@ -16,8 +16,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,13 +36,13 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 
 @Composable
 fun PinMarker(
+    animate: Boolean,
     modifier: Modifier = Modifier,
     duration: Int = 450,
     verticalOffset: Dp = 20.dp,
     shadowScaleMax: Float = 0.9f,
     shadowScaleMin: Float = 0.6f,
-    animate: Boolean,
-    onGloballyPositioned: (Offset) -> Unit
+    onGloballyPosition: (Offset) -> Unit
 ) {
     val startColor = LocalContentColor.current.copy(alpha = 0.85f)
     val endColor = LocalContentColor.current.copy(alpha = 0.4f)
@@ -93,9 +91,9 @@ fun PinMarker(
                 .onGloballyPositioned {
                     val position = Offset(
                         x = it.positionInWindow().x + it.size.width / 2f,
-                        y = it.positionInWindow().y + it.size.height / 2f,
+                        y = it.positionInWindow().y + it.size.height / 2f
                     )
-                    onGloballyPositioned(position)
+                    onGloballyPosition(position)
                 }
         ) {
             val canvasWidth = size.width
@@ -105,7 +103,7 @@ fun PinMarker(
                 drawOval(
                     topLeft = Offset(x = 0f, y = canvasHeight / 4f),
                     color = colorTransition,
-                    size = Size(width = canvasWidth, height = canvasHeight / 2f),
+                    size = Size(width = canvasWidth, height = canvasHeight / 2f)
                 )
             }
         }
@@ -117,7 +115,7 @@ fun PinMarker(
                     translationY = markerTranslation.value
                 },
             imageVector = GrodnoRoads.Outlined.PinMarker,
-            contentDescription = null,
+            contentDescription = null
         )
     }
 }
@@ -171,11 +169,11 @@ private fun animateColorAsState(
 @Composable
 private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
     Box(Modifier.size(300.dp)) {
-        var animate by remember { mutableStateOf(false) }
+        var animate by rememberMutableState { false }
 
         Button(
             modifier = Modifier.align(Alignment.BottomCenter),
-            onClick = { animate = !animate },
+            onClick = { animate = !animate }
         ) {
             Text("enabled: $animate")
         }
@@ -183,7 +181,7 @@ private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
         PinMarker(
             modifier = Modifier.align(Alignment.Center),
             animate = animate,
-            onGloballyPositioned = {}
+            onGloballyPosition = {}
         )
     }
 }

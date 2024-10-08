@@ -65,7 +65,9 @@ fun buildGuidanceComponent(
 internal class GuidanceComponentImpl(
     componentContext: ComponentContext,
     private val onOpenReporting: () -> Unit
-) : GuidanceComponent, ComponentContext by componentContext, KoinComponent {
+) : GuidanceComponent,
+    ComponentContext by componentContext,
+    KoinComponent {
 
     private val eventReportingComponent: EventReportingComponent =
         buildEventReportingComponent(childContext("event_reporting"))

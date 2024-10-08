@@ -18,7 +18,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsPreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.TriStateCheckbox
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,14 +26,15 @@ import com.egoriku.grodnoroads.foundation.uikit.checkbox.TriStateCheckbox
 fun TriStateCheckBoxListItem(
     text: String,
     state: ToggleableState,
+    modifier: Modifier = Modifier,
     onToggle: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .triStateToggleable(state = state, onClick = onToggle)
             .padding(start = 6.dp, end = 20.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides true) {
             TriStateCheckbox(
@@ -51,7 +52,7 @@ fun TriStateCheckBoxListItem(
     }
 }
 
-@GrodnoRoadsPreview
+@PreviewGrodnoRoads
 @Composable
 private fun TriStateCheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
     var state by rememberMutableState { ToggleableState.Off }
