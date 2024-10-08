@@ -3,19 +3,19 @@ compileSdk = "34"
 minSdk = "23" # Android 6.0
 targetSdk = "34"
 
-agp = "8.5.1"
-coil = "3.0.0-alpha08"
+agp = "8.6.1"
+coil = "3.0.0-alpha10"
 decompose = "3.1.0"
 essenty = "2.1.0"
-kotlinx-serialization = "1.7.1"
-kotlin = "2.0.0"
+kotlinx-serialization = "1.7.3"
+kotlin = "2.0.20"
 ktor = "2.3.12"
-moko-resources = "0.24.1"
-mvikotlin = "4.1.0"
+moko-resources = "0.24.3"
+mvikotlin = "4.2.0"
 
 [libraries]
-androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
-androidx-annotation = "androidx.annotation:annotation:1.8.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.2"
+androidx-annotation = "androidx.annotation:annotation:1.8.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-core = "androidx.core:core-ktx:1.13.1"
@@ -24,37 +24,36 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.1"
 androidx-media = "androidx.media:media:1.7.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.5"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.7"
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
-coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+coil-network-ktor = "io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha08"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.0.4"
-dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:1.13.0"
-dev-gitlive-firebase-database = "dev.gitlive:firebase-database:1.13.0"
-dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:1.13.0"
+desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.2"
+dev-gitlive-firebase-analytics = "dev.gitlive:firebase-analytics:2.1.0"
+dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:2.1.0"
+dev-gitlive-firebase-database = "dev.gitlive:firebase-database:2.1.0"
+dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:2.1.0"
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
-
-firebase-analytics = "com.google.firebase:firebase-analytics:22.0.2"
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.1.1"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.8.2"
 google-material = "com.google.android.material:material:1.12.0"
 
-koin-android = "io.insert-koin:koin-android:3.5.6"
-koin-compose = "io.insert-koin:koin-compose:1.1.5"
-koin-core = "io.insert-koin:koin-core:3.5.6"
+koin-android = "io.insert-koin:koin-android:4.0.0"
+koin-compose = "io.insert-koin:koin-compose:4.0.0"
+koin-core = "io.insert-koin:koin-core:4.0.0"
 
-kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7"
-kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
-kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
-kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.0"
+kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"
+kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0"
+kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.1"
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -81,7 +80,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.1" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.15.2" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.2" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.2" }

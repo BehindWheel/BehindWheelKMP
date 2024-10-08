@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
@@ -50,7 +51,6 @@ import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import com.egoriku.grodnoroads.uuid.Uuid
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
@@ -196,7 +196,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             speedLimit = limit,
             alerts = persistentListOf(
                 IncidentAlert(
-                    id = Uuid.randomUUID(),
+                    id = Uuid.random(),
                     mapEventType = MapEventType.TrafficPolice,
                     distance = 1,
                     messages = persistentListOf(
@@ -207,7 +207,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     )
                 ),
                 IncidentAlert(
-                    id = Uuid.randomUUID(),
+                    id = Uuid.random(),
                     mapEventType = MapEventType.CarCrash,
                     distance = 120,
                     messages = persistentListOf(

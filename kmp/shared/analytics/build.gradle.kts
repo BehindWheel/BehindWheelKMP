@@ -1,4 +1,3 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
 
@@ -15,12 +14,8 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(libs.dev.gitlive.firebase.analytics)
             implementation(libs.koin.core)
-        }
-        androidDependencies {
-            implementation(libs.androidx.core)
-            implementation(libs.firebase.analytics)
-            implementation(libs.koin.android)
         }
     }
 }

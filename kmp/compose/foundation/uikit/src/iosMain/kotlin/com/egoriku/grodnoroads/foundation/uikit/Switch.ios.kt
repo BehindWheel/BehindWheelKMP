@@ -165,7 +165,7 @@ actual fun Switch(
  * specifications.
  */
 @Immutable
-data class CupertinoSwitchColors internal constructor(
+data class CupertinoSwitchColors(
     private val thumbColor: Color,
     private val disabledThumbColor: Color,
     private val checkedTrackColor: Color,

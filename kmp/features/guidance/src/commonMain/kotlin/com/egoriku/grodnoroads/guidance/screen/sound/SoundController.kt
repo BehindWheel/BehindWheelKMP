@@ -1,10 +1,10 @@
 package com.egoriku.grodnoroads.guidance.screen.sound
 
 import com.egoriku.grodnoroads.extensions.DateTime
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType
 import com.egoriku.grodnoroads.shared.audioplayer.Sound
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import com.egoriku.grodnoroads.uuid.Uuid
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
@@ -20,7 +20,7 @@ interface SoundController {
 
 abstract class SharedSoundController : SoundController {
     private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
-    private val overSpeedId = Uuid.randomUUID()
+    private val overSpeedId = Uuid.random()
 
     private val currentTimeMillis: Long
         get() = DateTime.currentTimeMillis()
@@ -82,7 +82,7 @@ abstract class SharedSoundController : SoundController {
 
     private fun playSound(
         sound: Sound,
-        id: String = Uuid.randomUUID(),
+        id: String = Uuid.random(),
         expiration: Long = FIVE_MINUTE
     ) {
         val currentTimeMillis = currentTimeMillis

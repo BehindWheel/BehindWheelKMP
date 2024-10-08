@@ -10,9 +10,8 @@ import com.egoriku.grodnoroads.maps.compose.marker.compose.rememberIconMarker
 import com.egoriku.grodnoroads.maps.compose.marker.inScope
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 
-context(MapUpdater)
 @Composable
-fun CameraMarker(
+fun MapUpdater.CameraMarker(
     position: LatLng,
     markerSize: MarkerSize,
     icon: () -> MarkerImage,
@@ -20,6 +19,7 @@ fun CameraMarker(
     onClick: () -> Unit
 ) {
     val marker = rememberIconMarker(
+        mapUpdater = this,
         position = position,
         icon = icon,
         onMarkerClick = onClick,
