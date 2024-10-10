@@ -4,7 +4,7 @@ actual typealias PlatformLatLng = com.google.android.gms.maps.model.LatLng
 
 fun PlatformLatLng.toLatLng() = LatLng(this)
 
-actual class LatLng actual constructor(val platform: PlatformLatLng) {
+actual data class LatLng actual constructor(val platform: PlatformLatLng) {
     actual val latitude: Double
         get() = platform.latitude
 

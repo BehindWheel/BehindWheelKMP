@@ -1,6 +1,5 @@
 import com.egoriku.grodnoroads.extension.applyTargets
 import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.commonTestDependencies
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -21,6 +20,7 @@ kotlin {
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.crashlytics)
+            implementation(projects.kmp.shared.formatter)
             implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
 
@@ -31,9 +31,6 @@ kotlin {
             implementation(libs.mvikotlin)
             implementation(libs.mvikotlin.extensions)
             implementation(libs.mvikotlin.main)
-        }
-        commonTestDependencies {
-            implementation(libs.kotlin.test)
         }
     }
 }
