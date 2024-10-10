@@ -14,7 +14,7 @@ fun CValue<CLLocationCoordinate2D>.toLatLng() = LatLng(IOSLatLng(this))
 class IOSLatLng(val cValue: CValue<CLLocationCoordinate2D>)
 
 @OptIn(ExperimentalForeignApi::class)
-actual class LatLng actual constructor(private val platform: PlatformLatLng) {
+actual data class LatLng actual constructor(private val platform: PlatformLatLng) {
     actual val latitude: Double
         get() = platform.cValue.useContents { latitude }
 

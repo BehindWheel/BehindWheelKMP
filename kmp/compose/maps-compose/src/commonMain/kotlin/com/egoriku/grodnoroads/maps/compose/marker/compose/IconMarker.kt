@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.maps.compose.core.Marker
 import com.egoriku.grodnoroads.maps.compose.core.remove

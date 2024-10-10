@@ -32,9 +32,11 @@ In case bug and suggestions, please create issue.
 
 ### Useful gradle commands
 
-Check dependency updates: `./gradlew dependencyUpdates`
+Update code style: `./gradlew spotlessApply`
 
-Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true` 
+Check code style: `./gradlew spotlessCheck`
+
+Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true`
 
 Generate kmp buildconfig: `./gradlew :kmp:shared:components:generateBuildKonfig`
 

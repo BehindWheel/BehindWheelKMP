@@ -19,12 +19,12 @@ class DateTimeTest {
     @Test
     fun formatTest() {
         assertEquals(
-            "8:06",
-            DateTime.formatToTime((8.hours + 6.minutes).inWholeMilliseconds)
+            expected = "8:06",
+            actual = DateTime.formatToTime((8.hours + 6.minutes).inWholeMilliseconds)
         )
         assertEquals(
-            "17:09",
-            DateTime.formatToTime((17.hours + 9.minutes).inWholeMilliseconds)
+            expected = "17:09",
+            actual = DateTime.formatToTime((17.hours + 9.minutes).inWholeMilliseconds)
         )
 
         val date = LocalDateTime(
@@ -36,8 +36,8 @@ class DateTimeTest {
             second = 12
         ).toInstant(TimeZone.UTC).toEpochMilliseconds()
         assertEquals(
-            "17:09",
-            DateTime.formatToTime(date)
+            expected = "17:09",
+            actual = DateTime.formatToTime(date)
         )
     }
 }
