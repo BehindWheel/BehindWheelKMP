@@ -9,7 +9,7 @@ decompose = "3.1.0"
 essenty = "2.1.0"
 kotlinx-serialization = "1.7.3"
 kotlin = "2.0.21"
-ktor = "2.3.12"
+ktor = "3.0.0"
 moko-resources = "0.24.3"
 mvikotlin = "4.2.0"
 
