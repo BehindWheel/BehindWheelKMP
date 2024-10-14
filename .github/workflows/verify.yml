@@ -19,7 +19,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
 
       - name: Copy google-services.json
         run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/android/google-services.json
