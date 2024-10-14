@@ -24,7 +24,7 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.1"
 androidx-media = "androidx.media:media:1.7.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.7"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.8"
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor = "io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha08"
