@@ -8,11 +8,9 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.coroutines.coroutineScope
-import com.egoriku.grodnoroads.coroutines.flow.CFlow
-import com.egoriku.grodnoroads.coroutines.flow.toCFlow
 import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
 import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
+import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -44,6 +42,7 @@ import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildS
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
@@ -173,16 +172,16 @@ internal class GuidanceComponentImpl(
     override val alertEvents: MutableSharedFlow<AlertEvent> =
         MutableSharedFlow(extraBufferCapacity = 1)
 
-    override val appMode: CFlow<AppMode>
-        get() = mapConfigStore.states.map { it.currentAppMode }.toCFlow()
+    override val appMode: Flow<AppMode>
+        get() = mapConfigStore.states.map { it.currentAppMode }
 
-    override val mapBottomSheet: CFlow<MapBottomSheet>
-        get() = dialogStore.states.map { it.mapBottomSheet }.toCFlow()
+    override val mapBottomSheet: Flow<MapBottomSheet>
+        get() = dialogStore.states.map { it.mapBottomSheet }
 
-    override val userCount: CFlow<Int>
-        get() = mapEventsStore.states.map { it.userCount }.toCFlow()
+    override val userCount: Flow<Int>
+        get() = mapEventsStore.states.map { it.userCount }
 
-    override val mapConfig: CFlow<MapConfig>
+    override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
                 zoomLevel = it.zoomLevel,
@@ -192,9 +191,9 @@ internal class GuidanceComponentImpl(
                 alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled,
                 isChooseInDriveMode = it.isChooseInDriveMode
             )
-        }.toCFlow()
+        }
 
-    override val mapEvents: CFlow<MapEvents>
+    override val mapEvents: Flow<MapEvents>
         get() = combine(
             flow = reports,
             flow2 = stationary,
@@ -203,15 +202,14 @@ internal class GuidanceComponentImpl(
             flow5 = mapInfo,
             transform = filterMapEvents()
         ).flowOn(Dispatchers.Default)
-            .toCFlow()
 
-    override val lastLocation: CFlow<LastLocation>
-        get() = locationStore.states.map { it.lastLocation }.toCFlow()
+    override val lastLocation: Flow<LastLocation>
+        get() = locationStore.states.map { it.lastLocation }
 
-    override val initialLocation: CFlow<LatLng>
-        get() = locationStore.states.map { it.initialLocation }.toCFlow()
+    override val initialLocation: Flow<LatLng>
+        get() = locationStore.states.map { it.initialLocation }
 
-    override val alerts: CFlow<ImmutableList<Alert>>
+    override val alerts: Flow<ImmutableList<Alert>>
         get() = combine(
             flow = mapEvents,
             flow2 = lastLocation,
@@ -219,15 +217,13 @@ internal class GuidanceComponentImpl(
             flow4 = appMode,
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
-            .toCFlow()
 
-    override val speedLimit: CFlow<Int>
+    override val speedLimit: Flow<Int>
         get() = combine(
             flow = alerts,
             flow2 = lastLocation,
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
-            .toCFlow()
 
     override fun startDriveMode() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)

@@ -40,7 +40,6 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.shared.resources)
 
-            implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.logger)

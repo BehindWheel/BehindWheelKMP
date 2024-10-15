@@ -20,7 +20,7 @@ kotlin {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
-            implementation(projects.kmp.libraries.coroutines)
+            implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.logger)
 
             implementation(libs.decompose)

@@ -1,15 +1,15 @@
 package com.egoriku.grodnoroads.settings.faq.domain.component
 
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.extensions.LoremIpsum
+import com.egoriku.grodnoroads.extensions.coroutines.stateFlowOf
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.flow.StateFlow
 
 class FaqComponentPreview : FaqComponent {
 
-    override val state: CStateFlow<FaqStore.State>
+    override val state: StateFlow<FaqStore.State>
         get() = stateFlowOf {
             FaqStore.State(
                 isLoading = false,

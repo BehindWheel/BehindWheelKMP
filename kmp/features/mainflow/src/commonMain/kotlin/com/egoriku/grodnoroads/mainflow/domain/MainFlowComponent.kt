@@ -3,17 +3,17 @@ package com.egoriku.grodnoroads.mainflow.domain
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.FaqComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
+import kotlinx.coroutines.flow.StateFlow
 
 @Stable
 interface MainFlowComponent : BackHandlerOwner {
 
-    val childStack: CStateFlow<ChildStack<*, Child>>
+    val childStack: StateFlow<ChildStack<*, Child>>
     fun onBack()
 
     sealed class Child {

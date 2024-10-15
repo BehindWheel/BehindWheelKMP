@@ -23,7 +23,7 @@ kotlin {
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.models)
-            implementation(projects.kmp.libraries.coroutines)
+            implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose.compose)
             implementation(libs.decompose)

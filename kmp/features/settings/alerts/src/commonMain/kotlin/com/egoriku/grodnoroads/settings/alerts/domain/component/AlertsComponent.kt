@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.settings.alerts.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertAvailability
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertRadiusInCity
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref.AlertRadiusOutCity
@@ -20,11 +19,12 @@ import com.egoriku.grodnoroads.shared.persistent.alert.DEFAULT_ALERT_DISTANCE_OU
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.Flow
 
 @Stable
 interface AlertsComponent {
 
-    val state: CFlow<AlertState>
+    val state: Flow<AlertState>
 
     fun modify(pref: AlertsPref)
     fun reset(pref: AlertsPref)

@@ -1,26 +1,9 @@
-package com.egoriku.grodnoroads.coroutines
+package com.egoriku.grodnoroads.extensions.decompose
 
-import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.lifecycle.LifecycleOwner
-import com.arkivanov.essenty.lifecycle.doOnDestroy
-import kotlin.coroutines.CoroutineContext
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-
-fun LifecycleOwner.coroutineScope(
-    context: CoroutineContext = Dispatchers.Main.immediate
-): CoroutineScope {
-    val scope = CoroutineScope(context + SupervisorJob())
-    lifecycle.doOnDestroy(scope::cancel)
-
-    return scope
-}
 
 /**
  * Converts decompose [Value] to coroutines [StateFlow]
@@ -44,12 +27,5 @@ private class ValueStateFlow<out T : Any>(private val source: Value<T>) : StateF
         } finally {
             disposable.cancel()
         }
-    }
-}
-
-inline fun <T : Any> ChildSlot<*, T>?.onChild(action: (T) -> Unit) {
-    val instance = this?.child?.instance
-    if (instance != null) {
-        action(instance)
     }
 }

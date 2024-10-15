@@ -13,13 +13,12 @@ import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.egoriku.grodnoroads.appsettings.domain.component.buildAppSettingsComponent
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
-import com.egoriku.grodnoroads.coroutines.toStateFlow
+import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.guidance.domain.component.buildGuidanceComponent
 import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
 import com.egoriku.grodnoroads.shared.models.Page
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
 
 fun buildTabComponent(
@@ -48,14 +47,14 @@ internal class TabsComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
-    override val childSlot: CStateFlow<ChildSlot<*, Any>> =
+    override val childStack: StateFlow<ChildStack<*, Child>> = stack.toStateFlow()
+    override val childSlot: StateFlow<ChildSlot<*, Any>> =
         childSlot(
             source = reportingNavigation,
             serializer = ReportingConfig.serializer()
         ) { _, _ ->
             Any()
-        }.toStateFlow().toCStateFlow()
+        }.toStateFlow()
 
     private fun processChild(
         config: Config,

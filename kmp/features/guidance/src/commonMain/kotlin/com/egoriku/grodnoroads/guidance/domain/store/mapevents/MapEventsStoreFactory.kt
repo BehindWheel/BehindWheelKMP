@@ -6,11 +6,11 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.coroutines.reLaunch
 import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
+import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera

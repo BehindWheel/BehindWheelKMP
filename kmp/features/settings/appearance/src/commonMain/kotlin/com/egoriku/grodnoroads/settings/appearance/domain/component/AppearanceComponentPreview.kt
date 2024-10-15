@@ -1,14 +1,12 @@
 package com.egoriku.grodnoroads.settings.appearance.domain.component
 
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
+import com.egoriku.grodnoroads.extensions.coroutines.stateFlowOf
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
+import kotlinx.coroutines.flow.StateFlow
 
-// TODO: remove all preview components
 class AppearanceComponentPreview : AppearanceComponent {
 
-    override val state: CStateFlow<State>
-        get() = stateFlowOf { State() }
+    override val state: StateFlow<State> = stateFlowOf { State() }
 
     override fun modify(preference: AppearanceComponent.AppearancePref) = Unit
     override fun update(preference: AppearanceComponent.AppearancePref) = Unit

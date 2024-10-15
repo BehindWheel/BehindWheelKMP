@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.shared.geolocation
 
-import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
 import kotlin.coroutines.resume
@@ -8,6 +7,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
+import kotlinx.coroutines.flow.MutableStateFlow
 import platform.CoreLocation.CLLocation
 import platform.CoreLocation.CLLocationManager
 import platform.CoreLocation.CLLocationManagerDelegateProtocol
@@ -29,7 +29,7 @@ class IosLocationService : LocationService {
 
     private var lastKnownLocation: LocationInfo? = null
 
-    override val lastLocationFlow = CNullableMutableStateFlow<LocationInfo>(null)
+    override val lastLocationFlow = MutableStateFlow<LocationInfo?>(null)
 
     override fun startLocationUpdates() {
         locationManager.stopUpdatingLocation()
