@@ -86,10 +86,7 @@
     <string name="alerts_notifications_traffic_jam">Заторы</string>
     <string name="alerts_notifications_wild_animals">Дзікія жывёлы</string>
 
-    <string name="map_header_appearance">Знешні выгляд</string>
     <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
-    <string name="map_google_map_style_minimal">Мінімалізм</string>
-    <string name="map_google_map_style_detailed">Падрабязная</string>
 
     <string name="map_markers_filtering">Фільтрацыя маркераў па часе</string>
     <string name="map_markers_filtering_description">Выкарыстоўваецца толькі да маркераў з тэкставым паведамленнем (ДАІ, Заторы і г.д.)</string>

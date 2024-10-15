@@ -35,6 +35,7 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
 import com.egoriku.grodnoroads.maps.compose.configuration.MapUiSettings
+import com.egoriku.grodnoroads.maps.compose.configuration.toAndroidColorScheme
 import com.egoriku.grodnoroads.maps.compose.configuration.toAndroidMapType
 import com.egoriku.grodnoroads.maps.compose.core.CameraPosition
 import com.egoriku.grodnoroads.maps.compose.extension.zoom
@@ -199,8 +200,8 @@ private fun updateMapProperties(googleMap: GoogleMap, mapProperties: MapProperti
     googleMap.apply {
         isMyLocationEnabled = mapProperties.isMyLocationEnabled
         mapType = mapProperties.mapType.toAndroidMapType()
+        mapColorScheme = mapProperties.mapColor.toAndroidColorScheme()
         isTrafficEnabled = mapProperties.isTrafficEnabled
-        setMapStyle(mapProperties.mapStyleOptions)
         setMinZoomPreference(mapProperties.minZoomPreference)
         setMaxZoomPreference(mapProperties.maxZoomPreference)
     }

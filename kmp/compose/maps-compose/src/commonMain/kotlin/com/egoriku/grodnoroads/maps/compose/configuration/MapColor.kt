@@ -1,3 +1,7 @@
 package com.egoriku.grodnoroads.maps.compose.configuration
 
-expect class MapStyleOptions
+enum class MapColor {
+    Light,
+    Dark,
+    System
+}

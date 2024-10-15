@@ -93,10 +93,7 @@
     <string name="alerts_notifications_wild_animals">Дикие животные</string>
 
     <!-- Map -->
-    <string name="map_header_appearance">Внешний вид</string>
     <string name="map_traffic_conditions_appearance">Загруженность дорог</string>
-    <string name="map_google_map_style_minimal">Минимализм</string>
-    <string name="map_google_map_style_detailed">Подробная</string>
 
     <string name="map_markers_filtering">Фильтрация маркеров по времени</string>
     <string name="map_markers_filtering_description">Применяется только к маркерам с тектовым сообщением (ГАИ, Пробки и т.д.)</string>

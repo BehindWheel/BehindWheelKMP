@@ -27,6 +27,7 @@ import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
 import com.egoriku.grodnoroads.maps.compose.configuration.MapUiSettings
+import com.egoriku.grodnoroads.maps.compose.configuration.toIosColorScheme
 import com.egoriku.grodnoroads.maps.compose.configuration.toiOSMapType
 import com.egoriku.grodnoroads.maps.compose.core.CameraPosition
 import com.egoriku.grodnoroads.maps.compose.core.Projection
@@ -188,8 +189,8 @@ private fun updateMapProperties(googleMap: GMSMapView, mapProperties: MapPropert
     googleMap.apply {
         myLocationEnabled = mapProperties.isMyLocationEnabled
         mapType = mapProperties.mapType.toiOSMapType()
+        overrideUserInterfaceStyle = mapProperties.mapColor.toIosColorScheme()
         trafficEnabled = mapProperties.isTrafficEnabled
-        mapStyle = mapProperties.mapStyleOptions
         setMinZoom(mapProperties.minZoomPreference, mapProperties.maxZoomPreference)
     }
 }

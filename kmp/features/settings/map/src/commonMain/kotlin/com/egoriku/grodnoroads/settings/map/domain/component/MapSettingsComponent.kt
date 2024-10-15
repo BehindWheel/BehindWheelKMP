@@ -5,7 +5,6 @@ import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
@@ -23,7 +22,6 @@ import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.map.location.City.Grodno
-import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.Style
 
 @Stable
 interface MapSettingsComponent {
@@ -61,7 +59,6 @@ interface MapSettingsComponent {
         data class SelectAll(val selectAll: Boolean = true) : MapPref
 
         data class TrafficJamOnMap(val isShow: Boolean = false) : MapPref
-        data class GoogleMapStyle(val style: Style = Style.Minimal) : MapPref
 
         data class MapZoomInCity(
             val current: Float = DEFAULT_MAP_ZOOM_IN_CITY,
@@ -121,9 +118,6 @@ interface MapSettingsComponent {
         )
 
         @Stable
-        data class MapStyle(
-            val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap(),
-            val googleMapStyle: GoogleMapStyle = GoogleMapStyle()
-        )
+        data class MapStyle(val trafficJamOnMap: TrafficJamOnMap = TrafficJamOnMap())
     }
 }

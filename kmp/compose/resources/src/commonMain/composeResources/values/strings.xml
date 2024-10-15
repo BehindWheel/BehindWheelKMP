@@ -123,10 +123,7 @@
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
     <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
 
-    <string name="map_header_appearance">Appearance</string>
     <string name="map_traffic_conditions_appearance">Traffic conditions</string>
-    <string name="map_google_map_style_minimal">Minimal</string>
-    <string name="map_google_map_style_detailed">Detailed</string>
 
     <string name="map_markers_filtering">Filtering markers by time</string>
     <string name="map_markers_filtering_description">It applies only to markers with a text message (traffic police, congestion, etc.).</string>
