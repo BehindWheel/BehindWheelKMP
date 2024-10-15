@@ -11,7 +11,6 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
-import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.GoogleMapStyle
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
@@ -59,9 +58,7 @@ import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.updateStationaryCam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.updateTrafficJam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.updateTrafficPolice
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.updateWildAnimals
-import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
-import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.updateGoogleMapStyle
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.updateTrafficJamAppearance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -125,10 +122,7 @@ internal class MapSettingsStoreFactory(
                                         wildAnimals = WildAnimals(isShow = showWildAnimals),
                                         selectable = selectable
                                     ),
-                                    mapStyle = MapStyle(
-                                        trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap),
-                                        googleMapStyle = GoogleMapStyle(style = pref.googleMapStyle)
-                                    ),
+                                    mapStyle = MapStyle(trafficJamOnMap = TrafficJamOnMap(isShow = pref.trafficJamOnMap)),
                                     locationInfo = LocationInfo(
                                         defaultCity = DefaultCity(current = pref.defaultCity)
                                     ),
@@ -171,7 +165,6 @@ internal class MapSettingsStoreFactory(
                                     }
 
                                     is TrafficJamOnMap -> updateTrafficJamAppearance(preference.isShow)
-                                    is GoogleMapStyle -> updateGoogleMapStyle(preference.style.type)
 
                                     is DefaultCity -> updateDefaultCity(preference.current.cityName)
 

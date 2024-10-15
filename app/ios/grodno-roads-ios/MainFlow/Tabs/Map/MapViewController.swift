@@ -31,11 +31,6 @@ class MapViewController: UIViewController {
         )
         
         let mapView = GMSMapView(options: options)
-        do {
-            mapView.mapStyle = try GMSMapStyle(jsonString: MR.files().map_style_light_detailed_json.readText())
-        } catch {
-            NSLog("Failed to load map style. \(error)")
-        }
         mapView.delegate = self
         mapView.isMyLocationEnabled = false
         mapView.settings.myLocationButton = false

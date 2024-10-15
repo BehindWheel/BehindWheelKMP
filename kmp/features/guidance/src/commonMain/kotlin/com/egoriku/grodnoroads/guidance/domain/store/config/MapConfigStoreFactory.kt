@@ -46,7 +46,6 @@ import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowStationaryCam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowTrafficJam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowTrafficPolice
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowWildAnimals
-import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.googleMapStyle
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -111,7 +110,6 @@ internal class MapConfigStoreFactory(
                                         notifyCarCrash = pref.isNotifyCarCrash,
                                         notifyWildAnimals = pref.isNotifyWildAnimals
                                     ),
-                                    googleMapStyle = pref.googleMapStyle,
                                     trafficJanOnMap = pref.trafficJamOnMap,
                                     keepScreenOn = pref.keepScreenOn
                                 )

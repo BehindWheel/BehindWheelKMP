@@ -186,7 +186,6 @@ internal class GuidanceComponentImpl(
         get() = mapConfigStore.states.map {
             MapConfig(
                 zoomLevel = it.zoomLevel,
-                googleMapStyle = it.mapInternalConfig.googleMapStyle,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
                 alertRadius = it.alertRadius,
