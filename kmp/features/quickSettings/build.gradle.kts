@@ -20,7 +20,6 @@ kotlin {
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.persistent)
-            implementation(projects.kmp.libraries.coroutines)
 
             implementation(libs.decompose)
             implementation(libs.koin.core)

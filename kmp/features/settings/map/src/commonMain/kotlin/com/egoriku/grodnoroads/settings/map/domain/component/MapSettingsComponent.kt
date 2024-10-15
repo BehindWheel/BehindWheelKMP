@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.settings.map.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
@@ -22,11 +21,12 @@ import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.map.location.City.Grodno
+import kotlinx.coroutines.flow.Flow
 
 @Stable
 interface MapSettingsComponent {
 
-    val state: CFlow<MapSettingState>
+    val state: Flow<MapSettingState>
 
     fun modify(preference: MapPref)
     fun reset(preference: MapPref)

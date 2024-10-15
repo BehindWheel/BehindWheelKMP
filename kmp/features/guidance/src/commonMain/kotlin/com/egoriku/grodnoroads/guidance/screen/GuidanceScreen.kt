@@ -31,8 +31,8 @@ import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
-import com.egoriku.grodnoroads.coroutines.onChild
-import com.egoriku.grodnoroads.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.decompose.onChild
 import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState

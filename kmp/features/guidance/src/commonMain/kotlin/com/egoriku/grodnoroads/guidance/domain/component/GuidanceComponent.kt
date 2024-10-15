@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.guidance.domain.component
 
 import androidx.compose.runtime.Stable
-import com.egoriku.grodnoroads.coroutines.flow.CFlow
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -16,6 +15,7 @@ import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsCompo
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 
 @Stable
@@ -27,18 +27,18 @@ interface GuidanceComponent {
     val notificationEvents: SharedFlow<Notification>
     val alertEvents: SharedFlow<AlertEvent>
 
-    val lastLocation: CFlow<LastLocation>
-    val initialLocation: CFlow<LatLng>
+    val lastLocation: Flow<LastLocation>
+    val initialLocation: Flow<LatLng>
 
-    val appMode: CFlow<AppMode>
-    val mapBottomSheet: CFlow<MapBottomSheet>
-    val mapConfig: CFlow<MapConfig>
-    val mapEvents: CFlow<MapEvents>
-    val userCount: CFlow<Int>
+    val appMode: Flow<AppMode>
+    val mapBottomSheet: Flow<MapBottomSheet>
+    val mapConfig: Flow<MapConfig>
+    val mapEvents: Flow<MapEvents>
+    val userCount: Flow<Int>
 
-    val alerts: CFlow<ImmutableList<Alert>>
+    val alerts: Flow<ImmutableList<Alert>>
 
-    val speedLimit: CFlow<Int>
+    val speedLimit: Flow<Int>
 
     fun processReporting(params: ReportParams)
 

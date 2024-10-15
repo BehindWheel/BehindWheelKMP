@@ -7,12 +7,8 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
-import com.egoriku.grodnoroads.coroutines.coroutineScope
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.nullable.toCNullableStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
-import com.egoriku.grodnoroads.coroutines.toStateFlow
+import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
+import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
 import com.egoriku.grodnoroads.onboarding.domain.component.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
@@ -20,6 +16,7 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
 import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -56,14 +53,13 @@ internal class RootComponentImpl(
         }
     }
 
-    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
+    override val childStack: StateFlow<ChildStack<*, Child>> = stack.toStateFlow()
 
-    override val theme: CNullableStateFlow<Theme>
+    override val theme: StateFlow<Theme?>
         get() = dataStore.data
             .map { Theme.fromOrdinal(it.appTheme.theme) }
             .distinctUntilChanged()
             .stateIn(scope = coroutineScope, started = SharingStarted.Eagerly, initialValue = null)
-            .toCNullableStateFlow()
 
     private fun processChild(
         config: Config,

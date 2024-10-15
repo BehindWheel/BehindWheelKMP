@@ -1,10 +1,8 @@
 @file:Suppress("unused")
 
-import com.egoriku.grodnoroads.extension.compilerOptions
 import com.egoriku.grodnoroads.internal.applicationExtension
 import com.egoriku.grodnoroads.internal.applicationPluginId
 import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
-import com.egoriku.grodnoroads.internal.kotlinExtension
 import com.egoriku.grodnoroads.internal.kotlinPluginId
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -21,12 +19,6 @@ class AndroidApplicationPlugin : Plugin<Project> {
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
-            }
-
-            kotlinExtension {
-                compilerOptions {
-                    freeCompilerArgs.add("-Xcontext-receivers")
-                }
             }
 
             buildTypes {

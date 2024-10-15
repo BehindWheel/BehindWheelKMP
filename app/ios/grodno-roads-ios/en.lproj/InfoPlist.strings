@@ -6,7 +6,7 @@
   
 */
 
-"CFBundleDisplayName" = "Driving | Grodno";
+"CFBundleDisplayName" = "Behind Wheel | Grodno";
 
 "NSLocationWhenInUseUsageDescription" = "Used to display position on map";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Used to display position on map";

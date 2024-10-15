@@ -61,7 +61,6 @@ include(":kmp:features:settings:changelog")
 include(":kmp:features:settings:faq")
 include(":kmp:features:settings:map")
 
-include(":kmp:libraries:coroutines")
 include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")
 include(":kmp:libraries:location")

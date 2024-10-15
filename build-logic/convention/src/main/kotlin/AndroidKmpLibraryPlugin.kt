@@ -25,10 +25,7 @@ class AndroidKmpLibraryPlugin : Plugin<Project> {
 
         kmpExtension {
             compilerOptions {
-                freeCompilerArgs.addAll(
-                    "-Xcontext-receivers",
-                    "-Xexpect-actual-classes"
-                )
+                freeCompilerArgs.addAll("-Xexpect-actual-classes")
             }
 
             sourceSets {

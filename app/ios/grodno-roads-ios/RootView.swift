@@ -8,7 +8,7 @@
 import SwiftUI
 import Root
 
-struct RootView2: UIViewControllerRepresentable {
+struct RootView: UIViewControllerRepresentable {
     let root: RootComponent
     let backDispatcher: BackDispatcher
     
@@ -20,26 +20,4 @@ struct RootView2: UIViewControllerRepresentable {
 
        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
        }
-}
-
-struct RootView: View {
-    private let root: RootComponent
-    
-    init(root: RootComponent) {
-        self.root = root
-    }
-
-    var body: some View {
-        StackView(
-            stackValue: ObservableState(root.childStack),
-            childContent: { child in
-                switch child {
-                case let child as RootComponentChild.MainFlow: MainFlowView(child.component)
-                case let child as RootComponentChild.Onboarding: OnboardingView(child.component)
-                default: EmptyView()
-                }
-            },
-            onBack: {}
-        )
-    }
 }

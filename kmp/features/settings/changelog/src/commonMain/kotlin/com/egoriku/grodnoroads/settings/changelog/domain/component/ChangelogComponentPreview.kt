@@ -1,15 +1,15 @@
 package com.egoriku.grodnoroads.settings.changelog.domain.component
 
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.stateFlowOf
 import com.egoriku.grodnoroads.extensions.LoremIpsum
+import com.egoriku.grodnoroads.extensions.coroutines.stateFlowOf
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.flow.StateFlow
 
 class ChangelogComponentPreview : ChangelogComponent {
 
-    override val state: CStateFlow<ChangelogStore.State>
+    override val state: StateFlow<ChangelogStore.State>
         get() = stateFlowOf {
             ChangelogStore.State(
                 isLoading = false,

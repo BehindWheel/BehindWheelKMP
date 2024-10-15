@@ -6,7 +6,7 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.InvalidateLocation

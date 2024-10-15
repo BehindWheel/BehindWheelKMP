@@ -3,11 +3,10 @@ package com.egoriku.grodnoroads.root.domain
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.onboarding.domain.component.OnboardingComponent
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
+import kotlinx.coroutines.flow.StateFlow
 
 fun buildRootComponent(
     componentContext: ComponentContext
@@ -15,8 +14,8 @@ fun buildRootComponent(
 
 @Stable
 interface RootComponent {
-    val theme: CNullableStateFlow<Theme>
-    val childStack: CStateFlow<ChildStack<*, Child>>
+    val theme: StateFlow<Theme?>
+    val childStack: StateFlow<ChildStack<*, Child>>
 
     sealed class Child {
         data class Onboarding(val component: OnboardingComponent) : Child()

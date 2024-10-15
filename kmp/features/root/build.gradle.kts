@@ -53,7 +53,6 @@ kotlin {
             export(projects.kmp.shared.analytics)
             export(projects.kmp.shared.models)
             export(projects.kmp.shared.resources)
-            export(projects.kmp.libraries.coroutines)
             export(projects.kmp.libraries.location)
         }
     }
@@ -76,7 +75,6 @@ kotlin {
             api(projects.kmp.compose.resources)
             api(projects.kmp.shared.analytics)
             api(projects.kmp.shared.models)
-            api(projects.kmp.libraries.coroutines)
             api(projects.kmp.libraries.location)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.shared.crashlytics)
@@ -84,6 +82,7 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.datastore)
+            implementation(projects.kmp.libraries.extensions)
 
             api(libs.decompose)
             api(libs.decompose.compose)

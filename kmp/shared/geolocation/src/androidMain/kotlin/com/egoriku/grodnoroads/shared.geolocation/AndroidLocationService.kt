@@ -5,7 +5,6 @@ import android.content.Context
 import android.location.Location
 import android.os.Looper
 import androidx.core.location.LocationRequestCompat.QUALITY_HIGH_ACCURACY
-import com.egoriku.grodnoroads.coroutines.flow.nullable.CNullableMutableStateFlow
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
@@ -16,6 +15,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.tasks.await
 
 class AndroidLocationService(context: Context) : LocationService {
@@ -23,7 +23,7 @@ class AndroidLocationService(context: Context) : LocationService {
 
     private var lastKnownLocation: LocationInfo? = null
 
-    override val lastLocationFlow = CNullableMutableStateFlow<LocationInfo>(null)
+    override val lastLocationFlow = MutableStateFlow<LocationInfo?>(null)
 
     private val locationCallback = object : LocationCallback() {
 

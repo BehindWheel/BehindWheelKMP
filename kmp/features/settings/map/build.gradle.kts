@@ -22,7 +22,6 @@ kotlin {
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.persistent)
-            implementation(projects.kmp.libraries.coroutines)
             implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.libraries.location)
 

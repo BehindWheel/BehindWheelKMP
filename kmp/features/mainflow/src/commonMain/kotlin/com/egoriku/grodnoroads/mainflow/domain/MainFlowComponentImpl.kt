@@ -7,9 +7,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
-import com.egoriku.grodnoroads.coroutines.toStateFlow
+import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
@@ -17,6 +15,7 @@ import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelo
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
 
 fun buildMainFlowComponent(
@@ -38,7 +37,7 @@ internal class MainFlowComponentImpl(
         childFactory = ::processChild
     )
 
-    override val childStack: CStateFlow<ChildStack<*, Child>> = stack.toStateFlow().toCStateFlow()
+    override val childStack: StateFlow<ChildStack<*, Child>> = stack.toStateFlow()
 
     override fun onBack() = navigation.pop()
 

@@ -8,14 +8,13 @@ import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.coroutines.coroutineScope
-import com.egoriku.grodnoroads.coroutines.flow.CStateFlow
-import com.egoriku.grodnoroads.coroutines.flow.toCStateFlow
-import com.egoriku.grodnoroads.coroutines.toStateFlow
+import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
+import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.DialogComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.buildDialogComponent
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.store.SpecialEventStore
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
@@ -45,7 +44,7 @@ internal class SpecialEventComponentImpl(
             .launchIn(coroutineScope)
     }
 
-    override val specialEvents: CStateFlow<ChildSlot<*, DialogComponent>> = childSlot(
+    override val specialEvents: StateFlow<ChildSlot<*, DialogComponent>> = childSlot(
         source = eventsNavigation,
         serializer = EventConfig.serializer(),
         handleBackButton = true
@@ -55,7 +54,7 @@ internal class SpecialEventComponentImpl(
             eventType = config.eventType,
             onDismissed = eventsNavigation::dismiss
         )
-    }.toStateFlow().toCStateFlow()
+    }.toStateFlow()
 
     private fun showEvent(eventType: EventType) {
         eventsNavigation.activate(EventConfig(eventType))

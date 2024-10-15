@@ -17,7 +17,9 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(libs.androidx.annotation)
+            implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)
+            implementation(libs.decompose)
         }
         androidDependencies {
             implementation(libs.androidx.appcompat)
