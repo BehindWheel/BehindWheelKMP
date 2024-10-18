@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.appsettings.domain.util.STORE_URL
-import com.egoriku.grodnoroads.appsettings.domain.util.rememberUrlLauncher
 import com.egoriku.grodnoroads.appsettings.domain.util.rememberUrlShare
 import com.egoriku.grodnoroads.appsettings.screen.ui.SocialNetwork
 import com.egoriku.grodnoroads.compose.resources.Constants.TG_CHANNEL_LINK
@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SocialNetworkSection(modifier: Modifier = Modifier) {
-    val urlLauncher = rememberUrlLauncher()
+    val uriHandler = LocalUriHandler.current
 
     Row(
         modifier = modifier
@@ -38,7 +38,7 @@ fun SocialNetworkSection(modifier: Modifier = Modifier) {
     ) {
         SocialNetwork(
             title = stringResource(Res.string.social_telegram_chat),
-            onClick = { urlLauncher.openUrl(TG_CHAT_LINK) }
+            onClick = { uriHandler.openUri(TG_CHAT_LINK) }
         ) {
             Icon(
                 imageVector = GrodnoRoads.Outlined.Chat,
@@ -47,7 +47,7 @@ fun SocialNetworkSection(modifier: Modifier = Modifier) {
         }
         SocialNetwork(
             title = stringResource(Res.string.social_telegram_channel),
-            onClick = { urlLauncher.openUrl(TG_CHANNEL_LINK) }
+            onClick = { uriHandler.openUri(TG_CHANNEL_LINK) }
         ) {
             Icon(
                 imageVector = GrodnoRoads.Outlined.Telegram,
