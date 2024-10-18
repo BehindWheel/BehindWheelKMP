@@ -26,6 +26,8 @@ internal val lightColorScheme = lightColorScheme(
     onTertiaryContainer = colorUnknown,
 
     surface = Color.White,
+    surfaceContainerLow = Color.White,
+    surfaceContainerHighest = Color.White,
     surfaceVariant = Color.White,
     onSurface = Color(0xFF232F34),
     surfaceContainer = Color(0xFFFDFDFD),
@@ -56,7 +58,7 @@ internal val darkColorScheme = darkColorScheme(
 
     secondary = Color(0xFFFFC727),
     onSecondary = Color(0xFF664B00),
-    secondaryContainer = Color(0xFF92979F),
+    secondaryContainer = Color(0xFF393E46),
     onSecondaryContainer = Color(0xFFFDFDFD),
 
     tertiary = colorUnknown,
@@ -65,6 +67,9 @@ internal val darkColorScheme = darkColorScheme(
     onTertiaryContainer = colorUnknown,
 
     surface = Color(0xFF393E46),
+    surfaceContainer = Color(0xFF393E46),
+    surfaceContainerLow = Color(0xFF393E46),
+    surfaceContainerHighest = Color(0xFF393E46),
     surfaceVariant = Color(0xFF393E46),
     onSurface = Color(0xFFFDFDFD),
     onSurfaceVariant = Color(0xFFE3E6E8),

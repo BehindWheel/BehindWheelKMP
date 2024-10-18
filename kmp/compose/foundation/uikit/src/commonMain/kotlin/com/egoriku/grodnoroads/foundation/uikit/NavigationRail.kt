@@ -6,7 +6,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,19 +14,14 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.Settings
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun NavigationRail(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val tonalElevation = MaterialTheme.tonalElevation
-    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
-
     androidx.compose.material3.NavigationRail(
         modifier = modifier,
-        containerColor = containerColor,
         content = content
     )
 }
@@ -40,9 +34,6 @@ fun NavigationRailItem(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    val tonalElevation = MaterialTheme.tonalElevation
-    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(tonalElevation)
-
     NavigationRailItem(
         modifier = modifier,
         colors = NavigationRailItemDefaults.colors(
@@ -51,8 +42,7 @@ fun NavigationRailItem(
             ),
             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                 alpha = 0.45f
-            ),
-            indicatorColor = containerColor
+            )
         ),
         selected = selected,
         onClick = onClick,

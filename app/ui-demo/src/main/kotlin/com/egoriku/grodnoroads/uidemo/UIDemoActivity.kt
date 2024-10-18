@@ -98,7 +98,9 @@ class UIDemoActivity : ComponentActivity() {
                     ModalBottomSheet(
                         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
                         onDismissRequest = { isOpenPalette = false },
-                        windowInsets = WindowInsets(0, 0, 0, 0)
+                        contentWindowInsets = {
+                            WindowInsets(0, 0, 0, 0)
+                        }
                     ) {
                         Material3Palette(modifier = Modifier.padding(bottom = bottomPadding))
                     }

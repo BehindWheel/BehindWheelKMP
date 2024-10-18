@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.mainflow.domain
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
@@ -59,7 +58,6 @@ internal class MainFlowComponentImpl(
         is Config.MapSettings -> Child.MapSettings(buildMapSettingsComponent(componentContext))
     }
 
-    @OptIn(ExperimentalDecomposeApi::class)
     private fun open(page: Page) {
         when (page) {
             Page.Alerts -> navigation.pushNew(Config.Alerts)

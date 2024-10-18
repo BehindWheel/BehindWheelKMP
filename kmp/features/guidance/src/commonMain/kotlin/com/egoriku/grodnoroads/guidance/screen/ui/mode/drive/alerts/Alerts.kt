@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,7 +44,6 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Alerts(
     alerts: ImmutableList<Alert>,
@@ -69,8 +67,8 @@ fun Alerts(
                     }
 
                     IncidentAlert(
-                        modifier = Modifier.animateItemPlacement(
-                            animationSpec = tween(
+                        modifier = Modifier.animateItem(
+                            placementSpec = tween(
                                 durationMillis = 500,
                                 easing = LinearOutSlowInEasing
                             )
@@ -94,8 +92,8 @@ fun Alerts(
                         MediumSpeedCamera -> GrodnoRoads.Colored.MediumSpeedCamera
                     }
                     CameraAlert(
-                        modifier = Modifier.animateItemPlacement(
-                            animationSpec = tween(
+                        modifier = Modifier.animateItem(
+                            placementSpec = tween(
                                 durationMillis = 500,
                                 easing = LinearOutSlowInEasing
                             )

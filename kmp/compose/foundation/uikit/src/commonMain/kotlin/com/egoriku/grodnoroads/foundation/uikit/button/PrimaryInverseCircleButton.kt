@@ -26,7 +26,6 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 
 @Composable
@@ -58,8 +57,6 @@ fun PrimaryInverseCircleButton(
         color = MaterialTheme.colorScheme.inversePrimary,
         contentColor = contentColor,
         shape = CircleShape,
-        tonalElevation = MaterialTheme.tonalElevation,
-        shadowElevation = 0.dp,
         content = {
             CompositionLocalProvider(LocalContentColor provides contentColor) {
                 Row(

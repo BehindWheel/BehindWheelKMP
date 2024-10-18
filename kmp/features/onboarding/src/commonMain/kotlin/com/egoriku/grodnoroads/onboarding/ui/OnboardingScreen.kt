@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.onboarding.ui
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -60,7 +59,6 @@ fun OnboardingScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun OnboardingUi(
     state: State,
@@ -106,7 +104,6 @@ private fun OnboardingUi(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Footer(
     pagerState: PagerState,

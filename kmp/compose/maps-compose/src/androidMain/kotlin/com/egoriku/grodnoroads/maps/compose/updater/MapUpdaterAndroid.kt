@@ -94,7 +94,6 @@ internal class MapUpdaterAndroid(
     }
 
     override fun detach() {
-        googleMap.setOnMarkerClickListener(null)
         scope.cancel()
     }
 

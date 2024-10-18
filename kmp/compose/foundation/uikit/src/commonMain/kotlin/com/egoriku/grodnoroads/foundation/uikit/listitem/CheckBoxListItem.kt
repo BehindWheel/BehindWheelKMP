@@ -7,12 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -29,7 +26,6 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckBoxListItem(
     imageVector: ImageVector,
@@ -52,12 +48,10 @@ fun CheckBoxListItem(
             .padding(start = 6.dp, end = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides true) {
-            Checkbox(
-                checked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
-        }
+        Checkbox(
+            checked = isChecked,
+            onCheckedChange = onCheckedChange
+        )
         Text(
             modifier = Modifier
                 .padding(vertical = 8.dp)

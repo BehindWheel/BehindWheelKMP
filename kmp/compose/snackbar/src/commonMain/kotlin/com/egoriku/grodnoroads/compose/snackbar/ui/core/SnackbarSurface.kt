@@ -15,8 +15,6 @@ internal fun SnackbarSurface(
     Surface(
         modifier = modifier.widthIn(max = 420.dp),
         color = MaterialTheme.colorScheme.inverseSurface,
-        shadowElevation = 0.dp,
-        tonalElevation = 0.dp,
         shape = MaterialTheme.shapes.medium,
         content = content
     )
