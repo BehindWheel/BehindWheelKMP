@@ -4,18 +4,18 @@ minSdk = "23" # Android 6.0
 targetSdk = "34"
 
 agp = "8.7.1"
-coil = "3.0.0-alpha10"
+coil = "3.0.0-rc01"
 decompose = "3.1.0"
 essenty = "2.1.0"
 kotlinx-serialization = "1.7.3"
 kotlin = "2.0.21"
-ktor = "2.3.12"
+ktor = "3.0.0"
 moko-resources = "0.24.3"
 mvikotlin = "4.2.0"
 
 [libraries]
-androidx-activity-compose = "androidx.activity:activity-compose:1.9.2"
-androidx-annotation = "androidx.annotation:annotation:1.8.2"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.3"
+androidx-annotation = "androidx.annotation:annotation:1.9.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-core = "androidx.core:core-ktx:1.13.1"
@@ -24,7 +24,7 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.1"
 androidx-media = "androidx.media:media:1.7.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.7"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.8"
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor = "io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha08"

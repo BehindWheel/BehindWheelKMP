@@ -4,12 +4,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -21,7 +18,6 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.checkbox.TriStateCheckbox
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TriStateCheckBoxListItem(
     text: String,
@@ -36,12 +32,10 @@ fun TriStateCheckBoxListItem(
             .padding(start = 6.dp, end = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides true) {
-            TriStateCheckbox(
-                state = state,
-                onClick = onToggle
-            )
-        }
+        TriStateCheckbox(
+            state = state,
+            onClick = onToggle
+        )
         Text(
             modifier = Modifier
                 .padding(vertical = 8.dp)

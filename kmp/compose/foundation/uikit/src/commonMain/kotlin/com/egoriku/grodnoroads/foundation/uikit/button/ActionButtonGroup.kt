@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun ActionButtonGroup(
@@ -38,9 +37,7 @@ fun ActionButtonGroup(
                 ambientColor = shadowColor,
                 spotColor = shadowColor
             ),
-        shape = shape,
-        shadowElevation = 0.dp,
-        tonalElevation = MaterialTheme.tonalElevation
+        shape = shape
     ) {
         Column(content = content)
     }

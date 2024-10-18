@@ -12,13 +12,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.interop.UIKitView
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.viewinterop.UIKitInteropInteractionMode
+import androidx.compose.ui.viewinterop.UIKitInteropProperties
+import androidx.compose.ui.viewinterop.UIKitView
 import cocoapods.GoogleMaps.GMSCameraPosition
 import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
@@ -44,7 +47,7 @@ import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIApplication
 import platform.darwin.NSObject
 
-@OptIn(ExperimentalForeignApi::class)
+@OptIn(ExperimentalForeignApi::class, ExperimentalComposeUiApi::class)
 @Composable
 actual fun GoogleMap(
     cameraPositionProvider: () -> CameraPosition,
@@ -134,7 +137,11 @@ actual fun GoogleMap(
         modifier = Modifier.fillMaxSize(),
         onRelease = {
             it.removeFromSuperview()
-        }
+        },
+        properties = UIKitInteropProperties(
+            interactionMode = UIKitInteropInteractionMode.NonCooperative,
+            isNativeAccessibilityEnabled = true
+        )
     )
 
     DisposableEffect(mapUpdater) {

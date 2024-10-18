@@ -22,7 +22,6 @@ import com.egoriku.grodnoroads.compose.resources.map_user_count
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.Info
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -39,8 +38,6 @@ fun UsersCountBadge(
         else -> Color.Black
     }
     Surface(
-        tonalElevation = MaterialTheme.tonalElevation,
-        shadowElevation = 0.dp,
         modifier = modifier
             .shadow(
                 elevation = 12.dp,

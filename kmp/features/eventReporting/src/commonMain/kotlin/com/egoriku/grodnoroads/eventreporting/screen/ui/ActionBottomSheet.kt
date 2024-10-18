@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -71,6 +72,8 @@ internal enum class DragAnchors {
     End
 }
 
+private val sheetAnimationSpec = tween<Float>(durationMillis = 350)
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ActionBottomSheet(
@@ -87,12 +90,15 @@ internal fun ActionBottomSheet(
 
     val scope = rememberCoroutineScope()
 
+    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
+
     val anchoredDraggableState = remember {
         AnchoredDraggableState(
             initialValue = DragAnchors.End,
-            animationSpec = tween(),
             positionalThreshold = { distance: Float -> distance * 0.5f },
-            velocityThreshold = { with(density) { 50.dp.toPx() } }
+            velocityThreshold = { with(density) { 50.dp.toPx() } },
+            snapAnimationSpec = sheetAnimationSpec,
+            decayAnimationSpec = decayAnimationSpec
         )
     }
     val internalOnDismissRequest: () -> Unit = remember {

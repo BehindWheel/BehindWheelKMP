@@ -180,7 +180,7 @@ data class CupertinoSwitchColors(
     private val disabledUncheckedIconColor: Color
 ) {
     /**
-     * Represents the color used for the switch's thumb, depending on [enabled] and [checked].
+     * Represents the color used for the switch's thumb, depending on [enabled].
      *
      * @param enabled whether the Switch is enabled or not
      */

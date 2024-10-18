@@ -17,7 +17,6 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Geo
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.isLight
-import com.egoriku.grodnoroads.foundation.theme.tonalElevation
 
 @Composable
 fun ActionButton(
@@ -55,9 +54,7 @@ private fun ActionButton(
                 spotColor = shadowColor
             ),
         shape = RoundedCornerShape(10.dp),
-        onClick = onClick,
-        shadowElevation = 0.dp,
-        tonalElevation = MaterialTheme.tonalElevation
+        onClick = onClick
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
             icon()
