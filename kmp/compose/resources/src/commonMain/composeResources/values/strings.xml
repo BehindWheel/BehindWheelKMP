@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"Driving | Grodno</string>
-
     <string name="tab_map">Map</string>
     <string name="tab_chat">Chat</string>
     <string name="tab_settings">Settings</string>
