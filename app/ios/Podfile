@@ -8,7 +8,7 @@ target 'grodno-roads-ios' do
    pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
    pod 'FirebaseCore', '~> 11.1.0'
    pod 'FirebaseDatabase', '~> 11.1.0'
-   pod 'FirebaseAnalytics', '~> 11.1.0'
+   pod 'FirebaseAnalytics', '~> 11.4.0'
    pod 'FirebaseCrashlytics', '~> 11.1.0'
    pod 'FirebaseFirestore', '~> 11.1.0'
    pod 'root', :path => '../../kmp/features/root'
