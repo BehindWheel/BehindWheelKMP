@@ -10,7 +10,7 @@ target 'grodno-roads-ios' do
    pod 'FirebaseDatabase', '~> 11.1.0'
    pod 'FirebaseAnalytics', '~> 11.1.0'
    pod 'FirebaseCrashlytics', '~> 11.1.0'
-   pod 'FirebaseFirestore', '~> 11.1.0'
+   pod 'FirebaseFirestore', '~> 11.4.0'
    pod 'root', :path => '../../kmp/features/root'
 end
 
