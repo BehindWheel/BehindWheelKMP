@@ -532,7 +532,6 @@ fun GuidanceScreen(
                             } else {
                                 val message =
                                     snackbarMessageBuilder.handleCurrentLocationRequest(it)
-
                                 if (message == null) {
                                     isRequestCurrentLocation = true
                                     component.requestCurrentLocation()

@@ -16,6 +16,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import platform.CoreLocation.CLAuthorizationStatus
 import platform.CoreLocation.CLLocationManager
 import platform.CoreLocation.CLLocationManagerDelegateProtocol
@@ -65,6 +67,8 @@ class LocationRequester(
     private val locationDelegate: LocationManagerDelegate,
     private val scope: CoroutineScope
 ) {
+    private val mutex: Mutex = Mutex()
+
     private val _events = MutableSharedFlow<LocationRequestStatus>()
     val events = _events.asSharedFlow()
 
@@ -75,20 +79,22 @@ class LocationRequester(
     }
 
     private suspend fun requestPermission() {
-        val state = provideLocationPermission(CLLocationManager.authorizationStatus())
+        val state = provideLocationPermission(locationDelegate.currentPermissionStatus())
         _events.emit(state)
     }
 
     private suspend fun provideLocationPermission(status: CLAuthorizationStatus): LocationRequestStatus {
         return when (status) {
             kCLAuthorizationStatusAuthorizedAlways,
-            kCLAuthorizationStatusAuthorizedWhenInUse -> LocationRequestStatus.GmsLocationEnabled
+            kCLAuthorizationStatusAuthorizedWhenInUse -> LocationRequestStatus.PermissionGranted
 
             kCLAuthorizationStatusNotDetermined -> {
-                val newStatus = suspendCoroutine { continuation ->
-                    locationDelegate.requestLocationAccess { continuation.resume(it) }
+                mutex.withLock {
+                    val newStatus = suspendCoroutine { continuation ->
+                        locationDelegate.requestLocationAccess { continuation.resume(it) }
+                    }
+                    provideLocationPermission(newStatus)
                 }
-                provideLocationPermission(newStatus)
             }
 
             kCLAuthorizationStatusDenied -> LocationRequestStatus.PermissionDenied
@@ -100,18 +106,17 @@ class LocationRequester(
 class LocationManagerDelegate :
     NSObject(),
     CLLocationManagerDelegateProtocol {
-    private var callback: ((CLAuthorizationStatus) -> Unit)? = null
 
     private val locationManager = CLLocationManager()
+    private var callback: ((CLAuthorizationStatus) -> Unit)? = null
 
     init {
         locationManager.delegate = this
     }
 
-    fun requestLocationAccess(callback: (CLAuthorizationStatus) -> Unit) {
-        this.callback = callback
-
-        locationManager.requestWhenInUseAuthorization()
+    override fun locationManagerDidChangeAuthorization(manager: CLLocationManager) {
+        callback?.invoke(manager.authorizationStatus)
+        callback = null
     }
 
     override fun locationManager(
@@ -120,5 +125,12 @@ class LocationManagerDelegate :
     ) {
         callback?.invoke(didChangeAuthorizationStatus)
         callback = null
+    }
+
+    fun currentPermissionStatus(): CLAuthorizationStatus = locationManager.authorizationStatus
+
+    fun requestLocationAccess(callback: (CLAuthorizationStatus) -> Unit) {
+        this.callback = callback
+        locationManager.requestAlwaysAuthorization()
     }
 }

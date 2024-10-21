@@ -1,119 +1,47 @@
 package com.egoriku.grodnoroads.shared.geolocation
 
-import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.shared.geolocation.util.toKilometersPerHour
+import com.egoriku.grodnoroads.logger.logD
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.useContents
 import kotlinx.coroutines.flow.MutableStateFlow
-import platform.CoreLocation.CLLocation
-import platform.CoreLocation.CLLocationManager
-import platform.CoreLocation.CLLocationManagerDelegateProtocol
-import platform.CoreLocation.kCLDistanceFilterNone
-import platform.CoreLocation.kCLLocationAccuracyBest
-import platform.Foundation.NSError
-import platform.darwin.NSObject
 
 class IosLocationService : LocationService {
 
-    private val locationManager = CLLocationManager()
-    private val locationDelegate = LocationDelegate().apply {
-        onLocationUpdate = { location ->
-            if (location != null) {
-                lastLocationFlow.tryEmit(location)
-            }
+    private val locationDelegate = LocationDelegate()
+    private var lastKnownLocation: LocationInfo? = null
+
+    init {
+        locationDelegate.monitorLocation { location ->
+            lastLocationFlow.tryEmit(location.toLocationInfo())
         }
     }
 
-    private var lastKnownLocation: LocationInfo? = null
-
     override val lastLocationFlow = MutableStateFlow<LocationInfo?>(null)
 
-    override fun startLocationUpdates() {
-        locationManager.stopUpdatingLocation()
-        locationManager.delegate = null
+    override fun startLocationUpdates() = locationDelegate.startUpdatingLocation()
 
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
+    override fun stopLocationUpdates() = locationDelegate.stopTracking()
 
-        locationManager.delegate = locationDelegate
-    }
-
-    override fun stopLocationUpdates() {
-        locationManager.stopUpdatingLocation()
-        locationManager.delegate = null
-    }
-
-    @OptIn(ExperimentalForeignApi::class)
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
-            val location = locationManager.location ?: return null
-
-            location.coordinate.useContents {
-                lastKnownLocation = LocationInfo(
-                    latLng = LatLng(latitude, longitude),
-                    bearing = location.course.toFloat(),
-                    speed = 0
-                )
-            }
+            lastKnownLocation = requestLocation()
         }
 
         return lastKnownLocation
     }
 
-    override suspend fun requestCurrentLocation(): LocationInfo = requestLocation()
+    override suspend fun requestCurrentLocation(): LocationInfo? = requestLocation()
 
-    private suspend fun requestLocation(): LocationInfo = suspendCoroutine { continuation ->
-        locationManager.delegate = null
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-
-        locationManager.delegate = LocationDelegate().apply {
-            onLocationUpdate = { location ->
-                locationManager.stopUpdatingLocation()
-                locationManager.delegate = null
-
+    private suspend fun requestLocation(): LocationInfo? {
+        return suspendCoroutine { continuation ->
+            locationDelegate.requestLocation { error, location ->
                 if (location != null) {
-                    continuation.resume(location)
+                    continuation.resume(location.toLocationInfo())
                 } else {
-                    continuation.resumeWithException(Exception("Unable to get current location"))
+                    logD("requestLocation error=${error?.localizedDescription}")
+                    continuation.resume(null)
                 }
             }
-        }
-    }
-
-    @OptIn(ExperimentalForeignApi::class)
-    private class LocationDelegate :
-        NSObject(),
-        CLLocationManagerDelegateProtocol {
-        var onLocationUpdate: ((LocationInfo?) -> Unit)? = null
-
-        override fun locationManager(manager: CLLocationManager, didUpdateLocations: List<*>) {
-            didUpdateLocations.firstOrNull()?.let {
-                val location = it as CLLocation
-                location.coordinate.useContents {
-                    onLocationUpdate?.invoke(
-                        LocationInfo(
-                            latLng = LatLng(latitude, longitude),
-                            bearing = location.course.toFloat(),
-                            speed = when {
-                                location.speed >= 0 -> location.speed.toKilometersPerHour()
-                                else -> 0
-                            }
-                        )
-                    )
-                }
-            }
-        }
-
-        override fun locationManager(manager: CLLocationManager, didFailWithError: NSError) {
-            onLocationUpdate?.invoke(null)
         }
     }
 }
