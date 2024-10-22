@@ -11,6 +11,10 @@ plugins {
 
 android {
     namespace = "com.egoriku.grodnoroads.shared.components"
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 kotlin {

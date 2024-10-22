@@ -22,8 +22,8 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 fun SettingsTopBar(
     title: String,
     onBack: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -51,7 +51,6 @@ fun SettingsTopBar(
 private fun SettingsTopBarPreview() = GrodnoRoadsM3ThemePreview {
     SettingsTopBar(
         title = "Test",
-        onBack = {},
-        scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        onBack = {}
     )
 }

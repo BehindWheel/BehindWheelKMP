@@ -41,6 +41,7 @@
     <string name="settings_section_alerts">Оповещения</string>
     <string name="settings_section_changelog">История изменений</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
+    <string name="settings_section_debug_tools">Инструменты отладки</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Основные</string>

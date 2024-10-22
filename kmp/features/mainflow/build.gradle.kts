@@ -20,6 +20,7 @@ kotlin {
             implementation(projects.kmp.features.settings.alerts)
             implementation(projects.kmp.features.settings.appearance)
             implementation(projects.kmp.features.settings.changelog)
+            implementation(projects.kmp.features.settings.debugTools)
             implementation(projects.kmp.features.settings.faq)
             implementation(projects.kmp.features.settings.map)
             implementation(projects.kmp.compose.foundation.uikit)

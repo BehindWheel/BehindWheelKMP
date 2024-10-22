@@ -9,6 +9,6 @@ private val SHOW_ONBOARDING = booleanPreferencesKey("show_onboarding")
 val Preferences.showOnboarding: Boolean
     get() = this[SHOW_ONBOARDING] ?: true
 
-fun MutablePreferences.completeOnboarding() {
-    this[SHOW_ONBOARDING] = false
+fun MutablePreferences.showOnboarding(value: Boolean) {
+    this[SHOW_ONBOARDING] = value
 }
