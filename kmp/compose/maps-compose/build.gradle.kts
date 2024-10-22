@@ -1,11 +1,16 @@
 import com.egoriku.grodnoroads.extension.androidDependencies
 import com.egoriku.grodnoroads.extension.applyTargets
+import com.egoriku.grodnoroads.extension.buildConfigField
 import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.ios
+import com.egoriku.grodnoroads.extension.loadProperties
+import com.egoriku.grodnoroads.extension.propertyString
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.cocoapods)
+    alias(libs.plugins.buildkonfig)
 }
 
 android {
@@ -42,6 +47,23 @@ kotlin {
             implementation(libs.androidx.core)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
+        }
+    }
+}
+
+buildkonfig {
+    packageName = "com.egoriku.grodnoroads.maps.compose"
+    objectName = "MapsConfig"
+
+    defaultConfigs {
+        buildConfigField(name = "apiKey", value = "")
+    }
+    targetConfigs {
+        ios {
+            buildConfigField(
+                name = "apiKey",
+                value = loadProperties("$rootDir/secrets.properties").propertyString("MAPS_API_KEY_IOS")
+            )
         }
     }
 }
