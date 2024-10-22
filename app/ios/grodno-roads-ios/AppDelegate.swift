@@ -5,13 +5,12 @@
 //  Created by Vladislav Sitsko on 23.12.23.
 //
 
-import FirebaseCore
 import GoogleMaps
 import Root
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    
+
     var backDispatcher: BackDispatcher = BackDispatcherKt.BackDispatcher()
 
     private(set) lazy var root: RootComponent = RootComponentKt.buildRootComponent(
@@ -22,14 +21,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             backHandler: backDispatcher
         )
     )
-        
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        FirebaseInit.shared.start()
+        KoinInit.shared.start()
+
         setupGoogleMaps()
-        FirebaseApp.configure()
-        KoinHelper_iosKt.doInitKoin()
         return true
     }
 }
@@ -44,7 +44,7 @@ extension AppDelegate {
         else {
             return
         }
-        
+
         GMSServices.provideAPIKey(value)
     }
 }
