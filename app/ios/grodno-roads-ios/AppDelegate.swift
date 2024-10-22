@@ -5,7 +5,6 @@
 //  Created by Vladislav Sitsko on 23.12.23.
 //
 
-import GoogleMaps
 import Root
 import UIKit
 
@@ -28,24 +27,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         FirebaseInit.shared.start()
         KoinInit.shared.start()
+        GoogleMapsInit.shared.start()
 
-        setupGoogleMaps()
         return true
-    }
-}
-
-extension AppDelegate {
-    private func setupGoogleMaps() {
-        guard
-            let location = Bundle.main.url(forResource: "secrets", withExtension: "properties"),
-            let lines = try? String(contentsOf: location).components(separatedBy: .newlines),
-            let ios = lines.first(where: { $0.contains("MAPS_API_KEY_IOS") }),
-            let value = ios.components(separatedBy: "=").last
-        else {
-            return
-        }
-
-        GMSServices.provideAPIKey(value)
     }
 }
 

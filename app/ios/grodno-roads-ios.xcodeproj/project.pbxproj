@@ -14,7 +14,6 @@
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
 		CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */; };
 		CE6627492B3648D300799BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6627482B3648D300799BC2 /* AppDelegate.swift */; };
-		CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */ = {isa = PBXBuildFile; fileRef = CE6627B12B38CF4500799BC2 /* secrets.properties */; };
 		CEA924CD2B2FB5D00086E744 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA924CC2B2FB5D00086E744 /* RootView.swift */; };
 		CF1303A41FC571BC343D0759 /* Pods_grodno_roads_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6739030ED8C8D43D36F849C1 /* Pods_grodno_roads_ios.framework */; };
 /* End PBXBuildFile section */
@@ -34,7 +33,6 @@
 		CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE654B9C2BDFCFBA0069AE6A /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE6627B12B38CF4500799BC2 /* secrets.properties */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = secrets.properties; path = ../../../../secrets.properties; sourceTree = "<group>"; };
 		CEA924CC2B2FB5D00086E744 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,7 +70,6 @@
 			children = (
 				CE52F3082B1CF3B400D81762 /* Assets.xcassets */,
 				6A9CD2152B3870D60010592F /* GoogleService-Info.plist */,
-				CE6627B12B38CF4500799BC2 /* secrets.properties */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -185,7 +182,6 @@
 				CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */,
 				6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */,
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
-				CE6627B22B38CF4500799BC2 /* secrets.properties in Resources */,
 				12D440DD2BDFC31D00D2676D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
