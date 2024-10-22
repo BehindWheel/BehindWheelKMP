@@ -43,6 +43,7 @@
     <string name="settings_section_alerts">Alerts</string>
     <string name="settings_section_changelog">Changelog</string>
     <string name="settings_section_faq">FAQ</string>
+    <string name="settings_section_debug_tools">Debug Tools</string>
 
     <!-- Settings categories -->
     <string name="settings_category_main">Main</string>

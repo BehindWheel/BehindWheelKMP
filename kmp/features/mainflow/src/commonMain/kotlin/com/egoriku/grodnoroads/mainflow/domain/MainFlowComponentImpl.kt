@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
 import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
+import com.egoriku.grodnoroads.settings.debugtools.domain.buildDebugToolsComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
 import com.egoriku.grodnoroads.shared.models.Page
@@ -55,6 +56,7 @@ internal class MainFlowComponentImpl(
         is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
         is Config.FAQ -> Child.FAQ(buildFaqComponent(componentContext))
         is Config.MapSettings -> Child.MapSettings(buildMapSettingsComponent(componentContext))
+        is Config.DebugTools -> Child.DebugTools(buildDebugToolsComponent(componentContext))
     }
 
     private fun open(page: Page) {
@@ -62,6 +64,7 @@ internal class MainFlowComponentImpl(
             Page.Alerts -> navigation.pushNew(Config.Alerts)
             Page.Appearance -> navigation.pushNew(Config.Appearance)
             Page.Changelog -> navigation.pushNew(Config.Changelog)
+            Page.DebugTools -> navigation.pushNew(Config.DebugTools)
             Page.FAQ -> navigation.pushNew(Config.FAQ)
             Page.MapSettings -> navigation.pushNew(Config.MapSettings)
         }
@@ -86,5 +89,8 @@ internal class MainFlowComponentImpl(
 
         @Serializable
         data object FAQ : Config
+
+        @Serializable
+        data object DebugTools : Config
     }
 }

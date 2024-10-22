@@ -14,7 +14,7 @@ import com.egoriku.grodnoroads.onboarding.domain.store.OnboardingStore.Label
 import com.egoriku.grodnoroads.onboarding.domain.store.OnboardingStore.Message
 import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.persistent.map.location.updateDefaultCity
-import com.egoriku.grodnoroads.shared.persistent.onboarding.completeOnboarding
+import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -42,7 +42,7 @@ internal class OnboardingStoreFactory(
                 onIntent<CompleteOnboarding> {
                     launch {
                         dataStore.edit {
-                            completeOnboarding()
+                            showOnboarding(false)
                         }
                         publish(Label.FinishOnboarding)
                     }
