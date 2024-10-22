@@ -5,11 +5,11 @@ Pod::Spec.new do |spec|
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Shared functionality for iOS'
+    spec.summary                  = 'GoogleMaps for Compose Multiplatform'
     spec.vendored_frameworks      = 'build/cocoapods/framework/maps_compose.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '15.0'
-    spec.dependency 'GoogleMaps'
+    spec.dependency 'GoogleMaps', '~> 9.0.0'
                 
     if !Dir.exist?('build/cocoapods/framework/maps_compose.framework') || Dir.empty?('build/cocoapods/framework/maps_compose.framework')
         raise "

@@ -26,8 +26,6 @@ kotlin {
         homepage = "https://github.com/grodnoroads/GrodnoRoads"
         summary = "Shared functionality for iOS"
 
-        noPodspec()
-
         framework {
             baseName = "Root"
             isStatic = true

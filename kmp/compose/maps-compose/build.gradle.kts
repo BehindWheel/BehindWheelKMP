@@ -22,9 +22,10 @@ kotlin {
         podfile = project.file("../../../app/ios/Podfile")
 
         homepage = "https://github.com/grodnoroads/GrodnoRoads"
-        summary = "Shared functionality for iOS"
+        summary = "GoogleMaps for Compose Multiplatform"
 
         pod("GoogleMaps") {
+            version = "~> 9.0.0"
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
     }
