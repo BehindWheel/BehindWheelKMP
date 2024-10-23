@@ -5,7 +5,7 @@ targetSdk = "34"
 
 agp = "8.7.1"
 buildkonfig = "0.15.2"
-decompose = "3.1.0"
+decompose = "3.2.0"
 essenty = "2.1.0"
 kotlinx-serialization = "1.7.3"
 kotlin = "2.0.21"
