@@ -90,7 +90,7 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
-spotless = { id = "com.diffplug.spotless", version = "7.0.0.BETA3" }
+spotless = { id = "com.diffplug.spotless", version = "7.0.0.BETA4" }
 
 # Project conventional plugins
 grodnoroads-application = { id = "grodnoroads.application", version = "unspecified" }
