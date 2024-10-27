@@ -23,8 +23,8 @@ import com.egoriku.grodnoroads.location.requester.LocationRequestStatus
 
 private class SnackbarMessageBuilderAndroid(private val context: Context) : SnackbarMessageBuilder {
 
-    override fun handleDriveModeRequest(locationRequestStatus: LocationRequestStatus): SnackbarMessage? =
-        when (locationRequestStatus) {
+    override fun handleDriveModeRequest(locationRequestStatus: LocationRequestStatus): SnackbarMessage? {
+        return when (locationRequestStatus) {
             LocationRequestStatus.ShowRationale -> SnackbarMessage.SimpleMessage(
                 title = MessageData.StringRes(Res.string.snackbar_drive_mode_rationale_title),
                 description = MessageData.StringRes(Res.string.snackbar_drive_mode_rationale_description)
@@ -44,9 +44,10 @@ private class SnackbarMessageBuilderAndroid(private val context: Context) : Snac
             )
             LocationRequestStatus.GmsLocationEnabled -> null
         }
+    }
 
-    override fun handleCurrentLocationRequest(locationRequestStatus: LocationRequestStatus): SnackbarMessage? =
-        when (locationRequestStatus) {
+    override fun handleCurrentLocationRequest(locationRequestStatus: LocationRequestStatus): SnackbarMessage? {
+        return when (locationRequestStatus) {
             LocationRequestStatus.ShowRationale -> SnackbarMessage.SimpleMessage(
                 title = MessageData.StringRes(
                     Res.string.snackbar_current_location_rationale_title
@@ -69,6 +70,7 @@ private class SnackbarMessageBuilderAndroid(private val context: Context) : Snac
             )
             LocationRequestStatus.GmsLocationEnabled -> null
         }
+    }
 }
 
 @Composable

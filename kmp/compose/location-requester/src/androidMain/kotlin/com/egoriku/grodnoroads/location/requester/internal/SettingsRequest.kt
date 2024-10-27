@@ -17,11 +17,10 @@ import com.google.android.gms.location.SettingsClient
 import kotlinx.coroutines.tasks.await
 
 @Composable
-internal fun rememberResolutionResolver(onResult: (ActivityResult) -> Unit) =
-    rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartIntentSenderForResult(),
-        onResult = onResult
-    )
+internal fun rememberResolutionResolver(onResult: (ActivityResult) -> Unit) = rememberLauncherForActivityResult(
+    contract = ActivityResultContracts.StartIntentSenderForResult(),
+    onResult = onResult
+)
 
 @Composable
 internal fun rememberSettingsClient(): SettingsClient {

@@ -19,30 +19,29 @@ internal class ChangelogStoreFactory(
     private val crashlyticsTracker: CrashlyticsTracker
 ) {
 
-    internal fun create(): ChangelogStore =
-        object :
-            ChangelogStore,
-            Store<Nothing, State, Nothing> by storeFactory.create(
-                initialState = State(),
-                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                    onAction<Unit> {
-                        launch {
-                            dispatch(Message.Loading(true))
+    internal fun create(): ChangelogStore = object :
+        ChangelogStore,
+        Store<Nothing, State, Nothing> by storeFactory.create(
+            initialState = State(),
+            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                onAction<Unit> {
+                    launch {
+                        dispatch(Message.Loading(true))
 
-                            when (val result = changelogRepository.load()) {
-                                is ResultOf.Success -> dispatch(Message.Success(releaseNotes = result.value))
-                                is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
-                            }
-                            dispatch(Message.Loading(false))
+                        when (val result = changelogRepository.load()) {
+                            is ResultOf.Success -> dispatch(Message.Success(releaseNotes = result.value))
+                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
                         }
-                    }
-                },
-                bootstrapper = SimpleBootstrapper(Unit),
-                reducer = { message: Message ->
-                    when (message) {
-                        is Message.Loading -> copy(isLoading = message.isLoading)
-                        is Message.Success -> copy(releaseNotes = message.releaseNotes.toImmutableList())
+                        dispatch(Message.Loading(false))
                     }
                 }
-            ) {}
+            },
+            bootstrapper = SimpleBootstrapper(Unit),
+            reducer = { message: Message ->
+                when (message) {
+                    is Message.Loading -> copy(isLoading = message.isLoading)
+                    is Message.Success -> copy(releaseNotes = message.releaseNotes.toImmutableList())
+                }
+            }
+        ) {}
 }

@@ -21,8 +21,9 @@ object ChangelogFormatter {
         year()
     }
 
-    fun format(timestamp: Long): String =
-        Instant.fromEpochMilliseconds(timestamp)
+    fun format(timestamp: Long): String {
+        return Instant.fromEpochMilliseconds(timestamp)
             .toLocalDateTime(defaultTimeZone)
             .format(dayMonthYearFormatter)
+    }
 }

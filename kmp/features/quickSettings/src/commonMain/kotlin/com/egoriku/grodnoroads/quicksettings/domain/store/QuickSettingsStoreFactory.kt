@@ -36,44 +36,43 @@ internal class QuickSettingsStoreFactory(
     private val dataStore: DataStore<Preferences>
 ) {
 
-    fun create(): QuickSettingsStore =
-        object :
-            QuickSettingsStore,
-            Store<Intent, QuickSettingsState, Nothing> by storeFactory.create(
-                initialState = QuickSettingsState(),
-                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                    onAction<Unit> {
-                        dataStore.data
-                            .map { preferences ->
-                                QuickSettingsState(
-                                    appTheme = AppTheme(current = preferences.appTheme),
-                                    markerFiltering = MarkerFiltering(current = preferences.filteringMarkers),
-                                    trafficJamOnMap = TrafficJamOnMap(isShow = preferences.trafficJamOnMap),
-                                    voiceAlerts = VoiceAlerts(enabled = preferences.alertsVoiceAlertEnabled)
-                                )
-                            }
-                            .distinctUntilChanged()
-                            .onEach { dispatch(NewSettings(it)) }
-                            .launchIn(this)
-                    }
-                    onIntent<Update> {
-                        launch {
-                            dataStore.edit {
-                                when (val pref = it.preference) {
-                                    is AppTheme -> updateAppTheme(pref.current.theme)
-                                    is MarkerFiltering -> updateFiltering(pref.current)
-                                    is TrafficJamOnMap -> updateTrafficJamAppearance(pref.isShow)
-                                    is VoiceAlerts -> updateAlertsVoiceAlertAvailability(pref.enabled)
-                                }
+    fun create(): QuickSettingsStore = object :
+        QuickSettingsStore,
+        Store<Intent, QuickSettingsState, Nothing> by storeFactory.create(
+            initialState = QuickSettingsState(),
+            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                onAction<Unit> {
+                    dataStore.data
+                        .map { preferences ->
+                            QuickSettingsState(
+                                appTheme = AppTheme(current = preferences.appTheme),
+                                markerFiltering = MarkerFiltering(current = preferences.filteringMarkers),
+                                trafficJamOnMap = TrafficJamOnMap(isShow = preferences.trafficJamOnMap),
+                                voiceAlerts = VoiceAlerts(enabled = preferences.alertsVoiceAlertEnabled)
+                            )
+                        }
+                        .distinctUntilChanged()
+                        .onEach { dispatch(NewSettings(it)) }
+                        .launchIn(this)
+                }
+                onIntent<Update> {
+                    launch {
+                        dataStore.edit {
+                            when (val pref = it.preference) {
+                                is AppTheme -> updateAppTheme(pref.current.theme)
+                                is MarkerFiltering -> updateFiltering(pref.current)
+                                is TrafficJamOnMap -> updateTrafficJamAppearance(pref.isShow)
+                                is VoiceAlerts -> updateAlertsVoiceAlertAvailability(pref.enabled)
                             }
                         }
                     }
-                },
-                bootstrapper = SimpleBootstrapper(Unit),
-                reducer = { message: Message ->
-                    when (message) {
-                        is NewSettings -> message.appearanceState
-                    }
                 }
-            ) {}
+            },
+            bootstrapper = SimpleBootstrapper(Unit),
+            reducer = { message: Message ->
+                when (message) {
+                    is NewSettings -> message.appearanceState
+                }
+            }
+        ) {}
 }

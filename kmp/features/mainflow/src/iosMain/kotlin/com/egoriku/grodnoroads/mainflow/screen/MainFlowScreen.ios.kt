@@ -33,8 +33,8 @@ actual fun <C : Any, T : Any> backAnimation(
     onBack = onBack
 )
 
-private fun iosLikeSlide(animationSpec: FiniteAnimationSpec<Float> = tween()): StackAnimator =
-    stackAnimator(animationSpec = animationSpec) { factor, direction, content ->
+private fun iosLikeSlide(animationSpec: FiniteAnimationSpec<Float> = tween()): StackAnimator {
+    return stackAnimator(animationSpec = animationSpec) { factor, direction, content ->
         content(
             Modifier
                 .then(
@@ -46,23 +46,30 @@ private fun iosLikeSlide(animationSpec: FiniteAnimationSpec<Float> = tween()): S
                 .offsetXFactor(factor = if (direction.isFront) factor else factor * 0.5F)
         )
     }
+}
 
-private fun Modifier.slideExitModifier(progress: Float): Modifier = offsetXFactor(progress)
+private fun Modifier.slideExitModifier(progress: Float): Modifier {
+    return offsetXFactor(progress)
+}
 
-private fun Modifier.slideEnterModifier(progress: Float): Modifier =
-    fade(progress).offsetXFactor((progress - 1f) * 0.5f)
+private fun Modifier.slideEnterModifier(progress: Float): Modifier {
+    return fade(progress)
+        .offsetXFactor((progress - 1f) * 0.5f)
+}
 
-private fun Modifier.fade(factor: Float) =
-    drawWithContent {
+private fun Modifier.fade(factor: Float): Modifier {
+    return drawWithContent {
         drawContent()
         drawRect(color = Color(red = 0F, green = 0F, blue = 0F, alpha = (1F - factor) / 4F))
     }
+}
 
-private fun Modifier.offsetXFactor(factor: Float): Modifier =
-    layout { measurable, constraints ->
+private fun Modifier.offsetXFactor(factor: Float): Modifier {
+    return layout { measurable, constraints ->
         val placeable = measurable.measure(constraints)
 
         layout(placeable.width, placeable.height) {
             placeable.placeRelative(x = (placeable.width.toFloat() * factor).toInt(), y = 0)
         }
     }
+}

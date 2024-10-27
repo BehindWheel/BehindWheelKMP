@@ -19,28 +19,27 @@ internal class FaqStoreFactory(
     private val crashlyticsTracker: CrashlyticsTracker
 ) {
 
-    internal fun create(): FaqStore =
-        object :
-            FaqStore,
-            Store<Nothing, State, Nothing> by storeFactory.create(
-                initialState = State(),
-                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                    onAction<Unit> {
-                        launch {
-                            when (val result = faqRepository.load()) {
-                                is ResultOf.Success -> dispatch(Message.Success(result.value))
-                                is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
-                            }
-                            dispatch(Message.Loading(false))
+    internal fun create(): FaqStore = object :
+        FaqStore,
+        Store<Nothing, State, Nothing> by storeFactory.create(
+            initialState = State(),
+            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                onAction<Unit> {
+                    launch {
+                        when (val result = faqRepository.load()) {
+                            is ResultOf.Success -> dispatch(Message.Success(result.value))
+                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
                         }
-                    }
-                },
-                bootstrapper = SimpleBootstrapper(Unit),
-                reducer = { message: Message ->
-                    when (message) {
-                        is Message.Loading -> copy(isLoading = message.isLoading)
-                        is Message.Success -> copy(faq = message.faq.toImmutableList())
+                        dispatch(Message.Loading(false))
                     }
                 }
-            ) {}
+            },
+            bootstrapper = SimpleBootstrapper(Unit),
+            reducer = { message: Message ->
+                when (message) {
+                    is Message.Loading -> copy(isLoading = message.isLoading)
+                    is Message.Success -> copy(faq = message.faq.toImmutableList())
+                }
+            }
+        ) {}
 }

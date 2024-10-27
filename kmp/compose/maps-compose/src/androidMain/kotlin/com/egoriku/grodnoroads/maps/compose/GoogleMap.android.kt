@@ -239,8 +239,8 @@ private fun MapLifecycle(mapView: MapView) {
     }
 }
 
-private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Event>): LifecycleEventObserver =
-    LifecycleEventObserver { _, event ->
+private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Event>): LifecycleEventObserver {
+    return LifecycleEventObserver { _, event ->
         event.targetState
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
@@ -264,6 +264,7 @@ private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Even
         }
         previousState.value = event
     }
+}
 
 private fun MapView.componentCallbacks(): ComponentCallbacks = object : ComponentCallbacks {
     override fun onConfigurationChanged(config: Configuration) {}

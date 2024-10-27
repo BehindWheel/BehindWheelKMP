@@ -9,11 +9,13 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.Language
 @SuppressLint("AnnotateVersionCheck")
 actual fun isBYLocaleSupported() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
 
-actual fun resetAppLanguage() =
+actual fun resetAppLanguage() {
     AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
+}
 
-actual fun setAppLanguage(language: String) =
+actual fun setAppLanguage(language: String) {
     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
+}
 
 actual fun getCurrentLanguage() = Language.localeToLanguage(currentAppLanguage)
 

@@ -17,26 +17,25 @@ class SpecialEventStoreFactory(private val storeFactory: StoreFactory) {
         data class EventTypeChanged(val eventType: EventType) : Message
     }
 
-    fun create(): SpecialEventStore =
-        object :
-            SpecialEventStore,
-            Store<Nothing, State, Nothing> by storeFactory.create(
-                initialState = State(),
-                executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                    onAction<Unit> {
-                        launch {
-                            val eventType = SpecialEventDispatcher.calculateType()
-                            if (eventType != null) {
-                                dispatch(EventTypeChanged(eventType))
-                            }
+    fun create(): SpecialEventStore = object :
+        SpecialEventStore,
+        Store<Nothing, State, Nothing> by storeFactory.create(
+            initialState = State(),
+            executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
+                onAction<Unit> {
+                    launch {
+                        val eventType = SpecialEventDispatcher.calculateType()
+                        if (eventType != null) {
+                            dispatch(EventTypeChanged(eventType))
                         }
                     }
-                },
-                bootstrapper = SimpleBootstrapper(Unit),
-                reducer = { message: Message ->
-                    when (message) {
-                        is EventTypeChanged -> copy(eventType = message.eventType)
-                    }
                 }
-            ) {}
+            },
+            bootstrapper = SimpleBootstrapper(Unit),
+            reducer = { message: Message ->
+                when (message) {
+                    is EventTypeChanged -> copy(eventType = message.eventType)
+                }
+            }
+        ) {}
 }

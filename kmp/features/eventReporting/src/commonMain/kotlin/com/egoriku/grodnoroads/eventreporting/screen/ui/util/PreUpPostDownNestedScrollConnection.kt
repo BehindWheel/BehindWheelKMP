@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.Velocity
 import kotlin.jvm.JvmName
 
 @OptIn(ExperimentalFoundationApi::class)
-internal fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection() =
-    object : NestedScrollConnection {
+internal fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection(): NestedScrollConnection {
+    return object : NestedScrollConnection {
         override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
             val delta = available.toFloat()
             return if (delta < 0 && source == NestedScrollSource.UserInput) {
@@ -59,3 +59,4 @@ internal fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection()
         private fun Velocity.toFloat() = this.y
         private fun Offset.toFloat(): Float = this.y
     }
+}
