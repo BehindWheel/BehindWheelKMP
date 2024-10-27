@@ -74,8 +74,8 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
         return mergedReports
     }
 
-    private fun buildMarkerShortMessage(data: ReportsDTO) =
-        when (MapEventType.eventFromString(data.type)) {
+    private fun buildMarkerShortMessage(data: ReportsDTO): String {
+        return when (MapEventType.eventFromString(data.type)) {
             MapEventType.TrafficPolice -> buildString {
                 append("(${DateTime.formatToTime(data.timestamp)}) ")
                 append(MapEventType.TrafficPolice.emoji)
@@ -103,9 +103,10 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
             }
             else -> data.shortMessage.trim()
         }
+    }
 
-    private fun buildDialogTitle(data: ReportsDTO) =
-        when (MapEventType.eventFromString(data.type)) {
+    private fun buildDialogTitle(data: ReportsDTO): String {
+        return when (MapEventType.eventFromString(data.type)) {
             MapEventType.TrafficPolice -> buildString {
                 append(MapEventType.TrafficPolice.emoji)
                 appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
@@ -128,6 +129,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
             }
             else -> data.shortMessage
         }
+    }
 
     private fun String.emojiFix() = replace("(policecar)", "\uD83D\uDE93")
 }

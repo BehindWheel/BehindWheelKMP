@@ -65,8 +65,9 @@ class AndroidLocationService(context: Context) : LocationService {
         return lastKnownLocation
     }
 
-    override suspend fun requestCurrentLocation(): LocationInfo? =
-        requestLocation().toLocationInfo()
+    override suspend fun requestCurrentLocation(): LocationInfo? {
+        return requestLocation().toLocationInfo()
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("MissingPermission")

@@ -10,9 +10,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Modifier.unboundClickable(onClick: () -> Unit) =
-    this.clickable(
+fun Modifier.unboundClickable(onClick: () -> Unit): Modifier {
+    return this.clickable(
         interactionSource = remember { MutableInteractionSource() },
         indication = ripple(bounded = false),
         onClick = onClick
     )
+}

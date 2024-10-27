@@ -5,8 +5,8 @@ import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
 
 private const val ALLOWED_OVER_SPEED = 7
 
-fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int =
-    { alerts, lastLocation ->
+fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int {
+    return { alerts, lastLocation ->
         val cameraEvents = alerts.filterIsInstance<Alert.CameraAlert>()
 
         if (cameraEvents.isEmpty()) {
@@ -21,3 +21,4 @@ fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int =
             }
         }
     }
+}

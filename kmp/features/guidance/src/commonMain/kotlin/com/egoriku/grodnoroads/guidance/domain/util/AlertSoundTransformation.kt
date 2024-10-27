@@ -18,8 +18,8 @@ import kotlinx.collections.immutable.toImmutableList
 
 val alertPersistentList = persistentListOf<Alert>()
 
-internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsInfo, AppMode) -> ImmutableList<Alert> =
-    { alerts, alertInfo, appMode ->
+internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsInfo, AppMode) -> ImmutableList<Alert> {
+    return { alerts, alertInfo, appMode ->
         if (alertInfo.voiceAlertsEnabled && appMode == AppMode.Drive) {
             alerts.mapNotNull { alert ->
                 when (alert) {
@@ -78,3 +78,4 @@ internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsIn
             alertPersistentList
         }
     }
+}

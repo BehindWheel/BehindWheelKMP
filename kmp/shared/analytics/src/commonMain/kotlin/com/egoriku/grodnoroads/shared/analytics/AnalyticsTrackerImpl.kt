@@ -10,8 +10,9 @@ internal class AnalyticsTrackerImpl(
     private val firebaseAnalytics: FirebaseAnalytics
 ) : AnalyticsTracker {
 
-    override fun trackOpenMarkerInfoDialog() =
+    override fun trackOpenMarkerInfoDialog() {
         firebaseAnalytics.logEvent(EVENT_OPEN_MARKER_INFO_DIALOG)
+    }
 
     override fun eventReportAction(eventType: String, shortMessage: String) {
         firebaseAnalytics.logEvent(AnalyticsEvent.EVENT_REPORT_ACTION) {
@@ -20,6 +21,5 @@ internal class AnalyticsTrackerImpl(
         }
     }
 
-    override fun mobileCameraReport() =
-        firebaseAnalytics.logEvent(EVENT_REPORT_MOBILE_CAMERA)
+    override fun mobileCameraReport() = firebaseAnalytics.logEvent(EVENT_REPORT_MOBILE_CAMERA)
 }

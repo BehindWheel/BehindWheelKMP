@@ -6,11 +6,10 @@ import androidx.core.content.ContextCompat
 
 internal fun Context.hasLocationPermissions() = hasPermissions(LOCATION_PERMISSIONS)
 
-private fun Context.hasPermissions(permissions: Array<String>) =
-    permissions.all { hasPermission(it) }
+private fun Context.hasPermissions(permissions: Array<String>): Boolean {
+    return permissions.all { hasPermission(it) }
+}
 
-private fun Context.hasPermission(permission: String) =
-    ContextCompat.checkSelfPermission(
-        this,
-        permission
-    ) == PackageManager.PERMISSION_GRANTED
+private fun Context.hasPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}

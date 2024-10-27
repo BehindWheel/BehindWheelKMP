@@ -57,8 +57,7 @@ import org.koin.core.component.get
 fun buildGuidanceComponent(
     componentContext: ComponentContext,
     onOpenReporting: () -> Unit
-): GuidanceComponent =
-    GuidanceComponentImpl(componentContext, onOpenReporting)
+): GuidanceComponent = GuidanceComponentImpl(componentContext, onOpenReporting)
 
 @OptIn(FlowPreview::class)
 internal class GuidanceComponentImpl(
@@ -277,8 +276,9 @@ internal class GuidanceComponentImpl(
         mapConfigStore.accept(ChooseLocation.UserMapZoom(zoom))
     }
 
-    override fun showMarkerInfoDialog(reports: MapEvent.Reports) =
+    override fun showMarkerInfoDialog(reports: MapEvent.Reports) {
         dialogStore.accept(DialogStore.Intent.OpenMarkerInfoDialog(reports = reports))
+    }
 
     override fun openQuickSettings() {
         dialogStore.accept(DialogStore.Intent.OpenQuickSettings)
