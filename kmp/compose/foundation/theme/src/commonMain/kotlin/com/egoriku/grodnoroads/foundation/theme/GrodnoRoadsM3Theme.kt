@@ -17,6 +17,7 @@ fun GrodnoRoadsM3Theme(
         shapes = Shapes(
             medium = RoundedCornerShape(18.dp)
         ),
+        typography = GrodnoRoadsTypography(),
         content = content
     )
 }

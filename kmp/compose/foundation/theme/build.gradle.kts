@@ -15,6 +15,8 @@ kotlin {
 
     sourceSets {
         commonDependencies {
+            implementation(projects.kmp.compose.resources)
+
             implementation(compose.material3)
         }
     }
