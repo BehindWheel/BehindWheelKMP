@@ -23,7 +23,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.Switch
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.Switch
 
 @Composable
 fun SwitchListItem(

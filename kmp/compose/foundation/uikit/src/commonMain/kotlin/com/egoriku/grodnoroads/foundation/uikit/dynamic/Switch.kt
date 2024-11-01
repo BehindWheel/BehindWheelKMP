@@ -1,13 +1,16 @@
-package com.egoriku.grodnoroads.foundation.uikit
+package com.egoriku.grodnoroads.foundation.uikit.dynamic
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.Easing
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,7 +21,9 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
@@ -45,15 +50,70 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.core.LocalPlatform
+import com.egoriku.grodnoroads.foundation.core.Platform
+import com.egoriku.grodnoroads.foundation.core.Platform.Android
+import com.egoriku.grodnoroads.foundation.core.Platform.IOS
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
-import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Check
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 
 @Composable
-actual fun Switch(
+fun Switch(
+    checked: Boolean,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    platform: Platform = LocalPlatform.current,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    when (platform) {
+        Android -> MaterialSwitch(
+            checked = checked,
+            modifier = modifier,
+            enabled = enabled,
+            onCheckedChange = onCheckedChange
+        )
+        IOS -> SwitchIos(
+            checked = checked,
+            modifier = modifier,
+            enabled = enabled,
+            onCheckedChange = onCheckedChange
+        )
+    }
+}
+
+@Composable
+private fun MaterialSwitch(
+    checked: Boolean,
+    modifier: Modifier,
+    enabled: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    val icon: (@Composable () -> Unit)? = if (checked) {
+        {
+            Icon(
+                imageVector = GrodnoRoads.Outlined.Check,
+                contentDescription = null,
+                modifier = Modifier.size(SwitchDefaults.IconSize)
+            )
+        }
+    } else {
+        null
+    }
+    Switch(
+        modifier = modifier,
+        checked = checked,
+        enabled = enabled,
+        onCheckedChange = onCheckedChange,
+        thumbContent = icon
+    )
+}
+
+
+@Composable
+private fun SwitchIos(
     checked: Boolean,
     modifier: Modifier,
     enabled: Boolean,
@@ -131,7 +191,7 @@ actual fun Switch(
             .padding(ThumbPadding)
     ) {
         Box(
-            Modifier
+            modifier = Modifier
                 .fillMaxHeight()
                 .aspectRatio(animatedAspectRatio)
                 .pointerInput(dragThreshold) {
@@ -139,22 +199,22 @@ actual fun Switch(
                         onDragStart = {
                             dragDistance = if (updatedChecked) dragThreshold else 0f
                         },
-                        onHorizontalDrag = { c, v ->
+                        onHorizontalDrag = { _, v ->
                             dragDistance += v
                         }
                     )
                 }
                 .align(BiasAlignment.Horizontal(animatedAlignment))
-                .let {
+                .then(
                     if (enabled) {
-                        it.shadow(
+                        Modifier.shadow(
                             elevation = IosSwitchDefaults.EnabledThumbElevation,
                             shape = IosSwitchDefaults.Shape
                         )
                     } else {
-                        it.clip(IosSwitchDefaults.Shape)
+                        Modifier.clip(IosSwitchDefaults.Shape)
                     }
-                }
+                )
                 .background(colors.thumbColor(enabled).value)
         )
     }
@@ -250,31 +310,26 @@ object IosSwitchDefaults {
         disabledUncheckedIconColor = disabledUncheckedIconColor
     )
 }
+/**
+ * Cupertino [tween] transition spec.
+ *
+ * Default values are used for iOS view transitions such as
+ * UINavigationController, UIAlertController
+ * */
+fun <T> cupertinoTween(
+    durationMillis: Int = 400,
+    delayMillis: Int = 0,
+    easing: Easing = CupertinoEasing
+): TweenSpec<T> = tween(
+    durationMillis = durationMillis,
+    easing = easing,
+    delayMillis = delayMillis
+)
 
-private val ThumbPadding = 2.dp
+private val CupertinoEasing = CubicBezierEasing(0.2833f, 0.99f, 0.31833f, 0.99f)
 
 private val AspectRationAnimationSpec = cupertinoTween<Float>(durationMillis = 300)
 private val ColorAnimationSpec = cupertinoTween<Color>(durationMillis = 300)
 private val AlignmentAnimationSpec = AspectRationAnimationSpec
 
-@PreviewGrodnoRoadsDarkLight
-@Composable
-private fun PreviewSwitchPreview() = GrodnoRoadsM3ThemePreview {
-    var checked by rememberMutableState { true }
-
-    Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Switch(
-            checked = checked,
-            enabled = true,
-            onCheckedChange = { checked = !checked }
-        )
-        Switch(
-            checked = !checked,
-            enabled = true,
-            onCheckedChange = { checked = !checked }
-        )
-    }
-}
+private val ThumbPadding = 2.dp

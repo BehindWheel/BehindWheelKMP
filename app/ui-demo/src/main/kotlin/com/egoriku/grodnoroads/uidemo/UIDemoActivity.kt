@@ -48,7 +48,6 @@ import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSecondaryButton
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSecondaryCircleButton
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSnackbarSimple
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSnackbarWithAction
-import com.egoriku.grodnoroads.uidemo.ui.demo.DemoSwitch
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoText
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoTextButton
 import com.egoriku.grodnoroads.uidemo.ui.demo.DemoTriStateCheckbox
@@ -133,7 +132,6 @@ private fun DemoComponents() {
         DemoRadioButton()
         DemoCheckbox()
         DemoTriStateCheckbox()
-        DemoSwitch()
         DemoFilterChip()
         DemoNavigationRail()
         DemoNavigationBar()

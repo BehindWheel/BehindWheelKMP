@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.uidemo.ui.demo
+package com.egoriku.grodnoroads.settings.debugtools.ui.uikit
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -6,15 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
-import com.egoriku.grodnoroads.foundation.uikit.Switch
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.uidemo.ui.UIDemoContainer
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.Switch
+import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.common.UIKitDemoContainer
 
 @Composable
-fun DemoSwitch(modifier: Modifier = Modifier) {
-    UIDemoContainer(modifier = modifier, name = "Switch") {
+internal fun DemoSwitch(modifier: Modifier = Modifier) {
+    UIKitDemoContainer(modifier = modifier, name = "Switch") {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             val (isChecked, onCheckedChange) = rememberMutableState { true }
             Switch(
@@ -42,10 +40,4 @@ fun DemoSwitch(modifier: Modifier = Modifier) {
             )
         }
     }
-}
-
-@PreviewGrodnoRoadsDarkLight
-@Composable
-private fun DemoSwitchPreview() = GrodnoRoadsM3ThemePreview {
-    DemoSwitch()
 }
