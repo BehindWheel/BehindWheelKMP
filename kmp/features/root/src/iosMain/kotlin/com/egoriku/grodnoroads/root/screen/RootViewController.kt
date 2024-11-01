@@ -13,11 +13,14 @@ import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.PredictiveBackGestureOverlay
 import com.arkivanov.essenty.backhandler.BackDispatcher
+import com.egoriku.grodnoroads.foundation.core.LocalPlatform
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
+import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.root.domain.RootComponent
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 
+@Suppress("unused")
 object RootViewController {
 
     @OptIn(
@@ -45,7 +48,8 @@ object RootViewController {
             ) {
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
-                        LocalWindowSizeClass provides calculateWindowSizeClass()
+                        LocalWindowSizeClass provides calculateWindowSizeClass(),
+                        LocalPlatform provides Platform.IOS
                     ) {
                         RootContent(rootComponent)
                     }

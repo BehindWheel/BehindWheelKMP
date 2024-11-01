@@ -17,7 +17,9 @@ import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.arkivanov.decompose.defaultComponentContext
 import com.egoriku.grodnoroads.foundation.core.LocalActivity
+import com.egoriku.grodnoroads.foundation.core.LocalPlatform
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
+import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.root.domain.buildRootComponent
 import com.egoriku.grodnoroads.root.screen.RootContent
@@ -67,7 +69,8 @@ class MainActivity : AppCompatActivity() {
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
                         LocalWindowSizeClass provides calculateWindowSizeClass(),
-                        LocalActivity provides this
+                        LocalActivity provides this,
+                        LocalPlatform provides Platform.Android
                     ) {
                         RootContent(root)
                     }

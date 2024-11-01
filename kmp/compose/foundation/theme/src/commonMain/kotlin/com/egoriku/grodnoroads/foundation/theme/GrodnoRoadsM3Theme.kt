@@ -4,12 +4,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun GrodnoRoadsM3Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    typography: Typography = grodnoRoadsTypography(),
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
@@ -17,7 +19,7 @@ fun GrodnoRoadsM3Theme(
         shapes = Shapes(
             medium = RoundedCornerShape(18.dp)
         ),
-        typography = GrodnoRoadsTypography(),
+        typography = typography,
         content = content
     )
 }

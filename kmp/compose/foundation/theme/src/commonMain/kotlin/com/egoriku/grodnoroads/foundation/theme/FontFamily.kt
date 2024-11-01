@@ -12,11 +12,11 @@ import org.jetbrains.compose.resources.Font
 @Composable
 private fun GrodnoRoadsFontFamily() = FontFamily(
     Font(Res.font.roboto_regular, weight = FontWeight.Normal),
-    Font(Res.font.roboto_medium, weight = FontWeight.Medium),
+    Font(Res.font.roboto_medium, weight = FontWeight.Medium)
 )
 
 @Composable
-internal fun GrodnoRoadsTypography(): Typography {
+internal fun grodnoRoadsTypography(): Typography {
     val fontFamily = GrodnoRoadsFontFamily()
 
     val typography = Typography()
