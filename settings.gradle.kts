@@ -30,7 +30,6 @@ dependencyResolutionManagement {
 rootProject.name = "Grodno-Roads"
 
 include(":app:android")
-include(":app:ui-demo")
 
 include(":kmp:compose:common-ui")
 include(":kmp:compose:foundation:core")

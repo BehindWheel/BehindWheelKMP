@@ -52,9 +52,6 @@ jobs:
       - name: Build Android app
         run: ./gradlew app:android:assembleDebug
 
-      - name: Build UI Demo app
-        run: ./gradlew app:ui-demo:assembleDebug
-
   ios-test:
     runs-on: macos-15
 
