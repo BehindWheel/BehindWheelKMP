@@ -42,8 +42,6 @@ Generate kmp buildconfig: `./gradlew :kmp:shared:components:generateBuildKonfig`
 
 Generate kmp buildconfig: `./gradlew :kmp:compose:maps-compose:generateBuildKonfig`
 
-Build ui-demo: `./gradlew app:ui-demo:assembleRelease`
-
 Build app debug: `./gradlew app:android:assembleDebug`
 
 Build app release: `./gradlew app:android:assembleRelease`

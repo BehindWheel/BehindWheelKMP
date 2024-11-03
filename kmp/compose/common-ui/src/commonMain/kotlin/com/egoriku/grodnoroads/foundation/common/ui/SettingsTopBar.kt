@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.foundation.common.ui
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -24,7 +23,6 @@ fun SettingsTopBar(
     title: String,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    actions: @Composable RowScope.() -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
     CenterAlignedTopAppBar(
@@ -44,7 +42,6 @@ fun SettingsTopBar(
         title = {
             Text(text = title)
         },
-        actions = actions
     )
 }
 
