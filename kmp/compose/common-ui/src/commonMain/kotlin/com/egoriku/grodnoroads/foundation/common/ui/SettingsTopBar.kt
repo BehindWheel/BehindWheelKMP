@@ -41,7 +41,7 @@ fun SettingsTopBar(
         },
         title = {
             Text(text = title)
-        },
+        }
     )
 }
 

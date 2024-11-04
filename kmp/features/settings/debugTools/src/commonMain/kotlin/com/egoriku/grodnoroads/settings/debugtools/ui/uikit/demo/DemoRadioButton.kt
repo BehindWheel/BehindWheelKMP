@@ -10,8 +10,8 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
-import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.RadioButton
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.common.UIKitDemoContainer
 
 @Composable

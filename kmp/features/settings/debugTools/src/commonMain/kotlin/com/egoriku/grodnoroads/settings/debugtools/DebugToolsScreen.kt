@@ -67,11 +67,12 @@ fun DebugToolsScreen(
             topBar = {
                 SettingsTopBar(
                     title = stringResource(Res.string.settings_section_debug_tools),
-                    onBack = onBack,
+                    onBack = onBack
                 )
             }
         ) {
-            var platform by rememberMutableState { Platform.Android }
+            val current = LocalPlatform.current
+            var platform by rememberMutableState { current }
             val scrollState = rememberScrollState()
 
             CompositionLocalProvider(LocalPlatform provides platform) {
@@ -167,7 +168,7 @@ private fun PlatformSegmentedRow(
             selected = current == Platform.Android,
             label = {
                 Text(text = "Android")
-            },
+            }
         )
         SegmentedButton(
             shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
@@ -177,7 +178,7 @@ private fun PlatformSegmentedRow(
             selected = current == Platform.IOS,
             label = {
                 Text(text = "iOS")
-            },
+            }
         )
     }
 }

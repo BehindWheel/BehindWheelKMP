@@ -24,7 +24,7 @@ import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.checkbox.Checkbox
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.Checkbox
 
 @Composable
 fun CheckBoxListItem(
