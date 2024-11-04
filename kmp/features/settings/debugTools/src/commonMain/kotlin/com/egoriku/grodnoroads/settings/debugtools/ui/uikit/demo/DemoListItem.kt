@@ -1,6 +1,5 @@
 package com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +17,7 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.TriStateCheckBoxListItem
@@ -25,7 +25,18 @@ import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.common.UIKitDemoCont
 
 @Composable
 internal fun DemoListItem(modifier: Modifier = Modifier) {
-    UIKitDemoContainer(modifier = modifier, name = "ListItem") {
+    UIKitDemoContainer(
+        modifier = modifier,
+        paddingValues = PaddingValues(0.dp),
+        name = "ListItem"
+    ) {
+        var radioButtonState by rememberMutableState { false }
+        RadioButtonListItem(
+            text = "За рулем | Гродно",
+            selected = radioButtonState,
+            onClick = { radioButtonState = !radioButtonState }
+        )
+
         var triState by rememberMutableState { ToggleableState.Off }
         TriStateCheckBoxListItem(
             text = "За рулем | Гродно",
@@ -63,27 +74,25 @@ internal fun DemoListItem(modifier: Modifier = Modifier) {
         var isChecked2 by rememberMutableState { false }
         var isChecked3 by rememberMutableState { false }
 
-        Column {
-            SwitchListItem(
-                imageVector = GrodnoRoads.Outlined.Brightness,
-                text = "За рулем | Гродно",
-                isChecked = isChecked1,
-                onCheckedChange = { isChecked1 = it }
-            )
-            SwitchListItem(
-                imageVector = GrodnoRoads.Outlined.Brightness,
-                text = "За рулем | Гродно",
-                description = "За рулем | Гродно",
-                isChecked = isChecked2,
-                onCheckedChange = { isChecked2 = it }
-            )
-            SwitchListItem(
-                text = "За рулем | Гродно",
-                description = "За рулем | Гродно",
-                isChecked = isChecked3,
-                onCheckedChange = { isChecked3 = it }
-            )
-        }
+        SwitchListItem(
+            imageVector = GrodnoRoads.Outlined.Brightness,
+            text = "За рулем | Гродно",
+            isChecked = isChecked1,
+            onCheckedChange = { isChecked1 = it }
+        )
+        SwitchListItem(
+            imageVector = GrodnoRoads.Outlined.Brightness,
+            text = "За рулем | Гродно",
+            description = "За рулем | Гродно",
+            isChecked = isChecked2,
+            onCheckedChange = { isChecked2 = it }
+        )
+        SwitchListItem(
+            text = "За рулем | Гродно",
+            description = "За рулем | Гродно",
+            isChecked = isChecked3,
+            onCheckedChange = { isChecked3 = it }
+        )
     }
 }
 

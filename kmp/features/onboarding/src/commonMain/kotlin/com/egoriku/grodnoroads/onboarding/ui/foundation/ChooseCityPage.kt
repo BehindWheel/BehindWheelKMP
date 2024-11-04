@@ -1,7 +1,6 @@
 package com.egoriku.grodnoroads.onboarding.ui.foundation
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -35,7 +34,7 @@ internal fun ChooseCityPage(
 
     Column {
         Text(
-            modifier = Modifier.padding(horizontal = 30.dp),
+            modifier = Modifier.padding(horizontal = 20.dp),
             text = stringResource(Res.string.onboarding_choose_city),
             style = MaterialTheme.typography.displaySmall,
             textAlign = TextAlign.Center
@@ -45,7 +44,6 @@ internal fun ChooseCityPage(
         SingleChoiceLazyColumn(
             modifier = Modifier.fillMaxWidth(),
             list = sortedCityValues.map { it.value }.toImmutableList(),
-            contentPadding = PaddingValues(bottom = 16.dp),
             initialSelection = sortedCityValues.indexOfFirst { cityValue ->
                 cityValue.index == City.entries.indexOf(City.Grodno)
             },

@@ -29,7 +29,7 @@ import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo.DemoTextButton
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo.DemoTriStateCheckbox
 
 @Composable
-internal fun UiDemoList(modifier: Modifier) {
+internal fun UiDemoList(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -37,6 +37,9 @@ internal fun UiDemoList(modifier: Modifier) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         DemoSwitch()
+        DemoCheckbox()
+        DemoTriStateCheckbox()
+        DemoRadioButton()
         DemoText()
         DemoPrimaryButton()
         DemoPrimaryInverseCircleButton()
@@ -47,14 +50,11 @@ internal fun UiDemoList(modifier: Modifier) {
         DemoActionButton()
         DemoActionButtonGroup()
         DemoClickableRange()
-        DemoRadioButton()
-        DemoCheckbox()
-        DemoTriStateCheckbox()
         DemoFilterChip()
         DemoNavigationRail()
         DemoNavigationBar()
+        DemoListItem()
         DemoSnackbarSimple()
         DemoSnackbarWithAction()
-        DemoListItem()
     }
 }

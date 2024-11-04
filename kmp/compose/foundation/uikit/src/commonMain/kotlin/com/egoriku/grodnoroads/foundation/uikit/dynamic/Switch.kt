@@ -51,7 +51,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.core.Platform.Android
 import com.egoriku.grodnoroads.foundation.core.Platform.IOS
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
@@ -65,10 +64,9 @@ fun Switch(
     checked: Boolean,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    platform: Platform = LocalPlatform.current,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    when (platform) {
+    when (LocalPlatform.current) {
         Android -> MaterialSwitch(
             checked = checked,
             modifier = modifier,
@@ -87,8 +85,8 @@ fun Switch(
 @Composable
 private fun MaterialSwitch(
     checked: Boolean,
-    modifier: Modifier,
     enabled: Boolean,
+    modifier: Modifier = Modifier,
     onCheckedChange: (Boolean) -> Unit
 ) {
     val icon: (@Composable () -> Unit)? = if (checked) {
@@ -111,12 +109,11 @@ private fun MaterialSwitch(
     )
 }
 
-
 @Composable
 private fun SwitchIos(
     checked: Boolean,
-    modifier: Modifier,
     enabled: Boolean,
+    modifier: Modifier = Modifier,
     onCheckedChange: (Boolean) -> Unit
 ) {
     val density = LocalDensity.current
@@ -310,6 +307,7 @@ object IosSwitchDefaults {
         disabledUncheckedIconColor = disabledUncheckedIconColor
     )
 }
+
 /**
  * Cupertino [tween] transition spec.
  *

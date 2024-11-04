@@ -1,9 +1,9 @@
 package com.egoriku.grodnoroads.foundation.uikit.listitem
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,55 +11,54 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.dynamic.TriStateCheckbox
+import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.RadioButton
 
 @Composable
-fun TriStateCheckBoxListItem(
+fun RadioButtonListItem(
     text: String,
-    state: ToggleableState,
+    selected: Boolean,
     modifier: Modifier = Modifier,
-    onToggle: () -> Unit
+    onClick: () -> Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .triStateToggleable(state = state, onClick = onToggle)
-            .padding(start = 6.dp, end = 20.dp),
+            .clickable(
+                role = Role.RadioButton,
+                onClick = onClick
+            )
+            .padding(horizontal = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TriStateCheckbox(
-            state = state,
-            onClick = onToggle
+        RadioButton(
+            selected = selected,
+            onClick = onClick
         )
         Text(
             modifier = Modifier
                 .padding(vertical = 8.dp)
                 .weight(1f),
             text = text,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.titleMedium
         )
+        HorizontalSpacer(12.dp)
     }
 }
 
 @PreviewGrodnoRoads
 @Composable
-private fun TriStateCheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
-    var state by rememberMutableState { ToggleableState.Off }
+private fun RadioButtonListItemPreview() = GrodnoRoadsM3ThemePreview {
+    var state by rememberMutableState { true }
 
-    TriStateCheckBoxListItem(
-        text = "За рулем | Гродно",
-        state = state,
-        onToggle = {
-            state = when (state) {
-                ToggleableState.Indeterminate -> ToggleableState.Off
-                ToggleableState.Off -> ToggleableState.On
-                ToggleableState.On -> ToggleableState.Indeterminate
-            }
-        }
+    RadioButtonListItem(
+        text = "Мобильная камера",
+        selected = state,
+        onClick = { state = !state }
     )
 }

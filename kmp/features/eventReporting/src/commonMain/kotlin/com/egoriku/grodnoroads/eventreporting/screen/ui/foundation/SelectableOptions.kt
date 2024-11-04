@@ -1,25 +1,18 @@
 package com.egoriku.grodnoroads.eventreporting.screen.ui.foundation
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
@@ -30,8 +23,8 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
-import com.egoriku.grodnoroads.foundation.uikit.RadioButton
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import org.jetbrains.compose.resources.stringResource
 
@@ -64,7 +57,7 @@ internal fun SelectableOptions(
         RadioButtonListItem(
             text = stringResource(entry.toStringResource()),
             selected = selectedOption == entry,
-            onSelect = {
+            onClick = {
                 selectedOption = entry
                 focusManager.clearFocus()
             }
@@ -86,38 +79,6 @@ internal fun SelectableOptions(
         onValueChange = { inputText = it },
         label = stringResource(Res.string.dialog_input_hint)
     )
-}
-
-@Composable
-private fun RadioButtonListItem(
-    text: String,
-    selected: Boolean,
-    onSelect: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .toggleable(
-                value = selected,
-                role = Role.RadioButton,
-                onValueChange = { onSelect() }
-            )
-            .padding(horizontal = 6.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(0.dp)
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = onSelect
-        )
-        Text(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .weight(1f),
-            text = text,
-            style = MaterialTheme.typography.titleMedium
-        )
-    }
 }
 
 @PreviewGrodnoRoads
