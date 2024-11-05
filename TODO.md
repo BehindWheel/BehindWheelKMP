@@ -1,5 +1,4 @@
 - add Input field into UIKit
-- mvikotlin as bundle dependency
 
 ios:
 - choose on map modal not working

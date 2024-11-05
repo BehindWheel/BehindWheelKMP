@@ -27,9 +27,8 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)
-            implementation(libs.mvikotlin)
-            implementation(libs.mvikotlin.extensions)
-            implementation(libs.mvikotlin.main)
+
+            implementation(libs.bundles.mvikotlin)
         }
         commonTestDependencies {
             implementation(libs.kotlin.test)
