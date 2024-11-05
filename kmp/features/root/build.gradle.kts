@@ -97,8 +97,8 @@ kotlin {
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.dev.gitlive.firebase.firestore)
             implementation(libs.koin.core)
-            implementation(libs.mvikotlin)
-            implementation(libs.mvikotlin.main)
+
+            implementation(libs.bundles.mvikotlin)
         }
         androidDependencies {
             implementation(libs.koin.android)

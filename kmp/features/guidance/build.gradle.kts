@@ -49,9 +49,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.kotlin.collections)
             implementation(libs.kotlin.serialization.json)
-            implementation(libs.mvikotlin)
-            implementation(libs.mvikotlin.extensions)
-            implementation(libs.mvikotlin.main)
+
+            implementation(libs.bundles.mvikotlin)
         }
         androidDependencies {
             implementation(libs.androidx.activity.compose)
