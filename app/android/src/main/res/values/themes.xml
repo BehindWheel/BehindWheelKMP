@@ -8,7 +8,7 @@
         <item name="postSplashScreenTheme">@style/GrodnoRoadsTheme</item>
     </style>
 
-    <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">#FF4A6572</item>
         <item name="colorPrimary">#FF4A6572</item>
     </style>

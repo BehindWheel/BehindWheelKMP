@@ -88,12 +88,13 @@ dependencies {
     implementation(projects.kmp.shared.persistent)
     implementation(projects.kmp.libraries.logger)
 
-    implementation(compose.foundation)
-    implementation(compose.material3)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.google.material)
     implementation(libs.material3.windowsize)
+
+    implementation(compose.foundation)
+    implementation(compose.material3)
 
     coreLibraryDesugaring(libs.desugar.jdk)
 }
