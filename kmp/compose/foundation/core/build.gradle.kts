@@ -18,7 +18,6 @@ kotlin {
         commonDependencies {
             api(compose.runtime)
             implementation(compose.foundation)
-            // TODO: remove material3 after release compose 1.7.0
             implementation(compose.material3)
             implementation(libs.material3.windowsize)
         }

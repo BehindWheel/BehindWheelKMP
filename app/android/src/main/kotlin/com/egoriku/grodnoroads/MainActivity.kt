@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
-                        LocalWindowSizeClass provides calculateWindowSizeClass(),
+                        LocalWindowSizeClass provides calculateWindowSizeClass(this),
                         LocalActivity provides this,
                         LocalPlatform provides Platform.Android
                     ) {

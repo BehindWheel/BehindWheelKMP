@@ -53,7 +53,7 @@ kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializat
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
-material3-windowsize = "dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0"
+material3-windowsize = "org.jetbrains.compose.material3:material3-window-size-class:1.7.0"
 
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
 
