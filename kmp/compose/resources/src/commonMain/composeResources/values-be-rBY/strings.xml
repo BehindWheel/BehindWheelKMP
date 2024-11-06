@@ -206,5 +206,7 @@
     <string name="onboarding_infographic_2_description">Дадатак падкажа пра перавышэнне хуткасці, пра набліжэнне да паста ДАІ або фоторадару</string>
     <string name="onboarding_infographic_3_title">Пільнасць не перашкодзіць!</string>
     <string name="onboarding_infographic_3_description">Адзначаючы на карце праблемныя ўчасткі дарогі, вы тым самым папярэджваеце іншых карыстальнікаў аб небяспецы</string>
-    <string name="onboarding_choose_city">Выберыце ваш горад</string>
+
+    <string name="city_selector_choose_city">Выберыце ваш горад</string>
+    <string name="city_selector_done">Гатовы</string>
 </resources>

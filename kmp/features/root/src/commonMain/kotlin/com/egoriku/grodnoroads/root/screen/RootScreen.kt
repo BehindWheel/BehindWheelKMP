@@ -6,8 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.egoriku.grodnoroads.intro.IntroScreen
 import com.egoriku.grodnoroads.mainflow.screen.MainFlowScreen
-import com.egoriku.grodnoroads.onboarding.ui.OnboardingScreen
 import com.egoriku.grodnoroads.root.domain.RootComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
 
@@ -24,8 +24,8 @@ fun RootContent(
                 is Child.MainFlow -> {
                     MainFlowScreen(mainFlowComponent = child.component)
                 }
-                is Child.Onboarding -> {
-                    OnboardingScreen(onboardingComponent = child.component)
+                is Child.Intro -> {
+                    IntroScreen(introComponent = child.component)
                 }
             }
         }

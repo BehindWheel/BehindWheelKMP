@@ -215,5 +215,7 @@
     <string name="onboarding_infographic_2_description">The application will tell you about speeding, about approaching a traffic police post or a photo radar</string>
     <string name="onboarding_infographic_3_title">Vigilance does not hurt!</string>
     <string name="onboarding_infographic_3_description">By marking problematic sections of the road on the map, you are warning other users about the danger.</string>
-    <string name="onboarding_choose_city">Choose your city</string>
+
+    <string name="city_selector_choose_city">Select your city</string>
+    <string name="city_selector_done">Done</string>
 </resources>
