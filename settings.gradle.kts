@@ -43,7 +43,7 @@ include(":kmp:compose:resources")
 include(":kmp:compose:snackbar")
 
 include(":kmp:features:root")
-include(":kmp:features:onboarding")
+include(":kmp:features:intro")
 include(":kmp:features:mainflow")
 
 include(":kmp:features:guidance")

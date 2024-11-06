@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.decompose.ComponentContext
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
-import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
+import com.egoriku.grodnoroads.shared.persistent.intro.showIntro
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -27,7 +27,7 @@ internal class DebugToolsComponentImpl(
     override fun showOnboarding() {
         coroutineScope.launch {
             dataStore.edit {
-                showOnboarding(true)
+                showIntro(true)
             }
         }
     }

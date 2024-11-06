@@ -213,5 +213,7 @@
     <string name="onboarding_infographic_2_description">Приложение подскажет о превышении  скорости, о приближении к посту ГАИ или фоторадару</string>
     <string name="onboarding_infographic_3_title">Бдительность не помешает!</string>
     <string name="onboarding_infographic_3_description">Отмечая на карте проблемные участки дороги, вы тем самым предупреждаете других пользователей об опасности</string>
-    <string name="onboarding_choose_city">Выберите ваш город</string>
+
+    <string name="city_selector_choose_city">Выберите ваш город</string>
+    <string name="city_selector_done">Готово</string>
 </resources>

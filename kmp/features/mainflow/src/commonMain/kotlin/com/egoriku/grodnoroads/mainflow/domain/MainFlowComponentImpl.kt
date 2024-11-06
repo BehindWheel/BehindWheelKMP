@@ -33,7 +33,7 @@ internal class MainFlowComponentImpl(
         serializer = Config.serializer(),
         initialConfiguration = Config.Tabs,
         handleBackButton = true,
-        key = "MainFlowStack",
+        key = "MainFlow",
         childFactory = ::processChild
     )
 

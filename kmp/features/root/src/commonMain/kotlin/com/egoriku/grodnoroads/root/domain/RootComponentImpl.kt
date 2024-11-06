@@ -9,12 +9,12 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
 import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
+import com.egoriku.grodnoroads.intro.domain.component.buildIntroComponent
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
-import com.egoriku.grodnoroads.onboarding.domain.component.buildOnboardingComponent
 import com.egoriku.grodnoroads.root.domain.RootComponent.Child
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
-import com.egoriku.grodnoroads.shared.persistent.onboarding.showOnboarding
+import com.egoriku.grodnoroads.shared.persistent.intro.showIntro
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -41,14 +41,14 @@ internal class RootComponentImpl(
         serializer = Config.serializer(),
         initialConfiguration = Config.MainFlow,
         handleBackButton = true,
-        key = "RootStack",
+        key = "Root",
         childFactory = ::processChild
     )
 
     init {
         runBlocking {
-            if (dataStore.data.first().showOnboarding) {
-                navigation.replaceAll(Config.Onboarding)
+            if (dataStore.data.first().showIntro) {
+                navigation.replaceAll(Config.Intro)
             }
         }
     }
@@ -65,10 +65,10 @@ internal class RootComponentImpl(
         config: Config,
         componentContext: ComponentContext
     ) = when (config) {
-        is Config.Onboarding -> Child.Onboarding(
-            buildOnboardingComponent(
+        is Config.Intro -> Child.Intro(
+            buildIntroComponent(
                 componentContext = componentContext,
-                onFinishOnboarding = {
+                onFinishIntro = {
                     navigation.replaceAll(Config.MainFlow)
                 }
             )
@@ -84,6 +84,6 @@ internal class RootComponentImpl(
         data object MainFlow : Config
 
         @Serializable
-        data object Onboarding : Config
+        data object Intro : Config
     }
 }
