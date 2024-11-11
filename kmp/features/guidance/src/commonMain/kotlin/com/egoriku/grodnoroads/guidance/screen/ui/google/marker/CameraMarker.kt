@@ -17,7 +17,7 @@ fun MapUpdater.CameraMarker(
     position: LatLng,
     markerSize: MarkerSize,
     icon: () -> MarkerImage,
-    zIndex: Float = 1f,
+    zIndex: Float,
     onClick: () -> Unit
 ) {
     val updatedIcon by rememberUpdatedState(icon)

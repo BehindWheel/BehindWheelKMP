@@ -368,7 +368,8 @@ fun GuidanceScreen(
                         position = location.latLng,
                         bearing = location.bearing,
                         icon = { markerCache.getOrPut(NavigationArrow) },
-                        rotation = location.bearing
+                        rotation = location.bearing,
+                        zIndex = 0f
                     )
                 }
 
@@ -387,7 +388,8 @@ fun GuidanceScreen(
                                             }
                                         )
                                     },
-                                    onClick = { cameraInfo = mapEvent }
+                                    onClick = { cameraInfo = mapEvent },
+                                    zIndex = 1f
                                 )
 
                                 is MediumSpeedCamera -> {
@@ -402,13 +404,13 @@ fun GuidanceScreen(
                                                 }
                                             )
                                         },
-                                        onClick = { cameraInfo = mapEvent }
+                                        onClick = { cameraInfo = mapEvent },
+                                        zIndex = 1f
                                     )
                                 }
 
                                 is MobileCamera -> {
                                     CameraMarker(
-                                        zIndex = 2f,
                                         position = mapEvent.position,
                                         markerSize = markerSize,
                                         icon = {
@@ -419,7 +421,8 @@ fun GuidanceScreen(
                                                 }
                                             )
                                         },
-                                        onClick = { cameraInfo = mapEvent }
+                                        onClick = { cameraInfo = mapEvent },
+                                        zIndex = 2f
                                     )
                                 }
                             }
@@ -442,7 +445,8 @@ fun GuidanceScreen(
                                     }
                                 },
                                 markerGenerator = { iconGenerator },
-                                onClick = { component.showMarkerInfoDialog(mapEvent) }
+                                onClick = { component.showMarkerInfoDialog(mapEvent) },
+                                zIndex = 3f
                             )
                         }
                     }
