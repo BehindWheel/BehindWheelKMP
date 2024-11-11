@@ -19,6 +19,7 @@ fun MapUpdater.ReportsMarker(
     markerGenerator: () -> MarkerGenerator,
     iconProvider: () -> MarkerImage?,
     message: String,
+    zIndex: Float,
     onClick: () -> Unit
 ) {
     val icon = remember(message, markerSize) {
@@ -36,7 +37,7 @@ fun MapUpdater.ReportsMarker(
         mapUpdater = this,
         position = position,
         icon = icon,
-        zIndex = 2f,
+        zIndex = zIndex,
         title = message,
         onMarkerClick = onClick
     )

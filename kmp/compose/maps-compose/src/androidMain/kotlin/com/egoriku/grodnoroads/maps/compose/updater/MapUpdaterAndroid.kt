@@ -86,6 +86,9 @@ internal class MapUpdaterAndroid(
                 icon(markerOptions.icon)
                 zIndex(markerOptions.zIndex)
 
+                if (markerOptions.rotation != null) {
+                    rotation(markerOptions.rotation)
+                }
                 if (markerOptions.anchor != null) {
                     anchor(markerOptions.anchor.u, markerOptions.anchor.v)
                 }

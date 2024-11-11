@@ -22,7 +22,7 @@ fun rememberIconMarker(
     mapUpdater: MapUpdater,
     position: LatLng,
     icon: () -> MarkerImage,
-    zIndex: Float = 0.0f,
+    zIndex: Float = 0f,
     title: String? = null,
     onMarkerClick: () -> Unit
 ): Marker? {

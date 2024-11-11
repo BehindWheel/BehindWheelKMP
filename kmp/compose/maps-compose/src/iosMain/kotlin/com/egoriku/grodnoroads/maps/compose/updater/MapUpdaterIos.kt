@@ -103,10 +103,18 @@ class MapUpdaterIos(
         val marker = Marker.markerWithPosition(
             position = markerOptions.position.cValue
         ).apply {
+            title = markerOptions.title
             icon = markerOptions.icon
+            zIndex = markerOptions.zIndex.toInt()
 
             if (markerOptions.rotation != null) {
                 rotation = markerOptions.rotation.toDouble()
+            }
+            if (markerOptions.anchor != null) {
+                groundAnchor = CGPointMake(
+                    x = markerOptions.anchor.u.toDouble(),
+                    y = markerOptions.anchor.v.toDouble()
+                )
             }
             map = googleMap
             tappable = true
