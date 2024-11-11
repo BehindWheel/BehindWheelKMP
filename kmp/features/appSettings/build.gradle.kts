@@ -24,6 +24,7 @@ kotlin {
             implementation(projects.kmp.shared.models)
 
             implementation(libs.decompose)
+            implementation(libs.koin.core)
         }
         androidDependencies {
             implementation(libs.androidx.browser)

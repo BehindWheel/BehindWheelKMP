@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.appsettings.domain.component
 
 import com.arkivanov.decompose.ComponentContext
-import com.egoriku.grodnoroads.shared.AppBuildConfig
+import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.egoriku.grodnoroads.shared.models.Page
 
 fun buildAppSettingsComponent(

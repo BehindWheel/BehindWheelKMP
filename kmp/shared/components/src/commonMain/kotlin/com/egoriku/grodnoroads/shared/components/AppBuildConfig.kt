@@ -1,6 +1,8 @@
 package com.egoriku.grodnoroads.shared.components
 
-expect object DebugConfig {
+expect object AppBuildConfig {
+
+    val versionName: String
 
     val isDebug: Boolean
 }
