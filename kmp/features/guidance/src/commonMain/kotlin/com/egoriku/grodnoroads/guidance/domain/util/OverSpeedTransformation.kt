@@ -3,7 +3,7 @@ package com.egoriku.grodnoroads.guidance.domain.util
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
 
-private const val ALLOWED_OVER_SPEED = 7
+private const val ALLOWED_OVER_SPEED = 2
 
 fun overSpeedTransformation(): suspend (List<Alert>, LastLocation) -> Int {
     return { alerts, lastLocation ->
