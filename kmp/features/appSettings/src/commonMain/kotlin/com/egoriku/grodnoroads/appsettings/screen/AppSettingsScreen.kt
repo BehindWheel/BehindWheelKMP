@@ -48,7 +48,7 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.NotificationBadge
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.shared.components.DebugConfig
+import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.egoriku.grodnoroads.shared.models.Page
 import org.jetbrains.compose.resources.stringResource
 
@@ -147,7 +147,7 @@ private fun SettingsUi(
                         paddingValues = PaddingValues(horizontal = 20.dp),
                         onClick = { onSettingClick(Page.FAQ) }
                     )
-                    if (DebugConfig.isDebug) {
+                    if (AppBuildConfig.isDebug) {
                         SettingsListItem(
                             imageVector = GrodnoRoads.Outlined.Adb,
                             name = stringResource(Res.string.settings_section_debug_tools),
