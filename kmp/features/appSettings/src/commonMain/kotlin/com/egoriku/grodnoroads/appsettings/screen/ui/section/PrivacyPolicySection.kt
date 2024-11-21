@@ -13,10 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.compose.resources.Constants.BULLET_SEPARATOR
 import com.egoriku.grodnoroads.compose.resources.Constants.PRIVACY_POLICY_LINK
-import com.egoriku.grodnoroads.compose.resources.Constants.TERMS_OF_SERVICE_LINK
+import com.egoriku.grodnoroads.compose.resources.Constants.TERMS_OF_CONDITIONS_LINK
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.privacy_policy
-import com.egoriku.grodnoroads.compose.resources.terms_of_service
+import com.egoriku.grodnoroads.compose.resources.terms_of_conditions
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
@@ -33,8 +33,8 @@ fun PrivacyPolicySection(modifier: Modifier = Modifier) {
     ) {
         LinkButton(
             openUrl = uriHandler::openUri,
-            description = stringResource(Res.string.terms_of_service),
-            url = TERMS_OF_SERVICE_LINK
+            description = stringResource(Res.string.terms_of_conditions),
+            url = TERMS_OF_CONDITIONS_LINK
         )
         Text(
             text = BULLET_SEPARATOR,
