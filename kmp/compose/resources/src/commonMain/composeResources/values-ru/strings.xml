@@ -27,7 +27,7 @@
     <string name="camera_info_last_update">Обновлено %1$s</string>
     <string name="camera_info_report">Сообщить об ошибке</string>
 
-    <string name="terms_of_service">Условия использования</string>
+    <string name="terms_of_conditions">Условия использования</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
 
     <string name="social_telegram_chat">Чатик</string>

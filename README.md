@@ -7,9 +7,8 @@
 </h2>
 
 <p align="center">
-    <a target="_blank" href="https://github.com/egorikftp/GrodnoRoads/stargazers"><img src="https://img.shields.io/github/stars/egorikftp/GrodnoRoads.svg"></a>
-    <a href="https://github.com/egorikftp/GrodnoRoads/network"><img alt="API" src="https://img.shields.io/github/forks/egorikftp/GrodnoRoads.svg"/></a>
-    <a target="_blank" href="https://github.com/egorikftp/GrodnoRoads/blob/release/LICENSE"><img src="https://img.shields.io/github/license/egorikftp/GrodnoRoads.svg"></a>
+    <a target="_blank" href="https://github.com/BehindWheel/BehindWheelKMP/stargazers"><img src="https://img.shields.io/github/stars/egorikftp/GrodnoRoads.svg"></a>
+    <a target="_blank" href="https://github.com/BehindWheel/BehindWheelKMP/blob/release/LICENSE"><img src="https://img.shields.io/github/license/BehindWheel/BehindWheelKMP.svg"></a>
     <a target="_blank" href="https://t.me/grodno_roads"><img src="https://img.shields.io/badge/Telegram%20Channel-blue"></a>
 </p>
 
