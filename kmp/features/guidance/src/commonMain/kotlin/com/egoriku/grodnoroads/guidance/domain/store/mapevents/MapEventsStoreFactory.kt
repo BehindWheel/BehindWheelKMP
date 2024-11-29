@@ -72,7 +72,7 @@ internal class MapEventsStoreFactory(
                                 subscribeForReports(
                                     onLoaded = { list ->
                                         val filterTime = currentTime - time
-                                        dispatch(OnNewReports(data = list.filter { it.timestamp >= filterTime }))
+                                        dispatch(OnNewReports(data = list))
                                     }
                                 )
                             }

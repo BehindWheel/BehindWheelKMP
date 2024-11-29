@@ -17,12 +17,13 @@ import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Inte
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Message
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.State
+import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.geolocation.LocationInfo
 import com.egoriku.grodnoroads.shared.geolocation.LocationService
 import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -59,10 +60,15 @@ internal class LocationStoreFactory(
                     dispatch(Message.OnNewLocation(LastLocation.None))
 
                     locationJob = reLaunch(locationJob) {
-                        locationService.lastLocationFlow
-                            .filterNotNull()
-                            .map { LastLocation(it.latLng, it.bearing, it.speed) }
-                            .collect {
+
+                        listOf(
+                            LocationInfo(
+                                latLng = LatLng(53.660490, 23.859420),
+                                bearing = 7f,
+                                speed = 66
+                            )
+                        ).map { LastLocation(it.latLng, it.bearing, it.speed) }
+                            .onEach {
                                 dispatch(Message.OnNewLocation(lastLocation = it))
                                 dispatch(Message.OnInitialLocation(it.latLng))
 
