@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.guidance.domain.util
 
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.CameraAlert
 import com.egoriku.grodnoroads.guidance.domain.model.Alert.IncidentAlert
@@ -94,7 +95,7 @@ private fun makeAlertMessage(
                     is Reports -> {
                         IncidentAlert(
                             // TODO: in future use id from Group
-                            id = event.markerMessage,
+                            id = Uuid.random(),
                             distance = distance,
                             messages = event.messages,
                             mapEventType = event.mapEventType
