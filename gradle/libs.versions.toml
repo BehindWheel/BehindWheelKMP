@@ -8,7 +8,7 @@ buildkonfig = "0.15.2"
 decompose = "3.2.2"
 essenty = "2.3.0"
 kotlinx-serialization = "1.7.3"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 moko-resources = "0.24.4"
 mvikotlin = "4.2.0"
 
