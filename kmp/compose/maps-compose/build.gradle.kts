@@ -30,6 +30,7 @@ kotlin {
         summary = "GoogleMaps for Compose Multiplatform"
 
         pod("GoogleMaps") {
+            version = "9.2.0"
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
     }
