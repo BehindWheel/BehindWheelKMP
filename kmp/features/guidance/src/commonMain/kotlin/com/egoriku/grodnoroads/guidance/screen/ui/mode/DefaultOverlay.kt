@@ -66,7 +66,7 @@ fun DefaultOverlay(
     modifier: Modifier = Modifier,
     onOpenQuickSettings: () -> Unit
 ) {
-    Box(modifier = modifier) {
+    Box(modifier = modifier.padding(top = 8.dp)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
