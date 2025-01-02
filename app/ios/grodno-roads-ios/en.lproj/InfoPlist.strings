@@ -8,5 +8,5 @@
 
 "CFBundleDisplayName" = "Behind Wheel | Grodno";
 
-"NSLocationWhenInUseUsageDescription" = "Used to display position on map";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Used to display position on map";
+"NSLocationWhenInUseUsageDescription" = "Your current location is used in navigation mode to notify you of approaching important road events";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your current location is used in navigation mode to notify you of approaching important road events";
