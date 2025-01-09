@@ -33,7 +33,8 @@ android {
 
         versionCode = provideVersionCode("$rootDir/config/versioning/android.properties")
         versionName = provideVersionName("$rootDir/config/versioning/android.properties")
-        resourceConfigurations += listOf("en", "ru", "be")
+
+        androidResources.localeFilters += listOf("en", "ru", "be")
     }
 
     signingConfigs {
