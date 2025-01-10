@@ -21,7 +21,9 @@ class KmpComposePlugin : Plugin<Project> {
                 reportsDestination.set(outPath)
                 metricsDestination.set(outPath)
             }
-            stabilityConfigurationFile = file("$rootDir/config/compose-stability.config")
+            stabilityConfigurationFiles.add {
+                rootDir.resolve("config/compose-stability.config")
+            }
             includeSourceInformation = true
         }
     }
