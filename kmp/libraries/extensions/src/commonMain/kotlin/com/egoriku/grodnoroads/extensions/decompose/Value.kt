@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * Converts decompose [Value] to coroutines [StateFlow]
+ * Converts decompose [Value] to coroutines [kotlinx.coroutines.flow.StateFlow]
  */
 fun <T : Any> Value<T>.toStateFlow(): StateFlow<T> = ValueStateFlow(this)
 
