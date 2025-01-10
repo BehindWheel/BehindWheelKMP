@@ -1,5 +1,3 @@
-@file:Suppress("ktlint:compose:modifier-composable-check")
-
 package com.egoriku.grodnoroads.foundation.core
 
 import androidx.compose.foundation.clickable
@@ -11,7 +9,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun Modifier.unboundClickable(onClick: () -> Unit): Modifier {
-    return this.clickable(
+    return this then Modifier.clickable(
         interactionSource = remember { MutableInteractionSource() },
         indication = ripple(bounded = false),
         onClick = onClick
