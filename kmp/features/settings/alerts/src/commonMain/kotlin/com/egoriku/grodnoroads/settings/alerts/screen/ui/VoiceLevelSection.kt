@@ -16,6 +16,8 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.alerts_header_volume_level
 import com.egoriku.grodnoroads.compose.resources.alerts_play_test_audio
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
+import com.egoriku.grodnoroads.foundation.core.LocalPlatform
+import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Play
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
@@ -35,29 +37,31 @@ fun VoiceLevelSection(
     playTestSound: (VolumeLevel) -> Unit
 ) {
     Column(modifier = modifier) {
-        SettingsSectionHeader(title = stringResource(Res.string.alerts_header_volume_level))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            alertVolumeLevel.values.forEach { volumeLevel ->
-                val selected = alertVolumeLevel.current == volumeLevel
+        if (LocalPlatform.current == Platform.Android) {
+            SettingsSectionHeader(title = stringResource(Res.string.alerts_header_volume_level))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                alertVolumeLevel.values.forEach { volumeLevel ->
+                    val selected = alertVolumeLevel.current == volumeLevel
 
-                FilterChip(
-                    selected = selected,
-                    onClick = {
-                        modify(alertVolumeLevel.copy(current = volumeLevel))
-                    },
-                    label = {
-                        Text(
-                            text = volumeLevel.levelName,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                )
+                    FilterChip(
+                        selected = selected,
+                        onClick = {
+                            modify(alertVolumeLevel.copy(current = volumeLevel))
+                        },
+                        label = {
+                            Text(
+                                text = volumeLevel.levelName,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    )
+                }
             }
         }
         SimpleListItem(
