@@ -108,7 +108,7 @@ actual class AudioPlayer(private val context: Context) {
 
         mediaPlayer.reset()
 
-        val assetFileDescriptor = context.assets.openFd(sound.assetResource.path)
+        val assetFileDescriptor = context.assets.openFd(sound.uri)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mediaPlayer.setDataSource(assetFileDescriptor)
         } else {

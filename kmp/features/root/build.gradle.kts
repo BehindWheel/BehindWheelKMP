@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.moko.resources)
 }
 
 android {
@@ -33,7 +32,6 @@ kotlin {
             export(libs.decompose)
             export(libs.essenty.backhandler)
             export(libs.essenty.lifecycle)
-            export(libs.moko.resources)
 
             export(projects.kmp.features.appSettings)
             export(projects.kmp.features.guidance)
@@ -52,7 +50,6 @@ kotlin {
             export(projects.kmp.compose.resources)
             export(projects.kmp.shared.analytics)
             export(projects.kmp.shared.models)
-            export(projects.kmp.shared.resources)
             export(projects.kmp.libraries.location)
         }
     }
@@ -82,7 +79,6 @@ kotlin {
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.persistent)
-            implementation(projects.kmp.shared.resources)
             implementation(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.extensions)
 
@@ -90,7 +86,6 @@ kotlin {
             api(libs.decompose.compose)
             api(libs.essenty.backhandler)
             api(libs.essenty.lifecycle)
-            api(libs.moko.resources)
 
             implementation(libs.dev.gitlive.firebase.analytics)
             implementation(libs.dev.gitlive.firebase.crashlytics)

@@ -17,7 +17,7 @@ kotlin {
     sourceSets {
         commonDependencies {
             implementation(projects.kmp.libraries.logger)
-            implementation(projects.kmp.shared.resources)
+            implementation(projects.kmp.compose.resources)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

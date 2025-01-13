@@ -1,30 +1,32 @@
 package com.egoriku.grodnoroads.shared.audioplayer
 
-import com.egoriku.grodnoroads.shared.resources.MR
-import dev.icerock.moko.resources.AssetResource
+import com.egoriku.grodnoroads.compose.resources.Res
 
-sealed class Sound(val assetResource: AssetResource) {
-    data object OverSpeed : Sound(assetResource = MR.assets.sound_over_speed_mp3)
+sealed class Sound(val uri: String) {
+    data object OverSpeed : Sound(uri = Res.platformUri("files/sound_over_speed.mp3"))
 
-    data object StationaryCamera : Sound(assetResource = MR.assets.camera.stationary_camera_mp3)
-    data object MobileCamera : Sound(assetResource = MR.assets.camera.mobile_camera_mp3)
-    data object MediumSpeedCamera : Sound(assetResource = MR.assets.camera.medium_speed_camera_mp3)
+    data object StationaryCamera : Sound(uri = Res.platformUri("files/camera/stationary_camera.mp3"))
 
-    data object SpeedLimit40 : Sound(assetResource = MR.assets.limit.limit_40_mp3)
-    data object SpeedLimit50 : Sound(assetResource = MR.assets.limit.limit_50_mp3)
-    data object SpeedLimit60 : Sound(assetResource = MR.assets.limit.limit_60_mp3)
-    data object SpeedLimit70 : Sound(assetResource = MR.assets.limit.limit_70_mp3)
-    data object SpeedLimit80 : Sound(assetResource = MR.assets.limit.limit_80_mp3)
-    data object SpeedLimit90 : Sound(assetResource = MR.assets.limit.limit_90_mp3)
-    data object SpeedLimit100 : Sound(assetResource = MR.assets.limit.limit_100_mp3)
-    data object SpeedLimit110 : Sound(assetResource = MR.assets.limit.limit_110_mp3)
-    data object SpeedLimit120 : Sound(assetResource = MR.assets.limit.limit_120_mp3)
+    data object MobileCamera : Sound(uri = Res.platformUri("files/camera/mobile_camera.mp3"))
+    data object MediumSpeedCamera : Sound(uri = Res.platformUri("files/camera/medium_speed_camera.mp3"))
 
-    data object TrafficPolice : Sound(assetResource = MR.assets.incident.traffic_police_mp3)
-    data object CarCrash : Sound(assetResource = MR.assets.incident.car_crash_mp3)
-    data object WildAnimals : Sound(assetResource = MR.assets.incident.wild_animals_mp3)
-    data object TrafficJam : Sound(assetResource = MR.assets.incident.traffic_jam_mp3)
-    data object RoadIncident : Sound(assetResource = MR.assets.incident.road_incident_mp3)
+    data object SpeedLimit40 : Sound(uri = Res.platformUri("files/limit/limit_40.mp3"))
+    data object SpeedLimit50 : Sound(uri = Res.platformUri("files/limit/limit_50.mp3"))
+    data object SpeedLimit60 : Sound(uri = Res.platformUri("files/limit/limit_60.mp3"))
+    data object SpeedLimit70 : Sound(uri = Res.platformUri("files/limit/limit_70.mp3"))
+    data object SpeedLimit80 : Sound(uri = Res.platformUri("files/limit/limit_80.mp3"))
+    data object SpeedLimit90 : Sound(uri = Res.platformUri("files/limit/limit_90.mp3"))
+    data object SpeedLimit100 : Sound(uri = Res.platformUri("files/limit/limit_100.mp3"))
+    data object SpeedLimit110 : Sound(uri = Res.platformUri("files/limit/limit_110.mp3"))
+    data object SpeedLimit120 : Sound(uri = Res.platformUri("files/limit/limit_120.mp3"))
 
-    data object TestAudioLevel : Sound(assetResource = MR.assets.test.test_audio_level_mp3)
+    data object TrafficPolice : Sound(uri = Res.platformUri("files/incident/traffic_police.mp3"))
+    data object CarCrash : Sound(uri = Res.platformUri("files/incident/car_crash.mp3"))
+    data object WildAnimals : Sound(uri = Res.platformUri("files/incident/wild_animals.mp3"))
+    data object TrafficJam : Sound(uri = Res.platformUri("files/incident/traffic_jam.mp3"))
+    data object RoadIncident : Sound(uri = Res.platformUri("files/incident/road_incident.mp3"))
+
+    data object TestAudioLevel : Sound(uri = Res.platformUri("files/test/test_audio_level.mp3"))
 }
+
+expect fun Res.platformUri(path: String): String
