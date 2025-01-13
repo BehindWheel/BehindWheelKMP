@@ -11,6 +11,7 @@ import platform.AVFAudio.AVAudioSession
 import platform.AVFAudio.AVAudioSessionCategoryPlayback
 import platform.AVFAudio.AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
 import platform.AVFAudio.setActive
+import platform.Foundation.NSURL
 import platform.darwin.NSObject
 
 @Composable
@@ -56,7 +57,10 @@ actual class AudioPlayer {
     actual fun playSound(sound: Sound) {
         scope.launch {
             audioSession.setActive(active = true, error = null)
-            audioPlayer = AVAudioPlayer(sound.assetResource.url, null)
+            audioPlayer = AVAudioPlayer(
+                contentsOfURL = NSURL.fileURLWithPath(sound.uri),
+                error = null
+            )
             audioPlayer?.delegate = delegate
             audioPlayer?.play()
         }

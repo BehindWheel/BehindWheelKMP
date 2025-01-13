@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.LruCache
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.egoriku.grodnoroads.compose.resources.R
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers.CarCrash
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers.MediumSpeed
@@ -18,7 +19,6 @@ import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarker
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers.TrafficJam
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers.WildAnimals
 import com.egoriku.grodnoroads.maps.compose.extension.MarkerImage
-import com.egoriku.grodnoroads.shared.resources.MR
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -31,19 +31,19 @@ class MarkerCacheAndroid(private val context: Context) : MarkerCache {
         return when (val cachedBitmap = lruCache.get(availableMarkers.name)) {
             null -> {
                 val id = when (availableMarkers) {
-                    Stationary -> MR.images.nt_ic_marker_stationary_camera
-                    StationarySmall -> MR.images.nt_ic_marker_stationary_camera_small
-                    NavigationArrow -> MR.images.nt_ic_navigation_arrow
-                    MediumSpeed -> MR.images.nt_ic_marker_medium_speed_camera
-                    MediumSpeedSmall -> MR.images.nt_ic_marker_medium_speed_camera_small
-                    Mobile -> MR.images.nt_ic_marker_mobile_camera
-                    MobileSmall -> MR.images.nt_ic_marker_mobile_camera_small
-                    Police -> MR.images.nt_ic_marker_police
-                    RoadIncident -> MR.images.nt_ic_marker_road_incident
-                    CarCrash -> MR.images.nt_ic_marker_car_crash
-                    TrafficJam -> MR.images.nt_ic_marker_traffic_jam
-                    WildAnimals -> MR.images.nt_ic_marker_wild_animals
-                }.drawableResId
+                    Stationary -> R.drawable.nt_ic_marker_stationary_camera
+                    StationarySmall -> R.drawable.nt_ic_marker_stationary_camera_small
+                    NavigationArrow -> R.drawable.nt_ic_navigation_arrow
+                    MediumSpeed -> R.drawable.nt_ic_marker_medium_speed_camera
+                    MediumSpeedSmall -> R.drawable.nt_ic_marker_medium_speed_camera_small
+                    Mobile -> R.drawable.nt_ic_marker_mobile_camera
+                    MobileSmall -> R.drawable.nt_ic_marker_mobile_camera_small
+                    Police -> R.drawable.nt_ic_marker_police
+                    RoadIncident -> R.drawable.nt_ic_marker_road_incident
+                    CarCrash -> R.drawable.nt_ic_marker_car_crash
+                    TrafficJam -> R.drawable.nt_ic_marker_traffic_jam
+                    WildAnimals -> R.drawable.nt_ic_marker_wild_animals
+                }
 
                 val imageBitmap = context.drawableCompat(id).toBitmap()
                 BitmapDescriptorFactory.fromBitmap(imageBitmap)

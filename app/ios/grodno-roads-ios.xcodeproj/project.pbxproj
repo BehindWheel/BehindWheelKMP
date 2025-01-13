@@ -126,7 +126,6 @@
 				CE52F2FD2B1CF3B200D81762 /* Sources */,
 				CE52F2FE2B1CF3B200D81762 /* Frameworks */,
 				CE52F2FF2B1CF3B200D81762 /* Resources */,
-				6A540C8C2B711A130064299D /* Configure moko-resources */,
 				A4E9685F8BC0269F02CEC4CC /* [CP] Embed Pods Frameworks */,
 				4B29ADEDE5B5387310E28648 /* [CP] Copy Pods Resources */,
 			);
@@ -205,25 +204,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		6A540C8C2B711A130064299D /* Configure moko-resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Configure moko-resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/../../gradlew\" -p \"$SRCROOT/../../\" :kmp:features:root:copyFrameworkResourcesToApp \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \\\n    -Pkotlin.native.cocoapods.platform=\"$PLATFORM_NAME\" \\\n    -Pkotlin.native.cocoapods.archs=\"$ARCHS\" \\\n    -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\" \n";
 		};
 		7A3154E986D5BBE06F29E1D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -425,7 +405,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_ASSET_PATHS = "\"grodno-roads-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = XGV27LYB6Y;
 				ENABLE_PREVIEWS = YES;
@@ -451,7 +431,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -481,7 +461,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_ASSET_PATHS = "\"grodno-roads-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = XGV27LYB6Y;
 				ENABLE_PREVIEWS = YES;
@@ -508,7 +488,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
