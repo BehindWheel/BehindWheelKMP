@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.location.requester
 
 import android.Manifest
 import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.result.IntentSenderRequest
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -11,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
-import com.egoriku.grodnoroads.foundation.core.LocalActivity
 import com.egoriku.grodnoroads.location.requester.internal.LOCATION_PERMISSIONS
 import com.egoriku.grodnoroads.location.requester.internal.SettingsState
 import com.egoriku.grodnoroads.location.requester.internal.invalidateLocationSettings
@@ -32,7 +32,6 @@ actual fun WithLocationRequester(
     modifier: Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
-    // When in preview, early return a Box with the received modifier preserving layout
     if (LocalInspectionMode.current) {
         Box(modifier = modifier, content = content)
         return
@@ -70,7 +69,7 @@ actual fun WithLocationRequester(
                 onStateChange(LocationRequestStatus.FineLocationDenied)
             }
             else -> {
-                if (activity.shouldShowRationale(LOCATION_PERMISSIONS)) {
+                if (activity?.shouldShowRationale(LOCATION_PERMISSIONS) == true) {
                     onStateChange(LocationRequestStatus.ShowRationale)
                 } else {
                     onStateChange(LocationRequestStatus.PermissionDenied)
