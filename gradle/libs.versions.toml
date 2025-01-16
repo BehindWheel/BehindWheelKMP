@@ -9,7 +9,7 @@ decompose = "3.2.2"
 essenty = "2.4.0"
 kotlinx-serialization = "1.8.0"
 kotlin = "2.1.0"
-mvikotlin = "4.2.0"
+mvikotlin = "4.3.0"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.10.0"
