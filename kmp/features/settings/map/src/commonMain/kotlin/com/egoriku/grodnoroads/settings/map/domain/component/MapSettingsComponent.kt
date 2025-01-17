@@ -80,7 +80,7 @@ interface MapSettingsComponent {
         ) : MapPref
 
         data class MarkerFiltering(
-            val current: Filtering = Filtering.Hours1,
+            val current: Filtering = Filtering.Minutes45,
             val values: List<Filtering> = Filtering.entries
         ) : MapPref
     }

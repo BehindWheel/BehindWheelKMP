@@ -9,7 +9,7 @@ private val FILTER_EVENTS_TIME_PERIOD = longPreferencesKey("filter_events_time_p
 val Preferences.filteringMarkers: Filtering
     get() = Filtering.entries
         .firstOrNull { it.timeInMilliseconds == this[FILTER_EVENTS_TIME_PERIOD] }
-        ?: Filtering.Hours1
+        ?: Filtering.Minutes45
 
 fun MutablePreferences.updateFiltering(filtering: Filtering) {
     this[FILTER_EVENTS_TIME_PERIOD] = filtering.timeInMilliseconds
