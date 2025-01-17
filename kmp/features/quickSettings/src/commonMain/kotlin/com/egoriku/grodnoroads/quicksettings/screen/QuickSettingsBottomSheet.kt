@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
-import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.screen.ui.QuickSettingsContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -16,7 +15,7 @@ fun QuickSettingsBottomSheet(
     component: QuickSettingsComponent,
     onClose: () -> Unit
 ) {
-    val quickSettingsState by component.quickSettingsState.collectAsState(QuickSettingsState())
+    val quickSettingsState by component.quickSettingsState.collectAsState()
 
     BasicModalBottomSheet(
         sheetState = rememberSheetCloseBehaviour(onCancel = onClose).sheetState,

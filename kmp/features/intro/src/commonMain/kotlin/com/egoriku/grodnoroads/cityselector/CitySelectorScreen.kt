@@ -12,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.cityselector.domain.component.CitySelectorComponent
-import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore.State
 import com.egoriku.grodnoroads.cityselector.ui.ChooseCityPage
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.city_selector_done
@@ -21,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun CitySelectorScreen(citySelectorComponent: CitySelectorComponent) {
-    val state by citySelectorComponent.state.collectAsState(State())
+    val state by citySelectorComponent.state.collectAsState()
 
     Column(
         modifier = Modifier.systemBarsPadding(),
