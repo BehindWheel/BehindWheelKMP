@@ -19,6 +19,7 @@ kotlin {
             implementation(projects.kmp.compose.foundation.icons)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
+            implementation(projects.kmp.libraries.extensions)
             implementation(projects.kmp.shared.persistent)
 
             implementation(libs.decompose)

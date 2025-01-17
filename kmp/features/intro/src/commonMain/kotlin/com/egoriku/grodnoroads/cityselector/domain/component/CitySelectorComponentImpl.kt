@@ -5,13 +5,11 @@ import com.arkivanov.mvikotlin.core.binder.BinderLifecycleMode
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
-import com.arkivanov.mvikotlin.extensions.coroutines.states
+import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.egoriku.grodnoroads.cityselector.domain.component.CitySelectorComponent.CitySelectorPref
 import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore
 import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore.Intent
 import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore.Label
-import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore.State
-import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -32,7 +30,7 @@ internal class CitySelectorComponentImpl(
 
     private val citySelectorStore: CitySelectorStore = instanceKeeper.getStore(::get)
 
-    override val state: Flow<State> = citySelectorStore.states
+    override val state = citySelectorStore.stateFlow(lifecycle)
 
     init {
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {

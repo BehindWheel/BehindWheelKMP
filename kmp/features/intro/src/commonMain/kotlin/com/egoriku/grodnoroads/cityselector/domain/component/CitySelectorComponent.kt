@@ -3,12 +3,12 @@ package com.egoriku.grodnoroads.cityselector.domain.component
 import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.cityselector.domain.store.CitySelectorStore.State
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Stable
 interface CitySelectorComponent {
 
-    val state: Flow<State>
+    val state: StateFlow<State>
 
     fun modify(preference: CitySelectorPref)
     fun completeIntro()
