@@ -1,71 +1,61 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Locale
+import com.diffplug.gradle.spotless.SpotlessExtension
 
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.buildkonfig) apply false
+    alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.google.services) apply false
-    alias(libs.plugins.gradle.dependency.check)
+    alias(libs.plugins.jetbrains.compose) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.cocoapods) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.secrets) apply false
+    alias(libs.plugins.spotless) apply false
+}
+
+allprojects {
+    plugins.apply(
+        rootProject.libs.plugins.spotless
+            .get()
+            .pluginId
+    )
+
+    extensions.configure<SpotlessExtension> {
+        kotlin {
+            target("src/**/*.kt")
+            targetExclude("src/test/resources/**")
+            ktlint(libs.ktlint.get().version)
+                .editorConfigOverride(
+                    mapOf(
+                        "ktlint_compose_lambda-param-event-trailing" to "disabled",
+                        "ktlint_standard_function-expression-body" to "disabled",
+                        "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+                        "ktlint_compose_compositionlocal-allowlist" to "disabled",
+                        "ktlint_standard_backing-property-naming" to "disabled",
+                        "compose_treat_as_lambda" to false,
+                        "compose_disallow_material2" to true,
+                        "compose_preview_naming_enabled" to true,
+                        "compose_preview_naming_strategy" to "suffix"
+                    )
+                ).customRuleSets(
+                    listOf(
+                        libs.compose.rules
+                            .get()
+                            .toString()
+                    )
+                )
+        }
+        kotlinGradle {
+            ktlint(libs.ktlint.get().version)
+        }
+    }
 }
 
 tasks {
     registering(Delete::class) {
         delete(layout.buildDirectory)
     }
-    withType<DependencyUpdatesTask> {
-        // https://github.com/ben-manes/gradle-versions-plugin/issues/816
-        filterConfigurations = Spec<Configuration> {
-            !it.name.startsWith("incrementalScalaAnalysis")
-        }
-        rejectVersionIf {
-            isNonStable(candidate.version)
-        }
-    }
-}
-
-fun isNonStable(version: String): Boolean {
-    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any {
-        version.uppercase(Locale.getDefault()).contains(it)
-    }
-    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
-    val isStable = stableKeyword || regex.matches(version)
-    return isStable.not()
-}
-
-subprojects {
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            if (project.findProperty("enableComposeCompilerReports") == "true") {
-                val reportsPath = project.layout.buildDirectory
-                    .dir("compose_metrics")
-                    .get()
-                    .asFile
-                    .absolutePath
-                composeMetrics(path = reportsPath)
-            }
-            stabilityConfigurationPath(path = "$rootDir/config/compose-stability.config")
-        }
-    }
-}
-
-fun KotlinJvmOptions.composeMetrics(path: String) {
-    freeCompilerArgs += listOf(
-        "-P",
-        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$path",
-        "-P",
-        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$path"
-    )
-}
-
-fun KotlinJvmOptions.stabilityConfigurationPath(path: String) {
-    freeCompilerArgs += listOf(
-        "-P",
-        "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=$path"
-    )
 }

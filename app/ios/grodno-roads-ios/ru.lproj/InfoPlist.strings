@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  grodno-roads-ios
+
+  Created by Yahor Urbanovich on 29.04.24.
+  
+*/
+
+"CFBundleDisplayName" = "За рулем | Гродно";
+
+"NSLocationWhenInUseUsageDescription" = "Актуальное местоположение используется в режиме навигации для уведомления о приближении к важным дорожным событиям";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Актуальное местоположение используется в режиме навигации для уведомления о приближении к важным дорожным событиям";

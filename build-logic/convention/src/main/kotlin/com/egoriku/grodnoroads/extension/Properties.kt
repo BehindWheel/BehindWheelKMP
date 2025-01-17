@@ -15,3 +15,13 @@ fun Properties.propertyInt(key: String): Int {
         error("Cast exception for $key")
     }
 }
+
+fun Properties.propertyString(key: String): String {
+    val property = getProperty(key)
+
+    if (property.isNullOrEmpty()) {
+        error("property $key is null")
+    }
+
+    return property.toString()
+}

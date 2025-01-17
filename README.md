@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Icon" src="app/android/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" width="200" />
+    <img alt="Icon" src="app/android/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" width="200" />
 </div>
 
 <h2 align="center">
@@ -7,9 +7,8 @@
 </h2>
 
 <p align="center">
-    <a target="_blank" href="https://github.com/egorikftp/GrodnoRoads/stargazers"><img src="https://img.shields.io/github/stars/egorikftp/GrodnoRoads.svg"></a>
-    <a href="https://github.com/egorikftp/GrodnoRoads/network"><img alt="API" src="https://img.shields.io/github/forks/egorikftp/GrodnoRoads.svg"/></a>
-    <a target="_blank" href="https://github.com/egorikftp/GrodnoRoads/blob/release/LICENSE"><img src="https://img.shields.io/github/license/egorikftp/GrodnoRoads.svg"></a>
+    <a target="_blank" href="https://github.com/BehindWheel/BehindWheelKMP/stargazers"><img src="https://img.shields.io/github/stars/egorikftp/GrodnoRoads.svg"></a>
+    <a target="_blank" href="https://github.com/BehindWheel/BehindWheelKMP/blob/release/LICENSE"><img src="https://img.shields.io/github/license/BehindWheel/BehindWheelKMP.svg"></a>
     <a target="_blank" href="https://t.me/grodno_roads"><img src="https://img.shields.io/badge/Telegram%20Channel-blue"></a>
 </p>
 
@@ -32,10 +31,20 @@ In case bug and suggestions, please create issue.
 
 ### Useful gradle commands
 
-Check dependency updates: `./gradlew dependencyUpdates`
-Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true` 
+Update code style: `./gradlew spotlessApply`
 
-Build ui-demo: `./gradlew app:ui-demo:assembleRelease`
+Check code style: `./gradlew spotlessCheck`
+
+Run compose metrics: `./gradlew app:android:assembleRelease -PenableComposeCompilerReports=true`
+
+Generate kmp buildconfig: `./gradlew :kmp:shared:components:generateBuildKonfig`
+
+Generate kmp buildconfig: `./gradlew :kmp:compose:maps-compose:generateBuildKonfig`
 
 Build app debug: `./gradlew app:android:assembleDebug`
+
 Build app release: `./gradlew app:android:assembleRelease`
+
+Pods:
+remove pod: `pod deintegrate`
+init pod: `pod install`

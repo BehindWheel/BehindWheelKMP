@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <plurals name="camera_alerts_plurals_distance">
+        <item quantity="one">%1$d метр</item>
+        <item quantity="few">%1$d метры</item>
+        <item quantity="many">%1$d метраў</item>
+        <item quantity="other">%1$d метраў</item>
+    </plurals>
+
+    <string name="event_reminder_spring_body">З 25 мая па 5 чэрвеня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНі забудзьцеся ўключыць блізкае святло! 🚘💡</string>
+    <string name="event_reminder_autumn_body">З 25 жніўня па 5 верасня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНі забудзьцеся ўключыць блізкае святло! 🚘💡</string>
+
+    <string name="tab_map">Мапа</string>
+    <string name="tab_chat">Чат</string>
+    <string name="tab_settings">Наладкі</string>
+
+    <string name="alerts_stationary_camera">Стацыянарная камера</string>
+    <string name="alerts_mobile_camera">Мабільная камера</string>
+    <string name="alerts_medium_speed_camera">Камера сярэдняй хуткасці</string>
+    <string name="alerts_incident">Дарожнае здарэнне</string>
+    <string name="alerts_traffic_police">Экіпаж ДАІ</string>
+    <string name="alerts_car_crash">ДТЗ</string>
+    <string name="alerts_traffic_jam">Затор</string>
+    <string name="alerts_wild_animals">Дзікія жывёлы</string>
+    <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
+
+    <string name="camera_info_last_update">Абноўлена %1$s</string>
+    <string name="camera_info_report">Паведаміць пра памылку</string>
+
+    <string name="terms_of_conditions">Умовы выкарыстання</string>
+    <string name="privacy_policy">Палітыка прыватнасці</string>
+    <string name="social_telegram_chat">Чат</string>
+    <string name="social_telegram_channel">Канал</string>
+    <string name="social_share_app">Падзяліцца</string>
+    <string name="app_version">Версія: %1$s</string>
+
+    <string name="settings_section_appearance">Знешні выгляд</string>
+    <string name="settings_section_map">Мапа</string>
+    <string name="settings_section_alerts">Абвесткі</string>
+    <string name="settings_section_changelog">Гісторыя зменаў</string>
+    <string name="settings_section_faq">Часта задаюць пытанні</string>
+    <string name="settings_section_debug_tools">Інструменты адладкі</string>
+
+    <!-- Settings categories -->
+    <string name="settings_category_main">Асноўныя</string>
+    <string name="settings_category_other">Іншае</string>
+
+    <string name="appearance_app_theme">Тэма</string>
+    <string name="appearance_app_theme_system">Сістэмная</string>
+    <string name="appearance_app_theme_dark">Цёмная</string>
+    <string name="appearance_app_theme_light">Светлая</string>
+    <string name="appearance_app_language">Мова</string>
+    <string name="appearance_app_language_ru">Руская</string>
+    <string name="appearance_app_language_en">Англійская</string>
+    <string name="appearance_app_language_be">Беларуская</string>
+    <string name="appearance_app_language_system">Сістэмная</string>
+
+    <string name="appearance_keep_screen_on">Не выключаць экран</string>
+    <string name="appearance_keep_screen_on_description">Захоўвае экран Карты заўсёды уключаным (можа павялічыць расход батарэі)</string>
+
+    <!-- Alert -->
+    <string name="alerts_availability">Абвесткі</string>
+    <string name="alerts_availability_description">Паказваюцца на экране пры набліжэнні да падзеі на карце</string>
+    <string name="alerts_voice_alerts">Галасавыя абвесткі</string>
+    <string name="alerts_voice_alerts_description">Ўключаюцца пры набліжэнні да падзеі на карце</string>
+
+    <string name="alerts_header_volume_level">Узровень гучнасці</string>
+    <string name="alerts_volume_level_low">Нізкі</string>
+    <string name="alerts_volume_level_medium">Сярэдні</string>
+    <string name="alerts_volume_level_high">Высокі</string>
+    <string name="alerts_play_test_audio">Паслухаць тэставае паведамленне</string>
+
+    <string name="alerts_header_notification_radius">Радыус абвесткі</string>
+    <string name="alerts_notification_radius_in_city">У горадзе</string>
+    <string name="alerts_notification_radius_outside_city">За межамі горада</string>
+    <string name="alerts_notification_radius_postfix">м</string>
+
+    <string name="alerts_header_voice_alerts">Тыпы галасавых абвестак</string>
+    <string name="alerts_notifications_select_all">Выбраць усе</string>
+    <string name="alerts_notifications_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="alerts_notifications_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
+    <string name="alerts_notifications_mobile_cameras">Мабільныя камеры</string>
+    <string name="alerts_notifications_traffic_police">ДАІ</string>
+    <string name="alerts_notifications_incidents">Праблемы на дарозе</string>
+    <string name="alerts_notifications_car_crash">ДТЗ</string>
+    <string name="alerts_notifications_traffic_jam">Заторы</string>
+    <string name="alerts_notifications_wild_animals">Дзікія жывёлы</string>
+
+    <string name="map_traffic_conditions_appearance">Загружанасць дарог</string>
+
+    <string name="map_markers_filtering">Фільтрацыя маркераў па часе</string>
+    <string name="map_markers_filtering_description">Выкарыстоўваецца толькі да маркераў з тэкставым паведамленнем (ДАІ, Заторы і г.д.)</string>
+    <string name="map_markers_filtering_15_minutes">15 хв</string>
+    <string name="map_markers_filtering_30_minutes">30 хв</string>
+    <string name="map_markers_filtering_45_minutes">45 хв</string>
+    <string name="map_markers_filtering_1_hour">1 гадзіна</string>
+
+    <string name="map_header_markers">Маркеры</string>
+    <string name="map_markers_select_all">Выбраць усе</string>
+    <string name="map_markers_stationary_cameras">Стацыянарныя камеры</string>
+    <string name="map_markers_medium_speed_cameras">Камеры сярэдняй хуткасці</string>
+    <string name="map_markers_mobile_cameras">Мабільныя камеры</string>
+    <string name="map_markers_traffic_police">ДАІ</string>
+    <string name="map_markers_incidents">Праблемы на дарозе</string>
+    <string name="map_markers_car_crash">ДТЗ</string>
+    <string name="map_markers_traffic_jam">Заторы</string>
+    <string name="map_markers_wild_animals">Дзікія жывёлы</string>
+
+    <string name="dialog_report_police">Паведаміць аб ДАІ</string>
+    <string name="dialog_incident">Паведаміць аб праблеме</string>
+    <string name="dialog_input_hint">Апцыянальнае паведамленне</string>
+    <string name="cancel">Скасаваць</string>
+    <string name="ok">ОК</string>
+    <string name="send">Адправіць</string>
+    <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
+    <string name="map_default_location">Мой горад</string>
+
+    <string name="map_default_location_berestovitca">Вялікая Бераставіца</string>
+    <string name="map_default_location_berezovka">Бярозаўка</string>
+    <string name="map_default_location_dyatlovo">Дзятлава</string>
+    <string name="map_default_location_grodno">Гродна</string>
+    <string name="map_default_location_indura">Індура</string>
+    <string name="map_default_location_ivie">Іўе</string>
+    <string name="map_default_location_korelichi">Карэлічы</string>
+    <string name="map_default_location_lida">Ліда</string>
+    <string name="map_default_location_mosty">Масты</string>
+    <string name="map_default_location_novogrudok">Навагрудак</string>
+    <string name="map_default_location_ostrovec">Астравец</string>
+    <string name="map_default_location_ozery">Азёры</string>>
+    <string name="map_default_location_porechye">Парэчча</string>>
+    <string name="map_default_location_ruzhany">Ружаны</string>
+    <string name="map_default_location_shuchin">Шчучын</string>
+    <string name="map_default_location_skidel">Скідзель</string>
+    <string name="map_default_location_slonim">Слонім</string>
+    <string name="map_default_location_svisloch">Свіслач</string>
+    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_voronovo">Воранава</string>
+    <string name="map_default_location_zelva">Зэльва</string>
+
+    <string name="map_header_drive_mode">Рэжым навігацыі</string>
+    <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
+    <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
+
+    <string name="map_user_count">Анлайн: %1$s</string>
+    <string name="map_user_count_hint">На аснове актыўнасці за апошнія 10 хвілін</string>
+
+    <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
+    <string name="snackbar_drive_mode_rationale_description">Выкарыстоўваецца для адлюстравання маркера ў рэжыме навігацыі</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш пунктавага месцазнаходжання</string>
+    <string name="snackbar_drive_mode_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
+    <string name="snackbar_drive_mode_gms_disabled_title">Навігацыя патрабуе доступу да геалакацыі</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+
+    <string name="snackbar_current_location_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
+    <string name="snackbar_current_location_fine_location_denied">Патрабуецца доступ да болей дакладнага месцазнаходжання</string>
+    <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
+    <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
+    <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+
+    <string name="snackbar_in_app_update_install">Абнаўленне гатовае да ўстаноўкі</string>
+
+    <string name="reporting_header">Выберыце падзею</string>
+    <string name="reporting_category_road_incidents">Праблемы на дарозе</string>
+    <string name="reporting_category_traffic_police">ДАІ</string>
+    <string name="reporting_category_other">Іншае</string>
+    <string name="reporting_category_mobile_camera">Мабільная камера</string>
+
+    <string name="reporting_item_road_repair">Дарожныя работы</string>
+    <string name="reporting_item_broken_car">Сламалася машина</string>
+    <string name="reporting_item_tow_truck_working">Працуе эвакуатар</string>
+    <string name="reporting_item_pedestrian_on_road">Пешаход на дарозе</string>
+    <string name="reporting_item_traffic_controller">Рэгуляроўшчык</string>
+    <string name="reporting_item_non_working_traffic_lights">Не працуюць светафоры</string>
+    <string name="reporting_item_open_hatch">Адкрыты люк</string>
+    <string name="reporting_item_road_blocked">Дарога перакрытая</string>
+    <string name="reporting_item_other_road_incident">Іншае</string>
+    <string name="reporting_item_traffic_jam">Затор</string>
+    <string name="reporting_item_wild_animals">Дзікіе жывёлы</string>
+    <string name="reporting_item_car_accident">ДТЗ</string>
+    <string name="reporting_item_traffic_police">ДАІ</string>
+    <string name="reporting_item_working_with_radar">Працуюць з радарам</string>
+    <string name="reporting_item_stay_on_beacons">Стаяць на маячках</string>
+    <string name="reporting_item_document_check">Праверка дакументаў</string>
+    <string name="reporting_item_stopped_on_the_move">Спынілі на хаду</string>
+    <string name="reporting_item_sitting_in_the_car">Сядзяць у машыне</string>
+    <string name="reporting_item_working_from_car">Працуюць з машыны</string>
+    <string name="reporting_item_transport_inspection">Транспартная інспэкцыя</string>
+    <string name="reporting_item_filter">Фільтр</string>
+
+    <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
+    <string name="reporting_mobile_camera_speed">%1$s км/г</string>
+    <string name="reporting_mobile_camera_input_hint">Месцазнаходжанне камеры*</string>
+    <string name="reporting_mobile_camera_input_error">Увядзіце інфармацыю аб камеры</string>
+
+    <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
+
+    <string name="quick_settings_header">Хуткія налады</string>
+    <string name="quick_settings_app_theme">Змена тэмы</string>
+    <string name="quick_settings_markers_filtering">Фільтрацыя маркераў па часе</string>
+    <string name="quick_settings_voice_alerts">Галасавыя абвесткі</string>
+    <string name="quick_settings_traffic_conditions">Загружанасць дарог</string>
+
+    <string name="onboarding_infographic_1_title">Будзь спакойны за рулём!</string>
+    <string name="onboarding_infographic_1_description">Дадатак папярэджвае аб корках, ДТЗ, і іншых праблемах на дарозе</string>
+    <string name="onboarding_infographic_2_title">Выконвайце ПДР!</string>
+    <string name="onboarding_infographic_2_description">Дадатак падкажа пра перавышэнне хуткасці, пра набліжэнне да паста ДАІ або фоторадару</string>
+    <string name="onboarding_infographic_3_title">Пільнасць не перашкодзіць!</string>
+    <string name="onboarding_infographic_3_description">Адзначаючы на карце праблемныя ўчасткі дарогі, вы тым самым папярэджваеце іншых карыстальнікаў аб небяспецы</string>
+
+    <string name="city_selector_choose_city">Выберыце ваш горад</string>
+    <string name="city_selector_done">Гатовы</string>
+</resources>
