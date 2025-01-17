@@ -33,7 +33,7 @@ internal class RootComponentImpl(
     KoinComponent {
 
     private val dataStore by inject<DataStore<Preferences>>()
-    private val coroutineScope = coroutineScope()
+    private val componentScope = coroutineScope()
 
     private val navigation = StackNavigation<Config>()
     private val stack = childStack(
@@ -59,7 +59,7 @@ internal class RootComponentImpl(
         get() = dataStore.data
             .map { Theme.fromOrdinal(it.appTheme.theme) }
             .distinctUntilChanged()
-            .stateIn(scope = coroutineScope, started = SharingStarted.Eagerly, initialValue = null)
+            .stateIn(scope = componentScope, started = SharingStarted.Eagerly, initialValue = null)
 
     private fun processChild(
         config: Config,

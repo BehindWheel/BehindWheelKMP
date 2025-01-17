@@ -33,15 +33,15 @@ internal class SpecialEventComponentImpl(
     KoinComponent {
 
     private val specialEventStore = instanceKeeper.getStore<SpecialEventStore>(::get)
+    private val componentScope = coroutineScope()
 
     private val eventsNavigation = SlotNavigation<EventConfig>()
-    private val coroutineScope = coroutineScope()
 
     init {
         specialEventStore.states
             .mapNotNull { it.eventType }
             .onEach(::showEvent)
-            .launchIn(coroutineScope)
+            .launchIn(componentScope)
     }
 
     override val specialEvents: StateFlow<ChildSlot<*, DialogComponent>> = childSlot(

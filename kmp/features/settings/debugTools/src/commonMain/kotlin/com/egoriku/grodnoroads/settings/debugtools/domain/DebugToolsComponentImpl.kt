@@ -21,11 +21,10 @@ internal class DebugToolsComponentImpl(
     KoinComponent {
 
     private val dataStore: DataStore<Preferences> by inject()
-
-    private val coroutineScope = coroutineScope()
+    private val componentScope = coroutineScope()
 
     override fun showOnboarding() {
-        coroutineScope.launch {
+        componentScope.launch {
             dataStore.edit {
                 showIntro(true)
             }

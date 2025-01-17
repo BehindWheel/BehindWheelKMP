@@ -2,12 +2,10 @@ package com.egoriku.grodnoroads.quicksettings.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
-import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
+import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsStore.Intent
-import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -23,7 +21,7 @@ internal class QuickSettingsComponentImpl(
 
     private val quickSettingsStore: QuickSettingsStore = instanceKeeper.getStore(::get)
 
-    override val quickSettingsState: Flow<QuickSettingsState> = quickSettingsStore.states
+    override val quickSettingsState = quickSettingsStore.stateFlow(lifecycle)
 
     override fun updatePreferences(pref: QuickSettingsPref) {
         quickSettingsStore.accept(Intent.Update(pref))
