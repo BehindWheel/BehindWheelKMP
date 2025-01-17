@@ -25,6 +25,6 @@ interface MapEventsStore : Store<Nothing, State, Nothing> {
         val mobileCameras: List<MobileCamera> = emptyList(),
         val reports: List<Reports> = emptyList(),
         val userCount: Int = 0,
-        val filterEventsTime: Long = Filtering.Hours1.timeInMilliseconds
+        val filterEventsTime: Long = Filtering.Minutes45.timeInMilliseconds
     )
 }
