@@ -84,12 +84,12 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.DefaultOverlay
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.chooselocation.ChooseLocation
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.default.DefaultMode
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
+import com.egoriku.grodnoroads.guidance.screen.util.rememberOffsetUtil
 import com.egoriku.grodnoroads.guidance.screen.util.rememberSnackbarMessageBuilder
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.core.CameraPosition
-import com.egoriku.grodnoroads.maps.compose.core.Point
 import com.egoriku.grodnoroads.maps.compose.core.Projection
 import com.egoriku.grodnoroads.maps.compose.core.toScreenLatLng
 import com.egoriku.grodnoroads.maps.compose.extension.projection
@@ -123,6 +123,7 @@ fun GuidanceScreen(
     val soundController = koinInject<SoundController>()
 
     val iconGenerator = rememberMarkerGenerator()
+    val offsetUtil = rememberOffsetUtil()
 
     val specialEventSlot by component.specialEventComponent.specialEvents.collectAsState()
     specialEventSlot.onChild { dialogComponent ->
@@ -481,14 +482,12 @@ fun GuidanceScreen(
                                 openReportFlow = component::switchToChooseLocationFlow
                             )
                         }
-
                         AppMode.Drive -> {
                             DriveMode(
                                 back = component::stopDriveMode,
                                 openChooseLocation = component::switchToChooseLocationFlow
                             )
                         }
-
                         AppMode.ChooseLocation -> {
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
@@ -496,10 +495,7 @@ fun GuidanceScreen(
                                 onCancel = component::cancelChooseLocationFlow,
                                 onLocationSelect = { offset ->
                                     val latLng = projection?.toScreenLatLng(
-                                        Point(
-                                            x = offset.x,
-                                            y = offset.y
-                                        )
+                                        point = offsetUtil.offsetToPoint(offset)
                                     ) ?: return@ChooseLocation
                                     component.startReporting(latLng)
                                 }
