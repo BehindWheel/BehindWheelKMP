@@ -26,6 +26,7 @@ import cocoapods.GoogleMaps.GMSCameraPosition
 import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
 import cocoapods.GoogleMaps.GMSMarker
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
@@ -72,6 +73,8 @@ actual fun GoogleMap(
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
+    var isInitialLoading by rememberMutableState { false }
+
     val googleMap = remember {
         GMSMapView(
             frame = CGRectZero.readValue(),
@@ -94,8 +97,11 @@ actual fun GoogleMap(
 
     val delegate = remember {
         object : NSObject(), GMSMapViewDelegateProtocol {
-            override fun mapViewSnapshotReady(mapView: GMSMapView) {
-                updatedOnMapLoad(googleMap)
+            override fun mapViewDidFinishTileRendering(mapView: GMSMapView) {
+                if (!isInitialLoading) {
+                    updatedOnMapLoad(googleMap)
+                    isInitialLoading = true
+                }
             }
 
             override fun mapView(mapView: GMSMapView, willMove: Boolean) {
