@@ -179,12 +179,7 @@ private fun MapPaddingDecorator.updateContentPadding(
     density: Density,
     layoutDirection: LayoutDirection
 ) {
-    println("left=$contentPadding")
     with(density) {
-        println("left=${contentPadding.calculateLeftPadding(layoutDirection).roundToPx()}")
-        println("top=${contentPadding.calculateBottomPadding().roundToPx()}")
-        println("right=${contentPadding.calculateRightPadding(layoutDirection).roundToPx()}")
-        println("bottom=${contentPadding.calculateBottomPadding().roundToPx()}")
         updateContentPadding(
             left = contentPadding.calculateLeftPadding(layoutDirection).roundToPx(),
             // make top padding the same as bottom
