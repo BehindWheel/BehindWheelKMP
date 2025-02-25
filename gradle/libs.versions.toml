@@ -4,7 +4,7 @@ minSdk = "23" # Android 6.0
 targetSdk = "35"
 
 agp = "8.8.0"
-buildkonfig = "0.15.2"
+buildkonfig = "0.17.0"
 decompose = "3.2.2"
 essenty = "2.4.0"
 kotlinx-serialization = "1.8.0"
