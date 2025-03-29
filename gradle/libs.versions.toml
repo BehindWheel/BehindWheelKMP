@@ -35,6 +35,7 @@ dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:2.1.0"
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
+essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.1.1"

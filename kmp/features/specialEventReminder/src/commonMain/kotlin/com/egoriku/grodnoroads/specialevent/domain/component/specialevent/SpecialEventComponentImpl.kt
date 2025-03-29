@@ -6,9 +6,9 @@ import com.arkivanov.decompose.router.slot.SlotNavigation
 import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
 import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.DialogComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.dialog.buildDialogComponent
