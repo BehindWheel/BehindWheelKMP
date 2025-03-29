@@ -25,8 +25,8 @@ object SunriseSunsetCalculator {
         date: LocalDateTime,
         latitude: Double,
         longitude: Double,
-        twilight: Twilight = Twilight.Custom(2.0),
-        timeZone: TimeZone
+        twilight: Twilight,
+        timeZone: TimeZone = TimeZone.currentSystemDefault()
     ): SunTime? {
         val sunrise = calculateSunPosition(
             date = date,

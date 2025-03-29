@@ -28,6 +28,7 @@ class SunriseSunsetCalculatorTest {
             date = LocalDateTime(2025, 3, 23, 0, 0),
             latitude = 53.6687765,
             longitude = 23.8212226,
+            twilight = Twilight.Custom(2.0),
             timeZone = TimeZone.of("Europe/Minsk")
         )
         assertNotNull(sunTimeCustom)
@@ -52,6 +53,7 @@ class SunriseSunsetCalculatorTest {
             date = LocalDateTime(2025, 6, 21, 0, 0),
             latitude = 53.9,
             longitude = 27.5667,
+            twilight = Twilight.Custom(2.0),
             timeZone = TimeZone.of("Europe/Minsk")
         )
         assertNotNull(sunTimeCustom)
@@ -76,6 +78,7 @@ class SunriseSunsetCalculatorTest {
             date = LocalDateTime(2025, 12, 21, 0, 0),
             latitude = 53.9,
             longitude = 27.5667,
+            twilight = Twilight.Custom(2.0),
             timeZone = TimeZone.of("Europe/Minsk")
         )
         assertNotNull(sunTimeCustom)
@@ -89,6 +92,7 @@ class SunriseSunsetCalculatorTest {
             date = LocalDateTime(2025, 6, 21, 0, 0),
             latitude = 89.0,
             longitude = 0.0,
+            twilight = Twilight.Custom(2.0),
             timeZone = TimeZone.of("Europe/Minsk")
         )
         assertNull(sunTime)

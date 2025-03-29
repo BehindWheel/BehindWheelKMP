@@ -54,6 +54,7 @@
     <string name="appearance_app_theme_system">System</string>
     <string name="appearance_app_theme_dark">Dark</string>
     <string name="appearance_app_theme_light">Light</string>
+    <string name="appearance_app_theme_auto">Auto</string>
 
     <string name="appearance_app_language">Language</string>
     <string name="appearance_app_language_ru">Russian</string>

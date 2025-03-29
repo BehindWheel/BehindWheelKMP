@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.compose.resources.appearance_app_language_be
 import com.egoriku.grodnoroads.compose.resources.appearance_app_language_en
 import com.egoriku.grodnoroads.compose.resources.appearance_app_language_ru
 import com.egoriku.grodnoroads.compose.resources.appearance_app_language_system
+import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_auto
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_dark
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_light
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_system
@@ -49,6 +50,7 @@ fun Theme.toStringResource() = when (this) {
     Theme.System -> Res.string.appearance_app_theme_system
     Theme.Dark -> Res.string.appearance_app_theme_dark
     Theme.Light -> Res.string.appearance_app_theme_light
+    Theme.Auto -> Res.string.appearance_app_theme_auto
 }
 
 fun City.toStringResource() = when (this) {

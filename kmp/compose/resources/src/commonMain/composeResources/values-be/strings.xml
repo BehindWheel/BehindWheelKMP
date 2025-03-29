@@ -49,6 +49,8 @@
     <string name="appearance_app_theme_system">Сістэмная</string>
     <string name="appearance_app_theme_dark">Цёмная</string>
     <string name="appearance_app_theme_light">Светлая</string>
+    <string name="appearance_app_theme_auto">Аўта</string>
+
     <string name="appearance_app_language">Мова</string>
     <string name="appearance_app_language_ru">Руская</string>
     <string name="appearance_app_language_en">Англійская</string>
