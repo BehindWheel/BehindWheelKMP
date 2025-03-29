@@ -17,8 +17,8 @@ import com.egoriku.grodnoroads.foundation.core.LocalPlatform
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
+import com.egoriku.grodnoroads.root.domain.AppTheme
 import com.egoriku.grodnoroads.root.domain.RootComponent
-import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 
 @Suppress("unused")
 object RootViewController {
@@ -32,19 +32,19 @@ object RootViewController {
         rootComponent: RootComponent,
         backDispatcher: BackDispatcher
     ) = ComposeUIViewController(configure = { platformLayers = false }) {
-        val theme by rootComponent.theme.collectAsState()
+        val appTheme by rootComponent.appTheme.collectAsState(null)
 
-        theme?.let {
+        appTheme?.let {
             val isDarkTheme = when (it) {
-                Theme.System -> isSystemInDarkTheme()
-                Theme.Dark -> true
-                Theme.Light -> false
+                AppTheme.Dark -> true
+                AppTheme.Light -> false
+                AppTheme.System -> isSystemInDarkTheme()
             }
 
             PredictiveBackGestureOverlay(
+                modifier = Modifier.fillMaxSize(),
                 backDispatcher = backDispatcher,
-                backIcon = null,
-                modifier = Modifier.fillMaxSize()
+                backIcon = null
             ) {
                 GrodnoRoadsM3Theme(isDarkTheme) {
                     CompositionLocalProvider(
