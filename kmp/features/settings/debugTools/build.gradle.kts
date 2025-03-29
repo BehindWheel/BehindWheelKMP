@@ -24,6 +24,7 @@ kotlin {
             implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.decompose)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.core)
         }
     }

@@ -7,7 +7,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
-import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.intro.domain.component.buildIntroComponent
 import com.egoriku.grodnoroads.mainflow.domain.buildMainFlowComponent
