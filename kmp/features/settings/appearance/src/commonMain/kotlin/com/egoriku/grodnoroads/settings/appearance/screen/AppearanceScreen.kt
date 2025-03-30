@@ -17,8 +17,10 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme
+import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_description
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on_description
+import com.egoriku.grodnoroads.compose.resources.settings_category_main
 import com.egoriku.grodnoroads.compose.resources.settings_category_other
 import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
@@ -43,6 +45,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppLanguageBottomSheet
 import com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet.AppThemeBottomSheet
+import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -78,6 +81,7 @@ fun AppearanceScreen(
                 .padding(it)
                 .verticalScroll(rememberScrollState())
         ) {
+            SettingsSectionHeader(title = stringResource(Res.string.settings_category_main))
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
             VerticalSpacer(16.dp)
@@ -104,6 +108,10 @@ private fun AppThemeSection(
         imageVector = GrodnoRoads.Outlined.Moon,
         text = stringResource(Res.string.appearance_app_theme),
         value = stringResource(appTheme.current.toStringResource()),
+        description = when (appTheme.current) {
+            Theme.Auto -> stringResource(Res.string.appearance_app_theme_description)
+            else -> null
+        },
         onClick = { onModify(appTheme) }
     )
 }

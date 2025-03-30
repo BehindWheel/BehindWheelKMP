@@ -67,7 +67,7 @@ fun MoreActionListItem(
                     style = MaterialTheme.typography.bodyMedium.copy(
                         lineBreak = LineBreak.Heading
                     ),
-                    color = LocalContentColor.current.copy(alpha = 0.64f),
+                    color = LocalContentColor.current.copy(alpha = 0.64f)
                 )
             }
         }
