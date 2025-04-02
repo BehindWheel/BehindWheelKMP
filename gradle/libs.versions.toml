@@ -42,7 +42,7 @@ google-maps = "com.google.maps.android:maps-ktx:5.1.1"
 google-maps-utils = "com.google.maps.android:android-maps-utils:3.11.2"
 
 koin-android = "io.insert-koin:koin-android:4.0.3"
-koin-compose = "io.insert-koin:koin-compose:4.0.3"
+koin-compose = "io.insert-koin:koin-compose:4.0.4"
 koin-core = "io.insert-koin:koin-core:4.0.4"
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
