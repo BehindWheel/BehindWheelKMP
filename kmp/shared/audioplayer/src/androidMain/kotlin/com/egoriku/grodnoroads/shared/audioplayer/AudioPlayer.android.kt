@@ -35,7 +35,7 @@ actual class AudioPlayer(private val context: Context) {
             .build()
 
     private val mediaPlayer = MediaPlayer()
-    private val loudnessEnhancer: LoudnessEnhancer
+    private var loudnessEnhancer: LoudnessEnhancer? = null
     private val soundQueue = mutableListOf<Sound>()
     private var isPlaying = false
 
@@ -66,7 +66,11 @@ actual class AudioPlayer(private val context: Context) {
                 enqueueNextSound()
             }
         }
-        loudnessEnhancer = LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
+
+        if (AudioEffectUtil.isLoudnessEnhancerAvailable()) {
+            loudnessEnhancer = LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
+        }
+
         ContextCompat.registerReceiver(
             /* context = */
             context.applicationContext,
@@ -84,10 +88,7 @@ actual class AudioPlayer(private val context: Context) {
     }
 
     actual fun setLoudness(loudness: Int) {
-        if (!AudioEffectUtil.isLoudnessEnhancerAvailable()) {
-            return
-        }
-        loudnessEnhancer.setTargetGain(loudness * 100)
+        loudnessEnhancer?.setTargetGain(loudness * 100)
     }
 
     actual fun enqueueSound(sound: Sound) {
