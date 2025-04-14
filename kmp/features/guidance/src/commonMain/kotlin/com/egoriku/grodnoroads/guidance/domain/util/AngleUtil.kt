@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.guidance.domain.util
 
 import kotlin.math.abs
 
-private const val THRESHOLD = 30f
+private const val THRESHOLD = 20f
 
 fun isAngleInRange(cameraAngle: Float, bearing: Float, bidirectional: Boolean): Boolean {
     return if (bidirectional) {
