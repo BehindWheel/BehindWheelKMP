@@ -60,7 +60,7 @@ mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.re
 mvikotlin-extensions = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 
 play-services-location = "com.google.android.gms:play-services-location:21.3.0"
-play-services-maps = "com.google.android.gms:play-services-maps:19.1.0"
+play-services-maps = "com.google.android.gms:play-services-maps:19.2.0"
 
 # Dependencies for build-logic module
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
