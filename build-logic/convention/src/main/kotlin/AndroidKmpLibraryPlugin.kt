@@ -12,20 +12,22 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 class AndroidKmpLibraryPlugin : Plugin<Project> {
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     override fun apply(target: Project) = with(target) {
         apply(plugin = libraryPluginId)
         apply(plugin = kotlinMultiplatformPluginId)
 
         kmpExtension {
             compilerOptions {
-                freeCompilerArgs.addAll("-Xexpect-actual-classes")
+                freeCompilerArgs.addAll(
+                    "-Xexpect-actual-classes",
+                    "-Xsuppress-warning=REDUNDANT_VISIBILITY_MODIFIER"
+                )
+                extraWarnings.set(true)
             }
 
             sourceSets {
