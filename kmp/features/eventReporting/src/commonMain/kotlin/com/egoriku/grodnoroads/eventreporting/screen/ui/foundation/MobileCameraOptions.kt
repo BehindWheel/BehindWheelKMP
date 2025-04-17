@@ -63,7 +63,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
         updatedReportParamsChange(
             ReportParams.MobileCameraReport(
                 speedLimit = selectedSpeedLimit,
-                cameraInfo = inputText
+                cameraInfo = inputText.trim()
             )
         )
     }
