@@ -203,7 +203,7 @@ fun GuidanceScreen(
                     onClose = component::closeDialog
                 )
             }
-            is MapBottomSheet.None -> Unit
+            is MapBottomSheet.None -> {}
         }
 
         val coroutineScope = rememberCoroutineScope()
