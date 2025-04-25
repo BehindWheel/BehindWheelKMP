@@ -8,4 +8,13 @@
   ],
   "prHourlyLimit": 20,
   "prConcurrentLimit": 20,
+  "packageRules": [
+    {
+      "groupName": "AndroidX Datastore Dependencies",
+      "packageNames": [
+        "androidx.datastore:datastore-preferences-core",
+        "androidx.datastore:datastore-preferences"
+      ]
+    }
+  ]
 }
