@@ -11,7 +11,7 @@
   "packageRules": [
     {
       "groupName": "AndroidX Datastore Dependencies",
-      "packageNames": [
+      "matchPackageNames": [
         "androidx.datastore:datastore-preferences-core",
         "androidx.datastore:datastore-preferences"
       ]
