@@ -3,8 +3,8 @@ package com.egoriku.grodnoroads.settings.debugtools.domain
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.egoriku.grodnoroads.datastore.edit
-import com.egoriku.grodnoroads.extensions.decompose.coroutineScope
 import com.egoriku.grodnoroads.shared.persistent.intro.showIntro
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent

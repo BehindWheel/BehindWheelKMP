@@ -81,6 +81,7 @@ kotlin {
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.extensions)
+            implementation(projects.kmp.libraries.suntime)
 
             api(libs.decompose)
             api(libs.decompose.compose)
@@ -91,7 +92,9 @@ kotlin {
             implementation(libs.dev.gitlive.firebase.crashlytics)
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.dev.gitlive.firebase.firestore)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.core)
+            implementation(libs.kotlin.datetime)
 
             implementation(libs.bundles.mvikotlin)
         }

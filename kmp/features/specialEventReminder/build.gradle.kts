@@ -24,6 +24,7 @@ kotlin {
             implementation(projects.kmp.libraries.logger)
 
             implementation(libs.decompose)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.core)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)

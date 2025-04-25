@@ -63,7 +63,7 @@ fun SwitchListItem(
         ) {
             Text(
                 text = text,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.bodyMedium
             )
             Text(
                 text = description,
@@ -88,6 +88,7 @@ fun SwitchListItem(
     onCheckedChange: (Boolean) -> Unit
 ) {
     BasicListItem(
+        modifier = modifier,
         touchModifier = Modifier.toggleable(
             value = isChecked,
             role = Role.Switch,

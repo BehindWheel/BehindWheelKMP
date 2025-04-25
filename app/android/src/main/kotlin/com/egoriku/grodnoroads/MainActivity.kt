@@ -20,9 +20,9 @@ import com.egoriku.grodnoroads.foundation.core.LocalPlatform
 import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
+import com.egoriku.grodnoroads.root.domain.AppTheme
 import com.egoriku.grodnoroads.root.domain.buildRootComponent
 import com.egoriku.grodnoroads.root.screen.RootContent
-import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 
 // Don't use ComponentActivity, due to it breaks language change
 class MainActivity : AppCompatActivity() {
@@ -36,19 +36,19 @@ class MainActivity : AppCompatActivity() {
 
         val root = buildRootComponent(defaultComponentContext())
         setContent {
-            val theme by root.theme.collectAsState()
+            val appTheme by root.appTheme.collectAsState(null)
 
-            LaunchedEffect(theme) {
-                if (theme != null) {
+            LaunchedEffect(appTheme) {
+                if (appTheme != null) {
                     splash.setKeepOnScreenCondition { false }
                 }
             }
 
-            theme?.let {
+            appTheme?.let {
                 val isDarkTheme = when (it) {
-                    Theme.System -> isSystemInDarkTheme()
-                    Theme.Dark -> true
-                    Theme.Light -> false
+                    AppTheme.Dark -> true
+                    AppTheme.Light -> false
+                    AppTheme.System -> isSystemInDarkTheme()
                 }
 
                 DisposableEffect(isDarkTheme) {

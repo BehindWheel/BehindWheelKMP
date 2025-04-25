@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.eventreporting.data.mapper
 
 import com.egoriku.grodnoroads.extensions.DateTime
+import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
@@ -30,7 +31,7 @@ internal object MobileCameraReportMapper : (LatLng, MobileCameraReport) -> Mobil
 
     override fun invoke(latLng: LatLng, cameraReport: MobileCameraReport): MobileCameraDTO {
         return MobileCameraDTO(
-            id = "",
+            id = Uuid.random(),
             name = cameraReport.cameraInfo,
             latitude = latLng.latitude,
             longitude = latLng.longitude,

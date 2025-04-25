@@ -45,6 +45,7 @@ kotlin {
 
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.database)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.compose)
             implementation(libs.kotlin.collections)
             implementation(libs.kotlin.serialization.json)

@@ -3,31 +3,31 @@ compileSdk = "35"
 minSdk = "23" # Android 6.0
 targetSdk = "35"
 
-agp = "8.8.0"
-buildkonfig = "0.15.2"
-decompose = "3.2.2"
-essenty = "2.4.0"
-kotlinx-serialization = "1.8.0"
-kotlin = "2.1.10"
+agp = "8.9.2"
+buildkonfig = "0.17.1"
+decompose = "3.3.0"
+essenty = "2.5.0"
+kotlinx-serialization = "1.8.1"
+kotlin = "2.1.20"
 mvikotlin = "4.3.0"
 
 [libraries]
-androidx-activity-compose = "androidx.activity:activity-compose:1.10.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.10.1"
 androidx-annotation = "androidx.annotation:annotation:1.9.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-browser = "androidx.browser:browser:1.8.0"
-androidx-core = "androidx.core:core-ktx:1.15.0"
+androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
-androidx-datastore = "androidx.datastore:datastore-preferences:1.1.2"
-androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.2"
+androidx-datastore = "androidx.datastore:datastore-preferences:1.1.4"
+androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.4"
 androidx-media = "androidx.media:media:1.7.0"
 
-balloon-compose = "com.github.skydoves:balloon-compose:1.6.11"
+balloon-compose = "com.github.skydoves:balloon-compose:1.6.12"
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.4"
+desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.5"
 dev-gitlive-firebase-analytics = "dev.gitlive:firebase-analytics:2.1.0"
 dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:2.1.0"
 dev-gitlive-firebase-database = "dev.gitlive:firebase-database:2.1.0"
@@ -35,19 +35,20 @@ dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:2.1.0"
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
+essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
-google-maps = "com.google.maps.android:maps-ktx:5.1.1"
-google-maps-utils = "com.google.maps.android:android-maps-utils:3.10.0"
+google-maps = "com.google.maps.android:maps-ktx:5.2.0"
+google-maps-utils = "com.google.maps.android:android-maps-utils:3.13.0"
 
-koin-android = "io.insert-koin:koin-android:4.0.2"
-koin-compose = "io.insert-koin:koin-compose:4.0.2"
-koin-core = "io.insert-koin:koin-core:4.0.2"
+koin-android = "io.insert-koin:koin-android:4.0.4"
+koin-compose = "io.insert-koin:koin-compose:4.0.4"
+koin-core = "io.insert-koin:koin-core:4.0.4"
 
 kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
-kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1"
-kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.1"
-kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.1"
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
+kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2"
+kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -59,7 +60,7 @@ mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.re
 mvikotlin-extensions = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 
 play-services-location = "com.google.android.gms:play-services-location:21.3.0"
-play-services-maps = "com.google.android.gms:play-services-maps:19.0.0"
+play-services-maps = "com.google.android.gms:play-services-maps:19.2.0"
 
 # Dependencies for build-logic module
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -80,7 +81,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.2" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.3" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
 jetbrains-compose = { id = "org.jetbrains.compose", version = "1.7.3" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -88,7 +89,7 @@ kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref =
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
-spotless = { id = "com.diffplug.spotless", version = "7.0.2" }
+spotless = { id = "com.diffplug.spotless", version = "7.0.3" }
 
 # Project conventional plugins
 grodnoroads-application = { id = "grodnoroads.application", version = "unspecified" }

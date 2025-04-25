@@ -65,6 +65,7 @@ include(":kmp:libraries:datastore")
 include(":kmp:libraries:extensions")
 include(":kmp:libraries:location")
 include(":kmp:libraries:logger")
+include(":kmp:libraries:suntime")
 
 include(":kmp:shared:audioplayer")
 include(":kmp:shared:analytics")

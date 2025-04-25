@@ -46,9 +46,12 @@
     <string name="settings_category_other">Іншае</string>
 
     <string name="appearance_app_theme">Тэма</string>
+    <string name="appearance_app_theme_description">Вызначаецца па часе ўсходу і заходу сонца ў абраным горадзе</string>
     <string name="appearance_app_theme_system">Сістэмная</string>
     <string name="appearance_app_theme_dark">Цёмная</string>
     <string name="appearance_app_theme_light">Светлая</string>
+    <string name="appearance_app_theme_auto">Аўта</string>
+
     <string name="appearance_app_language">Мова</string>
     <string name="appearance_app_language_ru">Руская</string>
     <string name="appearance_app_language_en">Англійская</string>

@@ -8,4 +8,23 @@
   ],
   "prHourlyLimit": 20,
   "prConcurrentLimit": 20,
+  "packageRules": [
+    {
+      "groupName": "AndroidX Datastore dependencies",
+      "matchPackageNames": [
+        "androidx.datastore:datastore-preferences-core",
+        "androidx.datastore:datastore-preferences"
+      ]
+    },
+    {
+      "groupName": "Firebase Pod dependencies",
+      "matchPackageNames": [
+        "FirebaseFirestore",
+        "FirebaseDatabase",
+        "FirebaseCrashlytics",
+        "FirebaseCore",
+        "FirebaseAnalytics"
+      ]
+    }
+  ]
 }

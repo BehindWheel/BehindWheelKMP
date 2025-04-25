@@ -49,7 +49,7 @@ internal fun ColumnScope.SelectableOptions(
             ReportParams.EventReport(
                 mapEventType = selectedOption.mapEventType,
                 shortMessage = selectedOption.toSend,
-                message = inputText.ifEmpty { selectedOption.toSend }
+                message = inputText.trim().ifEmpty { selectedOption.toSend }
             )
         )
     }

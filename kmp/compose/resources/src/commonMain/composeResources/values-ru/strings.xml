@@ -49,9 +49,11 @@
 
     <!-- Appearance -->
     <string name="appearance_app_theme">Тема</string>
+    <string name="appearance_app_theme_description">Рассчитывается по времени восхода и захода солнца в выбранном городе</string>
     <string name="appearance_app_theme_system">Системная</string>
     <string name="appearance_app_theme_dark">Темная</string>
     <string name="appearance_app_theme_light">Светлая</string>
+    <string name="appearance_app_theme_auto">Авто</string>
 
     <string name="appearance_app_language">Язык</string>
     <string name="appearance_app_language_ru">Русский</string>
