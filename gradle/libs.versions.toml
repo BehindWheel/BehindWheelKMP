@@ -40,7 +40,7 @@ essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-corou
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.2.0"
-google-maps-utils = "com.google.maps.android:android-maps-utils:3.13.0"
+google-maps-utils = "com.google.maps.android:android-maps-utils:3.14.0"
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
