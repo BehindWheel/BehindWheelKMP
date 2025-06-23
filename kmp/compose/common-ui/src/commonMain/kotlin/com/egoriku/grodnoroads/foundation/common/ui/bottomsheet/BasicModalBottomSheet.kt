@@ -74,7 +74,7 @@ fun BasicModalBottomSheet(
     onCancel: () -> Unit,
     footer: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
-    footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+    footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 20.dp),
     content: @Composable ColumnScope.() -> Unit
 ) {
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
