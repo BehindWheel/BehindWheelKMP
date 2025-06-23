@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,16 +34,20 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.cancel
 import com.egoriku.grodnoroads.compose.resources.reporting_category_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.reporting_category_other
 import com.egoriku.grodnoroads.compose.resources.reporting_category_road_incidents
 import com.egoriku.grodnoroads.compose.resources.reporting_category_traffic_police
 import com.egoriku.grodnoroads.compose.resources.reporting_header
+import com.egoriku.grodnoroads.compose.resources.send
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
-import com.egoriku.grodnoroads.eventreporting.screen.ui.ActionBottomSheet
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MobileCameraOptions
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOptions
+import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
+import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
+import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
@@ -52,11 +57,14 @@ import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPoliceBold
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
+import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventReportingScreen(
     onClose: () -> Unit,
@@ -72,14 +80,25 @@ fun EventReportingScreen(
             }
         }
     }
-
-    ActionBottomSheet(
-        onDismiss = onClose,
-        sendEnabled = sendEnabled,
+    val sheetCloseBehaviour = rememberSheetCloseBehaviour(
+        onCancel = onClose,
         onResult = { reportParams?.let(onReport) }
-    ) {
-        ReportingUi(onReportParamsChange = { reportParams = it })
-    }
+    )
+
+    BasicModalBottomSheet(
+        sheetState = sheetCloseBehaviour.sheetState,
+        onCancel = onClose,
+        content = {
+            ReportingUi(onReportParamsChange = { reportParams = it })
+        },
+        footer = {
+            BottomActions(
+                sendEnabled = sendEnabled,
+                onCancel = sheetCloseBehaviour::cancel,
+                onResult = sheetCloseBehaviour::hideWithResult
+            )
+        }
+    )
 }
 
 @Composable
@@ -121,7 +140,35 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
                 )
             }
         }
-        VerticalSpacer(8.dp)
+    }
+}
+
+@Composable
+private fun BottomActions(
+    sendEnabled: Boolean,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
+    onResult: () -> Unit
+) {
+    CenterVerticallyRow(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 24.dp, bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+    ) {
+        SecondaryButton(
+            modifier = Modifier.weight(1f),
+            onClick = onCancel
+        ) {
+            Text(text = stringResource(Res.string.cancel))
+        }
+        PrimaryButton(
+            modifier = Modifier.weight(1f),
+            enabled = sendEnabled,
+            onClick = onResult
+        ) {
+            Text(text = stringResource(Res.string.send))
+        }
     }
 }
 
