@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.settings.appearance.screen.bottomsheet
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -41,13 +40,12 @@ fun AppLanguageBottomSheet(
             SingleChoiceLazyColumn(
                 list = language.values.map { stringResource(it.toStringResource()) }
                     .toImmutableList(),
-                contentPadding = PaddingValues(bottom = 16.dp),
+                contentPadding = PaddingValues(bottom = 8.dp),
                 initialSelection = language.values.indexOf(language.current),
                 onSelect = { position ->
                     language = language.copy(current = language.values[position])
                 }
             )
-            HorizontalDivider()
         },
         footer = {
             ConfirmationFooter(

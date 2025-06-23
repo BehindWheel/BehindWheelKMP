@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.settings.map.screen.ui.bottomsheet
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -56,7 +55,6 @@ internal fun DefaultLocationBottomSheet(
                         defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index])
                 }
             )
-            HorizontalDivider()
         },
         footer = {
             ConfirmationFooter(
@@ -74,7 +72,7 @@ private data class CityValue(
 
 @PreviewGrodnoRoads
 @Composable
-private fun PreviewDefaultLocationBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
+private fun DefaultLocationBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     DefaultLocationBottomSheet(
         defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
         onCancel = {},

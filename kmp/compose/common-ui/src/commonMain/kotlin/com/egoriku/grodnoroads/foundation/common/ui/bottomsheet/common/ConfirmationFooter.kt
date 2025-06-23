@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.cancel
 import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
-import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
+import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -24,7 +24,7 @@ fun ConfirmationFooter(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        TextButton(modifier = Modifier.weight(1f), onClick = onDismiss) {
+        SecondaryButton(modifier = Modifier.weight(1f), onClick = onDismiss) {
             Text(text = stringResource(Res.string.cancel))
         }
         PrimaryButton(modifier = Modifier.weight(1f), onClick = onAccept) {
