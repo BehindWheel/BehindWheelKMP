@@ -13,6 +13,7 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.KeepScreenOn
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.MapTypeAppearance
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceState
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.Intent.CloseDialog
@@ -28,6 +29,8 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
 import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.persistent.appearance.updateAppTheme
 import com.egoriku.grodnoroads.shared.persistent.appearance.updateKeepScreenOn
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.mapType
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.updateMapType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -53,6 +56,7 @@ class AppearanceStoreFactory(
                                 appLanguage = AppLanguage(
                                     current = getCurrentLanguage()
                                 ),
+                                mapTypeAppearance = MapTypeAppearance(current = preferences.mapType),
                                 keepScreenOn = KeepScreenOn(enabled = preferences.keepScreenOn)
                             )
                         }
@@ -76,6 +80,7 @@ class AppearanceStoreFactory(
                             )
                         }
                         is KeepScreenOn -> error("Not supported")
+                        is MapTypeAppearance -> error("Not supported")
                     }
                 }
                 onIntent<Update> { update ->
@@ -83,7 +88,7 @@ class AppearanceStoreFactory(
                         is AppTheme -> {
                             launch {
                                 dataStore.edit {
-                                    updateAppTheme(update.preference.current.theme)
+                                    updateAppTheme(update.preference.current)
                                 }
                             }
                         }
@@ -96,6 +101,13 @@ class AppearanceStoreFactory(
                             }
 
                             dispatch(Message.UpdateLanguage(AppLanguage(current = language)))
+                        }
+                        is MapTypeAppearance -> {
+                            launch {
+                                dataStore.edit {
+                                    updateMapType(update.preference.current)
+                                }
+                            }
                         }
                         is KeepScreenOn -> {
                             launch {

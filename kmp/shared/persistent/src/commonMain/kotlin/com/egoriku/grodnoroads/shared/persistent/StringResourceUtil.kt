@@ -9,6 +9,9 @@ import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_auto
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_dark
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_light
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_system
+import com.egoriku.grodnoroads.compose.resources.appearance_map_type_hybrid
+import com.egoriku.grodnoroads.compose.resources.appearance_map_type_normal
+import com.egoriku.grodnoroads.compose.resources.appearance_map_type_satellite
 import com.egoriku.grodnoroads.compose.resources.map_default_location_berestovitca
 import com.egoriku.grodnoroads.compose.resources.map_default_location_berezovka
 import com.egoriku.grodnoroads.compose.resources.map_default_location_dyatlovo
@@ -38,6 +41,7 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.Language
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType
 
 fun Language.toStringResource() = when (this) {
     Language.Russian -> Res.string.appearance_app_language_ru
@@ -82,4 +86,10 @@ fun Filtering.toStringResource() = when (this) {
     Filtering.Minutes30 -> Res.string.map_markers_filtering_30_minutes
     Filtering.Minutes45 -> Res.string.map_markers_filtering_45_minutes
     Filtering.Hours1 -> Res.string.map_markers_filtering_1_hour
+}
+
+fun MapType.toStringResource() = when (this) {
+    MapType.Normal -> Res.string.appearance_map_type_normal
+    MapType.Satellite -> Res.string.appearance_map_type_satellite
+    MapType.Hybrid -> Res.string.appearance_map_type_hybrid
 }

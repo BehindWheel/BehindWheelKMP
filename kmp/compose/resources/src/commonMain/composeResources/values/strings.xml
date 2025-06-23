@@ -63,6 +63,11 @@
     <string name="appearance_app_language_be">Belarusian</string>
     <string name="appearance_app_language_system">System</string>
 
+    <string name="appearance_map_type_header">Map type</string>
+    <string name="appearance_map_type_normal">Normal</string>
+    <string name="appearance_map_type_satellite">Satellite</string>
+    <string name="appearance_map_type_hybrid">Hybrid</string>
+
     <string name="appearance_keep_screen_on">Keep screen on</string>
     <string name="appearance_keep_screen_on_description">Keeps the Map screen always on (may increase battery consumption)</string>
 
@@ -208,6 +213,7 @@
     <string name="quick_settings_header">Quick settings</string>
     <string name="quick_settings_app_theme">Changing theme</string>
     <string name="quick_settings_markers_filtering">Filtering markers by time</string>
+    <string name="quick_settings_map_type">Map type</string>
     <string name="quick_settings_voice_alerts">Voice alerts</string>
     <string name="quick_settings_traffic_conditions">Traffic conditions</string>
 

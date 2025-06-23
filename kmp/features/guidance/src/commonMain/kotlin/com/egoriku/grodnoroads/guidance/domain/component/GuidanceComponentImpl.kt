@@ -185,6 +185,7 @@ internal class GuidanceComponentImpl(
             MapConfig(
                 zoomLevel = it.zoomLevel,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
+                mapType = it.mapInternalConfig.mapType,
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
                 alertRadius = it.alertRadius,
                 alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled,

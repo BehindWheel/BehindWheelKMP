@@ -7,6 +7,6 @@ enum class Theme(val theme: Int) {
     Auto(3);
 
     companion object {
-        fun toTheme(id: Int?): Theme = entries.find { it.ordinal == id } ?: System
+        fun toTheme(id: Int?): Theme = entries.find { it.theme == id } ?: System
     }
 }

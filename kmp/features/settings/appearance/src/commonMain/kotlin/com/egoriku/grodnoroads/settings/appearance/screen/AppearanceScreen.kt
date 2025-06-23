@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,16 +21,18 @@ import com.egoriku.grodnoroads.compose.resources.appearance_app_theme
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_description
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on_description
+import com.egoriku.grodnoroads.compose.resources.appearance_map_type_header
 import com.egoriku.grodnoroads.compose.resources.settings_category_main
-import com.egoriku.grodnoroads.compose.resources.settings_category_other
 import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
@@ -85,7 +88,8 @@ fun AppearanceScreen(
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
             VerticalSpacer(16.dp)
-            SettingsSectionHeader(title = stringResource(Res.string.settings_category_other))
+            MapTypeAppearanceSection(state = state, onModify = appearanceComponent::update)
+            VerticalSpacer(16.dp)
             KeepScreenOnSettings(state = state, onModify = appearanceComponent::update)
         }
     }
@@ -114,6 +118,36 @@ private fun AppThemeSection(
         },
         onClick = { onModify(appTheme) }
     )
+}
+
+@Composable
+private fun MapTypeAppearanceSection(
+    state: State,
+    onModify: (AppearancePref.MapTypeAppearance) -> Unit
+) {
+    val mapTypeAppearance = state.appearanceState.mapTypeAppearance
+
+    Column {
+        SettingsSectionHeader(title = stringResource(Res.string.appearance_map_type_header))
+        HorizontalScrollableRow {
+            mapTypeAppearance.values.forEach { filtering ->
+                val selected = mapTypeAppearance.current == filtering
+
+                FilterChip(
+                    selected = selected,
+                    onClick = {
+                        onModify(mapTypeAppearance.copy(current = filtering))
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(filtering.toStringResource()),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                )
+            }
+        }
+    }
 }
 
 @Composable
