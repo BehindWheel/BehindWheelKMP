@@ -31,7 +31,7 @@ object RootViewController {
     fun create(
         rootComponent: RootComponent,
         backDispatcher: BackDispatcher
-    ) = ComposeUIViewController(configure = { platformLayers = false }) {
+    ) = ComposeUIViewController {
         val appTheme by rootComponent.appTheme.collectAsState(null)
 
         appTheme?.let {
