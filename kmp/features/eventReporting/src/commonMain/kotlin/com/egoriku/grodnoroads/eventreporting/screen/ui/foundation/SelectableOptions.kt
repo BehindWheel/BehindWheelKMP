@@ -64,7 +64,7 @@ internal fun ColumnScope.SelectableOptions(
             }
         )
     }
-    VerticalSpacer(16.dp)
+    VerticalSpacer(8.dp)
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
