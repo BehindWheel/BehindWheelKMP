@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.quicksettings.domain.store
 import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -18,6 +19,12 @@ sealed interface QuickSettingsPref {
     data class MarkerFiltering(
         val current: Filtering = Filtering.Minutes45,
         val values: List<Filtering> = Filtering.entries
+    ) : QuickSettingsPref
+
+    @Stable
+    data class MapTypeAppearance(
+        val current: MapType = MapType.Normal,
+        val values: List<MapType> = MapType.entries
     ) : QuickSettingsPref
 
     @Stable

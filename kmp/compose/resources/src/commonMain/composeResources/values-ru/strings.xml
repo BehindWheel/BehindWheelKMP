@@ -61,6 +61,11 @@
     <string name="appearance_app_language_be">Белорусский</string>
     <string name="appearance_app_language_system">Системный</string>
 
+    <string name="appearance_map_type_header">Тип карты</string>
+    <string name="appearance_map_type_normal">Схема</string>
+    <string name="appearance_map_type_satellite">Спутник</string>
+    <string name="appearance_map_type_hybrid">Гибрид</string>
+
     <string name="appearance_keep_screen_on">Не выключать экран</string>
     <string name="appearance_keep_screen_on_description">Сохраняет экран Карты всегда включенным (может увеличить расход батареи)</string>
 
@@ -69,7 +74,6 @@
     <string name="alerts_availability_description">Показываются на экране при приближении к событию на карте</string>
     <string name="alerts_voice_alerts">Голосовые оповещения</string>
     <string name="alerts_voice_alerts_description">Включаются при приближении к событию на карте</string>
-
 
     <string name="alerts_header_volume_level">Уровень громкости</string>
     <string name="alerts_volume_level_low">Низкий</string>
@@ -206,6 +210,7 @@
     <string name="quick_settings_header">Быстрые настройки</string>
     <string name="quick_settings_app_theme">Смена темы</string>
     <string name="quick_settings_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="quick_settings_map_type">Тип карты</string>
     <string name="quick_settings_voice_alerts">Голосовые оповещения</string>
     <string name="quick_settings_traffic_conditions">Загруженность дорог</string>
 

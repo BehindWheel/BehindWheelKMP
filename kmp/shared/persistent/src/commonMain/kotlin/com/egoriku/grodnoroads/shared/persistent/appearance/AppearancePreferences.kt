@@ -11,8 +11,8 @@ private val KEEP_SCREEN_ON = booleanPreferencesKey("keep_screen_on")
 val Preferences.appTheme: Theme
     get() = Theme.toTheme(this[APP_THEME])
 
-fun MutablePreferences.updateAppTheme(theme: Int) {
-    this[APP_THEME] = theme
+fun MutablePreferences.updateAppTheme(theme: Theme) {
+    this[APP_THEME] = theme.theme
 }
 
 val Preferences.keepScreenOn: Boolean

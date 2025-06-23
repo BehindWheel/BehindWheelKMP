@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
 import com.egoriku.grodnoroads.shared.persistent.alert.VolumeLevel
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType
 
 internal data class MapInternalConfig(
     val zoomLevelInCity: Float,
@@ -10,6 +11,7 @@ internal data class MapInternalConfig(
     val mapInfo: MapInfo,
     val alertsInfo: AlertsInfo,
     val trafficJanOnMap: Boolean,
+    val mapType: MapType,
     val keepScreenOn: Boolean
 ) {
     internal data class MapInfo(
@@ -67,6 +69,7 @@ internal data class MapInternalConfig(
                 notifyWildAnimals = false
             ),
             trafficJanOnMap = false,
+            mapType = MapType.Normal,
             keepScreenOn = false
         )
     }
