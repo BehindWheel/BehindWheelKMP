@@ -6,6 +6,7 @@ targetSdk = "35"
 agp = "8.10.1"
 buildkonfig = "0.17.1"
 decompose = "3.3.0"
+compose = "1.8.2"
 essenty = "2.5.0"
 koin = "4.0.4"
 kotlinx-serialization = "1.8.1"
@@ -54,7 +55,7 @@ kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializat
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
-material3-windowsize = "org.jetbrains.compose.material3:material3-window-size-class:1.8.2"
+material3-windowsize = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
@@ -84,7 +85,7 @@ buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig"
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.4" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
-jetbrains-compose = { id = "org.jetbrains.compose", version = "1.8.2" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
