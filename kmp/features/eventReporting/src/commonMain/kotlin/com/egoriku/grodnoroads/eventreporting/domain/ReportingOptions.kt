@@ -14,6 +14,7 @@ enum class ReportingOptions(
     NON_WORKING_TRAFFIC_LIGHTS(toSend = "Не работают светофоры", mapEventType = MapEventType.RoadIncident),
     OPEN_HATCH(toSend = "Открытый люк", mapEventType = MapEventType.RoadIncident),
     ROAD_BLOCKED(toSend = "Дорога перекрыта", mapEventType = MapEventType.RoadIncident),
+    ROAD_MARKING(toSend = "Наносят разметку", mapEventType = MapEventType.RoadIncident),
     OTHER_ROAD_INCIDENT(toSend = "Другое", mapEventType = MapEventType.RoadIncident),
 
     TRAFFIC_JAM(toSend = "Пробка", mapEventType = MapEventType.TrafficJam),

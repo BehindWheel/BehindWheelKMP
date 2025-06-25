@@ -189,6 +189,7 @@
     <string name="reporting_item_non_working_traffic_lights">Non-working traffic lights</string>
     <string name="reporting_item_open_hatch">Open hatch</string>
     <string name="reporting_item_road_blocked">Road blocked</string>
+    <string name="reporting_item_road_marking">Applying road markings</string>
     <string name="reporting_item_other_road_incident">Other</string>
     <string name="reporting_item_traffic_jam">Traffic jam</string>
     <string name="reporting_item_wild_animals">Wild animals</string>
