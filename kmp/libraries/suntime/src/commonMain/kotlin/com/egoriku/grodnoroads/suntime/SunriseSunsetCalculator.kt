@@ -8,6 +8,7 @@ import kotlin.math.cos
 import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.math.tan
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
@@ -51,6 +52,7 @@ object SunriseSunsetCalculator {
         }
     }
 
+    @OptIn(ExperimentalTime::class)
     private fun calculateSunPosition(
         date: LocalDateTime,
         isSunrise: Boolean,

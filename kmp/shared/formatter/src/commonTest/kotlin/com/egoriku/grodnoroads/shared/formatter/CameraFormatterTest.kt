@@ -2,12 +2,14 @@ package com.egoriku.grodnoroads.shared.formatter
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 
 class CameraFormatterTest {
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun formatterTest() {
         assertEquals(
@@ -15,8 +17,8 @@ class CameraFormatterTest {
             actual = CameraFormatter.format(
                 timestamp = LocalDate(
                     year = 2024,
-                    monthNumber = 10,
-                    dayOfMonth = 5
+                    month = 10,
+                    day = 5
                 ).atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()
             )
         )
@@ -25,8 +27,8 @@ class CameraFormatterTest {
             actual = CameraFormatter.format(
                 timestamp = LocalDate(
                     year = 2023,
-                    monthNumber = 1,
-                    dayOfMonth = 5
+                    month = 1,
+                    day = 5
                 ).atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()
             )
         )

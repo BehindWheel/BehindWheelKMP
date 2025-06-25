@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.shared.formatter
 
-import kotlinx.datetime.Instant
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
@@ -13,7 +14,7 @@ object ChangelogFormatter {
 
     private val defaultTimeZone = TimeZone.of("Europe/Minsk")
     private val dayMonthYearFormatter = LocalDateTime.Format {
-        dayOfMonth(padding = Padding.NONE)
+        day(padding = Padding.NONE)
         char(' ')
         monthName(MonthNames.ENGLISH_FULL)
         char(',')
@@ -21,6 +22,7 @@ object ChangelogFormatter {
         year()
     }
 
+    @OptIn(ExperimentalTime::class)
     fun format(timestamp: Long): String {
         return Instant.fromEpochMilliseconds(timestamp)
             .toLocalDateTime(defaultTimeZone)

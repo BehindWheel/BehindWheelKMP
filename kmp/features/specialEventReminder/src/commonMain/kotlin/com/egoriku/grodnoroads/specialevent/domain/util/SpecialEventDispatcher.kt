@@ -3,9 +3,11 @@ package com.egoriku.grodnoroads.specialevent.domain.util
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Spring
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 
 internal object SpecialEventDispatcher {
@@ -22,11 +24,12 @@ internal object SpecialEventDispatcher {
     private const val SEPTEMBER = 9
     private val SEPTEMBER_RANGE = 1..5
 
+    @OptIn(ExperimentalTime::class)
     fun calculateType(
         current: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
     ): EventType? {
-        val day = current.dayOfMonth
-        val month = current.monthNumber
+        val day = current.day
+        val month = current.month.number
 
         return when {
             month == MAY && day in MAY_RANGE -> Spring

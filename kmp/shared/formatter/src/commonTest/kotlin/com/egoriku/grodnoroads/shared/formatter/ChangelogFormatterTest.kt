@@ -2,12 +2,14 @@ package com.egoriku.grodnoroads.shared.formatter
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 
 class ChangelogFormatterTest {
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun formatterTest() {
         assertEquals(
@@ -19,8 +21,8 @@ class ChangelogFormatterTest {
             actual = ChangelogFormatter.format(
                 timestamp = LocalDate(
                     year = 2023,
-                    monthNumber = 1,
-                    dayOfMonth = 5
+                    month = 1,
+                    day = 5
                 ).atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()
             )
         )
