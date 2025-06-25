@@ -188,11 +188,13 @@ private fun MapPaddingDecorator.updateContentPadding(
     layoutDirection: LayoutDirection
 ) {
     with(density) {
+        val bottom = contentPadding.calculateBottomPadding().value.toInt() - insetBottom
+
         updateContentPadding(
             left = contentPadding.calculateLeftPadding(layoutDirection).roundToPx(),
-            top = contentPadding.calculateBottomPadding().roundToPx(),
+            top = bottom,
             right = contentPadding.calculateRightPadding(layoutDirection).roundToPx(),
-            bottom = contentPadding.calculateBottomPadding().value.toInt() - insetBottom
+            bottom = bottom
         )
     }
 }
