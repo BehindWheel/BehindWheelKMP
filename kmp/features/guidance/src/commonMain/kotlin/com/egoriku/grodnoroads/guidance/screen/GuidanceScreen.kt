@@ -305,14 +305,6 @@ fun GuidanceScreen(
                     AppMode.Drive -> {
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
-                        if (mapUpdater.isInitialCameraAnimation()) {
-                            mapUpdater.animateCamera(
-                                target = location.latLng,
-                                zoom = mapConfig.zoomLevel,
-                                bearing = location.bearing
-                            )
-                        }
-
                         if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None) {
                             return@LaunchedEffect
                         }

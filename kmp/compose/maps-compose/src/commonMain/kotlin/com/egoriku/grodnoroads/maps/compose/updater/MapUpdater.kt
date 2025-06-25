@@ -12,7 +12,6 @@ interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
     val clickedMarker: SharedFlow<Marker?>
 
-    fun isInitialCameraAnimation(): Boolean
     fun resetLastLocation()
 
     fun addMarker(markerOptions: MarkerOptions): Marker?
