@@ -521,7 +521,7 @@ fun GuidanceScreen(
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
                         onLocationRequestStateChange = {
-                            if (appMode == AppMode.Drive) {
+                            if (appMode == AppMode.Drive && location.latLng != LastLocation.None) {
                                 mapUpdater.onMapScope {
                                     animateCurrentLocation(
                                         target = location.latLng,
