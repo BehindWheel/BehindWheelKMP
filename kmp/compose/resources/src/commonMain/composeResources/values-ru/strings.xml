@@ -186,6 +186,7 @@
     <string name="reporting_item_non_working_traffic_lights">Не работают светофоры</string>
     <string name="reporting_item_open_hatch">Открытый люк</string>
     <string name="reporting_item_road_blocked">Дорога перекрыта</string>
+    <string name="reporting_item_road_marking">Наносят разметку</string>
     <string name="reporting_item_other_road_incident">Другое</string>
     <string name="reporting_item_traffic_jam">Пробка</string>
     <string name="reporting_item_wild_animals">Дикие животные</string>

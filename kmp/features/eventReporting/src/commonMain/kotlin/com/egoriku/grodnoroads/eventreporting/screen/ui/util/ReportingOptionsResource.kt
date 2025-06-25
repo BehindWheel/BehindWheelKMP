@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.compose.resources.reporting_item_open_hatch
 import com.egoriku.grodnoroads.compose.resources.reporting_item_other_road_incident
 import com.egoriku.grodnoroads.compose.resources.reporting_item_pedestrian_on_road
 import com.egoriku.grodnoroads.compose.resources.reporting_item_road_blocked
+import com.egoriku.grodnoroads.compose.resources.reporting_item_road_marking
 import com.egoriku.grodnoroads.compose.resources.reporting_item_road_repair
 import com.egoriku.grodnoroads.compose.resources.reporting_item_sitting_in_the_car
 import com.egoriku.grodnoroads.compose.resources.reporting_item_stay_on_beacons
@@ -46,4 +47,5 @@ fun ReportingOptions.toStringResource() = when (this) {
     ReportingOptions.WORKING_FROM_CAR -> Res.string.reporting_item_working_from_car
     ReportingOptions.TRANSPORT_INSPECTION -> Res.string.reporting_item_transport_inspection
     ReportingOptions.FILTER -> Res.string.reporting_item_filter
+    ReportingOptions.ROAD_MARKING -> Res.string.reporting_item_road_marking
 }

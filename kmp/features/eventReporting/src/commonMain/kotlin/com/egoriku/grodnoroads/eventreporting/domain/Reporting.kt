@@ -10,6 +10,7 @@ import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.OPEN_HATCH
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.OTHER_ROAD_INCIDENT
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.PEDESTRIAN_ON_ROAD
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.ROAD_BLOCKED
+import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.ROAD_MARKING
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.ROAD_REPAIR
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.SITTING_IN_THE_CAR
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.STAY_ON_BEACONS
@@ -39,6 +40,7 @@ object Reporting {
                     TRAFFIC_JAM,
                     OPEN_HATCH,
                     BROKEN_CAR,
+                    ROAD_MARKING,
                     OTHER_ROAD_INCIDENT
                 )
         }
