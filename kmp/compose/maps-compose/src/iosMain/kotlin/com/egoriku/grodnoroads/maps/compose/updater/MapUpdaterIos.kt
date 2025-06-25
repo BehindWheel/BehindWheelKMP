@@ -94,7 +94,6 @@ class MapUpdaterIos(
         minZoom = value
     }
 
-    override fun isInitialCameraAnimation() = lastLocation == null
     override fun resetLastLocation() {
         lastLocation = null
     }
