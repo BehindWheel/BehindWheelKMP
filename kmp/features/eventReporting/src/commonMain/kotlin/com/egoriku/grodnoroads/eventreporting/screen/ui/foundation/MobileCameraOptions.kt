@@ -47,7 +47,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     val inputErrorText = stringResource(Res.string.reporting_mobile_camera_input_error)
 
     val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90) }
-    var selectedSpeedLimit by rememberMutableState { speedLimits.first() }
+    var selectedSpeedLimit by rememberMutableState { speedLimits[2] }
     var inputText by rememberMutableState { "" }
 
     var isValidateInput by rememberMutableState { false }
