@@ -5,6 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
@@ -16,6 +17,7 @@ class DateTimeTest {
         DateTime.defaultTimeZone = TimeZone.UTC
     }
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun formatTest() {
         assertEquals(
@@ -29,8 +31,8 @@ class DateTimeTest {
 
         val date = LocalDateTime(
             year = 2024,
-            monthNumber = 1,
-            dayOfMonth = 17,
+            month = 1,
+            day = 17,
             hour = 17,
             minute = 9,
             second = 12
