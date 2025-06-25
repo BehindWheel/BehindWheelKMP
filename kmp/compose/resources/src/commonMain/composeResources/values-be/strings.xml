@@ -25,6 +25,7 @@
     <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
 
     <string name="camera_info_last_update">Абноўлена %1$s</string>
+    <string name="camera_info_stub_title">Без апісання</string>
     <string name="camera_info_report">Паведаміць пра памылку</string>
 
     <string name="terms_of_conditions">Умовы выкарыстання</string>
@@ -197,8 +198,8 @@
 
     <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
     <string name="reporting_mobile_camera_speed">%1$s км/г</string>
-    <string name="reporting_mobile_camera_input_hint">Месцазнаходжанне камеры*</string>
-    <string name="reporting_mobile_camera_input_error">Увядзіце інфармацыю аб камеры</string>
+    <string name="reporting_mobile_camera_input_hint">Месцазнаходжанне камеры</string>
+    <string name="reporting_mobile_camera_input_error">Максімум 50 знакаў</string>
 
     <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
 

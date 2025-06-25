@@ -37,6 +37,8 @@ import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
+internal const val MAX_CAMERA_DESCRIPTION_SYMBOLS = 50
+
 @Composable
 internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
@@ -50,12 +52,10 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     var selectedSpeedLimit by rememberMutableState { speedLimits[2] }
     var inputText by rememberMutableState { "" }
 
-    var isValidateInput by rememberMutableState { false }
-    val errorLabel by rememberMutableState(inputText, isValidateInput) {
-        if (isValidateInput && inputText.isBlank()) {
-            inputErrorText
-        } else {
-            null
+    val errorLabel by rememberMutableState(inputText) {
+        when {
+            inputText.length > MAX_CAMERA_DESCRIPTION_SYMBOLS -> inputErrorText
+            else -> null
         }
     }
 
@@ -115,9 +115,8 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
             value = inputText,
             isError = errorLabel != null,
             onValueChange = { inputText = it },
-            label = stringResource(Res.string.reporting_mobile_camera_input_hint),
             supportingText = errorLabel,
-            onFocusChange = { isValidateInput = true }
+            label = stringResource(Res.string.reporting_mobile_camera_input_hint)
         )
     }
 }

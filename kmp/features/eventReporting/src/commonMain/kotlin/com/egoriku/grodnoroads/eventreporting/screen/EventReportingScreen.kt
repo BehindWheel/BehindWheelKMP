@@ -42,6 +42,7 @@ import com.egoriku.grodnoroads.compose.resources.reporting_category_traffic_poli
 import com.egoriku.grodnoroads.compose.resources.reporting_header
 import com.egoriku.grodnoroads.compose.resources.send
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MAX_CAMERA_DESCRIPTION_SYMBOLS
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MobileCameraOptions
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOptions
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
@@ -75,7 +76,7 @@ fun EventReportingScreen(
         derivedStateOf {
             when (val params = reportParams) {
                 is ReportParams.EventReport -> true
-                is ReportParams.MobileCameraReport -> params.cameraInfo.isNotEmpty()
+                is ReportParams.MobileCameraReport -> params.cameraInfo.length < MAX_CAMERA_DESCRIPTION_SYMBOLS
                 null -> false
             }
         }
