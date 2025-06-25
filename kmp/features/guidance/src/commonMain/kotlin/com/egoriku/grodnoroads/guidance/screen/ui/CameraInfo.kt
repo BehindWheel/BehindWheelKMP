@@ -28,6 +28,7 @@ import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
 import com.egoriku.grodnoroads.compose.resources.camera_info_last_update
 import com.egoriku.grodnoroads.compose.resources.camera_info_report
+import com.egoriku.grodnoroads.compose.resources.camera_info_stub_title
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCameraBold
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
@@ -89,7 +90,10 @@ private fun Info(
             )
             HorizontalSpacer(16.dp)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(text = camera.name, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = camera.name.ifEmpty { stringResource(Res.string.camera_info_stub_title) },
+                    style = MaterialTheme.typography.titleMedium
+                )
                 Text(
                     text = stringResource(cameraResource),
                     style = MaterialTheme.typography.bodyMedium

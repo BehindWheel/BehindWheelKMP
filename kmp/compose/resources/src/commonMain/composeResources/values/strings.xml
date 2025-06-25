@@ -27,6 +27,7 @@
     <string name="alerts_unsupported_message">Unsupported message</string>
 
     <string name="camera_info_last_update">Updated %1$s</string>
+    <string name="camera_info_stub_title">No description</string>
     <string name="camera_info_report">Report an error</string>
 
     <string name="terms_of_conditions">Terms of Conditions</string>
@@ -206,8 +207,8 @@
 
     <string name="reporting_mobile_camera_header">Speed limit</string>
     <string name="reporting_mobile_camera_speed">%1$s km/h</string>
-    <string name="reporting_mobile_camera_input_hint">Camera location*</string>
-    <string name="reporting_mobile_camera_input_error">Enter information about the camera</string>
+    <string name="reporting_mobile_camera_input_hint">Camera location</string>
+    <string name="reporting_mobile_camera_input_error">Maximum 50 characters</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
 
