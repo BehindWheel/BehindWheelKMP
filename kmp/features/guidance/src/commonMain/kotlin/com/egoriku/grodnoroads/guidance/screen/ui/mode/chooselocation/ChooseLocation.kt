@@ -36,7 +36,7 @@ fun ChooseLocation(
 
     val offsetAlignment = remember {
         if (isChooseInDriveMode) {
-            OffsetAlignment(xOffset = 0.5f, yOffset = 0.7f)
+            OffsetAlignment(xOffset = 0.5f, yOffset = 0.66f)
         } else {
             OffsetAlignment(xOffset = 0.5f, yOffset = 0.5f)
         }
