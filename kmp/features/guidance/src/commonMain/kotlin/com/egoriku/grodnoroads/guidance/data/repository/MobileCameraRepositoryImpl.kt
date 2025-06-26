@@ -6,6 +6,7 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
 import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
 import dev.gitlive.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,7 @@ internal class MobileCameraRepositoryImpl(
 ) : MobileCameraRepository {
 
     private val currentTime = DateTime.currentTimeMillis()
+    private val mobileCameraUpdateTime = CameraFormatter.format(currentTime)
 
     override fun loadAsFlow() = databaseReference
         .child("/v2/mobile_cameras/cameras")
@@ -34,7 +36,7 @@ internal class MobileCameraRepositoryImpl(
                             position = LatLng(data.latitude, data.longitude),
                             speedCar = data.speed,
                             speedTruck = data.speed,
-                            updateTime = currentTime,
+                            formattedUpdateTime = mobileCameraUpdateTime,
                             angle = data.angle,
                             bidirectional = data.bidirectional
                         )
