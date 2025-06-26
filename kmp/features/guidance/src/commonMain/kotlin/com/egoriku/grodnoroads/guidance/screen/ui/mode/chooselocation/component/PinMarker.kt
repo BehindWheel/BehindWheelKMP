@@ -24,8 +24,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.layout.onLayoutRectChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -42,7 +41,7 @@ fun PinMarker(
     verticalOffset: Dp = 20.dp,
     shadowScaleMax: Float = 0.9f,
     shadowScaleMin: Float = 0.6f,
-    onGloballyPosition: (Offset) -> Unit
+    onPositionUpdate: (Offset) -> Unit
 ) {
     val startColor = LocalContentColor.current.copy(alpha = 0.85f)
     val endColor = LocalContentColor.current.copy(alpha = 0.4f)
@@ -88,12 +87,12 @@ fun PinMarker(
                         y = (space.height - size.height * 0.5f).toInt()
                     )
                 }
-                .onGloballyPositioned {
+                .onLayoutRectChanged {
                     val position = Offset(
-                        x = it.positionInWindow().x + it.size.width / 2f,
-                        y = it.positionInWindow().y + it.size.height / 2f
+                        x = it.positionInWindow.x + it.width / 2f,
+                        y = it.positionInWindow.y + it.height / 2f
                     )
-                    onGloballyPosition(position)
+                    onPositionUpdate(position)
                 }
         ) {
             val canvasWidth = size.width
@@ -181,7 +180,7 @@ private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
         PinMarker(
             modifier = Modifier.align(Alignment.Center),
             animate = animate,
-            onGloballyPosition = {}
+            onPositionUpdate = {}
         )
     }
 }
