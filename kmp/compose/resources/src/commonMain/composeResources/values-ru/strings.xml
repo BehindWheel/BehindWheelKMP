@@ -205,7 +205,8 @@
     <string name="reporting_mobile_camera_header">Ограничение скорости</string>
     <string name="reporting_mobile_camera_speed">%1$s км/ч</string>
     <string name="reporting_mobile_camera_input_hint">Местоположение камеры</string>
-    <string name="reporting_mobile_camera_input_error">Максимум 50 символов</string>
+
+    <string name="reporting_input_length_error">Максимум %1$s символов</string>
 
     <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
 

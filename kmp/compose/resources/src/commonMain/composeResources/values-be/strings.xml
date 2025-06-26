@@ -200,7 +200,8 @@
     <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
     <string name="reporting_mobile_camera_speed">%1$s км/г</string>
     <string name="reporting_mobile_camera_input_hint">Месцазнаходжанне камеры</string>
-    <string name="reporting_mobile_camera_input_error">Максімум 50 знакаў</string>
+
+    <string name="reporting_input_length_error">Максімум %1$s знакаў</string>
 
     <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
 
