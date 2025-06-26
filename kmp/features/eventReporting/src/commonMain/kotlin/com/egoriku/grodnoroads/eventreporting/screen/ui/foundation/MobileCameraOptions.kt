@@ -2,11 +2,8 @@ package com.egoriku.grodnoroads.eventreporting.screen.ui.foundation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,13 +15,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.reporting_mobile_camera_header
-import com.egoriku.grodnoroads.compose.resources.reporting_mobile_camera_input_error
-import com.egoriku.grodnoroads.compose.resources.reporting_mobile_camera_input_hint
 import com.egoriku.grodnoroads.compose.resources.reporting_mobile_camera_speed
 import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
 import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
@@ -32,38 +25,24 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
-
-internal const val MAX_CAMERA_DESCRIPTION_SYMBOLS = 50
 
 @Composable
 internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
     val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
 
     val focusManager = LocalFocusManager.current
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-    val inputErrorText = stringResource(Res.string.reporting_mobile_camera_input_error)
 
     val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90) }
     var selectedSpeedLimit by rememberMutableState { speedLimits[2] }
-    var inputText by rememberMutableState { "" }
 
-    val errorLabel by rememberMutableState(inputText) {
-        when {
-            inputText.length > MAX_CAMERA_DESCRIPTION_SYMBOLS -> inputErrorText
-            else -> null
-        }
-    }
-
-    LaunchedEffect(selectedSpeedLimit, inputText) {
+    LaunchedEffect(selectedSpeedLimit) {
         updatedReportParamsChange(
             ReportParams.MobileCameraReport(
                 speedLimit = selectedSpeedLimit,
-                cameraInfo = inputText.trim()
+                cameraInfo = ""
             )
         )
     }
@@ -101,23 +80,6 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
                 )
             }
         }
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    keyboardController?.hide()
-                    focusManager.clearFocus()
-                }
-            ),
-            value = inputText,
-            isError = errorLabel != null,
-            onValueChange = { inputText = it },
-            supportingText = errorLabel,
-            label = stringResource(Res.string.reporting_mobile_camera_input_hint)
-        )
     }
 }
 

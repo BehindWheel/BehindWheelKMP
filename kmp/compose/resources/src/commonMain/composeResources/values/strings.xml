@@ -208,7 +208,8 @@
     <string name="reporting_mobile_camera_header">Speed limit</string>
     <string name="reporting_mobile_camera_speed">%1$s km/h</string>
     <string name="reporting_mobile_camera_input_hint">Camera location</string>
-    <string name="reporting_mobile_camera_input_error">Maximum 50 characters</string>
+
+    <string name="reporting_input_length_error">Maximum %1$s characters</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
 

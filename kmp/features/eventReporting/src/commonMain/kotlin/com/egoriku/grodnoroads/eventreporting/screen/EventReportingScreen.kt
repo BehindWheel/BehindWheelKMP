@@ -1,21 +1,11 @@
 package com.egoriku.grodnoroads.eventreporting.screen
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -25,45 +15,29 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.cancel
-import com.egoriku.grodnoroads.compose.resources.reporting_category_mobile_camera
-import com.egoriku.grodnoroads.compose.resources.reporting_category_other
-import com.egoriku.grodnoroads.compose.resources.reporting_category_road_incidents
-import com.egoriku.grodnoroads.compose.resources.reporting_category_traffic_police
 import com.egoriku.grodnoroads.compose.resources.reporting_header
-import com.egoriku.grodnoroads.compose.resources.send
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting.ReportType
-import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MAX_CAMERA_DESCRIPTION_SYMBOLS
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.BottomActions
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.MobileCameraOptions
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.ReportingOptionalMessage
+import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.ReportingTypesCarousel
 import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOptions
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
-import com.egoriku.grodnoroads.foundation.core.AutoScrollLazyRow
-import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
-import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
-import com.egoriku.grodnoroads.foundation.icons.colored.RoadIncidentBold
-import com.egoriku.grodnoroads.foundation.icons.colored.RoadProblemBold
-import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPoliceBold
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
-import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
-import kotlinx.collections.immutable.persistentListOf
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+
+internal const val MAX_CAMERA_DESCRIPTION_SYMBOLS = 50
+internal const val MAX_EVENT_DESCRIPTION_SYMBOLS = 120
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,28 +45,49 @@ fun EventReportingScreen(
     onClose: () -> Unit,
     onReport: (ReportParams) -> Unit
 ) {
+    var reportType by rememberMutableState<ReportType> { ReportType.RoadIncidents }
     var reportParams by rememberMutableState<ReportParams?> { null }
     val sendEnabled by remember {
         derivedStateOf {
             when (val params = reportParams) {
-                is ReportParams.EventReport -> true
-                is ReportParams.MobileCameraReport -> params.cameraInfo.length < MAX_CAMERA_DESCRIPTION_SYMBOLS
+                is ReportParams.EventReport -> params.message.length <= MAX_EVENT_DESCRIPTION_SYMBOLS
+                is ReportParams.MobileCameraReport -> params.cameraInfo.length <= MAX_CAMERA_DESCRIPTION_SYMBOLS
                 null -> false
             }
         }
     }
     val sheetCloseBehaviour = rememberSheetCloseBehaviour(
         onCancel = onClose,
-        onResult = { reportParams?.let(onReport) }
+        onResult = {
+            reportParams?.let(onReport)
+        }
     )
 
     BasicModalBottomSheet(
         sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onClose,
         content = {
-            ReportingUi(onReportParamsChange = { reportParams = it })
+            ReportingUi(
+                reportType = reportType,
+                onReportTypeChange = { reportType = it },
+                onReportParamsChange = { reportParams = it }
+            )
         },
         footer = {
+            ReportingOptionalMessage(
+                reportType = reportType,
+                onUpdateMessage = {
+                    when (val params = reportParams) {
+                        is ReportParams.EventReport -> {
+                            reportParams = params.copy(message = it.ifEmpty { params.shortMessage })
+                        }
+                        is ReportParams.MobileCameraReport -> {
+                            reportParams = params.copy(cameraInfo = it)
+                        }
+                        null -> {}
+                    }
+                }
+            )
             BottomActions(
                 sendEnabled = sendEnabled,
                 onCancel = sheetCloseBehaviour::cancel,
@@ -103,10 +98,12 @@ fun EventReportingScreen(
 }
 
 @Composable
-private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
+private fun ReportingUi(
+    reportType: ReportType,
+    onReportTypeChange: (ReportType) -> Unit,
+    onReportParamsChange: (ReportParams) -> Unit
+) {
     val focusManager = LocalFocusManager.current
-
-    var reportType by rememberMutableState<ReportType> { ReportType.RoadIncidents }
 
     Column(
         modifier = Modifier
@@ -127,7 +124,10 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
             style = MaterialTheme.typography.headlineSmall
         )
         VerticalSpacer(16.dp)
-        ReportingTypes(currentType = reportType, onTypeChange = { reportType = it })
+        ReportingTypesCarousel(
+            currentType = reportType,
+            onTypeChange = onReportTypeChange
+        )
         VerticalSpacer(16.dp)
 
         when (reportType) {
@@ -144,137 +144,12 @@ private fun ReportingUi(onReportParamsChange: (ReportParams) -> Unit) {
     }
 }
 
-@Composable
-private fun BottomActions(
-    sendEnabled: Boolean,
-    onCancel: () -> Unit,
-    modifier: Modifier = Modifier,
-    onResult: () -> Unit
-) {
-    CenterVerticallyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 24.dp, bottom = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
-    ) {
-        SecondaryButton(
-            modifier = Modifier.weight(1f),
-            onClick = onCancel
-        ) {
-            Text(text = stringResource(Res.string.cancel))
-        }
-        PrimaryButton(
-            modifier = Modifier.weight(1f),
-            enabled = sendEnabled,
-            onClick = onResult
-        ) {
-            Text(text = stringResource(Res.string.send))
-        }
-    }
-}
-
-internal data class Repo(
-    val reportType: ReportType,
-    val imageVector: ImageVector,
-    val stringResource: StringResource
-)
-
-@Composable
-private fun ReportingTypes(
-    currentType: ReportType,
-    onTypeChange: (ReportType) -> Unit
-) {
-    val focusManager = LocalFocusManager.current
-    val items = remember {
-        persistentListOf(
-            Repo(
-                reportType = ReportType.RoadIncidents,
-                imageVector = GrodnoRoads.Colored.RoadProblemBold,
-                stringResource = Res.string.reporting_category_road_incidents
-            ),
-            Repo(
-                reportType = ReportType.TrafficPolice,
-                imageVector = GrodnoRoads.Colored.TrafficPoliceBold,
-                stringResource = Res.string.reporting_category_traffic_police
-            ),
-            Repo(
-                reportType = ReportType.Other,
-                imageVector = GrodnoRoads.Colored.RoadIncidentBold,
-                stringResource = Res.string.reporting_category_other
-            ),
-            Repo(
-                reportType = ReportType.MobileCamera,
-                imageVector = GrodnoRoads.Colored.MobileCameraBold,
-                stringResource = Res.string.reporting_category_mobile_camera
-            )
-        )
-    }
-
-    val indexToScroll by remember(currentType) {
-        derivedStateOf { items.indexOfFirst { it.reportType == currentType } }
-    }
-    AutoScrollLazyRow(
-        indexToScroll = indexToScroll,
-        contentPadding = PaddingValues(horizontal = 20.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(items) {
-            CategoryCell(
-                modifier = Modifier.width(96.dp),
-                name = stringResource(it.stringResource),
-                imageVector = it.imageVector,
-                selected = currentType == it.reportType,
-                onClick = {
-                    onTypeChange(it.reportType)
-                    focusManager.clearFocus()
-                }
-            )
-        }
-    }
-}
-
-@Composable
-private fun CategoryCell(
-    name: String,
-    imageVector: ImageVector,
-    selected: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    val selectedModifier = if (selected) {
-        Modifier.border(
-            width = 2.dp,
-            color = MaterialTheme.colorScheme.primary,
-            shape = RoundedCornerShape(10.dp)
-        )
-    } else {
-        Modifier
-    }
-    Column(
-        modifier = modifier
-            .heightIn(min = 132.dp)
-            .then(selectedModifier)
-            .clip(RoundedCornerShape(10.dp))
-            .clickable(onClick = onClick)
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Image(
-            modifier = Modifier.size(64.dp),
-            imageVector = imageVector,
-            contentDescription = null
-        )
-        Text(
-            text = name,
-            style = MaterialTheme.typography.titleSmall,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
 @PreviewGrodnoRoads
 @Composable
 private fun ReportingUiPreview() = GrodnoRoadsM3ThemePreview {
-    ReportingUi(onReportParamsChange = {})
+    ReportingUi(
+        reportType = ReportType.TrafficPolice,
+        onReportTypeChange = {},
+        onReportParamsChange = {}
+    )
 }
