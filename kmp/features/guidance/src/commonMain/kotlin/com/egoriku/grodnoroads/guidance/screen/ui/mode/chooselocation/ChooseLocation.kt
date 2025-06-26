@@ -46,7 +46,7 @@ fun ChooseLocation(
         PinMarker(
             modifier = Modifier.align(offsetAlignment),
             animate = isCameraMoving,
-            onGloballyPosition = {
+            onPositionUpdate = {
                 markerOffset = it
             }
         )
