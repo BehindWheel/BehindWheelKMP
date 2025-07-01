@@ -22,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import platform.CoreGraphics.CGPoint
@@ -71,12 +70,21 @@ class MapUpdaterIos(
     private val currentZoom: Float
         get() = googleMap.zoom
 
-    private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
-    override val clickedMarker: SharedFlow<Marker?> = _clickedMarker.asSharedFlow()
+    private val _clickedMarker = MutableSharedFlow<Marker>(replay = 0)
+    override val clickedMarker = _clickedMarker.asSharedFlow()
+
+    private val _mapLongClickEvents = MutableSharedFlow<LatLng>(replay = 0)
+    override val mapLongClickEvents = _mapLongClickEvents.asSharedFlow()
 
     fun clickMarker(marker: Marker) {
         scope.launch {
             _clickedMarker.emit(marker)
+        }
+    }
+
+    fun mapLongPressEvent(latLng: LatLng) {
+        scope.launch {
+            _mapLongClickEvents.emit(latLng)
         }
     }
 
