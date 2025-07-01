@@ -35,17 +35,20 @@ interface GuidanceComponent {
     val mapConfig: Flow<MapConfig>
     val mapEvents: Flow<MapEvents>
     val userCount: Flow<Int>
+    val longPressReportingInDriveMode: Flow<Boolean>
 
     val alerts: Flow<ImmutableList<Alert>>
 
     val speedLimit: Flow<Int>
 
     fun processReporting(params: ReportParams)
+    fun cancelReporting()
 
     fun setLocation(latLng: LatLng)
 
     fun switchToChooseLocationFlow()
     fun startReporting(latLng: LatLng)
+    fun longPressReporting(latLng: LatLng)
     fun setUserMapZoom(zoom: Float)
     fun cancelChooseLocationFlow()
 

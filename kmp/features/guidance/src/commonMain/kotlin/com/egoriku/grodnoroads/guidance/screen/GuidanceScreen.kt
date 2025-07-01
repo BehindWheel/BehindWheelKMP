@@ -189,6 +189,7 @@ fun GuidanceScreen(
         val mapBottomSheet by component.mapBottomSheet.collectAsState(initial = MapBottomSheet.None)
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
+        val longPressReportingInDriveMode by component.longPressReportingInDriveMode.collectAsState(false)
 
         when (val state = mapBottomSheet) {
             is MapBottomSheet.MarkerInfo -> {
@@ -234,6 +235,17 @@ fun GuidanceScreen(
 
         var projection by rememberMutableState<Projection?> { null }
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
+
+        LaunchedEffect(mapUpdater, appMode) {
+            val mapUpdater = mapUpdater
+            if (appMode != AppMode.ChooseLocation && mapUpdater != null) {
+                mapUpdater.mapLongClickEvents
+                    .onEach {
+                        component.longPressReporting(latLng = it)
+                    }
+                    .launchIn(this)
+            }
+        }
 
         if (mapConfig != MapConfig.EMPTY && initialLocation != UNKNOWN_LOCATION) {
             val mapProperties = rememberMapProperties(
@@ -305,7 +317,7 @@ fun GuidanceScreen(
                     AppMode.Drive -> {
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
-                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None) {
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None || longPressReportingInDriveMode) {
                             return@LaunchedEffect
                         }
 
