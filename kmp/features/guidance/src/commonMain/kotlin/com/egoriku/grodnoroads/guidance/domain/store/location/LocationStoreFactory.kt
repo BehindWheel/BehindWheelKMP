@@ -95,8 +95,8 @@ internal class LocationStoreFactory(
                         Message.OnUserLocation(
                             lastLocation = LastLocation(
                                 latLng = it.latLng,
-                                bearing = state().lastLocation.bearing,
-                                speed = state().lastLocation.speed
+                                bearing = 0f,
+                                speed = 0
                             )
                         )
                     )

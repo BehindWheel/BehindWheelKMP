@@ -88,7 +88,10 @@ internal class TabsComponentImpl(
         (stack.active.instance as? Child.Guidance)?.component?.processReporting(params)
     }
 
-    override fun closeReporting() = reportingNavigation.dismiss()
+    override fun closeReporting() {
+        reportingNavigation.dismiss()
+        (stack.active.instance as? Child.Guidance)?.component?.cancelReporting()
+    }
 
     @Serializable
     object ReportingConfig

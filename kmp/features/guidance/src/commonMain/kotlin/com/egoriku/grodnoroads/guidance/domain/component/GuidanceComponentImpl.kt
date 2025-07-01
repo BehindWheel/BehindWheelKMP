@@ -180,6 +180,9 @@ internal class GuidanceComponentImpl(
     override val userCount: Flow<Int>
         get() = mapEventsStore.states.map { it.userCount }
 
+    override val longPressReportingInDriveMode: Flow<Boolean>
+        get() = mapConfigStore.states.map { it.longPressReportingInDriveMode }
+
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
@@ -257,6 +260,12 @@ internal class GuidanceComponentImpl(
         notificationEvents.tryEmit(Notification.RepostingSuccess)
     }
 
+    override fun cancelReporting() {
+        if (mapConfigStore.state.longPressReportingInDriveMode) {
+            mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+        }
+    }
+
     override fun switchToChooseLocationFlow() {
         mapConfigStore.accept(ChooseLocation.OpenChooseLocation)
     }
@@ -271,6 +280,11 @@ internal class GuidanceComponentImpl(
     override fun startReporting(latLng: LatLng) {
         onOpenReporting()
         setLocation(latLng)
+    }
+
+    override fun longPressReporting(latLng: LatLng) {
+        mapConfigStore.accept(ChooseLocation.LongPressReporting)
+        startReporting(latLng)
     }
 
     override fun setUserMapZoom(zoom: Float) {
