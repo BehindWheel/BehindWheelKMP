@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.ktx.mapLongClickEvents
 import com.google.maps.android.ktx.markerClickEvents
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.model.markerOptions
@@ -24,7 +25,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -56,12 +56,19 @@ internal class MapUpdaterAndroid(
     private val currentZoom: Float
         get() = googleMap.zoom
 
-    private val _clickedMarker = MutableSharedFlow<Marker?>(replay = 0)
-    override val clickedMarker: SharedFlow<Marker?> = _clickedMarker.asSharedFlow()
+    private val _clickedMarker = MutableSharedFlow<Marker>(replay = 0)
+    override val clickedMarker = _clickedMarker.asSharedFlow()
+
+    private val _mapLongClickEvents = MutableSharedFlow<LatLng>(replay = 0)
+    override val mapLongClickEvents = _mapLongClickEvents.asSharedFlow()
 
     override fun attach() {
         googleMap.markerClickEvents()
             .onEach { _clickedMarker.emit(it) }
+            .launchIn(scope)
+
+        googleMap.mapLongClickEvents()
+            .onEach { _mapLongClickEvents.emit(it.toLatLng()) }
             .launchIn(scope)
     }
 
