@@ -158,7 +158,9 @@ internal class MapConfigStoreFactory(
                     dispatch(OnZoomLevel(zoomLevel = 12.5f))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
-                    when (state().currentAppMode) {
+                    val state = state()
+
+                    when (state.currentAppMode) {
                         AppMode.Default -> {
                             dispatch(
                                 ChangeAppMode(
@@ -166,15 +168,21 @@ internal class MapConfigStoreFactory(
                                     isChooseInDriveMode = false
                                 )
                             )
-                            dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
-                            dispatch(OnUserZoomLevel(userZoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                            if (state.userZoomLevel < state.mapInternalConfig.zoomLevelInCity) {
+                                dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                            } else {
+                                dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel))
+                            }
                         }
-                        AppMode.Drive -> dispatch(
-                            ChangeAppMode(
-                                appMode = AppMode.ChooseLocation,
-                                isChooseInDriveMode = true
+                        AppMode.Drive -> {
+                            dispatch(
+                                ChangeAppMode(
+                                    appMode = AppMode.ChooseLocation,
+                                    isChooseInDriveMode = true
+                                )
                             )
-                        )
+                            dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel))
+                        }
                         else -> {}
                     }
                 }
@@ -188,14 +196,15 @@ internal class MapConfigStoreFactory(
                 onIntent<ChooseLocation.CancelChooseLocation> {
                     if (state().isChooseInDriveMode || state().longPressReportingInDriveMode) {
                         dispatch(ChangeAppMode(appMode = AppMode.Drive))
-                        dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
                     } else {
                         dispatch(ChangeAppMode(appMode = AppMode.Default))
-                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel - 2f))
+                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel))
                     }
                 }
                 onIntent<ChooseLocation.UserMapZoom> {
-                    dispatch(OnUserZoomLevel(it.zoom))
+                    if (state().userZoomLevel != it.zoom) {
+                        dispatch(OnUserZoomLevel(it.zoom))
+                    }
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
