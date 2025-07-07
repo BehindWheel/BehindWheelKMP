@@ -279,9 +279,7 @@ fun GuidanceScreen(
                             val zoom = zoomLevel.zoom
 
                             idleZoomLevel = zoom
-                            if (appMode == AppMode.ChooseLocation) {
-                                component.setUserMapZoom(zoom)
-                            }
+                            component.setUserMapZoom(zoom)
                         }
                         is ZoomLevelState.Moving -> Unit
                     }
