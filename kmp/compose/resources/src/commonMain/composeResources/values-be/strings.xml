@@ -204,6 +204,9 @@
     <string name="reporting_input_length_error">Максімум %1$s знакаў</string>
 
     <string name="reporting_notification_sent">Ваша паведамленне адпраўлена!</string>
+    <string name="reporting_notification_error">Адбылася памылка пры адпраўцы паведамлення</string>
+    <string name="reporting_notification_disabled">Адпраўка паведамленняў часова адключана</string>
+    <string name="reporting_notification_too_often">Вы занадта часта адпраўляеце паведамленні, паспрабуйце пазней</string>
 
     <string name="quick_settings_header">Хуткія налады</string>
     <string name="quick_settings_app_theme">Змена тэмы</string>

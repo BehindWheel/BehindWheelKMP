@@ -23,13 +23,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.reporting_notification_disabled
+import com.egoriku.grodnoroads.compose.resources.reporting_notification_error
 import com.egoriku.grodnoroads.compose.resources.reporting_notification_sent
+import com.egoriku.grodnoroads.compose.resources.reporting_notification_too_often
 import com.egoriku.grodnoroads.compose.resources.snackbar_in_app_update_install
 import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
-import com.egoriku.grodnoroads.compose.snackbar.model.Icon
-import com.egoriku.grodnoroads.compose.snackbar.model.MessageData
-import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.StringRes
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.ActionMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
 import com.egoriku.grodnoroads.extensions.decompose.onChild
@@ -39,6 +41,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.CheckCircle
+import com.egoriku.grodnoroads.foundation.icons.outlined.Error
 import com.egoriku.grodnoroads.guidance.domain.component.GuidanceComponent
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -126,6 +129,8 @@ fun GuidanceScreen(
     val iconGenerator = rememberMarkerGenerator()
     val offsetUtil = rememberOffsetUtil()
 
+    val errorColor = MaterialTheme.colorScheme.error
+
     val specialEventSlot by component.specialEventComponent.specialEvents.collectAsState()
     specialEventSlot.onChild { dialogComponent ->
         SpecialEventDialog(
@@ -141,9 +146,33 @@ fun GuidanceScreen(
                 when (it) {
                     Notification.RepostingSuccess ->
                         snackbarState.show(
-                            SnackbarMessage.SimpleMessage(
-                                title = MessageData.StringRes(Res.string.reporting_notification_sent),
-                                icon = Icon.DrawableRes(imageVector = GrodnoRoads.Outlined.CheckCircle)
+                            SimpleMessage(
+                                title = StringRes(Res.string.reporting_notification_sent),
+                                imageVector = GrodnoRoads.Outlined.CheckCircle
+                            )
+                        )
+                    Notification.GeneralError ->
+                        snackbarState.show(
+                            SimpleMessage(
+                                title = StringRes(Res.string.reporting_notification_error),
+                                imageVector = GrodnoRoads.Outlined.Error,
+                                tint = errorColor
+                            )
+                        )
+                    Notification.ReportingDisabled ->
+                        snackbarState.show(
+                            SimpleMessage(
+                                title = StringRes(Res.string.reporting_notification_disabled),
+                                imageVector = GrodnoRoads.Outlined.Error,
+                                tint = errorColor
+                            )
+                        )
+                    Notification.ReportingTooOften ->
+                        snackbarState.show(
+                            SimpleMessage(
+                                title = StringRes(Res.string.reporting_notification_too_often),
+                                imageVector = GrodnoRoads.Outlined.Error,
+                                tint = errorColor
                             )
                         )
                 }
@@ -190,7 +219,7 @@ fun GuidanceScreen(
         val mapBottomSheet by component.mapBottomSheet.collectAsState(initial = MapBottomSheet.None)
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
-        val longPressReportingInDriveMode by component.longPressReportingInDriveMode.collectAsState(false)
+        val longPressInDriveMode by component.longPressReportingInDriveMode.collectAsState(false)
 
         when (val state = mapBottomSheet) {
             is MapBottomSheet.MarkerInfo -> {
@@ -316,7 +345,7 @@ fun GuidanceScreen(
                     AppMode.Drive -> {
                         if (cameraMoveState == CameraMoveState.Animating) return@LaunchedEffect
 
-                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None || longPressReportingInDriveMode) {
+                        if (!isCameraUpdatesEnabled || cameraInfo != null || mapBottomSheet != MapBottomSheet.None || longPressInDriveMode) {
                             return@LaunchedEffect
                         }
 
@@ -577,7 +606,7 @@ fun GuidanceScreen(
                 coroutineScope.launch {
                     snackbarState.show(
                         ActionMessage(
-                            title = MessageData.StringRes(Res.string.snackbar_in_app_update_install),
+                            title = StringRes(Res.string.snackbar_in_app_update_install),
                             onAction = it
                         )
                     )

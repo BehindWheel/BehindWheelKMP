@@ -209,6 +209,9 @@
     <string name="reporting_input_length_error">Максимум %1$s символов</string>
 
     <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
+    <string name="reporting_notification_error">Произошла ошибка при отправке сообщения</string>
+    <string name="reporting_notification_disabled">Отправка сообщений временно отключена</string>
+    <string name="reporting_notification_too_often">Вы слишком часто отправляете сообщения, попробуйте позже</string>
 
     <string name="quick_settings_header">Быстрые настройки</string>
     <string name="quick_settings_app_theme">Смена темы</string>

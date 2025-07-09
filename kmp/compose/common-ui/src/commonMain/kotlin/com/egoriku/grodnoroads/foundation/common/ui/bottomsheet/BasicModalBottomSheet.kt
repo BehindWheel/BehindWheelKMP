@@ -3,10 +3,7 @@ package com.egoriku.grodnoroads.foundation.common.ui.bottomsheet
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -77,14 +74,12 @@ fun BasicModalBottomSheet(
     footerPadding: PaddingValues = PaddingValues(vertical = 8.dp, horizontal = 20.dp),
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
-
     ModalBottomSheet(
         modifier = modifier,
         onDismissRequest = onCancel,
         dragHandle = { BottomSheetDefaults.DragHandle() },
         sheetState = sheetState,
-        content = {
+        content = { paddingValues ->
             Column(
                 modifier = Modifier.weight(1f, fill = false),
                 content = content
@@ -93,7 +88,7 @@ fun BasicModalBottomSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(footerPadding)
-                    .padding(bottom = navBarPadding.calculateBottomPadding()),
+                    .padding(bottom = paddingValues.calculateBottomPadding()),
                 content = footer
             )
         }
@@ -104,20 +99,18 @@ fun BasicModalBottomSheet(
 @Composable
 fun BasicModalBottomSheet(
     sheetState: SheetState,
-    onCancel: () -> Unit,
+    onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val navBarPadding = WindowInsets.navigationBars.asPaddingValues()
-
     ModalBottomSheet(
         modifier = modifier,
-        onDismissRequest = onCancel,
+        onDismissRequest = onDismissRequest,
         dragHandle = { BottomSheetDefaults.DragHandle() },
         sheetState = sheetState,
-        content = {
+        content = { paddingValues ->
             Column(
-                modifier = Modifier.padding(bottom = navBarPadding.calculateBottomPadding()),
+                modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding()),
                 content = content
             )
         }
