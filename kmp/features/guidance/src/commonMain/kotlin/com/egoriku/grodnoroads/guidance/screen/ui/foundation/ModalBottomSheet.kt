@@ -2,9 +2,6 @@ package com.egoriku.grodnoroads.guidance.screen.ui.foundation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,16 +24,14 @@ fun <T> ModalBottomSheet(
     content: @Composable ColumnScope.(T) -> Unit
 ) {
     if (data != null) {
-        val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-
         ModalBottomSheet(
             modifier = modifier,
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
             shape = shape,
             dragHandle = dragHandle
-        ) {
-            Column(modifier = Modifier.padding(bottom = bottomPadding)) {
+        ) { paddingValues ->
+            Column(modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding())) {
                 content(data)
             }
         }

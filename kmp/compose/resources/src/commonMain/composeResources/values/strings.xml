@@ -212,6 +212,9 @@
     <string name="reporting_input_length_error">Maximum %1$s characters</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
+    <string name="reporting_notification_error">An error occurred while sending the message</string>
+    <string name="reporting_notification_disabled">Message sending is temporarily disabled</string>
+    <string name="reporting_notification_too_often">You are sending messages too often, please try again later</string>
 
     <string name="quick_settings_header">Quick settings</string>
     <string name="quick_settings_app_theme">Changing theme</string>

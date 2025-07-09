@@ -11,6 +11,10 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
 import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.GeneralError
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingDisabled
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingSuccess
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingTooOften
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -109,6 +113,17 @@ internal class GuidanceComponentImpl(
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY) {
             locationStore.labels bindTo ::bindLocationLabel
         }
+
+        eventReportingComponent.labels
+            .onEach { label ->
+                when (label) {
+                    GeneralError -> notificationEvents.tryEmit(Notification.GeneralError)
+                    ReportingDisabled -> notificationEvents.tryEmit(Notification.ReportingDisabled)
+                    ReportingTooOften -> notificationEvents.tryEmit(Notification.ReportingTooOften)
+                    ReportingSuccess -> notificationEvents.tryEmit(Notification.RepostingSuccess)
+                }
+            }
+            .launchIn(coroutineScope)
 
         combine(
             flow = alerts,
@@ -256,8 +271,6 @@ internal class GuidanceComponentImpl(
             locationStore.accept(LocationStore.Intent.InvalidateLocation)
         }
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
-
-        notificationEvents.tryEmit(Notification.RepostingSuccess)
     }
 
     override fun cancelReporting() {

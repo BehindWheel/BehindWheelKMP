@@ -1,5 +1,6 @@
 package com.egoriku.grodnoroads.compose.snackbar.model
 
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlin.jvm.JvmInline
 import org.jetbrains.compose.resources.StringResource
@@ -12,14 +13,6 @@ sealed interface MessageData {
     value class Raw(val text: String) : MessageData
 }
 
-sealed interface Icon {
-    @JvmInline
-    value class DrawableRes(val imageVector: ImageVector) : Icon
-
-    @JvmInline
-    value class Vector(val imageVector: ImageVector) : Icon
-}
-
 sealed interface SnackbarMessage {
     val title: MessageData
     val description: MessageData?
@@ -29,7 +22,8 @@ sealed interface SnackbarMessage {
         override val title: MessageData,
         override val description: MessageData? = null,
         override val duration: SnackbarDuration = SnackbarDuration.Short,
-        val icon: Icon? = null
+        val imageVector: ImageVector? = null,
+        val tint: Color? = null
     ) : SnackbarMessage
 
     data class ActionMessage(
