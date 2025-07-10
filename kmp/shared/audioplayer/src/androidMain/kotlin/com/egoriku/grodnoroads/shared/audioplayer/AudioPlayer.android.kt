@@ -13,9 +13,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
+import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VOLUME_CHANGE_ACTION
 import com.egoriku.grodnoroads.shared.audioplayer.broadcast.VolumeChangeReceiver
-import com.egoriku.grodnoroads.shared.audioplayer.util.AudioEffectUtil
 import com.egoriku.grodnoroads.shared.audioplayer.util.audioManager
 import kotlin.math.roundToInt
 
@@ -35,7 +35,9 @@ actual class AudioPlayer(private val context: Context) {
             .build()
 
     private val mediaPlayer = MediaPlayer()
-    private var loudnessEnhancer: LoudnessEnhancer? = null
+    private var loudnessEnhancer = createEffect {
+        LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
+    }
     private val soundQueue = mutableListOf<Sound>()
     private var isPlaying = false
 
@@ -65,10 +67,6 @@ actual class AudioPlayer(private val context: Context) {
                 }
                 enqueueNextSound()
             }
-        }
-
-        if (AudioEffectUtil.isLoudnessEnhancerAvailable()) {
-            loudnessEnhancer = LoudnessEnhancer(mediaPlayer.audioSessionId).apply { enabled = true }
         }
 
         ContextCompat.registerReceiver(
@@ -138,5 +136,14 @@ actual class AudioPlayer(private val context: Context) {
         AudioManagerCompat.abandonAudioFocusRequest(audioManager, audioFocusRequest)
         mediaPlayer.release()
         soundQueue.clear()
+    }
+}
+
+private inline fun <T> createEffect(block: () -> T): T? {
+    return try {
+        block()
+    } catch (t: Throwable) {
+        logD("Effect init failed: ${t.message}")
+        null
     }
 }
