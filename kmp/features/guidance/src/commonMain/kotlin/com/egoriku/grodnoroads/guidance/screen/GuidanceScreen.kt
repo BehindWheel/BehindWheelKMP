@@ -86,6 +86,7 @@ import com.egoriku.grodnoroads.guidance.screen.ui.mode.default.DefaultMode
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.DriveMode
 import com.egoriku.grodnoroads.guidance.screen.util.rememberOffsetUtil
 import com.egoriku.grodnoroads.guidance.screen.util.rememberSnackbarMessageBuilder
+import com.egoriku.grodnoroads.location.validateOrNull
 import com.egoriku.grodnoroads.maps.compose.GoogleMap
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
@@ -496,9 +497,10 @@ fun GuidanceScreen(
                                 isChooseInDriveMode = mapConfig.isChooseInDriveMode,
                                 onCancel = component::cancelChooseLocationFlow,
                                 onLocationSelect = { offset ->
-                                    val latLng = projection?.toScreenLatLng(
-                                        point = offsetUtil.offsetToPoint(offset)
-                                    ) ?: return@ChooseLocation
+                                    val latLng = projection
+                                        ?.toScreenLatLng(point = offsetUtil.offsetToPoint(offset))
+                                        ?.validateOrNull()
+                                        ?: return@ChooseLocation
                                     component.startReporting(latLng)
                                 }
                             )
