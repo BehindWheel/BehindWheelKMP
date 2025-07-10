@@ -9,3 +9,13 @@ expect class LatLng(platform: PlatformLatLng) {
 
     constructor(latitude: Double, longitude: Double)
 }
+
+fun LatLng.validateOrNull(): LatLng? {
+    val isValid =
+        !latitude.isNaN() &&
+            !latitude.isInfinite() &&
+            !longitude.isNaN() &&
+            !longitude.isInfinite()
+
+    return if (isValid) this else null
+}
