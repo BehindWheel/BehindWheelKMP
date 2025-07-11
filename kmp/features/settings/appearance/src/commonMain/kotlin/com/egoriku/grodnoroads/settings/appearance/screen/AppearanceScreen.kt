@@ -21,6 +21,7 @@ import com.egoriku.grodnoroads.compose.resources.appearance_app_theme
 import com.egoriku.grodnoroads.compose.resources.appearance_app_theme_description
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on
 import com.egoriku.grodnoroads.compose.resources.appearance_keep_screen_on_description
+import com.egoriku.grodnoroads.compose.resources.settings_category_main
 import com.egoriku.grodnoroads.compose.resources.appearance_map_type_header
 import com.egoriku.grodnoroads.compose.resources.settings_category_main
 import com.egoriku.grodnoroads.compose.resources.settings_section_appearance
