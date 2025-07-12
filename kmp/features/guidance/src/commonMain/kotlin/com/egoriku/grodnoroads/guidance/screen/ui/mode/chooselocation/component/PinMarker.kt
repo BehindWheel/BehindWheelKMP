@@ -24,7 +24,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.onLayoutRectChanged
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -87,10 +88,10 @@ fun PinMarker(
                         y = (space.height - size.height * 0.5f).toInt()
                     )
                 }
-                .onLayoutRectChanged {
+                .onGloballyPositioned {
                     val position = Offset(
-                        x = it.positionInWindow.x + it.width / 2f,
-                        y = it.positionInWindow.y + it.height / 2f
+                        x = it.positionInWindow().x + it.size.width / 2f,
+                        y = it.positionInWindow().y + it.size.height / 2f
                     )
                     onPositionUpdate(position)
                 }
