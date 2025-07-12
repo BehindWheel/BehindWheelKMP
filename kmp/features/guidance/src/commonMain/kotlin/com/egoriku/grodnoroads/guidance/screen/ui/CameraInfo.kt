@@ -28,6 +28,7 @@ import com.egoriku.grodnoroads.compose.resources.alerts_mobile_camera
 import com.egoriku.grodnoroads.compose.resources.alerts_stationary_camera
 import com.egoriku.grodnoroads.compose.resources.camera_info_last_update
 import com.egoriku.grodnoroads.compose.resources.camera_info_report
+import com.egoriku.grodnoroads.compose.resources.camera_info_stub_title
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCameraBold
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
@@ -47,7 +48,6 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamer
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.components.FeatureFlags
-import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -89,15 +89,19 @@ private fun Info(
             )
             HorizontalSpacer(16.dp)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(text = camera.name, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = camera.name.ifEmpty { stringResource(Res.string.camera_info_stub_title) },
+                    style = MaterialTheme.typography.titleMedium
+                )
                 Text(
                     text = stringResource(cameraResource),
                     style = MaterialTheme.typography.bodyMedium
                 )
-                // TODO: make separate UI model with formatted value
-                val formattedDate = CameraFormatter.format(camera.updateTime)
                 DisabledText(
-                    text = stringResource(Res.string.camera_info_last_update, formattedDate),
+                    text = stringResource(
+                        Res.string.camera_info_last_update,
+                        camera.formattedUpdateTime
+                    ),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
@@ -182,7 +186,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 name = "Гродно, ул. Магистральная",
                 angle = -1.0f,
                 bidirectional = false,
-                updateTime = 1683234000000,
+                formattedUpdateTime = "05.05.2023",
                 speedCar = 100,
                 speedTruck = 80,
                 position = LatLng(-1.0, -1.0)
@@ -195,7 +199,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 name = "Гродно, ул. Магистральная",
                 angle = -1.0f,
                 bidirectional = false,
-                updateTime = 1683234000000,
+                formattedUpdateTime = "05.05.2023",
                 speedCar = 100,
                 speedTruck = 80,
                 position = LatLng(-1.0, -1.0)
@@ -208,7 +212,7 @@ private fun CameraInfoPreview() = GrodnoRoadsM3ThemePreview {
                 name = "Гродно, ул. Магистральная",
                 angle = -1.0f,
                 bidirectional = false,
-                updateTime = 1683234000000,
+                formattedUpdateTime = "05.05.2023",
                 speedCar = 100,
                 speedTruck = 80,
                 position = LatLng(-1.0, -1.0)

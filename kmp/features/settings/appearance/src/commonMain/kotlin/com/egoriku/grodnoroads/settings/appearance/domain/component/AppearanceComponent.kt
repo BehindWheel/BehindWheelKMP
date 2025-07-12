@@ -4,10 +4,12 @@ import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppLanguage
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.KeepScreenOn
+import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.MapTypeAppearance
 import com.egoriku.grodnoroads.settings.appearance.domain.store.AppearanceStore.State
 import com.egoriku.grodnoroads.settings.appearance.domain.util.isBYLocaleSupported
 import com.egoriku.grodnoroads.shared.persistent.appearance.Language
 import com.egoriku.grodnoroads.shared.persistent.appearance.Theme
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType
 import kotlinx.coroutines.flow.StateFlow
 
 @Stable
@@ -23,6 +25,7 @@ interface AppearanceComponent {
     data class AppearanceState(
         val appTheme: AppTheme = AppTheme(),
         val appLanguage: AppLanguage = AppLanguage(),
+        val mapTypeAppearance: MapTypeAppearance = MapTypeAppearance(),
         val keepScreenOn: KeepScreenOn = KeepScreenOn()
     )
 
@@ -44,6 +47,11 @@ interface AppearanceComponent {
                 }
                 add(Language.English)
             }
+        ) : AppearancePref
+
+        data class MapTypeAppearance(
+            val current: MapType = MapType.Normal,
+            val values: List<MapType> = MapType.entries
         ) : AppearancePref
 
         data class KeepScreenOn(val enabled: Boolean = false) : AppearancePref

@@ -27,6 +27,7 @@
     <string name="alerts_unsupported_message">Unsupported message</string>
 
     <string name="camera_info_last_update">Updated %1$s</string>
+    <string name="camera_info_stub_title">No description</string>
     <string name="camera_info_report">Report an error</string>
 
     <string name="terms_of_conditions">Terms of Conditions</string>
@@ -62,6 +63,11 @@
     <string name="appearance_app_language_en">English</string>
     <string name="appearance_app_language_be">Belarusian</string>
     <string name="appearance_app_language_system">System</string>
+
+    <string name="appearance_map_type_header">Map type</string>
+    <string name="appearance_map_type_normal">Normal</string>
+    <string name="appearance_map_type_satellite">Satellite</string>
+    <string name="appearance_map_type_hybrid">Hybrid</string>
 
     <string name="appearance_keep_screen_on">Keep screen on</string>
     <string name="appearance_keep_screen_on_description">Keeps the Map screen always on (may increase battery consumption)</string>
@@ -184,6 +190,7 @@
     <string name="reporting_item_non_working_traffic_lights">Non-working traffic lights</string>
     <string name="reporting_item_open_hatch">Open hatch</string>
     <string name="reporting_item_road_blocked">Road blocked</string>
+    <string name="reporting_item_road_marking">Applying road markings</string>
     <string name="reporting_item_other_road_incident">Other</string>
     <string name="reporting_item_traffic_jam">Traffic jam</string>
     <string name="reporting_item_wild_animals">Wild animals</string>
@@ -200,14 +207,19 @@
 
     <string name="reporting_mobile_camera_header">Speed limit</string>
     <string name="reporting_mobile_camera_speed">%1$s km/h</string>
-    <string name="reporting_mobile_camera_input_hint">Camera location*</string>
-    <string name="reporting_mobile_camera_input_error">Enter information about the camera</string>
+    <string name="reporting_mobile_camera_input_hint">Camera location</string>
+
+    <string name="reporting_input_length_error">Maximum %1$s characters</string>
 
     <string name="reporting_notification_sent">Your message has been sent!</string>
+    <string name="reporting_notification_error">An error occurred while sending the message</string>
+    <string name="reporting_notification_disabled">Message sending is temporarily disabled</string>
+    <string name="reporting_notification_too_often">You are sending messages too often, please try again later</string>
 
     <string name="quick_settings_header">Quick settings</string>
     <string name="quick_settings_app_theme">Changing theme</string>
     <string name="quick_settings_markers_filtering">Filtering markers by time</string>
+    <string name="quick_settings_map_type">Map type</string>
     <string name="quick_settings_voice_alerts">Voice alerts</string>
     <string name="quick_settings_traffic_conditions">Traffic conditions</string>
 

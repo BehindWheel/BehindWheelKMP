@@ -3,23 +3,25 @@ compileSdk = "35"
 minSdk = "23" # Android 6.0
 targetSdk = "35"
 
-agp = "8.9.2"
+agp = "8.11.1"
 buildkonfig = "0.17.1"
 decompose = "3.3.0"
+compose = "1.8.2"
 essenty = "2.5.0"
-kotlinx-serialization = "1.8.1"
-kotlin = "2.1.20"
+koin = "4.1.0"
+kotlinx-serialization = "1.9.0"
+kotlin = "2.2.0"
 mvikotlin = "4.3.0"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.10.1"
 androidx-annotation = "androidx.annotation:annotation:1.9.1"
-androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
-androidx-datastore = "androidx.datastore:datastore-preferences:1.1.4"
-androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.4"
+androidx-datastore = "androidx.datastore:datastore-preferences:1.1.7"
+androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.7"
 androidx-media = "androidx.media:media:1.7.0"
 
 balloon-compose = "com.github.skydoves:balloon-compose:1.6.12"
@@ -39,21 +41,21 @@ essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-corou
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
 google-maps = "com.google.maps.android:maps-ktx:5.2.0"
-google-maps-utils = "com.google.maps.android:android-maps-utils:3.13.0"
+google-maps-utils = "com.google.maps.android:android-maps-utils:3.14.0"
 
-koin-android = "io.insert-koin:koin-android:4.0.4"
-koin-compose = "io.insert-koin:koin-compose:4.0.4"
-koin-core = "io.insert-koin:koin-core:4.0.4"
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 
-kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
+kotlin-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.4.0"
 kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
 kotlin-coroutines-playservices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2"
-kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
+kotlin-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.7.1"
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
-material3-windowsize = "org.jetbrains.compose.material3:material3-window-size-class:1.7.3"
+material3-windowsize = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose" }
 
 mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
@@ -71,7 +73,7 @@ buildkonfig-gradle = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle
 
 # 3rd party tools
 compose-rules = "io.nlopez.compose.rules:ktlint:0.4.22"
-ktlint = "com.pinterest.ktlint:ktlint-cli:1.5.0"
+ktlint = "com.pinterest.ktlint:ktlint-cli:1.6.0"
 
 [bundles]
 mvikotlin = ["mvikotlin", "mvikotlin-main", "mvikotlin-extensions"]
@@ -81,15 +83,15 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.3" }
-google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
-jetbrains-compose = { id = "org.jetbrains.compose", version = "1.7.3" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.4" }
+google-services = { id = "com.google.gms.google-services", version = "4.4.3" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
-spotless = { id = "com.diffplug.spotless", version = "7.0.3" }
+spotless = { id = "com.diffplug.spotless", version = "7.1.0" }
 
 # Project conventional plugins
 grodnoroads-application = { id = "grodnoroads.application", version = "unspecified" }

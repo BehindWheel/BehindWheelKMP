@@ -60,7 +60,7 @@ actual fun InAppUpdateHandle(onDownload: (complete: () -> Unit) -> Unit) {
                     appUpdateResult.completeUpdate()
                 }
             }
-            else -> Unit
+            else -> {}
         }
     }
 }

@@ -17,7 +17,9 @@ import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Inten
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent.StopDriveMode
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.ChangeAppMode
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.LongPressReporting
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnAlertRadius
+import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnAreasParsed
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnMapConfigInternal
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnUserZoomLevel
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStoreFactory.Message.OnZoomLevel
@@ -46,6 +48,7 @@ import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowStationaryCam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowTrafficJam
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowTrafficPolice
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowWildAnimals
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.mapType
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -67,9 +70,11 @@ internal class MapConfigStoreFactory(
         data class OnUserZoomLevel(val userZoomLevel: Float) : Message
         data class ChangeAppMode(
             val appMode: AppMode,
-            val isChooseInDriveMode: Boolean = false
+            val isChooseInDriveMode: Boolean = false,
+            val longPressReportingInDriveMode: Boolean = false
         ) : Message
 
+        data class LongPressReporting(val longPressReportingInDriveMode: Boolean) : Message
         data class OnAreasParsed(val areas: List<Area>) : Message
     }
 
@@ -110,6 +115,7 @@ internal class MapConfigStoreFactory(
                                     notifyWildAnimals = pref.isNotifyWildAnimals
                                 ),
                                 trafficJanOnMap = pref.trafficJamOnMap,
+                                mapType = pref.mapType,
                                 keepScreenOn = pref.keepScreenOn
                             )
                         }
@@ -118,7 +124,7 @@ internal class MapConfigStoreFactory(
                         .launchIn(this)
 
                     launch {
-                        dispatch(Message.OnAreasParsed(cityAreasRepository.load()))
+                        dispatch(OnAreasParsed(cityAreasRepository.load()))
                     }
                 }
                 onIntent<CheckLocation> { location ->
@@ -152,7 +158,9 @@ internal class MapConfigStoreFactory(
                     dispatch(OnZoomLevel(zoomLevel = 12.5f))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
-                    when (state().currentAppMode) {
+                    val state = state()
+
+                    when (state.currentAppMode) {
                         AppMode.Default -> {
                             dispatch(
                                 ChangeAppMode(
@@ -160,29 +168,43 @@ internal class MapConfigStoreFactory(
                                     isChooseInDriveMode = false
                                 )
                             )
-                            dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
-                            dispatch(OnUserZoomLevel(userZoomLevel = state().mapInternalConfig.zoomLevelInCity))
+                            if (state.userZoomLevel < state.mapInternalConfig.zoomLevelInCity) {
+                                dispatch(OnZoomLevel(zoomLevel = state.mapInternalConfig.zoomLevelInCity))
+                            } else {
+                                dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel))
+                            }
                         }
-                        AppMode.Drive -> dispatch(
-                            ChangeAppMode(
-                                appMode = AppMode.ChooseLocation,
-                                isChooseInDriveMode = true
+                        AppMode.Drive -> {
+                            dispatch(
+                                ChangeAppMode(
+                                    appMode = AppMode.ChooseLocation,
+                                    isChooseInDriveMode = true
+                                )
                             )
-                        )
+                            dispatch(OnZoomLevel(zoomLevel = state.userZoomLevel))
+                        }
+                        else -> {}
+                    }
+                }
+                onIntent<ChooseLocation.LongPressReporting> {
+                    when (state().currentAppMode) {
+                        AppMode.Default -> dispatch(LongPressReporting(longPressReportingInDriveMode = false))
+                        AppMode.Drive -> dispatch(LongPressReporting(longPressReportingInDriveMode = true))
                         else -> {}
                     }
                 }
                 onIntent<ChooseLocation.CancelChooseLocation> {
-                    if (state().isChooseInDriveMode) {
+                    if (state().isChooseInDriveMode || state().longPressReportingInDriveMode) {
                         dispatch(ChangeAppMode(appMode = AppMode.Drive))
-                        dispatch(OnZoomLevel(zoomLevel = state().mapInternalConfig.zoomLevelInCity))
                     } else {
                         dispatch(ChangeAppMode(appMode = AppMode.Default))
-                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel - 2f))
+                        dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel))
                     }
                 }
                 onIntent<ChooseLocation.UserMapZoom> {
-                    dispatch(OnUserZoomLevel(it.zoom))
+                    if (state().userZoomLevel != it.zoom) {
+                        dispatch(OnUserZoomLevel(it.zoom))
+                    }
                 }
             },
             bootstrapper = SimpleBootstrapper(Unit),
@@ -192,11 +214,13 @@ internal class MapConfigStoreFactory(
                     is OnZoomLevel -> copy(zoomLevel = message.zoomLevel)
                     is ChangeAppMode -> copy(
                         currentAppMode = message.appMode,
-                        isChooseInDriveMode = message.isChooseInDriveMode
+                        isChooseInDriveMode = message.isChooseInDriveMode,
+                        longPressReportingInDriveMode = message.longPressReportingInDriveMode
                     )
                     is OnUserZoomLevel -> copy(userZoomLevel = message.userZoomLevel)
                     is OnAlertRadius -> copy(alertRadius = message.radius)
-                    is Message.OnAreasParsed -> copy(areas = message.areas)
+                    is OnAreasParsed -> copy(areas = message.areas)
+                    is LongPressReporting -> copy(longPressReportingInDriveMode = message.longPressReportingInDriveMode)
                 }
             }
         ) {}

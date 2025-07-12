@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.quick_settings_app_theme
 import com.egoriku.grodnoroads.compose.resources.quick_settings_header
+import com.egoriku.grodnoroads.compose.resources.quick_settings_map_type
 import com.egoriku.grodnoroads.compose.resources.quick_settings_markers_filtering
 import com.egoriku.grodnoroads.compose.resources.quick_settings_traffic_conditions
 import com.egoriku.grodnoroads.compose.resources.quick_settings_voice_alerts
@@ -30,6 +31,7 @@ import com.egoriku.grodnoroads.foundation.core.CenterVerticallyRow
 import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Appearance
 import com.egoriku.grodnoroads.foundation.icons.outlined.Filter
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.icons.outlined.Notification
@@ -43,6 +45,7 @@ import com.egoriku.grodnoroads.foundation.uikit.dynamic.Switch
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppTheme
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MapTypeAppearance
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MarkerFiltering
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
@@ -69,6 +72,11 @@ internal fun QuickSettingsContent(
         VerticalSpacer(24.dp)
         FilteringSection(
             markerFiltering = quickSettingsState.markerFiltering,
+            onChange = onChange
+        )
+        VerticalSpacer(24.dp)
+        MapTypeSection(
+            mapTypeAppearance = quickSettingsState.mapTypeAppearance,
             onChange = onChange
         )
         VerticalSpacer(16.dp)
@@ -136,6 +144,36 @@ private fun FilteringSection(
                     selected = selected,
                     onClick = {
                         onChange(markerFiltering.copy(current = filtering))
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(filtering.toStringResource()),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MapTypeSection(
+    mapTypeAppearance: MapTypeAppearance,
+    onChange: (QuickSettingsPref) -> Unit
+) {
+    BasicSection(
+        imageVector = GrodnoRoads.Outlined.Appearance,
+        name = stringResource(Res.string.quick_settings_map_type)
+    ) {
+        HorizontalScrollableRow {
+            mapTypeAppearance.values.forEach { filtering ->
+                val selected = mapTypeAppearance.current == filtering
+
+                FilterChip(
+                    selected = selected,
+                    onClick = {
+                        onChange(mapTypeAppearance.copy(current = filtering))
                     },
                     label = {
                         Text(
@@ -220,6 +258,7 @@ private fun QuickSettingsContentPreview() = GrodnoRoadsM3ThemePreview {
             state = when (it) {
                 is AppTheme -> state.copy(appTheme = it)
                 is MarkerFiltering -> state.copy(markerFiltering = it)
+                is MapTypeAppearance -> state.copy(mapTypeAppearance = it)
                 is TrafficJamOnMap -> state.copy(trafficJamOnMap = it)
                 is VoiceAlerts -> state.copy(voiceAlerts = it)
             }

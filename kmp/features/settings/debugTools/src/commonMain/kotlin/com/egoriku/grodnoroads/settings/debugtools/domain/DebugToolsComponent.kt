@@ -5,5 +5,6 @@ import androidx.compose.runtime.Stable
 @Stable
 interface DebugToolsComponent {
 
-    fun showOnboarding()
+    fun resetOnboarding()
+    fun resetReportingLimit()
 }

@@ -27,6 +27,7 @@ import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
 import cocoapods.GoogleMaps.GMSMarker
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
 import com.egoriku.grodnoroads.maps.compose.api.ZoomLevelState
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
@@ -41,10 +42,12 @@ import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdaterIos
 import com.egoriku.grodnoroads.maps.compose.util.toUIColor
+import kotlinx.cinterop.CValue
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.readValue
 import kotlinx.cinterop.useContents
 import platform.CoreGraphics.CGRectZero
+import platform.CoreLocation.CLLocationCoordinate2D
 import platform.UIKit.UIApplication
 import platform.darwin.NSObject
 
@@ -114,7 +117,6 @@ actual fun GoogleMap(
 
             override fun mapView(
                 mapView: GMSMapView,
-                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
                 idleAtCameraPosition: GMSCameraPosition
             ) {
                 updatedCameraMoveState(CameraMoveState.Idle)
@@ -124,12 +126,18 @@ actual fun GoogleMap(
 
             override fun mapView(
                 mapView: GMSMapView,
-                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
                 didTapMarker: GMSMarker
             ): Boolean {
                 mapUpdater?.clickMarker(didTapMarker)
 
                 return true
+            }
+
+            override fun mapView(
+                mapView: GMSMapView,
+                didLongPressAtCoordinate: CValue<CLLocationCoordinate2D>
+            ) {
+                mapUpdater?.mapLongPressEvent(didLongPressAtCoordinate.toLatLng())
             }
         }
     }
@@ -188,11 +196,13 @@ private fun MapPaddingDecorator.updateContentPadding(
     layoutDirection: LayoutDirection
 ) {
     with(density) {
+        val bottom = contentPadding.calculateBottomPadding().value.toInt() - insetBottom
+
         updateContentPadding(
             left = contentPadding.calculateLeftPadding(layoutDirection).roundToPx(),
-            top = contentPadding.calculateBottomPadding().roundToPx(),
+            top = bottom,
             right = contentPadding.calculateRightPadding(layoutDirection).roundToPx(),
-            bottom = contentPadding.calculateBottomPadding().value.toInt() - insetBottom
+            bottom = bottom
         )
     }
 }

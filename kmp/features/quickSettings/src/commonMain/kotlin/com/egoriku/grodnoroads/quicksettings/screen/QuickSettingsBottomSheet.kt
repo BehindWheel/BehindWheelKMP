@@ -19,7 +19,7 @@ fun QuickSettingsBottomSheet(
 
     BasicModalBottomSheet(
         sheetState = rememberSheetCloseBehaviour(onCancel = onClose).sheetState,
-        onCancel = onClose,
+        onDismissRequest = onClose,
         content = {
             QuickSettingsContent(
                 quickSettingsState = quickSettingsState,

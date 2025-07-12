@@ -11,6 +11,10 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.eventreporting.domain.component.EventReportingComponent
 import com.egoriku.grodnoroads.eventreporting.domain.component.buildEventReportingComponent
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.GeneralError
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingDisabled
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingSuccess
+import com.egoriku.grodnoroads.eventreporting.domain.store.Label.ReportingTooOften
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
@@ -110,6 +114,17 @@ internal class GuidanceComponentImpl(
             locationStore.labels bindTo ::bindLocationLabel
         }
 
+        eventReportingComponent.labels
+            .onEach { label ->
+                when (label) {
+                    GeneralError -> notificationEvents.tryEmit(Notification.GeneralError)
+                    ReportingDisabled -> notificationEvents.tryEmit(Notification.ReportingDisabled)
+                    ReportingTooOften -> notificationEvents.tryEmit(Notification.ReportingTooOften)
+                    ReportingSuccess -> notificationEvents.tryEmit(Notification.RepostingSuccess)
+                }
+            }
+            .launchIn(coroutineScope)
+
         combine(
             flow = alerts,
             flow2 = alertInfo,
@@ -180,11 +195,15 @@ internal class GuidanceComponentImpl(
     override val userCount: Flow<Int>
         get() = mapEventsStore.states.map { it.userCount }
 
+    override val longPressReportingInDriveMode: Flow<Boolean>
+        get() = mapConfigStore.states.map { it.longPressReportingInDriveMode }
+
     override val mapConfig: Flow<MapConfig>
         get() = mapConfigStore.states.map {
             MapConfig(
                 zoomLevel = it.zoomLevel,
                 trafficJanOnMap = it.mapInternalConfig.trafficJanOnMap,
+                mapType = it.mapInternalConfig.mapType,
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
                 alertRadius = it.alertRadius,
                 alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled,
@@ -252,8 +271,12 @@ internal class GuidanceComponentImpl(
             locationStore.accept(LocationStore.Intent.InvalidateLocation)
         }
         mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+    }
 
-        notificationEvents.tryEmit(Notification.RepostingSuccess)
+    override fun cancelReporting() {
+        if (mapConfigStore.state.longPressReportingInDriveMode) {
+            mapConfigStore.accept(ChooseLocation.CancelChooseLocation)
+        }
     }
 
     override fun switchToChooseLocationFlow() {
@@ -270,6 +293,11 @@ internal class GuidanceComponentImpl(
     override fun startReporting(latLng: LatLng) {
         onOpenReporting()
         setLocation(latLng)
+    }
+
+    override fun longPressReporting(latLng: LatLng) {
+        mapConfigStore.accept(ChooseLocation.LongPressReporting)
+        startReporting(latLng)
     }
 
     override fun setUserMapZoom(zoom: Float) {

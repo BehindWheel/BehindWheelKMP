@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.snackbar.model.Icon
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
 import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.StringRes
 import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
@@ -41,18 +41,13 @@ fun SimpleMessageItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                val icon = message.icon
+                val icon = message.imageVector
                 if (icon != null) {
-                    when (icon) {
-                        is Icon.DrawableRes -> Icon(
-                            imageVector = icon.imageVector,
-                            contentDescription = null
-                        )
-                        is Icon.Vector -> Icon(
-                            imageVector = icon.imageVector,
-                            contentDescription = null
-                        )
-                    }
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = message.tint ?: LocalContentColor.current
+                    )
                 }
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -95,7 +90,7 @@ private fun SimpleMessageItemPreview() = GrodnoRoadsM3ThemePreview {
         SimpleMessageItem(
             message = SimpleMessage(
                 title = Raw("Доступ к геолокации запрещен."),
-                icon = Icon.DrawableRes(imageVector = GrodnoRoads.Outlined.CheckCircle)
+                imageVector = GrodnoRoads.Outlined.CheckCircle
             )
         )
     }

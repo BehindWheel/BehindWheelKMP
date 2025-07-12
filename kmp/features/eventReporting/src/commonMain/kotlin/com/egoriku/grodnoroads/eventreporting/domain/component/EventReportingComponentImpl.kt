@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.eventreporting.domain.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
+import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore
 import com.egoriku.grodnoroads.eventreporting.domain.store.ReportingStore.Intent
 import com.egoriku.grodnoroads.location.LatLng
@@ -20,6 +21,8 @@ internal class EventReportingComponentImpl(
     KoinComponent {
 
     private val reportingStore: ReportingStore = instanceKeeper.getStore(::get)
+
+    override val labels = reportingStore.labels
 
     override fun report(params: ReportParams, latLng: LatLng) {
         reportingStore.accept(Intent.ReportAction(params, latLng))

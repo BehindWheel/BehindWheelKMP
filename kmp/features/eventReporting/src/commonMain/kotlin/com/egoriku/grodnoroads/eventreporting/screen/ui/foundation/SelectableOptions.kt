@@ -2,28 +2,18 @@ package com.egoriku.grodnoroads.eventreporting.screen.ui.foundation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.dialog_input_hint
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting
 import com.egoriku.grodnoroads.eventreporting.screen.ui.util.toStringResource
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.OutlinedTextField
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
@@ -34,22 +24,19 @@ internal fun ColumnScope.SelectableOptions(
     reportType: Reporting.ReportType,
     onReportParamsChange: (ReportParams) -> Unit
 ) {
-    val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
-
-    val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+    val updatedReportParamsChange by rememberUpdatedState(onReportParamsChange)
 
     var selectedOption by rememberMutableState(reportType) {
         reportType.items.first()
     }
-    var inputText by rememberMutableState { "" }
 
-    LaunchedEffect(reportType, selectedOption, inputText) {
+    LaunchedEffect(reportType, selectedOption) {
         updatedReportParamsChange(
             ReportParams.EventReport(
                 mapEventType = selectedOption.mapEventType,
                 shortMessage = selectedOption.toSend,
-                message = inputText.trim().ifEmpty { selectedOption.toSend }
+                message = selectedOption.toSend
             )
         )
     }
@@ -64,22 +51,7 @@ internal fun ColumnScope.SelectableOptions(
             }
         )
     }
-    VerticalSpacer(16.dp)
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                keyboardController?.hide()
-                focusManager.clearFocus()
-            }
-        ),
-        value = inputText,
-        onValueChange = { inputText = it },
-        label = stringResource(Res.string.dialog_input_hint)
-    )
+    VerticalSpacer(8.dp)
 }
 
 @PreviewGrodnoRoads

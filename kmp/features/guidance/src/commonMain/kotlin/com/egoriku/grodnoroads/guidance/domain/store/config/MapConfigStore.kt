@@ -19,6 +19,7 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
             data object OpenChooseLocation : Intent
             data class UserMapZoom(val zoom: Float) : Intent
             data object CancelChooseLocation : Intent
+            data object LongPressReporting : Intent
         }
     }
 
@@ -26,9 +27,10 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
         val mapInternalConfig: MapInternalConfig = MapInternalConfig.EMPTY,
         val areas: List<Area> = emptyList(),
         val zoomLevel: Float = 12.5f,
-        val userZoomLevel: Float = 0f,
+        val userZoomLevel: Float = 12.5f,
         val alertRadius: Int = 0,
         val currentAppMode: AppMode = AppMode.Default,
-        val isChooseInDriveMode: Boolean = false
+        val isChooseInDriveMode: Boolean = false,
+        val longPressReportingInDriveMode: Boolean = false
     )
 }

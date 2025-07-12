@@ -4,4 +4,6 @@ object GrodnoRoads {
     object Outlined
 
     object Colored
+
+    object Filled
 }

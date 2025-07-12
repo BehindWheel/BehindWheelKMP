@@ -14,7 +14,8 @@ val eventReportingModule = module {
         ReportingStoreFactory(
             storeFactory = get(),
             reportingRepository = get(),
-            analyticsTracker = get()
+            analyticsTracker = get(),
+            crashlyticsTracker = get()
         ).create()
     }
 }

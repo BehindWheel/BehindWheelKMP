@@ -9,6 +9,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.AppTheme
+import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MapTypeAppearance
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.MarkerFiltering
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.TrafficJamOnMap
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref.VoiceAlerts
@@ -22,7 +23,9 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.appTheme
 import com.egoriku.grodnoroads.shared.persistent.appearance.updateAppTheme
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.updateFiltering
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.mapType
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.trafficJamOnMap
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.updateMapType
 import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.updateTrafficJamAppearance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -47,6 +50,7 @@ internal class QuickSettingsStoreFactory(
                             QuickSettingsState(
                                 appTheme = AppTheme(current = preferences.appTheme),
                                 markerFiltering = MarkerFiltering(current = preferences.filteringMarkers),
+                                mapTypeAppearance = MapTypeAppearance(current = preferences.mapType),
                                 trafficJamOnMap = TrafficJamOnMap(isShow = preferences.trafficJamOnMap),
                                 voiceAlerts = VoiceAlerts(enabled = preferences.alertsVoiceAlertEnabled)
                             )
@@ -59,8 +63,9 @@ internal class QuickSettingsStoreFactory(
                     launch {
                         dataStore.edit {
                             when (val pref = it.preference) {
-                                is AppTheme -> updateAppTheme(pref.current.theme)
+                                is AppTheme -> updateAppTheme(pref.current)
                                 is MarkerFiltering -> updateFiltering(pref.current)
+                                is MapTypeAppearance -> updateMapType(pref.current)
                                 is TrafficJamOnMap -> updateTrafficJamAppearance(pref.isShow)
                                 is VoiceAlerts -> updateAlertsVoiceAlertAvailability(pref.enabled)
                             }

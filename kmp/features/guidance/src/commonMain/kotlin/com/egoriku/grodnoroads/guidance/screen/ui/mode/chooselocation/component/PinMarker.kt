@@ -42,7 +42,7 @@ fun PinMarker(
     verticalOffset: Dp = 20.dp,
     shadowScaleMax: Float = 0.9f,
     shadowScaleMin: Float = 0.6f,
-    onGloballyPosition: (Offset) -> Unit
+    onPositionUpdate: (Offset) -> Unit
 ) {
     val startColor = LocalContentColor.current.copy(alpha = 0.85f)
     val endColor = LocalContentColor.current.copy(alpha = 0.4f)
@@ -93,7 +93,7 @@ fun PinMarker(
                         x = it.positionInWindow().x + it.size.width / 2f,
                         y = it.positionInWindow().y + it.size.height / 2f
                     )
-                    onGloballyPosition(position)
+                    onPositionUpdate(position)
                 }
         ) {
             val canvasWidth = size.width
@@ -181,7 +181,7 @@ private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
         PinMarker(
             modifier = Modifier.align(Alignment.Center),
             animate = animate,
-            onGloballyPosition = {}
+            onPositionUpdate = {}
         )
     }
 }

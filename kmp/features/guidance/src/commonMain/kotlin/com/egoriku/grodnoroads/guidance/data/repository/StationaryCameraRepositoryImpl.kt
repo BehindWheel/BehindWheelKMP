@@ -5,6 +5,7 @@ import com.egoriku.grodnoroads.guidance.data.dto.StationaryDTO
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
 import com.egoriku.grodnoroads.guidance.domain.repository.StationaryCameraRepository
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
 import dev.gitlive.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -31,7 +32,7 @@ internal class StationaryCameraRepositoryImpl(
                                 name = data.name,
                                 angle = data.angle,
                                 bidirectional = data.bidirectional,
-                                updateTime = data.updateTime,
+                                formattedUpdateTime = CameraFormatter.format(data.updateTime),
                                 speedCar = data.speedCar,
                                 speedTruck = data.speedTruck,
                                 position = LatLng(data.latitude, data.longitude)

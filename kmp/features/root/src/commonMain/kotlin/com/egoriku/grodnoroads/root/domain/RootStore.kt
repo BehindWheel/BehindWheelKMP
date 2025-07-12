@@ -21,7 +21,9 @@ import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator.SunTime
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator.Twilight
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -31,7 +33,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -160,6 +161,7 @@ internal class RootStoreFactory(
         ) {}
 }
 
+@OptIn(ExperimentalTime::class)
 private fun currentDateTime(): LocalDateTime {
     return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 }

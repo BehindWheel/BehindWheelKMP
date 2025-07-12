@@ -1,21 +1,14 @@
 package com.egoriku.grodnoroads.settings.map.screen.ui
 
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.map_markers_filtering
 import com.egoriku.grodnoroads.compose.resources.map_markers_filtering_description
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
+import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
@@ -34,13 +27,7 @@ internal fun MarkersFilteringSection(
             title = stringResource(Res.string.map_markers_filtering),
             description = stringResource(Res.string.map_markers_filtering_description)
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        HorizontalScrollableRow {
             markersFiltering.values.forEach { filtering ->
                 val selected = markersFiltering.current == filtering
 

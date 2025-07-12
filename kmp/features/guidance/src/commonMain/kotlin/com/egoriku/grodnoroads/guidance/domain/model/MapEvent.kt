@@ -13,7 +13,7 @@ sealed interface MapEvent {
         val cameraType: CameraType
         val id: String
         val name: String
-        val updateTime: Long
+        val formattedUpdateTime: String
         val angle: Float
         val bidirectional: Boolean
         val speedCar: Int
@@ -23,7 +23,7 @@ sealed interface MapEvent {
             override val cameraType: CameraType = CameraType.StationaryCamera,
             override val id: String,
             override val name: String,
-            override val updateTime: Long,
+            override val formattedUpdateTime: String,
             override val angle: Float,
             override val bidirectional: Boolean,
             override val position: LatLng,
@@ -35,7 +35,7 @@ sealed interface MapEvent {
             override val cameraType: CameraType = CameraType.MobileCamera,
             override val id: String,
             override val name: String,
-            override val updateTime: Long,
+            override val formattedUpdateTime: String,
             override val angle: Float,
             override val bidirectional: Boolean,
             override val position: LatLng,
@@ -47,7 +47,7 @@ sealed interface MapEvent {
             override val cameraType: CameraType = CameraType.MediumSpeedCamera,
             override val id: String,
             override val name: String,
-            override val updateTime: Long,
+            override val formattedUpdateTime: String,
             override val angle: Float,
             override val bidirectional: Boolean,
             override val position: LatLng,

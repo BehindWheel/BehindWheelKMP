@@ -25,6 +25,7 @@
     <string name="alerts_unsupported_message">Неподдерживаемое сообщение</string>
 
     <string name="camera_info_last_update">Обновлено %1$s</string>
+    <string name="camera_info_stub_title">Без описания</string>
     <string name="camera_info_report">Сообщить об ошибке</string>
 
     <string name="terms_of_conditions">Условия использования</string>
@@ -61,6 +62,11 @@
     <string name="appearance_app_language_be">Белорусский</string>
     <string name="appearance_app_language_system">Системный</string>
 
+    <string name="appearance_map_type_header">Тип карты</string>
+    <string name="appearance_map_type_normal">Схема</string>
+    <string name="appearance_map_type_satellite">Спутник</string>
+    <string name="appearance_map_type_hybrid">Гибрид</string>
+
     <string name="appearance_keep_screen_on">Не выключать экран</string>
     <string name="appearance_keep_screen_on_description">Сохраняет экран Карты всегда включенным (может увеличить расход батареи)</string>
 
@@ -69,7 +75,6 @@
     <string name="alerts_availability_description">Показываются на экране при приближении к событию на карте</string>
     <string name="alerts_voice_alerts">Голосовые оповещения</string>
     <string name="alerts_voice_alerts_description">Включаются при приближении к событию на карте</string>
-
 
     <string name="alerts_header_volume_level">Уровень громкости</string>
     <string name="alerts_volume_level_low">Низкий</string>
@@ -182,6 +187,7 @@
     <string name="reporting_item_non_working_traffic_lights">Не работают светофоры</string>
     <string name="reporting_item_open_hatch">Открытый люк</string>
     <string name="reporting_item_road_blocked">Дорога перекрыта</string>
+    <string name="reporting_item_road_marking">Наносят разметку</string>
     <string name="reporting_item_other_road_incident">Другое</string>
     <string name="reporting_item_traffic_jam">Пробка</string>
     <string name="reporting_item_wild_animals">Дикие животные</string>
@@ -198,14 +204,19 @@
 
     <string name="reporting_mobile_camera_header">Ограничение скорости</string>
     <string name="reporting_mobile_camera_speed">%1$s км/ч</string>
-    <string name="reporting_mobile_camera_input_hint">Местоположение камеры*</string>
-    <string name="reporting_mobile_camera_input_error">Введите информацию о камере</string>
+    <string name="reporting_mobile_camera_input_hint">Местоположение камеры</string>
+
+    <string name="reporting_input_length_error">Максимум %1$s символов</string>
 
     <string name="reporting_notification_sent">Ваше сообщение отправлено!</string>
+    <string name="reporting_notification_error">Произошла ошибка при отправке сообщения</string>
+    <string name="reporting_notification_disabled">Отправка сообщений временно отключена</string>
+    <string name="reporting_notification_too_often">Вы слишком часто отправляете сообщения, попробуйте позже</string>
 
     <string name="quick_settings_header">Быстрые настройки</string>
     <string name="quick_settings_app_theme">Смена темы</string>
     <string name="quick_settings_markers_filtering">Фильтрация маркеров по времени</string>
+    <string name="quick_settings_map_type">Тип карты</string>
     <string name="quick_settings_voice_alerts">Голосовые оповещения</string>
     <string name="quick_settings_traffic_conditions">Загруженность дорог</string>
 

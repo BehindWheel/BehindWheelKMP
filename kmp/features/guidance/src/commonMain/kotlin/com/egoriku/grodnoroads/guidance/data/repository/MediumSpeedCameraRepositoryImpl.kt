@@ -6,6 +6,7 @@ import com.egoriku.grodnoroads.guidance.data.dto.MediumSpeedDTO
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
 import com.egoriku.grodnoroads.guidance.domain.repository.MediumSpeedCameraRepository
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
 import dev.gitlive.firebase.database.DatabaseReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -32,7 +33,7 @@ internal class MediumSpeedCameraRepositoryImpl(
                                 name = data.name,
                                 angle = data.angle,
                                 bidirectional = data.bidirectional,
-                                updateTime = data.updateTime,
+                                formattedUpdateTime = CameraFormatter.format(data.updateTime),
                                 speedCar = data.speedCar,
                                 speedTruck = data.speedTruck,
                                 position = LatLng(data.latitude, data.longitude)

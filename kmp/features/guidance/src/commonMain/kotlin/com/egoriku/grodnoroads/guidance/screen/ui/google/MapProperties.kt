@@ -13,6 +13,9 @@ import com.egoriku.grodnoroads.location.requester.rememberLocationPermissionsSta
 import com.egoriku.grodnoroads.maps.compose.configuration.MapColor
 import com.egoriku.grodnoroads.maps.compose.configuration.MapProperties
 import com.egoriku.grodnoroads.maps.compose.configuration.MapType
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType.Hybrid
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType.Normal
+import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType.Satellite
 
 @Composable
 fun rememberMapProperties(
@@ -24,7 +27,11 @@ fun rememberMapProperties(
 
     var mapProperties by rememberMutableState(isLight, mapConfig) {
         MapProperties(
-            mapType = MapType.Normal,
+            mapType = when (mapConfig.mapType) {
+                Normal -> MapType.Normal
+                Satellite -> MapType.Satellite
+                Hybrid -> MapType.Hybrid
+            },
             minZoomPreference = 6.0f,
             maxZoomPreference = 17.5f,
             isTrafficEnabled = mapConfig.trafficJanOnMap,

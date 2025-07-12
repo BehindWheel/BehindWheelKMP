@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.SharedFlow
 @Stable
 interface MapUpdater {
     val paddingDecorator: MapPaddingDecorator
-    val clickedMarker: SharedFlow<Marker?>
+    val clickedMarker: SharedFlow<Marker>
+    val mapLongClickEvents: SharedFlow<LatLng>
 
-    fun isInitialCameraAnimation(): Boolean
     fun resetLastLocation()
 
     fun addMarker(markerOptions: MarkerOptions): Marker?
