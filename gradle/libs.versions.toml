@@ -73,7 +73,7 @@ buildkonfig-gradle = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle
 
 # 3rd party tools
 compose-rules = "io.nlopez.compose.rules:ktlint:0.4.22"
-ktlint = "com.pinterest.ktlint:ktlint-cli:1.6.0"
+ktlint = "com.pinterest.ktlint:ktlint-cli:1.7.1"
 
 [bundles]
 mvikotlin = ["mvikotlin", "mvikotlin-main", "mvikotlin-extensions"]
