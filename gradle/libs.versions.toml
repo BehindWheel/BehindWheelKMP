@@ -32,7 +32,7 @@ decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", ver
 desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.5"
 dev-gitlive-firebase-analytics = "dev.gitlive:firebase-analytics:2.1.0"
 dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:2.1.0"
-dev-gitlive-firebase-database = "dev.gitlive:firebase-database:2.1.0"
+dev-gitlive-firebase-database = "dev.gitlive:firebase-database:2.3.0"
 dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:2.1.0"
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
