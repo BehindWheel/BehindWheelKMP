@@ -25,6 +25,15 @@
         "FirebaseCore",
         "FirebaseAnalytics"
       ]
+    },
+    {
+      "groupName": "Firebase KMP dependencies",
+      "matchPackageNames": [
+        "dev.gitlive:firebase-firestore",
+        "dev.gitlive:firebase-database",
+        "dev.gitlive:firebase-crashlytics",
+        "dev.gitlive:firebase-analytics"
+      ]
     }
   ]
 }
