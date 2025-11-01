@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.Telegram: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(22.208f, 2.455f)
                 curveTo(21.975f, 2.255f, 21.635f, 2.196f, 21.349f, 2.308f)
                 lineTo(2.349f, 9.743f)

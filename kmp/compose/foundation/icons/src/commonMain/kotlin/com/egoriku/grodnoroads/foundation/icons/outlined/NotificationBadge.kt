@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.NotificationBadge: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(17.777f, 18f)
                 horizontalLineTo(6.223f)
                 curveTo(4.394f, 18f, 3.351f, 16.161f, 4.448f, 14.872f)
@@ -33,18 +33,18 @@ val GrodnoRoads.Outlined.NotificationBadge: ImageVector
                 curveTo(20.649f, 16.161f, 19.606f, 18f, 17.777f, 18f)
                 close()
             }
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(20.998f, 7.077f)
                 curveTo(20.998f, 7.129f, 21.001f, 7.026f, 20.998f, 7.077f)
                 curveTo(20.998f, 5.42f, 19.657f, 4f, 18f, 4f)
                 curveTo(16.343f, 4f, 15.001f, 5.389f, 15.001f, 7.046f)
             }
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(20.998f, 7.077f)
                 curveTo(20.918f, 8.662f, 19.605f, 10f, 18f, 10f)
                 curveTo(16.374f, 10f, 15.049f, 8.66f, 15.001f, 7.046f)
             }
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(14.986f, 19.997f)
                 curveTo(14.529f, 21.125f, 13.356f, 22f, 12f, 22f)
                 curveTo(10.644f, 22f, 9.471f, 21.125f, 9.014f, 19.997f)

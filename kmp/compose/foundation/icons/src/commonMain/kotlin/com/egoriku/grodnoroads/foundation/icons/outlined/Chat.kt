@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.Chat: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(21.75f, 9f)
                 curveTo(21.75f, 8.183f, 21.067f, 7.5f, 20.25f, 7.5f)
                 horizontalLineTo(17.25f)

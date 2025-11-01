@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.CheckCircle: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(12f, 2f)
                 curveTo(5.79f, 2f, 0.98f, 7.86f, 2.192f, 13.95f)
                 curveTo(3.403f, 20.04f, 10.09f, 23.615f, 15.826f, 21.238f)

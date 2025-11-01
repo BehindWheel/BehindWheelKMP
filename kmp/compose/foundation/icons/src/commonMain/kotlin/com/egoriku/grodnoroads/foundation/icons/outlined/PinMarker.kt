@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.PinMarker: ImageVector
             viewportWidth = 24.0f,
             viewportHeight = 24.0f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(12.0f, 24.0f)
                 curveToRelative(0.2f, 0.0f, 0.4f, -0.2f, 0.4f, -0.4f)
                 verticalLineTo(10.5f)
