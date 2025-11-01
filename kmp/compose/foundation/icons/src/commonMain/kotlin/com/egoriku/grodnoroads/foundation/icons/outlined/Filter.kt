@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.Filter: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(6.8f, 9.32f)
                 lineTo(10.35f, 3.63f)
                 curveTo(10.76f, 2.96f, 10.28f, 2.1f, 9.5f, 2.1f)
@@ -30,7 +30,7 @@ val GrodnoRoads.Outlined.Filter: ImageVector
                 curveTo(5.68f, 9.95f, 6.46f, 9.87f, 6.8f, 9.32f)
                 close()
             }
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(20.6f, 4.1f)
                 curveTo(20.6f, 3f, 19.7f, 2.1f, 18.6f, 2.1f)
                 curveTo(17.351f, 2.1f, 13f, 1.5f, 12.63f, 2.57f)

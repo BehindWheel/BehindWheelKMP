@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.ArrowLeft: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(21f, 12.313f)
                 curveTo(21f, 11.76f, 20.552f, 11.313f, 20f, 11.313f)
                 horizontalLineTo(6.548f)

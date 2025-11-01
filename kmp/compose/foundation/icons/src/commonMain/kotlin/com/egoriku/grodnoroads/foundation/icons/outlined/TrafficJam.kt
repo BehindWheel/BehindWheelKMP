@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.TrafficJam: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(11.823f, 1.755f)
                 curveTo(10.688f, 2.055f, 10.489f, 2.212f, 10.09f, 3.127f)
                 curveTo(9.676f, 4.076f, 9.688f, 4.157f, 10.241f, 4.157f)

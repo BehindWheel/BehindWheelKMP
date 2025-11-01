@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.Play: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(12f, 2f)
                 curveTo(6.48f, 2f, 2f, 6.48f, 2f, 12f)
                 curveTo(2f, 17.52f, 6.48f, 22f, 12f, 22f)

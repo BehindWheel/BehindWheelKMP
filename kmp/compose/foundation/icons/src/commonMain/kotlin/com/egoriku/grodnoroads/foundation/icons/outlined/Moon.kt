@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.Moon: ImageVector
             viewportWidth = 24f,
             viewportHeight = 24f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(21.224f, 15.929f)
                 curveTo(20.601f, 14.878f, 18.613f, 15.617f, 17.614f, 15.569f)
                 curveTo(15.284f, 15.469f, 13.174f, 14.399f, 11.704f, 12.749f)

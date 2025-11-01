@@ -19,7 +19,7 @@ val GrodnoRoads.Outlined.PinLocation: ImageVector
             viewportWidth = 16f,
             viewportHeight = 34f
         ).apply {
-            path(fill = SolidColor(Color(0xFFE676FF))) {
+            path(fill = SolidColor(Color.Black)) {
                 moveTo(15.63f, 7.75f)
                 curveTo(15.59f, 3.7f, 12.27f, 0f, 7.99f, 0f)
                 curveTo(3.72f, 0f, 0.41f, 3.7f, 0.37f, 7.75f)
