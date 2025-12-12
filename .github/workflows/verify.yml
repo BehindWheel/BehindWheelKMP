@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Cache Gradle
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Cache Gradle
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -73,7 +73,7 @@ jobs:
             gradle-
 
       - name: Cache Pods
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: app/ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('app/ios/Podfile.lock') }}
