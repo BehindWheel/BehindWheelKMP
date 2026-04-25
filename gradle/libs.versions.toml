@@ -72,7 +72,7 @@ buildkonfig-compiler = { module = "com.codingfeline.buildkonfig:buildkonfig-comp
 buildkonfig-gradle = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfig" }
 
 # 3rd party tools
-compose-rules = "io.nlopez.compose.rules:ktlint:0.4.27"
+compose-rules = "io.nlopez.compose.rules:ktlint:0.5.8"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.7.1"
 
 [bundles]
