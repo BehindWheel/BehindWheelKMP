@@ -1,7 +1,7 @@
 #!/usr/bin/env -S kotlin -Xplugin=/opt/homebrew/opt/kotlin/libexec/lib/kotlinx-serialization-compiler-plugin.jar
 // brew install kotlin
 
-@file:DependsOn("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.1")
+@file:DependsOn("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 
 import Areas_optimizer_main.MultiPolygon
 import kotlinx.serialization.Serializable
