@@ -1,6 +1,4 @@
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.commonTestDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -8,15 +6,15 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.specialevent"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.specialevent")
+
+    android {
+        withHostTest {}
+    }
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
@@ -31,7 +29,7 @@ kotlin {
 
             implementation(libs.bundles.mvikotlin)
         }
-        commonTestDependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
     }

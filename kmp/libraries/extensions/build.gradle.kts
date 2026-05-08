@@ -1,32 +1,29 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.commonTestDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.extensions"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.extensions")
+
+    android {
+        withHostTest {}
+    }
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(libs.androidx.annotation)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)
             implementation(libs.decompose)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.appcompat)
             implementation(libs.androidx.browser)
             implementation(libs.androidx.core)
         }
-        commonTestDependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
     }

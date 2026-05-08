@@ -1,6 +1,4 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -8,15 +6,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.settings.appearance"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.settings.appearance")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.icons)
             implementation(projects.kmp.compose.foundation.uikit)
@@ -32,8 +26,11 @@ kotlin {
 
             implementation(libs.bundles.mvikotlin)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.appcompat)
+
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.crashlytics)
         }
     }
 }

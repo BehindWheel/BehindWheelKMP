@@ -1,27 +1,21 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.shared.geolocation"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.shared.geolocation")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             api(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.logger)
 
             implementation(libs.koin.core)
             implementation(libs.kotlin.coroutines)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.core)
             implementation(libs.play.services.location)
             implementation(libs.kotlin.coroutines.playservices)

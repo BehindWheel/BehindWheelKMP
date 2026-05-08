@@ -31,9 +31,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform.Android
-import com.egoriku.grodnoroads.foundation.core.Platform.IOS
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform.Android
+import com.egoriku.grodnoroads.foundation.theme.Platform.IOS
 
 @Composable
 fun Checkbox(

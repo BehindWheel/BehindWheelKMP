@@ -1,23 +1,18 @@
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.foundation.theme"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.foundation.theme")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.resources)
 
-            implementation(compose.material3)
+            implementation(libs.compose.material3)
         }
     }
 }

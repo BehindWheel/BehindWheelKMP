@@ -1,19 +1,14 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.shared.components"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.shared.components")
 
-    dependencies {
-        androidDependencies {
+    sourceSets {
+        androidMain.dependencies {
             implementation(libs.koin.core)
         }
     }

@@ -1,7 +1,5 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
+import com.egoriku.grodnoroads.extension.configureTargets
 import com.egoriku.grodnoroads.extension.buildConfigField
-import com.egoriku.grodnoroads.extension.commonDependencies
 import com.egoriku.grodnoroads.extension.ios
 import com.egoriku.grodnoroads.extension.loadProperties
 import com.egoriku.grodnoroads.extension.propertyString
@@ -13,12 +11,8 @@ plugins {
     alias(libs.plugins.buildkonfig)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.maps.compose"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.maps.compose")
 
     cocoapods {
         version = "1.0.0"
@@ -36,14 +30,14 @@ kotlin {
     }
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.foundation.core)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.libraries.location)
 
-            implementation(compose.foundation)
+            implementation(libs.compose.foundation)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.core)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)

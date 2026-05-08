@@ -1,6 +1,4 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -9,12 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.root"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.root")
 
     cocoapods {
         version = "1.0.0"
@@ -38,7 +32,7 @@ kotlin {
     }
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             api(projects.kmp.compose.mapsCompose)
 
             implementation(projects.kmp.features.appSettings)
@@ -82,8 +76,14 @@ kotlin {
 
             implementation(libs.bundles.mvikotlin)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.koin.android)
+
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.analytics)
+            implementation(libs.firebase.crashlytics)
+            implementation(libs.firebase.database)
+            implementation(libs.firebase.firestore)
         }
     }
 }

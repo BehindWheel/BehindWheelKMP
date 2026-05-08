@@ -1,20 +1,14 @@
-
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.location"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.location")
 
     sourceSets {
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.play.services.maps)
         }
     }

@@ -50,12 +50,12 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform.Android
-import com.egoriku.grodnoroads.foundation.core.Platform.IOS
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Check
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform.Android
+import com.egoriku.grodnoroads.foundation.theme.Platform.IOS
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 

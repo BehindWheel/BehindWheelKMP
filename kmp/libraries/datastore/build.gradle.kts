@@ -1,23 +1,17 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.datastore"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.datastore")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             api(libs.androidx.datastore.core)
         }
-        androidDependencies {
+        androidMain.dependencies {
             api(libs.androidx.datastore)
         }
     }

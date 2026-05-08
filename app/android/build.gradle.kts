@@ -92,10 +92,14 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.material3.windowsize)
 
-    implementation(compose.foundation)
-    implementation(compose.material3)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material3.windowsize)
+
+    implementation(project.dependencies.platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 
     coreLibraryDesugaring(libs.desugar.jdk)
 }

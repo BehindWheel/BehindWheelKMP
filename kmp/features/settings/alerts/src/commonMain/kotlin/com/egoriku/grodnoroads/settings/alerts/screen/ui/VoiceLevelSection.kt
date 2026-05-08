@@ -10,12 +10,12 @@ import com.egoriku.grodnoroads.compose.resources.alerts_header_volume_level
 import com.egoriku.grodnoroads.compose.resources.alerts_play_test_audio
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsSectionHeader
 import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Play
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SimpleListItem
 import com.egoriku.grodnoroads.settings.alerts.domain.component.AlertsComponent.AlertsPref

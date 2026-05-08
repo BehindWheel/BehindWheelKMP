@@ -1,21 +1,15 @@
-
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.shared.models"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.shared.models")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(libs.kotlin.serialization.core)
         }
     }

@@ -1,5 +1,4 @@
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -7,15 +6,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.settings.changelog"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.features.settings.changelog")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
@@ -29,6 +24,10 @@ kotlin {
             implementation(libs.kotlin.collections)
 
             implementation(libs.bundles.mvikotlin)
+        }
+        androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.firestore)
         }
     }
 }
