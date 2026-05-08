@@ -1,27 +1,21 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.location.requester"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.location.requester")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.compose.foundation.core)
 
-            implementation(compose.material3)
-            implementation(compose.runtime)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.runtime)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.appcompat)
             implementation(libs.kotlin.coroutines.playservices)

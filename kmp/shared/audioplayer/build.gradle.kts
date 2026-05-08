@@ -1,28 +1,22 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.grodnoroads.kmp.library)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.shared.audioplayer"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.shared.audioplayer")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.libraries.logger)
             implementation(projects.kmp.compose.resources)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.runtime)
         }
-        androidDependencies {
+        androidMain.dependencies {
             implementation(libs.androidx.core)
             implementation(libs.androidx.media)
         }

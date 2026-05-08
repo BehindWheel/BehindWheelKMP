@@ -39,6 +39,7 @@ fun RowScope.NavigationBarItem(
 ) {
     Material3NavigationBarItem(
         colors = NavigationBarItemDefaults.colors(
+            selectedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f)
         ),

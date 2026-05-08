@@ -3,7 +3,6 @@
 import com.egoriku.grodnoroads.internal.applicationExtension
 import com.egoriku.grodnoroads.internal.applicationPluginId
 import com.egoriku.grodnoroads.internal.configureKotlinAndroidToolchain
-import com.egoriku.grodnoroads.internal.kotlinPluginId
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,7 +12,6 @@ class AndroidApplicationPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         apply(plugin = applicationPluginId)
-        apply(plugin = kotlinPluginId)
 
         applicationExtension {
             compileOptions {

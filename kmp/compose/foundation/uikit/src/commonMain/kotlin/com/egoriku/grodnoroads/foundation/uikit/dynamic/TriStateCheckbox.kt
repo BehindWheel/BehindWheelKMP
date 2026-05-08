@@ -9,12 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform.Android
-import com.egoriku.grodnoroads.foundation.core.Platform.IOS
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform.Android
+import com.egoriku.grodnoroads.foundation.theme.Platform.IOS
 
 @Composable
 fun TriStateCheckbox(

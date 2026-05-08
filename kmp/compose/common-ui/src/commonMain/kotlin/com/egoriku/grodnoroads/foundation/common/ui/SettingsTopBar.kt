@@ -29,7 +29,7 @@ fun SettingsTopBar(
         modifier = modifier,
         windowInsets = WindowInsets.statusBars,
         scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+        colors = TopAppBarDefaults.topAppBarColors()
             .copy(scrolledContainerColor = MaterialTheme.colorScheme.surface),
         navigationIcon = {
             IconButton(onClick = onBack) {

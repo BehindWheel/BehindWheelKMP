@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.maps.compose
 
 import android.annotation.SuppressLint
-import android.content.ComponentCallbacks
+import android.content.ComponentCallbacks2
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MotionEvent
@@ -261,10 +261,17 @@ private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Even
     }
 }
 
-private fun MapView.componentCallbacks(): ComponentCallbacks = object : ComponentCallbacks {
-    override fun onConfigurationChanged(config: Configuration) {}
+private fun MapView.componentCallbacks(): ComponentCallbacks2 = object : ComponentCallbacks2 {
+    override fun onConfigurationChanged(p0: Configuration) {
+        // no-op
+    }
 
+    @Deprecated("Deprecated in Java")
     override fun onLowMemory() {
+        // no-op
+    }
+
+    override fun onTrimMemory(p0: Int) {
         this@componentCallbacks.onLowMemory()
     }
 }

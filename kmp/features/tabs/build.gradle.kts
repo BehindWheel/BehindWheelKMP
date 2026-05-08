@@ -1,5 +1,4 @@
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -7,15 +6,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.tabs"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.tabs")
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.features.appSettings)
             implementation(projects.kmp.features.guidance)
             implementation(projects.kmp.features.eventReporting)
@@ -25,10 +20,10 @@ kotlin {
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.libraries.extensions)
 
+            implementation(libs.compose.material3.windowsize)
             implementation(libs.decompose.compose)
             implementation(libs.decompose)
             implementation(libs.kotlin.collections)
-            implementation(libs.material3.windowsize)
         }
     }
 }

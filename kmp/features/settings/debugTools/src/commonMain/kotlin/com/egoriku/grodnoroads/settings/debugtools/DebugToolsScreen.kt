@@ -34,14 +34,15 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.settings_section_debug_tools
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.filled.Edit
 import com.egoriku.grodnoroads.foundation.icons.outlined.Appearance
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform
+import com.egoriku.grodnoroads.foundation.theme.Platform.Android
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.settings.debugtools.domain.DebugToolsComponent
 import com.egoriku.grodnoroads.settings.debugtools.ui.datastore.DataStoreEdit
@@ -173,9 +174,9 @@ private fun PlatformSegmentedRow(
         SegmentedButton(
             shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
             onClick = {
-                onPlatformChange(Platform.Android)
+                onPlatformChange(Android)
             },
-            selected = current == Platform.Android,
+            selected = current == Android,
             label = {
                 Text(text = "Android")
             }

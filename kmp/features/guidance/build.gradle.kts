@@ -1,7 +1,4 @@
-import com.egoriku.grodnoroads.extension.androidDependencies
-import com.egoriku.grodnoroads.extension.applyTargets
-import com.egoriku.grodnoroads.extension.commonDependencies
-import com.egoriku.grodnoroads.extension.commonTestDependencies
+import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.library)
@@ -9,15 +6,15 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.egoriku.grodnoroads.guidance"
-}
-
 kotlin {
-    applyTargets()
+    configureTargets(namespace = "com.egoriku.grodnoroads.guidance")
+
+    android {
+        withHostTest {}
+    }
 
     sourceSets {
-        commonDependencies {
+        commonMain.dependencies {
             implementation(projects.kmp.features.eventReporting)
             implementation(projects.kmp.features.quickSettings)
             implementation(projects.kmp.features.specialEventReminder)
@@ -52,16 +49,18 @@ kotlin {
 
             implementation(libs.bundles.mvikotlin)
         }
-        androidDependencies {
-            implementation(libs.androidx.activity.compose)
+        androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.database)
 
+            implementation(libs.androidx.activity.compose)
             implementation(libs.balloon.compose)
             implementation(libs.decompose.compose)
             implementation(libs.google.app.update)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
         }
-        commonTestDependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.datetime)
             implementation(libs.kotlin.test)
         }

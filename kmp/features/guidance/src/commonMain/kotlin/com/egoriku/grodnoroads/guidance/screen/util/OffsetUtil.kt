@@ -5,10 +5,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
-import com.egoriku.grodnoroads.foundation.core.LocalPlatform
-import com.egoriku.grodnoroads.foundation.core.Platform
-import com.egoriku.grodnoroads.foundation.core.Platform.Android
-import com.egoriku.grodnoroads.foundation.core.Platform.IOS
+import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
+import com.egoriku.grodnoroads.foundation.theme.Platform
+import com.egoriku.grodnoroads.foundation.theme.Platform.Android
+import com.egoriku.grodnoroads.foundation.theme.Platform.IOS
 import com.egoriku.grodnoroads.maps.compose.core.Point
 
 @Composable

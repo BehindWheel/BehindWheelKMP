@@ -11,7 +11,7 @@ fun Properties.propertyInt(key: String): Int {
 
     return try {
         property.toInt()
-    } catch (exception: NumberFormatException) {
+    } catch (_: NumberFormatException) {
         error("Cast exception for $key")
     }
 }
@@ -23,5 +23,5 @@ fun Properties.propertyString(key: String): String {
         error("property $key is null")
     }
 
-    return property.toString()
+    return property
 }
