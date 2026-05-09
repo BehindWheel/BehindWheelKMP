@@ -154,12 +154,9 @@ internal class AlertsStoreFactory(
                                         updateAlertsVoiceAlertAvailability(false)
                                     }
                                 }
-
                                 is AlertVolumeLevel -> updateAlertsVolumeInfo(pref.current.levelName)
-
                                 is AlertRadiusInCity -> updateAlertsDistanceInCity(pref.current)
                                 is AlertRadiusOutCity -> updateAlertsDistanceOutsideCity(pref.current)
-
                                 is CarCrash -> updateNotifyCarCrash(pref.isNotify)
                                 is MediumSpeedCameras -> updateNotifyMediumSpeedCameras(pref.isNotify)
                                 is MobileCameras -> updateNotifyMobileCameras(pref.isNotify)
@@ -189,11 +186,9 @@ internal class AlertsStoreFactory(
                                 is AlertRadiusInCity -> updateAlertsDistanceInCity(
                                     DEFAULT_ALERT_DISTANCE_IN_CITY
                                 )
-
                                 is AlertRadiusOutCity -> updateAlertsDistanceOutsideCity(
                                     DEFAULT_ALERT_DISTANCE_OUTSIDE_CITY
                                 )
-
                                 else -> Unit
                             }
                         }

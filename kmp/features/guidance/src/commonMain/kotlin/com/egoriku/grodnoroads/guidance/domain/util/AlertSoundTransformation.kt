@@ -29,46 +29,38 @@ internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsIn
                                 alertInfo.notifyStationaryCameras -> alert
                                 else -> null
                             }
-
                             MobileCamera -> when {
                                 alertInfo.notifyMobileCameras -> alert
                                 else -> null
                             }
-
                             MediumSpeedCamera -> when {
                                 alertInfo.notifyMediumSpeedCameras -> alert
                                 else -> null
                             }
                         }
                     }
-
                     is Alert.IncidentAlert -> {
                         when (alert.mapEventType) {
                             TrafficPolice -> when {
                                 alertInfo.notifyTrafficPolice -> alert
                                 else -> null
                             }
-
                             RoadIncident -> when {
                                 alertInfo.notifyRoadIncident -> alert
                                 else -> null
                             }
-
                             CarCrash -> when {
                                 alertInfo.notifyCarCrash -> alert
                                 else -> null
                             }
-
                             TrafficJam -> when {
                                 alertInfo.notifyTrafficJam -> alert
                                 else -> null
                             }
-
                             WildAnimals -> when {
                                 alertInfo.notifyWildAnimals -> alert
                                 else -> null
                             }
-
                             else -> null
                         }
                     }

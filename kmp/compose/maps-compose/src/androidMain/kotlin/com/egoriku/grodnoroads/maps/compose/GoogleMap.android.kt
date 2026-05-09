@@ -246,7 +246,6 @@ private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Even
                     this.onCreate(Bundle())
                 }
             }
-
             Lifecycle.Event.ON_START -> this.onStart()
             Lifecycle.Event.ON_RESUME -> this.onResume()
             Lifecycle.Event.ON_PAUSE -> this.onPause()
@@ -254,7 +253,6 @@ private fun MapView.lifecycleObserver(previousState: MutableState<Lifecycle.Even
             Lifecycle.Event.ON_DESTROY -> {
                 // handled in onDispose
             }
-
             else -> throw IllegalStateException()
         }
         previousState.value = event

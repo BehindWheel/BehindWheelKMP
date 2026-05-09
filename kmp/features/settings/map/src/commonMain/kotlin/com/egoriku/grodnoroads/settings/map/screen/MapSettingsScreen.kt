@@ -136,7 +136,6 @@ private fun DialogHandler(
                 onResult = onResult
             )
         }
-
         is None -> {}
     }
 }

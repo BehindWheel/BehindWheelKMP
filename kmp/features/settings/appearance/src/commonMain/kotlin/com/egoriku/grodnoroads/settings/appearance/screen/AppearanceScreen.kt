@@ -182,7 +182,6 @@ private fun DialogHandler(
                 onResult = onResult
             )
         }
-
         is LanguageDialogState -> {
             AppLanguageBottomSheet(
                 languageDialogState = dialogState,
@@ -193,7 +192,6 @@ private fun DialogHandler(
                 }
             )
         }
-
         else -> {}
     }
 }

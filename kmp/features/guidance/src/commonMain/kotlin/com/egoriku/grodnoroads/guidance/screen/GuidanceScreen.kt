@@ -424,7 +424,6 @@ fun GuidanceScreen(
                                     onClick = { cameraInfo = mapEvent },
                                     zIndex = 1f
                                 )
-
                                 is MediumSpeedCamera -> {
                                     CameraMarker(
                                         position = mapEvent.position,
@@ -441,7 +440,6 @@ fun GuidanceScreen(
                                         zIndex = 1f
                                     )
                                 }
-
                                 is MobileCamera -> {
                                     CameraMarker(
                                         position = mapEvent.position,

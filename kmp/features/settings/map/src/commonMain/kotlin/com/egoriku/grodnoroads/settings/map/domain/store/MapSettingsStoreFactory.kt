@@ -162,11 +162,8 @@ internal class MapSettingsStoreFactory(
                                     updateTrafficJam(preference.selectAll)
                                     updateWildAnimals(preference.selectAll)
                                 }
-
                                 is TrafficJamOnMap -> updateTrafficJamAppearance(preference.isShow)
-
                                 is DefaultCity -> updateDefaultCity(preference.current.cityName)
-
                                 is MapZoomInCity -> updateMapZoomInCity(preference.current)
                                 is MapZoomOutCity -> updateMapZoomOutsideCity(preference.current)
                                 is MarkerFiltering -> updateFiltering(preference.current)
@@ -181,7 +178,6 @@ internal class MapSettingsStoreFactory(
                                 mapDialogState = DefaultLocationDialogState(defaultCity = it.preference)
                             )
                         )
-
                         else -> throw UnsupportedOperationException("${it.preference} not supported")
                     }
                 }
@@ -198,7 +194,6 @@ internal class MapSettingsStoreFactory(
                                 is MapZoomOutCity -> updateMapZoomOutsideCity(
                                     DEFAULT_MAP_ZOOM_OUT_CITY
                                 )
-
                                 else -> Unit
                             }
                         }

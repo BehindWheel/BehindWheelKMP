@@ -1,5 +1,5 @@
-import com.egoriku.grodnoroads.extension.configureTargets
 import com.egoriku.grodnoroads.extension.buildConfigField
+import com.egoriku.grodnoroads.extension.configureTargets
 import com.egoriku.grodnoroads.extension.ios
 import com.egoriku.grodnoroads.extension.loadProperties
 import com.egoriku.grodnoroads.extension.propertyString

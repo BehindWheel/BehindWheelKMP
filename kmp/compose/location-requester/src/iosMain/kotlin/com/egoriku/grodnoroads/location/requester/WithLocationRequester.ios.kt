@@ -87,7 +87,6 @@ class LocationRequester(
         return when (status) {
             kCLAuthorizationStatusAuthorizedAlways,
             kCLAuthorizationStatusAuthorizedWhenInUse -> LocationRequestStatus.PermissionGranted
-
             kCLAuthorizationStatusNotDetermined -> {
                 mutex.withLock {
                     val newStatus = suspendCoroutine { continuation ->
@@ -96,7 +95,6 @@ class LocationRequester(
                     provideLocationPermission(newStatus)
                 }
             }
-
             kCLAuthorizationStatusDenied -> LocationRequestStatus.PermissionDenied
             else -> error("unknown location authorization status $status")
         }
