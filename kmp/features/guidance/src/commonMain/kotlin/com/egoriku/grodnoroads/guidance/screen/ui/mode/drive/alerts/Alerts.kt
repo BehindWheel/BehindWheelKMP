@@ -79,7 +79,6 @@ fun Alerts(
                         messages = alert.messages
                     )
                 }
-
                 is CameraAlert -> {
                     val title = when (alert.cameraType) {
                         StationaryCamera -> stringResource(Res.string.alerts_stationary_camera)

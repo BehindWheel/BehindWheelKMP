@@ -38,7 +38,6 @@ import com.egoriku.grodnoroads.foundation.theme.isLight
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UsersCount(count: Int, modifier: Modifier = Modifier) {
@@ -55,11 +54,11 @@ fun UsersCount(count: Int, modifier: Modifier = Modifier) {
             tooltip = {
                 RichTooltip(
                     caretShape = TooltipDefaults.caretShape(),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     Text(
                         style = MaterialTheme.typography.bodySmall,
-                        text = stringResource(Res.string.map_user_count_hint),
+                        text = stringResource(Res.string.map_user_count_hint)
                     )
                 }
             },
@@ -132,4 +131,3 @@ private fun UsersCountBadgePreview() = GrodnoRoadsM3ThemePreview {
         )
     }
 }
-

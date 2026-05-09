@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:mixed-condition-operators")
+
 package com.egoriku.grodnoroads.location.util
 
 import com.egoriku.grodnoroads.location.LatLng

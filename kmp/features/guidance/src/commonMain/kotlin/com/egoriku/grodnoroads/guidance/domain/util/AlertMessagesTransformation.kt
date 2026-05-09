@@ -33,7 +33,6 @@ fun alertMessagesTransformation(): suspend (MapEvents, LastLocation, MapConfig, 
                     lastLocation = lastLocation,
                     alertDistance = config.alertRadius
                 )
-
                 else -> emptyList
             }
         }
@@ -121,7 +120,6 @@ private fun computeDistance(
                 else -> null
             }
         }
-
         else -> null
     }
 }
