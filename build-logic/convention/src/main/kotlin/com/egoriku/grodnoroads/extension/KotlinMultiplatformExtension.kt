@@ -8,7 +8,6 @@ fun KotlinMultiplatformExtension.configureTargets(namespace: String) {
         this.namespace = namespace
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 }
