@@ -54,8 +54,6 @@ kotlin {
             implementation(libs.firebase.database)
 
             implementation(libs.androidx.activity.compose)
-            implementation(libs.balloon.compose)
-            implementation(libs.decompose.compose)
             implementation(libs.google.app.update)
             implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
