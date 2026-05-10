@@ -5,7 +5,7 @@ import com.egoriku.grodnoroads.extension.loadProperties
 import com.egoriku.grodnoroads.extension.propertyString
 
 plugins {
-    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.grodnoroads.multiplatform.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
     alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.buildkonfig)

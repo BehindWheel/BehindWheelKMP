@@ -107,5 +107,5 @@ spotless = { id = "com.diffplug.spotless", version = "8.4.0" }
 
 # Project conventional plugins
 grodnoroads-application = { id = "grodnoroads.application" }
+grodnoroads-multiplatform-library = { id = "grodnoroads.multiplatform.library" }
 grodnoroads-kmp-compose = { id = "grodnoroads.kmp.compose" }
-grodnoroads-kmp-library = { id = "grodnoroads.kmp.library" }
