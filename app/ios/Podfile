@@ -4,7 +4,7 @@ target 'grodno-roads-ios' do
    use_frameworks!
    platform :ios, '16.0'
 
-   pod 'GoogleMaps', '~> 10.3.0'
+   pod 'GoogleMaps', '~> 10.13.0'
    pod 'FirebaseCore', '~> 11.8.0'
    pod 'FirebaseDatabase', '~> 11.8.0'
    pod 'FirebaseAnalytics', '~> 11.8.0'
