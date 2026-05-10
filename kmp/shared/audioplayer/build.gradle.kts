@@ -2,7 +2,7 @@ import com.egoriku.grodnoroads.extension.configureTargets
 
 plugins {
     alias(libs.plugins.grodnoroads.kmp.compose)
-    alias(libs.plugins.grodnoroads.kmp.library)
+    alias(libs.plugins.grodnoroads.multiplatform.library)
 }
 
 kotlin {

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 internal val Project.libs
     get() = the<LibrariesForLibs>()
 
-internal fun Project.kmpExtension(action: KotlinMultiplatformExtension.() -> Unit) =
+internal fun Project.kotlin(action: KotlinMultiplatformExtension.() -> Unit) =
     extensions.configure<KotlinMultiplatformExtension>(action)
 
 internal fun Project.applicationExtension(action: ApplicationExtension.() -> Unit) =

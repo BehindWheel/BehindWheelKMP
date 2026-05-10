@@ -266,7 +266,7 @@ private fun MapView.componentCallbacks(): ComponentCallbacks2 = object : Compone
 
     @Deprecated("Deprecated in Java")
     override fun onLowMemory() {
-        // no-op
+        this@componentCallbacks.onLowMemory()
     }
 
     override fun onTrimMemory(p0: Int) {

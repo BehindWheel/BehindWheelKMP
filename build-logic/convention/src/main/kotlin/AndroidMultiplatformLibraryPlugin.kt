@@ -1,27 +1,23 @@
 @file:Suppress("unused")
 
-import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import com.egoriku.grodnoroads.internal.android
 import com.egoriku.grodnoroads.internal.androidKmpLibraryPluginId
-import com.egoriku.grodnoroads.internal.kmpExtension
+import com.egoriku.grodnoroads.internal.kotlin
 import com.egoriku.grodnoroads.internal.kotlinMultiplatformPluginId
 import com.egoriku.grodnoroads.internal.libs
-import org.gradle.api.Action
-import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-class AndroidKmpLibraryPlugin : Plugin<Project> {
+class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         apply(plugin = androidKmpLibraryPluginId)
         apply(plugin = kotlinMultiplatformPluginId)
 
-        kmpExtension {
+        kotlin {
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-Xexpect-actual-classes",
@@ -47,12 +43,3 @@ class AndroidKmpLibraryPlugin : Plugin<Project> {
         }
     }
 }
-
-fun KotlinMultiplatformExtension.android(
-    configure: Action<KotlinMultiplatformAndroidLibraryTarget>
-) = (this as ExtensionAware).extensions.configure("android", configure)
-
-fun KotlinMultiplatformExtension.sourceSets(
-    configure: Action<NamedDomainObjectContainer<KotlinSourceSet>>
-): Unit = (this as ExtensionAware).extensions.configure("sourceSets", configure)
-
