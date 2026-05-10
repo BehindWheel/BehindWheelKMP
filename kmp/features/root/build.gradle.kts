@@ -1,34 +1,52 @@
 import com.egoriku.grodnoroads.extension.configureTargets
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.grodnoroads.multiplatform.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
-    alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
     configureTargets(namespace = "com.egoriku.grodnoroads.root")
 
-    cocoapods {
-        version = "1.0.0"
-        ios.deploymentTarget = "16.0"
+    targets
+        .withType<KotlinNativeTarget>()
+        .matching { it.konanTarget.family.isAppleFamily }
+        .configureEach {
+            binaries {
+                framework {
+                    baseName = "Root"
+                    isStatic = true
 
-        podfile = project.file("../../../app/ios/Podfile")
+                    export(libs.decompose)
+                    export(libs.essenty.backhandler)
+                    export(libs.essenty.lifecycle)
 
-        homepage = "https://github.com/grodnoroads/GrodnoRoads"
-        summary = "Shared functionality for iOS"
-
-        framework {
-            baseName = "Root"
-            isStatic = true
-
-            export(libs.decompose)
-            export(libs.essenty.backhandler)
-            export(libs.essenty.lifecycle)
-
-            export(projects.kmp.compose.mapsCompose)
+                    export(projects.kmp.compose.mapsCompose)
+                }
+            }
         }
+
+    swiftPMDependencies {
+        iosMinimumDeploymentTarget =
+            libs.versions.ios.minTarget
+                .get()
+
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        swiftPackage(
+            url = url("https://github.com/firebase/firebase-ios-sdk.git"),
+            version = from("11.8.0"),
+            products =
+                listOf(
+                    product("FirebaseCore"),
+                    product("FirebaseDatabase"),
+                    product("FirebaseAnalytics"),
+                    product("FirebaseCrashlytics"),
+                    product("FirebaseFirestore")
+                )
+        )
     }
 
     sourceSets {

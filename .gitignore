@@ -40,3 +40,4 @@ kotlin-js-store/
 xcuserdata/
 xcshareddata/
 contents.xcworkspacedata
+/.swiftpm-locks/

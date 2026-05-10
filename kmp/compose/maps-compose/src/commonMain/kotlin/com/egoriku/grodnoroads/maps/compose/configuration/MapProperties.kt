@@ -1,7 +1,10 @@
 package com.egoriku.grodnoroads.maps.compose.configuration
 
+import androidx.compose.runtime.Stable
+
 internal val DefaultMapProperties = MapProperties()
 
+@Stable
 data class MapProperties(
     val isMyLocationEnabled: Boolean = false,
     val isTrafficEnabled: Boolean = false,

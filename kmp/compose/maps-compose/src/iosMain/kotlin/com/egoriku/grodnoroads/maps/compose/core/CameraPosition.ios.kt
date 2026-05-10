@@ -1,8 +1,8 @@
 package com.egoriku.grodnoroads.maps.compose.core
 
-import cocoapods.GoogleMaps.GMSCameraPosition
 import com.egoriku.grodnoroads.location.LatLng
 import kotlinx.cinterop.ExperimentalForeignApi
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSCameraPosition
 
 @OptIn(ExperimentalForeignApi::class)
 actual typealias PlatformCameraPosition = GMSCameraPosition

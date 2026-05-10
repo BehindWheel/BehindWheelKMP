@@ -1,7 +1,12 @@
 [versions]
+# Android specific
 compileSdk = "36"
 minSdk = "23" # Android 6.0
 targetSdk = "36"
+
+# iOS specific
+ios-minTarget = "16.0"
+spm-googleMaps = "10.13.0"
 
 agp = "9.2.1"
 buildkonfig = "0.20.0"
@@ -11,7 +16,7 @@ essenty = "2.5.0"
 firebase-bom = "33.15.0"
 koin = "4.2.1"
 kotlinx-serialization = "1.11.0"
-kotlin = "2.3.21"
+kotlin = "2.4.0-Beta2"
 mvikotlin = "4.4.0"
 
 [libraries]
@@ -99,7 +104,6 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.7" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.4" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
-kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }

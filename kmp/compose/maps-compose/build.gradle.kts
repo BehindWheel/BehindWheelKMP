@@ -3,30 +3,32 @@ import com.egoriku.grodnoroads.extension.configureTargets
 import com.egoriku.grodnoroads.extension.ios
 import com.egoriku.grodnoroads.extension.loadProperties
 import com.egoriku.grodnoroads.extension.propertyString
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     alias(libs.plugins.grodnoroads.multiplatform.library)
     alias(libs.plugins.grodnoroads.kmp.compose)
-    alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
     configureTargets(namespace = "com.egoriku.grodnoroads.maps.compose")
 
-    cocoapods {
-        version = "1.0.0"
-        ios.deploymentTarget = "16.0"
+    swiftPMDependencies {
+        iosMinimumDeploymentTarget =
+            libs.versions.ios.minTarget
+                .get()
 
-        podfile = project.file("../../../app/ios/Podfile")
-
-        homepage = "https://github.com/grodnoroads/GrodnoRoads"
-        summary = "GoogleMaps for Compose Multiplatform"
-
-        pod("GoogleMaps") {
-            version = "10.3.0"
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        swiftPackage(
+            url = url("https://github.com/googlemaps/ios-maps-sdk.git"),
+            version =
+                exact(
+                    libs.versions.spm.googleMaps
+                        .get()
+                ),
+            products = listOf(product("GoogleMaps"))
+        )
     }
 
     sourceSets {

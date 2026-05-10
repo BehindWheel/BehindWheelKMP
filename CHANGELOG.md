@@ -6,7 +6,8 @@
 
 - [iOS] Add user count tooltip
 
-
 ### Changed
 
-- [iOS] Update Google Maps to 10.3.0, min supported iOS 16
+- [iOS] Bump min supported iOS 16
+- [iOS] Migrate from Cocoapods to SPM
+- [iOS] Update Google Maps to 10.13.0

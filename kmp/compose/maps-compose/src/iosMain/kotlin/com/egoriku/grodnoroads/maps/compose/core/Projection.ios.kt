@@ -1,12 +1,12 @@
 package com.egoriku.grodnoroads.maps.compose.core
 
-import cocoapods.GoogleMaps.GMSProjection
 import com.egoriku.grodnoroads.location.LatLng
 import kotlinx.cinterop.CValue
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import platform.CoreGraphics.CGPoint
 import platform.CoreGraphics.CGPointMake
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSProjection
 
 @OptIn(ExperimentalForeignApi::class)
 actual typealias Projection = GMSProjection

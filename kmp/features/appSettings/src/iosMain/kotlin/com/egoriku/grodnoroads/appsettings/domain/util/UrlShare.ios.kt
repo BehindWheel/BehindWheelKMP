@@ -2,7 +2,7 @@ package com.egoriku.grodnoroads.appsettings.domain.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.interop.LocalUIViewController
+import androidx.compose.ui.uikit.LocalUIViewController
 import platform.UIKit.UIActivityViewController
 import platform.UIKit.UIPopoverArrowDirectionDown
 import platform.UIKit.UIViewController

@@ -22,10 +22,6 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.viewinterop.UIKitInteropInteractionMode
 import androidx.compose.ui.viewinterop.UIKitInteropProperties
 import androidx.compose.ui.viewinterop.UIKitView
-import cocoapods.GoogleMaps.GMSCameraPosition
-import cocoapods.GoogleMaps.GMSMapView
-import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
-import cocoapods.GoogleMaps.GMSMarker
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.location.toLatLng
 import com.egoriku.grodnoroads.maps.compose.api.CameraMoveState
@@ -50,6 +46,10 @@ import platform.CoreGraphics.CGRectZero
 import platform.CoreLocation.CLLocationCoordinate2D
 import platform.UIKit.UIApplication
 import platform.darwin.NSObject
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSCameraPosition
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSMapView
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSMapViewDelegateProtocol
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSMarker
 
 @OptIn(ExperimentalForeignApi::class, ExperimentalComposeUiApi::class)
 @Composable
