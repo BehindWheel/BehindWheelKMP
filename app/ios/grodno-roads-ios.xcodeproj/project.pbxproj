@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12AD65172C149E7600C101AC /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 12AD65162C149E7600C101AC /* GoogleMaps.bundle */; };
 		12D440DD2BDFC31D00D2676D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D440DB2BDFC31D00D2676D /* InfoPlist.strings */; };
-		64AC19E55F27939B28481222 /* Pods_grodno_roads_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0545F7D339B0E6086F276BDB /* Pods_grodno_roads_ios.framework */; };
 		6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CD2152B3870D60010592F /* GoogleService-Info.plist */; };
+		AD4B2BDC106C65F24F21B577 /* KotlinMultiplatformLinkedPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 8FA9845EF0F73E1D2CDFB819 /* KotlinMultiplatformLinkedPackage */; };
 		CE52F3052B1CF3B200D81762 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F3042B1CF3B200D81762 /* MainApp.swift */; };
 		CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F3082B1CF3B400D81762 /* Assets.xcassets */; };
 		CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE52F30B2B1CF3B400D81762 /* Preview Assets.xcassets */; };
@@ -19,8 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0545F7D339B0E6086F276BDB /* Pods_grodno_roads_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_grodno_roads_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		12AD65162C149E7600C101AC /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Pods/GoogleMaps/Maps/Resources/GoogleMapsResources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		12CE78052BDC399F009ED8E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12D440DC2BDFC31D00D2676D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		12D440DF2BDFC35300D2676D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -32,8 +29,6 @@
 		CE654B9C2BDFCFBA0069AE6A /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE6627482B3648D300799BC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEA924CC2B2FB5D00086E744 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		F286D7D47BB1E7EF0B6D10EA /* Pods-grodno-roads-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-grodno-roads-ios.debug.xcconfig"; path = "Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		FD3E9A75A3A784FAE9BCA805 /* Pods-grodno-roads-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-grodno-roads-ios.release.xcconfig"; path = "Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,30 +36,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64AC19E55F27939B28481222 /* Pods_grodno_roads_ios.framework in Frameworks */,
+				AD4B2BDC106C65F24F21B577 /* KotlinMultiplatformLinkedPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0372A35001CD950D076F2BFA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0545F7D339B0E6086F276BDB /* Pods_grodno_roads_ios.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		19BEC1CF30123329EFA8ED21 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F286D7D47BB1E7EF0B6D10EA /* Pods-grodno-roads-ios.debug.xcconfig */,
-				FD3E9A75A3A784FAE9BCA805 /* Pods-grodno-roads-ios.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CE46B7202B325F4A00493502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,11 +55,8 @@
 		CE52F2F82B1CF3B200D81762 = {
 			isa = PBXGroup;
 			children = (
-				12AD65162C149E7600C101AC /* GoogleMaps.bundle */,
 				CE52F3032B1CF3B200D81762 /* grodno-roads-ios */,
 				CE52F3022B1CF3B200D81762 /* Products */,
-				19BEC1CF30123329EFA8ED21 /* Pods */,
-				0372A35001CD950D076F2BFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,18 +97,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE52F30F2B1CF3B400D81762 /* Build configuration list for PBXNativeTarget "grodno-roads-ios" */;
 			buildPhases = (
-				0F3636381FCA3576F7750F45 /* [CP] Check Pods Manifest.lock */,
+				12291D2D2FB08E8D0091BB70 /* Run Script */,
 				CE52F2FD2B1CF3B200D81762 /* Sources */,
 				CE52F2FE2B1CF3B200D81762 /* Frameworks */,
 				CE52F2FF2B1CF3B200D81762 /* Resources */,
-				3AF4153B85CE100CD3D6E33F /* [CP] Embed Pods Frameworks */,
-				47A152ACD262120901E7844B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "grodno-roads-ios";
+			packageProductDependencies = (
+				8FA9845EF0F73E1D2CDFB819 /* KotlinMultiplatformLinkedPackage */,
+			);
 			productName = "grodno-roads-ios";
 			productReference = CE52F3012B1CF3B200D81762 /* grodno-roads-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +139,9 @@
 				be,
 			);
 			mainGroup = CE52F2F82B1CF3B200D81762;
+			packageReferences = (
+				9FE6B257D67F50E5F0DE3944 /* XCLocalSwiftPackageReference "KotlinMultiplatformLinkedPackage" */,
+			);
 			productRefGroup = CE52F3022B1CF3B200D81762 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,7 +156,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12AD65172C149E7600C101AC /* GoogleMaps.bundle in Resources */,
 				CE52F30C2B1CF3B400D81762 /* Preview Assets.xcassets in Resources */,
 				6A9CD2162B3870D60010592F /* GoogleService-Info.plist in Resources */,
 				CE52F3092B1CF3B400D81762 /* Assets.xcassets in Resources */,
@@ -188,61 +166,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F3636381FCA3576F7750F45 /* [CP] Check Pods Manifest.lock */ = {
+		12291D2D2FB08E8D0091BB70 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-grodno-roads-ios-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3AF4153B85CE100CD3D6E33F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47A152ACD262120901E7844B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-grodno-roads-ios/Pods-grodno-roads-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n    echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n    exit 0\nfi\ncd \"$SRCROOT/../../\"\n./gradlew :kmp:features:root:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -312,6 +253,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = "$(inherited)";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -377,6 +319,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = "$(inherited)";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -398,7 +341,6 @@
 		};
 		CE52F3102B1CF3B400D81762 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F286D7D47BB1E7EF0B6D10EA /* Pods-grodno-roads-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -410,11 +352,7 @@
 				DEVELOPMENT_TEAM = XGV27LYB6Y;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "grodno-roads-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Behind the Wheel";
@@ -454,7 +392,6 @@
 		};
 		CE52F3112B1CF3B400D81762 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD3E9A75A3A784FAE9BCA805 /* Pods-grodno-roads-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -469,8 +406,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../kmp/features/root/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "grodno-roads-ios/Info.plist";
@@ -530,6 +465,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9FE6B257D67F50E5F0DE3944 /* XCLocalSwiftPackageReference "KotlinMultiplatformLinkedPackage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = KotlinMultiplatformLinkedPackage;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8FA9845EF0F73E1D2CDFB819 /* KotlinMultiplatformLinkedPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KotlinMultiplatformLinkedPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE52F2F92B1CF3B200D81762 /* Project object */;
 }

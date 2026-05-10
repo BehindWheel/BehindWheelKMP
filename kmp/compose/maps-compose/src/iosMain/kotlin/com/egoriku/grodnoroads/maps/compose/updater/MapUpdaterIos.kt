@@ -1,8 +1,5 @@
 package com.egoriku.grodnoroads.maps.compose.updater
 
-import cocoapods.GoogleMaps.GMSCameraPosition
-import cocoapods.GoogleMaps.GMSCameraUpdate
-import cocoapods.GoogleMaps.animateWithCameraUpdate
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.calc.computeOffset
 import com.egoriku.grodnoroads.location.calc.distanceTo
@@ -28,6 +25,9 @@ import platform.CoreGraphics.CGPoint
 import platform.CoreGraphics.CGPointMake
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.QuartzCore.CATransaction
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSCameraPosition
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.GMSCameraUpdate
+import swiftPMImport.Grodno.Roads.kmp.compose.kmp.compose.maps.compose.animateWithCameraUpdate
 
 @OptIn(ExperimentalForeignApi::class)
 class MapUpdaterIos(

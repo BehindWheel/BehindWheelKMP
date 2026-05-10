@@ -2,8 +2,9 @@
 - window size class common
 - LocalClipboardManager deprecated
 - androidPredictiveBackAnimatable deprecated
-- compact navigatiobar
+- compact navigation bar
 - more native ios components
+- update areas json
 
 ios:
 - ios native: radiobutton
