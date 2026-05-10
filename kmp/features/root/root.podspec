@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Shared functionality for iOS'
     spec.vendored_frameworks      = 'build/cocoapods/framework/Root.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '15.0'
+    spec.ios.deployment_target    = '16.0'
     if !Dir.exist?('build/cocoapods/framework/Root.framework') || Dir.empty?('build/cocoapods/framework/Root.framework')
         raise "
         Kotlin framework 'Root' doesn't exist yet, so a proper Xcode project can't be generated.
