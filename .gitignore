@@ -38,6 +38,4 @@ kotlin-js-store/
 *.xccheckout
 *.xcsmblueprint
 xcuserdata/
-xcshareddata/
-contents.xcworkspacedata
 /.swiftpm-locks/
