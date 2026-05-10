@@ -16,7 +16,7 @@ kotlin {
 
     cocoapods {
         version = "1.0.0"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "16.0"
 
         podfile = project.file("../../../app/ios/Podfile")
 
@@ -24,7 +24,7 @@ kotlin {
         summary = "GoogleMaps for Compose Multiplatform"
 
         pod("GoogleMaps") {
-            version = "9.4.0"
+            version = "10.3.0"
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
     }

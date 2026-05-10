@@ -8,8 +8,8 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'GoogleMaps for Compose Multiplatform'
     spec.vendored_frameworks      = 'build/cocoapods/framework/maps_compose.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '15.0'
-    spec.dependency 'GoogleMaps', '9.4.0'
+    spec.ios.deployment_target    = '16.0'
+    spec.dependency 'GoogleMaps', '10.3.0'
     if !Dir.exist?('build/cocoapods/framework/maps_compose.framework') || Dir.empty?('build/cocoapods/framework/maps_compose.framework')
         raise "
         Kotlin framework 'maps_compose' doesn't exist yet, so a proper Xcode project can't be generated.

@@ -12,7 +12,7 @@ kotlin {
 
     cocoapods {
         version = "1.0.0"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "16.0"
 
         podfile = project.file("../../../app/ios/Podfile")
 
