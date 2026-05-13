@@ -16,7 +16,7 @@ essenty = "2.5.0"
 firebase-bom = "34.13.0"
 koin = "4.2.1"
 kotlinx-serialization = "1.11.0"
-kotlin = "2.4.0-Beta2"
+kotlin = "2.4.0-RC"
 mvikotlin = "4.4.0"
 
 [libraries]
