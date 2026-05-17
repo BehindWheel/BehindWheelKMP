@@ -28,7 +28,7 @@ androidx-core = "androidx.core:core-ktx:1.18.0"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.2.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.2.1"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.2.1"
-androidx-media = "androidx.media:media:1.8.0"
+androidx-media3-exoplayer = "androidx.media3:media3-exoplayer:1.10.1"
 
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
