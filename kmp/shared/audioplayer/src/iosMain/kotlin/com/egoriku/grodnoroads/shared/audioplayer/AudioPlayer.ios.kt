@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.shared.audioplayer
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,13 @@ import platform.darwin.NSObject
 
 @Composable
 actual fun rememberAudioPlayer(): AudioPlayer {
-    return remember { AudioPlayer() }
+    val audioPlayer = remember { AudioPlayer() }
+
+    DisposableEffect(audioPlayer) {
+        onDispose { audioPlayer.release() }
+    }
+
+    return audioPlayer
 }
 
 actual class AudioPlayer {
