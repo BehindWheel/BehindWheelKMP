@@ -6,16 +6,19 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.platform.LocalClipboard
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.settings.debugtools.clipboard.createClipEntry
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun Material3Palette(modifier: Modifier = Modifier) {
-    val clipboardManager = LocalClipboardManager.current
+    val clipboard = LocalClipboard.current
+    val scope = rememberCoroutineScope()
 
     val colorScheme = MaterialTheme.colorScheme
     val colors = remember {
@@ -59,7 +62,9 @@ internal fun Material3Palette(modifier: Modifier = Modifier) {
                 colorName = it.name,
                 currentColor = it.color,
                 onClick = { colorHex ->
-                    clipboardManager.setText(AnnotatedString(colorHex))
+                    scope.launch {
+                        clipboard.setClipEntry(createClipEntry(colorHex))
+                    }
                 }
             )
         }
