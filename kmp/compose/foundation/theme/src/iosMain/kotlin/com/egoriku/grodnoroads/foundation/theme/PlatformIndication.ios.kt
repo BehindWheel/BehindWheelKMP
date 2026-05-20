@@ -12,16 +12,10 @@ import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.graphics.withSaveLayer
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
 import kotlinx.coroutines.launch
@@ -111,9 +105,7 @@ private class IOSPressIndicationNode(
         val currentAlpha = animatedAlpha.value
 
         scale(scaleX = currentScale, scaleY = currentScale) {
-            drawWithLayer {
-                this@draw.drawContent()
-            }
+            this@draw.drawContent()
         }
 
         // Apply alpha by drawing a semi-transparent overlay
@@ -122,14 +114,6 @@ private class IOSPressIndicationNode(
                 color = Color.Black.copy(alpha = 1f - currentAlpha),
                 blendMode = BlendMode.Multiply
             )
-        }
-    }
-
-    private inline fun DrawScope.drawWithLayer(block: DrawScope.() -> Unit) {
-        drawIntoCanvas { canvas ->
-            canvas.withSaveLayer(Rect(Offset.Zero, size), Paint()) {
-                block()
-            }
         }
     }
 }
