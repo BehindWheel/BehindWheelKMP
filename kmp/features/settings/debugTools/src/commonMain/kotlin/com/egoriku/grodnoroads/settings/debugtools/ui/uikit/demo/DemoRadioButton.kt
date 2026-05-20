@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
-import com.egoriku.grodnoroads.foundation.uikit.dynamic.RadioButton
+import com.egoriku.grodnoroads.foundation.uikit.dynamic.DynamicRadioButton
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.common.UIKitDemoContainer
 
 @Composable
@@ -20,30 +20,30 @@ internal fun DemoRadioButton(modifier: Modifier = Modifier) {
         var selectedOption by rememberMutableState { Option.F }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            RadioButton(
+            DynamicRadioButton(
                 selected = selectedOption == Option.F,
                 onClick = { selectedOption = Option.F }
             )
-            RadioButton(
+            DynamicRadioButton(
                 selected = selectedOption == Option.S,
                 onClick = { selectedOption = Option.S }
             )
             WeightSpacer()
-            RadioButton(
+            DynamicRadioButton(
                 selected = true,
                 onClick = {}
             )
-            RadioButton(
+            DynamicRadioButton(
                 selected = true,
                 enabled = false,
                 onClick = {}
             )
-            RadioButton(
+            DynamicRadioButton(
                 selected = false,
                 enabled = true,
                 onClick = {}
             )
-            RadioButton(
+            DynamicRadioButton(
                 selected = false,
                 enabled = false,
                 onClick = {}

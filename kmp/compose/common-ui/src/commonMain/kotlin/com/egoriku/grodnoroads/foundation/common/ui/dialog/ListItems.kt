@@ -1,7 +1,7 @@
 package com.egoriku.grodnoroads.foundation.common.ui.dialog
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,7 +25,7 @@ fun <T> ListItems(
         contentPadding = contentPadding
     ) {
         itemsIndexed(list) { index, it ->
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(
