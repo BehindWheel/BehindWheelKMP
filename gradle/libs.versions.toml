@@ -9,7 +9,7 @@ ios-minTarget = "16.0"
 spm-googleMaps = "10.13.0"
 
 agp = "9.2.1"
-buildkonfig = "0.21.0"
+buildkonfig = "0.21.2"
 decompose = "3.5.0"
 compose = "1.11.0"
 essenty = "2.5.0"
