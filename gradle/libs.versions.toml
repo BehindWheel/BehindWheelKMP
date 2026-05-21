@@ -14,6 +14,7 @@ decompose = "3.5.0"
 compose = "1.11.0"
 essenty = "2.5.0"
 firebase-bom = "34.13.0"
+gitlive = "2.4.0"
 koin = "4.2.1"
 kotlinx-serialization = "1.11.0"
 kotlin = "2.4.0-RC"
@@ -44,10 +45,10 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
 desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.5"
-dev-gitlive-firebase-analytics = "dev.gitlive:firebase-analytics:2.4.0"
-dev-gitlive-firebase-crashlytics = "dev.gitlive:firebase-crashlytics:2.4.0"
-dev-gitlive-firebase-database = "dev.gitlive:firebase-database:2.4.0"
-dev-gitlive-firebase-firestore = "dev.gitlive:firebase-firestore:2.4.0"
+dev-gitlive-firebase-analytics = { module = "dev.gitlive:firebase-analytics", version.ref = "gitlive" }
+dev-gitlive-firebase-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "gitlive" }
+dev-gitlive-firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "gitlive" }
+dev-gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "gitlive" }
 
 essenty-backhandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
