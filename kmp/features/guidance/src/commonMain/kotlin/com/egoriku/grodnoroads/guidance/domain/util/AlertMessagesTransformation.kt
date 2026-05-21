@@ -78,17 +78,19 @@ private fun makeAlertMessage(
                             bearing = lastLocation.bearing
                         )
 
-                        if (inRange) {
-                            CameraAlert(
-                                id = event.id,
-                                distance = distance,
-                                // TODO: handle car type
-                                speedLimit = event.speedCar,
-                                cameraType = event.cameraType
-                            )
-                        } else {
-                            null
-                        }
+                        val onRoad = inRange && isUserOnCameraRoad(
+                            cameraLatLng = event.position,
+                            cameraAngle = event.angle,
+                            userLatLng = lastLocation.latLng
+                        )
+
+                        CameraAlert(
+                            id = event.id,
+                            distance = distance,
+                            // TODO: handle car type
+                            speedLimit = event.speedCar,
+                            cameraType = event.cameraType
+                        ).takeIf { onRoad }
                     }
                     is Reports -> {
                         IncidentAlert(
