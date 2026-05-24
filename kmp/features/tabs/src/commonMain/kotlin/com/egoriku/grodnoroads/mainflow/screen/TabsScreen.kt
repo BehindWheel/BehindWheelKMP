@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -38,7 +39,8 @@ import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
-private val NavigationBarHeight: Dp = 80.dp
+private val VerticalNavigationBarHeight: Dp = 56.dp
+private val HorizontalNavigationBarWidth: Dp = 86.dp
 
 @Composable
 fun TabsScreen(
@@ -87,7 +89,7 @@ private fun VerticalOrientationLayout(
     var isShowBottomBar by rememberMutableState { true }
 
     val bottomPadding by animateDpAsState(
-        targetValue = if (isShowBottomBar) NavigationBarHeight else 0.dp,
+        targetValue = if (isShowBottomBar) VerticalNavigationBarHeight else 0.dp,
         label = "bottomPadding"
     )
 
@@ -129,6 +131,7 @@ private fun VerticalOrientationLayout(
                         onClick = { onSelectTab(screen.index) },
                         icon = {
                             Icon(
+                                modifier = Modifier.size(screen.size),
                                 imageVector = screen.imageVector,
                                 contentDescription = null
                             )
@@ -153,7 +156,7 @@ private fun HorizontalOrientationLayout(
     var isHideBottomBar by rememberMutableState { true }
 
     val leftPadding by animateDpAsState(
-        targetValue = if (isHideBottomBar) NavigationBarHeight else 0.dp,
+        targetValue = if (isHideBottomBar) HorizontalNavigationBarWidth else 0.dp,
         label = "leftPadding"
     )
 
