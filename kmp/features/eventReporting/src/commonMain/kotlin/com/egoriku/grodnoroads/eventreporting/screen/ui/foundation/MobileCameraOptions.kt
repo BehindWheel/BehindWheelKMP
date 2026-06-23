@@ -35,7 +35,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
 
     val focusManager = LocalFocusManager.current
 
-    val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90) }
+    val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90, 100, 110, 120) }
     var selectedSpeedLimit by rememberMutableState { speedLimits[2] }
 
     LaunchedEffect(selectedSpeedLimit) {
