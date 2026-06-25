@@ -3,6 +3,7 @@ package com.egoriku.grodnoroads.guidance.screen.ui.dialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,7 +47,9 @@ fun MarkerInfoBottomSheet(
         onCancel = onClose,
         content = {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 text = reports.dialogTitle,
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center
