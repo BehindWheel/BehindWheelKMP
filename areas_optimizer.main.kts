@@ -3,34 +3,34 @@
 
 @file:DependsOn("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 
-import Areas_optimizer_main.MultiPolygon
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.io.File
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 val json = Json {
     prettyPrint = true
     ignoreUnknownKeys = true
 }
-val filePath = "kmp/compose/resources/src/commonMain/composeResources/files/areas.geojson"
-val jsonData = File(filePath).readText()
-val featureCollection = json.decodeFromString<AreasDTO>(jsonData)
 
-val areas = featureCollection.features.map {
-    AreaDTO(
-        name = it.properties.name,
-        coordinates = it.geometry.coordinates.first().first().map { coordinates ->
-            LatLng(
-                latitude = coordinates[1],
-                longitude = coordinates[0]
-            )
-        }
-    )
-}
+val input = File("areas.geojson")
+val output = File("kmp/compose/resources/src/commonMain/composeResources/files/areas.geojson")
+
+val areas = json
+    .decodeFromString<AreasDTO>(input.readText())
+    .features.map {
+        AreaDTO(
+            name = it.properties.name,
+            coordinates = it.geometry.coordinates.first().first().map { coordinates ->
+                LatLng(
+                    latitude = coordinates[1],
+                    longitude = coordinates[0]
+                )
+            }
+        )
+    }
 
 val updatedAreas = json.encodeToString(areas)
-File(filePath).writeText(updatedAreas)
+output.writeText(updatedAreas)
 println("Updated JSON data: $updatedAreas")
 
 // Old models
