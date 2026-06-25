@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -45,10 +44,9 @@ internal fun CitySelectorScreen(citySelectorComponent: CitySelectorComponent) {
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
                 .padding(bottom = 16.dp),
+            text = stringResource(Res.string.city_selector_done),
             onClick = citySelectorComponent::completeIntro
-        ) {
-            Text(text = stringResource(Res.string.city_selector_done))
-        }
+        )
     }
 }
 

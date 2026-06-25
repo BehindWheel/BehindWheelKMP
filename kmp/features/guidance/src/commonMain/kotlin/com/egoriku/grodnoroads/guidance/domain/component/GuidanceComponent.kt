@@ -55,6 +55,7 @@ interface GuidanceComponent {
     fun stopDriveMode()
     fun requestCurrentLocation()
     fun showMarkerInfoDialog(reports: Reports)
+    fun confirmReport(reports: Reports)
     fun openQuickSettings()
     fun closeDialog()
 }

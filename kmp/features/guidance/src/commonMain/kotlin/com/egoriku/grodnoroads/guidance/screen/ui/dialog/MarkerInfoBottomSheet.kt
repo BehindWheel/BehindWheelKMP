@@ -14,14 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.compose.resources.Res
-import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.button.TextButton
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.common.MessageRow
@@ -30,12 +27,12 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarkerInfoBottomSheet(
     reports: Reports,
+    onConfirm: () -> Unit,
     modifier: Modifier = Modifier,
     onClose: () -> Unit
 ) {
@@ -65,10 +62,12 @@ fun MarkerInfoBottomSheet(
             HorizontalDivider()
         },
         footer = {
-            TextButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(Res.string.ok),
-                onClick = { sheetCloseBehaviour.cancel() }
+            MarkerInfoBottomSheetFooter(
+                onConfirm = {
+                    onConfirm()
+                    sheetCloseBehaviour.cancel()
+                },
+                onClose = { sheetCloseBehaviour.cancel() }
             )
         }
     )
@@ -99,11 +98,13 @@ private fun PreviewMarkerInfoBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
                 )
             ),
             dialogTitle = "${RoadIncident.emoji} М6 выезд из города",
+            shortMessage = "М6 выезд из города",
             markerMessage = "${RoadIncident.emoji} (12:30) М6 выезд из города",
             position = LatLng(latitude = 0.0, longitude = 0.0),
             mapEventType = RoadIncident,
             timestamp = 0L
-        )
-    ) {
-    }
+        ),
+        onConfirm = {},
+        onClose = {}
+    )
 }

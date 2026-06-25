@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo.DemoActionButton
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo.DemoActionButtonGroup
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo.DemoCheckbox
@@ -57,4 +60,10 @@ internal fun UiDemoList(modifier: Modifier = Modifier) {
         DemoSnackbarSimple()
         DemoSnackbarWithAction()
     }
+}
+
+@Preview(heightDp = 3000)
+@Composable
+private fun UiDemoListPreview() = GrodnoRoadsM3ThemePreview {
+    UiDemoList(modifier = Modifier.padding(16.dp))
 }

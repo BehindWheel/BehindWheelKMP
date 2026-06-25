@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,11 +24,13 @@ internal fun DataStoreEdit(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        PrimaryButton(onClick = resetOnboarding) {
-            Text(text = "Reset onboarding")
-        }
-        PrimaryButton(onClick = resetReportingLimit) {
-            Text(text = "Reset reporting limit")
-        }
+        PrimaryButton(
+            text = "Reset onboarding",
+            onClick = resetOnboarding
+        )
+        PrimaryButton(
+            text = "Reset reporting limit",
+            onClick = resetReportingLimit
+        )
     }
 }

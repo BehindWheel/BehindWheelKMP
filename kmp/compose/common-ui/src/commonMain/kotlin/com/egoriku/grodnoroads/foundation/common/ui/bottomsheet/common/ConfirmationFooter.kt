@@ -27,8 +27,10 @@ fun ConfirmationFooter(
         SecondaryButton(modifier = Modifier.weight(1f), onClick = onDismiss) {
             Text(text = stringResource(Res.string.cancel))
         }
-        PrimaryButton(modifier = Modifier.weight(1f), onClick = onAccept) {
-            Text(text = stringResource(Res.string.ok))
-        }
+        PrimaryButton(
+            modifier = Modifier.weight(1f),
+            text = stringResource(Res.string.ok),
+            onClick = onAccept
+        )
     }
 }

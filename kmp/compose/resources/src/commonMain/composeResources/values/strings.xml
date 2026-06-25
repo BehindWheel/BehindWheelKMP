@@ -159,6 +159,8 @@
 
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="close">Close</string>
+    <string name="confirm">Confirm</string>
     <string name="send">Send</string>
 
     <string name="snackbar_drive_mode_rationale_title">Permission for access to geolocation denied</string>

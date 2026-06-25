@@ -58,6 +58,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                     ),
                     markerMessage = buildMarkerShortMessage(data),
                     dialogTitle = buildDialogTitle(data),
+                    shortMessage = data.shortMessage.trim(),
                     position = LatLng(data.latitude, data.longitude),
                     mapEventType = MapEventType.eventFromString(data.type),
                     timestamp = data.timestamp
