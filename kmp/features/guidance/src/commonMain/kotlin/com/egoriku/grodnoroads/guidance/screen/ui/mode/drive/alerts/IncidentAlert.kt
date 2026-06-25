@@ -28,8 +28,6 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -38,7 +36,7 @@ fun IncidentAlert(
     emoji: String,
     title: String,
     distance: Int,
-    messages: ImmutableList<MessageItem>,
+    messages: List<MessageItem>,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -86,7 +84,7 @@ private fun PreviewIncidentAlertPreview() = GrodnoRoadsM3ThemePreview {
             emoji = RoadIncident.emoji,
             title = stringResource(Res.string.alerts_incident),
             distance = 200,
-            messages = persistentListOf(
+            messages = listOf(
                 MessageItem(
                     message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
                     messageSource = App
@@ -102,7 +100,7 @@ private fun PreviewIncidentAlertPreview() = GrodnoRoadsM3ThemePreview {
             emoji = TrafficPolice.emoji,
             title = stringResource(Res.string.alerts_traffic_police),
             distance = 350,
-            messages = persistentListOf(
+            messages = listOf(
                 MessageItem(
                     message = "(15:30) Славинского беларуснефть на скорость",
                     messageSource = App

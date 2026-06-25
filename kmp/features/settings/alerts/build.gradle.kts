@@ -19,7 +19,6 @@ kotlin {
 
             implementation(libs.decompose)
             implementation(libs.koin.core)
-            implementation(libs.kotlin.collections)
 
             implementation(libs.bundles.mvikotlin)
         }

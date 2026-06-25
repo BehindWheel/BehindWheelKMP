@@ -36,7 +36,6 @@ import com.egoriku.grodnoroads.foundation.uikit.NavigationRailItem
 import com.egoriku.grodnoroads.guidance.screen.GuidanceScreen
 import com.egoriku.grodnoroads.mainflow.domain.TabsComponent
 import com.egoriku.grodnoroads.mainflow.domain.TabsComponent.Child
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
 private val VerticalNavigationBarHeight: Dp = 56.dp
@@ -85,7 +84,7 @@ private fun VerticalOrientationLayout(
     activeIndex: () -> Int,
     onSelectTab: (Int) -> Unit
 ) {
-    val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.AppSettings) }
+    val bottomNavItems = remember { listOf(Screen.Map, Screen.AppSettings) }
     var isShowBottomBar by rememberMutableState { true }
 
     val bottomPadding by animateDpAsState(
@@ -152,7 +151,7 @@ private fun HorizontalOrientationLayout(
     activeIndex: () -> Int,
     onSelectTab: (Int) -> Unit
 ) {
-    val bottomNavItems = remember { persistentListOf(Screen.Map, Screen.AppSettings) }
+    val bottomNavItems = remember { listOf(Screen.Map, Screen.AppSettings) }
     var isHideBottomBar by rememberMutableState { true }
 
     val leftPadding by animateDpAsState(

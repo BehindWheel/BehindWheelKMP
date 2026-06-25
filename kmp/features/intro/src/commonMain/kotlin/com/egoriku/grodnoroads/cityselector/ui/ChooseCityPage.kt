@@ -18,7 +18,6 @@ import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyC
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -43,7 +42,7 @@ internal fun ChooseCityPage(
         VerticalSpacer(24.dp)
         SingleChoiceLazyColumn(
             modifier = Modifier.fillMaxWidth(),
-            list = sortedCityValues.map { it.value }.toImmutableList(),
+            list = sortedCityValues.map { it.value },
             initialSelection = sortedCityValues.indexOfFirst { cityValue ->
                 cityValue.index == City.entries.indexOf(City.Grodno)
             },

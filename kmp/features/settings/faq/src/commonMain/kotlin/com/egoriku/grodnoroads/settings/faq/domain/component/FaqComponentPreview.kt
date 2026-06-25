@@ -4,7 +4,6 @@ import com.egoriku.grodnoroads.extensions.LoremIpsum
 import com.egoriku.grodnoroads.extensions.coroutines.stateFlowOf
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.store.FaqStore
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.StateFlow
 
 class FaqComponentPreview : FaqComponent {
@@ -13,7 +12,7 @@ class FaqComponentPreview : FaqComponent {
         get() = stateFlowOf {
             FaqStore.State(
                 isLoading = false,
-                faq = persistentListOf(
+                faq = listOf(
                     FAQ(
                         question = LoremIpsum.generateLoremIpsum(5),
                         answer = LoremIpsum.generateLoremIpsum(40)

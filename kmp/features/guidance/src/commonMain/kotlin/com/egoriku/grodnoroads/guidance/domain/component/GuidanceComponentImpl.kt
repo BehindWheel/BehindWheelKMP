@@ -43,7 +43,6 @@ import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettings
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -227,7 +226,7 @@ internal class GuidanceComponentImpl(
     override val initialLocation: Flow<LatLng>
         get() = locationStore.states.map { it.initialLocation }
 
-    override val alerts: Flow<ImmutableList<Alert>>
+    override val alerts: Flow<List<Alert>>
         get() = combine(
             flow = mapEvents,
             flow2 = lastLocation,

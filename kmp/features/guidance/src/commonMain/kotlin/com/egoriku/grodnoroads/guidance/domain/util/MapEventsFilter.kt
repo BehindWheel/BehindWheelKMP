@@ -10,7 +10,6 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Reports
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig.MapInfo
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import kotlinx.collections.immutable.toImmutableList
 
 internal fun filterMapEvents(): suspend (
     List<Reports>,
@@ -23,7 +22,7 @@ internal fun filterMapEvents(): suspend (
         data = mapEvents(
             events = reports + stationary + mediumSpeed + mobile,
             mapInfo = mapInfo
-        ).toImmutableList()
+        )
     )
 }
 

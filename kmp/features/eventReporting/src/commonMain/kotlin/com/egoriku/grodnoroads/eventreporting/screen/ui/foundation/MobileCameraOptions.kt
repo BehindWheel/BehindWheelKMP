@@ -26,7 +26,6 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -35,7 +34,7 @@ internal fun MobileCameraOptions(onReportParamsChange: (ReportParams) -> Unit) {
 
     val focusManager = LocalFocusManager.current
 
-    val speedLimits = remember { persistentListOf(40, 50, 60, 70, 80, 90, 100, 110, 120) }
+    val speedLimits = remember { listOf(40, 50, 60, 70, 80, 90, 100, 110, 120) }
     var selectedSpeedLimit by rememberMutableState { speedLimits[2] }
 
     LaunchedEffect(selectedSpeedLimit) {

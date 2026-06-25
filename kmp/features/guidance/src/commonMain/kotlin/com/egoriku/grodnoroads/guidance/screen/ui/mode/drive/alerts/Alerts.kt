@@ -40,13 +40,11 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun Alerts(
-    alerts: ImmutableList<Alert>,
+    alerts: List<Alert>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -112,12 +110,12 @@ fun Alerts(
 @Composable
 private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
     Alerts(
-        alerts = persistentListOf(
+        alerts = listOf(
             IncidentAlert(
                 mapEventType = TrafficPolice,
                 distance = 1,
                 id = Uuid.random(),
-                messages = persistentListOf(
+                messages = listOf(
                     MessageItem(
                         message = "Славинского беларуснефть на скорость",
                         messageSource = Viber
@@ -133,7 +131,7 @@ private fun AlertsPreview() = GrodnoRoadsM3ThemePreview {
             IncidentAlert(
                 id = Uuid.random(),
                 distance = 5,
-                messages = persistentListOf(
+                messages = listOf(
                     MessageItem(
                         message = "(15:30) Старый мост ДТП в правой полосе по направлению от кольца в центр",
                         messageSource = Viber

@@ -51,8 +51,6 @@ import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.guidance.screen.ui.mode.drive.alerts.Alerts
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 
 @Composable
@@ -62,7 +60,7 @@ fun DefaultOverlay(
     isDriveMode: Boolean,
     currentSpeed: Int,
     speedLimit: Int,
-    alerts: ImmutableList<Alert>,
+    alerts: List<Alert>,
     modifier: Modifier = Modifier,
     onOpenQuickSettings: () -> Unit
 ) {
@@ -197,12 +195,12 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             isDriveMode = true,
             currentSpeed = 120,
             speedLimit = limit,
-            alerts = persistentListOf(
+            alerts = listOf(
                 IncidentAlert(
                     id = Uuid.random(),
                     mapEventType = MapEventType.TrafficPolice,
                     distance = 1,
-                    messages = persistentListOf(
+                    messages = listOf(
                         MessageItem(
                             message = "Славинского Беларуснефть на скорость",
                             messageSource = Viber
@@ -213,7 +211,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                     id = Uuid.random(),
                     mapEventType = MapEventType.CarCrash,
                     distance = 120,
-                    messages = persistentListOf(
+                    messages = listOf(
                         MessageItem(
                             message = "Славинского ДТП",
                             messageSource = Viber

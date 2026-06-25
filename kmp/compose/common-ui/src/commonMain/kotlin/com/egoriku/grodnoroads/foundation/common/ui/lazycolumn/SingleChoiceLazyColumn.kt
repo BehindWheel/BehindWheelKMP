@@ -17,12 +17,10 @@ import com.egoriku.grodnoroads.foundation.preview.PlatformPreviewProvider
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.Platform
 import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SingleChoiceLazyColumn(
-    list: ImmutableList<String>,
+    list: List<String>,
     initialSelection: Int,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
@@ -57,7 +55,7 @@ private fun PreviewListSingleChoiceDialogPreview(
 ) = GrodnoRoadsM3ThemePreview(platform = platform) {
     SingleChoiceLazyColumn(
         modifier = Modifier.padding(vertical = 8.dp),
-        list = listOf("System", "Dark", "Light").toImmutableList(),
+        list = listOf("System", "Dark", "Light"),
         initialSelection = 0,
         onSelect = {}
     )

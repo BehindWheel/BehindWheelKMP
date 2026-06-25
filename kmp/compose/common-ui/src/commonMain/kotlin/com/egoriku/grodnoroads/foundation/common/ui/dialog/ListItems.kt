@@ -8,12 +8,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import kotlinx.collections.immutable.ImmutableList
 
 @Suppress("ktlint:compose:content-slot-reused")
 @Composable
 fun <T> ListItems(
-    list: ImmutableList<T>,
+    list: List<T>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
     onClick: (index: Int, item: T) -> Unit = { _, _ -> },

@@ -16,7 +16,6 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearanceDialogState.LanguageDialogState
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,8 +37,7 @@ fun AppLanguageBottomSheet(
         onCancel = onCancel,
         content = {
             SingleChoiceLazyColumn(
-                list = language.values.map { stringResource(it.toStringResource()) }
-                    .toImmutableList(),
+                list = language.values.map { stringResource(it.toStringResource()) },
                 contentPadding = PaddingValues(bottom = 8.dp),
                 initialSelection = language.values.indexOf(language.current),
                 onSelect = { position ->

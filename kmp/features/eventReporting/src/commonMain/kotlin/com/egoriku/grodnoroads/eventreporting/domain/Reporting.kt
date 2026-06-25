@@ -23,17 +23,15 @@ import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.TRANSPORT_
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.WILD_ANIMALS
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.WORKING_FROM_CAR
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.WORKING_WITH_RADAR
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 object Reporting {
     @Stable
     sealed interface ReportType {
-        val items: ImmutableList<ReportingOptions>
+        val items: List<ReportingOptions>
 
         data object RoadIncidents : ReportType {
-            override val items: ImmutableList<ReportingOptions> =
-                persistentListOf(
+            override val items: List<ReportingOptions> =
+                listOf(
                     CAR_ACCIDENT,
                     ROAD_REPAIR,
                     ROAD_BLOCKED,
@@ -46,8 +44,8 @@ object Reporting {
         }
 
         data object TrafficPolice : ReportType {
-            override val items: ImmutableList<ReportingOptions> =
-                persistentListOf(
+            override val items: List<ReportingOptions> =
+                listOf(
                     TRAFFIC_POLICE,
                     WORKING_WITH_RADAR,
                     STAY_ON_BEACONS,
@@ -62,8 +60,8 @@ object Reporting {
         }
 
         data object Other : ReportType {
-            override val items: ImmutableList<ReportingOptions> =
-                persistentListOf(
+            override val items: List<ReportingOptions> =
+                listOf(
                     TOW_TRUCK_WORKING,
                     NON_WORKING_TRAFFIC_LIGHTS,
                     WILD_ANIMALS,
@@ -72,7 +70,7 @@ object Reporting {
         }
 
         data object MobileCamera : ReportType {
-            override val items: ImmutableList<ReportingOptions> = persistentListOf()
+            override val items: List<ReportingOptions> = emptyList()
         }
     }
 }

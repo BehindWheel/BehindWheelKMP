@@ -21,7 +21,6 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.firestore)
             implementation(libs.koin.core)
-            implementation(libs.kotlin.collections)
 
             implementation(libs.bundles.mvikotlin)
         }

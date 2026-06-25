@@ -23,7 +23,6 @@ kotlin {
             implementation(libs.compose.material3.windowsize)
             implementation(libs.decompose.compose)
             implementation(libs.decompose)
-            implementation(libs.kotlin.collections)
         }
     }
 }

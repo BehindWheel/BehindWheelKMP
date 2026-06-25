@@ -14,7 +14,6 @@ import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.quicksettings.domain.component.QuickSettingsComponent
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
-import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 
@@ -37,7 +36,7 @@ interface GuidanceComponent {
     val userCount: Flow<Int>
     val longPressReportingInDriveMode: Flow<Boolean>
 
-    val alerts: Flow<ImmutableList<Alert>>
+    val alerts: Flow<List<Alert>>
 
     val speedLimit: Flow<Int>
 

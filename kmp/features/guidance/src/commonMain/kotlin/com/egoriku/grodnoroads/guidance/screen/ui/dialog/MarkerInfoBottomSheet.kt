@@ -29,7 +29,6 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,7 +77,7 @@ private fun PreviewMarkerInfoBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
     MarkerInfoBottomSheet(
         reports = Reports(
             id = Uuid.random(),
-            messages = persistentListOf(
+            messages = listOf(
                 MessageItem(
                     message = "(12:30) М6 выезд из города в сторону Минска сразу за заправками на скорость",
                     messageSource = App

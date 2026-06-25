@@ -12,12 +12,10 @@ import com.egoriku.grodnoroads.guidance.domain.model.MessageItem
 import com.egoriku.grodnoroads.shared.models.MessageSource.App
 import com.egoriku.grodnoroads.shared.models.MessageSource.Telegram
 import com.egoriku.grodnoroads.shared.models.MessageSource.Viber
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun MessageComponent(
-    messages: ImmutableList<MessageItem>,
+    messages: List<MessageItem>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -34,7 +32,7 @@ fun MessageComponent(
 @Composable
 private fun PreviewMessageComponentPreview() = GrodnoRoadsM3ThemePreview {
     MessageComponent(
-        messages = persistentListOf(
+        messages = listOf(
             MessageItem(message = "Test message 1\nTest message 1", messageSource = App),
             MessageItem(message = "Test message 2", messageSource = Viber),
             MessageItem(message = "Test message 3", messageSource = Telegram)

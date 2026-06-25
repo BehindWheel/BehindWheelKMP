@@ -1,10 +1,8 @@
 package com.egoriku.grodnoroads.guidance.domain.model
 
-import androidx.compose.runtime.Stable
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
+import androidx.compose.runtime.Immutable
 
-@Stable
+@Immutable
 data class MapEvents(
-    val data: ImmutableList<MapEvent> = persistentListOf()
+    val data: List<MapEvent> = emptyList()
 )

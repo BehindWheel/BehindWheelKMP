@@ -9,9 +9,6 @@ import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.shared.models.MessageSource
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
-import kotlinx.collections.immutable.mutate
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toPersistentList
 
 private const val MERGE_ALERT_DISTANCE = 200
 
@@ -39,13 +36,12 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
                 val item: Reports = mergedReports[index]
 
                 mergedReports[index] = item.copy(
-                    messages = item.messages.toPersistentList()
-                        .mutate {
-                            it += MessageItem(
-                                message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
-                                messageSource = MessageSource.sourceFromString(data.source)
-                            )
-                        },
+                    messages = item.messages.toMutableList().also {
+                        it += MessageItem(
+                            message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
+                            messageSource = MessageSource.sourceFromString(data.source)
+                        )
+                    },
                     position = LatLng(data.latitude, data.longitude),
                     dialogTitle = buildDialogTitle(data),
                     markerMessage = buildMarkerShortMessage(data),
@@ -54,7 +50,7 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
             } else {
                 val action = Reports(
                     id = "${data.type}-${data.latitude}-${data.longitude}",
-                    messages = persistentListOf(
+                    messages = listOf(
                         MessageItem(
                             message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
                             messageSource = MessageSource.sourceFromString(data.source)

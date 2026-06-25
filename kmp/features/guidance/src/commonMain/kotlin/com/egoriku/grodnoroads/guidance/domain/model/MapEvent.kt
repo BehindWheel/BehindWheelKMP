@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.guidance.domain.model
 import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import kotlinx.collections.immutable.ImmutableList
 
 @Stable
 sealed interface MapEvent {
@@ -61,7 +60,7 @@ sealed interface MapEvent {
         val timestamp: Long,
         val markerMessage: String,
         val dialogTitle: String,
-        val messages: ImmutableList<MessageItem>,
+        val messages: List<MessageItem>,
         val mapEventType: MapEventType,
         override val position: LatLng
     ) : MapEvent

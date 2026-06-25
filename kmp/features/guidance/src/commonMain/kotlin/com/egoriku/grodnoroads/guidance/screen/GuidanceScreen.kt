@@ -102,7 +102,7 @@ import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
 import com.egoriku.grodnoroads.quicksettings.screen.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.screen.SpecialEventDialog
-import kotlinx.collections.immutable.persistentListOf
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -208,7 +208,7 @@ fun GuidanceScreen(
     Surface(modifier = modifier) {
         var cameraInfo by rememberMutableState<MapEvent.Camera?> { null }
 
-        val alerts by component.alerts.collectAsState(initial = persistentListOf())
+        val alerts by component.alerts.collectAsState(initial = emptyList())
         val appMode by component.appMode.collectAsState(AppMode.Default)
 
         val location by component.lastLocation.collectAsState(LastLocation.None)
@@ -325,7 +325,7 @@ fun GuidanceScreen(
                             if (cameraMoveState == CameraMoveState.UserGesture) {
                                 cameraUpdatesJob = coroutineScope.reLaunch(cameraUpdatesJob) {
                                     isCameraUpdatesEnabled = false
-                                    delay(5000)
+                                    delay(5000.milliseconds)
                                     isCameraUpdatesEnabled = true
                                 }
                             }

@@ -4,7 +4,6 @@ import com.egoriku.grodnoroads.extensions.LoremIpsum
 import com.egoriku.grodnoroads.extensions.coroutines.stateFlowOf
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.StateFlow
 
 class ChangelogComponentPreview : ChangelogComponent {
@@ -13,7 +12,7 @@ class ChangelogComponentPreview : ChangelogComponent {
         get() = stateFlowOf {
             ChangelogStore.State(
                 isLoading = false,
-                releaseNotes = persistentListOf(
+                releaseNotes = listOf(
                     ReleaseNotes(
                         versionCode = 102,
                         versionName = "1.0.2",

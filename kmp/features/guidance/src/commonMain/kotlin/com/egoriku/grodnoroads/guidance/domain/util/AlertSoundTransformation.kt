@@ -12,13 +12,10 @@ import com.egoriku.grodnoroads.shared.models.MapEventType.RoadIncident
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficJam
 import com.egoriku.grodnoroads.shared.models.MapEventType.TrafficPolice
 import com.egoriku.grodnoroads.shared.models.MapEventType.WildAnimals
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 
-val alertPersistentList = persistentListOf<Alert>()
+val alertPersistentList = emptyList<Alert>()
 
-internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsInfo, AppMode) -> ImmutableList<Alert> {
+internal fun alertSoundTransformation(): suspend (List<Alert>, AlertsInfo, AppMode) -> List<Alert> {
     return { alerts, alertInfo, appMode ->
         if (alertInfo.voiceAlertsEnabled && appMode == AppMode.Drive) {
             alerts.mapNotNull { alert ->
@@ -65,7 +62,7 @@ internal fun alertSoundTransformation(): suspend (ImmutableList<Alert>, AlertsIn
                         }
                     }
                 }
-            }.toImmutableList()
+            }
         } else {
             alertPersistentList
         }

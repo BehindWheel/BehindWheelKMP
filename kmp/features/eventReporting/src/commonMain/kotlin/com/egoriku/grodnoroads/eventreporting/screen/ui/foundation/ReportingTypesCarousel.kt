@@ -37,7 +37,6 @@ import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
 import com.egoriku.grodnoroads.foundation.icons.colored.RoadIncidentBold
 import com.egoriku.grodnoroads.foundation.icons.colored.RoadProblemBold
 import com.egoriku.grodnoroads.foundation.icons.colored.TrafficPoliceBold
-import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -48,7 +47,7 @@ internal fun ReportingTypesCarousel(
 ) {
     val focusManager = LocalFocusManager.current
     val items = remember {
-        persistentListOf(
+        listOf(
             Repo(
                 reportType = ReportType.RoadIncidents,
                 imageVector = GrodnoRoads.Colored.RoadProblemBold,

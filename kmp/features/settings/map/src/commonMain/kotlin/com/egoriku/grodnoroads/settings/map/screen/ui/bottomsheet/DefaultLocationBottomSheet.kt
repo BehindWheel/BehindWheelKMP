@@ -18,7 +18,6 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +44,7 @@ internal fun DefaultLocationBottomSheet(
                 }.sortedWith(compareBy(Collator.collator) { it.value })
 
             SingleChoiceLazyColumn(
-                list = sortedCityValues.map { it.value }.toImmutableList(),
+                list = sortedCityValues.map { it.value },
                 contentPadding = PaddingValues(bottom = 16.dp),
                 initialSelection = sortedCityValues.indexOfFirst { cityValue ->
                     cityValue.index == defaultCity.values.indexOf(defaultCity.current)

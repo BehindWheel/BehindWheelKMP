@@ -9,7 +9,6 @@ import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.Message
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.State
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -40,7 +39,7 @@ internal class ChangelogStoreFactory(
             reducer = { message: Message ->
                 when (message) {
                     is Message.Loading -> copy(isLoading = message.isLoading)
-                    is Message.Success -> copy(releaseNotes = message.releaseNotes.toImmutableList())
+                    is Message.Success -> copy(releaseNotes = message.releaseNotes)
                 }
             }
         ) {}

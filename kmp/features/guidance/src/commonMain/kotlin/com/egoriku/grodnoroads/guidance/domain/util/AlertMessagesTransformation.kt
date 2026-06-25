@@ -13,27 +13,22 @@ import com.egoriku.grodnoroads.guidance.domain.model.MapEvents
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.calc.computeOffset
 import com.egoriku.grodnoroads.location.calc.roundDistanceTo
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 
 private const val MIN_DISTANCE = 20
 private const val MIN_SPEED = 10
 
-private val emptyList = persistentListOf<Alert>()
-
-fun alertMessagesTransformation(): suspend (MapEvents, LastLocation, MapConfig, AppMode) -> ImmutableList<Alert> {
+fun alertMessagesTransformation(): suspend (MapEvents, LastLocation, MapConfig, AppMode) -> List<Alert> {
     return { mapEvents, lastLocation, config, appMode ->
         when (lastLocation) {
-            LastLocation.None -> emptyList
+            LastLocation.None -> emptyList()
             else -> when {
-                !config.alertsEnabled && appMode != AppMode.Drive -> emptyList
+                !config.alertsEnabled && appMode != AppMode.Drive -> emptyList()
                 lastLocation.speed > MIN_SPEED -> makeAlertMessage(
                     mapEvents = mapEvents.data,
                     lastLocation = lastLocation,
                     alertDistance = config.alertRadius
                 )
-                else -> emptyList
+                else -> emptyList()
             }
         }
     }
@@ -105,7 +100,7 @@ private fun makeAlertMessage(
             }
         }
     }
-}.toImmutableList()
+}
 
 private fun computeDistance(
     eventLatLng: LatLng,

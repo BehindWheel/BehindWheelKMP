@@ -17,7 +17,6 @@ import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceCo
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent.AppearancePref.AppTheme
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
-import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,9 +38,7 @@ fun AppThemeBottomSheet(
         onCancel = onCancel,
         content = {
             SingleChoiceLazyColumn(
-                list = theme.values.map {
-                    stringResource(it.toStringResource())
-                }.toImmutableList(),
+                list = theme.values.map { stringResource(it.toStringResource()) },
                 contentPadding = PaddingValues(bottom = 8.dp),
                 initialSelection = theme.values.indexOf(theme.current),
                 onSelect = { position ->
