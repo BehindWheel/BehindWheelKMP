@@ -13,7 +13,7 @@ val json = Json {
 }
 
 val input = File("areas.geojson")
-val output = File("kmp/compose/resources/src/commonMain/composeResources/files/areas.geojson")
+val output = File("kmp/compose/resources/src/commonMain/composeResources/files/areas.json")
 
 val areas = json
     .decodeFromString<AreasDTO>(input.readText())
@@ -33,7 +33,7 @@ val updatedAreas = json.encodeToString(areas)
 output.writeText(updatedAreas)
 println("Updated JSON data: $updatedAreas")
 
-// Old models
+// GeoJSON input models
 typealias MultiPolygon = List<List<List<List<Double>>>>
 
 @Serializable

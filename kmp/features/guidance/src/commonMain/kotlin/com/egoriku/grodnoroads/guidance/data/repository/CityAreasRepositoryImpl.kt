@@ -16,7 +16,7 @@ class CityAreasRepositoryImpl : CityAreasRepository {
 
     @OptIn(ExperimentalResourceApi::class)
     override suspend fun load(): List<Area> = withContext(Dispatchers.Default) {
-        val areasJson = Res.readBytes("files/areas.geojson").decodeToString()
+        val areasJson = Res.readBytes("files/areas.json").decodeToString()
         val areas = json.decodeFromString<List<AreaDTO>>(areasJson)
 
         areas.map {
