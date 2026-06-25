@@ -1,8 +1,8 @@
 [versions]
 # Android specific
-compileSdk = "36"
+compileSdk = "37"
 minSdk = "23" # Android 6.0
-targetSdk = "36"
+targetSdk = "37"
 
 # iOS specific
 ios-minTarget = "16.0"
