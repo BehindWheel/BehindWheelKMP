@@ -37,10 +37,9 @@ internal fun BottomActions(
         }
         PrimaryButton(
             modifier = Modifier.weight(1f),
+            text = stringResource(Res.string.send),
             enabled = sendEnabled,
             onClick = onResult
-        ) {
-            Text(text = stringResource(Res.string.send))
-        }
+        )
     }
 }

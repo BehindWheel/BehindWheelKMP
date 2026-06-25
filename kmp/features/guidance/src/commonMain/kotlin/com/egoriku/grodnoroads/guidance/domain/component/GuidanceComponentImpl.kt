@@ -307,6 +307,17 @@ internal class GuidanceComponentImpl(
         dialogStore.accept(DialogStore.Intent.OpenMarkerInfoDialog(reports = reports))
     }
 
+    override fun confirmReport(reports: MapEvent.Reports) {
+        eventReportingComponent.report(
+            params = ReportParams.EventReport(
+                mapEventType = reports.mapEventType,
+                shortMessage = reports.shortMessage,
+                message = "${reports.shortMessage} - актуально"
+            ),
+            latLng = reports.position
+        )
+    }
+
     override fun openQuickSettings() {
         dialogStore.accept(DialogStore.Intent.OpenQuickSettings)
     }

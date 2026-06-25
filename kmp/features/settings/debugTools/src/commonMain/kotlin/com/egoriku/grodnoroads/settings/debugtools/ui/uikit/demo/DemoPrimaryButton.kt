@@ -2,7 +2,6 @@ package com.egoriku.grodnoroads.settings.debugtools.ui.uikit.demo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,17 +16,15 @@ internal fun DemoPrimaryButton(modifier: Modifier = Modifier) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             PrimaryButton(
                 modifier = Modifier.weight(1f),
+                text = "Enabled state",
                 onClick = { }
-            ) {
-                Text(text = "Enabled state")
-            }
+            )
             PrimaryButton(
                 modifier = Modifier.weight(1f),
+                text = "Disabled state",
                 onClick = { },
                 enabled = false
-            ) {
-                Text(text = "Disabled state")
-            }
+            )
         }
     }
 }

@@ -5,6 +5,7 @@
 ### Added
 
 - Add user count tooltip
+- Add "Confirm" button in marker info dialog to quickly report that road events are still active
 
 ### Fixed
 

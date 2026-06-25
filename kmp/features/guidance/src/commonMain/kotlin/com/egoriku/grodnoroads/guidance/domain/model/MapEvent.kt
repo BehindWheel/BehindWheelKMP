@@ -60,6 +60,7 @@ sealed interface MapEvent {
         val timestamp: Long,
         val markerMessage: String,
         val dialogTitle: String,
+        val shortMessage: String,
         val messages: List<MessageItem>,
         val mapEventType: MapEventType,
         override val position: LatLng

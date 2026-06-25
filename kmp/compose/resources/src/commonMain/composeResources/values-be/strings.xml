@@ -120,6 +120,8 @@
     <string name="dialog_input_hint">Апцыянальнае паведамленне</string>
     <string name="cancel">Скасаваць</string>
     <string name="ok">ОК</string>
+    <string name="close">Закрыць</string>
+    <string name="confirm">Актуальна</string>
     <string name="send">Адправіць</string>
     <string name="map_header_default_location">Месцазнаходжанне па змаўчанні</string>
     <string name="map_default_location">Мой горад</string>

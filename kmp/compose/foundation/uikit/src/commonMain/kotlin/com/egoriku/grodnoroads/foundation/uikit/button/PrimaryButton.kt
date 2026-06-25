@@ -1,7 +1,5 @@
 package com.egoriku.grodnoroads.foundation.uikit.button
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -14,25 +12,27 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 
 @Composable
 fun PrimaryButton(
+    text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    content: @Composable RowScope.() -> Unit
+    enabled: Boolean = true
 ) {
     Button(
         modifier = modifier.heightIn(min = 48.dp),
         enabled = enabled,
         onClick = onClick,
-        content = content
+        content = {
+            Text(text = text)
+        }
     )
 }
 
 @PreviewGrodnoRoadsDarkLight
 @Composable
 private fun PrimaryButtonPreview() = GrodnoRoadsM3ThemePreview {
-    Box(modifier = Modifier.padding(16.dp)) {
-        PrimaryButton(onClick = {}) {
-            Text(text = "Sample text")
-        }
-    }
+    PrimaryButton(
+        modifier = Modifier.padding(16.dp),
+        onClick = {},
+        text = "Primary Button"
+    )
 }

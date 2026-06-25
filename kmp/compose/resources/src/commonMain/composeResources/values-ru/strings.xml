@@ -125,6 +125,8 @@
 
     <string name="cancel">Отмена</string>
     <string name="ok">ОК</string>
+    <string name="close">Закрыть</string>
+    <string name="confirm">Актуально</string>
     <string name="send">Отправить</string>
     <string name="map_header_default_location">Местоположение по умолчанию</string>
     <string name="map_default_location">Мой город</string>

@@ -225,6 +225,7 @@ fun GuidanceScreen(
             is MapBottomSheet.MarkerInfo -> {
                 MarkerInfoBottomSheet(
                     reports = state.reports,
+                    onConfirm = { component.confirmReport(state.reports) },
                     onClose = component::closeDialog
                 )
             }
