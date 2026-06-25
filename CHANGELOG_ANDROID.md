@@ -4,6 +4,10 @@
 
 ### Added
 
+### Fixed
+
+- Fix missing horizontal padding on title in marker info bottom sheet
+
 ### Changed
 
 - Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel
