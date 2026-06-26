@@ -25,105 +25,66 @@ internal object ReportsMapper : (List<ReportsDTO>) -> List<Reports> {
         val mergedReports = mutableListOf<Reports>()
 
         forEach { data ->
-            val index = mergedReports.indexOfFirst { calcAction ->
-                val distance =
-                    calcAction.position roundDistanceTo LatLng(data.latitude, data.longitude)
+            val position = LatLng(data.latitude, data.longitude)
+            val eventType = MapEventType.eventFromString(data.type)
+            val shortMessage = data.shortMessage.trim()
 
-                distance < MERGE_ALERT_DISTANCE
+            val index = mergedReports.indexOfFirst { calcAction ->
+                calcAction.position roundDistanceTo position < MERGE_ALERT_DISTANCE
             }
 
             if (index != -1) {
-                val item: Reports = mergedReports[index]
+                val item = mergedReports[index]
 
                 mergedReports[index] = item.copy(
-                    messages = item.messages.toMutableList().also {
-                        it += MessageItem(
-                            message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
-                            messageSource = MessageSource.sourceFromString(data.source)
-                        )
-                    },
-                    position = LatLng(data.latitude, data.longitude),
-                    dialogTitle = buildDialogTitle(data),
-                    markerMessage = buildMarkerShortMessage(data),
+                    messages = item.messages + buildMessageItem(data),
+                    position = position,
+                    dialogTitle = buildDialogTitle(eventType, shortMessage),
+                    markerMessage = buildMarkerShortMessage(data, eventType, shortMessage),
                     timestamp = data.timestamp
                 )
             } else {
-                val action = Reports(
+                mergedReports += Reports(
                     id = "${data.type}-${data.latitude}-${data.longitude}",
-                    messages = listOf(
-                        MessageItem(
-                            message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
-                            messageSource = MessageSource.sourceFromString(data.source)
-                        )
-                    ),
-                    markerMessage = buildMarkerShortMessage(data),
-                    dialogTitle = buildDialogTitle(data),
-                    shortMessage = data.shortMessage.trim(),
-                    position = LatLng(data.latitude, data.longitude),
-                    mapEventType = MapEventType.eventFromString(data.type),
+                    messages = listOf(buildMessageItem(data)),
+                    markerMessage = buildMarkerShortMessage(data, eventType, shortMessage),
+                    dialogTitle = buildDialogTitle(eventType, shortMessage),
+                    shortMessage = shortMessage,
+                    position = position,
+                    mapEventType = eventType,
                     timestamp = data.timestamp
                 )
-
-                mergedReports.add(action)
             }
         }
         return mergedReports
     }
 
-    private fun buildMarkerShortMessage(data: ReportsDTO): String {
-        return when (MapEventType.eventFromString(data.type)) {
-            MapEventType.TrafficPolice -> buildString {
-                append("(${DateTime.formatToTime(data.timestamp)}) ")
-                append(MapEventType.TrafficPolice.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
-            }
-            MapEventType.RoadIncident -> buildString {
-                append("(${DateTime.formatToTime(data.timestamp)}) ")
-                append(MapEventType.RoadIncident.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
-            }
-            MapEventType.WildAnimals -> buildString {
-                append("(${DateTime.formatToTime(data.timestamp)}) ")
-                append(MapEventType.WildAnimals.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
-            }
-            MapEventType.CarCrash -> buildString {
-                append("(${DateTime.formatToTime(data.timestamp)}) ")
-                append(MapEventType.CarCrash.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
-            }
-            MapEventType.TrafficJam -> buildString {
-                append("(${DateTime.formatToTime(data.timestamp)}) ")
-                append(MapEventType.TrafficJam.emoji)
-                appendIfNotEmpty(data.shortMessage, " (${data.shortMessage.trim()})")
-            }
-            else -> data.shortMessage.trim()
+    private fun buildMessageItem(data: ReportsDTO) = MessageItem(
+        message = "(${DateTime.formatToTime(data.timestamp)}) ${data.message.emojiFix()}",
+        messageSource = MessageSource.sourceFromString(data.source)
+    )
+
+    private fun buildMarkerShortMessage(
+        data: ReportsDTO,
+        eventType: MapEventType,
+        shortMessage: String
+    ): String = when (eventType) {
+        MapEventType.Unsupported -> shortMessage
+        else -> buildString {
+            append("(${DateTime.formatToTime(data.timestamp)}) ")
+            append(eventType.emoji)
+            appendIfNotEmpty(shortMessage, " ($shortMessage)")
         }
     }
 
-    private fun buildDialogTitle(data: ReportsDTO): String {
-        return when (MapEventType.eventFromString(data.type)) {
-            MapEventType.TrafficPolice -> buildString {
-                append(MapEventType.TrafficPolice.emoji)
-                appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
-            }
-            MapEventType.RoadIncident -> buildString {
-                append(MapEventType.RoadIncident.emoji)
-                appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
-            }
-            MapEventType.WildAnimals -> buildString {
-                append(MapEventType.WildAnimals.emoji)
-                appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
-            }
-            MapEventType.CarCrash -> buildString {
-                append(MapEventType.CarCrash.emoji)
-                appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
-            }
-            MapEventType.TrafficJam -> buildString {
-                append(MapEventType.TrafficJam.emoji)
-                appendIfNotEmpty(data.shortMessage, " ${data.shortMessage}")
-            }
-            else -> data.shortMessage
+    private fun buildDialogTitle(
+        eventType: MapEventType,
+        shortMessage: String
+    ): String = when (eventType) {
+        MapEventType.Unsupported -> shortMessage
+        else -> buildString {
+            append(eventType.emoji)
+            appendIfNotEmpty(shortMessage, " $shortMessage")
         }
     }
 
