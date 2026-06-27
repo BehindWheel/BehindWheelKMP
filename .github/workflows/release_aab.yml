@@ -84,7 +84,7 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.egoriku.grodnoroads
           releaseFiles: app/android/build/outputs/bundle/release/android-release.aab
-          track: beta
+          tracks: beta
           mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
 
