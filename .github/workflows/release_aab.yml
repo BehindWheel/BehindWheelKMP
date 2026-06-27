@@ -52,6 +52,16 @@ jobs:
         with:
           files: "app/android/keystore.jks"
 
+      - name: Read version
+        id: version
+        run: |
+          major=$(grep "^major=" config/versioning/android.properties | cut -d= -f2)
+          minor=$(grep "^minor=" config/versioning/android.properties | cut -d= -f2)
+          patch=$(grep "^patch=" config/versioning/android.properties | cut -d= -f2)
+          VERSION_NAME="${major}.${minor}.${patch}"
+          echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_OUTPUT
+          echo "TAG=android/v${VERSION_NAME}" >> $GITHUB_OUTPUT
+
       - name: Build Release AAB
         id: buildRelease
         run: ./gradlew clean app:android:bundleRelease
@@ -77,3 +87,12 @@ jobs:
           track: beta
           mappingFile: app/android/build/outputs/mapping/release/mapping.txt
           status: completed
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3.0.1
+        with:
+          tag_name: ${{ steps.version.outputs.TAG }}
+          name: Android ${{ steps.version.outputs.VERSION_NAME }}
+          generate_release_notes: true
+          files: app/android/build/outputs/bundle/release/android-release.aab
+

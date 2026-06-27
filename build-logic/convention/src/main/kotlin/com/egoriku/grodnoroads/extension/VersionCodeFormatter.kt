@@ -5,18 +5,18 @@ import java.util.Properties
 
 fun provideVersionCode(path: String): Int {
     val properties = loadProperties(path)
-    val major = properties.propertyInt("VERSION")
-    val minor = properties.propertyInt("SUB_VERSION")
-    val patch = properties.propertyInt("BUILD_VERSION")
+    val major = properties.propertyInt("major")
+    val minor = properties.propertyInt("minor")
+    val patch = properties.propertyInt("patch")
 
     return calcVersionCode(major, minor, patch)
 }
 
 fun provideVersionName(path: String): String {
     val properties = loadProperties(path)
-    val major = properties.propertyInt("VERSION")
-    val minor = properties.propertyInt("SUB_VERSION")
-    val patch = properties.propertyInt("BUILD_VERSION")
+    val major = properties.propertyInt("major")
+    val minor = properties.propertyInt("minor")
+    val patch = properties.propertyInt("patch")
 
     return "$major.$minor.$patch"
 }
