@@ -20,9 +20,6 @@ changelog:
     - title: "🍎 iOS"
       labels:
         - ios
-    - title: "🔗 Common"
-      labels:
-        - common
     - title: "📦 Dependencies"
       labels:
         - dependencies
