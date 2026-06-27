@@ -1,0 +1,31 @@
+changelog:
+  exclude:
+    labels:
+      - blocked
+      - WIP
+      - release
+  categories:
+    - title: "🚀 New Features"
+      labels:
+        - feature
+    - title: "🐛 Bug Fixes"
+      labels:
+        - bug
+    - title: "📦 Dependencies"
+      labels:
+        - dependencies
+    - title: "🏠 Housekeeping"
+      labels:
+        - housekeeping
+    - title: "🤖 Android"
+      labels:
+        - android
+    - title: "🍎 iOS"
+      labels:
+        - ios
+    - title: "🔗 Common"
+      labels:
+        - common
+    - title: "🔧 Other Changes"
+      labels:
+        - "*"
