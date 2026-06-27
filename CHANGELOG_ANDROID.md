@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-06-27
+
 ### Added
 
 - Add "Confirm" button in marker info dialog to quickly report that road events are still active

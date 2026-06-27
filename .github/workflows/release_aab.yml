@@ -89,7 +89,7 @@ jobs:
           status: completed
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3.0.1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.TAG }}
           name: Android ${{ steps.version.outputs.VERSION_NAME }}
