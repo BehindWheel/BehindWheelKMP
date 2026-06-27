@@ -11,9 +11,6 @@ changelog:
     - title: "🐛 Bug Fixes"
       labels:
         - bug
-    - title: "📦 Dependencies"
-      labels:
-        - dependencies
     - title: "🏠 Housekeeping"
       labels:
         - housekeeping
@@ -26,6 +23,9 @@ changelog:
     - title: "🔗 Common"
       labels:
         - common
+    - title: "📦 Dependencies"
+      labels:
+        - dependencies
     - title: "🔧 Other Changes"
       labels:
         - "*"
