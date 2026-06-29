@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RichTooltip
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipAnchorPosition
@@ -52,7 +52,7 @@ fun UsersCount(count: Int, modifier: Modifier = Modifier) {
                 spacingBetweenTooltipAndAnchor = 8.dp
             ),
             tooltip = {
-                RichTooltip(
+                PlainTooltip(
                     caretShape = TooltipDefaults.caretShape(),
                     shape = RoundedCornerShape(8.dp)
                 ) {
