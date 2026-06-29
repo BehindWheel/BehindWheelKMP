@@ -158,7 +158,7 @@
     <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
 
     <string name="map_user_count">Онлайн: %1$s</string>
-    <string name="map_user_count_hint">На основе активности за последние 10 минут</string>
+    <string name="map_user_count_hint">Активные пользователи за последние 10 минут</string>
 
     <string name="snackbar_drive_mode_rationale_title">Разрешение для доступа к геолокации отклонено</string>
     <string name="snackbar_drive_mode_rationale_description">Используется для отображения маркера в режиме навигации</string>
