@@ -21,6 +21,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.reporting_notification_disabled
@@ -39,6 +40,7 @@ import com.egoriku.grodnoroads.foundation.core.alignment.OffsetAlignment
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.rememberMutableFloatState
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.core.thenIf
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.CheckCircle
 import com.egoriku.grodnoroads.foundation.icons.outlined.Error
@@ -70,7 +72,6 @@ import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarker
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers.WildAnimals
 import com.egoriku.grodnoroads.guidance.screen.sound.SoundController
 import com.egoriku.grodnoroads.guidance.screen.ui.CameraInfo
-import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 import com.egoriku.grodnoroads.guidance.screen.ui.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.ModalBottomSheet
@@ -482,8 +483,13 @@ fun GuidanceScreen(
         }
 
         FadeInOutAnimatedVisibility(visible = isMapLoaded) {
-            AlwaysKeepScreenOn(mapConfig.keepScreenOn)
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .thenIf(mapConfig.keepScreenOn) {
+                        keepScreenOn()
+                    }
+            ) {
                 AnimatedContent(
                     modifier = Modifier
                         .matchParentSize()
@@ -608,11 +614,6 @@ fun GuidanceScreen(
             }
         )
     }
-}
-
-@Composable
-private fun AlwaysKeepScreenOn(enabled: Boolean) {
-    KeepScreenOn(enabled)
 }
 
 private fun MapEventType.toAvailableMarker(): MarkerCache.AvailableMarkers? {

@@ -15,3 +15,11 @@ fun Modifier.unboundClickable(onClick: () -> Unit): Modifier {
         onClick = onClick
     )
 }
+
+inline fun Modifier.thenIf(
+    condition: Boolean,
+    modifier: Modifier.() -> Modifier
+): Modifier = when {
+    condition -> then(modifier(Modifier))
+    else -> this
+}

@@ -9,6 +9,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.PinLocation
@@ -18,7 +19,6 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size.Large
-import com.egoriku.grodnoroads.guidance.screen.ui.KeepScreenOn
 
 @Composable
 fun DriveMode(
@@ -26,8 +26,11 @@ fun DriveMode(
     modifier: Modifier = Modifier,
     openChooseLocation: () -> Unit
 ) {
-    KeepScreenOn()
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .keepScreenOn()
+    ) {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
