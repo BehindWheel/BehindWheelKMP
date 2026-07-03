@@ -3,9 +3,8 @@ package com.egoriku.grodnoroads.guidance.data.repository
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
+import com.egoriku.grodnoroads.guidance.data.mapper.MobileCameraMapper
 import com.egoriku.grodnoroads.guidance.domain.repository.MobileCameraRepository
-import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.shared.formatter.CameraFormatter
 import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
 import dev.gitlive.firebase.database.DatabaseReference
@@ -27,20 +26,10 @@ internal class MobileCameraRepositoryImpl(
         .valueEvents
         .map { resultOf ->
             Success(
-                resultOf.children
-                    .map { it.value<MobileCameraDTO>() }
-                    .map { data ->
-                        MobileCamera(
-                            id = data.id,
-                            name = data.name,
-                            position = LatLng(data.latitude, data.longitude),
-                            speedCar = data.speed,
-                            speedTruck = data.speed,
-                            formattedUpdateTime = mobileCameraUpdateTime,
-                            angle = data.angle,
-                            bidirectional = data.bidirectional
-                        )
-                    }
+                MobileCameraMapper(
+                    camerasDTO = resultOf.children.map { it.value<MobileCameraDTO>() },
+                    formattedUpdateTime = mobileCameraUpdateTime
+                )
             )
         }
         .catch { ResultOf.Failure(it) }

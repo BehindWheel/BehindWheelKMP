@@ -51,9 +51,3 @@ allprojects {
         }
     }
 }
-
-tasks {
-    registering(Delete::class) {
-        delete(layout.buildDirectory)
-    }
-}
