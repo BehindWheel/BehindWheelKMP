@@ -9,6 +9,7 @@
 ### Changed
 
 - Update medium speed camera color
+- Merge mobile cameras that are close to each other (within 300 m) into a single marker
 
 ## [1.6.0] - 2026-06-27
 

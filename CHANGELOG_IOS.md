@@ -23,4 +23,5 @@
 - Migrate from Cocoapods to SPM
 - Update Google Maps to 10.13.0
 - Update medium speed camera color
+- Merge mobile cameras that are close to each other (within 300 m) into a single marker
 
