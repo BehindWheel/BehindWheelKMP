@@ -21,7 +21,7 @@ val GrodnoRoads.Colored.MediumSpeedCameraBold: ImageVector
             viewportHeight = 32f
         ).apply {
             path(
-                fill = SolidColor(Color(0xFFFFD666)),
+                fill = SolidColor(Color(0xFFFFB366)),
                 stroke = SolidColor(Color(0xFF232F34)),
                 strokeLineWidth = 1.5f
             ) {
@@ -122,7 +122,7 @@ val GrodnoRoads.Colored.MediumSpeedCameraBold: ImageVector
                 close()
             }
             path(
-                fill = SolidColor(Color(0xFFFFD666)),
+                fill = SolidColor(Color(0xFFFFB366)),
                 stroke = SolidColor(Color(0xFF232F34)),
                 strokeLineWidth = 0.275955f
             ) {
@@ -176,7 +176,7 @@ val GrodnoRoads.Colored.MediumSpeedCameraBold: ImageVector
                 close()
             }
             path(
-                fill = SolidColor(Color(0xFFFFD666)),
+                fill = SolidColor(Color(0xFFFFB366)),
                 stroke = SolidColor(Color(0xFF232F34)),
                 strokeLineWidth = 0.413932f
             ) {
@@ -196,7 +196,7 @@ val GrodnoRoads.Colored.MediumSpeedCameraBold: ImageVector
                 close()
             }
             path(
-                fill = SolidColor(Color(0xFFFFD666)),
+                fill = SolidColor(Color(0xFFFFB366)),
                 stroke = SolidColor(Color(0xFF232F34)),
                 strokeLineWidth = 0.20322f
             ) {
@@ -250,7 +250,7 @@ val GrodnoRoads.Colored.MediumSpeedCameraBold: ImageVector
                 close()
             }
             path(
-                fill = SolidColor(Color(0xFFFFD666)),
+                fill = SolidColor(Color(0xFFFFB366)),
                 stroke = SolidColor(Color(0xFF232F34)),
                 strokeLineWidth = 0.30483f
             ) {

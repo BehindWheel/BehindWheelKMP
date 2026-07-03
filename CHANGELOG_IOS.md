@@ -21,4 +21,5 @@
 - Bump min supported iOS 16
 - Migrate from Cocoapods to SPM
 - Update Google Maps to 10.13.0
+- Update medium speed camera color
 

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Update medium speed camera color
+
 ## [1.6.0] - 2026-06-27
 
 ### Added
