@@ -76,6 +76,7 @@ import com.egoriku.grodnoroads.guidance.screen.ui.dialog.MarkerInfoBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.UsersCount
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MapOverlayActions
+import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Circle
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Large
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MarkerSize.Small
 import com.egoriku.grodnoroads.guidance.screen.ui.google.marker.CameraMarker
@@ -257,8 +258,9 @@ fun GuidanceScreen(
         val markerSize by remember {
             derivedStateOf {
                 when {
-                    idleZoomLevel == -1f -> Large
-                    idleZoomLevel <= 9f -> Small
+                    idleZoomLevel < 0f -> Large // initial state, zoom not yet known
+                    idleZoomLevel <= 8f -> Circle
+                    idleZoomLevel <= 11f -> Small
                     else -> Large
                 }
             }
@@ -415,12 +417,11 @@ fun GuidanceScreen(
                                     position = mapEvent.position,
                                     markerSize = markerSize,
                                     icon = {
-                                        markerCache.getOrPut(
-                                            availableMarkers = when (markerSize) {
-                                                Large -> Stationary
-                                                Small -> StationarySmall
-                                            }
-                                        )
+                                        when (markerSize) {
+                                            Large -> markerCache.getOrPut(Stationary)
+                                            Small -> markerCache.getOrPut(StationarySmall)
+                                            Circle -> markerCache.getOrPutCircle(Stationary)
+                                        }
                                     },
                                     onClick = { cameraInfo = mapEvent },
                                     zIndex = 1f
@@ -430,12 +431,11 @@ fun GuidanceScreen(
                                         position = mapEvent.position,
                                         markerSize = markerSize,
                                         icon = {
-                                            markerCache.getOrPut(
-                                                availableMarkers = when (markerSize) {
-                                                    Large -> MediumSpeed
-                                                    Small -> MediumSpeedSmall
-                                                }
-                                            )
+                                            when (markerSize) {
+                                                Large -> markerCache.getOrPut(MediumSpeed)
+                                                Small -> markerCache.getOrPut(MediumSpeedSmall)
+                                                Circle -> markerCache.getOrPutCircle(MediumSpeed)
+                                            }
                                         },
                                         onClick = { cameraInfo = mapEvent },
                                         zIndex = 1f
@@ -446,12 +446,11 @@ fun GuidanceScreen(
                                         position = mapEvent.position,
                                         markerSize = markerSize,
                                         icon = {
-                                            markerCache.getOrPut(
-                                                availableMarkers = when (markerSize) {
-                                                    Large -> Mobile
-                                                    Small -> MobileSmall
-                                                }
-                                            )
+                                            when (markerSize) {
+                                                Large -> markerCache.getOrPut(Mobile)
+                                                Small -> markerCache.getOrPut(MobileSmall)
+                                                Circle -> markerCache.getOrPutCircle(Mobile)
+                                            }
                                         },
                                         onClick = { cameraInfo = mapEvent },
                                         zIndex = 2f
@@ -465,16 +464,12 @@ fun GuidanceScreen(
                                 markerSize = markerSize,
                                 message = mapEvent.markerMessage,
                                 iconProvider = {
-                                    when (mapEvent.mapEventType) {
-                                        MapEventType.TrafficPolice -> markerCache.getOrPut(Police)
-                                        MapEventType.RoadIncident -> markerCache.getOrPut(
-                                            RoadIncident
-                                        )
-                                        MapEventType.CarCrash -> markerCache.getOrPut(CarCrash)
-                                        MapEventType.TrafficJam -> markerCache.getOrPut(TrafficJam)
-                                        MapEventType.WildAnimals -> markerCache.getOrPut(WildAnimals)
-                                        MapEventType.Unsupported -> null
-                                    }
+                                    mapEvent.mapEventType.toAvailableMarker()
+                                        ?.let(markerCache::getOrPut)
+                                },
+                                circleIconProvider = {
+                                    mapEvent.mapEventType.toAvailableMarker()
+                                        ?.let(markerCache::getOrPutCircle)
                                 },
                                 markerGenerator = { iconGenerator },
                                 onClick = { component.showMarkerInfoDialog(mapEvent) },
@@ -618,4 +613,15 @@ fun GuidanceScreen(
 @Composable
 private fun AlwaysKeepScreenOn(enabled: Boolean) {
     KeepScreenOn(enabled)
+}
+
+private fun MapEventType.toAvailableMarker(): MarkerCache.AvailableMarkers? {
+    return when (this) {
+        MapEventType.TrafficPolice -> Police
+        MapEventType.RoadIncident -> RoadIncident
+        MapEventType.CarCrash -> CarCrash
+        MapEventType.TrafficJam -> TrafficJam
+        MapEventType.WildAnimals -> WildAnimals
+        MapEventType.Unsupported -> null
+    }
 }

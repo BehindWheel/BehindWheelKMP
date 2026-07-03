@@ -18,6 +18,7 @@ fun MapUpdater.ReportsMarker(
     markerSize: MarkerSize,
     markerGenerator: () -> MarkerGenerator,
     iconProvider: () -> MarkerImage?,
+    circleIconProvider: () -> MarkerImage?,
     message: String,
     zIndex: Float,
     onClick: () -> Unit
@@ -28,6 +29,9 @@ fun MapUpdater.ReportsMarker(
                 MarkerSize.Large -> markerGenerator().makeIcon(message)
                 MarkerSize.Small -> {
                     iconProvider() ?: markerGenerator().makeIcon(message)
+                }
+                MarkerSize.Circle -> {
+                    circleIconProvider() ?: iconProvider() ?: markerGenerator().makeIcon(message)
                 }
             }
         }

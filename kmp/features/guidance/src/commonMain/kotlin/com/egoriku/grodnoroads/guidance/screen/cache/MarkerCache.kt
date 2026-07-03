@@ -6,6 +6,8 @@ interface MarkerCache {
 
     fun getOrPut(availableMarkers: AvailableMarkers): MarkerImage
 
+    fun getOrPutCircle(availableMarkers: AvailableMarkers): MarkerImage
+
     enum class AvailableMarkers {
         Mobile,
         MobileSmall,
