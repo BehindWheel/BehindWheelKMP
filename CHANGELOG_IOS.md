@@ -6,6 +6,7 @@
 
 - Add user count tooltip
 - Add "Confirm" button in marker info dialog to quickly report that road events are still active
+- Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
 
 ### Fixed
 

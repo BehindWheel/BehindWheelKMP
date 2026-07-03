@@ -1,8 +1,14 @@
 package com.egoriku.grodnoroads.guidance.screen.cache
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color as AndroidColor
+import android.graphics.Paint
 import android.util.LruCache
+import androidx.compose.ui.graphics.toArgb
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toBitmap
 import com.egoriku.grodnoroads.compose.resources.R
 import com.egoriku.grodnoroads.guidance.screen.cache.MarkerCache.AvailableMarkers
@@ -54,6 +60,49 @@ class MarkerCacheAndroid(private val context: Context) : MarkerCache {
             else -> cachedBitmap
         }
     }
+
+    override fun getOrPutCircle(availableMarkers: AvailableMarkers): MarkerImage {
+        val key = "circle_${availableMarkers.name}"
+
+        return when (val cachedBitmap = lruCache.get(key)) {
+            null -> {
+                val bitmap = availableMarkers.circleColor.toArgb().toCircleBitmap(context)
+                BitmapDescriptorFactory.fromBitmap(bitmap)
+                    .also { bitmapDescriptor ->
+                        lruCache.put(key, bitmapDescriptor)
+                    }
+            }
+            else -> cachedBitmap
+        }
+    }
 }
 
 private fun Context.drawableCompat(id: Int) = requireNotNull(ContextCompat.getDrawable(this, id))
+
+private const val CIRCLE_DIAMETER_DP = 12
+private const val STROKE_WIDTH_DP = 2
+
+private fun Int.toCircleBitmap(context: Context): Bitmap {
+    val density = context.resources.displayMetrics.density
+    val diameter = (CIRCLE_DIAMETER_DP * density).toInt()
+    val strokeWidth = STROKE_WIDTH_DP * density
+
+    val bitmap = createBitmap(diameter, diameter)
+    val canvas = Canvas(bitmap)
+    val radius = diameter / 2f
+
+    val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = this@toCircleBitmap
+        style = Paint.Style.FILL
+    }
+    val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = AndroidColor.WHITE
+        style = Paint.Style.STROKE
+        this.strokeWidth = strokeWidth
+    }
+
+    canvas.drawCircle(radius, radius, radius - strokeWidth / 2, fillPaint)
+    canvas.drawCircle(radius, radius, radius - strokeWidth / 2, strokePaint)
+
+    return bitmap
+}

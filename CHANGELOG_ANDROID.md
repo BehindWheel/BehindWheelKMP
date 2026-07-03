@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
+
 ### Changed
 
 - Update medium speed camera color
