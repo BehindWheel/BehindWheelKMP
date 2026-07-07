@@ -365,10 +365,21 @@ fun GuidanceScreen(
 
             LaunchedEffect(appMode) {
                 when (appMode) {
-                    AppMode.Default, AppMode.ChooseLocation -> {
+                    AppMode.Default -> {
                         mapUpdater.onMapScope {
                             resetLastLocation()
                             animateZoom(mapConfig.zoomLevel)
+                        }
+                    }
+                    AppMode.ChooseLocation -> {
+                        if (location != LastLocation.None) {
+                            mapUpdater.onMapScope {
+                                resetLastLocation()
+                                animateTarget(
+                                    target = location.latLng,
+                                    zoom = mapConfig.zoomLevel
+                                )
+                            }
                         }
                     }
                     else -> {}
@@ -401,12 +412,8 @@ fun GuidanceScreen(
             mapUpdater.onMapScope {
                 if (appMode == AppMode.Drive && location != LastLocation.None) {
                     NavigationMarker(
-                        appMode = appMode,
                         position = location.latLng,
-                        bearing = location.bearing,
-                        icon = { markerCache.getOrPut(NavigationArrow) },
-                        rotation = location.bearing,
-                        zIndex = 0f
+                        icon = { markerCache.getOrPut(NavigationArrow) }
                     )
                 }
 
@@ -523,7 +530,7 @@ fun GuidanceScreen(
                         AppMode.ChooseLocation -> {
                             ChooseLocation(
                                 isCameraMoving = isCameraMoving,
-                                isChooseInDriveMode = mapConfig.isChooseInDriveMode,
+                                markerVerticalOffset = (contentPadding.calculateBottomPadding() - contentPadding.calculateTopPadding()) / 2,
                                 onCancel = component::cancelChooseLocationFlow,
                                 onLocationSelect = { offset ->
                                     val latLng = projection
