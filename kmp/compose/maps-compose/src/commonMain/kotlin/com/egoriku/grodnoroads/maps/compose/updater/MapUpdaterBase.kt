@@ -3,7 +3,6 @@ package com.egoriku.grodnoroads.maps.compose.updater
 import com.egoriku.grodnoroads.location.LatLng
 import com.egoriku.grodnoroads.location.calc.computeOffset
 import com.egoriku.grodnoroads.location.calc.distanceTo
-import com.egoriku.grodnoroads.location.calc.headingTo
 import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.maps.compose.core.Marker
 import com.egoriku.grodnoroads.maps.compose.core.Projection
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
 internal const val NAVIGATION_CAMERA_TILT = 55.0
+internal const val SHADOW_CAMERA_ANIMATION_DURATION_MS = 400
 private const val MINIMUM_DISTANCE_FOR_ANIMATION = 5
 
 abstract class MapUpdaterBase :
@@ -66,10 +66,6 @@ abstract class MapUpdaterBase :
 
     protected fun shouldZoomOut(): Boolean = currentZoom > minZoom
 
-    protected fun shouldAnimateWithInitialCamera(zoom: Float): Boolean {
-        return lastLocation == null || lastZoom != zoom || currentZoom != lastZoom
-    }
-
     protected fun updateLastLocationAndZoom(location: LatLng, zoom: Float) {
         lastZoom = zoom
         lastLocation = location
@@ -80,34 +76,34 @@ abstract class MapUpdaterBase :
 
     protected abstract fun animateShadowCamera(shadowTarget: LatLng, bearing: Double, zoom: Float)
 
-    fun animateWithShadowPoint(target: LatLng, zoom: Float) {
+    fun animateWithShadowPoint(target: LatLng, zoom: Float, bearing: Double) {
         val projection = projection
-        val result = calculateShadowTargetOrNull(
+        val shadowTarget = calculateShadowTargetOrNull(
             target = target,
+            bearing = bearing,
             getCenterLocation = { projection.getCenterLocation() },
             getOffsetLocation = { projection.getOffsetLocation() }
         ) ?: return
 
-        val (shadowTarget, bearing) = result
         animateShadowCamera(shadowTarget, bearing, zoom)
     }
 
     private fun calculateShadowTargetOrNull(
         target: LatLng,
+        bearing: Double,
         getCenterLocation: () -> LatLng,
         getOffsetLocation: () -> LatLng
-    ): Pair<LatLng, Double>? {
-        val lastLoc = lastLocation ?: return null
-        val distance = lastLoc roundDistanceTo target
-        if (distance < MINIMUM_DISTANCE_FOR_ANIMATION) return null
-
-        val bearing = lastLoc headingTo target
+    ): LatLng? {
+        val lastLoc = lastLocation
+        if (lastLoc != null) {
+            val distance = lastLoc roundDistanceTo target
+            if (distance < MINIMUM_DISTANCE_FOR_ANIMATION) return null
+        }
 
         val centerLocation = getCenterLocation()
         val offsetLocation = getOffsetLocation()
         val offsetDistance = centerLocation distanceTo offsetLocation
 
-        val shadowTarget = computeOffset(target, offsetDistance, bearing)
-        return shadowTarget to bearing
+        return computeOffset(target, offsetDistance, bearing)
     }
 }

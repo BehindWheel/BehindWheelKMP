@@ -99,24 +99,11 @@ internal class MapUpdaterAndroid(
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
-        if (shouldAnimateWithInitialCamera(zoom)) {
-            additionalPadding(top = mapView.height / 3)
-            animateCamera(
-                cameraUpdate = CameraUpdateFactory.newCameraPosition(
-                    cameraPosition {
-                        target(target.platform)
-                        bearing(bearing)
-                        zoom(zoom)
-                        tilt(NAVIGATION_CAMERA_TILT.toFloat())
-                    }
-                ),
-                duration = 700,
-                onFinish = { additionalPadding(top = 0) },
-                onCancel = { additionalPadding(top = 0) }
-            )
-        } else {
-            animateWithShadowPoint(target = target, zoom = zoom)
-        }
+        animateWithShadowPoint(
+            target = target,
+            zoom = zoom,
+            bearing = bearing.toDouble()
+        )
         updateLastLocationAndZoom(target, zoom)
     }
 
@@ -134,7 +121,7 @@ internal class MapUpdaterAndroid(
                     tilt(NAVIGATION_CAMERA_TILT.toFloat())
                 }
             ),
-            duration = 400
+            duration = SHADOW_CAMERA_ANIMATION_DURATION_MS
         )
     }
 

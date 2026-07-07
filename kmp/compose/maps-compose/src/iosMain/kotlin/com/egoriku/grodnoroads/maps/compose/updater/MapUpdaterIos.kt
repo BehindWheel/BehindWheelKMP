@@ -122,25 +122,7 @@ class MapUpdaterIos(
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
-        if (shouldAnimateWithInitialCamera(zoom)) {
-            additionalPadding(
-                top = (googleMap.frame.useContents { size.height } / 3).toInt()
-            )
-            animateCamera(
-                cameraUpdate = GMSCameraUpdate.setCamera(
-                    GMSCameraPosition(
-                        target = target.cValue,
-                        bearing = bearing.toDouble(),
-                        zoom = zoom,
-                        viewingAngle = NAVIGATION_CAMERA_TILT
-                    )
-                ),
-                duration = 0.7
-            )
-        } else {
-            animateWithShadowPoint(target = target, zoom = zoom)
-        }
-
+        animateWithShadowPoint(target = target, zoom = zoom, bearing = bearing.toDouble())
         updateLastLocationAndZoom(target, zoom)
     }
 
@@ -158,7 +140,7 @@ class MapUpdaterIos(
                     viewingAngle = NAVIGATION_CAMERA_TILT
                 )
             ),
-            duration = 0.7
+            duration = SHADOW_CAMERA_ANIMATION_DURATION_MS / 1000.0
         )
     }
 
