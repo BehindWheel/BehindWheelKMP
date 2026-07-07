@@ -128,6 +128,22 @@ actual class AudioPlayer { ... }
 
 Common in: `kmp/shared/audioplayer`, `kmp/libraries/location`, `kmp/compose/maps-compose`
 
+**IMPORTANT**: If constants, functions, or code are used by **both iOS and Android** (not platform-specific),
+place them in **commonMain**, not duplicated in androidMain and iosMain. Only use platform-specific sources
+when the implementation differs between platforms.
+
+```kotlin
+// ✅ GOOD: Shared constant in commonMain
+// commonMain/MapUpdater.kt
+internal const val NAVIGATION_CAMERA_TILT = 55.0f
+
+// ❌ BAD: Duplicated constants in platform sources
+// androidMain/MapUpdaterAndroid.kt
+private const val NAVIGATION_CAMERA_TILT = 55.0f
+// iosMain/MapUpdaterIos.kt
+private const val NAVIGATION_CAMERA_VIEWING_ANGLE = 55.0
+```
+
 ### Build Files
 
 Modules use convention plugins + type-safe project accessors:

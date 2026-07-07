@@ -2,13 +2,9 @@ package com.egoriku.grodnoroads.maps.compose.updater
 
 import android.graphics.Point
 import com.egoriku.grodnoroads.location.LatLng
-import com.egoriku.grodnoroads.location.calc.computeOffset
-import com.egoriku.grodnoroads.location.calc.distanceTo
-import com.egoriku.grodnoroads.location.calc.headingTo
-import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.location.toLatLng
+import com.egoriku.grodnoroads.maps.compose.core.Projection
 import com.egoriku.grodnoroads.maps.compose.extension.zoom
-import com.egoriku.grodnoroads.maps.compose.impl.MapStateUpdater
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecorator
 import com.egoriku.grodnoroads.maps.compose.impl.decorator.MapPaddingDecoratorImpl
 import com.egoriku.grodnoroads.maps.compose.marker.MarkerOptions
@@ -21,11 +17,6 @@ import com.google.maps.android.ktx.mapLongClickEvents
 import com.google.maps.android.ktx.markerClickEvents
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.model.markerOptions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -34,54 +25,30 @@ internal class MapUpdaterAndroid(
     private val googleMap: GoogleMap,
     override val paddingDecorator: MapPaddingDecorator = MapPaddingDecoratorImpl(googleMap),
     private val onZoomChanged: () -> Unit
-) : MapUpdater,
-    MapStateUpdater,
+) : MapUpdaterBase(),
     MapPaddingDecorator by paddingDecorator {
 
-    private val scope = CoroutineScope(Dispatchers.Main)
-
-    private var minZoom = -1f
-    private var maxZoom = -1f
-
     private val bottomRightPoint by lazy {
-        val projection = googleMap.projection
+        val projection = projection
         projection.toScreenLocation(projection.visibleRegion.nearRight)
     }
     private val center: Point by lazy { Point(bottomRightPoint.x / 2, bottomRightPoint.y / 2) }
     private val offset: Point by lazy { Point(center.x, 2 * bottomRightPoint.y / 3) }
 
-    private var lastLocation: LatLng? = null
-    private var lastZoom: Float? = null
-
-    private val currentZoom: Float
+    override val currentZoom: Float
         get() = googleMap.zoom
 
-    private val _clickedMarker = MutableSharedFlow<Marker>(replay = 0)
-    override val clickedMarker = _clickedMarker.asSharedFlow()
-
-    private val _mapLongClickEvents = MutableSharedFlow<LatLng>(replay = 0)
-    override val mapLongClickEvents = _mapLongClickEvents.asSharedFlow()
+    override val projection: Projection
+        get() = googleMap.projection
 
     override fun attach() {
         googleMap.markerClickEvents()
-            .onEach { _clickedMarker.emit(it) }
+            .onEach { emitClickedMarker(it) }
             .launchIn(scope)
 
         googleMap.mapLongClickEvents()
-            .onEach { _mapLongClickEvents.emit(it.toLatLng()) }
+            .onEach { emitMapLongClickEvent(it.toLatLng()) }
             .launchIn(scope)
-    }
-
-    override fun setMaxZoomPreference(value: Float) {
-        maxZoom = value
-    }
-
-    override fun setMinZoomPreference(value: Float) {
-        minZoom = value
-    }
-
-    override fun resetLastLocation() {
-        lastLocation = null
     }
 
     override fun addMarker(markerOptions: MarkerOptions): Marker? {
@@ -102,19 +69,15 @@ internal class MapUpdaterAndroid(
         )
     }
 
-    override fun detach() {
-        scope.cancel()
-    }
-
     override fun zoomIn() {
         onZoomChanged()
-        if (currentZoom >= maxZoom) return
+        if (!shouldZoomIn()) return
         googleMap.animateCamera(CameraUpdateFactory.zoomIn())
     }
 
     override fun zoomOut() {
         onZoomChanged()
-        if (currentZoom <= minZoom) return
+        if (!shouldZoomOut()) return
         googleMap.animateCamera(CameraUpdateFactory.zoomOut())
     }
 
@@ -126,7 +89,7 @@ internal class MapUpdaterAndroid(
                     target(target.platform)
                     bearing(bearing)
                     zoom(zoom)
-                    tilt(35.0f)
+                    tilt(NAVIGATION_CAMERA_TILT.toFloat())
                 }
             ),
             duration = 700,
@@ -136,7 +99,7 @@ internal class MapUpdaterAndroid(
     }
 
     override fun animateCamera(target: LatLng, zoom: Float, bearing: Float) {
-        if (lastLocation == null || lastZoom != zoom || googleMap.zoom != lastZoom) {
+        if (shouldAnimateWithInitialCamera(zoom)) {
             additionalPadding(top = mapView.height / 3)
             animateCamera(
                 cameraUpdate = CameraUpdateFactory.newCameraPosition(
@@ -144,7 +107,7 @@ internal class MapUpdaterAndroid(
                         target(target.platform)
                         bearing(bearing)
                         zoom(zoom)
-                        tilt(35.0f)
+                        tilt(NAVIGATION_CAMERA_TILT.toFloat())
                     }
                 ),
                 duration = 700,
@@ -154,31 +117,21 @@ internal class MapUpdaterAndroid(
         } else {
             animateWithShadowPoint(target = target, zoom = zoom)
         }
-        lastZoom = zoom
-        lastLocation = target
+        updateLastLocationAndZoom(target, zoom)
     }
 
-    private fun animateWithShadowPoint(target: LatLng, zoom: Float) {
-        val lastLocation = lastLocation ?: return
-        val distance = lastLocation roundDistanceTo target
-        if (distance < 5) return
+    override fun Projection.getCenterLocation(): LatLng = fromScreenLocation(center).toLatLng()
 
-        val bearing = lastLocation headingTo target
+    override fun Projection.getOffsetLocation(): LatLng = fromScreenLocation(offset).toLatLng()
 
-        val projection = googleMap.projection
-        val centerLocation = projection.fromScreenLocation(center).toLatLng()
-        val offsetLocation = projection.fromScreenLocation(offset).toLatLng()
-
-        val offsetDistance = centerLocation distanceTo offsetLocation
-
-        val shadowTarget = computeOffset(target, offsetDistance, bearing)
+    override fun animateShadowCamera(shadowTarget: LatLng, bearing: Double, zoom: Float) {
         animateCamera(
             cameraUpdate = CameraUpdateFactory.newCameraPosition(
                 cameraPosition {
                     target(shadowTarget.platform)
                     bearing(bearing.toFloat())
                     zoom(zoom)
-                    tilt(35.0f)
+                    tilt(NAVIGATION_CAMERA_TILT.toFloat())
                 }
             ),
             duration = 400

@@ -8,6 +8,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -33,6 +35,8 @@ import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.PinMarker
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+
+private val PinIconSize = 64.dp
 
 @Composable
 fun PinMarker(
@@ -77,7 +81,11 @@ fun PinMarker(
         color = if (it == endColor) startColor else endColor
     }
 
-    Box(modifier = modifier) {
+    // The pin's tip (ground contact point) sits at the bottom edge of this Box (see Icon
+    // below and the shadow Canvas alignment), while `modifier` centers the Box itself.
+    // Shift the whole Box up by half its height so the tip - not the Box center - lands
+    // on the point the caller aligned to (e.g. screen/camera target center).
+    Box(modifier = modifier.offset(y = -PinIconSize / 2)) {
         Canvas(
             modifier = Modifier
                 .width(16.dp)
@@ -109,7 +117,7 @@ fun PinMarker(
         }
         Icon(
             modifier = Modifier
-                .size(64.dp)
+                .size(PinIconSize)
                 .align(Alignment.Center)
                 .graphicsLayer {
                     translationY = markerTranslation.value
@@ -159,13 +167,7 @@ private fun animateColorAsState(
     label = label
 )
 
-/*
-@Preview(device = "id:Nexus One")
-@Preview(device = "id:pixel_3a")
-@Preview(device = "id:pixel_3a_xl", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(device = "id:pixel_6_pro")
-@Preview(device = "id:Nexus 7")
-@Preview(device = "id:pixel_c")*/
+@Preview
 @Composable
 private fun PinMarkerPreview() = GrodnoRoadsM3ThemePreview {
     Box(Modifier.size(300.dp)) {
