@@ -1,14 +1,17 @@
 package com.egoriku.grodnoroads.settings.map.domain.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettingState
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore
 import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.Intent
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -23,14 +26,20 @@ internal class MapSettingsComponentImpl(
     KoinComponent {
 
     private val mapSettingsStore: MapSettingsStore = instanceKeeper.getStore(::get)
+    private val coroutineScope = coroutineScope()
 
-    override val state: Flow<MapSettingState> = mapSettingsStore.states.map { storeState ->
-        MapSettingState(
-            isLoading = storeState.isLoading,
-            mapSettings = storeState.mapSettings,
-            mapDialogState = storeState.mapDialogState
+    override val state: StateFlow<MapSettingState> = mapSettingsStore.states
+        .map { storeState ->
+            MapSettingState(
+                isLoading = storeState.isLoading,
+                mapSettings = storeState.mapSettings,
+                mapDialogState = storeState.mapDialogState
+            )
+        }.stateIn(
+            scope = coroutineScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = MapSettingState()
         )
-    }
 
     override fun modify(preference: MapPref) {
         mapSettingsStore.accept(Intent.Modify(preference))

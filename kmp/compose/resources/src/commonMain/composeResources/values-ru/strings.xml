@@ -153,7 +153,10 @@
     <string name="map_default_location_voronovo">Вороново</string>
     <string name="map_default_location_zelva">Зельва</string>
 
-    <string name="map_header_drive_mode">Режим навигации</string>
+    <string name="map_header_drive_mode_scale">Масштаб карты</string>
+    <string name="map_header_drive_mode_dynamic">Динамический</string>
+    <string name="map_header_drive_mode_static">Статический</string>
+
     <string name="map_header_drive_mode_zoom_in_city">Масштаб в городе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Масштаб за городом</string>
 

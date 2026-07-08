@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Close
 import com.egoriku.grodnoroads.foundation.icons.outlined.Ok
@@ -33,7 +35,7 @@ fun ChooseLocation(
     markerVerticalOffset: Dp = 0.dp,
     onLocationSelect: (Offset) -> Unit
 ) {
-    var markerOffset = remember { Offset.Zero }
+    var markerOffset by rememberMutableState { Offset.Zero }
 
     Box(modifier = modifier.fillMaxSize()) {
         PinMarker(

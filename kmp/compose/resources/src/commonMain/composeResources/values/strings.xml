@@ -126,7 +126,10 @@
     <string name="map_default_location_voronovo">Voronovo</string>
     <string name="map_default_location_zelva">Zelva</string>
 
-    <string name="map_header_drive_mode">Navigation mode</string>
+    <string name="map_header_drive_mode_scale">Map scale</string>
+    <string name="map_header_drive_mode_dynamic">Dynamic</string>
+    <string name="map_header_drive_mode_static">Static</string>
+
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
     <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
 

@@ -11,7 +11,7 @@ import com.egoriku.grodnoroads.location.LatLng
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
     sealed interface Intent {
-        data class CheckLocation(val latLng: LatLng) : Intent
+        data class CheckLocation(val latLng: LatLng, val speed: Int) : Intent
         data object StartDriveMode : Intent
         data object StopDriveMode : Intent
 

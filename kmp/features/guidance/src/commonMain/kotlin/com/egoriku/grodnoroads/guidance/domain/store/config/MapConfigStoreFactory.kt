@@ -7,6 +7,8 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.guidance.domain.model.AppMode
+import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculator
+import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl
 import com.egoriku.grodnoroads.guidance.domain.model.MapInternalConfig
 import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.repository.CityAreasRepository
@@ -38,6 +40,7 @@ import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyTrafficJam
 import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyTrafficPolice
 import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyWildAnimals
 import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.dynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowCarCrash
@@ -60,7 +63,8 @@ import kotlinx.coroutines.launch
 internal class MapConfigStoreFactory(
     private val storeFactory: StoreFactory,
     private val dataStore: DataStore<Preferences>,
-    private val cityAreasRepository: CityAreasRepository
+    private val cityAreasRepository: CityAreasRepository,
+    private val dynamicZoomCalculator: DynamicZoomCalculator = DynamicZoomCalculatorImpl()
 ) {
 
     private sealed interface Message {
@@ -89,6 +93,7 @@ internal class MapConfigStoreFactory(
                             MapInternalConfig(
                                 zoomLevelInCity = pref.mapZoomInCity,
                                 zoomLevelOutOfCity = pref.mapZoomOutCity,
+                                dynamicZoomEnabled = pref.dynamicZoomEnabled,
                                 alertsDistanceInCity = pref.alertsDistanceInCity,
                                 alertsDistanceOutCity = pref.alertsDistanceOutsideCity,
                                 mapInfo = MapInternalConfig.MapInfo(
@@ -138,6 +143,9 @@ internal class MapConfigStoreFactory(
 
                     val internalConfig = state().mapInternalConfig
                     val zoomLevel = when {
+                        internalConfig.dynamicZoomEnabled && state().currentAppMode == AppMode.Drive -> {
+                            dynamicZoomCalculator.calculateZoomLevel(speedKmh = location.speed)
+                        }
                         isCityArea -> internalConfig.zoomLevelInCity
                         else -> internalConfig.zoomLevelOutOfCity
                     }
@@ -155,7 +163,7 @@ internal class MapConfigStoreFactory(
                 }
                 onIntent<StopDriveMode> {
                     dispatch(ChangeAppMode(appMode = AppMode.Default))
-                    dispatch(OnZoomLevel(zoomLevel = 12.5f))
+                    dispatch(OnZoomLevel(zoomLevel = state().userZoomLevel))
                 }
                 onIntent<ChooseLocation.OpenChooseLocation> {
                     val state = state()
