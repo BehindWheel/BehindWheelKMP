@@ -148,7 +148,10 @@
     <string name="map_default_location_voronovo">Воранава</string>
     <string name="map_default_location_zelva">Зэльва</string>
 
-    <string name="map_header_drive_mode">Рэжым навігацыі</string>
+    <string name="map_header_drive_mode_scale">Маштаб карты</string>
+    <string name="map_header_drive_mode_dynamic">Дынамічны</string>
+    <string name="map_header_drive_mode_static">Статычны</string>
+
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
 

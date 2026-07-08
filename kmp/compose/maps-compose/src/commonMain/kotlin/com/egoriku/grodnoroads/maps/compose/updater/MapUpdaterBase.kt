@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.location.calc.roundDistanceTo
 import com.egoriku.grodnoroads.maps.compose.core.Marker
 import com.egoriku.grodnoroads.maps.compose.core.Projection
 import com.egoriku.grodnoroads.maps.compose.impl.MapStateUpdater
+import kotlin.math.pow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -80,6 +81,7 @@ abstract class MapUpdaterBase :
         val projection = projection
         val shadowTarget = calculateShadowTargetOrNull(
             target = target,
+            zoom = zoom,
             bearing = bearing,
             getCenterLocation = { projection.getCenterLocation() },
             getOffsetLocation = { projection.getOffsetLocation() }
@@ -90,6 +92,7 @@ abstract class MapUpdaterBase :
 
     private fun calculateShadowTargetOrNull(
         target: LatLng,
+        zoom: Float,
         bearing: Double,
         getCenterLocation: () -> LatLng,
         getOffsetLocation: () -> LatLng
@@ -102,7 +105,9 @@ abstract class MapUpdaterBase :
 
         val centerLocation = getCenterLocation()
         val offsetLocation = getOffsetLocation()
-        val offsetDistance = centerLocation distanceTo offsetLocation
+        // offsetDistance is measured at currentZoom; scale it to the target zoom, since the
+        // on-screen offset represents a different real-world distance at a different zoom level.
+        val offsetDistance = (centerLocation distanceTo offsetLocation) * 2f.pow(currentZoom - zoom)
 
         return computeOffset(target, offsetDistance, bearing)
     }

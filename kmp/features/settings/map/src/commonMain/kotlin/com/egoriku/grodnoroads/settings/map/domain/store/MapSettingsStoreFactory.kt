@@ -11,6 +11,7 @@ import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponen
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DynamicZoomEnabled
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
@@ -34,8 +35,10 @@ import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.StoreS
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.dynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateDynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateMapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateMapZoomOutsideCity
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
@@ -127,7 +130,8 @@ internal class MapSettingsStoreFactory(
                                 ),
                                 driveModeZoom = DriveModeZoom(
                                     mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
-                                    mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity)
+                                    mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity),
+                                    dynamicZoomEnabled = DynamicZoomEnabled(isEnabled = pref.dynamicZoomEnabled)
                                 )
                             )
                         }
@@ -166,6 +170,7 @@ internal class MapSettingsStoreFactory(
                                 is DefaultCity -> updateDefaultCity(preference.current.cityName)
                                 is MapZoomInCity -> updateMapZoomInCity(preference.current)
                                 is MapZoomOutCity -> updateMapZoomOutsideCity(preference.current)
+                                is DynamicZoomEnabled -> updateDynamicZoomEnabled(preference.isEnabled)
                                 is MarkerFiltering -> updateFiltering(preference.current)
                             }
                         }

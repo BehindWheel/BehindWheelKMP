@@ -325,6 +325,6 @@ internal class GuidanceComponentImpl(
     override fun closeDialog() = dialogStore.accept(DialogStore.Intent.CloseDialog)
 
     private fun bindLocationLabel(label: Label) = when (label) {
-        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng))
+        is Label.NewLocation -> mapConfigStore.accept(CheckLocation(label.latLng, label.speed))
     }
 }

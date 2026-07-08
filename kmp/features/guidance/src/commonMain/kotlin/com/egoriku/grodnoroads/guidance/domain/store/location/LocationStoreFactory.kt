@@ -66,7 +66,7 @@ internal class LocationStoreFactory(
                                 dispatch(Message.OnNewLocation(lastLocation = it))
                                 dispatch(Message.OnInitialLocation(it.latLng))
 
-                                publish(Label.NewLocation(it.latLng))
+                                publish(Label.NewLocation(it.latLng, it.speed))
                             }
                     }
                 }

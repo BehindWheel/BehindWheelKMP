@@ -23,7 +23,7 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.settings_section_map
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
-import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
@@ -46,7 +46,7 @@ fun MapSettingsScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
-    val state by mapSettingsComponent.state.collectAsState(initial = MapSettingState())
+    val state by mapSettingsComponent.state.collectAsState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
@@ -140,7 +140,7 @@ private fun DialogHandler(
     }
 }
 
-@PreviewGrodnoRoadsDarkLight
+@PreviewGrodnoRoads
 @Composable
 private fun MapSettingsScreenPreview() = GrodnoRoadsM3ThemePreview {
     MapSettingsScreen(

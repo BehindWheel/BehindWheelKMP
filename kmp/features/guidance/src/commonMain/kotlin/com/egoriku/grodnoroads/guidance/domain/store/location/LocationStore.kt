@@ -25,7 +25,7 @@ interface LocationStore : Store<Intent, State, Label> {
     }
 
     sealed interface Label {
-        data class NewLocation(val latLng: LatLng) : Label
+        data class NewLocation(val latLng: LatLng, val speed: Int) : Label
     }
 
     data class State(

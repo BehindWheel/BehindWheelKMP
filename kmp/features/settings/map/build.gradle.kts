@@ -22,6 +22,7 @@ kotlin {
             implementation(libs.koin.core)
 
             implementation(libs.bundles.mvikotlin)
+            implementation(libs.essenty.lifecycle.coroutines)
         }
     }
 }

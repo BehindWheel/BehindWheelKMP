@@ -6,6 +6,7 @@ import com.egoriku.grodnoroads.shared.persistent.map.mapstyle.MapType
 internal data class MapInternalConfig(
     val zoomLevelInCity: Float,
     val zoomLevelOutOfCity: Float,
+    val dynamicZoomEnabled: Boolean,
     val alertsDistanceInCity: Int,
     val alertsDistanceOutCity: Int,
     val mapInfo: MapInfo,
@@ -43,6 +44,7 @@ internal data class MapInternalConfig(
         val EMPTY = MapInternalConfig(
             zoomLevelInCity = -1f,
             zoomLevelOutOfCity = -1f,
+            dynamicZoomEnabled = false,
             alertsDistanceInCity = -1,
             alertsDistanceOutCity = -1,
             mapInfo = MapInfo(

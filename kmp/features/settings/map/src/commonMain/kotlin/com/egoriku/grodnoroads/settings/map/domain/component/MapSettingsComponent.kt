@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DynamicZoomEnabled
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomInCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MapZoomOutCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.MarkerFiltering
@@ -21,12 +22,12 @@ import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.Filtering
 import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.map.location.City.Grodno
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Stable
 interface MapSettingsComponent {
 
-    val state: Flow<MapSettingState>
+    val state: StateFlow<MapSettingState>
 
     fun modify(preference: MapPref)
     fun reset(preference: MapPref)
@@ -74,6 +75,10 @@ interface MapSettingsComponent {
             val stepSize: Float = 0.1f
         ) : MapPref
 
+        data class DynamicZoomEnabled(
+            val isEnabled: Boolean = false
+        ) : MapPref
+
         data class DefaultCity(
             val current: City = Grodno,
             val values: List<City> = City.entries
@@ -101,7 +106,8 @@ interface MapSettingsComponent {
         @Stable
         data class DriveModeZoom(
             val mapZoomInCity: MapZoomInCity = MapZoomInCity(),
-            val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity()
+            val mapZoomOutCity: MapZoomOutCity = MapZoomOutCity(),
+            val dynamicZoomEnabled: DynamicZoomEnabled = DynamicZoomEnabled()
         )
 
         @Stable
