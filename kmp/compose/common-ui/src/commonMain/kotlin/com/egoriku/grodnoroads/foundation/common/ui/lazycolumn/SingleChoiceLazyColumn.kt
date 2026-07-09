@@ -2,8 +2,10 @@ package com.egoriku.grodnoroads.foundation.common.ui.lazycolumn
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,10 +29,18 @@ fun SingleChoiceLazyColumn(
     onSelect: (selected: Int) -> Unit
 ) {
     var selectedItem by rememberMutableIntState { initialSelection }
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(selectedItem) {
+        if (selectedItem >= 0 && selectedItem < list.size) {
+            listState.animateScrollToItem(selectedItem)
+        }
+    }
 
     ListItems(
         modifier = modifier,
         contentPadding = contentPadding,
+        listState = listState,
         list = list,
         onClick = { index, _ -> selectedItem = index }
     ) { index, item ->
