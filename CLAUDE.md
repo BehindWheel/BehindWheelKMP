@@ -35,12 +35,27 @@ Example structure:
 - ...
 ```
 
-### 3. Done
+## Build & Verify Commands
 
-The CI workflow (`release_aab.yml`) will automatically:
-- Read the version from `android.properties`
-- Create a git tag `android/vX.Y.Z`
-- Build and sign the release AAB
-- Deploy to Play Store (beta track)
-- Create a GitHub Release with auto-generated changelog from PR labels (configured in `.github/release.yml`)
+**To verify the project compiles:**
+```bash
+./gradlew app:android:assembleDebug
+```
 
+**To apply linting/formatting (Spotless):**
+```bash
+./gradlew spotlessApply
+```
+
+**Typical workflow:**
+```bash
+# 1. Make changes
+# 2. Check compilation
+./gradlew app:android:assembleDebug
+
+# 3. Apply formatting
+./gradlew spotlessApply
+
+# 4. Run tests if needed
+./gradlew test
+```

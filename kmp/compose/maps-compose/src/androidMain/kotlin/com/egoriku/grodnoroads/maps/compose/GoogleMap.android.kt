@@ -61,7 +61,8 @@ actual fun GoogleMap(
     onMapUpdaterChange: (MapUpdater?) -> Unit,
     onProjectionChange: (Projection) -> Unit,
     onZoomChange: (ZoomLevelState) -> Unit,
-    cameraMoveStateChange: (CameraMoveState) -> Unit
+    cameraMoveStateChange: (CameraMoveState) -> Unit,
+    onBearingChange: (Float) -> Unit
 ) {
     val updatedOnMapLoaded by rememberUpdatedState(onMapLoad)
     val updatedCameraPositionProvider by rememberUpdatedState(cameraPositionProvider)
@@ -69,6 +70,7 @@ actual fun GoogleMap(
     val updatedOnProjectionChanged by rememberUpdatedState(onProjectionChange)
     val updatedOnZoomChanged by rememberUpdatedState(onZoomChange)
     val updatedCameraMoveState by rememberUpdatedState(cameraMoveStateChange)
+    val updatedOnBearingChange by rememberUpdatedState(onBearingChange)
 
     val context = LocalContext.current
     val density = LocalDensity.current
@@ -165,6 +167,7 @@ actual fun GoogleMap(
         googleMap.setOnCameraMoveListener {
             updatedOnZoomChanged(ZoomLevelState.Moving(zoom = googleMap.zoom))
             updatedOnProjectionChanged(googleMap.projection)
+            updatedOnBearingChange(googleMap.cameraPosition.bearing)
         }
 
         updateMapProperties(googleMap, mapProperties)
