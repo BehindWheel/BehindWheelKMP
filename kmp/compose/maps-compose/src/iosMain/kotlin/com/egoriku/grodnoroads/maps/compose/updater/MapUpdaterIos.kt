@@ -184,6 +184,26 @@ class MapUpdaterIos(
         )
     }
 
+    override fun rotateToNorth() {
+        val currentBearing = googleMap.camera.bearing
+        if (currentBearing != 0.0) {
+            val target = googleMap.camera.target
+            val zoom = googleMap.zoom
+            val viewingAngle = googleMap.camera.viewingAngle
+            animateCamera(
+                cameraUpdate = GMSCameraUpdate.setCamera(
+                    GMSCameraPosition(
+                        target = target,
+                        bearing = 0.0,
+                        zoom = zoom,
+                        viewingAngle = viewingAngle
+                    )
+                ),
+                duration = 1.0
+            )
+        }
+    }
+
     private fun animateCamera(
         cameraUpdate: GMSCameraUpdate,
         duration: Double,

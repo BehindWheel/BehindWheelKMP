@@ -4,10 +4,11 @@
 
 ### Added
 
-- Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
+- Add compass button to rotate map north when map is rotated
 
 ### Changed
 
+- Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
 - Update medium speed camera color
 - Merge mobile cameras that are close to each other (within 300 m) into a single marker
 

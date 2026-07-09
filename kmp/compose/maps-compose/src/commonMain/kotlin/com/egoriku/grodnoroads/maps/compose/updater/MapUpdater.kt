@@ -30,4 +30,6 @@ interface MapUpdater {
     )
 
     fun animateZoom(zoom: Float)
+
+    fun rotateToNorth()
 }

@@ -59,7 +59,7 @@ The application can be customised for yourself:
 
 <img alt="Icon" src="docs/ios/img_1.png" width="200" /><img alt="Icon" src="docs/ios/img_2.png" width="200" /><img alt="Icon" src="docs/ios/img_3.png" width="200" /><img alt="Icon" src="docs/ios/img_4.png" width="200" /><img alt="Icon" src="docs/ios/img_5.png" width="200" />
 
-### Useful gradle commands
+### Useful Gradle commands
 
 Update code style: `./gradlew spotlessApply`
 

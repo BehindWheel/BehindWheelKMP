@@ -27,5 +27,6 @@ expect fun GoogleMap(
     onMapUpdaterChange: (MapUpdater?) -> Unit = {},
     onProjectionChange: (Projection) -> Unit = {},
     onZoomChange: (ZoomLevelState) -> Unit = {},
-    cameraMoveStateChange: (CameraMoveState) -> Unit = {}
+    cameraMoveStateChange: (CameraMoveState) -> Unit = {},
+    onBearingChange: (Float) -> Unit = {}
 )

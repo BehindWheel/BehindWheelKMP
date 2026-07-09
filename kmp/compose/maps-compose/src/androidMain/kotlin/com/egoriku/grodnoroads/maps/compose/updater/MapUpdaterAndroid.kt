@@ -164,6 +164,24 @@ internal class MapUpdaterAndroid(
         animateCamera(cameraUpdate = cameraUpdate, duration = 1000)
     }
 
+    override fun rotateToNorth() {
+        val currentBearing = googleMap.cameraPosition.bearing
+        if (currentBearing != 0f) {
+            val target = googleMap.cameraPosition.target
+            val zoom = googleMap.cameraPosition.zoom
+            val tilt = googleMap.cameraPosition.tilt
+            val cameraUpdate = CameraUpdateFactory.newCameraPosition(
+                cameraPosition {
+                    target(target)
+                    bearing(0f)
+                    zoom(zoom)
+                    tilt(tilt)
+                }
+            )
+            animateCamera(cameraUpdate = cameraUpdate, duration = 1000)
+        }
+    }
+
     private fun animateCamera(
         cameraUpdate: CameraUpdate,
         duration: Int,

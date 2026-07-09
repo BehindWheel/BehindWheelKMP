@@ -270,6 +270,7 @@ fun GuidanceScreen(
 
         var projection by rememberMutableState<Projection?> { null }
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
+        var mapBearing by rememberMutableState { 0f }
 
         LaunchedEffect(mapUpdater, appMode) {
             val mapUpdater = mapUpdater
@@ -339,6 +340,9 @@ fun GuidanceScreen(
                             isCameraUpdatesEnabled = true
                         }
                     }
+                },
+                onBearingChange = { bearing ->
+                    mapBearing = bearing
                 }
             )
 
@@ -562,6 +566,9 @@ fun GuidanceScreen(
                         modifier = Modifier.padding(end = 16.dp),
                         zoomIn = { mapUpdater?.zoomIn() },
                         zoomOut = { mapUpdater?.zoomOut() },
+                        rotateToNorth = { mapUpdater?.rotateToNorth() },
+                        bearing = mapBearing,
+                        appMode = appMode,
                         onLocationRequestStateChange = {
                             if (appMode == AppMode.Drive && location.latLng != LastLocation.None) {
                                 mapUpdater.onMapScope {
