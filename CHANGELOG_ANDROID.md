@@ -11,6 +11,7 @@
 - Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
 - Update medium speed camera color
 - Merge mobile cameras that are close to each other (within 300 m) into a single marker
+- Dynamic map zoom that adjusts to the selected city's default zoom level
 
 ## [1.6.0] - 2026-06-27
 

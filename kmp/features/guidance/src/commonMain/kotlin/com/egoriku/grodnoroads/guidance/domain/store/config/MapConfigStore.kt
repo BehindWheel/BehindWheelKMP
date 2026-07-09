@@ -7,6 +7,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.area.Area
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.config.MapConfigStore.StoreState
 import com.egoriku.grodnoroads.location.LatLng
+import com.egoriku.grodnoroads.shared.persistent.map.location.City
 
 internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
 
@@ -26,8 +27,8 @@ internal interface MapConfigStore : Store<Intent, StoreState, Nothing> {
     data class StoreState(
         val mapInternalConfig: MapInternalConfig = MapInternalConfig.EMPTY,
         val areas: List<Area> = emptyList(),
-        val zoomLevel: Float = 12.5f,
-        val userZoomLevel: Float = 12.5f,
+        val zoomLevel: Float = City.Grodno.defaultZoom,
+        val userZoomLevel: Float = City.Grodno.defaultZoom,
         val alertRadius: Int = 0,
         val currentAppMode: AppMode = AppMode.Default,
         val isChooseInDriveMode: Boolean = false,

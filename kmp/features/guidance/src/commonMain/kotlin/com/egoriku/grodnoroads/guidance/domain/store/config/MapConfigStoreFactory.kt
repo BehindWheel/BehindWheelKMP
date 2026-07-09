@@ -43,6 +43,7 @@ import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.dynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowCarCrash
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowMediumSpeedCameras
 import com.egoriku.grodnoroads.shared.persistent.map.mapinfo.isShowMobileCameras
@@ -126,6 +127,12 @@ internal class MapConfigStoreFactory(
                         }
                         .distinctUntilChanged()
                         .onEach { dispatch(OnMapConfigInternal(it)) }
+                        .launchIn(this)
+
+                    dataStore.data
+                        .map { it.defaultCity }
+                        .distinctUntilChanged()
+                        .onEach { city -> dispatch(OnZoomLevel(city.defaultZoom)) }
                         .launchIn(this)
 
                     launch {

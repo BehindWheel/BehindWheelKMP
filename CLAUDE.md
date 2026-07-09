@@ -16,6 +16,7 @@ patch=Z
 
 - Move all content from `## [Unreleased]` into a new versioned section `## [X.Y.Z] - YYYY-MM-DD` (use today's date)
 - Leave `## [Unreleased]` empty at the top
+- When adding entries to an existing `[Unreleased]` section, append new items at the **end** of the relevant category (e.g. `### Changed`), not at the top
 
 Example structure:
 ```markdown
