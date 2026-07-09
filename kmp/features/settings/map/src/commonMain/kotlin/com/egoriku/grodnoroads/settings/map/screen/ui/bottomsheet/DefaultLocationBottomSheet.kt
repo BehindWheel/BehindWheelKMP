@@ -5,6 +5,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.Collator
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
@@ -17,6 +18,7 @@ import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
+import com.egoriku.grodnoroads.shared.persistent.map.location.City
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -38,21 +40,9 @@ internal fun DefaultLocationBottomSheet(
         sheetState = sheetCloseBehaviour.sheetState,
         onCancel = onCancel,
         content = {
-            val sortedCityValues = defaultCity.values
-                .mapIndexed { index, value ->
-                    CityValue(index, stringResource(value.toStringResource()))
-                }.sortedWith(compareBy(Collator.collator) { it.value })
-
-            SingleChoiceLazyColumn(
-                list = sortedCityValues.map { it.value },
-                contentPadding = PaddingValues(bottom = 16.dp),
-                initialSelection = sortedCityValues.indexOfFirst { cityValue ->
-                    cityValue.index == defaultCity.values.indexOf(defaultCity.current)
-                },
-                onSelect = { position ->
-                    defaultCity =
-                        defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index])
-                }
+            DefaultLocationBottomSheetContent(
+                defaultCity = defaultCity,
+                onCitySelect = { city -> defaultCity = city }
             )
         },
         footer = {
@@ -64,6 +54,30 @@ internal fun DefaultLocationBottomSheet(
     )
 }
 
+@Composable
+internal fun DefaultLocationBottomSheetContent(
+    defaultCity: DefaultCity,
+    onCitySelect: (DefaultCity) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val sortedCityValues = defaultCity.values
+        .mapIndexed { index, value ->
+            CityValue(index, stringResource(value.toStringResource()))
+        }.sortedWith(compareBy(Collator.collator) { it.value })
+
+    SingleChoiceLazyColumn(
+        modifier = modifier,
+        list = sortedCityValues.map { it.value },
+        contentPadding = PaddingValues(bottom = 16.dp),
+        initialSelection = sortedCityValues.indexOfFirst { cityValue ->
+            cityValue.index == defaultCity.values.indexOf(defaultCity.current)
+        },
+        onSelect = { position ->
+            onCitySelect(defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index]))
+        }
+    )
+}
+
 private data class CityValue(
     val index: Int,
     val value: String
@@ -71,10 +85,9 @@ private data class CityValue(
 
 @PreviewGrodnoRoads
 @Composable
-private fun DefaultLocationBottomSheetPreview() = GrodnoRoadsM3ThemePreview {
-    DefaultLocationBottomSheet(
-        defaultLocationState = DefaultLocationDialogState(defaultCity = DefaultCity()),
-        onCancel = {},
-        onResult = {}
+private fun DefaultLocationBottomSheetContentPreview() = GrodnoRoadsM3ThemePreview {
+    DefaultLocationBottomSheetContent(
+        defaultCity = DefaultCity(current = City.Shuchin),
+        onCitySelect = {}
     )
 }
