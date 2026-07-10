@@ -36,6 +36,10 @@ Example structure:
 - ...
 ```
 
+## Compose
+
+- Use `rememberMutableState { value }` instead of `val state by remember { mutableStateOf(value) }`
+
 ## Build & Verify Commands
 
 **To verify the project compiles:**

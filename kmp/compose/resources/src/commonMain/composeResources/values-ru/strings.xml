@@ -234,4 +234,7 @@
 
     <string name="city_selector_choose_city">Выберите ваш город</string>
     <string name="city_selector_done">Готово</string>
+
+    <string name="region_grodno">Гродненская область</string>
+    <string name="region_brest">Брестская область</string>
 </resources>

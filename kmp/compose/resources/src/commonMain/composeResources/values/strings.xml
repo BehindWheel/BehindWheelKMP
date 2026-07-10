@@ -237,4 +237,7 @@
 
     <string name="city_selector_choose_city">Select your city</string>
     <string name="city_selector_done">Done</string>
+
+    <string name="region_grodno">Hrodna Region</string>
+    <string name="region_brest">Brest Region</string>
 </resources>
