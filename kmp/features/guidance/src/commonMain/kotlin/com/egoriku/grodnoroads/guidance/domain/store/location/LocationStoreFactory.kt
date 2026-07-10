@@ -6,7 +6,7 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.coroutines.smartJob
 import com.egoriku.grodnoroads.guidance.domain.model.LastLocation
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Intent.InvalidateLocation
@@ -20,7 +20,6 @@ import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Stat
 import com.egoriku.grodnoroads.shared.geolocation.LocationService
 import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
@@ -39,7 +38,7 @@ internal class LocationStoreFactory(
         Store<Intent, State, Label> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                var locationJob: Job? = null
+                var locationJob by smartJob()
 
                 onAction<Unit> {
                     launch {
@@ -58,7 +57,7 @@ internal class LocationStoreFactory(
 
                     dispatch(Message.OnNewLocation(LastLocation.None))
 
-                    locationJob = reLaunch(locationJob) {
+                    locationJob = launch {
                         locationService.lastLocationFlow
                             .filterNotNull()
                             .map { LastLocation(it.latLng, it.bearing, it.speed) }
