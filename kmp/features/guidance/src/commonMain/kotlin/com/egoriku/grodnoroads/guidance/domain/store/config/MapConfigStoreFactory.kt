@@ -40,6 +40,7 @@ import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyTrafficJam
 import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyTrafficPolice
 import com.egoriku.grodnoroads.shared.persistent.alert.isNotifyWildAnimals
 import com.egoriku.grodnoroads.shared.persistent.appearance.keepScreenOn
+import com.egoriku.grodnoroads.shared.persistent.debug.showMapDebugOverlay
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.dynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
@@ -122,7 +123,8 @@ internal class MapConfigStoreFactory(
                                 ),
                                 trafficJanOnMap = pref.trafficJamOnMap,
                                 mapType = pref.mapType,
-                                keepScreenOn = pref.keepScreenOn
+                                keepScreenOn = pref.keepScreenOn,
+                                showMapDebugOverlay = pref.showMapDebugOverlay
                             )
                         }
                         .distinctUntilChanged()

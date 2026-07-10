@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -65,6 +66,7 @@ fun DebugToolsScreen(
 ) {
     var sheetType by rememberMutableState<SheetType> { SheetType.NoSheet }
     var isDarkTheme by rememberMutableState { false }
+    val showMapDebugOverlay by debugToolsComponent.showMapDebugOverlay.collectAsState()
 
     GrodnoRoadsM3Theme(isDarkTheme) {
         Scaffold(
@@ -117,6 +119,8 @@ fun DebugToolsScreen(
                             SheetType.DataStoreEdit -> {
                                 DataStoreEdit(
                                     modifier = Modifier.padding(bottom = 16.dp),
+                                    showMapDebugOverlay = showMapDebugOverlay,
+                                    onShowMapDebugOverlayChange = debugToolsComponent::setShowMapDebugOverlay,
                                     resetOnboarding = debugToolsComponent::resetOnboarding,
                                     resetReportingLimit = debugToolsComponent::resetReportingLimit
                                 )
@@ -198,20 +202,23 @@ private fun PlatformSegmentedRow(
 private fun ScrollState.isScrollingUp(scrollOffset: Int = 100): Boolean {
     var lastScroll by rememberMutableState { 0 }
 
-    if (value > lastScroll + scrollOffset) {
-        lastScroll = value - scrollOffset // scroll up
-    } else if (value < lastScroll - scrollOffset) {
-        lastScroll = value + scrollOffset // scroll down
-    }
-
-    val isInitialStateORScrollingUp = remember {
+    return remember {
         derivedStateOf {
+            val current = value
+
             when {
-                value >= lastScroll + scrollOffset -> false
-                value < lastScroll -> true
+                current > lastScroll + scrollOffset -> {
+                    lastScroll = current - scrollOffset
+                    false
+                }
+                current < lastScroll - scrollOffset -> {
+                    lastScroll = current + scrollOffset
+                    true
+                }
+                current >= lastScroll + scrollOffset -> false
+                current < lastScroll -> true
                 else -> lastScroll - scrollOffset < 0 // initial state
             }
         }
-    }
-    return isInitialStateORScrollingUp.value
+    }.value
 }

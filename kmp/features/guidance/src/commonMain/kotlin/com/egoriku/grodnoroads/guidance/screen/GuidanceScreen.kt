@@ -74,6 +74,7 @@ import com.egoriku.grodnoroads.guidance.screen.sound.SoundController
 import com.egoriku.grodnoroads.guidance.screen.ui.CameraInfo
 import com.egoriku.grodnoroads.guidance.screen.ui.appupdate.InAppUpdateHandle
 import com.egoriku.grodnoroads.guidance.screen.ui.dialog.MarkerInfoBottomSheet
+import com.egoriku.grodnoroads.guidance.screen.ui.foundation.MapDebugOverlay
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.ModalBottomSheet
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.UsersCount
 import com.egoriku.grodnoroads.guidance.screen.ui.google.MapOverlayActions
@@ -600,6 +601,15 @@ fun GuidanceScreen(
                     alerts = alerts,
                     onOpenQuickSettings = component::openQuickSettings
                 )
+                if (mapConfig.showMapDebugOverlay) {
+                    MapDebugOverlay(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(contentPadding),
+                        mapZoom = idleZoomLevel,
+                        targetZoom = mapConfig.zoomLevel
+                    )
+                }
                 SnackbarHost(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)

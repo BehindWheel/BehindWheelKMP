@@ -21,7 +21,8 @@ class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-Xexpect-actual-classes",
-                    "-Xwarning-level=REDUNDANT_VISIBILITY_MODIFIER:disabled"
+                    "-Xwarning-level=REDUNDANT_VISIBILITY_MODIFIER:disabled",
+                    "-Xexplicit-backing-fields"
                 )
                 extraWarnings.set(true)
             }

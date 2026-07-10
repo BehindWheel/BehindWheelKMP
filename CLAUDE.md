@@ -39,6 +39,9 @@ Example structure:
 ## Compose
 
 - Use `rememberMutableState { value }` instead of `val state by remember { mutableStateOf(value) }`
+- When adding a new `@Composable` function, add a preview at the bottom of the file with `@PreviewGrodnoRoadsDarkLight` annotation and a wrapper `GrodnoRoadsM3ThemePreview` composable
+- Do not pass `initial` to `collectAsState()` when collecting from a `StateFlow` — it already has a value
+- Add an empty line after `var`/`val` declarations inside composable functions
 
 ## Build & Verify Commands
 
@@ -63,4 +66,14 @@ Example structure:
 
 # 4. Run tests if needed
 ./gradlew test
+```
+
+**Run tests in a specific module:**
+```bash
+./gradlew :kmp:features:<module>:testAndroidHostTest
+```
+
+**Run a single test class:**
+```bash
+./gradlew :kmp:features:<module>:testAndroidHostTest --tests "com.egoriku.grodnoroads.<package>.<TestClass>"
 ```
