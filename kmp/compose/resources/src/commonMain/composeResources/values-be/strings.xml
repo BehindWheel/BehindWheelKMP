@@ -4,11 +4,11 @@
         <item quantity="one">%1$d метр</item>
         <item quantity="few">%1$d метры</item>
         <item quantity="many">%1$d метраў</item>
-        <item quantity="other">%1$d метраў</item>
+        <item quantity="other">%1$d метра</item>
     </plurals>
 
-    <string name="event_reminder_spring_body">З 25 мая па 5 чэрвеня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНі забудзьцеся ўключыць блізкае святло! 🚘💡</string>
-    <string name="event_reminder_autumn_body">З 25 жніўня па 5 верасня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНі забудзьцеся ўключыць блізкае святло! 🚘💡</string>
+    <string name="event_reminder_spring_body">З 25 мая па 5 чэрвеня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНе забудзьцеся ўключыць бліжняе святло! 🚘💡</string>
+    <string name="event_reminder_autumn_body">З 25 жніўня па 5 верасня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНе забудзьцеся ўключыць бліжняе святло! 🚘💡</string>
 
     <string name="tab_map">Мапа</string>
     <string name="tab_chat">Чат</string>
@@ -22,7 +22,7 @@
     <string name="alerts_car_crash">ДТЗ</string>
     <string name="alerts_traffic_jam">Затор</string>
     <string name="alerts_wild_animals">Дзікія жывёлы</string>
-    <string name="alerts_unsupported_message">Дадатковае паведамленне</string>
+    <string name="alerts_unsupported_message">Непадтрымліванае паведамленне</string>
 
     <string name="camera_info_last_update">Абноўлена %1$s</string>
     <string name="camera_info_stub_title">Без апісання</string>
@@ -39,7 +39,7 @@
     <string name="settings_section_map">Мапа</string>
     <string name="settings_section_alerts">Абвесткі</string>
     <string name="settings_section_changelog">Гісторыя зменаў</string>
-    <string name="settings_section_faq">Часта задаюць пытанні</string>
+    <string name="settings_section_faq">Часта задаваныя пытанні</string>
     <string name="settings_section_debug_tools">Інструменты адладкі</string>
 
     <!-- Settings categories -->
@@ -137,14 +137,14 @@
     <string name="map_default_location_mosty">Масты</string>
     <string name="map_default_location_novogrudok">Навагрудак</string>
     <string name="map_default_location_ostrovec">Астравец</string>
-    <string name="map_default_location_ozery">Азёры</string>>
-    <string name="map_default_location_porechye">Парэчча</string>>
+    <string name="map_default_location_ozery">Азёры</string>
+    <string name="map_default_location_porechye">Парэчча</string>
     <string name="map_default_location_ruzhany">Ружаны</string>
     <string name="map_default_location_shuchin">Шчучын</string>
     <string name="map_default_location_skidel">Скідзель</string>
     <string name="map_default_location_slonim">Слонім</string>
     <string name="map_default_location_svisloch">Свіслач</string>
-    <string name="map_default_location_volkovysk">Ваўкавыск</string>>
+    <string name="map_default_location_volkovysk">Ваўкавыск</string>
     <string name="map_default_location_voronovo">Воранава</string>
     <string name="map_default_location_zelva">Зэльва</string>
 
@@ -160,16 +160,16 @@
 
     <string name="snackbar_drive_mode_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
     <string name="snackbar_drive_mode_rationale_description">Выкарыстоўваецца для адлюстравання маркера ў рэжыме навігацыі</string>
-    <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш пунктавага месцазнаходжання</string>
+    <string name="snackbar_drive_mode_fine_location_denied">Навігацыя патрабуе доступу да больш дакладнага месцазнаходжання</string>
     <string name="snackbar_drive_mode_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
     <string name="snackbar_drive_mode_gms_disabled_title">Навігацыя патрабуе доступу да геалакацыі</string>
-    <string name="snackbar_drive_mode_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+    <string name="snackbar_drive_mode_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў выплыўной панэлі апавяшчэнняў</string>
 
     <string name="snackbar_current_location_rationale_title">Дазвол на доступ да геалакацыі адхілены</string>
     <string name="snackbar_current_location_fine_location_denied">Патрабуецца доступ да болей дакладнага месцазнаходжання</string>
     <string name="snackbar_current_location_permission_denied">Доступ да геалакацыі забаронены. Вы можаце дадаць дазвол у наладах</string>
     <string name="snackbar_current_location_gms_disabled_title">Доступ да геалакацыі адхілены</string>
-    <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў сплаўным панэлі апавяшчэнняў</string>
+    <string name="snackbar_current_location_gms_disabled_description">Вы можаце ўключыць гэта самастойна ў выплыўной панэлі апавяшчэнняў</string>
 
     <string name="snackbar_in_app_update_install">Абнаўленне гатовае да ўстаноўкі</string>
 
@@ -180,7 +180,7 @@
     <string name="reporting_category_mobile_camera">Мабільная камера</string>
 
     <string name="reporting_item_road_repair">Дарожныя работы</string>
-    <string name="reporting_item_broken_car">Сламалася машина</string>
+    <string name="reporting_item_broken_car">Сламалася машына</string>
     <string name="reporting_item_tow_truck_working">Працуе эвакуатар</string>
     <string name="reporting_item_pedestrian_on_road">Пешаход на дарозе</string>
     <string name="reporting_item_traffic_controller">Рэгуляроўшчык</string>
@@ -190,7 +190,7 @@
     <string name="reporting_item_road_marking">Наносяць разметку</string>
     <string name="reporting_item_other_road_incident">Іншае</string>
     <string name="reporting_item_traffic_jam">Затор</string>
-    <string name="reporting_item_wild_animals">Дзікіе жывёлы</string>
+    <string name="reporting_item_wild_animals">Дзікія жывёлы</string>
     <string name="reporting_item_car_accident">ДТЗ</string>
     <string name="reporting_item_traffic_police">ДАІ</string>
     <string name="reporting_item_working_with_radar">Працуюць з радарам</string>
@@ -199,7 +199,7 @@
     <string name="reporting_item_stopped_on_the_move">Спынілі на хаду</string>
     <string name="reporting_item_sitting_in_the_car">Сядзяць у машыне</string>
     <string name="reporting_item_working_from_car">Працуюць з машыны</string>
-    <string name="reporting_item_transport_inspection">Транспартная інспэкцыя</string>
+    <string name="reporting_item_transport_inspection">Транспартная інспекцыя</string>
     <string name="reporting_item_filter">Фільтр</string>
 
     <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
@@ -221,7 +221,7 @@
     <string name="quick_settings_traffic_conditions">Загружанасць дарог</string>
 
     <string name="onboarding_infographic_1_title">Будзь спакойны за рулём!</string>
-    <string name="onboarding_infographic_1_description">Дадатак папярэджвае аб корках, ДТЗ, і іншых праблемах на дарозе</string>
+    <string name="onboarding_infographic_1_description">Дадатак папярэджвае аб заторах, ДТЗ і іншых праблемах на дарозе</string>
     <string name="onboarding_infographic_2_title">Выконвайце ПДР!</string>
     <string name="onboarding_infographic_2_description">Дадатак падкажа пра перавышэнне хуткасці, пра набліжэнне да паста ДАІ або фоторадару</string>
     <string name="onboarding_infographic_3_title">Пільнасць не перашкодзіць!</string>
