@@ -11,10 +11,12 @@ import com.egoriku.grodnoroads.extensions.Collator
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.common.ConfirmationFooter
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
-import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.Group
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.GroupedSingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
+import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
@@ -61,27 +63,36 @@ internal fun DefaultLocationBottomSheetContent(
     modifier: Modifier = Modifier
 ) {
     val sortedCityValues = defaultCity.values
-        .mapIndexed { index, value ->
-            CityValue(index, stringResource(value.toStringResource()))
-        }.sortedWith(compareBy(Collator.collator) { it.value })
+        .map { it to stringResource(it.toStringResource()) }
+        .sortedWith(compareBy(Collator.collator) { it.second })
+        .map { it.first }
 
-    SingleChoiceLazyColumn(
+    val displayGroups = sortedCityValues
+        .groupBy { it.region }
+        .map { (region, cities) ->
+            Group(
+                header = stringResource(region.stringResource),
+                items = cities
+            )
+        }
+
+    GroupedSingleChoiceLazyColumn(
         modifier = modifier,
-        list = sortedCityValues.map { it.value },
+        groups = displayGroups,
         contentPadding = PaddingValues(bottom = 16.dp),
-        initialSelection = sortedCityValues.indexOfFirst { cityValue ->
-            cityValue.index == defaultCity.values.indexOf(defaultCity.current)
+        initialItem = defaultCity.current,
+        onSelect = { city ->
+            onCitySelect(defaultCity.copy(current = city))
         },
-        onSelect = { position ->
-            onCitySelect(defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index]))
+        itemContent = { city, isSelected, onClick ->
+            RadioButtonListItem(
+                text = stringResource(city.toStringResource()),
+                selected = isSelected,
+                onClick = onClick
+            )
         }
     )
 }
-
-private data class CityValue(
-    val index: Int,
-    val value: String
-)
 
 @PreviewGrodnoRoads
 @Composable

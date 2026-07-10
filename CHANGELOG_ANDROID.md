@@ -5,6 +5,7 @@
 ### Added
 
 - Add compass button to rotate map north when map is rotated
+- Group cities by region with sticky headers in city selection list
 
 ### Changed
 

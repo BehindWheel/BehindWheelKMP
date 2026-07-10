@@ -229,4 +229,7 @@
 
     <string name="city_selector_choose_city">Выберыце ваш горад</string>
     <string name="city_selector_done">Гатовы</string>
+
+    <string name="region_grodno">Гродзенская вобласць</string>
+    <string name="region_brest">Брэсцкая вобласць</string>
 </resources>

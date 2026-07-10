@@ -14,9 +14,10 @@ import com.egoriku.grodnoroads.cityselector.domain.component.CitySelectorCompone
 import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.city_selector_choose_city
 import com.egoriku.grodnoroads.extensions.Collator
-import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.SingleChoiceLazyColumn
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.Group
+import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.GroupedSingleChoiceLazyColumn
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.shared.persistent.map.location.City
+import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -27,10 +28,18 @@ internal fun ChooseCityPage(
     onModify: (CitySelectorPref) -> Unit
 ) {
     val sortedCityValues = defaultCity.values
-        .mapIndexed { index, value ->
-            CityValue(index, stringResource(value.toStringResource()))
+        .map { it to stringResource(it.toStringResource()) }
+        .sortedWith(compareBy(Collator.collator) { it.second })
+        .map { it.first }
+
+    val displayGroups = sortedCityValues
+        .groupBy { it.region }
+        .map { (region, cities) ->
+            Group(
+                header = stringResource(region.stringResource),
+                items = cities
+            )
         }
-        .sortedWith(compareBy(Collator.collator) { it.value })
 
     Column(modifier = modifier) {
         Text(
@@ -40,20 +49,21 @@ internal fun ChooseCityPage(
             textAlign = TextAlign.Center
         )
         VerticalSpacer(24.dp)
-        SingleChoiceLazyColumn(
+        GroupedSingleChoiceLazyColumn(
             modifier = Modifier.fillMaxWidth(),
-            list = sortedCityValues.map { it.value },
-            initialSelection = sortedCityValues.indexOfFirst { cityValue ->
-                cityValue.index == City.entries.indexOf(City.Grodno)
+            groups = displayGroups,
+            initialItem = defaultCity.current,
+            autoScroll = false,
+            onSelect = { city ->
+                onModify(defaultCity.copy(current = city))
             },
-            onSelect = { position ->
-                onModify(defaultCity.copy(current = defaultCity.values[sortedCityValues[position].index]))
+            itemContent = { city, isSelected, onClick ->
+                RadioButtonListItem(
+                    text = stringResource(city.toStringResource()),
+                    selected = isSelected,
+                    onClick = onClick
+                )
             }
         )
     }
 }
-
-private data class CityValue(
-    val index: Int,
-    val value: String
-)
