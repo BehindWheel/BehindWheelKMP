@@ -3,27 +3,36 @@ package com.egoriku.grodnoroads.settings.debugtools.ui.datastore
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryButton
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 
 @Composable
 internal fun DataStoreEdit(
+    showMapDebugOverlay: Boolean,
+    onShowMapDebugOverlayChange: (Boolean) -> Unit,
     resetOnboarding: () -> Unit,
     modifier: Modifier = Modifier,
     resetReportingLimit: () -> Unit
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState()),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        SwitchListItem(
+            text = "Map debug overlay",
+            isChecked = showMapDebugOverlay,
+            onCheckedChange = onShowMapDebugOverlayChange
+        )
         PrimaryButton(
             text = "Reset onboarding",
             onClick = resetOnboarding
@@ -33,4 +42,17 @@ internal fun DataStoreEdit(
             onClick = resetReportingLimit
         )
     }
+}
+
+@PreviewGrodnoRoadsDarkLight
+@Composable
+private fun PreviewDataStoreEditPreview() = GrodnoRoadsM3ThemePreview {
+    var showMapDebugOverlay by rememberMutableState { false }
+
+    DataStoreEdit(
+        showMapDebugOverlay = showMapDebugOverlay,
+        onShowMapDebugOverlayChange = { showMapDebugOverlay = it },
+        resetOnboarding = {},
+        resetReportingLimit = {}
+    )
 }

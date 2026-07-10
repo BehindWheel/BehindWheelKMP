@@ -237,7 +237,7 @@ Android app uses env vars for release signing (see `app/android/build.gradle.kts
 - ❌ Don't create ViewModels (use Decompose Components + MVIKotlin Stores)
 - ❌ Don't use Hilt/Dagger annotations (use Koin `module {}`)
 - ❌ Don't reference Android SDK directly in commonMain (use expect/actual)
-- ❌ Don't disallow Material 2 (enforced by Spotless rules)
+- ❌ Don't use Material 2 (Material 3 only, enforced by Spotless rules)
 
 ## Adding a New Feature
 

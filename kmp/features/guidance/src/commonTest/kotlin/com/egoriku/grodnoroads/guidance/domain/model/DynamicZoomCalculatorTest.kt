@@ -4,6 +4,7 @@ import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl.C
 import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl.Companion.MAX_SPEED_FOR_ZOOM_KMH_DEFAULT
 import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl.Companion.MIN_DYNAMIC_ZOOM_DEFAULT
 import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl.Companion.MIN_SPEED_THRESHOLD_KMH_DEFAULT
+import com.egoriku.grodnoroads.guidance.domain.model.DynamicZoomCalculatorImpl.Companion.RE_MIN_SPEED_THRESHOLD_KMH_DEFAULT
 import kotlin.math.roundToInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -85,8 +86,41 @@ class DynamicZoomCalculatorTest {
     @Test
     fun `calculateZoomLevel returns rounded to one decimal place`() {
         // At 35 km/h with default settings: fraction = 35/140 = 0.25
-        // zoom = 16.2 - (16.2 - 13) * 0.25 = 16.2 - 0.8 = 15.4
+        // zoom = 16.1 - (16.1 - 13) * 0.25 = 16.1 - 0.775 = 15.3
         val zoom = calculator.calculateZoomLevel(35)
-        assertEquals(15.4f, zoom)
+        assertEquals(15.3f, zoom)
+    }
+
+    @Test
+    fun `calculateZoomLevel below re-threshold returns max zoom`() {
+        val zoom = calculator.calculateZoomLevel(RE_MIN_SPEED_THRESHOLD_KMH_DEFAULT - 1)
+        assertEquals(MAX_DYNAMIC_ZOOM_DEFAULT, zoom)
+    }
+
+    @Test
+    fun `calculateZoomLevel in hysteresis zone preserves previous zoom`() {
+        calculator.calculateZoomLevel(60)
+        val zoom = calculator.calculateZoomLevel(MIN_SPEED_THRESHOLD_KMH_DEFAULT)
+        // Speed is in hysteresis zone (reMin < 25 <= min), should preserve last zoom
+        val expectedAt60 = calculator.calculateZoomLevel(60)
+        assertEquals(expectedAt60, zoom)
+    }
+
+    @Test
+    fun `calculateZoomLevel speed spike above threshold then drop preserves zoom`() {
+        // Simulate GPS spike: idle -> spike -> back to idle
+        calculator.calculateZoomLevel(0)
+        calculator.calculateZoomLevel(30) // spike above threshold
+        val zoomAfterSpike = calculator.calculateZoomLevel(MIN_SPEED_THRESHOLD_KMH_DEFAULT)
+        // Should preserve zoom from spike, not jump back to max
+        val expectedAt30 = calculator.calculateZoomLevel(30)
+        assertEquals(expectedAt30, zoomAfterSpike)
+    }
+
+    @Test
+    fun `calculateZoomLevel speed drops below re-threshold returns max zoom`() {
+        calculator.calculateZoomLevel(60) // set some zoom
+        val zoom = calculator.calculateZoomLevel(RE_MIN_SPEED_THRESHOLD_KMH_DEFAULT - 1)
+        assertEquals(MAX_DYNAMIC_ZOOM_DEFAULT, zoom)
     }
 }
