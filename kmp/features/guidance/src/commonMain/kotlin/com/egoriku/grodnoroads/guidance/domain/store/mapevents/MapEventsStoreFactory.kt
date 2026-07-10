@@ -10,7 +10,7 @@ import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Failure
 import com.egoriku.grodnoroads.extensions.common.ResultOf.Success
-import com.egoriku.grodnoroads.extensions.coroutines.reLaunch
+import com.egoriku.grodnoroads.extensions.coroutines.smartJob
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MobileCamera
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.StationaryCamera
@@ -32,7 +32,6 @@ import com.egoriku.grodnoroads.logger.logD
 import com.egoriku.grodnoroads.shared.persistent.map.filtering.filteringMarkers
 import kotlin.time.Duration.Companion.minutes
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -59,7 +58,7 @@ internal class MapEventsStoreFactory(
         Store<Nothing, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                var reports: Job? = null
+                var reports by smartJob()
 
                 onAction<Unit> {
                     dataStore.data
@@ -68,7 +67,7 @@ internal class MapEventsStoreFactory(
                         .onEach { time ->
                             dispatch(OnUpdateFilterTime(time))
 
-                            reports = reLaunch(reports) {
+                            reports = launch {
                                 subscribeForReports(
                                     onLoaded = { list ->
                                         val filterTime = currentTime - time
