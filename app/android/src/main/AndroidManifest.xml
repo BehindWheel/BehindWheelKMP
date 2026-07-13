@@ -20,6 +20,11 @@
         android:enableOnBackInvokedCallback="true"
         android:theme="@style/SplashTheme">
 
+        <!-- https://issuetracker.google.com/issues/476788722 -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

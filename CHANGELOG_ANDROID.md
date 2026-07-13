@@ -10,6 +10,7 @@
 ### Fixed
 
 - Fix map briefly rotating to north and resetting tilt when rotating screen during navigation
+- Fix Apache HTTP legacy crash on Android 10 devices
 
 ### Changed
 
