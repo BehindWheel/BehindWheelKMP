@@ -17,12 +17,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,15 +37,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.foundation.core.animation.FadeInOutAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.isMediumScreenWidth
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.More
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
+import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
@@ -64,37 +70,39 @@ fun DefaultOverlay(
     modifier: Modifier = Modifier,
     onOpenQuickSettings: () -> Unit
 ) {
-    Box(modifier = modifier.padding(top = 8.dp)) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            if (isDriveMode) {
-                Row(
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy((-8).dp)
-                ) {
-                    CarSpeed(speed = currentSpeed)
-                    if (speedLimit != -1) {
-                        SpeedLimit(limit = speedLimit)
-                    }
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp, start = 16.dp, end = 16.dp)
+    ) {
+        if (isDriveMode) {
+            when {
+                currentWindowAdaptiveInfoV2().windowSizeClass.isMediumScreenWidth() -> {
+                    TabletOverlay(
+                        contentPadding = contentPadding,
+                        currentSpeed = currentSpeed,
+                        speedLimit = speedLimit,
+                        alerts = alerts
+                    )
                 }
-                Alerts(alerts = alerts)
+                else -> {
+                    PhoneOverlay(
+                        contentPadding = contentPadding,
+                        currentSpeed = currentSpeed,
+                        speedLimit = speedLimit,
+                        alerts = alerts
+                    )
+                }
             }
         }
         FadeInOutAnimatedVisibility(
             visible = isOverlayVisible,
-            modifier = Modifier.align(Alignment.TopEnd)
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .padding(contentPadding)
+                .align(Alignment.TopEnd)
         ) {
             PrimaryInverseCircleButton(
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .padding(horizontal = 16.dp),
                 onClick = onOpenQuickSettings,
                 size = Size.Small
             ) {
@@ -103,6 +111,68 @@ fun DefaultOverlay(
                     contentDescription = null
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun PhoneOverlay(
+    contentPadding: PaddingValues,
+    currentSpeed: Int,
+    speedLimit: Int,
+    alerts: List<Alert>
+) {
+    Column(
+        modifier = Modifier.padding(contentPadding),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        SpeedRow(
+            currentSpeed = currentSpeed,
+            speedLimit = speedLimit
+        )
+        Alerts(alerts = alerts)
+    }
+}
+
+@Composable
+private fun TabletOverlay(
+    contentPadding: PaddingValues,
+    currentSpeed: Int,
+    speedLimit: Int,
+    alerts: List<Alert>
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(contentPadding)
+    ) {
+        SpeedRow(
+            currentSpeed = currentSpeed,
+            speedLimit = speedLimit
+        )
+        Alerts(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .widthIn(max = 500.dp),
+            alerts = alerts
+        )
+    }
+}
+
+@Composable
+private fun SpeedRow(
+    currentSpeed: Int,
+    speedLimit: Int,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy((-8).dp)
+    ) {
+        CarSpeed(speed = currentSpeed)
+        if (speedLimit != -1) {
+            SpeedLimit(limit = speedLimit)
         }
     }
 }
@@ -183,16 +253,19 @@ private fun SpeedLimit(limit: Int) {
     }
 }
 
+@Preview(widthDp = 1000, heightDp = 400)
 @PreviewGrodnoRoadsDarkLight
 @Composable
 private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
     var limit by rememberMutableState { -1 }
+    var driveMode by rememberMutableState { true }
 
-    Box {
+    Column {
         DefaultOverlay(
+            modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(),
             isOverlayVisible = true,
-            isDriveMode = true,
+            isDriveMode = driveMode,
             currentSpeed = 120,
             speedLimit = limit,
             alerts = listOf(
@@ -221,18 +294,24 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             ),
             onOpenQuickSettings = {}
         )
+        HorizontalDivider()
+        VerticalSpacer(8.dp)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter),
-            horizontalArrangement = Arrangement.Center
+                .align(Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
             Button(onClick = { limit = 50 }) {
-                Text(text = "Set limit")
+                Text(text = "Speed limit")
             }
             Button(onClick = { limit = -1 }) {
-                Text(text = "Reset limit")
+                Text(text = "Reset")
+            }
+            Button(onClick = { driveMode = !driveMode }) {
+                Text(text = "Toggle Mode")
             }
         }
+        VerticalSpacer(8.dp)
     }
 }
