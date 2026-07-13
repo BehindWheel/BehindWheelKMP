@@ -2,8 +2,6 @@ package com.egoriku.grodnoroads.root.screen
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.collectAsState
@@ -13,7 +11,6 @@ import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.animation.predictiveback.PredictiveBackGestureOverlay
 import com.arkivanov.essenty.backhandler.BackDispatcher
-import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
 import com.egoriku.grodnoroads.foundation.theme.Platform.IOS
@@ -24,7 +21,6 @@ import com.egoriku.grodnoroads.root.domain.RootComponent
 object RootViewController {
 
     @OptIn(
-        ExperimentalMaterial3WindowSizeClassApi::class,
         ExperimentalComposeApi::class,
         ExperimentalDecomposeApi::class
     )
@@ -47,10 +43,7 @@ object RootViewController {
                 backIcon = null
             ) {
                 GrodnoRoadsM3Theme(isDarkTheme) {
-                    CompositionLocalProvider(
-                        LocalWindowSizeClass provides calculateWindowSizeClass(),
-                        LocalPlatform provides IOS
-                    ) {
+                    CompositionLocalProvider(LocalPlatform provides IOS) {
                         RootContent(rootComponent)
                     }
                 }

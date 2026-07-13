@@ -95,7 +95,6 @@ dependencies {
 
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material3.windowsize)
 
     implementation(project.dependencies.platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)

@@ -36,6 +36,10 @@ Example structure:
 - ...
 ```
 
+## Agent Behavior
+
+- **Do not use Agent tool or any sub-agents.** Do all work directly in the main conversation thread, one step at a time.
+
 ## Compose
 
 - Use `rememberMutableState { value }` instead of `val state by remember { mutableStateOf(value) }`
