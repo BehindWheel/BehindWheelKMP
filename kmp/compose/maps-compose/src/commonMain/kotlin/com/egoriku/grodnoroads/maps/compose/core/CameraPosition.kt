@@ -8,6 +8,8 @@ expect class CameraPosition(platformCameraPosition: PlatformCameraPosition) {
 
     constructor(
         target: LatLng,
-        zoom: Float
+        zoom: Float,
+        bearing: Float = 0f,
+        tilt: Float = 0f
     )
 }

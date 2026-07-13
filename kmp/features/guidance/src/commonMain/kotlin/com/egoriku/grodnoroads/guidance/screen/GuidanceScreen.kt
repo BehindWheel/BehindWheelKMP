@@ -15,9 +15,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,6 +104,7 @@ import com.egoriku.grodnoroads.maps.compose.core.toScreenLatLng
 import com.egoriku.grodnoroads.maps.compose.extension.projection
 import com.egoriku.grodnoroads.maps.compose.impl.onMapScope
 import com.egoriku.grodnoroads.maps.compose.updater.MapUpdater
+import com.egoriku.grodnoroads.maps.compose.updater.NAVIGATION_CAMERA_TILT
 import com.egoriku.grodnoroads.quicksettings.screen.QuickSettingsBottomSheet
 import com.egoriku.grodnoroads.shared.models.MapEventType
 import com.egoriku.grodnoroads.specialevent.screen.SpecialEventDialog
@@ -270,7 +273,7 @@ fun GuidanceScreen(
 
         var projection by rememberMutableState<Projection?> { null }
         var mapUpdater by rememberMutableState<MapUpdater?> { null }
-        var mapBearing by rememberMutableState { 0f }
+        var mapBearing by rememberSaveable { mutableFloatStateOf(0f) }
 
         LaunchedEffect(mapUpdater, appMode) {
             val mapUpdater = mapUpdater
@@ -300,7 +303,9 @@ fun GuidanceScreen(
                 cameraPositionProvider = {
                     CameraPosition(
                         target = initialLocation,
-                        zoom = mapConfig.zoomLevel
+                        zoom = mapConfig.zoomLevel,
+                        bearing = mapBearing,
+                        tilt = if (appMode == AppMode.Drive) NAVIGATION_CAMERA_TILT.toFloat() else 0f
                     )
                 },
                 onMapUpdaterChange = { mapUpdater = it },

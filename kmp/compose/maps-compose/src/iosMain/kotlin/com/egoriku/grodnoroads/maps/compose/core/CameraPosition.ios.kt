@@ -13,11 +13,15 @@ actual class CameraPosition actual constructor(
 ) {
     actual constructor(
         target: LatLng,
-        zoom: Float
+        zoom: Float,
+        bearing: Float,
+        tilt: Float
     ) : this(
         platformCameraPosition = GMSCameraPosition.cameraWithTarget(
             target = target.cValue,
-            zoom = zoom
+            zoom = zoom,
+            bearing = bearing.toDouble(),
+            viewingAngle = tilt.toDouble()
         )
     )
 }

@@ -11,11 +11,15 @@ actual class CameraPosition actual constructor(
 ) {
     actual constructor(
         target: LatLng,
-        zoom: Float
+        zoom: Float,
+        bearing: Float,
+        tilt: Float
     ) : this(
         platformCameraPosition = cameraPosition {
             target(target.platform)
             zoom(zoom)
+            bearing(bearing)
+            tilt(tilt)
         }
     )
 }

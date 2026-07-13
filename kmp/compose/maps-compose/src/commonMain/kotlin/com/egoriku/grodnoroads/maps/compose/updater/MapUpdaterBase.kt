@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
-internal const val NAVIGATION_CAMERA_TILT = 55.0
+const val NAVIGATION_CAMERA_TILT = 55.0
 internal const val SHADOW_CAMERA_ANIMATION_DURATION_MS = 400
 private const val MINIMUM_DISTANCE_FOR_ANIMATION = 5
 
