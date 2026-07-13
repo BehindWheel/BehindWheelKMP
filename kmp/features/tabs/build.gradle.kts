@@ -20,7 +20,7 @@ kotlin {
             implementation(projects.kmp.shared.models)
             implementation(projects.kmp.libraries.extensions)
 
-            implementation(libs.compose.material3.windowsize)
+            implementation(libs.compose.material3.adaptive)
             implementation(libs.decompose.compose)
             implementation(libs.decompose)
         }

@@ -40,6 +40,7 @@ kotlin {
             implementation(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.logger)
 
+            implementation(libs.compose.material3.adaptive)
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.database)
             implementation(libs.essenty.lifecycle.coroutines)

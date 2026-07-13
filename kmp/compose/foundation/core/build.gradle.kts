@@ -13,7 +13,7 @@ kotlin {
             api(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
-            implementation(libs.compose.material3.windowsize)
+            implementation(libs.compose.material3.adaptive)
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)

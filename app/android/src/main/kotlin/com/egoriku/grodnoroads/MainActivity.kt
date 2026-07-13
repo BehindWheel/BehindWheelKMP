@@ -7,8 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -16,7 +14,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.arkivanov.decompose.defaultComponentContext
-import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
 import com.egoriku.grodnoroads.foundation.theme.Platform.Android
@@ -27,7 +24,6 @@ import com.egoriku.grodnoroads.root.screen.RootContent
 // Don't use ComponentActivity, due to it breaks language change
 class MainActivity : AppCompatActivity() {
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
         splash.setKeepOnScreenCondition { true }
@@ -66,10 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 GrodnoRoadsM3Theme(isDarkTheme) {
-                    CompositionLocalProvider(
-                        LocalWindowSizeClass provides calculateWindowSizeClass(this),
-                        LocalPlatform provides Android
-                    ) {
+                    CompositionLocalProvider(LocalPlatform provides Android) {
                         RootContent(root)
                     }
                 }

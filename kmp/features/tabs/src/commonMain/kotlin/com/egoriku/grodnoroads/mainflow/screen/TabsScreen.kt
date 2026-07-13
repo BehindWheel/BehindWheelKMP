@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,9 +26,9 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.egoriku.grodnoroads.appsettings.screen.AppSettingsScreen
 import com.egoriku.grodnoroads.eventreporting.screen.EventReportingScreen
 import com.egoriku.grodnoroads.extensions.decompose.onChild
-import com.egoriku.grodnoroads.foundation.core.LocalWindowSizeClass
 import com.egoriku.grodnoroads.foundation.core.animation.HorizontalSlideAnimatedVisibility
 import com.egoriku.grodnoroads.foundation.core.animation.VerticalSlideAnimatedVisibility
+import com.egoriku.grodnoroads.foundation.core.isExpandedScreenWidth
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBar
 import com.egoriku.grodnoroads.foundation.uikit.NavigationBarItem
@@ -46,13 +47,11 @@ fun TabsScreen(
     tabsComponent: TabsComponent,
     modifier: Modifier = Modifier
 ) {
-    val windowSizeClass = LocalWindowSizeClass.current
-
     val childStack by tabsComponent.childStack.collectAsState()
 
     Box(modifier = modifier) {
-        when (windowSizeClass.widthSizeClass) {
-            WindowWidthSizeClass.Expanded -> {
+        when {
+            currentWindowAdaptiveInfoV2().windowSizeClass.isExpandedScreenWidth() -> {
                 HorizontalOrientationLayout(
                     childStack = { childStack },
                     onSelectTab = tabsComponent::onSelectTab,
