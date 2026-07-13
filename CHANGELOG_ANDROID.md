@@ -17,6 +17,7 @@
 - Update medium speed camera color
 - Merge mobile cameras that are close to each other (within 300 m) into a single marker
 - Dynamic map zoom that adjusts to the selected city's default zoom level
+- Adjust map overlay depending on screen size
 
 ## [1.6.0] - 2026-06-27
 

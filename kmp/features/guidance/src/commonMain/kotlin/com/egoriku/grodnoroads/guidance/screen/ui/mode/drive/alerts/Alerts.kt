@@ -50,7 +50,7 @@ fun Alerts(
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
+        contentPadding = PaddingValues(vertical = 4.dp)
     ) {
         items(items = alerts, key = { it.id }) { alert ->
             when (alert) {

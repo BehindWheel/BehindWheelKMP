@@ -158,7 +158,7 @@ private fun HorizontalOrientationLayout(
         label = "leftPadding"
     )
 
-    val contentPadding = WindowInsets.systemBars
+    val contentPadding = WindowInsets.safeDrawing
         .add(WindowInsets(left = leftPadding))
         .asPaddingValues()
 
