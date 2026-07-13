@@ -7,6 +7,10 @@
 - Add compass button to rotate map north when map is rotated
 - Group cities by region with sticky headers in city selection list
 
+### Fixed
+
+- Fix map briefly rotating to north and resetting tilt when rotating screen during navigation
+
 ### Changed
 
 - Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
