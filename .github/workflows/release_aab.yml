@@ -1,4 +1,4 @@
-name: Deploy App Bundle
+name: Deploy App Bundle to Beta channel
 
 on:
   push:
@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: set up JDK 17
         uses: actions/setup-java@v5
@@ -62,6 +64,12 @@ jobs:
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_OUTPUT
           echo "TAG=android/v${VERSION_NAME}" >> $GITHUB_OUTPUT
 
+      - name: Get previous Android tag
+        id: prev_tag
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | grep '^android/v' | head -n 1)
+          echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_OUTPUT
+
       - name: Build Release AAB
         id: buildRelease
         run: ./gradlew clean app:android:bundleRelease
@@ -93,6 +101,7 @@ jobs:
         with:
           tag_name: ${{ steps.version.outputs.TAG }}
           name: Android ${{ steps.version.outputs.VERSION_NAME }}
+          previous_tag: ${{ steps.prev_tag.outputs.PREV_TAG }}
           generate_release_notes: true
           files: app/android/build/outputs/bundle/release/android-release.aab
 
