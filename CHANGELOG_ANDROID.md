@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-07-14
+
 ### Added
 
 - Add compass button to rotate map north when map is rotated
