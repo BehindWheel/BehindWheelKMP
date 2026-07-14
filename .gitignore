@@ -39,3 +39,4 @@ kotlin-js-store/
 *.xcsmblueprint
 xcuserdata/
 /.swiftpm-locks/
+.claude/settings.json
