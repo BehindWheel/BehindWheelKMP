@@ -31,6 +31,10 @@ internal class LocationDelegate :
         manager.requestLocation()
     }
 
+    fun cancelRequest() {
+        oneTimeLocationCallback = null
+    }
+
     fun startUpdatingLocation() {
         if (isTracking) return
 

@@ -42,23 +42,24 @@ internal class LocationStoreFactory(
 
                 onAction<Unit> {
                     launch {
-                        locationService.getLastKnownLocation()?.run {
-                            dispatch(Message.OnInitialLocation(latLng))
+                        val lastLocation = locationService.getLastKnownLocation()
+
+                        if (lastLocation != null) {
+                            dispatch(Message.OnInitialLocation(lastLocation.latLng))
+                        } else {
+                            dataStore.data
+                                .map { it.defaultCity }
+                                .distinctUntilChanged()
+                                .onEach { dispatch(Message.OnInitialLocation(it.latLng)) }
+                                .launchIn(this)
                         }
                     }
-                    dataStore.data
-                        .map { it.defaultCity }
-                        .distinctUntilChanged()
-                        .onEach { dispatch(Message.OnInitialLocation(it.latLng)) }
-                        .launchIn(this)
                 }
                 onIntent<StartLocationUpdates> {
-                    locationService.startLocationUpdates()
-
                     dispatch(Message.OnNewLocation(LastLocation.None))
 
                     locationJob = launch {
-                        locationService.lastLocationFlow
+                        locationService.locationUpdates()
                             .filterNotNull()
                             .map { LastLocation(it.latLng, it.bearing, it.speed) }
                             .collect {
@@ -70,7 +71,8 @@ internal class LocationStoreFactory(
                     }
                 }
                 onIntent<StopLocationUpdates> {
-                    locationService.stopLocationUpdates()
+                    locationJob?.cancel()
+                    locationJob = null
                 }
                 onIntent<RequestCurrentLocation> {
                     launch {

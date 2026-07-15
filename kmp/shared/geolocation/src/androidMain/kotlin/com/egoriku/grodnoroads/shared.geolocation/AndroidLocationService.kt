@@ -14,8 +14,10 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class AndroidLocationService(context: Context) : LocationService {
@@ -23,65 +25,52 @@ class AndroidLocationService(context: Context) : LocationService {
 
     private var lastKnownLocation: LocationInfo? = null
 
-    override val lastLocationFlow = MutableStateFlow<LocationInfo?>(null)
-
-    private val locationCallback = object : LocationCallback() {
-
-        override fun onLocationResult(locationResult: LocationResult) {
-            val location = locationResult.lastLocation ?: return
-
-            lastLocationFlow.tryEmit(
-                LocationInfo(
-                    latLng = LatLng(location.latitude, location.longitude),
-                    bearing = location.bearing,
-                    speed = when {
-                        location.hasSpeed() -> location.speed.toKilometersPerHour()
-                        else -> 0
-                    }
-                )
-            )
-        }
-    }
-
+    // Note: each collector creates a separate LocationCallback — prefer single collector
     @SuppressLint("MissingPermission")
-    override fun startLocationUpdates() {
-        fusedLocationProvider.removeLocationUpdates(locationCallback)
+    override fun locationUpdates(): Flow<LocationInfo?> = callbackFlow {
+        val callback = object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                val location = result.lastLocation ?: return
+                trySend(location.toLocationInfo())
+            }
+        }
+
         fusedLocationProvider.requestLocationUpdates(
             highPrecisionLowIntervalRequest,
-            locationCallback,
+            callback,
             Looper.getMainLooper()
         )
-    }
 
-    override fun stopLocationUpdates() {
-        fusedLocationProvider.removeLocationUpdates(locationCallback)
+        awaitClose {
+            fusedLocationProvider.removeLocationUpdates(callback)
+        }
     }
 
     override suspend fun getLastKnownLocation(): LocationInfo? {
         if (lastKnownLocation == null) {
-            lastKnownLocation = requestLocation().toLocationInfo()
+            lastKnownLocation = requestCurrentLocation()
         }
 
         return lastKnownLocation
     }
 
-    override suspend fun requestCurrentLocation(): LocationInfo? {
-        return requestLocation().toLocationInfo()
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("MissingPermission")
-    private suspend fun requestLocation(): Location? {
+    override suspend fun requestCurrentLocation(): LocationInfo? {
         val cancellationTokenSource = CancellationTokenSource()
 
-        return runCatching {
+        return try {
             fusedLocationProvider.getCurrentLocation(
                 QUALITY_HIGH_ACCURACY,
                 cancellationTokenSource.token
-            ).await(cancellationTokenSource)
-        }.onFailure {
-            logD(it.message.toString())
-        }.getOrNull()
+            ).await(cancellationTokenSource).toLocationInfo()
+        } catch (c: CancellationException) {
+            throw c
+        } catch (e: Exception) {
+            logD(e.message.toString())
+            null
+        } finally {
+            cancellationTokenSource.cancel()
+        }
     }
 
     companion object {
@@ -98,7 +87,10 @@ class AndroidLocationService(context: Context) : LocationService {
                 location != null -> LocationInfo(
                     latLng = LatLng(location.latitude, location.longitude),
                     bearing = location.bearing,
-                    speed = 0
+                    speed = when {
+                        location.hasSpeed() -> location.speed.toKilometersPerHour()
+                        else -> 0
+                    }
                 )
                 else -> null
             }
