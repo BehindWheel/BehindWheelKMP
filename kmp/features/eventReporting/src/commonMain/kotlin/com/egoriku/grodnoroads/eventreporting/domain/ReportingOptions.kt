@@ -31,5 +31,7 @@ enum class ReportingOptions(
     SITTING_IN_THE_CAR(toSend = "Сидят в машине", mapEventType = MapEventType.TrafficPolice),
     WORKING_FROM_CAR(toSend = "Работают на ходу", mapEventType = MapEventType.TrafficPolice),
     TRANSPORT_INSPECTION(toSend = "Транспортная инспекция", mapEventType = MapEventType.TrafficPolice),
-    FILTER(toSend = "Фильтр", mapEventType = MapEventType.TrafficPolice)
+    FILTER(toSend = "Фильтр", mapEventType = MapEventType.TrafficPolice),
+    DRONE_CONTROL(toSend = "Видеоконтроль БПЛА", mapEventType = MapEventType.TrafficPolice),
+    MOTORCYCLE_UNIT(toSend = "Мотобат", mapEventType = MapEventType.TrafficPolice)
 }

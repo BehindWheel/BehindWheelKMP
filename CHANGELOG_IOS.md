@@ -9,6 +9,7 @@
 - Add "Confirm" button in marker info dialog to quickly report that road events are still active
 - Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
 - Group cities by region with sticky headers in city selection list
+- Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
 
 ### Fixed
 
