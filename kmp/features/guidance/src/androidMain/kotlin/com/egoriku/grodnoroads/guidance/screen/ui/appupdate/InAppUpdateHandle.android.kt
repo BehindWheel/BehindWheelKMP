@@ -6,13 +6,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.egoriku.grodnoroads.datastore.edit
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsTracker
+import com.google.android.play.core.install.InstallException
 import com.google.android.play.core.ktx.AppUpdateResult
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -23,14 +28,22 @@ import org.koin.compose.koinInject
 actual fun InAppUpdateHandle(onDownload: (complete: () -> Unit) -> Unit) {
     val updatedDownload by rememberUpdatedState(onDownload)
 
+    val analyticsTracker = koinInject<AnalyticsTracker>()
     val dataStore = koinInject<DataStore<Preferences>>()
     val updatePreferences = remember { InAppUpdatePreferences(dataStore) }
 
     val scope = rememberCoroutineScope()
     val appUpdateResult = rememberAppUpdateResult()
+
+    // Flag to prevent duplicate update flow launches
+    var isUpdateInProgress by rememberSaveable { mutableStateOf(false) }
+
     val updateLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult(),
         onResult = { result ->
+            // Reset flag when user completes or cancels the flow
+            isUpdateInProgress = false
+
             when (result.resultCode) {
                 Activity.RESULT_CANCELED -> {
                     scope.launch {
@@ -49,9 +62,31 @@ actual fun InAppUpdateHandle(onDownload: (complete: () -> Unit) -> Unit) {
     LaunchedEffect(appUpdateResult) {
         when (appUpdateResult) {
             is AppUpdateResult.Available -> {
-                if (updatePreferences.isShowInAppUpdate()) {
-                    appUpdateResult.startFlexibleUpdate(updateLauncher)
-                } else {
+                val shouldShow = updatePreferences.isShowInAppUpdate()
+
+                if (shouldShow && !isUpdateInProgress) {
+                    try {
+                        isUpdateInProgress = true
+                        appUpdateResult.startFlexibleUpdate(updateLauncher)
+                    } catch (e: InstallException) {
+                        // InstallException is thrown synchronously when:
+                        // - Another update is already in progress (errorCode = -8)
+                        // - Other installation errors occur
+                        // We catch it to prevent crash and log to analytics
+                        isUpdateInProgress = false
+                        analyticsTracker.trackInAppUpdateError(
+                            errorCode = e.errorCode,
+                            errorMessage = e.message ?: "InstallException"
+                        )
+                    } catch (e: Exception) {
+                        // Catch any other unexpected exceptions
+                        isUpdateInProgress = false
+                        analyticsTracker.trackInAppUpdateError(
+                            errorCode = -1,
+                            errorMessage = e.message ?: "Unknown error"
+                        )
+                    }
+                } else if (!shouldShow) {
                     updatePreferences.incrementRequestCount()
                 }
             }

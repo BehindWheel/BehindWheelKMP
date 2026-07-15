@@ -1,7 +1,10 @@
 package com.egoriku.grodnoroads.shared.analytics
 
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.EVENT_IN_APP_UPDATE_ERROR
 import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.EVENT_OPEN_MARKER_INFO_DIALOG
 import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.EVENT_REPORT_MOBILE_CAMERA
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.PARAM_ERROR_CODE
+import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.PARAM_ERROR_MESSAGE
 import com.egoriku.grodnoroads.shared.analytics.AnalyticsEvent.PARAM_SHORT_MESSAGE
 import dev.gitlive.firebase.analytics.FirebaseAnalytics
 import dev.gitlive.firebase.analytics.logEvent
@@ -22,4 +25,11 @@ internal class AnalyticsTrackerImpl(
     }
 
     override fun mobileCameraReport() = firebaseAnalytics.logEvent(EVENT_REPORT_MOBILE_CAMERA)
+
+    override fun trackInAppUpdateError(errorCode: Int, errorMessage: String) {
+        firebaseAnalytics.logEvent(EVENT_IN_APP_UPDATE_ERROR) {
+            param(PARAM_ERROR_CODE, errorCode.toLong())
+            param(PARAM_ERROR_MESSAGE, errorMessage)
+        }
+    }
 }
