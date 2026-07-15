@@ -6,4 +6,6 @@ interface AnalyticsTracker {
 
     fun eventReportAction(eventType: String, shortMessage: String)
     fun mobileCameraReport()
+
+    fun trackInAppUpdateError(errorCode: Int, errorMessage: String)
 }

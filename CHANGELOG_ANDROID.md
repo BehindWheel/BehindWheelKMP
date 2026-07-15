@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix crash when in-app update is triggered while another update is already in progress
+
+### Changed
+
+- Add analytics tracking for in-app update errors
+
 ## [1.7.0] - 2026-07-14
 
 ### Added

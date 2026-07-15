@@ -11,6 +11,7 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.ktx.AppUpdateResult
 import com.google.android.play.core.ktx.requestUpdateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun rememberAppUpdateResult(): AppUpdateResult {
@@ -22,6 +23,7 @@ fun rememberAppUpdateResult(): AppUpdateResult {
         updateManager
             .requestUpdateFlow()
             .catch { emit(AppUpdateResult.NotAvailable) }
+            .distinctUntilChanged()
             .collect {
                 appUpdateResult = it
             }
