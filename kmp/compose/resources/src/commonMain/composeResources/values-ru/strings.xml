@@ -206,6 +206,8 @@
     <string name="reporting_item_working_from_car">Работают на ходу</string>
     <string name="reporting_item_transport_inspection">Транспортная инспекция</string>
     <string name="reporting_item_filter">Фильтр</string>
+    <string name="reporting_item_drone_control">Видеоконтроль БПЛА</string>
+    <string name="reporting_item_motorcycle_unit">Мотобат</string>
 
     <string name="reporting_mobile_camera_header">Ограничение скорости</string>
     <string name="reporting_mobile_camera_speed">%1$s км/ч</string>

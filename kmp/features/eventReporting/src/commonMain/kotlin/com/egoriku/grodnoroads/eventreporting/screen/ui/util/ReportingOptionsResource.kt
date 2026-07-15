@@ -4,7 +4,9 @@ import com.egoriku.grodnoroads.compose.resources.Res
 import com.egoriku.grodnoroads.compose.resources.reporting_item_broken_car
 import com.egoriku.grodnoroads.compose.resources.reporting_item_car_accident
 import com.egoriku.grodnoroads.compose.resources.reporting_item_document_check
+import com.egoriku.grodnoroads.compose.resources.reporting_item_drone_control
 import com.egoriku.grodnoroads.compose.resources.reporting_item_filter
+import com.egoriku.grodnoroads.compose.resources.reporting_item_motorcycle_unit
 import com.egoriku.grodnoroads.compose.resources.reporting_item_non_working_traffic_lights
 import com.egoriku.grodnoroads.compose.resources.reporting_item_open_hatch
 import com.egoriku.grodnoroads.compose.resources.reporting_item_other_road_incident
@@ -47,5 +49,7 @@ fun ReportingOptions.toStringResource() = when (this) {
     ReportingOptions.WORKING_FROM_CAR -> Res.string.reporting_item_working_from_car
     ReportingOptions.TRANSPORT_INSPECTION -> Res.string.reporting_item_transport_inspection
     ReportingOptions.FILTER -> Res.string.reporting_item_filter
+    ReportingOptions.DRONE_CONTROL -> Res.string.reporting_item_drone_control
     ReportingOptions.ROAD_MARKING -> Res.string.reporting_item_road_marking
+    ReportingOptions.MOTORCYCLE_UNIT -> Res.string.reporting_item_motorcycle_unit
 }

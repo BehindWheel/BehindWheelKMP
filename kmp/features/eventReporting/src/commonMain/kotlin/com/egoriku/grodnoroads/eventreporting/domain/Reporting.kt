@@ -4,7 +4,9 @@ import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.BROKEN_CAR
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.CAR_ACCIDENT
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.DOCUMENT_CHECK
+import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.DRONE_CONTROL
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.FILTER
+import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.MOTORCYCLE_UNIT
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.NON_WORKING_TRAFFIC_LIGHTS
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.OPEN_HATCH
 import com.egoriku.grodnoroads.eventreporting.domain.ReportingOptions.OTHER_ROAD_INCIDENT
@@ -55,7 +57,9 @@ object Reporting {
                     WORKING_FROM_CAR,
                     TRANSPORT_INSPECTION,
                     TRAFFIC_CONTROLLER,
-                    FILTER
+                    FILTER,
+                    DRONE_CONTROL,
+                    MOTORCYCLE_UNIT
                 )
         }
 

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
+
 ### Fixed
 
 - Fix crash when in-app update is triggered while another update is already in progress

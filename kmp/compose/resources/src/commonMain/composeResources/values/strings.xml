@@ -209,6 +209,8 @@
     <string name="reporting_item_working_from_car">Working from car</string>
     <string name="reporting_item_transport_inspection">Transport inspection</string>
     <string name="reporting_item_filter">Filter</string>
+    <string name="reporting_item_drone_control">Drone video control</string>
+    <string name="reporting_item_motorcycle_unit">Motorcycle unit</string>
 
     <string name="reporting_mobile_camera_header">Speed limit</string>
     <string name="reporting_mobile_camera_speed">%1$s km/h</string>

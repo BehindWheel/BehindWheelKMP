@@ -201,6 +201,8 @@
     <string name="reporting_item_working_from_car">Працуюць з машыны</string>
     <string name="reporting_item_transport_inspection">Транспартная інспекцыя</string>
     <string name="reporting_item_filter">Фільтр</string>
+    <string name="reporting_item_drone_control">Відэакантроль БПЛА</string>
+    <string name="reporting_item_motorcycle_unit">Матабат</string>
 
     <string name="reporting_mobile_camera_header">Абмежаванне хуткасці</string>
     <string name="reporting_mobile_camera_speed">%1$s км/г</string>
