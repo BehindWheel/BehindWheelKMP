@@ -387,7 +387,8 @@ fun GuidanceScreen(
                                 resetLastLocation()
                                 animateTarget(
                                     target = location.latLng,
-                                    zoom = mapConfig.zoomLevel
+                                    zoom = mapConfig.zoomLevel,
+                                    bearing = mapBearing
                                 )
                             }
                         }
@@ -403,6 +404,7 @@ fun GuidanceScreen(
                     mapUpdater.onMapScope {
                         animateTarget(
                             target = location.latLng,
+                            bearing = location.bearing,
                             zoom = if (appMode == AppMode.Default) 14.5f else null,
                             onFinish = { isRequestCurrentLocation = false },
                             onCancel = { isRequestCurrentLocation = false }
