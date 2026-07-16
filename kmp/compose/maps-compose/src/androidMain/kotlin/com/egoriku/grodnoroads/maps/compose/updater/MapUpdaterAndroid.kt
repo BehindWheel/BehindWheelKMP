@@ -128,11 +128,10 @@ internal class MapUpdaterAndroid(
     override fun animateTarget(
         target: LatLng,
         zoom: Float?,
+        bearing: Float,
         onFinish: () -> Unit,
         onCancel: () -> Unit
     ) {
-        val bearing = googleMap.cameraPosition.bearing
-
         val zoomLevel = zoom ?: googleMap.zoom
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(
             cameraPosition {

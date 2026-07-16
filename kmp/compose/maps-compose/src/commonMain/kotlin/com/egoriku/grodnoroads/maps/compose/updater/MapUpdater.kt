@@ -25,6 +25,7 @@ interface MapUpdater {
     fun animateTarget(
         target: LatLng,
         zoom: Float? = null,
+        bearing: Float,
         onFinish: () -> Unit = {},
         onCancel: () -> Unit = {}
     )

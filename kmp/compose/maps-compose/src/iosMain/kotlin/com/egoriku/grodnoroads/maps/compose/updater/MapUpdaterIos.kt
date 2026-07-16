@@ -147,17 +147,16 @@ class MapUpdaterIos(
     override fun animateTarget(
         target: LatLng,
         zoom: Float?,
+        bearing: Float,
         onFinish: () -> Unit,
         onCancel: () -> Unit
     ) {
-        val bearing = googleMap.camera.bearing
-
         val zoomLevel = zoom ?: googleMap.zoom
         animateCamera(
             cameraUpdate = GMSCameraUpdate.setCamera(
                 GMSCameraPosition(
                     target = target.cValue,
-                    bearing = bearing,
+                    bearing = bearing.toDouble(),
                     zoom = zoomLevel,
                     viewingAngle = 0.0
                 )

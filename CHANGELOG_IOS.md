@@ -16,6 +16,7 @@
 - Fix missing horizontal padding on title in marker info bottom sheet
 - Fix list not scrolling to selected city when it is off-screen
 - Fix map briefly rotating to north and resetting tilt when rotating screen during navigation
+- Fix zoom to current location button not accounting for bearing in Default mode
 
 ### Changed
 
