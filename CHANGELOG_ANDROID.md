@@ -10,6 +10,7 @@
 
 - Fix crash when in-app update is triggered while another update is already in progress
 - Fix zoom to current location button not accounting for bearing in Default mode
+- Fix duplicate voice notifications for camera alerts
 
 ### Changed
 

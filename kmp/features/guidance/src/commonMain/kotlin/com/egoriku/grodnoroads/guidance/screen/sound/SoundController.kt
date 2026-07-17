@@ -20,6 +20,7 @@ interface SoundController {
 
 abstract class SharedSoundController : SoundController {
     private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
+    private val playedAlertIds = mutableMapOf<String, Long>()
     private val overSpeedId = Uuid.random()
 
     private val currentTimeMillis: Long
@@ -43,15 +44,14 @@ abstract class SharedSoundController : SoundController {
             MapEventType.Unsupported -> null
         } ?: return
 
-        val isSkipByDuplicate = checkDuplicate(incidentSound)
+        if (!isAlertAlreadyPlayed(id)) return
 
-        when {
-            isSkipByDuplicate -> return
-            else -> playSound(sound = incidentSound, id = id)
-        }
+        playSound(sound = incidentSound, id = id)
     }
 
     override fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
+        if (!isAlertAlreadyPlayed(id)) return
+
         val speedLimitSound = when (speedLimit) {
             40 -> Sound.SpeedLimit40
             50 -> Sound.SpeedLimit50
@@ -70,14 +70,8 @@ abstract class SharedSoundController : SoundController {
             CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
         }
 
-        val isSkipByDuplicate = checkDuplicate(cameraSound)
-        when {
-            isSkipByDuplicate -> return
-            else -> {
-                playSound(sound = cameraSound, id = id)
-                speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
-            }
-        }
+        playSound(sound = cameraSound, id = id)
+        speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
     }
 
     private fun playSound(
@@ -99,23 +93,30 @@ abstract class SharedSoundController : SoundController {
         invalidateOldSounds()
     }
 
-    private fun checkDuplicate(sound: Sound, expiration: Long = ONE_MINUTE): Boolean {
+    private fun isAlertAlreadyPlayed(alertId: String): Boolean {
         val currentTimeMillis = currentTimeMillis
-        return soundHistory
-            .filterValues { soundTimeStamp ->
-                soundTimeStamp.sound == sound &&
-                    soundTimeStamp.timestamp >= currentTimeMillis - expiration
-            }
-            .isNotEmpty()
+        val lastPlayed = playedAlertIds[alertId]
+        if (lastPlayed != null && currentTimeMillis - lastPlayed < FIVE_MINUTE) {
+            return false
+        }
+        playedAlertIds[alertId] = currentTimeMillis
+        invalidateOldSounds()
+        return true
     }
 
     private fun invalidateOldSounds() {
         val currentTime = currentTimeMillis
-        val invalidIds = soundHistory
+        val invalidSoundIds = soundHistory
             .filterValues { currentTime - it.timestamp > THIRTY_MINUTES }
             .keys
 
-        invalidIds.forEach(soundHistory::remove)
+        invalidSoundIds.forEach(soundHistory::remove)
+
+        val invalidAlertIds = playedAlertIds
+            .filterValues { currentTime - it > THIRTY_MINUTES }
+            .keys
+
+        invalidAlertIds.forEach(playedAlertIds::remove)
     }
 
     private data class SoundTimeStamp(
@@ -125,7 +126,6 @@ abstract class SharedSoundController : SoundController {
 
     companion object {
         val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
-        val ONE_MINUTE = 30.seconds.inWholeMilliseconds
         val FIVE_MINUTE = 5.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }
