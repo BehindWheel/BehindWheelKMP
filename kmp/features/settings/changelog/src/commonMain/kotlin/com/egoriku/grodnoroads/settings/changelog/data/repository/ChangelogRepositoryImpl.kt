@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.settings.changelog.data.repository
 
 import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import com.egoriku.grodnoroads.settings.changelog.data.dto.ChangelogDTO
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
@@ -17,7 +18,7 @@ internal class ChangelogRepositoryImpl(
 ) : ChangelogRepository {
 
     override suspend fun load() = withContext(Dispatchers.IO) {
-        runCatching {
+        runCatchingCancellable {
             val changelog = firestore
                 .collection("whats_new")
                 .orderBy("code", Direction.DESCENDING)

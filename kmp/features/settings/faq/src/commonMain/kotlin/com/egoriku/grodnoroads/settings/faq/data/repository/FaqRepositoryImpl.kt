@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.settings.faq.data.repository
 
 import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import com.egoriku.grodnoroads.settings.faq.data.dto.FaqDTO
 import com.egoriku.grodnoroads.settings.faq.domain.model.FAQ
 import com.egoriku.grodnoroads.settings.faq.domain.repository.FaqRepository
@@ -14,7 +15,7 @@ internal class FaqRepositoryImpl(
 ) : FaqRepository {
 
     override suspend fun load() = withContext(Dispatchers.IO) {
-        runCatching {
+        runCatchingCancellable {
             val faq = firestore
                 .collection("faq")
                 .orderBy("id")

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -42,13 +43,13 @@ internal fun rememberLocationSettingsRequest() = remember {
 
 internal suspend fun SettingsClient.invalidateLocationSettings(
     request: LocationSettingsRequest
-) = runCatching {
+) = runCatchingCancellable {
     checkLocationSettings(request).await()
     SettingsState.Resolved
 }.getOrElse { throwable ->
     when (throwable) {
         is ApiException -> {
-            runCatching {
+            runCatchingCancellable {
                 SettingsState.Resolvable(throwable as ResolvableApiException)
             }.getOrDefault(SettingsState.Unresolvable)
         }

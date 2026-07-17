@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.eventreporting.domain.repository.ReportingRepository
 import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import com.egoriku.grodnoroads.shared.models.dto.MobileCameraDTO
 import com.egoriku.grodnoroads.shared.models.dto.ReportsDTO
 import com.egoriku.grodnoroads.shared.persistent.reporting.lastReportTime
@@ -36,7 +37,7 @@ internal class ReportingRepositoryImpl(
     }
 
     private suspend fun <T> reportData(path: String, data: T): ResultOf<Unit> {
-        return runCatching {
+        return runCatchingCancellable {
             checkAndUpdateRateLimit()
             databaseReference
                 .child(path)
