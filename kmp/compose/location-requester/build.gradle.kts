@@ -11,6 +11,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.kmp.compose.foundation.core)
+            implementation(projects.kmp.libraries.extensions)
 
             implementation(libs.compose.material3)
             implementation(libs.compose.runtime)
