@@ -44,13 +44,13 @@ abstract class SharedSoundController : SoundController {
             MapEventType.Unsupported -> null
         } ?: return
 
-        if (!isAlertAlreadyPlayed(id)) return
+        if (isAlertAlreadyPlayed(id)) return
 
         playSound(sound = incidentSound, id = id)
     }
 
     override fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
-        if (!isAlertAlreadyPlayed(id)) return
+        if (isAlertAlreadyPlayed(id)) return
 
         val speedLimitSound = when (speedLimit) {
             40 -> Sound.SpeedLimit40
@@ -77,7 +77,7 @@ abstract class SharedSoundController : SoundController {
     private fun playSound(
         sound: Sound,
         id: String = Uuid.random(),
-        expiration: Long = FIVE_MINUTE
+        expiration: Long = FIVE_MINUTES
     ) {
         val currentTimeMillis = currentTimeMillis
         val item = soundHistory[id]
@@ -96,27 +96,19 @@ abstract class SharedSoundController : SoundController {
     private fun isAlertAlreadyPlayed(alertId: String): Boolean {
         val currentTimeMillis = currentTimeMillis
         val lastPlayed = playedAlertIds[alertId]
-        if (lastPlayed != null && currentTimeMillis - lastPlayed < FIVE_MINUTE) {
-            return false
+        if (lastPlayed != null && currentTimeMillis - lastPlayed < FIVE_MINUTES) {
+            return true
         }
         playedAlertIds[alertId] = currentTimeMillis
         invalidateOldSounds()
-        return true
+        return false
     }
 
     private fun invalidateOldSounds() {
         val currentTime = currentTimeMillis
-        val invalidSoundIds = soundHistory
-            .filterValues { currentTime - it.timestamp > THIRTY_MINUTES }
-            .keys
 
-        invalidSoundIds.forEach(soundHistory::remove)
-
-        val invalidAlertIds = playedAlertIds
-            .filterValues { currentTime - it > THIRTY_MINUTES }
-            .keys
-
-        invalidAlertIds.forEach(playedAlertIds::remove)
+        soundHistory.entries.removeAll { currentTime - it.value.timestamp > THIRTY_MINUTES }
+        playedAlertIds.entries.removeAll { currentTime - it.value > THIRTY_MINUTES }
     }
 
     private data class SoundTimeStamp(
@@ -126,7 +118,7 @@ abstract class SharedSoundController : SoundController {
 
     companion object {
         val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
-        val FIVE_MINUTE = 5.minutes.inWholeMilliseconds
+        val FIVE_MINUTES = 5.minutes.inWholeMilliseconds
         val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
     }
 }
