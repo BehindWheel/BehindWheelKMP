@@ -41,6 +41,9 @@
     <string name="settings_section_map">Карта</string>
     <string name="settings_section_alerts">Оповещения</string>
     <string name="settings_section_changelog">История изменений</string>
+    <string name="changelog_error_message">Не удалось загрузить историю изменений</string>
+    <string name="changelog_empty_message">Данные об изменениях отсутствуют</string>
+    <string name="retry">Повторить</string>
     <string name="settings_section_faq">Часто задаваемые вопросы</string>
     <string name="settings_section_debug_tools">Инструменты отладки</string>
 

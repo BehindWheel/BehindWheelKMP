@@ -20,6 +20,7 @@ kotlin {
 
             implementation(libs.decompose)
             implementation(libs.dev.gitlive.firebase.firestore)
+            implementation(libs.essenty.lifecycle.coroutines)
             implementation(libs.koin.core)
 
             implementation(libs.bundles.mvikotlin)

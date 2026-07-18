@@ -9,12 +9,12 @@ internal class ChangelogDTO(
     @SerialName("name")
     val name: String,
 
-    @SerialName("code")
-    val code: Int,
-
     @SerialName("notes")
     val notes: String,
 
     @SerialName("date")
-    val releaseDate: Timestamp
+    val releaseDate: Timestamp,
+
+    @SerialName("platform")
+    val platform: String
 )

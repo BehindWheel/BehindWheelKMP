@@ -43,6 +43,9 @@
     <string name="settings_section_map">Map</string>
     <string name="settings_section_alerts">Alerts</string>
     <string name="settings_section_changelog">Changelog</string>
+    <string name="changelog_error_message">Failed to load changelog</string>
+    <string name="changelog_empty_message">No changelog data available</string>
+    <string name="retry">Retry</string>
     <string name="settings_section_faq">FAQ</string>
     <string name="settings_section_debug_tools">Debug Tools</string>
 
