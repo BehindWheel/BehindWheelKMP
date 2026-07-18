@@ -40,3 +40,4 @@ kotlin-js-store/
 xcuserdata/
 /.swiftpm-locks/
 .claude/settings.json
+.claude/worktrees/

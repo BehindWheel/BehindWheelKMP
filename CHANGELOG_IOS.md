@@ -10,6 +10,7 @@
 - Show markers as simple colored circles when map is zoomed far out, instead of detailed icons
 - Group cities by region with sticky headers in city selection list
 - Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
+- Add platform filter (Android/iOS) to changelog screen
 
 ### Fixed
 
@@ -21,6 +22,7 @@
 
 ### Changed
 
+- Add error and empty state handling with retry in changelog screen
 - Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel
   road (cross-track distance > 40 m from camera axis)
 - Introduce compact navigation bar

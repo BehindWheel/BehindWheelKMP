@@ -1,5 +1,7 @@
 package com.egoriku.grodnoroads.settings.changelog.screen.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -7,26 +9,35 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.egoriku.grodnoroads.extensions.LoremIpsum
+import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
+import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
 import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
+import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogEntry
+
+private val latestReleaseEmojis = listOf("🔥", "⭐", "🎉", "✨", "🚀", "💎")
 
 @Composable
 internal fun ChangelogItem(
     isLatestRelease: Boolean,
-    release: ReleaseNotes
+    release: ChangelogEntry
 ) {
     Card {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 16.dp)
+                .padding(16.dp)
         ) {
             val versionName = when {
-                isLatestRelease -> "${release.versionName} \uD83D\uDD25"
+                isLatestRelease -> {
+                    val emoji = remember { latestReleaseEmojis.random() }
+                    release.latestReleaseBadge(emoji)
+                }
                 else -> release.versionName
             }
             Text(
@@ -47,30 +58,30 @@ internal fun ChangelogItem(
     }
 }
 
-/*
-@GrodnoRoadsPreview
+@PreviewGrodnoRoadsDarkLight
 @Composable
-private fun ChangelogPreview(@PreviewParameter(LoremIpsum::class) lorem: String) {
-    GrodnoRoadsM3ThemePreview {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            ChangelogItem(
-                isLatestRelease = true,
-                release = ReleaseNotes(
-                    versionCode = 1000,
-                    versionName = "1000",
-                    notes = lorem.take(100),
-                    releaseDate = "20.05.2022"
-                )
+private fun ChangelogPreview() = GrodnoRoadsM3ThemePreview {
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        ChangelogItem(
+            isLatestRelease = true,
+            release = ChangelogEntry(
+                versionName = "1.0.2",
+                notes = LoremIpsum.generateLoremIpsum(10),
+                releaseDate = "20.05.2022"
             )
-            ChangelogItem(
-                isLatestRelease = false,
-                release = ReleaseNotes(
-                    versionCode = 2000,
-                    versionName = "2000",
-                    notes = lorem.take(200),
-                    releaseDate = "30.05.2022"
-                )
+        )
+        ChangelogItem(
+            isLatestRelease = false,
+            release = ChangelogEntry(
+                versionName = "1.0.1",
+                notes = LoremIpsum.generateLoremIpsum(20),
+                releaseDate = "30.05.2022"
             )
-        }
+        )
     }
-}*/
+}

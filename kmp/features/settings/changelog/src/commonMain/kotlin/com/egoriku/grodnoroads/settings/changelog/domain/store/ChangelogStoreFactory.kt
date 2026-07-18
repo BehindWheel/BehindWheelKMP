@@ -1,12 +1,14 @@
 package com.egoriku.grodnoroads.settings.changelog.domain.store
 
-import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.crashlytics.shared.CrashlyticsTracker
 import com.egoriku.grodnoroads.extensions.common.ResultOf
+import com.egoriku.grodnoroads.extensions.coroutines.smartJob
+import com.egoriku.grodnoroads.settings.changelog.domain.model.ErrorType
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
+import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.Intent
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.Message
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.State
 import kotlinx.coroutines.Dispatchers
@@ -20,26 +22,38 @@ internal class ChangelogStoreFactory(
 
     internal fun create(): ChangelogStore = object :
         ChangelogStore,
-        Store<Nothing, State, Nothing> by storeFactory.create(
+        Store<Intent, State, Nothing> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
-                onAction<Unit> {
-                    launch {
-                        dispatch(Message.Loading(true))
+                var loadJob by smartJob()
 
-                        when (val result = changelogRepository.load()) {
-                            is ResultOf.Success -> dispatch(Message.Success(releaseNotes = result.value))
-                            is ResultOf.Failure -> crashlyticsTracker.recordException(result.throwable)
+                onIntent<Intent.SelectPlatform> { intent ->
+                    loadJob = launch {
+                        dispatch(Message.PlatformUpdated(intent.platform))
+                        dispatch(Message.Loading)
+
+                        when (val result = changelogRepository.load(intent.platform)) {
+                            is ResultOf.Success -> {
+                                if (result.value.isEmpty()) {
+                                    dispatch(Message.Error(ErrorType.EmptyData))
+                                } else {
+                                    dispatch(Message.Success(result.value))
+                                }
+                            }
+                            is ResultOf.Failure -> {
+                                crashlyticsTracker.recordException(result.throwable)
+                                dispatch(Message.Error(ErrorType.LoadFailed))
+                            }
                         }
-                        dispatch(Message.Loading(false))
                     }
                 }
             },
-            bootstrapper = SimpleBootstrapper(Unit),
             reducer = { message: Message ->
                 when (message) {
-                    is Message.Loading -> copy(isLoading = message.isLoading)
-                    is Message.Success -> copy(releaseNotes = message.releaseNotes)
+                    is Message.PlatformUpdated -> copy(platform = message.platform)
+                    is Message.Loading -> copy(content = State.Content.Loading)
+                    is Message.Success -> copy(content = State.Content.Loaded(message.entries))
+                    is Message.Error -> copy(content = State.Content.Error(message.errorType))
                 }
             }
         ) {}

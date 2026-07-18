@@ -5,6 +5,7 @@
 ### Added
 
 - Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
+- Add platform filter (Android/iOS) to changelog screen
 
 ### Fixed
 
@@ -17,11 +18,13 @@
 ### Changed
 
 - Add analytics tracking for in-app update errors
+- Add error and empty state handling with retry in changelog screen
 
 ## [1.7.0] - 2026-07-14
 
 ### Added
 
+- Dynamic map zoom depending on speed
 - Add compass button to rotate map north when map is rotated
 - Group cities by region with sticky headers in city selection list
 
@@ -51,8 +54,8 @@
 
 ### Changed
 
-- Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel
-  road (cross-track distance > 40 m from camera axis)
+- Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel road (cross-track distance > 40 m
+  from camera axis)
 - Introduce compact navigation bar
 - Add more speed limits for Mobile cameras
 - Update city areas JSON

@@ -39,6 +39,9 @@
     <string name="settings_section_map">Мапа</string>
     <string name="settings_section_alerts">Абвесткі</string>
     <string name="settings_section_changelog">Гісторыя зменаў</string>
+    <string name="changelog_error_message">Не ўдалося загрузіць гісторыю зменаў</string>
+    <string name="changelog_empty_message">Дадзеныя аб зменах адсутнічаюць</string>
+    <string name="retry">Паўтарыць</string>
     <string name="settings_section_faq">Часта задаваныя пытанні</string>
     <string name="settings_section_debug_tools">Інструменты адладкі</string>
 

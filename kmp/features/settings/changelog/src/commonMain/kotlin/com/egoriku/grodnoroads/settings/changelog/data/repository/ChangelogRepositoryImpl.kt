@@ -3,7 +3,8 @@ package com.egoriku.grodnoroads.settings.changelog.data.repository
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import com.egoriku.grodnoroads.settings.changelog.data.dto.ChangelogDTO
-import com.egoriku.grodnoroads.settings.changelog.domain.model.ReleaseNotes
+import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogEntry
+import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogPlatform
 import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRepository
 import com.egoriku.grodnoroads.shared.formatter.ChangelogFormatter
 import dev.gitlive.firebase.firestore.Direction
@@ -17,22 +18,20 @@ internal class ChangelogRepositoryImpl(
     private val firestore: FirebaseFirestore
 ) : ChangelogRepository {
 
-    override suspend fun load() = withContext(Dispatchers.IO) {
+    override suspend fun load(platform: ChangelogPlatform) = withContext(Dispatchers.IO) {
         runCatchingCancellable {
-            val changelog = firestore
+            val query = firestore
                 .collection("whats_new")
-                .orderBy("code", Direction.DESCENDING)
+                .where { "platform" equalTo platform.query }
+                .orderBy("date", Direction.DESCENDING)
                 .get()
-                .documents.map {
-                    it.data<ChangelogDTO>()
-                }
+                .documents.map { it.data<ChangelogDTO>() }
 
             ResultOf.Success(
-                changelog.map {
-                    ReleaseNotes(
-                        versionCode = it.code,
+                query.map {
+                    ChangelogEntry(
                         versionName = it.name,
-                        notes = it.notes.replace("\\n", "\n"),
+                        notes = it.notes,
                         releaseDate = ChangelogFormatter.format(
                             timestamp = it.releaseDate.seconds.seconds.inWholeMilliseconds
                         )

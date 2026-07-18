@@ -266,6 +266,7 @@ Xcode project: `app/ios/grodno-roads-ios.xcodeproj`
 - ❌ Don't use Hilt/Dagger annotations (use Koin `module {}`)
 - ❌ Don't reference Android SDK directly in commonMain (use expect/actual)
 - ❌ Don't use Material 2 (Material 3 only, enforced by Spotless rules)
+- ❌ Don't use `// region` / `// endregion` comments — extract functions instead
 
 ## Adding a New Feature
 
