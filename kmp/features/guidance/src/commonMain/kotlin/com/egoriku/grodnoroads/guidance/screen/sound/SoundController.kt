@@ -20,7 +20,6 @@ interface SoundController {
 
 abstract class SharedSoundController : SoundController {
     private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
-    private val playedAlertIds = mutableMapOf<String, Long>()
     private val overSpeedId = Uuid.random()
 
     private val currentTimeMillis: Long
@@ -94,21 +93,14 @@ abstract class SharedSoundController : SoundController {
     }
 
     private fun isAlertAlreadyPlayed(alertId: String): Boolean {
-        val currentTimeMillis = currentTimeMillis
-        val lastPlayed = playedAlertIds[alertId]
-        if (lastPlayed != null && currentTimeMillis - lastPlayed < FIVE_MINUTES) {
-            return true
-        }
-        playedAlertIds[alertId] = currentTimeMillis
-        invalidateOldSounds()
-        return false
+        val lastPlayed = soundHistory[alertId]
+        return lastPlayed != null && currentTimeMillis - lastPlayed.timestamp < FIVE_MINUTES
     }
 
     private fun invalidateOldSounds() {
         val currentTime = currentTimeMillis
 
         soundHistory.entries.removeAll { currentTime - it.value.timestamp > THIRTY_MINUTES }
-        playedAlertIds.entries.removeAll { currentTime - it.value > THIRTY_MINUTES }
     }
 
     private data class SoundTimeStamp(
