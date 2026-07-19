@@ -1,12 +1,9 @@
 package com.egoriku.grodnoroads.guidance.screen.sound
 
-import com.egoriku.grodnoroads.extensions.DateTime
 import com.egoriku.grodnoroads.extensions.Uuid
 import com.egoriku.grodnoroads.guidance.domain.model.CameraType
 import com.egoriku.grodnoroads.shared.audioplayer.Sound
 import com.egoriku.grodnoroads.shared.models.MapEventType
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 
 interface SoundController {
 
@@ -18,20 +15,20 @@ interface SoundController {
     fun setLoudness(loudness: Int)
 }
 
-abstract class SharedSoundController : SoundController {
-    private val soundHistory = mutableMapOf<String, SoundTimeStamp>()
+abstract class SharedSoundController(
+    private val tracker: PlayedAlertTracker = PlayedAlertTracker()
+) : SoundController {
     private val overSpeedId = Uuid.random()
-
-    private val currentTimeMillis: Long
-        get() = DateTime.currentTimeMillis()
 
     abstract fun enqueueSound(sound: Sound)
 
-    override fun playOverSpeed() = playSound(
-        sound = Sound.OverSpeed,
-        id = overSpeedId,
-        expiration = FIVE_SECONDS
-    )
+    override fun playOverSpeed() {
+        if (tracker.shouldPlay(overSpeedId, PlayedAlertTracker.FIVE_SECONDS)) {
+            tracker.record(overSpeedId)
+            enqueueSound(Sound.OverSpeed)
+        }
+        tracker.cleanup()
+    }
 
     override fun playIncident(id: String, mapEventType: MapEventType) {
         val incidentSound = when (mapEventType) {
@@ -43,13 +40,24 @@ abstract class SharedSoundController : SoundController {
             MapEventType.Unsupported -> null
         } ?: return
 
-        if (isAlertAlreadyPlayed(id)) return
+        if (!tracker.shouldPlay(id)) return
 
-        playSound(sound = incidentSound, id = id)
+        tracker.record(id)
+        enqueueSound(incidentSound)
+        tracker.cleanup()
     }
 
     override fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
-        if (isAlertAlreadyPlayed(id)) return
+        if (!tracker.shouldPlay(id)) return
+
+        val cameraSound = when (cameraType) {
+            CameraType.StationaryCamera -> Sound.StationaryCamera
+            CameraType.MobileCamera -> Sound.MobileCamera
+            CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
+        }
+
+        tracker.record(id)
+        enqueueSound(cameraSound)
 
         val speedLimitSound = when (speedLimit) {
             40 -> Sound.SpeedLimit40
@@ -63,54 +71,14 @@ abstract class SharedSoundController : SoundController {
             120 -> Sound.SpeedLimit120
             else -> null
         }
-        val cameraSound = when (cameraType) {
-            CameraType.StationaryCamera -> Sound.StationaryCamera
-            CameraType.MobileCamera -> Sound.MobileCamera
-            CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
+        speedLimitSound?.let {
+            val speedLimitId = "camera_$id"
+            if (tracker.shouldPlay(speedLimitId)) {
+                tracker.record(speedLimitId)
+                enqueueSound(it)
+            }
         }
 
-        playSound(sound = cameraSound, id = id)
-        speedLimitSound?.run { playSound(sound = this, id = "camera_$id") }
-    }
-
-    private fun playSound(
-        sound: Sound,
-        id: String = Uuid.random(),
-        expiration: Long = FIVE_MINUTES
-    ) {
-        val currentTimeMillis = currentTimeMillis
-        val item = soundHistory[id]
-
-        if (item == null) {
-            soundHistory[id] = SoundTimeStamp(sound = sound, timestamp = currentTimeMillis)
-            enqueueSound(sound)
-        } else if (currentTimeMillis - item.timestamp > expiration) {
-            soundHistory[id] = item.copy(timestamp = currentTimeMillis)
-            enqueueSound(sound)
-        }
-
-        invalidateOldSounds()
-    }
-
-    private fun isAlertAlreadyPlayed(alertId: String): Boolean {
-        val lastPlayed = soundHistory[alertId]
-        return lastPlayed != null && currentTimeMillis - lastPlayed.timestamp < FIVE_MINUTES
-    }
-
-    private fun invalidateOldSounds() {
-        val currentTime = currentTimeMillis
-
-        soundHistory.entries.removeAll { currentTime - it.value.timestamp > THIRTY_MINUTES }
-    }
-
-    private data class SoundTimeStamp(
-        val sound: Sound,
-        val timestamp: Long
-    )
-
-    companion object {
-        val FIVE_SECONDS = 5.seconds.inWholeMilliseconds
-        val FIVE_MINUTES = 5.minutes.inWholeMilliseconds
-        val THIRTY_MINUTES = 30.minutes.inWholeMilliseconds
+        tracker.cleanup()
     }
 }
