@@ -23,10 +23,7 @@ abstract class SharedSoundController(
     abstract fun enqueueSound(sound: Sound)
 
     override fun playOverSpeed() {
-        if (tracker.shouldPlay(overSpeedId, PlayedAlertTracker.FIVE_SECONDS)) {
-            tracker.record(overSpeedId)
-            enqueueSound(Sound.OverSpeed)
-        }
+        playIfAllowed(overSpeedId, Sound.OverSpeed, PlayedAlertTracker.FIVE_SECONDS)
         tracker.cleanup()
     }
 
@@ -40,24 +37,18 @@ abstract class SharedSoundController(
             MapEventType.Unsupported -> null
         } ?: return
 
-        if (!tracker.shouldPlay(id)) return
-
-        tracker.record(id)
-        enqueueSound(incidentSound)
+        playIfAllowed(id, incidentSound)
         tracker.cleanup()
     }
 
     override fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType) {
-        if (!tracker.shouldPlay(id)) return
-
         val cameraSound = when (cameraType) {
             CameraType.StationaryCamera -> Sound.StationaryCamera
             CameraType.MobileCamera -> Sound.MobileCamera
             CameraType.MediumSpeedCamera -> Sound.MediumSpeedCamera
         }
 
-        tracker.record(id)
-        enqueueSound(cameraSound)
+        playIfAllowed(id, cameraSound)
 
         val speedLimitSound = when (speedLimit) {
             40 -> Sound.SpeedLimit40
@@ -72,13 +63,20 @@ abstract class SharedSoundController(
             else -> null
         }
         speedLimitSound?.let {
-            val speedLimitId = "camera_$id"
-            if (tracker.shouldPlay(speedLimitId)) {
-                tracker.record(speedLimitId)
-                enqueueSound(it)
-            }
+            playIfAllowed("camera_$id", it)
         }
 
         tracker.cleanup()
+    }
+
+    private fun playIfAllowed(
+        id: String,
+        sound: Sound,
+        expiration: Long = PlayedAlertTracker.FIVE_MINUTES
+    ) {
+        if (tracker.shouldPlay(id, expiration)) {
+            tracker.record(id)
+            enqueueSound(sound)
+        }
     }
 }
