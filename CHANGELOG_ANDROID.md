@@ -11,6 +11,8 @@
 - Fix crash when in-app update is triggered while another update is already in progress
 - Fix zoom to current location button not accounting for bearing in Default mode
 - Fix duplicate voice notifications for camera alerts
+- Fix voice notifications not playing after switching apps on Android Auto
+- Fix voice notifications interrupted mid-playback on Android Auto
 
 ### Changed
 

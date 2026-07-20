@@ -140,14 +140,13 @@ actual class AudioPlayer(private val context: Context) {
 
     actual fun enqueueSound(sound: Sound) {
         val isEnded = player.playbackState == Player.STATE_ENDED
-        val isIdle = player.playbackState == Player.STATE_IDLE
-        val needsStart = isIdle || isEnded
         if (isEnded) {
             player.stop()
             player.clearMediaItems()
         }
         player.addMediaItem(MediaItem.fromUri("asset:///${sound.uri}"))
-        if (needsStart) {
+
+        if (!player.isPlaying) {
             val result = AudioManagerCompat.requestAudioFocus(audioManager, audioFocusRequest)
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                 setSystemVolume()
