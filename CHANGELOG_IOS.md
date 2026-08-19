@@ -19,6 +19,7 @@
 - Fix map briefly rotating to north and resetting tilt when rotating screen during navigation
 - Fix zoom to current location button not accounting for bearing in Default mode
 - Fix duplicate voice notifications for camera alerts
+- Fix overspeed voice notification playing even when voice notifications are disabled
 
 ### Changed
 
