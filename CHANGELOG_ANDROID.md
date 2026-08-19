@@ -14,6 +14,7 @@
 - Fix duplicate voice notifications for camera alerts
 - Fix voice notifications not playing after switching apps on Android Auto
 - Fix voice notifications interrupted mid-playback on Android Auto
+- Fix overspeed voice notification playing even when voice notifications are disabled
 
 ### Changed
 

@@ -43,6 +43,7 @@ import com.egoriku.grodnoroads.quicksettings.domain.component.buildQuickSettings
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.SpecialEventComponent
 import com.egoriku.grodnoroads.specialevent.domain.component.specialevent.buildSpecialEventComponent
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -156,11 +157,14 @@ internal class GuidanceComponentImpl(
             }
             .launchIn(coroutineScope)
 
-        speedLimit
-            .distinctUntilChanged()
-            .debounce(500)
-            .onEach {
-                if (it != -1) {
+        combine(
+            flow = speedLimit,
+            flow2 = alertInfo.map { it.voiceAlertsEnabled },
+            transform = ::Pair
+        ).distinctUntilChanged()
+            .debounce(500.milliseconds)
+            .onEach { (speedLimit, voiceAlertsEnabled) ->
+                if (speedLimit != -1 && voiceAlertsEnabled) {
                     alertEvents.tryEmit(AlertEvent.OverSpeed)
                 }
             }
