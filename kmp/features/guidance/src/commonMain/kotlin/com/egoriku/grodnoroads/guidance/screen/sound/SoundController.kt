@@ -20,7 +20,7 @@ abstract class SharedSoundController(
 ) : SoundController {
     private val overSpeedId = Uuid.random()
 
-    abstract fun enqueueSound(sound: Sound)
+    abstract fun enqueueSound(sound: Sound): Boolean
 
     override fun playOverSpeed() {
         playIfAllowed(overSpeedId, Sound.OverSpeed, PlayedAlertTracker.FIVE_SECONDS)
@@ -75,8 +75,9 @@ abstract class SharedSoundController(
         expiration: Long = PlayedAlertTracker.FIVE_MINUTES
     ) {
         if (tracker.shouldPlay(id, expiration)) {
-            tracker.record(id)
-            enqueueSound(sound)
+            if (enqueueSound(sound)) {
+                tracker.record(id)
+            }
         }
     }
 }

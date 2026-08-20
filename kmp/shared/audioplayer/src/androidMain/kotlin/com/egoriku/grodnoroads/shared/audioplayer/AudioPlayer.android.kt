@@ -45,8 +45,9 @@ actual class AudioPlayer(private val context: Context) {
     private val maxVolume = audioManager.getStreamMaxVolumeCompat(AudioManager.STREAM_MUSIC)
 
     private var volumeLevel = 1f
+    private var resumeOnFocusGain = false
 
-    private val audioFocusRequest =
+    private val audioFocusRequest: AudioFocusRequestCompat =
         AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
             .setAudioAttributes(
                 AudioAttributes.Builder()
@@ -57,9 +58,15 @@ actual class AudioPlayer(private val context: Context) {
             .setWillPauseWhenDucked(false)
             .setOnAudioFocusChangeListener { focusChange ->
                 when (focusChange) {
-                    AudioManager.AUDIOFOCUS_LOSS,
+                    AudioManager.AUDIOFOCUS_LOSS -> {
+                        resumeOnFocusGain = false
+                        player.pause()
+                        AudioManagerCompat.abandonAudioFocusRequest(audioManager, audioFocusRequest)
+                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0)
+                    }
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                        if (player.isPlaying) player.pause()
+                        resumeOnFocusGain = player.playWhenReady
+                        player.pause()
                     }
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
                         // setWillPauseWhenDucked = false, so we handle ducking manually
@@ -67,7 +74,10 @@ actual class AudioPlayer(private val context: Context) {
                     }
                     AudioManager.AUDIOFOCUS_GAIN -> {
                         player.volume = 1f
-                        if (!player.isPlaying) player.play()
+                        if (resumeOnFocusGain) {
+                            resumeOnFocusGain = false
+                            player.play()
+                        }
                     }
                 }
             }
@@ -138,21 +148,26 @@ actual class AudioPlayer(private val context: Context) {
         loudnessEnhancer?.setTargetGain(persistedLoudnessGain)
     }
 
-    actual fun enqueueSound(sound: Sound) {
+    actual fun enqueueSound(sound: Sound): Boolean {
         val isEnded = player.playbackState == Player.STATE_ENDED
         if (isEnded) {
             player.stop()
             player.clearMediaItems()
         }
-        player.addMediaItem(MediaItem.fromUri("asset:///${sound.uri}"))
 
         if (!player.isPlaying) {
             val result = AudioManagerCompat.requestAudioFocus(audioManager, audioFocusRequest)
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                player.addMediaItem(MediaItem.fromUri("asset:///${sound.uri}"))
                 setSystemVolume()
                 player.prepare()
                 player.play()
+                return true
             }
+            return false
+        } else {
+            player.addMediaItem(MediaItem.fromUri("asset:///${sound.uri}"))
+            return true
         }
     }
 
@@ -184,6 +199,7 @@ actual class AudioPlayer(private val context: Context) {
         player.removeListener(playerListener)
         context.applicationContext.unregisterReceiver(volumeChangeReceiver)
         AudioManagerCompat.abandonAudioFocusRequest(audioManager, audioFocusRequest)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0)
         loudnessEnhancer?.release()
         player.release()
     }

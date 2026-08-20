@@ -56,9 +56,10 @@ actual class AudioPlayer {
         // Not supported on iOS
     }
 
-    actual fun enqueueSound(sound: Sound) {
+    actual fun enqueueSound(sound: Sound): Boolean {
         soundQueue.add(sound)
         if (!isPlaying) enqueueNextSound()
+        return true
     }
 
     actual fun playSound(sound: Sound) {

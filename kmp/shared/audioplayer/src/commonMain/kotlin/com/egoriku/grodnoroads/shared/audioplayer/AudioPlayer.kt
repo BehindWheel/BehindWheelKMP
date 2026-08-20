@@ -8,7 +8,7 @@ expect fun rememberAudioPlayer(): AudioPlayer
 expect class AudioPlayer {
     fun setVolumeLevel(level: Float)
     fun setLoudness(loudness: Int)
-    fun enqueueSound(sound: Sound)
+    fun enqueueSound(sound: Sound): Boolean
     fun playSound(sound: Sound)
 
     fun release()
