@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.extensions.LoremIpsum
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogEntry
 
 private val latestReleaseEmojis = listOf("🔥", "⭐", "🎉", "✨", "🚀", "💎")
@@ -49,7 +49,7 @@ internal fun ChangelogItem(
                 text = release.releaseDate,
                 style = MaterialTheme.typography.labelSmall
             )
-            VerticalSpacer(4.dp)
+            Spacer(4.dp)
             Text(
                 text = release.notes,
                 style = MaterialTheme.typography.bodyMedium

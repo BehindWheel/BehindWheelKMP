@@ -35,12 +35,11 @@ import com.egoriku.grodnoroads.foundation.icons.colored.MobileCameraBold
 import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCameraBold
 import com.egoriku.grodnoroads.foundation.icons.outlined.Car
 import com.egoriku.grodnoroads.foundation.icons.outlined.Truck
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.theme.Red
 import com.egoriku.grodnoroads.foundation.uikit.DisabledText
-import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryButton
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent
 import com.egoriku.grodnoroads.guidance.domain.model.MapEvent.Camera.MediumSpeedCamera
@@ -70,7 +69,7 @@ internal fun CameraInfo(
                 is MobileCamera -> Res.string.alerts_mobile_camera
             }
         )
-        VerticalSpacer(32.dp)
+        Spacer(32.dp)
     }
 }
 
@@ -87,7 +86,7 @@ private fun Info(
                 imageVector = imageVector,
                 contentDescription = null
             )
-            HorizontalSpacer(16.dp)
+            Spacer(16.dp)
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
                     text = camera.name.ifEmpty { stringResource(Res.string.camera_info_stub_title) },
@@ -106,7 +105,7 @@ private fun Info(
                 )
             }
         }
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
@@ -124,7 +123,7 @@ private fun Info(
         }
 
         if (FeatureFlags.REPORT_CAMERA_PROBLEMS_ENABLED) {
-            VerticalSpacer(24.dp)
+            Spacer(24.dp)
             SecondaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.camera_info_report),
@@ -149,7 +148,7 @@ private fun SpeedLimitGroup(
             imageVector = imageVector,
             contentDescription = null
         )
-        HorizontalSpacer(18.dp)
+        Spacer(18.dp)
         SpeedLimit(value = speed)
     }
 }

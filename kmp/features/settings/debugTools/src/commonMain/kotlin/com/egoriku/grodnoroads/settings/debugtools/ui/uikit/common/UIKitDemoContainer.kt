@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 
 @Composable
 fun UIKitDemoContainer(
@@ -32,7 +32,7 @@ fun UIKitDemoContainer(
             text = name,
             style = MaterialTheme.typography.titleMedium
         )
-        VerticalSpacer(8.dp)
+        Spacer(8.dp)
         Column(modifier = Modifier.padding(paddingValues)) {
             content()
         }

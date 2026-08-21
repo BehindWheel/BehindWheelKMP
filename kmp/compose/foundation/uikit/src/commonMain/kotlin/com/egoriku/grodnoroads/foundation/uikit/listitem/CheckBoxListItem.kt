@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.dynamic.Checkbox
 
 @Composable
@@ -61,7 +61,7 @@ fun CheckBoxListItem(
             style = MaterialTheme.typography.bodyMedium
         )
         if (imageVector != null) {
-            HorizontalSpacer(12.dp)
+            Spacer(12.dp)
             Image(
                 modifier = Modifier.size(iconSize),
                 imageVector = imageVector,

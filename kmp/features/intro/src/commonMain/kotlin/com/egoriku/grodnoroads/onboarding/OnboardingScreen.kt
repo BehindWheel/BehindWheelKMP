@@ -31,8 +31,7 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowLeft
 import com.egoriku.grodnoroads.foundation.icons.outlined.ArrowRight
 import com.egoriku.grodnoroads.foundation.icons.outlined.Check
-import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.SecondaryCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
@@ -88,12 +87,12 @@ private fun OnboardingUi(
                 )
             }
         }
-        VerticalSpacer(24.dp)
+        Spacer(24.dp)
         Footer(
             pagerState = pagerState,
             onComplete = completeOnboarding
         )
-        VerticalSpacer(24.dp)
+        Spacer(24.dp)
     }
 }
 
@@ -122,7 +121,7 @@ private fun Footer(
                         }
                     }
                 )
-                HorizontalSpacer(16.dp)
+                Spacer(16.dp)
             }
         }
         if (pagerState.currentPage != pagerState.pageCount - 1) {

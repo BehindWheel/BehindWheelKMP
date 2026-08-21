@@ -30,10 +30,10 @@ import com.egoriku.grodnoroads.foundation.core.HorizontalScrollableRow
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.Brightness
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.MoreActionListItem
 import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.settings.appearance.domain.component.AppearanceComponent
@@ -87,9 +87,9 @@ fun AppearanceScreen(
             SettingsSectionHeader(title = stringResource(Res.string.settings_category_main))
             AppThemeSection(state = state, onModify = appearanceComponent::modify)
             LanguageSection(state = state, onModify = appearanceComponent::modify)
-            VerticalSpacer(16.dp)
+            Spacer(16.dp)
             MapTypeAppearanceSection(state = state, onModify = appearanceComponent::update)
-            VerticalSpacer(16.dp)
+            Spacer(16.dp)
             KeepScreenOnSettings(state = state, onModify = appearanceComponent::update)
         }
     }

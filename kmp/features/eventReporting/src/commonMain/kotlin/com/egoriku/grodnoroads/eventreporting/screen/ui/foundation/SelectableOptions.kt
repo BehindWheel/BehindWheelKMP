@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.eventreporting.domain.Reporting
 import com.egoriku.grodnoroads.eventreporting.screen.ui.util.toStringResource
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import org.jetbrains.compose.resources.stringResource
@@ -51,7 +51,7 @@ internal fun ColumnScope.SelectableOptions(
             }
         )
     }
-    VerticalSpacer(8.dp)
+    Spacer(8.dp)
 }
 
 @PreviewGrodnoRoads

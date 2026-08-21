@@ -6,17 +6,11 @@ plugins {
 }
 
 kotlin {
-    configureTargets(namespace = "com.egoriku.grodnoroads.foundation.uikit")
+    configureTargets(namespace = "com.egoriku.grodnoroads.foundation.layout")
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.kmp.compose.foundation.icons)
-            api(projects.kmp.compose.foundation.core)
-            api(projects.kmp.compose.foundation.layout)
-            api(projects.kmp.compose.foundation.preview)
-
             api(libs.compose.foundation)
-            api(libs.compose.material3)
             api(libs.compose.runtime)
             api(libs.compose.ui)
         }

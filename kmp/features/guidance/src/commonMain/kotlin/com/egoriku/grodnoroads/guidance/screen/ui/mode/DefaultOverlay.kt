@@ -46,9 +46,9 @@ import com.egoriku.grodnoroads.foundation.core.isMediumScreenWidth
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.outlined.More
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.button.PrimaryInverseCircleButton
 import com.egoriku.grodnoroads.foundation.uikit.button.common.Size
 import com.egoriku.grodnoroads.guidance.domain.model.Alert
@@ -295,7 +295,7 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
             onOpenQuickSettings = {}
         )
         HorizontalDivider()
-        VerticalSpacer(8.dp)
+        Spacer(8.dp)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -312,6 +312,6 @@ private fun DefaultOverlayPreview() = GrodnoRoadsM3ThemePreview {
                 Text(text = "Toggle Mode")
             }
         }
-        VerticalSpacer(8.dp)
+        Spacer(8.dp)
     }
 }

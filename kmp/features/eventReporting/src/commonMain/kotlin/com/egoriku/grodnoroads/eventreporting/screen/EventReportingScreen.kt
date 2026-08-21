@@ -30,9 +30,9 @@ import com.egoriku.grodnoroads.eventreporting.screen.ui.foundation.SelectableOpt
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.BasicModalBottomSheet
 import com.egoriku.grodnoroads.foundation.common.ui.bottomsheet.rememberSheetCloseBehaviour
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.shared.models.reporting.ReportParams
 import org.jetbrains.compose.resources.stringResource
 
@@ -123,12 +123,12 @@ private fun ReportingUi(
             text = stringResource(Res.string.reporting_header),
             style = MaterialTheme.typography.headlineSmall
         )
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
         ReportingTypesCarousel(
             currentType = reportType,
             onTypeChange = onReportTypeChange
         )
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
 
         when (reportType) {
             ReportType.MobileCamera -> {

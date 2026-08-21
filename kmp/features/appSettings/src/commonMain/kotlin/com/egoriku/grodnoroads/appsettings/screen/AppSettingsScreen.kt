@@ -45,9 +45,9 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Changelog
 import com.egoriku.grodnoroads.foundation.icons.outlined.Faq
 import com.egoriku.grodnoroads.foundation.icons.outlined.Map
 import com.egoriku.grodnoroads.foundation.icons.outlined.NotificationBadge
+import com.egoriku.grodnoroads.foundation.layout.WeightSpacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.shared.components.AppBuildConfig
 import com.egoriku.grodnoroads.shared.models.Page
 import org.jetbrains.compose.resources.stringResource

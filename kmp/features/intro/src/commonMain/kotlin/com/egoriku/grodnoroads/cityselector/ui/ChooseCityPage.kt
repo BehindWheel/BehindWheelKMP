@@ -16,7 +16,7 @@ import com.egoriku.grodnoroads.compose.resources.city_selector_choose_city
 import com.egoriku.grodnoroads.extensions.Collator
 import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.Group
 import com.egoriku.grodnoroads.foundation.common.ui.lazycolumn.GroupedSingleChoiceLazyColumn
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.RadioButtonListItem
 import com.egoriku.grodnoroads.shared.persistent.toStringResource
 import org.jetbrains.compose.resources.stringResource
@@ -48,7 +48,7 @@ internal fun ChooseCityPage(
             style = MaterialTheme.typography.displaySmall,
             textAlign = TextAlign.Center
         )
-        VerticalSpacer(24.dp)
+        Spacer(24.dp)
         GroupedSingleChoiceLazyColumn(
             modifier = Modifier.fillMaxWidth(),
             groups = displayGroups,
