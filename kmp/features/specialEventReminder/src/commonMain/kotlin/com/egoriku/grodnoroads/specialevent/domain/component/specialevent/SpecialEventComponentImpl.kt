@@ -52,7 +52,12 @@ internal class SpecialEventComponentImpl(
         buildDialogComponent(
             componentContext = childComponentContext,
             eventType = config.eventType,
-            onDismissed = eventsNavigation::dismiss
+            onDismissed = { dismissToday ->
+                if (dismissToday) {
+                    specialEventStore.accept(SpecialEventStore.Intent.DismissToday)
+                }
+                eventsNavigation.dismiss()
+            }
         )
     }.toStateFlow()
 

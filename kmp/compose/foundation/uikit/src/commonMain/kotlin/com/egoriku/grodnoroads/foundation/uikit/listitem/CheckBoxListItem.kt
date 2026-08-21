@@ -1,6 +1,7 @@
 package com.egoriku.grodnoroads.foundation.uikit.listitem
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,10 +29,10 @@ import com.egoriku.grodnoroads.foundation.uikit.dynamic.Checkbox
 
 @Composable
 fun CheckBoxListItem(
-    imageVector: ImageVector,
     text: String,
     isChecked: Boolean,
     modifier: Modifier = Modifier,
+    imageVector: ImageVector? = null,
     iconSize: DpSize = DpSize(24.dp, 24.dp),
     paddingValues: PaddingValues = PaddingValues(),
     onCheckedChange: (Boolean) -> Unit
@@ -59,12 +60,14 @@ fun CheckBoxListItem(
             text = text,
             style = MaterialTheme.typography.bodyMedium
         )
-        HorizontalSpacer(12.dp)
-        Image(
-            modifier = Modifier.size(iconSize),
-            imageVector = imageVector,
-            contentDescription = null
-        )
+        if (imageVector != null) {
+            HorizontalSpacer(12.dp)
+            Image(
+                modifier = Modifier.size(iconSize),
+                imageVector = imageVector,
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -73,10 +76,17 @@ fun CheckBoxListItem(
 private fun CheckBoxListItemPreview() = GrodnoRoadsM3ThemePreview {
     var state by rememberMutableState { true }
 
-    CheckBoxListItem(
-        text = "Мобильная камера",
-        isChecked = state,
-        imageVector = GrodnoRoads.Colored.MobileCamera,
-        onCheckedChange = { state = it }
-    )
+    Column {
+        CheckBoxListItem(
+            text = "Мобильная камера",
+            isChecked = state,
+            imageVector = GrodnoRoads.Colored.MobileCamera,
+            onCheckedChange = { state = it }
+        )
+        CheckBoxListItem(
+            text = "Не показывать сегодня",
+            isChecked = state,
+            onCheckedChange = { state = it }
+        )
+    }
 }

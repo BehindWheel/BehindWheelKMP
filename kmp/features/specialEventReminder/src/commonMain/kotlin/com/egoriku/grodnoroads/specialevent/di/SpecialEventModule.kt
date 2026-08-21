@@ -5,6 +5,9 @@ import org.koin.dsl.module
 
 val specialEventModule = module {
     factory {
-        SpecialEventStoreFactory(storeFactory = get()).create()
+        SpecialEventStoreFactory(
+            storeFactory = get(),
+            dataStore = get()
+        ).create()
     }
 }

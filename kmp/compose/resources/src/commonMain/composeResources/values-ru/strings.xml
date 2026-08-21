@@ -6,6 +6,7 @@
 
     <string name="event_reminder_spring_body">С 25 мая по 5 июня проходит специальное комплексное мероприятие "Внимание – дети!"\n\nНе забудьте включить ближний свет! 🚘💡</string>
     <string name="event_reminder_autumn_body">С 25 августа по 5 сентября проходит специальное комплексное мероприятие "Внимание – дети!"\n\nНе забудьте включить ближний свет! 🚘💡</string>
+    <string name="event_reminder_dont_show_today">Не показывать сегодня</string>
 
     <plurals name="camera_alerts_plurals_distance">
         <item quantity="one">%1$d метр</item>

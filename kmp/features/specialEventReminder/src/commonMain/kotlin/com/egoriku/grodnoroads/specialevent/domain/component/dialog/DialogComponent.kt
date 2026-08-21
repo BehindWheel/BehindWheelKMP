@@ -6,5 +6,5 @@ interface DialogComponent {
 
     val eventType: EventType
 
-    fun dismiss()
+    fun dismiss(dismissToday: Boolean)
 }

@@ -49,6 +49,8 @@ import com.egoriku.grodnoroads.settings.debugtools.domain.DebugToolsComponent
 import com.egoriku.grodnoroads.settings.debugtools.ui.datastore.DataStoreEdit
 import com.egoriku.grodnoroads.settings.debugtools.ui.palette.Material3Palette
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.UiDemoList
+import com.egoriku.grodnoroads.specialevent.domain.model.EventType
+import com.egoriku.grodnoroads.specialevent.screen.SpecialEventDialog
 import org.jetbrains.compose.resources.stringResource
 
 internal sealed interface SheetType {
@@ -66,6 +68,7 @@ fun DebugToolsScreen(
 ) {
     var sheetType by rememberMutableState<SheetType> { SheetType.NoSheet }
     var isDarkTheme by rememberMutableState { false }
+    var specialEventType by rememberMutableState<EventType?> { null }
     val showMapDebugOverlay by debugToolsComponent.showMapDebugOverlay.collectAsState()
 
     GrodnoRoadsM3Theme(isDarkTheme) {
@@ -96,7 +99,8 @@ fun DebugToolsScreen(
                             TopActions(
                                 onDataStoreEdit = { sheetType = SheetType.DataStoreEdit },
                                 onOpenPalette = { sheetType = SheetType.Material3Palette },
-                                onChangeDarkTheme = { isDarkTheme = !isDarkTheme }
+                                onChangeDarkTheme = { isDarkTheme = !isDarkTheme },
+                                onShowSpecialEvent = { specialEventType = it }
                             )
                             VerticalSpacer(16.dp)
                         }
@@ -108,6 +112,13 @@ fun DebugToolsScreen(
                     VerticalSpacer(4.dp)
                     UiDemoList(modifier = Modifier.verticalScroll(scrollState))
                 }
+            }
+
+            specialEventType?.let { eventType ->
+                SpecialEventDialog(
+                    eventType = eventType,
+                    onClose = { _ -> specialEventType = null }
+                )
             }
 
             if (sheetType != SheetType.NoSheet) {
@@ -139,7 +150,8 @@ fun DebugToolsScreen(
 private fun TopActions(
     onDataStoreEdit: () -> Unit,
     onOpenPalette: () -> Unit,
-    onChangeDarkTheme: () -> Unit
+    onChangeDarkTheme: () -> Unit,
+    onShowSpecialEvent: (EventType) -> Unit
 ) {
     Card {
         Row(
@@ -164,6 +176,12 @@ private fun TopActions(
                     imageVector = GrodnoRoads.Outlined.Moon,
                     contentDescription = null
                 )
+            }
+            IconButton(onClick = { onShowSpecialEvent(EventType.Spring) }) {
+                Text(text = "🌸")
+            }
+            IconButton(onClick = { onShowSpecialEvent(EventType.Autumn) }) {
+                Text(text = "🍁")
             }
         }
     }

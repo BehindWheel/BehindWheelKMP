@@ -6,6 +6,7 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
+import com.egoriku.grodnoroads.extensions.DateTime.currentDateTime
 import com.egoriku.grodnoroads.root.domain.RootStore.Intent
 import com.egoriku.grodnoroads.root.domain.RootStore.Label
 import com.egoriku.grodnoroads.root.domain.RootStore.Message
@@ -21,9 +22,7 @@ import com.egoriku.grodnoroads.shared.persistent.map.location.defaultCity
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator.SunTime
 import com.egoriku.grodnoroads.suntime.SunriseSunsetCalculator.Twilight
-import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -33,9 +32,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 sealed interface AppTheme {
     data object Dark : AppTheme
@@ -159,9 +155,4 @@ internal class RootStoreFactory(
                 }
             }
         ) {}
-}
-
-@OptIn(ExperimentalTime::class)
-private fun currentDateTime(): LocalDateTime {
-    return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 }
