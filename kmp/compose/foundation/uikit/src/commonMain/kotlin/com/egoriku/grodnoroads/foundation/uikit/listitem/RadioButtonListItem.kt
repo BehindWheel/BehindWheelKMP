@@ -15,11 +15,11 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PlatformPreviewProvider
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.Platform
-import com.egoriku.grodnoroads.foundation.uikit.HorizontalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.dynamic.DynamicRadioButton
 
 @Composable
@@ -50,7 +50,7 @@ fun RadioButtonListItem(
             text = text,
             style = MaterialTheme.typography.titleMedium
         )
-        HorizontalSpacer(12.dp)
+        Spacer(12.dp)
     }
 }
 

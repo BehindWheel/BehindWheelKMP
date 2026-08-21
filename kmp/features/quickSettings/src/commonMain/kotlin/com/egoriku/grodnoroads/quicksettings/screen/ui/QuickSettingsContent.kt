@@ -36,11 +36,11 @@ import com.egoriku.grodnoroads.foundation.icons.outlined.Filter
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
 import com.egoriku.grodnoroads.foundation.icons.outlined.Notification
 import com.egoriku.grodnoroads.foundation.icons.outlined.TrafficJam
+import com.egoriku.grodnoroads.foundation.layout.Spacer
+import com.egoriku.grodnoroads.foundation.layout.WeightSpacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.FilterChip
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
-import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
 import com.egoriku.grodnoroads.foundation.uikit.dynamic.Switch
 import com.egoriku.grodnoroads.quicksettings.domain.model.QuickSettingsState
 import com.egoriku.grodnoroads.quicksettings.domain.store.QuickSettingsPref
@@ -64,36 +64,36 @@ internal fun QuickSettingsContent(
             text = stringResource(Res.string.quick_settings_header),
             style = MaterialTheme.typography.headlineSmall
         )
-        VerticalSpacer(26.dp)
+        Spacer(26.dp)
         AppearanceSection(
             appTheme = quickSettingsState.appTheme,
             onChange = onChange
         )
-        VerticalSpacer(24.dp)
+        Spacer(24.dp)
         FilteringSection(
             markerFiltering = quickSettingsState.markerFiltering,
             onChange = onChange
         )
-        VerticalSpacer(24.dp)
+        Spacer(24.dp)
         MapTypeSection(
             mapTypeAppearance = quickSettingsState.mapTypeAppearance,
             onChange = onChange
         )
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
         SwitchSetting(
             imageVector = GrodnoRoads.Outlined.Notification,
             name = stringResource(Res.string.quick_settings_voice_alerts),
             checked = quickSettingsState.voiceAlerts.enabled,
             onCheckedChange = { onChange(quickSettingsState.voiceAlerts.copy(enabled = it)) }
         )
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
         SwitchSetting(
             imageVector = GrodnoRoads.Outlined.TrafficJam,
             name = stringResource(Res.string.quick_settings_traffic_conditions),
             checked = quickSettingsState.trafficJamOnMap.isShow,
             onCheckedChange = { onChange(quickSettingsState.trafficJamOnMap.copy(isShow = it)) }
         )
-        VerticalSpacer(32.dp)
+        Spacer(32.dp)
     }
 }
 

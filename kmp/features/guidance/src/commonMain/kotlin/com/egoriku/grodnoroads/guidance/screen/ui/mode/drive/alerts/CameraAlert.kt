@@ -26,9 +26,9 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.colored.MediumSpeedCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.MobileCamera
 import com.egoriku.grodnoroads.foundation.icons.colored.StationaryCamera
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.guidance.screen.ui.foundation.SpeedLimitSign
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
@@ -64,7 +64,7 @@ fun CameraAlert(
                         text = title,
                         style = MaterialTheme.typography.bodyLarge
                     )
-                    VerticalSpacer(4.dp)
+                    Spacer(4.dp)
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,

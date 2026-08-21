@@ -40,11 +40,11 @@ import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
 import com.egoriku.grodnoroads.foundation.icons.filled.Edit
 import com.egoriku.grodnoroads.foundation.icons.outlined.Appearance
 import com.egoriku.grodnoroads.foundation.icons.outlined.Moon
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.theme.GrodnoRoadsM3Theme
 import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
 import com.egoriku.grodnoroads.foundation.theme.Platform
 import com.egoriku.grodnoroads.foundation.theme.Platform.Android
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.settings.debugtools.domain.DebugToolsComponent
 import com.egoriku.grodnoroads.settings.debugtools.ui.datastore.DataStoreEdit
 import com.egoriku.grodnoroads.settings.debugtools.ui.palette.Material3Palette
@@ -93,7 +93,7 @@ fun DebugToolsScreen(
                         .padding(horizontal = 16.dp)
                         .padding(it)
                 ) {
-                    VerticalSpacer(8.dp)
+                    Spacer(8.dp)
                     AnimatedVisibility(visible = scrollState.isScrollingUp()) {
                         Column {
                             TopActions(
@@ -102,14 +102,14 @@ fun DebugToolsScreen(
                                 onChangeDarkTheme = { isDarkTheme = !isDarkTheme },
                                 onShowSpecialEvent = { specialEventType = it }
                             )
-                            VerticalSpacer(16.dp)
+                            Spacer(16.dp)
                         }
                     }
                     PlatformSegmentedRow(
                         current = platform,
                         onPlatformChange = { platform = it }
                     )
-                    VerticalSpacer(4.dp)
+                    Spacer(4.dp)
                     UiDemoList(modifier = Modifier.verticalScroll(scrollState))
                 }
             }

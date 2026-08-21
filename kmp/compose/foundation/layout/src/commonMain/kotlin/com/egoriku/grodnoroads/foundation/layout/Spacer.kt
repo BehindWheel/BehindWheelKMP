@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.foundation.uikit
+package com.egoriku.grodnoroads.foundation.layout
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
@@ -9,15 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
-// TODO: rename to Spacer
 @Composable
-fun ColumnScope.VerticalSpacer(
+fun ColumnScope.Spacer(
     dp: Dp,
     modifier: Modifier = Modifier
 ) = Spacer(modifier = modifier.height(dp))
 
 @Composable
-fun RowScope.HorizontalSpacer(
+fun RowScope.Spacer(
     dp: Dp,
     modifier: Modifier = Modifier
 ) = Spacer(modifier = modifier.width(dp))

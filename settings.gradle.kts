@@ -37,6 +37,7 @@ include(":app:android")
 
 include(":kmp:compose:common-ui")
 include(":kmp:compose:foundation:core")
+include(":kmp:compose:foundation:layout")
 include(":kmp:compose:foundation:preview")
 include(":kmp:compose:foundation:theme")
 include(":kmp:compose:foundation:uikit")

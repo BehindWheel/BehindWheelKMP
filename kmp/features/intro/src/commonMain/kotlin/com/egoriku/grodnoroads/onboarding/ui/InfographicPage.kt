@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -34,7 +34,7 @@ internal fun InfographicPage(
                 style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center
             )
-            VerticalSpacer(16.dp)
+            Spacer(16.dp)
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodyLarge

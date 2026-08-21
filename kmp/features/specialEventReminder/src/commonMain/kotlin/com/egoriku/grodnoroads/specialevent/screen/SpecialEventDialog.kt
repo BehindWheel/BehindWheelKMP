@@ -25,9 +25,9 @@ import com.egoriku.grodnoroads.compose.resources.ok
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.DialogContent
 import com.egoriku.grodnoroads.foundation.common.ui.dialog.content.DialogButton
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.layout.Spacer
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
-import com.egoriku.grodnoroads.foundation.uikit.VerticalSpacer
 import com.egoriku.grodnoroads.foundation.uikit.listitem.CheckBoxListItem
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 import com.egoriku.grodnoroads.specialevent.domain.model.EventType.Autumn
@@ -74,7 +74,7 @@ private fun SpecialEventDialogContent(
     }
 
     DialogContent {
-        VerticalSpacer(16.dp)
+        Spacer(16.dp)
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -95,7 +95,7 @@ private fun SpecialEventDialogContent(
                 onCheckedChange = { dismissToday = it }
             )
         }
-        VerticalSpacer(8.dp)
+        Spacer(8.dp)
         HorizontalDivider()
         DialogButton(
             modifier = Modifier.fillMaxWidth(),

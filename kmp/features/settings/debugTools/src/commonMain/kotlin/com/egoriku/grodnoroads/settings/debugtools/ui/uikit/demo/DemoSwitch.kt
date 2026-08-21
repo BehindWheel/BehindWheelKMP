@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
-import com.egoriku.grodnoroads.foundation.uikit.WeightSpacer
+import com.egoriku.grodnoroads.foundation.layout.WeightSpacer
 import com.egoriku.grodnoroads.foundation.uikit.dynamic.Switch
 import com.egoriku.grodnoroads.settings.debugtools.ui.uikit.common.UIKitDemoContainer
 
