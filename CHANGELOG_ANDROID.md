@@ -6,6 +6,7 @@
 
 - Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
 - Add platform filter (Android/iOS) to changelog screen
+- Add "Don't show today" option to special event reminder dialog
 
 ### Fixed
 
@@ -17,6 +18,8 @@
 - Fix overspeed voice notification playing even when voice notifications are disabled
 
 ### Changed
+
+- Only show special event reminder dialog between sunrise and sunset
 
 - Add analytics tracking for in-app update errors
 - Add error and empty state handling with retry in changelog screen

@@ -18,8 +18,12 @@ kotlin {
             implementation(projects.kmp.compose.commonUi)
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
+            implementation(projects.kmp.libraries.datastore)
             implementation(projects.kmp.libraries.extensions)
+            implementation(projects.kmp.libraries.location)
             implementation(projects.kmp.libraries.logger)
+            implementation(projects.kmp.libraries.suntime)
+            implementation(projects.kmp.shared.persistent)
 
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle.coroutines)

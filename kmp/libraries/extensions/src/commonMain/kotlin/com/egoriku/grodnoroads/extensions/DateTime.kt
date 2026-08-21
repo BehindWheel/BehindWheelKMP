@@ -2,8 +2,8 @@ package com.egoriku.grodnoroads.extensions
 
 import androidx.annotation.VisibleForTesting
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -12,7 +12,6 @@ object DateTime {
     @VisibleForTesting
     var defaultTimeZone = TimeZone.of("Europe/Minsk")
 
-    @OptIn(ExperimentalTime::class)
     fun formatToTime(date: Long): String {
         val instant = Instant.fromEpochMilliseconds(date)
         val localDateTime = instant.toLocalDateTime(defaultTimeZone)
@@ -22,6 +21,9 @@ object DateTime {
         return "$hour:$minute"
     }
 
-    @OptIn(ExperimentalTime::class)
     fun currentTimeMillis(): Long = Clock.System.now().toEpochMilliseconds()
+
+    fun currentDateTime(): LocalDateTime {
+        return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    }
 }

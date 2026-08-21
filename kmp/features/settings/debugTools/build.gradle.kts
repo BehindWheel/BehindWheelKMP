@@ -17,6 +17,7 @@ kotlin {
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.persistent)
             implementation(projects.kmp.libraries.extensions)
+            implementation(projects.kmp.features.specialEventReminder)
 
             implementation(libs.decompose)
             implementation(libs.essenty.lifecycle.coroutines)

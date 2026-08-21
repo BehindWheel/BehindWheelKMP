@@ -6,7 +6,7 @@ import com.egoriku.grodnoroads.specialevent.domain.model.EventType
 internal fun buildDialogComponent(
     componentContext: ComponentContext,
     eventType: EventType,
-    onDismissed: () -> Unit
+    onDismissed: (dismissToday: Boolean) -> Unit
 ): DialogComponent = DialogComponentImpl(
     componentContext = componentContext,
     eventType = eventType,
@@ -16,9 +16,9 @@ internal fun buildDialogComponent(
 internal class DialogComponentImpl(
     componentContext: ComponentContext,
     override val eventType: EventType,
-    private val onDismissed: () -> Unit
+    private val onDismissed: (dismissToday: Boolean) -> Unit
 ) : DialogComponent,
     ComponentContext by componentContext {
 
-    override fun dismiss() = onDismissed()
+    override fun dismiss(dismissToday: Boolean) = onDismissed(dismissToday)
 }

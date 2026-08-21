@@ -9,6 +9,7 @@
 
     <string name="event_reminder_spring_body">З 25 мая па 5 чэрвеня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНе забудзьцеся ўключыць бліжняе святло! 🚘💡</string>
     <string name="event_reminder_autumn_body">З 25 жніўня па 5 верасня праходзіць спецыяльнае комплекснае мерапрыемства "Увага-дзеці!"\n\nНе забудзьцеся ўключыць бліжняе святло! 🚘💡</string>
+    <string name="event_reminder_dont_show_today">Не паказваць сёння</string>
 
     <string name="tab_map">Мапа</string>
     <string name="tab_chat">Чат</string>
