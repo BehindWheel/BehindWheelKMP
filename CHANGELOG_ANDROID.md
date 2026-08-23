@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-08-23
+
 ### Added
 
 - Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
@@ -20,7 +22,6 @@
 ### Changed
 
 - Only show special event reminder dialog between sunrise and sunset
-
 - Add analytics tracking for in-app update errors
 - Add error and empty state handling with retry in changelog screen
 
@@ -58,7 +59,8 @@
 
 ### Changed
 
-- Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel road (cross-track distance > 40 m
+- Filter `Camera` alerts by road corridor: suppress alerts when user is on a parallel road (
+  cross-track distance > 40 m
   from camera axis)
 - Introduce compact navigation bar
 - Add more speed limits for Mobile cameras
