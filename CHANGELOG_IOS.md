@@ -12,6 +12,7 @@
 - Add "Drone video control" and "Motorcycle unit" reporting options for traffic police
 - Add platform filter (Android/iOS) to changelog screen
 - Add "Don't show today" option to special event reminder dialog
+- Add double overspeed detection (alert when exceeding speed limit within 150m of camera)
 
 ### Fixed
 

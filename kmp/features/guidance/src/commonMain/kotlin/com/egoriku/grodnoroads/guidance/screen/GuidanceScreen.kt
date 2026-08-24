@@ -202,6 +202,7 @@ fun GuidanceScreen(
                         )
                     }
                     is AlertEvent.OverSpeed -> soundController.playOverSpeed()
+                    is AlertEvent.OverSpeedDouble -> soundController.playOverSpeedDouble(id = it.id)
                     is AlertEvent.VolumeChange -> {
                         soundController.setVolume(level = it.volume)
                         soundController.setLoudness(loudness = it.loudness)

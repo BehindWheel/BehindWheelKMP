@@ -33,6 +33,7 @@ import com.egoriku.grodnoroads.guidance.domain.store.dialog.DialogStore
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore
 import com.egoriku.grodnoroads.guidance.domain.store.location.LocationStore.Label
 import com.egoriku.grodnoroads.guidance.domain.store.mapevents.MapEventsStore
+import com.egoriku.grodnoroads.guidance.domain.util.OverSpeedAlert
 import com.egoriku.grodnoroads.guidance.domain.util.alertMessagesTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.alertSoundTransformation
 import com.egoriku.grodnoroads.guidance.domain.util.filterMapEvents
@@ -131,7 +132,7 @@ internal class GuidanceComponentImpl(
             flow3 = appMode,
             transform = alertSoundTransformation()
         ).distinctUntilChanged()
-            .debounce(500)
+            .debounce(500.milliseconds)
             .onEach { data ->
                 data.onEach { alert ->
                     when (alert) {
@@ -158,14 +159,22 @@ internal class GuidanceComponentImpl(
             .launchIn(coroutineScope)
 
         combine(
-            flow = speedLimit,
+            flow = overSpeed,
             flow2 = alertInfo.map { it.voiceAlertsEnabled },
             transform = ::Pair
         ).distinctUntilChanged()
             .debounce(500.milliseconds)
-            .onEach { (speedLimit, voiceAlertsEnabled) ->
-                if (speedLimit != -1 && voiceAlertsEnabled) {
-                    alertEvents.tryEmit(AlertEvent.OverSpeed)
+            .onEach { (overSpeed, voiceAlertsEnabled) ->
+                if (voiceAlertsEnabled) {
+                    when (overSpeed) {
+                        is OverSpeedAlert.None -> {}
+                        is OverSpeedAlert.Regular -> {
+                            alertEvents.tryEmit(AlertEvent.OverSpeed)
+                        }
+                        is OverSpeedAlert.Double -> {
+                            alertEvents.tryEmit(AlertEvent.OverSpeedDouble(id = overSpeed.cameraId))
+                        }
+                    }
                 }
             }
             .launchIn(coroutineScope)
@@ -240,12 +249,21 @@ internal class GuidanceComponentImpl(
             transform = alertMessagesTransformation()
         ).flowOn(Dispatchers.Default)
 
-    override val speedLimit: Flow<Int>
+    private val overSpeed: Flow<OverSpeedAlert>
         get() = combine(
             flow = alerts,
             flow2 = lastLocation,
             transform = overSpeedTransformation()
         ).flowOn(Dispatchers.Default)
+
+    override val speedLimit: Flow<Int>
+        get() = overSpeed.map {
+            when (it) {
+                OverSpeedAlert.None -> -1
+                is OverSpeedAlert.Regular -> it.speedLimit
+                is OverSpeedAlert.Double -> it.speedLimit
+            }
+        }
 
     override fun startDriveMode() {
         locationStore.accept(LocationStore.Intent.StartLocationUpdates)
