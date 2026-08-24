@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow.screen
+package com.egoriku.grodnoroads.foundation.navigation
 
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween

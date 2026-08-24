@@ -1,4 +1,4 @@
-package com.egoriku.grodnoroads.mainflow.screen
+package com.egoriku.grodnoroads.foundation.navigation
 
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.FaultyDecomposeApi
