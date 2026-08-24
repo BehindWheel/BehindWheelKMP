@@ -8,6 +8,7 @@ import com.egoriku.grodnoroads.shared.models.MapEventType
 interface SoundController {
 
     fun playOverSpeed()
+    fun playOverSpeedDouble(id: String)
     fun playIncident(id: String, mapEventType: MapEventType)
     fun playCameraLimit(id: String, speedLimit: Int, cameraType: CameraType)
 
@@ -24,6 +25,11 @@ abstract class SharedSoundController(
 
     override fun playOverSpeed() {
         playIfAllowed(overSpeedId, Sound.OverSpeed, PlayedAlertTracker.FIVE_SECONDS)
+        tracker.cleanup()
+    }
+
+    override fun playOverSpeedDouble(id: String) {
+        playIfAllowed("over_speed_double_$id", Sound.OverSpeed, PlayedAlertTracker.FIVE_MINUTES)
         tracker.cleanup()
     }
 

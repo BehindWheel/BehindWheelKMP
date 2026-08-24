@@ -17,6 +17,10 @@ sealed interface AlertEvent {
 
     data object OverSpeed : AlertEvent
 
+    data class OverSpeedDouble(
+        val id: String
+    ) : AlertEvent
+
     data class VolumeChange(
         val volume: Float,
         val loudness: Int

@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.google.maps.utils)
         }
         commonTest.dependencies {
+            implementation(libs.kotlin.coroutines.test)
             implementation(libs.kotlin.datetime)
             implementation(libs.kotlin.test)
         }
