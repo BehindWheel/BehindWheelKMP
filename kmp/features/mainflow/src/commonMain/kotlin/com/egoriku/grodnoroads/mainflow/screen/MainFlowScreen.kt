@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimation
-import com.arkivanov.essenty.backhandler.BackHandler
+import com.egoriku.grodnoroads.foundation.navigation.backAnimation
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
@@ -55,8 +54,3 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
         }
     }
 }
-
-expect fun <C : Any, T : Any> backAnimation(
-    backHandler: BackHandler,
-    onBack: () -> Unit
-): StackAnimation<C, T>
