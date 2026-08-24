@@ -70,6 +70,7 @@ kotlin {
             implementation(projects.kmp.compose.foundation.uikit)
             implementation(projects.kmp.compose.resources)
             implementation(projects.kmp.shared.analytics)
+            implementation(projects.kmp.shared.auth)
             implementation(projects.kmp.shared.crashlytics)
             implementation(projects.kmp.shared.geolocation)
             implementation(projects.kmp.shared.models)

@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.root.di
 
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
+import com.egoriku.grodnoroads.auth.di.authModule
 import com.egoriku.grodnoroads.crashlytics.shared.di.crashlyticsModule
 import com.egoriku.grodnoroads.eventreporting.di.eventReportingModule
 import com.egoriku.grodnoroads.guidance.di.guidanceModule
@@ -36,6 +37,7 @@ fun appModule() = listOf(
 
     alertsModule,
     appearanceModule,
+    authModule,
     changelogModule,
     faqModule,
     mapSettingsModule,

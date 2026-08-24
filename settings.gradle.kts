@@ -74,6 +74,7 @@ include(":kmp:libraries:suntime")
 
 include(":kmp:shared:audioplayer")
 include(":kmp:shared:analytics")
+include(":kmp:shared:auth")
 include(":kmp:shared:components")
 include(":kmp:shared:crashlytics")
 include(":kmp:shared:formatter")

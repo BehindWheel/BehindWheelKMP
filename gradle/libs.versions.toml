@@ -47,6 +47,7 @@ decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", ver
 
 desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.5"
 dev-gitlive-firebase-analytics = { module = "dev.gitlive:firebase-analytics", version.ref = "gitlive" }
+dev-gitlive-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "gitlive" }
 dev-gitlive-firebase-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "gitlive" }
 dev-gitlive-firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "gitlive" }
 dev-gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "gitlive" }
@@ -57,6 +58,7 @@ essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-corou
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
