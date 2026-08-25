@@ -17,14 +17,14 @@ interface MainFlowComponent : BackHandlerOwner {
     val childStack: StateFlow<ChildStack<*, Child>>
     fun onBack()
 
-    sealed class Child {
-        data class Tabs(val component: TabsComponent) : Child()
+    sealed interface Child {
+        data class Tabs(val component: TabsComponent) : Child
 
-        data class Alerts(val component: AlertsComponent) : Child()
-        data class Appearance(val component: AppearanceComponent) : Child()
-        data class Changelog(val component: ChangelogComponent) : Child()
-        data class DebugTools(val component: DebugToolsComponent) : Child()
-        data class FAQ(val component: FaqComponent) : Child()
-        data class MapSettings(val component: MapSettingsComponent) : Child()
+        data class Alerts(val component: AlertsComponent) : Child
+        data class Appearance(val component: AppearanceComponent) : Child
+        data class Changelog(val component: ChangelogComponent) : Child
+        data class DebugTools(val component: DebugToolsComponent) : Child
+        data class FAQ(val component: FaqComponent) : Child
+        data class MapSettings(val component: MapSettingsComponent) : Child
     }
 }
