@@ -46,7 +46,7 @@ fun FaqScreen(
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        contentWindowInsets = WindowInsets(),
         topBar = {
             SettingsTopBar(
                 title = stringResource(Res.string.settings_section_faq),

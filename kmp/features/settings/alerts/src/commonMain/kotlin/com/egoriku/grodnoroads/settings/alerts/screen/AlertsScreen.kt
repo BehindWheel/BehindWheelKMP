@@ -87,7 +87,7 @@ private fun AlertsUI(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.surface,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        contentWindowInsets = WindowInsets(),
         topBar = {
             SettingsTopBar(
                 title = stringResource(Res.string.settings_section_alerts),

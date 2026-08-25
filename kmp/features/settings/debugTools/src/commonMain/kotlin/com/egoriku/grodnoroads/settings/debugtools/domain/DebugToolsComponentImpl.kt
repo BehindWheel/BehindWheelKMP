@@ -1,22 +1,18 @@
 package com.egoriku.grodnoroads.settings.debugtools.domain
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
-import com.egoriku.grodnoroads.datastore.edit
-import com.egoriku.grodnoroads.shared.persistent.debug.showMapDebugOverlay
-import com.egoriku.grodnoroads.shared.persistent.debug.updateShowMapDebugOverlay
-import com.egoriku.grodnoroads.shared.persistent.intro.showIntro
-import com.egoriku.grodnoroads.shared.persistent.reporting.updateLastReportTime
-import com.egoriku.grodnoroads.shared.persistent.reporting.updateReportsInLastHour
-import kotlinx.coroutines.flow.SharingStarted
+import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.pushNew
+import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
+import com.egoriku.grodnoroads.settings.debugtools.domain.DebugToolsComponent.Child
+import com.egoriku.grodnoroads.settings.debugtools.domain.auth.buildAuthComponent
+import com.egoriku.grodnoroads.settings.debugtools.domain.datastore.buildDataStoreEditComponent
+import com.egoriku.grodnoroads.settings.debugtools.domain.root.buildDebugToolsRootComponent
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import kotlinx.serialization.Serializable
 
 fun buildDebugToolsComponent(
     componentContext: ComponentContext
@@ -25,42 +21,61 @@ fun buildDebugToolsComponent(
 internal class DebugToolsComponentImpl(
     componentContext: ComponentContext
 ) : DebugToolsComponent,
-    ComponentContext by componentContext,
-    KoinComponent {
+    ComponentContext by componentContext {
 
-    private val dataStore: DataStore<Preferences> by inject()
-    private val componentScope = coroutineScope()
+    private val navigation = StackNavigation<Config>()
+    private val stack = childStack(
+        source = navigation,
+        serializer = Config.serializer(),
+        initialConfiguration = Config.Root,
+        handleBackButton = true,
+        key = "DebugTools",
+        childFactory = ::processChild
+    )
 
-    override val showMapDebugOverlay: StateFlow<Boolean> = dataStore.data
-        .map { it.showMapDebugOverlay }
-        .stateIn(
-            scope = componentScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = false
+    override val childStack: StateFlow<ChildStack<*, Child>> = stack.toStateFlow()
+
+    override fun onBack() = navigation.pop()
+
+    private fun processChild(
+        config: Config,
+        componentContext: ComponentContext
+    ) = when (config) {
+        Config.Root -> Child.Root(
+            buildDebugToolsRootComponent(
+                componentContext = componentContext,
+                onOpenUiKit = { navigation.pushNew(Config.UiKit) },
+                onOpenDataStoreEdit = { navigation.pushNew(Config.DataStoreEdit) },
+                onOpenPalette = { navigation.pushNew(Config.Palette) },
+                onOpenAuth = { navigation.pushNew(Config.Auth) },
+                onOpenSpecialEvents = { navigation.pushNew(Config.SpecialEvents) }
+            )
         )
-
-    override fun resetOnboarding() {
-        componentScope.launch {
-            dataStore.edit {
-                showIntro(true)
-            }
-        }
+        Config.UiKit -> Child.UIKit
+        Config.DataStoreEdit -> Child.DataStoreEdit(buildDataStoreEditComponent(componentContext))
+        Config.Palette -> Child.Palette
+        Config.Auth -> Child.Auth(buildAuthComponent(componentContext))
+        Config.SpecialEvents -> Child.SpecialEvents
     }
 
-    override fun resetReportingLimit() {
-        componentScope.launch {
-            dataStore.edit {
-                updateLastReportTime(0L)
-                updateReportsInLastHour(0)
-            }
-        }
-    }
+    @Serializable
+    private sealed interface Config {
+        @Serializable
+        data object Root : Config
 
-    override fun setShowMapDebugOverlay(enabled: Boolean) {
-        componentScope.launch {
-            dataStore.edit {
-                updateShowMapDebugOverlay(enabled)
-            }
-        }
+        @Serializable
+        data object UiKit : Config
+
+        @Serializable
+        data object DataStoreEdit : Config
+
+        @Serializable
+        data object Palette : Config
+
+        @Serializable
+        data object Auth : Config
+
+        @Serializable
+        data object SpecialEvents : Config
     }
 }

@@ -31,7 +31,7 @@ fun ModalBottomSheet(
         shape = shape,
         dragHandle = dragHandle,
         sheetState = sheetState,
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
+        contentWindowInsets = { WindowInsets() }
     ) {
         content(navBarPadding)
     }
