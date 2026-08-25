@@ -40,9 +40,9 @@ interface RootComponent {
     val appTheme: Flow<AppTheme?>
     val childStack: StateFlow<ChildStack<*, Child>>
 
-    sealed class Child {
-        data class Intro(val component: IntroComponent) : Child()
-        data class MainFlow(val component: MainFlowComponent) : Child()
+    sealed interface Child {
+        data class Intro(val component: IntroComponent) : Child
+        data class MainFlow(val component: MainFlowComponent) : Child
     }
 }
 
