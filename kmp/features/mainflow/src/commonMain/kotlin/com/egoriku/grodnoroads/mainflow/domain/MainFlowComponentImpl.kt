@@ -10,7 +10,7 @@ import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.domain.component.buildAlertsComponent
 import com.egoriku.grodnoroads.settings.appearance.domain.component.buildAppearanceComponent
-import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogComponent
+import com.egoriku.grodnoroads.settings.changelog.domain.component.buildChangelogFlowComponent
 import com.egoriku.grodnoroads.settings.debugtools.domain.buildDebugToolsComponent
 import com.egoriku.grodnoroads.settings.faq.domain.component.buildFaqComponent
 import com.egoriku.grodnoroads.settings.map.domain.component.buildMapSettingsComponent
@@ -53,7 +53,7 @@ internal class MainFlowComponentImpl(
         )
         is Config.Appearance -> Child.Appearance(buildAppearanceComponent(componentContext))
         is Config.Alerts -> Child.Alerts(buildAlertsComponent(componentContext))
-        is Config.Changelog -> Child.Changelog(buildChangelogComponent(componentContext))
+        is Config.Changelog -> Child.Changelog(buildChangelogFlowComponent(componentContext))
         is Config.FAQ -> Child.FAQ(buildFaqComponent(componentContext))
         is Config.MapSettings -> Child.MapSettings(buildMapSettingsComponent(componentContext))
         is Config.DebugTools -> Child.DebugTools(buildDebugToolsComponent(componentContext))

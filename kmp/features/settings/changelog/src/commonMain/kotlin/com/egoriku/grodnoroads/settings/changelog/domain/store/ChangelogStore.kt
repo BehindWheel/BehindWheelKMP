@@ -7,10 +7,16 @@ import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogPlatform
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ErrorType
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore.State
 
-interface ChangelogStore : Store<ChangelogStore.Intent, State, Nothing> {
+interface ChangelogStore : Store<ChangelogStore.Intent, State, ChangelogStore.Label> {
 
     sealed interface Intent {
         data class SelectPlatform(val platform: ChangelogPlatform) : Intent
+        data class DeleteEntry(val id: String) : Intent
+        data class EntryUpserted(val entry: ChangelogEntry) : Intent
+    }
+
+    sealed interface Label {
+        data object DeleteFailed : Label
     }
 
     sealed interface Message {
@@ -18,6 +24,7 @@ interface ChangelogStore : Store<ChangelogStore.Intent, State, Nothing> {
         data object Loading : Message
         data class Success(val entries: List<ChangelogEntry>) : Message
         data class Error(val errorType: ErrorType) : Message
+        data class EntryUpserted(val entry: ChangelogEntry) : Message
     }
 
     data class State(

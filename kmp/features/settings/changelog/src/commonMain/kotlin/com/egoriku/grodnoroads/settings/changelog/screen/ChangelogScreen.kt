@@ -12,21 +12,28 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -38,8 +45,15 @@ import com.egoriku.grodnoroads.compose.resources.changelog_empty_message
 import com.egoriku.grodnoroads.compose.resources.changelog_error_message
 import com.egoriku.grodnoroads.compose.resources.retry
 import com.egoriku.grodnoroads.compose.resources.settings_section_changelog
+import com.egoriku.grodnoroads.compose.snackbar.SnackbarHost
+import com.egoriku.grodnoroads.compose.snackbar.model.MessageData.Raw
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarMessage.SimpleMessage
+import com.egoriku.grodnoroads.compose.snackbar.model.SnackbarState
 import com.egoriku.grodnoroads.extensions.LoremIpsum
 import com.egoriku.grodnoroads.foundation.common.ui.SettingsTopBar
+import com.egoriku.grodnoroads.foundation.core.rememberMutableState
+import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
+import com.egoriku.grodnoroads.foundation.icons.outlined.Add
 import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoadsDarkLight
 import com.egoriku.grodnoroads.foundation.theme.LocalPlatform
@@ -60,9 +74,33 @@ import org.jetbrains.compose.resources.stringResource
 fun ChangelogScreen(
     changelogComponent: ChangelogComponent,
     modifier: Modifier = Modifier,
+    onAddClick: () -> Unit = {},
+    onEditClick: (ChangelogEntry) -> Unit = {},
     onBack: () -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val allowedModify by changelogComponent.allowedModify.collectAsState()
+    val content by changelogComponent.content.collectAsState()
+    val platform by changelogComponent.platform.collectAsState()
+    val currentPlatform = LocalPlatform.current.toChangelogPlatform()
+    val resolvedPlatform = platform ?: currentPlatform
+
+    val snackbarState = remember { SnackbarState() }
+    var entryToDelete by rememberMutableState<ChangelogEntry?> { null }
+
+    LaunchedEffect(currentPlatform) {
+        changelogComponent.selectPlatform(currentPlatform)
+    }
+
+    LaunchedEffect(Unit) {
+        changelogComponent.labels.collect { label ->
+            when (label) {
+                ChangelogComponent.Label.DeleteFailed -> snackbarState.show(
+                    SimpleMessage(title = Raw("Failed to delete entry"))
+                )
+            }
+        }
+    }
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -73,25 +111,75 @@ fun ChangelogScreen(
                 title = stringResource(Res.string.settings_section_changelog),
                 onBack = onBack
             )
+        },
+        floatingActionButton = {
+            if (allowedModify) {
+                FloatingActionButton(
+                    modifier = Modifier.navigationBarsPadding(),
+                    onClick = onAddClick
+                ) {
+                    Icon(
+                        imageVector = GrodnoRoads.Outlined.Add,
+                        contentDescription = null
+                    )
+                }
+            }
         }
     ) { paddingValues ->
-        val content by changelogComponent.content.collectAsState()
-        val platform by changelogComponent.platform.collectAsState()
+        Box(modifier = Modifier.fillMaxSize()) {
+            ChangelogContent(
+                content = content,
+                platform = resolvedPlatform,
+                allowedModify = allowedModify,
+                modifier = Modifier.padding(paddingValues),
+                onPlatformSelect = changelogComponent::selectPlatform,
+                onRetry = { changelogComponent.selectPlatform(resolvedPlatform) },
+                onEditClick = onEditClick,
+                onDeleteClick = { entryToDelete = it }
+            )
 
-        val currentPlatform = LocalPlatform.current.toChangelogPlatform()
-
-        LaunchedEffect(currentPlatform) {
-            changelogComponent.selectPlatform(currentPlatform)
+            SnackbarHost(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(paddingValues),
+                hostState = snackbarState
+            )
         }
+    }
 
-        ChangelogContent(
-            content = content,
-            platform = platform ?: currentPlatform,
-            modifier = Modifier.padding(paddingValues),
-            onPlatformSelect = changelogComponent::selectPlatform,
-            onRetry = { platform?.let { changelogComponent.selectPlatform(it) } }
+    entryToDelete?.let { entry ->
+        DeleteChangelogEntryDialog(
+            versionName = entry.versionName,
+            onConfirm = {
+                changelogComponent.deleteEntry(entry.id)
+                entryToDelete = null
+            },
+            onDismiss = { entryToDelete = null }
         )
     }
+}
+
+@Composable
+private fun DeleteChangelogEntryDialog(
+    versionName: String,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(text = "Delete version") },
+        text = { Text(text = "Are you sure you want to delete $versionName?") },
+        confirmButton = {
+            TextButton(onClick = onConfirm) {
+                Text(text = "Delete")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(text = "Cancel")
+            }
+        }
+    )
 }
 
 @Composable
@@ -99,8 +187,11 @@ private fun ChangelogContent(
     content: Content,
     platform: ChangelogPlatform,
     modifier: Modifier = Modifier,
+    allowedModify: Boolean = false,
     onPlatformSelect: (ChangelogPlatform) -> Unit = {},
-    onRetry: () -> Unit = {}
+    onRetry: () -> Unit = {},
+    onEditClick: (ChangelogEntry) -> Unit = {},
+    onDeleteClick: (ChangelogEntry) -> Unit = {}
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         PlatformFilterRow(
@@ -118,7 +209,12 @@ private fun ChangelogContent(
                     errorType = targetContent.errorType,
                     onRetry = onRetry
                 )
-                is Content.Loaded -> ChangelogLoadedContent(entries = targetContent.entries)
+                is Content.Loaded -> ChangelogLoadedContent(
+                    entries = targetContent.entries,
+                    allowedModify = allowedModify,
+                    onEditClick = onEditClick,
+                    onDeleteClick = onDeleteClick
+                )
             }
         }
     }
@@ -188,7 +284,12 @@ private fun ChangelogErrorContent(
 }
 
 @Composable
-private fun ChangelogLoadedContent(entries: List<ChangelogEntry>) {
+private fun ChangelogLoadedContent(
+    entries: List<ChangelogEntry>,
+    allowedModify: Boolean = false,
+    onEditClick: (ChangelogEntry) -> Unit = {},
+    onDeleteClick: (ChangelogEntry) -> Unit = {}
+) {
     LazyVerticalStaggeredGrid(
         modifier = Modifier.fillMaxSize(),
         columns = StaggeredGridCells.Adaptive(250.dp),
@@ -209,7 +310,10 @@ private fun ChangelogLoadedContent(entries: List<ChangelogEntry>) {
         itemsIndexed(entries) { index, entry ->
             ChangelogItem(
                 isLatestRelease = index == 0,
-                release = entry
+                release = entry,
+                allowedModify = allowedModify,
+                onEditClick = { onEditClick(entry) },
+                onDeleteClick = { onDeleteClick(entry) }
             )
         }
     }
@@ -224,29 +328,39 @@ private fun ChangelogContentLoadedPreview() = GrodnoRoadsM3ThemePreview {
         content = Content.Loaded(
             entries = listOf(
                 ChangelogEntry(
+                    id = "1",
+                    platform = Android,
                     versionName = "1.0.6",
                     notes = LoremIpsum.generateLoremIpsum(10),
-                    releaseDate = "18 July, 2026"
+                    releaseDateMillis = 1784448000000L
                 ),
                 ChangelogEntry(
+                    id = "2",
+                    platform = Android,
                     versionName = "1.0.5",
                     notes = LoremIpsum.generateLoremIpsum(31),
-                    releaseDate = "10 June, 2026"
+                    releaseDateMillis = 1781136000000L
                 ),
                 ChangelogEntry(
+                    id = "3",
+                    platform = Android,
                     versionName = "1.0.4",
                     notes = LoremIpsum.generateLoremIpsum(4),
-                    releaseDate = "22 May, 2026"
+                    releaseDateMillis = 1779408000000L
                 ),
                 ChangelogEntry(
+                    id = "4",
+                    platform = Android,
                     versionName = "1.0.3",
                     notes = LoremIpsum.generateLoremIpsum(31),
-                    releaseDate = "15 April, 2026"
+                    releaseDateMillis = 1776211200000L
                 ),
                 ChangelogEntry(
+                    id = "5",
+                    platform = Android,
                     versionName = "1.0.2",
                     notes = LoremIpsum.generateLoremIpsum(9),
-                    releaseDate = "3 October, 2023"
+                    releaseDateMillis = 1696291200000L
                 )
             )
         ),

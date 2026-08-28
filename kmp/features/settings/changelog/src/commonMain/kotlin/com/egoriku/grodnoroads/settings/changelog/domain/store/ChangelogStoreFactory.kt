@@ -22,12 +22,14 @@ internal class ChangelogStoreFactory(
 
     internal fun create(): ChangelogStore = object :
         ChangelogStore,
-        Store<Intent, State, Nothing> by storeFactory.create(
+        Store<Intent, State, ChangelogStore.Label> by storeFactory.create(
             initialState = State(),
             executorFactory = coroutineExecutorFactory(Dispatchers.Main) {
                 var loadJob by smartJob()
 
                 onIntent<Intent.SelectPlatform> { intent ->
+                    if (state().platform == intent.platform) return@onIntent
+
                     loadJob = launch {
                         dispatch(Message.PlatformUpdated(intent.platform))
                         dispatch(Message.Loading)
@@ -47,6 +49,38 @@ internal class ChangelogStoreFactory(
                         }
                     }
                 }
+
+                onIntent<Intent.DeleteEntry> { intent ->
+                    val platform = state().platform ?: return@onIntent
+                    loadJob = launch {
+                        when (val deleteResult = changelogRepository.delete(intent.id)) {
+                            is ResultOf.Success -> {
+                                dispatch(Message.Loading)
+
+                                when (val loadResult = changelogRepository.load(platform)) {
+                                    is ResultOf.Success -> {
+                                        if (loadResult.value.isEmpty()) {
+                                            dispatch(Message.Error(ErrorType.EmptyData))
+                                        } else {
+                                            dispatch(Message.Success(loadResult.value))
+                                        }
+                                    }
+                                    is ResultOf.Failure -> {
+                                        crashlyticsTracker.recordException(loadResult.throwable)
+                                        dispatch(Message.Error(ErrorType.LoadFailed))
+                                    }
+                                }
+                            }
+                            is ResultOf.Failure -> {
+                                crashlyticsTracker.recordException(deleteResult.throwable)
+                                publish(ChangelogStore.Label.DeleteFailed)
+                            }
+                        }
+                    }
+                }
+                onIntent<Intent.EntryUpserted> { intent ->
+                    dispatch(Message.EntryUpserted(intent.entry))
+                }
             },
             reducer = { message: Message ->
                 when (message) {
@@ -54,6 +88,24 @@ internal class ChangelogStoreFactory(
                     is Message.Loading -> copy(content = State.Content.Loading)
                     is Message.Success -> copy(content = State.Content.Loaded(message.entries))
                     is Message.Error -> copy(content = State.Content.Error(message.errorType))
+                    is Message.EntryUpserted -> {
+                        val currentContent = content
+
+                        if (message.entry.platform != platform) {
+                            this
+                        } else {
+                            val existingEntries = when (currentContent) {
+                                is State.Content.Loaded -> currentContent.entries
+                                else -> emptyList()
+                            }
+                            val updatedEntries = existingEntries
+                                .filterNot { it.id == message.entry.id }
+                                .plus(message.entry)
+                                .sortedByDescending { it.releaseDateMillis }
+
+                            copy(content = State.Content.Loaded(updatedEntries))
+                        }
+                    }
                 }
             }
         ) {}

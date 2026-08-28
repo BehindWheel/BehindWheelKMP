@@ -9,7 +9,7 @@ import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent
 import com.egoriku.grodnoroads.mainflow.domain.MainFlowComponent.Child
 import com.egoriku.grodnoroads.settings.alerts.screen.AlertsScreen
 import com.egoriku.grodnoroads.settings.appearance.screen.AppearanceScreen
-import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogScreen
+import com.egoriku.grodnoroads.settings.changelog.screen.ChangelogFlowScreen
 import com.egoriku.grodnoroads.settings.debugtools.DebugToolsScreen
 import com.egoriku.grodnoroads.settings.faq.screen.FaqScreen
 import com.egoriku.grodnoroads.settings.map.screen.MapSettingsScreen
@@ -35,8 +35,8 @@ fun MainFlowScreen(mainFlowComponent: MainFlowComponent) {
                 appearanceComponent = child.component,
                 onBack = mainFlowComponent::onBack
             )
-            is Child.Changelog -> ChangelogScreen(
-                changelogComponent = child.component,
+            is Child.Changelog -> ChangelogFlowScreen(
+                changelogFlowComponent = child.component,
                 onBack = mainFlowComponent::onBack
             )
             is Child.FAQ -> FaqScreen(
