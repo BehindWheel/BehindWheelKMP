@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.foundation.core.rememberMutableState
 import com.egoriku.grodnoroads.foundation.icons.GrodnoRoads
@@ -63,6 +64,7 @@ fun OutlinedTextField(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     isError: Boolean = false,
+    singleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     supportingText: String? = null
@@ -73,46 +75,83 @@ fun OutlinedTextField(
         keyboardActions = keyboardActions,
         value = value,
         shape = RoundedCornerShape(16.dp),
-        singleLine = true,
+        singleLine = singleLine,
         enabled = enabled,
         isError = isError,
-        colors = OutlinedTextFieldDefaults.colors().copy(
-            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-            unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
-            disabledIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-
-            focusedLabelColor = MaterialTheme.colorScheme.onSurface,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
-            disabledLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-
-            errorLabelColor = MaterialTheme.colorScheme.error,
-
-            errorSupportingTextColor = MaterialTheme.colorScheme.error,
-
-            disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-        ),
+        colors = grodnoRoadsOutlinedTextFieldColors(),
         onValueChange = onValueChange,
         label = { Text(text = label) },
-        trailingIcon = when {
-            isError -> {
-                {
-                    Icon(
-                        imageVector = GrodnoRoads.Outlined.Error,
-                        contentDescription = null
-                    )
-                }
-            }
-            else -> null
-        },
-        supportingText = when {
-            supportingText != null -> {
-                {
-                    Text(text = supportingText)
-                }
-            }
-            else -> null
-        }
+        trailingIcon = errorTrailingIcon(isError),
+        supportingText = supportingTextComposable(supportingText)
     )
+}
+
+@Composable
+fun OutlinedTextField(
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    isError: Boolean = false,
+    singleLine: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    supportingText: String? = null
+) {
+    androidx.compose.material3.OutlinedTextField(
+        modifier = modifier.fillMaxWidth(),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        value = value,
+        shape = RoundedCornerShape(16.dp),
+        singleLine = singleLine,
+        enabled = enabled,
+        isError = isError,
+        colors = grodnoRoadsOutlinedTextFieldColors(),
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        trailingIcon = errorTrailingIcon(isError),
+        supportingText = supportingTextComposable(supportingText)
+    )
+}
+
+@Composable
+private fun grodnoRoadsOutlinedTextFieldColors() = OutlinedTextFieldDefaults.colors().copy(
+    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+    unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
+    disabledIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+
+    focusedLabelColor = MaterialTheme.colorScheme.onSurface,
+    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
+    disabledLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+
+    errorLabelColor = MaterialTheme.colorScheme.error,
+
+    errorSupportingTextColor = MaterialTheme.colorScheme.error,
+
+    disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+)
+
+private fun errorTrailingIcon(isError: Boolean): (@Composable () -> Unit)? = when {
+    isError -> {
+        {
+            Icon(
+                imageVector = GrodnoRoads.Outlined.Error,
+                contentDescription = null
+            )
+        }
+    }
+    else -> null
+}
+
+private fun supportingTextComposable(supportingText: String?): (@Composable () -> Unit)? = when {
+    supportingText != null -> {
+        {
+            Text(text = supportingText)
+        }
+    }
+    else -> null
 }
 
 @PreviewGrodnoRoads

@@ -27,6 +27,7 @@ internal val lightColorScheme = lightColorScheme(
 
     surface = Color.White,
     surfaceContainerLow = Color.White,
+    surfaceContainerHigh = Color.White,
     surfaceContainerHighest = Color.White,
     surfaceVariant = Color.White,
     onSurface = Color(0xFF232F34),
@@ -69,6 +70,7 @@ internal val darkColorScheme = darkColorScheme(
     surface = Color(0xFF393E46),
     surfaceContainer = Color(0xFF393E46),
     surfaceContainerLow = Color(0xFF393E46),
+    surfaceContainerHigh = Color(0xFF393E46),
     surfaceContainerHighest = Color(0xFF393E46),
     surfaceVariant = Color(0xFF393E46),
     onSurface = Color(0xFFFDFDFD),
