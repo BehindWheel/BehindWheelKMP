@@ -3,10 +3,13 @@ package com.egoriku.grodnoroads.auth
 import com.egoriku.grodnoroads.extensions.common.ResultOf
 import com.egoriku.grodnoroads.extensions.coroutines.runCatchingCancellable
 import dev.gitlive.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 interface Auth {
@@ -21,8 +24,18 @@ internal class AuthImpl(
     private val firebaseAuth: FirebaseAuth
 ) : Auth {
 
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
     override val isSignedIn: StateFlow<Boolean>
         field = MutableStateFlow(firebaseAuth.currentUser != null)
+
+    init {
+        scope.launch {
+            firebaseAuth.authStateChanged.collect { user ->
+                isSignedIn.value = user != null
+            }
+        }
+    }
 
     override suspend fun signIn(email: String, password: String): ResultOf<Unit> = withContext(Dispatchers.IO) {
         runCatchingCancellable {

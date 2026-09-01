@@ -28,7 +28,10 @@ internal class ChangelogStoreFactory(
                 var loadJob by smartJob()
 
                 onIntent<Intent.SelectPlatform> { intent ->
-                    if (state().platform == intent.platform) return@onIntent
+                    val current = state()
+                    if (current.platform == intent.platform && current.content is State.Content.Loaded) {
+                        return@onIntent
+                    }
 
                     loadJob = launch {
                         dispatch(Message.PlatformUpdated(intent.platform))
