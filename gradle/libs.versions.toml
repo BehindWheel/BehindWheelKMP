@@ -8,7 +8,7 @@ targetSdk = "37"
 ios-minTarget = "16.0"
 spm-googleMaps = "10.13.0"
 
-agp = "9.3.2"
+agp = "9.4.0"
 buildkonfig = "0.22.0"
 decompose = "3.5.0"
 compose = "1.12.0"
