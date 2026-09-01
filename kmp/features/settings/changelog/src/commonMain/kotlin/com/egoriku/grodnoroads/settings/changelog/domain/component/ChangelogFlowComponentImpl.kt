@@ -10,7 +10,6 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.egoriku.grodnoroads.extensions.decompose.toStateFlow
 import com.egoriku.grodnoroads.settings.changelog.domain.component.ChangelogFlowComponent.Child
 import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogEntry
-import com.egoriku.grodnoroads.settings.changelog.domain.model.ChangelogPlatform
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
@@ -44,21 +43,11 @@ internal class ChangelogFlowComponentImpl(
     override fun onBack() = navigation.pop()
 
     override fun onAddClick() {
-        navigation.pushNew(
-            Config.AddEdit(
-                platform = ChangelogPlatform.Android,
-                entry = null
-            )
-        )
+        navigation.pushNew(Config.Add)
     }
 
     override fun onEditClick(entry: ChangelogEntry) {
-        navigation.pushNew(
-            Config.AddEdit(
-                platform = entry.platform,
-                entry = entry
-            )
-        )
+        navigation.pushNew(Config.Edit(entry))
     }
 
     private fun processChild(
@@ -68,10 +57,18 @@ internal class ChangelogFlowComponentImpl(
         is Config.List -> Child.List(
             buildChangelogComponent(componentContext = componentContext, changelogStore = changelogStore)
         )
-        is Config.AddEdit -> Child.AddEdit(
+        is Config.Add -> Child.AddEdit(
             buildChangelogAddComponent(
                 componentContext = componentContext,
-                platform = config.platform,
+                entry = null,
+                changelogStore = changelogStore,
+                onFinished = navigation::pop
+            )
+        )
+        is Config.Edit -> Child.AddEdit(
+            buildChangelogAddComponent(
+                componentContext = componentContext,
+                platform = config.entry.platform,
                 entry = config.entry,
                 changelogStore = changelogStore,
                 onFinished = navigation::pop
@@ -85,6 +82,9 @@ internal class ChangelogFlowComponentImpl(
         data object List : Config
 
         @Serializable
-        data class AddEdit(val platform: ChangelogPlatform, val entry: ChangelogEntry?) : Config
+        data object Add : Config
+
+        @Serializable
+        data class Edit(val entry: ChangelogEntry) : Config
     }
 }

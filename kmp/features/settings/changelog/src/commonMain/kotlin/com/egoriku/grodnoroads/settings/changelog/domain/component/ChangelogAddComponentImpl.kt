@@ -31,10 +31,10 @@ private val NEW_ENTRY_NOTES_TEMPLATE = """
 
 fun buildChangelogAddComponent(
     componentContext: ComponentContext,
-    platform: ChangelogPlatform,
-    entry: ChangelogEntry?,
     changelogStore: ChangelogStore,
-    onFinished: () -> Unit
+    onFinished: () -> Unit,
+    entry: ChangelogEntry? = null,
+    platform: ChangelogPlatform = ChangelogPlatform.Android
 ): ChangelogAddComponent = ChangelogAddComponentImpl(
     componentContext = componentContext,
     platform = platform,

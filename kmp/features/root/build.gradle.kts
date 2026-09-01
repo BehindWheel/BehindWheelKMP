@@ -40,10 +40,11 @@ kotlin {
             version = from("11.8.0"),
             products =
                 listOf(
-                    product("FirebaseCore"),
-                    product("FirebaseDatabase"),
                     product("FirebaseAnalytics"),
+                    product("FirebaseAuth"),
+                    product("FirebaseCore"),
                     product("FirebaseCrashlytics"),
+                    product("FirebaseDatabase"),
                     product("FirebaseFirestore")
                 )
         )
