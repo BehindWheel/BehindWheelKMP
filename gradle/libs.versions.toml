@@ -64,7 +64,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 
 google-app-update = "com.google.android.play:app-update-ktx:2.1.0"
-google-maps = "com.google.maps.android:maps-ktx:6.3.0"
+google-maps = "com.google.maps.android:maps-ktx:6.4.0"
 google-maps-utils = "com.google.maps.android:android-maps-utils:5.2.0"
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
