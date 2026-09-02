@@ -15,7 +15,7 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/firebase/firebase-ios-sdk.git",
-      from: "11.8.0"
+      from: "12.18.0"
     ),
     .package(path: "subpackages/_kmp_compose_maps_compose")
   ],
