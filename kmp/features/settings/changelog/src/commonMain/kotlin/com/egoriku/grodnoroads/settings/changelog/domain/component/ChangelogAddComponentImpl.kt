@@ -12,7 +12,6 @@ import com.egoriku.grodnoroads.settings.changelog.domain.repository.ChangelogRep
 import com.egoriku.grodnoroads.settings.changelog.domain.store.ChangelogStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -56,39 +55,39 @@ internal class ChangelogAddComponentImpl(
     private val componentScope = coroutineScope()
     private val changelogRepository: ChangelogRepository = get()
 
-    private val _state = MutableStateFlow(
-        State(
-            isEditing = entry != null,
-            platform = platform,
-            versionName = entry?.versionName.orEmpty(),
-            notes = entry?.notes ?: NEW_ENTRY_NOTES_TEMPLATE,
-            releaseDateMillis = entry?.releaseDateMillis ?: DateTime.currentTimeMillis(),
-            isSaving = false,
-            saveError = null
+    override val state: StateFlow<State>
+        field = MutableStateFlow(
+            State(
+                isEditing = entry != null,
+                platform = platform,
+                versionName = entry?.versionName.orEmpty(),
+                notes = entry?.notes ?: NEW_ENTRY_NOTES_TEMPLATE,
+                releaseDateMillis = entry?.releaseDateMillis ?: DateTime.currentTimeMillis(),
+                isSaving = false,
+                saveError = null
+            )
         )
-    )
-    override val state: StateFlow<State> = _state.asStateFlow()
 
     override fun setPlatform(platform: ChangelogPlatform) {
-        _state.update { it.copy(platform = platform) }
+        state.update { it.copy(platform = platform) }
     }
 
     override fun setVersionName(versionName: String) {
-        _state.update { it.copy(versionName = versionName) }
+        state.update { it.copy(versionName = versionName) }
     }
 
     override fun setNotes(notes: String) {
-        _state.update { it.copy(notes = notes) }
+        state.update { it.copy(notes = notes) }
     }
 
     override fun setReleaseDateMillis(millis: Long) {
-        _state.update { it.copy(releaseDateMillis = millis) }
+        state.update { it.copy(releaseDateMillis = millis) }
     }
 
     override fun save() {
-        val current = _state.value
+        val current = state.value
         componentScope.launch {
-            _state.update { it.copy(isSaving = true, saveError = null) }
+            state.update { it.copy(isSaving = true, saveError = null) }
 
             val newEntry = NewChangelogEntry(
                 versionName = current.versionName,
@@ -106,7 +105,7 @@ internal class ChangelogAddComponentImpl(
                     changelogStore.accept(ChangelogStore.Intent.EntryUpserted(result.value))
                     onFinished()
                 }
-                is ResultOf.Failure -> _state.update {
+                is ResultOf.Failure -> state.update {
                     it.copy(isSaving = false, saveError = result.throwable)
                 }
             }

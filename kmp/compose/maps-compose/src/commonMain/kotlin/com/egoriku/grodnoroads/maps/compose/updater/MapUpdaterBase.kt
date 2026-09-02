@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 
 const val NAVIGATION_CAMERA_TILT = 55.0
 internal const val SHADOW_CAMERA_ANIMATION_DURATION_MS = 400
@@ -33,18 +32,18 @@ abstract class MapUpdaterBase :
     protected abstract val currentZoom: Float
     protected abstract val projection: Projection
 
-    private val _clickedMarker = MutableSharedFlow<Marker>(replay = 0)
-    override val clickedMarker: SharedFlow<Marker> = _clickedMarker.asSharedFlow()
+    final override val clickedMarker: SharedFlow<Marker>
+        field = MutableSharedFlow(replay = 0)
 
-    private val _mapLongClickEvents = MutableSharedFlow<LatLng>(replay = 0)
-    override val mapLongClickEvents: SharedFlow<LatLng> = _mapLongClickEvents.asSharedFlow()
+    final override val mapLongClickEvents: SharedFlow<LatLng>
+        field = MutableSharedFlow(replay = 0)
 
     protected suspend fun emitClickedMarker(marker: Marker) {
-        _clickedMarker.emit(marker)
+        clickedMarker.emit(marker)
     }
 
     protected suspend fun emitMapLongClickEvent(latLng: LatLng) {
-        _mapLongClickEvents.emit(latLng)
+        mapLongClickEvents.emit(latLng)
     }
 
     override fun setMaxZoomPreference(value: Float) {

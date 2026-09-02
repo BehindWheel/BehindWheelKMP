@@ -12,7 +12,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -69,8 +69,8 @@ class LocationRequester(
 ) {
     private val mutex: Mutex = Mutex()
 
-    private val _events = MutableSharedFlow<LocationRequestStatus>()
-    val events = _events.asSharedFlow()
+    val events: SharedFlow<LocationRequestStatus>
+        field = MutableSharedFlow()
 
     fun request() {
         scope.launch {
@@ -80,7 +80,7 @@ class LocationRequester(
 
     private suspend fun requestPermission() {
         val state = provideLocationPermission(locationDelegate.currentPermissionStatus())
-        _events.emit(state)
+        events.emit(state)
     }
 
     private suspend fun provideLocationPermission(status: CLAuthorizationStatus): LocationRequestStatus {
