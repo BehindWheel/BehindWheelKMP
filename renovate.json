@@ -19,6 +19,7 @@
     {
       "groupName": "Firebase Pod dependencies",
       "matchPackageNames": [
+        "FirebaseAuth",
         "FirebaseFirestore",
         "FirebaseDatabase",
         "FirebaseCrashlytics",
@@ -32,7 +33,8 @@
         "dev.gitlive:firebase-firestore",
         "dev.gitlive:firebase-database",
         "dev.gitlive:firebase-crashlytics",
-        "dev.gitlive:firebase-analytics"
+        "dev.gitlive:firebase-analytics",
+        "dev.gitlive:firebase-auth"
       ]
     }
   ]
