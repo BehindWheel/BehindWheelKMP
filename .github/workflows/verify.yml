@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 17.0.20+101
 
       - name: Copy google-services.json
         run: echo ${{ secrets.GOOGLE_JSON }} | base64 --decode > app/android/google-services.json
@@ -76,7 +76,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 17.0.20+101
 
       - name: Make secrets.properties
         run: echo ${{ secrets.SECRETS_PROPERTIES }} | base64 --decode > secrets.properties
