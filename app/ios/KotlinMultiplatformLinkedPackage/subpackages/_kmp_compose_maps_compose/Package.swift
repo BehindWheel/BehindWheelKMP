@@ -15,7 +15,7 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/googlemaps/ios-maps-sdk.git",
-      exact: "10.13.0"
+      exact: "11.1.0"
     )
   ],
   targets: [

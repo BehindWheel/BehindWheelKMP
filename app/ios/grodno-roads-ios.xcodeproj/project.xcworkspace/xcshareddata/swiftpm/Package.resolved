@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googlemaps/ios-maps-sdk.git",
       "state" : {
-        "revision" : "3105e73b6b157838dbce2407caf89106bd61fc96",
-        "version" : "10.13.0"
+        "revision" : "bb35529d3660739497b35d5de53dc7e6c5942198",
+        "version" : "11.1.0"
       }
     },
     {
