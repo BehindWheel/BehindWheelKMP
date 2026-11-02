@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Raise minimum Android SDK from 23 to 24
+
 ## [1.8.0] - 2026-08-23
 
 ### Added
