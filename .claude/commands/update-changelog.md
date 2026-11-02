@@ -23,8 +23,11 @@ Update the changelog based on uncommitted changes.
    - `### Added` — new features or capabilities
    - `### Fixed` — bug fixes
    - `### Changed` — improvements, updates, refactors
+   - Create the category heading if it does not already exist under `## [Unreleased]`.
 
-5. Rules:
+5. If no meaningful (user-facing) changes are found, do not modify the changelog.
+
+6. Rules:
    - Write in English
    - Use imperative mood ("Add...", "Fix...", "Update...")
    - Keep entries concise but descriptive
@@ -38,6 +41,13 @@ Update the changelog based on uncommitted changes.
 - `**/androidMain/**` → Android
 - `**/iosMain/**` → iOS
 - `kmp/`, `compose/`, `libraries/`, `shared/` (under `kmp/`) → Both (unless matched by a platform-specific rule above)
-- `build-logic/`, `gradle/`, `settings.gradle.kts` → skip (build configuration, not user-facing)
+- `build-logic/`, `gradle/`, `settings.gradle.kts` → skip, except changes to `minSdk`, `compileSdk`, or `targetSdk` in version catalogs, which are user-facing → Changed
+- `config/`, `docs/`, `README.md`, `CLAUDE.md` → skip
+
+## Examples
+
+- `### Changed` — Raise minimum Android SDK from 23 to 24
+- `### Fixed` — Fix crash when in-app update is triggered while another update is already in progress
+- `### Added` — Add platform filter to changelog screen
 
 $ARGUMENTS
