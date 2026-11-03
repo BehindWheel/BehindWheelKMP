@@ -1,3 +1,4 @@
+import com.android.build.api.variant.HostTestBuilder
 import com.egoriku.grodnoroads.extension.debug
 import com.egoriku.grodnoroads.extension.loadKeystore
 import com.egoriku.grodnoroads.extension.provideVersionCode
@@ -35,6 +36,11 @@ android {
         versionName = provideVersionName("$rootDir/config/versioning/android.properties")
 
         androidResources.localeFilters += listOf("en", "ru", "be")
+
+        // The secrets plugin injects the real value via the variant API, which the unit test
+        // manifest merger does not read; without a DSL fallback mergeDebugUnitTestManifest fails
+        // on the ${MAPS_API_KEY} placeholder (required by isIncludeAndroidResources = true)
+        manifestPlaceholders["MAPS_API_KEY"] = ""
     }
 
     signingConfigs {
@@ -76,6 +82,14 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+// AGP 9.5: generate<Variant>ComposePreviewRunfiles fails at configuration time
+// when unit tests are disabled for a variant (b/572377862)
+androidComponents {
+    beforeVariants {
+        it.hostTests[HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
     }
 }
 
