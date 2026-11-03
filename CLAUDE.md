@@ -311,30 +311,6 @@ patch=Z
 
 ### 2. Update `CHANGELOG_ANDROID.md`
 
-- Move all content from `## [Unreleased]` into a new versioned section `## [X.Y.Z] - YYYY-MM-DD` (
-  use today's date)
-- Leave `## [Unreleased]` empty at the top
-- When adding entries to an existing `[Unreleased]` section, append new items at the **end** of the
-  relevant category (e.g. `### Changed`), not at the top
-
-Example structure:
-
-```markdown
-# Changelog (Android)
-
-## [Unreleased]
-
-## [1.6.0] - 2026-06-27
-
-### Added
-
-- ...
-
-### Fixed
-
-- ...
-
-### Changed
-
-- ...
-```
+Follow the `/update-changelog` skill (`.claude/commands/update-changelog.md`) — it defines the
+changelog rules (categories, formatting, entry placement) and the release flow (moving
+`## [Unreleased]` content into a versioned section, leaving `## [Unreleased]` empty at the top).
