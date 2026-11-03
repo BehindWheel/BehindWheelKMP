@@ -137,6 +137,9 @@
     <string name="map_header_drive_mode_zoom_in_city">Zoom in city</string>
     <string name="map_header_drive_mode_zoom_outside_city">Zoom outside city</string>
 
+    <string name="auto_start_navigation_mode">Start navigation mode automatically</string>
+    <string name="auto_start_navigation_mode_description">Automatically switch to navigation mode when the app is opened</string>
+
     <string name="map_traffic_conditions_appearance">Traffic conditions</string>
 
     <string name="map_markers_filtering">Filtering markers by time</string>

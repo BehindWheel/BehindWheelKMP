@@ -219,6 +219,7 @@ internal class GuidanceComponentImpl(
                 keepScreenOn = it.mapInternalConfig.keepScreenOn,
                 alertRadius = it.alertRadius,
                 alertsEnabled = it.mapInternalConfig.alertsInfo.alertsEnabled,
+                autoStartDriveMode = it.mapInternalConfig.autoStartDriveMode,
                 isChooseInDriveMode = it.isChooseInDriveMode,
                 showMapDebugOverlay = it.mapInternalConfig.showMapDebugOverlay
             )

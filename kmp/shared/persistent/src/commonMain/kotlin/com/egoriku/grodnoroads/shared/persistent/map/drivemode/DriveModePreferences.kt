@@ -12,6 +12,7 @@ const val DEFAULT_DYNAMIC_ZOOM_ENABLED = true
 private val MAP_ZOOM_IN_CITY = floatPreferencesKey("map_zoom_in_city")
 private val MAP_ZOOM_OUTSIDE_CITY = floatPreferencesKey("map_zoom_outside_city")
 private val DYNAMIC_ZOOM_ENABLED = booleanPreferencesKey("dynamic_zoom_enabled")
+private val AUTO_START_DRIVE_MODE = booleanPreferencesKey("auto_start_drive_mode")
 
 val Preferences.mapZoomInCity: Float
     get() = this[MAP_ZOOM_IN_CITY] ?: DEFAULT_MAP_ZOOM_IN_CITY
@@ -21,6 +22,9 @@ val Preferences.mapZoomOutCity: Float
 
 val Preferences.dynamicZoomEnabled: Boolean
     get() = this[DYNAMIC_ZOOM_ENABLED] ?: DEFAULT_DYNAMIC_ZOOM_ENABLED
+
+val Preferences.autoStartDriveMode: Boolean
+    get() = this[AUTO_START_DRIVE_MODE] ?: false
 
 fun MutablePreferences.updateMapZoomInCity(value: Float) {
     this[MAP_ZOOM_IN_CITY] = value
@@ -32,4 +36,8 @@ fun MutablePreferences.updateMapZoomOutsideCity(value: Float) {
 
 fun MutablePreferences.updateDynamicZoomEnabled(value: Boolean) {
     this[DYNAMIC_ZOOM_ENABLED] = value
+}
+
+fun MutablePreferences.updateAutoStartDriveMode(value: Boolean) {
+    this[AUTO_START_DRIVE_MODE] = value
 }

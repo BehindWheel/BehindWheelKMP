@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -227,6 +228,17 @@ fun GuidanceScreen(
         val userCount by component.userCount.collectAsState(initial = 0)
         val speedLimit by component.speedLimit.collectAsState(initial = -1)
         val longPressInDriveMode by component.longPressReportingInDriveMode.collectAsState(false)
+
+        var autoStartTriggered by rememberSaveable { mutableStateOf(false) }
+
+        // Auto start is valid only at app launch: once the app enters any other mode
+        // (e.g. the user started navigation manually before the config was loaded),
+        // auto start is suppressed for the session to avoid bouncing back into drive mode.
+        LaunchedEffect(appMode) {
+            if (appMode != AppMode.Default) {
+                autoStartTriggered = true
+            }
+        }
 
         when (val state = mapBottomSheet) {
             is MapBottomSheet.MarkerInfo -> {
@@ -520,6 +532,8 @@ fun GuidanceScreen(
                     when (state) {
                         AppMode.Default -> {
                             DefaultMode(
+                                autoStart = mapConfig.autoStartDriveMode && !autoStartTriggered,
+                                onAutoStartTrigger = { autoStartTriggered = true },
                                 onLocationRequestStateChange = {
                                     val message = snackbarMessageBuilder.handleDriveModeRequest(it)
 

@@ -104,6 +104,7 @@ private fun LoadedState(
         )
         DrivingModeSection(
             driveModeZoom = mapSettingState.mapSettings.driveModeZoom,
+            autoStartDriveMode = mapSettingState.mapSettings.autoStartDriveMode,
             modify = modify,
             reset = reset
         )

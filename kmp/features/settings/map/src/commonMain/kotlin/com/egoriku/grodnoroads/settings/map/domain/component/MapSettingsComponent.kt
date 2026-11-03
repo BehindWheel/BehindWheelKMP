@@ -2,6 +2,7 @@ package com.egoriku.grodnoroads.settings.map.domain.component
 
 import androidx.compose.runtime.Stable
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.AutoStartDriveMode
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DynamicZoomEnabled
@@ -79,6 +80,10 @@ interface MapSettingsComponent {
             val isEnabled: Boolean = false
         ) : MapPref
 
+        data class AutoStartDriveMode(
+            val isEnabled: Boolean = false
+        ) : MapPref
+
         data class DefaultCity(
             val current: City = Grodno,
             val values: List<City> = City.entries
@@ -94,6 +99,7 @@ interface MapSettingsComponent {
     data class MapSettings(
         val locationInfo: LocationInfo = LocationInfo(),
         val driveModeZoom: DriveModeZoom = DriveModeZoom(),
+        val autoStartDriveMode: AutoStartDriveMode = AutoStartDriveMode(),
         val mapStyle: MapStyle = MapStyle(),
         val markerFiltering: MarkerFiltering = MarkerFiltering(),
         val mapInfo: MapInfo = MapInfo()

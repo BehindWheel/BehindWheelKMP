@@ -9,6 +9,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.egoriku.grodnoroads.datastore.edit
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.DefaultLocationDialogState
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapDialogState.None
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.AutoStartDriveMode
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.CarCrash
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DefaultCity
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.DynamicZoomEnabled
@@ -35,9 +36,11 @@ import com.egoriku.grodnoroads.settings.map.domain.store.MapSettingsStore.StoreS
 import com.egoriku.grodnoroads.shared.persistent.Selectable
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_IN_CITY
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.DEFAULT_MAP_ZOOM_OUT_CITY
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.autoStartDriveMode
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.dynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.mapZoomOutCity
+import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateAutoStartDriveMode
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateDynamicZoomEnabled
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateMapZoomInCity
 import com.egoriku.grodnoroads.shared.persistent.map.drivemode.updateMapZoomOutsideCity
@@ -132,7 +135,8 @@ internal class MapSettingsStoreFactory(
                                     mapZoomInCity = MapZoomInCity(current = pref.mapZoomInCity),
                                     mapZoomOutCity = MapZoomOutCity(current = pref.mapZoomOutCity),
                                     dynamicZoomEnabled = DynamicZoomEnabled(isEnabled = pref.dynamicZoomEnabled)
-                                )
+                                ),
+                                autoStartDriveMode = AutoStartDriveMode(isEnabled = pref.autoStartDriveMode)
                             )
                         }
                         .distinctUntilChanged()
@@ -171,6 +175,7 @@ internal class MapSettingsStoreFactory(
                                 is MapZoomInCity -> updateMapZoomInCity(preference.current)
                                 is MapZoomOutCity -> updateMapZoomOutsideCity(preference.current)
                                 is DynamicZoomEnabled -> updateDynamicZoomEnabled(preference.isEnabled)
+                                is AutoStartDriveMode -> updateAutoStartDriveMode(preference.isEnabled)
                                 is MarkerFiltering -> updateFiltering(preference.current)
                             }
                         }
