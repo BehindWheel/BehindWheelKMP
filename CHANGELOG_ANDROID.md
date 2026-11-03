@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add option to start navigation mode automatically
+
 ### Changed
 
 - Raise minimum Android SDK from 23 to 24

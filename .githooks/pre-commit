@@ -1,0 +1,14 @@
+#!/bin/sh
+# Rejects the commit when Spotless finds formatting violations.
+# Skip a single commit with: git commit --no-verify
+
+echo "==> Spotless check (pre-commit)"
+if ! ./gradlew --quiet spotlessCheck; then
+  echo ""
+  echo "✖ Commit rejected: Spotless found formatting violations."
+  echo "  Fix them with:"
+  echo "      ./gradlew spotlessApply"
+  echo "  then stage the changes and commit again."
+  echo "  To skip this check (not recommended): git commit --no-verify"
+  exit 1
+fi

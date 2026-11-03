@@ -34,6 +34,37 @@ Update the changelog based on uncommitted changes.
    - Append new entries at the **end** of the relevant category
    - Do not modify entries under versioned sections (e.g., `## [1.6.0]`)
 
+## Releases
+
+When preparing a release (e.g. "prepare release 1.6.0"), after updating the version in
+`config/versioning/android.properties`:
+
+- Move all content from `## [Unreleased]` into a new versioned section `## [X.Y.Z] - YYYY-MM-DD`
+  (use today's date)
+- Leave `## [Unreleased]` empty at the top
+
+Example structure:
+
+```markdown
+# Changelog (Android)
+
+## [Unreleased]
+
+## [1.6.0] - 2026-06-27
+
+### Added
+
+- ...
+
+### Fixed
+
+- ...
+
+### Changed
+
+- ...
+```
+
 ## Platform Detection
 
 - `app/android/` → Android

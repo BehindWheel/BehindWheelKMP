@@ -18,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.egoriku.grodnoroads.compose.resources.Res
+import com.egoriku.grodnoroads.compose.resources.auto_start_navigation_mode
+import com.egoriku.grodnoroads.compose.resources.auto_start_navigation_mode_description
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode_dynamic
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode_scale
 import com.egoriku.grodnoroads.compose.resources.map_header_drive_mode_static
@@ -32,17 +34,27 @@ import com.egoriku.grodnoroads.foundation.preview.GrodnoRoadsM3ThemePreview
 import com.egoriku.grodnoroads.foundation.preview.PreviewGrodnoRoads
 import com.egoriku.grodnoroads.foundation.uikit.ClickableFloatRange
 import com.egoriku.grodnoroads.foundation.uikit.listitem.BasicListItem
+import com.egoriku.grodnoroads.foundation.uikit.listitem.SwitchListItem
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref
+import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapPref.AutoStartDriveMode
 import com.egoriku.grodnoroads.settings.map.domain.component.MapSettingsComponent.MapSettings.DriveModeZoom
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DrivingModeSection(
     driveModeZoom: DriveModeZoom,
+    autoStartDriveMode: AutoStartDriveMode,
     modify: (MapPref) -> Unit,
     reset: (MapPref) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        SwitchListItem(
+            text = stringResource(Res.string.auto_start_navigation_mode),
+            description = stringResource(Res.string.auto_start_navigation_mode_description),
+            isChecked = autoStartDriveMode.isEnabled,
+            onCheckedChange = { modify(autoStartDriveMode.copy(isEnabled = it)) }
+        )
+
         SettingsSectionHeader(title = stringResource(Res.string.map_header_drive_mode_scale))
 
         val selectedIndex = if (driveModeZoom.dynamicZoomEnabled.isEnabled) 0 else 1
@@ -147,11 +159,13 @@ private fun DrivingModeSectionSectionPreview() = GrodnoRoadsM3ThemePreview {
     Box(modifier = Modifier.height(200.dp)) {
         DrivingModeSection(
             driveModeZoom = driveModeZoom,
+            autoStartDriveMode = AutoStartDriveMode(),
             modify = {
                 driveModeZoom = when (it) {
                     is MapPref.MapZoomInCity -> driveModeZoom.copy(mapZoomInCity = it)
                     is MapPref.MapZoomOutCity -> driveModeZoom.copy(mapZoomOutCity = it)
                     is MapPref.DynamicZoomEnabled -> driveModeZoom.copy(dynamicZoomEnabled = it)
+                    is MapPref.AutoStartDriveMode -> driveModeZoom
                     else -> error("Unhandled MapPref type")
                 }
             },

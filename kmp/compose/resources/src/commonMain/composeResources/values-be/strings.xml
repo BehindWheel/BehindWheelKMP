@@ -159,6 +159,9 @@
     <string name="map_header_drive_mode_zoom_in_city">Маштаб ў горадзе</string>
     <string name="map_header_drive_mode_zoom_outside_city">Маштаб за горадам</string>
 
+    <string name="auto_start_navigation_mode">Запускаць рэжым навігацыі аўтаматычна</string>
+    <string name="auto_start_navigation_mode_description">Аўтаматычна пераходзіць у рэжым навігацыі пры адкрыцці праграмы</string>
+
     <string name="map_user_count">Анлайн: %1$s</string>
     <string name="map_user_count_hint">Карыстальнікі, актыўныя за апошнія 10 хвілін</string>
 
