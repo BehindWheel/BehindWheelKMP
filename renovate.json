@@ -12,7 +12,7 @@
     {
       "groupName": "Kotlin",
       "matchPackagePatterns": [
-        "^org\\.jetbrains\\.kotlin"
+        "^org\\.jetbrains\\.kotlin(\\.|:)"
       ]
     },
     {
