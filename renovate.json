@@ -10,6 +10,12 @@
   "prConcurrentLimit": 20,
   "packageRules": [
     {
+      "groupName": "Kotlin",
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlin"
+      ]
+    },
+    {
       "groupName": "AndroidX Datastore dependencies",
       "matchPackageNames": [
         "androidx.datastore:datastore-preferences-core",
