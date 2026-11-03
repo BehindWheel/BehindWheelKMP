@@ -207,6 +207,15 @@ Version catalog: `gradle/libs.versions.toml`
 ./gradlew spotlessApply
 ```
 
+**Git hooks:**
+
+A pre-commit hook runs `spotlessCheck` and rejects the commit on formatting violations
+(skip a single commit with `git commit --no-verify`). After a fresh clone, enable the hooks:
+
+```bash
+./gradlew installGitHooks
+```
+
 **Typical workflow:**
 
 ```bash
