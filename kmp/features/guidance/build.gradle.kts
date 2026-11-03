@@ -55,7 +55,6 @@ kotlin {
 
             implementation(libs.androidx.activity.compose)
             implementation(libs.google.app.update)
-            implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
         }
         commonTest.dependencies {
