@@ -41,7 +41,6 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.androidx.core)
-            implementation(libs.google.maps)
             implementation(libs.google.maps.utils)
         }
     }
