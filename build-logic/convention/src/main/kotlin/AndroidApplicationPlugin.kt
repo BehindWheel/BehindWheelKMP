@@ -19,6 +19,13 @@ class AndroidApplicationPlugin : Plugin<Project> {
                 targetCompatibility = JavaVersion.VERSION_17
             }
 
+            testOptions {
+                unitTests {
+                    // Required by AGP's Compose Preview runfiles task (IDE warm-up)
+                    isIncludeAndroidResources = true
+                }
+            }
+
             buildTypes {
                 release {
                     isMinifyEnabled = true

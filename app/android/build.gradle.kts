@@ -1,3 +1,4 @@
+import com.android.build.api.variant.HostTestBuilder
 import com.egoriku.grodnoroads.extension.debug
 import com.egoriku.grodnoroads.extension.loadKeystore
 import com.egoriku.grodnoroads.extension.provideVersionCode
@@ -76,6 +77,14 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+// AGP 9.5: generate<Variant>ComposePreviewRunfiles fails at configuration time
+// when unit tests are disabled for a variant (b/572377862)
+androidComponents {
+    beforeVariants {
+        it.hostTests[HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
     }
 }
 
