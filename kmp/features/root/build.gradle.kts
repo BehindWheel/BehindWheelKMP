@@ -37,7 +37,7 @@ kotlin {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         swiftPackage(
             url = url("https://github.com/firebase/firebase-ios-sdk.git"),
-            version = from("11.8.0"),
+            version = from("12.19.3"),
             products =
                 listOf(
                     product("FirebaseAnalytics"),
