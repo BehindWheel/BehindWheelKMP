@@ -10,7 +10,7 @@ spm-googleMaps = "10.13.0"
 
 agp = "9.5.1"
 buildkonfig = "0.24.0"
-decompose = "3.6.1"
+decompose = "3.6.2"
 compose = "1.12.2"
 essenty = "2.7.1"
 firebase-bom = "35.1.0"
