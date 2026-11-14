@@ -14,7 +14,8 @@ internal data class MapInternalConfig(
     val trafficJanOnMap: Boolean,
     val mapType: MapType,
     val keepScreenOn: Boolean,
-    val showMapDebugOverlay: Boolean
+    val showMapDebugOverlay: Boolean,
+    val autoStartDriveMode: Boolean
 ) {
     internal data class MapInfo(
         val showStationaryCameras: Boolean,
@@ -74,7 +75,8 @@ internal data class MapInternalConfig(
             trafficJanOnMap = false,
             mapType = MapType.Normal,
             keepScreenOn = false,
-            showMapDebugOverlay = false
+            showMapDebugOverlay = false,
+            autoStartDriveMode = false
         )
     }
 }

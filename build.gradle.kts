@@ -51,3 +51,16 @@ allprojects {
         }
     }
 }
+
+tasks.register("installGitHooks") {
+    group = "verification"
+    description = "Configures git to use project hooks from .githooks (Spotless pre-commit check)"
+    val projectDir = layout.projectDirectory
+    doLast {
+        ProcessBuilder("git", "config", "core.hooksPath", ".githooks")
+            .directory(projectDir.asFile)
+            .start()
+            .waitFor()
+        println("Git hooks installed: core.hooksPath = .githooks")
+    }
+}
